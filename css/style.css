@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Modak&display=swap');
 
 body {
-    margin: 0;
+    margin: 0 auto;
     padding: 0;
     font-family: 'EB Garamond', serif;
     padding-top: 50px; /* Space for fixed header */
@@ -15,9 +15,24 @@ header > h1 {
     font-weight: 100;
 }
 
-header {
+ul > li {
+    list-style-type: none;
+}
+
+#links {
     display: flex;
-    justify-content: space-between; 
+    gap: 5em;
+    margin-right: 5em;
+}
+
+#nav_bar {
+    display: none;
+}
+
+header:first-of-type {
+    margin: 0 auto;
+    grid-area: header;
+    display: flex;
     align-items: center;
     position: fixed;
     top: 0;
@@ -27,47 +42,7 @@ header {
     background-color: #F0E8D1;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
     padding: 0 20px;
-}
-
-ul > li {
-    list-style-type: none;
-}
-
-#nav_bar {
-    display: none;
-}
-
-
-#menu .nav_bar:before {
-    content:'\2630';
-    font-size: 1.5em;
-}
-
-#nav_bar:checked + .nav_bar + ul li{
-    max-height: 1em;
-    padding: 1em;
-    opacity: 1;
-}
-
-#nav_bar:checked + .nav_bar:before {
-    content:'\2715';
-}
-
-#menu li {
-    max-height: 0;
-    padding: 0 1em;
-    background-color: #F0E8D1;
-    text-align: left;
-    opacity: 0;
-    transition: all .3s ease-in-out;
-} 
-
-#links {
-    display: flex;
-    flex-direction: column;
-    list-style: none;
-    margin: 0;
-    padding: 0;
+    justify-content: space-between;
 }
 
 #links li a {
@@ -83,13 +58,11 @@ ul > li {
 }
 
 
-
-
-
 .container {
     display: grid;
-    grid-template-rows: auto auto auto;
-    grid-template-areas: "title" 
+    grid-template-rows: auto auto auto auto auto;
+    grid-template-areas: "header"
+                         "title" 
                          "categories" 
                          "info" 
                          "end";
@@ -156,3 +129,38 @@ ul > li {
     height: 85%;
     margin-left: 25%;
 }
+
+/*
+
+#menu .nav_bar:before {
+    content:'\2630';
+    font-size: 1.5em;
+}
+
+#nav_bar:checked + .nav_bar + ul li{
+    max-height: 1em;
+    padding: 1em;
+    opacity: 1;
+}
+
+#nav_bar:checked + .nav_bar:before {
+    content:'\2715';
+}
+
+#menu li {
+    max-height: 0;
+    padding: 0 1em;
+    background-color: #F0E8D1;
+    text-align: left;
+    opacity: 1;
+    transition: all .3s ease-in-out;
+} 
+
+#links {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+*/
