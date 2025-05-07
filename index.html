@@ -33,5 +33,33 @@
             
             </footer>
         </main>
+
+        <div id="modal-overlay" class="hidden">
+            <div id="modal">
+            </div>
+        </div>
+
+        <!--concerning modal-->
+        <script> 
+            document.addEventListener('DOMContentLoaded', function() {
+                const signupBtn = document.querySelector('#buttons li button');
+                const modalOverlay = document.getElementById('modal-overlay');
+                
+                signupBtn.addEventListener('click', function(e) {
+                    e.stopPropagation(); // Prevent the click from bubbling up
+                    modalOverlay.classList.remove('hidden');
+                });
+                
+                // Close modal when clicking anywhere (including the empty modal)
+                modalOverlay.addEventListener('click', function() {
+                    modalOverlay.classList.add('hidden');
+                });
+                
+                // Prevent clicks inside the modal from closing it
+                document.getElementById('modal').addEventListener('click', function(e) {
+                    e.stopPropagation();
+                });
+            });
+        </script>
     </body>
 </html>
