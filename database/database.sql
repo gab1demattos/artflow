@@ -1,13 +1,20 @@
-CREATE TABLE users {
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS services;
+DROP TABLE IF EXISTS transactions;
+DROP TABLE IF EXISTS messages;
+DROP TABLE IF EXISTS reviews;
+DROP TABLE IF EXISTS categories;
+
+CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_type TEXT NOT NULL CHECK (user_type IN ('regular', 'admin')), -- a regular user can act as a client or freelancer without needing to chnage accounts
     name TEXT NOT NULL,
     username TEXT NOT NULL,
     password TEXT NOT NULL,
     email TEXT NOT NULL
-};
+);
 
-CREATE TABLE services {
+CREATE TABLE services (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INTEGER NOT NULL,
     title TEXT NOT NULL,
@@ -19,9 +26,9 @@ CREATE TABLE services {
     videos TEXT,    -- paths to files
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (category_id) REFERENCES categories(id)
-};
+);
 
-CREATE TABLE transactions {
+CREATE TABLE transactions (
     id INT AUTO_INCREMENT PRIMARY KEY,
     freelancer_id INTEGER NOT NULL,
     client_id INTEGER NOT NULL,
@@ -31,18 +38,18 @@ CREATE TABLE transactions {
     FOREIGN KEY (freelancer_id) REFERENCES users(id),
     FOREIGN KEY (client_id) REFERENCES users(id),
     FOREIGN KEY (service_id) REFERENCES services(id)
-};
+);
 
-CREATE TABLE messages {
+CREATE TABLE messages (
     id INT AUTO_INCREMENT PRIMARY KEY,
     sender_id INTEGER NOT NULL,
     receiver_id INTEGER NOT NULL,
     message TEXT NOT NULL,
     FOREIGN KEY (sender_id) REFERENCES users(id),
     FOREIGN KEY (receiver_id) REFERENCES users(id)
-};
+);
 
-CREATE TABLE reviews {
+CREATE TABLE reviews (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INTEGER NOT NULL,
     service_id INTEGER NOT NULL,    --  before a user being able to leave a review we need to check if the service's status is 'completed'
@@ -50,9 +57,9 @@ CREATE TABLE reviews {
     comment TEXT,
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (service_id) REFERENCES services(id)
-};
+);
 
-CREATE TABLE categories {
+CREATE TABLE categories (
     id INT AUTO_INCREMENT PRIMARY KEY,
     category_type TEXT NOT NULL
-}
+);
