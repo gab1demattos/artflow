@@ -22,7 +22,7 @@ ul > li {
 #links {
     display: flex;
     gap: 5em;
-    margin-right: 5em;
+    margin-right: 3em;
 }
 
 #nav_bar {
@@ -46,15 +46,22 @@ header:first-of-type {
 }
 
 #links li a {
-    color: #333;
+    width: 81px;
+    height: 34px;
+    color: #F0E8D1;
     text-decoration: none;
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Modak', sans-serif;
     font-weight: 500;
-    transition: color 0.3s;
+    transition: border 0.3s;
+    padding: 5px 25px;
+    border-radius: 25px;
+    background-color: #885784;
 }
 
 #links li a:hover {
-    color: #82A899;
+    background-color: #F0E8D1;
+    border: 2px solid #885784; 
+    color: #885784; 
 }
 
 
