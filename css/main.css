@@ -174,30 +174,33 @@ header:first-of-type {
     font-family: 'Cormorant Garamond', serif;
 }
 
-#signup-form button,
-#Sign\ In {
-    padding: 12px 24px;
-    font-size: 16px;
-    border-radius: 15px;
-    font-weight: bold;
-    cursor: pointer;
-    font-family: inherit;
+#modal #sign-up,
+#modal #sign-in {
+  display: inline-block;
+  margin-right: 10px; /* Adjust the spacing as needed */
 }
 
-/* Sign Up (filled button) */
-#signup-form button {
-    background-color: #885784;
-    color: white;
-    border: none;
-    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+/* Modal button container styles */
+.button-container {
+    display: flex;
+    gap: 1em;
+    margin-top: 0.5em;
 }
 
-/* Sign In (outlined button) */
-#SignIn {
-    background-color: transparent;
-    border: 2px solid #885784;
-    color: #885784;
-    margin-top: 10px;
+.button-container .button {
+    flex: 1;
+    padding: 12px 20px;
+    text-align: center;
+}
+
+/* Remove any existing individual button margins */
+#sign-up, #sign-in {
+    margin: 0;
+}
+
+/* Remove margin from the last button */
+#modal #sign-in {
+  margin-right: 0;
 }
 
 /* Header */
