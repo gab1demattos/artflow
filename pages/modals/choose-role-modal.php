@@ -14,6 +14,6 @@
                 <h2>Freelancer</h2>
             </div>
         </div>
-        <button class='button garamond outline orange'>Next</button>
+        <button id="next" class='button garamond outline orange'>Next</button>
     </div>
 </div>
