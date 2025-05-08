@@ -9,7 +9,7 @@
                         <input type="email" placeholder="Email" name="email" required>
                         <input type="password" placeholder="Password" name="password" required>
                         <div class="button-container">
-                            <button type="submit" class="button long filled classic">Sign Up</button>
+                            <button type="submit" id='sign-up-submit' class="button long filled classic">Sign Up</button>
                             <button type="button" id="sign-in" class="button long outline">Sign In</button>
                         </div>
                     </form>

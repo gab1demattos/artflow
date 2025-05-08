@@ -25,7 +25,7 @@ ul > li {
 #buttons {
     display: flex;
     gap: 5em;
-    margin-right: 4em;
+    margin-right: 3em;
 }
 
 #nav_bar {

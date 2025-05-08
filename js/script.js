@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const modalOverlays = document.querySelectorAll('#modal-overlay');
     const signInButtons = document.querySelectorAll('#sign-in');
     const signUpButtons = document.querySelectorAll('#sign-up');
+    const signUpBtn_submit = document.querySelector('#sign-up-submit');
     
     // Show sign up modal when clicking sign up button
     signupBtn.addEventListener('click', function(e) {
@@ -33,6 +34,15 @@ document.addEventListener('DOMContentLoaded', function() {
             // Show sign up modal
             document.querySelector('#signup-modal').closest('#modal-overlay').classList.remove('hidden');
         });
+    });
+
+    // Handle sign up form submission
+    signUpBtn_submit.addEventListener('click', function(e) {
+        e.preventDefault();
+        // Hide all modals first
+        modalOverlays.forEach(overlay => overlay.classList.add('hidden'));
+        // Show success message (or handle form submission)
+        document.querySelector('#choose-role-modal').closest('#modal-overlay').classList.remove('hidden');
     });
     
     // Close modal when clicking outside

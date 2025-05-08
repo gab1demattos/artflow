@@ -35,6 +35,7 @@
 
         <?php include '../pages/modals/sign-up-modal.php'; ?>
         <?php include '../pages/modals/sign-in-modal.php'; ?>
+        <?php include '../pages/modals/choose-role-modal.php'; ?>
         
         <script src="js/script.js"></script>
     </body>
