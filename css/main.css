@@ -213,6 +213,14 @@ header:first-of-type {
     text-align: center;
 }
 
+#modal-overlay {
+    z-index: 1000;
+}
+
+#signup-modal, #signin-modal {
+    z-index: 1001;
+}
+
 .hidden {
     display: none !important;
 }
