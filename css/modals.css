@@ -155,3 +155,46 @@
 }
 
 /*--- CHOOSE ROLE MODAL SPECIFICS ---*/
+
+#choose-role-modal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+}
+
+#choose-role-modal .intro-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.1em;
+}
+
+.intro-text p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    max-width: 600px;
+    text-align: center;
+    color: #555;
+    line-height: 0.4;
+}
+
+.modal #roles {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+}
+
+#client-role, #freelancer-role {
+    border: 2px solid #885784;
+    border-radius: 25px;
+}
+
+#client-role:hover {
+    background-color: #885784;
+    color: white;
+    cursor: pointer;
+}

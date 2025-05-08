@@ -1,9 +1,9 @@
 <div id="modal-overlay" class="hidden">
     <div class="modal" id="choose-role-modal">
-        <p>
-            Welcome, username
-            What is your artistic pursue?
-        </p>
+        <div class='intro-text'>
+            <p>Welcome, username</p>
+            <p>What is your artistic pursue?</p>
+        </div>
         <div id='roles'>
             <div id='client-role' class='role'>
                 <input type='checkbox' id='client-checkbox' value='client'/>
