@@ -1,20 +1,19 @@
 <div id="modal-overlay" class="hidden">
-    <div id="modal" class="signin-modal">
+    <div class="modal" id="signin-modal">
         <div class="modal-content">
+            <div class="modal-right">
+                <img src="../images/sign-in-image.png" alt="Illustration">
+            </div>
             <div class="form-container">
-                <h2>Create Account</h2>
-                <form id="signup-form">
-                    <input type="text" placeholder="Name" name="name" required>
+                <h2 id='h2-signin'>Welcome back!</h2>
+                <form id="signin-form" class="form">
                     <input type="email" placeholder="Email" name="email" required>
                     <input type="password" placeholder="Password" name="password" required>
                     <div class="button-container">
-                        <button type="submit" class="button long primary classic">Sign Up</button>
-                        <button type="button" id="sign-in" class="button long outline">Sign In</button>
+                        <button type="submit" class="button long filled classic yellow">Sign In</button>
+                        <button type="button" id="sign-up" class="button long outline yellow">Sign Up</button>
                     </div>
                 </form>
-            </div>
-            <div class="modal-right">
-                <img src="../images/sign-in-image.png" alt="Illustration">
             </div>
         </div>
     </div>

@@ -16,7 +16,7 @@
                 <input type="checkbox" id="nav_bar">
                 <label class="nav_bar" for="nav_bar"></label>
                 <ul id="buttons">
-                    <li><button class="button primary hovering">Sign Up</button></li>
+                    <li><button class="button filled hovering">Sign Up</button></li>
                 </ul>
             </nav>
         </header>

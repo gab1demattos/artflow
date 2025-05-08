@@ -1,15 +1,15 @@
 <body>
     <div id="modal-overlay" class="hidden">
-        <div id="modal" class="signup-modal">
+        <div class="modal" id="signup-modal">
             <div class="modal-content">
                 <div class="form-container">
-                    <h2>Create Account</h2>
-                    <form id="signup-form">
+                    <h2 id='h2-signup'>Create Account</h2>
+                    <form id="signup-form" class="form">
                         <input type="text" placeholder="Name" name="name" required>
                         <input type="email" placeholder="Email" name="email" required>
                         <input type="password" placeholder="Password" name="password" required>
                         <div class="button-container">
-                            <button type="submit" class="button long primary classic">Sign Up</button>
+                            <button type="submit" class="button long filled classic">Sign Up</button>
                             <button type="button" id="sign-in" class="button long outline">Sign In</button>
                         </div>
                     </form>
