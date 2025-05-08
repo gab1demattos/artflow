@@ -154,6 +154,7 @@
     border: 2px solid #C2AD42; /* Yellow */
 }
 
+
 /*--- CHOOSE ROLE MODAL SPECIFICS ---*/
 
 #choose-role-modal {
@@ -235,4 +236,10 @@
     position: absolute;
     top: 0.5em; /* Adjust as needed */
     left: 0.5em; /* Adjust as needed */
+}
+
+#choose-role-modal #next {
+    align-self: flex-end; 
+    margin-top: 1em;
+    margin-right: 3em;
 }
