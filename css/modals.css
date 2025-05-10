@@ -171,18 +171,20 @@
     justify-content: center;
     align-items: center;
     gap: 0.1em;
+    padding: 2em;
 }
 
-.intro-text p {
+#choose-role-modal .intro-text p {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.5rem;
+    font-size: 2rem;
     max-width: 600px;
     text-align: center;
-    color: #555;
-    line-height: 0.4;
+    color: black;
+    margin:0;
+    line-height: 1.1;
 }
 
-.modal #roles {
+#choose-role-modal #roles {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -190,8 +192,8 @@
 }
 
 #choose-role-modal .role {
-    display: flex; /* Changed to flex */
-    flex-direction: column; /* Keep heading above checkbox */
+    display: flex; 
+    flex-direction: column;  
     justify-content: center; /* Vertically center content */
     align-items: center; /* Horizontally center content */
     border-radius: 10px;
@@ -200,7 +202,6 @@
     height: 10em;
     box-sizing: border-box;
     cursor: pointer;
-    position: relative; /* Needed for absolute positioning of checkbox */
 }
 
 #client-role {
@@ -233,9 +234,32 @@
     height: 0;
 }
 
-
 #choose-role-modal #next {
     align-self: flex-end; 
     margin-top: 1em;
     margin-right: 3em;
+}
+
+.corner-image {
+    position: absolute;
+    z-index: 1;
+    pointer-events: none; /* Prevent interaction */
+}
+
+.corner-image #yellow-flowie {
+    width: 7.5625em;
+}
+
+.corner-image #yellow-flowie {
+    width: 10.75em;
+}
+
+.top-left {
+    top: -0.625em;
+    left: -0.625em;
+}
+
+.top-right {
+    top: -0.625em;
+    right: -0.625em;
 }
