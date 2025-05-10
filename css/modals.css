@@ -213,24 +213,26 @@
     color: var(--green);
 }
 
-#client-role:hover {
+/* Style for when client checkbox is checked */
+#client-checkbox:checked + #client-role {
     background-color: var(--yellow);
     color: white;
-    cursor: pointer;
 }
 
-#freelancer-role:hover {
+/* Style for when freelancer checkbox is checked */
+#freelancer-checkbox:checked + #freelancer-role {
     background-color: var(--green);
     color: white;
-    cursor: pointer;
 }
 
-/* Position the checkbox in the top left */
+/* Hide the default checkbox appearance */
 .role input[type='checkbox'] {
     position: absolute;
-    top: 0.5em; 
-    left: 0.5em; 
+    opacity: 0;
+    width: 0;
+    height: 0;
 }
+
 
 #choose-role-modal #next {
     align-self: flex-end; 

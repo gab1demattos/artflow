@@ -5,12 +5,13 @@
             <p>What is your artistic pursue?</p>
         </div>
         <div id='roles'>
+            <input type='checkbox' class='hidden' id='client-checkbox' value='client'/>
             <div id='client-role' class='role'>
-                <input type='checkbox' id='client-checkbox' value='client'/>
                 <h2>Client</h2>
             </div>
+            
+            <input type='checkbox' class='hidden' id='freelancer-checkbox' value='freelancer'/>
             <div id='freelancer-role' class='role'>
-                <input type='checkbox' id='freelancer-checkbox' value='freelancer'/>
                 <h2>Freelancer</h2>
             </div>
         </div>
