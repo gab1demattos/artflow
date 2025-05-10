@@ -132,26 +132,26 @@
 
 /* Purple heading for signup */
 #h2-signup {
-    color: #885784;
+    color: var(--purple);
 }
 
 /* Purple focus border for signup inputs */
 #signup-modal .form input:focus {
     outline: none;
-    border: 2px solid #885784; /* Purple */
+    border: 2px solid var(--purple); 
 }
 
 /*--- SIGNIN MODAL SPECIFICS ---*/
 
 /* Yellow heading for signin */
 #h2-signin {
-    color: #C2AD42;
+    color: var(--yellow);
 }
 
 /* Yellow focus border for signin inputs */
 #signin-modal .form input:focus {
     outline: none;
-    border: 2px solid #C2AD42; /* Yellow */
+    border: 2px solid var(--yellow); 
 }
 
 
@@ -204,38 +204,32 @@
 }
 
 #client-role {
-    border: 3px solid #C2AB42;
-    color: #C2AB42;
+    border: 3px solid var(--yellow);
+    color: var(--yellow);
 }
 
 #freelancer-role {
-    border: 3px solid #82A899;
-    color: #82A899;
+    border: 3px solid var(--green);
+    color: var(--green);
 }
 
 #client-role:hover {
-    background-color: #C2AB42;
+    background-color: var(--yellow);
     color: white;
     cursor: pointer;
 }
 
 #freelancer-role:hover {
-    background-color: #82A899;
+    background-color: var(--green);
     color: white;
     cursor: pointer;
 }
 
 /* Position the checkbox in the top left */
-#client-role input[type='checkbox'] {
+.role input[type='checkbox'] {
     position: absolute;
-    top: 0.5em; /* Adjust as needed */
-    left: 0.5em; /* Adjust as needed */
-}
-
-#freelancer-role input[type='checkbox'] {
-    position: absolute;
-    top: 0.5em; /* Adjust as needed */
-    left: 0.5em; /* Adjust as needed */
+    top: 0.5em; 
+    left: 0.5em; 
 }
 
 #choose-role-modal #next {

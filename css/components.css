@@ -33,8 +33,8 @@
 /* ===== COLOR + FILL OPTIONS ===== */
 /* Purple filled (default filled) */
 .button.filled {
-    background-color: #885784;
-    color: #F0E8D1;
+    background-color: var(--purple);
+    color: var(--beige);
     border: none;
 }
 /* Example: <button class="button filled [other classes]">Purple Filled</button> */
@@ -42,14 +42,14 @@
 /* Purple outlined */
 .button.outline {
     background-color: transparent;
-    color: #885784;
-    border: 2px solid #885784;
+    color: var(--purple);
+    border: 2px solid var(--purple);
 }
 /* Example: <button class="button outline [other classes]">Purple Outlined</button> */
 
 /* Yellow filled */
 .button.filled.yellow {
-    background-color: #C2AD42;
+    background-color: var(--yellow);
     color: #FFFFFF;
     border: none;
 }
@@ -58,15 +58,15 @@
 /* Yellow outlined */
 .button.outline.yellow {
     background-color: transparent;
-    color: #C2AD42;
-    border: 2px solid #C2AD42;
+    color: var(--yellow);
+    border: 2px solid var(--yellow);
 }
 /* Example: <button class="button outline yellow [other classes]">Yellow Outlined</button> */
 
 .button.outline.orange {
     background-color: transparent;
-    color: #DD8D6E;
-    border: 2px solid #DD8D6E;
+    color: var(--orange);
+    border: 2px solid var(--orange);
 }
 
 /* ===== HOVER BEHAVIOR OPTIONS ===== */
@@ -75,28 +75,28 @@
 
 /* Hovering effect (add .hovering) */
 .button.hovering.filled:hover {
-    background-color: #F0E8D1;
-    color: #885784;
-    border: 2px solid #885784;
+    background-color: var(--beige);
+    color: var(--purple);
+    border: 2px solid var(--purple);
 }
 
 .button.hovering.outline:hover {
-    background-color: #885784;
-    color: #F0E8D1;
-    border: 2px solid #885784;
+    background-color: var(--purple);
+    color: var(--beige);
+    border: 2px solid var(--purple);
 }
 
 /* Yellow hovering variants */
 .button.hovering.filled.yellow:hover {
-    background-color: #F0E8D1;
-    color: #C2AD42;
-    border: 2px solid #C2AD42;
+    background-color: var(--beige);
+    color: var(--yellow);
+    border: 2px solid var(--yellow);
 }
 
 .button.hovering.outline.yellow:hover {
-    background-color: #C2AD42;
+    background-color: var(--yellow);
     color: #000000;
-    border: 2px solid #C2AD42;
+    border: 2px solid var(--yellow);
 }
 /* Example: <button class="button hovering [other classes]">Hoverable</button> */
 
