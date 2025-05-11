@@ -266,32 +266,9 @@
 
 
 /*--- GO WITH FLOW MODAL SPECIFICS ---*/
-
-#goflow-modal {
-    background-color: white;
-    border-radius: 20px;
-    width: 42em;
-    height: 25em;
-    padding: 0;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-    display: flex;
-    flex-direction: row;
-    position: relative;
-}
-
 #goflow-modal .modal-content {
-    display: flex;
-    flex-direction: row;
     width: 100%;
     height: 100%;
-}
-
-#goflow-modal #go-flow {
-    width: 20em;
-    height: 100%;
-    object-fit: cover;
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
 }
 
 #goflow-modal p {
@@ -306,23 +283,35 @@
     color: var(--orange);
 }
 
-#goflow-modal .modal-content {
-    position: relative;
+#goflow-modal img {
+    width: 41.625em;
+    height: 29.625em;
+    position: absolute;
+    top: -0.56em;
+    right: -1.21em;
+    left: -1.21em;
+    bottom: -0.56em;
 }
 
 #goflow-modal .modal-content > p:nth-of-type(1) {
-    margin-top: 2em;
+    font-size: 2rem;
+    position: absolute;
+    left: 4em;
+    top: 2em;
 }
 
 #goflow-modal .modal-content > p:nth-of-type(2) {
-    margin-top: 1em;
+    position: absolute;
+    left: 2.125em;
+    top: 14.25em;
+    text-align: center;
 }
 
 /* Positioning the icon button inside modal */
 #goflow-modal #go-arrow {
     position: absolute;
-    bottom: 1.5em;
-    right: 2em;
+    bottom: 4.5em;
+    right: 6em;
     z-index: 10;
 }
 

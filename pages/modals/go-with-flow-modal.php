@@ -7,7 +7,8 @@
                 — now just go with the <span class='flow-text'>flow</span>.
             </p>
             <p>
-                Explore, discover, and let <span id='artflow-goflow' class='artflow-text'>artflow</span> guide you effortlessly.
+                Explore, discover, and let
+                <span id='artflow-goflow' class='artflow-text'>artflow</span> <br> guide you effortlessly.
             </p>
             <button id="go-arrow" class='icon-button'><strong>→</strong></button>
         </div>
