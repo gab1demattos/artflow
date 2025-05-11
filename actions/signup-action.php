@@ -39,7 +39,7 @@
         );
         
         // Redirect on success
-        header('Location: /index.php?signup=success');
+        header('Location: /index.php?signup=success&username=' . urlencode($username));
         exit();
     } catch (PDOException $e) {
         error_log("Signup error: " . $e->getMessage());

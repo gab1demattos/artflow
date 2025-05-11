@@ -98,6 +98,27 @@ document.addEventListener('DOMContentLoaded', function() {
         if (freelancerCheckbox) freelancerCheckbox.checked = false;
     }
 
+    // Check for successful signup and show role selection modal
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('signup') === 'success') {
+        const username = urlParams.get('username');
+        if (username) {
+            // Update the username in the modal if needed
+            const usernameElement = document.querySelector('.intro-text p:first-child');
+            if (usernameElement) {
+                usernameElement.textContent = `Welcome, ${username}`;
+            }
+            
+            // Show the choose role modal
+            hideAllModals();
+            document.getElementById('choose-role-modal-overlay').classList.remove('hidden');
+            
+            // Clean the URL to prevent showing the modal again on refresh
+            const cleanUrl = window.location.pathname;
+            window.history.replaceState({}, document.title, cleanUrl);
+        }
+    }
+
     /*
     if (nextBtn) {
         nextBtn.addEventListener('click', function(e) {
