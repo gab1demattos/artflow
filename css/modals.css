@@ -234,7 +234,7 @@
     height: 0;
 }
 
-#choose-role-modal #next {
+#choose-role-modal #next-btn {
     align-self: flex-end; 
     margin-top: 1em;
     margin-right: 3em;
@@ -263,3 +263,66 @@
     top: -0.625em;
     right: -0.625em;
 }
+
+
+/*--- GO WITH FLOW MODAL SPECIFICS ---*/
+
+#goflow-modal {
+    background-color: white;
+    border-radius: 20px;
+    width: 42em;
+    height: 25em;
+    padding: 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: row;
+    position: relative;
+}
+
+#goflow-modal .modal-content {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+}
+
+#goflow-modal #go-flow {
+    width: 20em;
+    height: 100%;
+    object-fit: cover;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+#goflow-modal p {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.4rem;
+    color: #000;
+    margin: 0;
+    line-height: 1.2;
+}
+
+#goflow-modal .artflow-text {
+    color: var(--orange);
+}
+
+#goflow-modal .modal-content {
+    position: relative;
+}
+
+#goflow-modal .modal-content > p:nth-of-type(1) {
+    margin-top: 2em;
+}
+
+#goflow-modal .modal-content > p:nth-of-type(2) {
+    margin-top: 1em;
+}
+
+/* Positioning the icon button inside modal */
+#goflow-modal #go-arrow {
+    position: absolute;
+    bottom: 1.5em;
+    right: 2em;
+    z-index: 10;
+}
+

@@ -117,3 +117,24 @@
   5. Purple filled hovering button:
      <button class="button filled hovering">Save</button>
 */
+
+/* ========== ICON BUTTON (Circular) ========== */
+.icon-button {
+    width: 2.5em;
+    height: 2.5em;
+    border-radius: 50%;
+    background-color: var(--orange);
+    color: white;
+    border: none;
+    font-size: 1.25em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease, background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.icon-button:hover {
+    transform: translateX(5px);
+}

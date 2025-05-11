@@ -19,12 +19,15 @@ body {
     padding-top: 50px; /* Space for fixed header */
 }
 
-header > h1 {
+.artflow-text {
     font-family: 'Modak';
-    color: var(--green);
-    font-size: 1.5rem;
-    margin: 0;
     font-weight: 100;
+    font-size: 1.5rem;
+}
+
+header > h1 {
+    color: var(--green);
+    margin: 0;
 }
 
 ul > li {
@@ -108,7 +111,7 @@ header:first-of-type {
     font-weight: 100;
 }
 
-#diff {
+.flow-text {
     font-style: italic;
 }
 

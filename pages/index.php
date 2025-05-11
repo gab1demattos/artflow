@@ -11,7 +11,7 @@
     </head>
     <body>
         <header>
-            <h1>artflow</h1>
+            <h1 class='artflow-text'>artflow</h1>
             <nav id="menu">
                 <input type="checkbox" id="nav_bar">
                 <label class="nav_bar" for="nav_bar"></label>
@@ -23,7 +23,7 @@
         <main class="container">
             <section id="title">
                 <h2>where creativity<br>
-                <span id="diff">flows</span> seamlessly</h2>
+                <span class='flow-text'>flows</span> seamlessly</h2>
                 <p>a collection of diverse artistic talents</p>
             </section>
             <section id="categories"></section>
@@ -36,6 +36,7 @@
         <?php include '../pages/modals/sign-up-modal.php'; ?>
         <?php include '../pages/modals/sign-in-modal.php'; ?>
         <?php include '../pages/modals/choose-role-modal.php'; ?>
+        <?php include '../pages/modals/go-with-flow-modal.php'; ?>
         
         <script src="js/script.js"></script>
     </body>

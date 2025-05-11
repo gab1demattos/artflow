@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const signInButtons = document.querySelectorAll('#sign-in');
     const signUpButtons = document.querySelectorAll('#sign-up');
     const signUpBtn_submit = document.querySelector('#sign-up-submit');
+    const nextBtn = document.querySelector('#next-btn');
     
     // Role selection elements
     const clientRole = document.getElementById('client-role');
@@ -77,5 +78,49 @@ document.addEventListener('DOMContentLoaded', function() {
         freelancerRole.addEventListener('click', function() {
             freelancerCheckbox.checked = !freelancerCheckbox.checked;
         });
+    }
+
+    // Handle next button click in choose role modal
+    if (nextBtn) {
+        nextBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const selectedRoles = [];
+            
+            // Collect selected roles
+            if (clientCheckbox.checked) {
+                selectedRoles.push('Client');
+            }
+            if (freelancerCheckbox.checked) {
+                selectedRoles.push('Freelancer');
+            }
+
+            // Validate at least one role is selected
+            if (selectedRoles.length === 0) {
+                alert('Please select at least one role.');
+                return;
+            }
+
+            // Store selected roles
+            console.log('Selected roles stored:', selectedRoles);
+
+            // Proceed to next modal
+            hideAllModals();
+            document.getElementById('goflow-modal-overlay')?.classList.remove('hidden');
+        });
+    }
+
+    // Reset checkboxes when modal is closed (clicking outside)
+    document.getElementById('choose-role-modal-overlay')?.addEventListener('click', function(e) {
+        if (e.target === this) { // Only if clicking directly on overlay (not modal content)
+            resetRoleSelection();
+        }
+    });
+
+    // Function to reset role selection
+    function resetRoleSelection() {
+        if (clientCheckbox) clientCheckbox.checked = false;
+        if (freelancerCheckbox) freelancerCheckbox.checked = false;
+        
+        // Remove stored roles if needed
     }
 });
