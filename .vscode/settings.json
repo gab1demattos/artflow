@@ -1,0 +1,11 @@
+{
+	"sqltools.useNodeRuntime": true,
+	"sqltools.connections": [
+		{
+			"previewLimit": 50,
+			"driver": "SQLite",
+			"name": "artflow_database",
+			"database": "${workspaceFolder:ltw-project-ltw07g05}/database/database.db"
+		}
+	]
+}
