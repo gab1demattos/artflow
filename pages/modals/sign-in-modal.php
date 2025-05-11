@@ -2,7 +2,7 @@
     <div class="modal" id="signin-modal">
         <div class="modal-content">
             <div class="modal-right">
-                <img src="../images/sign-in-image.png" alt="Illustration">
+                <img src="../images/modals/sign_in/sign-in-image.png" alt="Illustration">
             </div>
             <div class="form-container">
                 <h2 id='h2-signin'>Welcome back!</h2>
