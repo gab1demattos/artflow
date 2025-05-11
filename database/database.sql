@@ -6,7 +6,7 @@ DROP TABLE IF EXISTS Review;
 DROP TABLE IF EXISTS Category;
 
 CREATE TABLE User (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id INTEGER PRIMARY KEY,
     user_type TEXT NOT NULL CHECK (user_type IN ('regular', 'admin')), -- a regular user can act as a client or freelancer without needing to change accounts
     isClient INT NOT NULL CHECK (isClient IN (0,1)), -- if true (0), the user is a client
     isFreelancer BOOLEAN NOT NULL CHECK (isFreelancer IN (0,1)), -- if true (0), the user is a freelancer
@@ -17,7 +17,7 @@ CREATE TABLE User (
 );
 
 CREATE TABLE Service (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id INTEGER PRIMARY KEY,
     user_id INTEGER NOT NULL,
     title TEXT NOT NULL,
     description TEXT NOT NULL,
@@ -31,7 +31,7 @@ CREATE TABLE Service (
 );
 
 CREATE TABLE Exchange (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id INTEGER PRIMARY KEY,
     freelancer_id INTEGER NOT NULL,
     client_id INTEGER NOT NULL,
     service_id INTEGER NOT NULL,
@@ -43,7 +43,7 @@ CREATE TABLE Exchange (
 );
 
 CREATE TABLE Message (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id INTEGER PRIMARY KEY,
     sender_id INTEGER NOT NULL,
     receiver_id INTEGER NOT NULL,
     message TEXT NOT NULL,
@@ -52,7 +52,7 @@ CREATE TABLE Message (
 );
 
 CREATE TABLE Review (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id INTEGER PRIMARY KEY,
     user_id INTEGER NOT NULL,
     service_id INTEGER NOT NULL,    --  before a user being able to leave a review we need to check if the service's status is 'completed'
     rating INTEGER NOT NULL CHECK (rating BETWEEN 1 AND 5),
@@ -62,6 +62,6 @@ CREATE TABLE Review (
 );
 
 CREATE TABLE Category (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id INTEGER PRIMARY KEY,
     category_type TEXT NOT NULL
 );

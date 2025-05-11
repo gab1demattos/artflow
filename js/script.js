@@ -98,7 +98,6 @@ document.addEventListener('DOMContentLoaded', function() {
         if (freelancerCheckbox) freelancerCheckbox.checked = false;
     }
 
-    // MODIFIED: Comment out the role selection modal handling for now
     /*
     if (nextBtn) {
         nextBtn.addEventListener('click', function(e) {
