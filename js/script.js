@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const signUpBtn_submit = document.querySelector('#sign-up-submit');
     const nextBtn = document.querySelector('#next-btn');
     
-    // Role selection elements
+    // Role selection elements (keep these for future use)
     const clientRole = document.getElementById('client-role');
     const clientCheckbox = document.getElementById('client-checkbox');
     const freelancerRole = document.getElementById('freelancer-role');
@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('signup-modal-overlay')?.classList.add('hidden');
         document.getElementById('signin-modal-overlay')?.classList.add('hidden');
         document.getElementById('choose-role-modal-overlay')?.classList.add('hidden');
+        document.getElementById('goflow-modal-overlay')?.classList.add('hidden');
     }
 
     // Show sign up modal when clicking sign up button
@@ -46,12 +47,24 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Handle sign up form submission
+    // MODIFIED: Handle sign up form submission (direct submit without role selection)
     if (signUpBtn_submit) {
         signUpBtn_submit.addEventListener('click', function(e) {
-            e.preventDefault();
-            hideAllModals();
-            document.getElementById('choose-role-modal-overlay').classList.remove('hidden');
+            // Get the form element
+            const form = document.getElementById('signup-form');
+            
+            // Basic client-side validation
+            const password = form.querySelector('input[name="password"]').value;
+            const confirmPassword = form.querySelector('input[name="confirm_password"]').value;
+            
+            if (password !== confirmPassword) {
+                alert('Passwords do not match!');
+                e.preventDefault();
+                return;
+            }
+            
+            // If validation passes, let the form submit normally
+            // All role-related code has been removed for now
         });
     }
 
@@ -66,27 +79,32 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Toggle client checkbox when clicking the client role box
+    // Keep these for future role selection implementation
     if (clientRole && clientCheckbox) {
         clientRole.addEventListener('click', function() {
             clientCheckbox.checked = !clientCheckbox.checked;
         });
     }
 
-    // Toggle freelancer checkbox when clicking the freelancer role box
     if (freelancerRole && freelancerCheckbox) {
         freelancerRole.addEventListener('click', function() {
             freelancerCheckbox.checked = !freelancerCheckbox.checked;
         });
     }
 
-    // Handle next button click in choose role modal
+    // Keep this for future role selection implementation
+    function resetRoleSelection() {
+        if (clientCheckbox) clientCheckbox.checked = false;
+        if (freelancerCheckbox) freelancerCheckbox.checked = false;
+    }
+
+    // MODIFIED: Comment out the role selection modal handling for now
+    /*
     if (nextBtn) {
         nextBtn.addEventListener('click', function(e) {
             e.preventDefault();
             const selectedRoles = [];
             
-            // Collect selected roles
             if (clientCheckbox.checked) {
                 selectedRoles.push('Client');
             }
@@ -94,33 +112,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 selectedRoles.push('Freelancer');
             }
 
-            // Validate at least one role is selected
             if (selectedRoles.length === 0) {
                 alert('Please select at least one role.');
                 return;
             }
 
-            // Store selected roles
             console.log('Selected roles stored:', selectedRoles);
-
-            // Proceed to next modal
             hideAllModals();
             document.getElementById('goflow-modal-overlay')?.classList.remove('hidden');
         });
     }
 
-    // Reset checkboxes when modal is closed (clicking outside)
     document.getElementById('choose-role-modal-overlay')?.addEventListener('click', function(e) {
-        if (e.target === this) { // Only if clicking directly on overlay (not modal content)
+        if (e.target === this) {
             resetRoleSelection();
         }
     });
-
-    // Function to reset role selection
-    function resetRoleSelection() {
-        if (clientCheckbox) clientCheckbox.checked = false;
-        if (freelancerCheckbox) freelancerCheckbox.checked = false;
-        
-        // Remove stored roles if needed
-    }
+    */
 });

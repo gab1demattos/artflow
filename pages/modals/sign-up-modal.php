@@ -3,7 +3,7 @@
         <div class="modal-content">
             <div class="form-container">
                 <h2 id='h2-signup'>Create Account</h2>
-                <form id="signup-form" class="form" method='POST' action='/actions/signup-action.php'>
+                <form id="signup-form" class="form" method='POST' action='../actions/signup-action.php'>
                     <input type="text" placeholder="Name" name="name" required>
                     <input type="text" placeholder="Username" name="username" required>
                     <input type="email" placeholder="Email" name="email" required>

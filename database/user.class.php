@@ -21,7 +21,15 @@
             $this->email = $email;
         }
 
-        public static function create($user_type = 'regular', $isClient = 0, $isFreelancer = 0, $name, $username, $email, $password) {
+        public static function create(
+            string $user_type = 'regular', 
+            int $isClient = 0, 
+            int $isFreelancer = 0, 
+            string $name, 
+            string $username, 
+            string $email, 
+            string $password
+        ) {
             $db = Database::getInstance();
             $stmt = $db->prepare('INSERT INTO User (user_type, isClient, isFreelancer, name, username, email, password) VALUES (?, ?, ?, ?, ?, ?, ?)');
             $stmt->execute([$user_type, $isClient, $isFreelancer, $name, $username, $email, sha1($password)]);
