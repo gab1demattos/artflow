@@ -1,4 +1,4 @@
-<div id="modal-overlay" class="hidden">
+<div id="choose-role-modal-overlay" class="modal-overlay hidden">
     <div class="modal" id="choose-role-modal">
         <img src="images/flowie_green-choose_role.png" class="corner-image top-left" id="green-flowie" alt="Green Flowie">
         <img src="images/flowie_yellow-choose_role.png" class="corner-image top-right" id="yellow-flowie" alt="Yellow Flowie">

@@ -1,4 +1,4 @@
-<div id="modal-overlay" class="hidden">
+<div id="signin-modal-overlay" class="modal-overlay hidden">
     <div class="modal" id="signin-modal">
         <div class="modal-content">
             <div class="modal-right">

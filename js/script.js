@@ -1,32 +1,38 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Button elements
     const signupBtn = document.querySelector('#buttons li button');
-    const modalOverlays = document.querySelectorAll('#modal-overlay');
     const signInButtons = document.querySelectorAll('#sign-in');
     const signUpButtons = document.querySelectorAll('#sign-up');
     const signUpBtn_submit = document.querySelector('#sign-up-submit');
     
+    // Role selection elements
     const clientRole = document.getElementById('client-role');
     const clientCheckbox = document.getElementById('client-checkbox');
     const freelancerRole = document.getElementById('freelancer-role');
     const freelancerCheckbox = document.getElementById('freelancer-checkbox');
 
+    // Function to hide all modals
+    function hideAllModals() {
+        document.getElementById('signup-modal-overlay')?.classList.add('hidden');
+        document.getElementById('signin-modal-overlay')?.classList.add('hidden');
+        document.getElementById('choose-role-modal-overlay')?.classList.add('hidden');
+    }
+
     // Show sign up modal when clicking sign up button
-    signupBtn.addEventListener('click', function(e) {
-        e.stopPropagation();
-        // Hide all modals first
-        modalOverlays.forEach(overlay => overlay.classList.add('hidden'));
-        // Show sign up modal (the first one in DOM)
-        document.querySelector('#signup-modal').closest('#modal-overlay').classList.remove('hidden');
-    });
+    if (signupBtn) {
+        signupBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            hideAllModals();
+            document.getElementById('signup-modal-overlay').classList.remove('hidden');
+        });
+    }
 
     // Handle click on sign in button in sign up modal
     signInButtons.forEach(button => {
         button.addEventListener('click', function(e) {
             e.stopPropagation();
-            // Hide all modals first
-            modalOverlays.forEach(overlay => overlay.classList.add('hidden'));
-            // Show sign in modal
-            document.querySelector('#signin-modal').closest('#modal-overlay').classList.remove('hidden');
+            hideAllModals();
+            document.getElementById('signin-modal-overlay').classList.remove('hidden');
         });
     });
 
@@ -34,29 +40,26 @@ document.addEventListener('DOMContentLoaded', function() {
     signUpButtons.forEach(button => {
         button.addEventListener('click', function(e) {
             e.stopPropagation();
-            // Hide all modals first
-            modalOverlays.forEach(overlay => overlay.classList.add('hidden'));
-            // Show sign up modal
-            document.querySelector('#signup-modal').closest('#modal-overlay').classList.remove('hidden');
+            hideAllModals();
+            document.getElementById('signup-modal-overlay').classList.remove('hidden');
         });
     });
 
     // Handle sign up form submission
-    signUpBtn_submit.addEventListener('click', function(e) {
-        e.preventDefault();
-        // Hide all modals first
-        modalOverlays.forEach(overlay => overlay.classList.add('hidden'));
-        // Show success message (or handle form submission)
-        document.querySelector('#choose-role-modal').closest('#modal-overlay').classList.remove('hidden');
-    });
+    if (signUpBtn_submit) {
+        signUpBtn_submit.addEventListener('click', function(e) {
+            e.preventDefault();
+            hideAllModals();
+            document.getElementById('choose-role-modal-overlay').classList.remove('hidden');
+        });
+    }
 
     // Close modal when clicking outside
-    modalOverlays.forEach(overlay => {
+    document.querySelectorAll('.modal-overlay').forEach(overlay => {
         overlay.addEventListener('click', function() {
             overlay.classList.add('hidden');
         });
 
-        // Prevent modal from closing when clicking inside
         overlay.querySelector('.modal').addEventListener('click', function(e) {
             e.stopPropagation();
         });
