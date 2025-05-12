@@ -29,8 +29,6 @@
     try {
         User::create(
             'regular',  // user_type
-            0,          // isClient (false)
-            0,          // isFreelancer (false)
             $name,
             $username,
             $email,
