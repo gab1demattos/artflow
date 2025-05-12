@@ -79,78 +79,78 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Role selection implementation
-    if (clientRole && clientCheckbox) {
-        clientRole.addEventListener('click', function (e) {
-            // Toggle the checkbox state
-            clientCheckbox.checked = !clientCheckbox.checked;
+    // // Role selection implementation
+    // if (clientRole && clientCheckbox) {
+    //     clientRole.addEventListener('click', function (e) {
+    //         // Toggle the checkbox state
+    //         clientCheckbox.checked = !clientCheckbox.checked;
 
-            // Force a change event on the checkbox to ensure the CSS styles apply
-            const event = new Event('change', { bubbles: true });
-            clientCheckbox.dispatchEvent(event);
+    //         // Force a change event on the checkbox to ensure the CSS styles apply
+    //         const event = new Event('change', { bubbles: true });
+    //         clientCheckbox.dispatchEvent(event);
 
-            // Apply visual styling directly to ensure it works
-            if (clientCheckbox.checked) {
-                clientRole.style.backgroundColor = 'var(--yellow)';
-                clientRole.style.color = 'white';
-            } else {
-                clientRole.style.backgroundColor = '';
-                clientRole.style.color = 'var(--yellow)';
-            }
+    //         // Apply visual styling directly to ensure it works
+    //         if (clientCheckbox.checked) {
+    //             clientRole.style.backgroundColor = 'var(--yellow)';
+    //             clientRole.style.color = 'white';
+    //         } else {
+    //             clientRole.style.backgroundColor = '';
+    //             clientRole.style.color = 'var(--yellow)';
+    //         }
 
-            console.log('Client role clicked, checked:', clientCheckbox.checked);
-        });
+    //         console.log('Client role clicked, checked:', clientCheckbox.checked);
+    //     });
 
-        // Also listen for checkbox change events
-        clientCheckbox.addEventListener('change', function () {
-            if (this.checked) {
-                clientRole.style.backgroundColor = 'var(--yellow)';
-                clientRole.style.color = 'white';
-            } else {
-                clientRole.style.backgroundColor = '';
-                clientRole.style.color = 'var(--yellow)';
-            }
-        });
-    }
+    //     // Also listen for checkbox change events
+    //     clientCheckbox.addEventListener('change', function () {
+    //         if (this.checked) {
+    //             clientRole.style.backgroundColor = 'var(--yellow)';
+    //             clientRole.style.color = 'white';
+    //         } else {
+    //             clientRole.style.backgroundColor = '';
+    //             clientRole.style.color = 'var(--yellow)';
+    //         }
+    //     });
+    // }
 
-    if (freelancerRole && freelancerCheckbox) {
-        freelancerRole.addEventListener('click', function (e) {
-            // Toggle the checkbox state
-            freelancerCheckbox.checked = !freelancerCheckbox.checked;
+    // if (freelancerRole && freelancerCheckbox) {
+    //     freelancerRole.addEventListener('click', function (e) {
+    //         // Toggle the checkbox state
+    //         freelancerCheckbox.checked = !freelancerCheckbox.checked;
 
-            // Force a change event on the checkbox to ensure the CSS styles apply
-            const event = new Event('change', { bubbles: true });
-            freelancerCheckbox.dispatchEvent(event);
+    //         // Force a change event on the checkbox to ensure the CSS styles apply
+    //         const event = new Event('change', { bubbles: true });
+    //         freelancerCheckbox.dispatchEvent(event);
 
-            // Apply visual styling directly to ensure it works
-            if (freelancerCheckbox.checked) {
-                freelancerRole.style.backgroundColor = 'var(--green)';
-                freelancerRole.style.color = 'white';
-            } else {
-                freelancerRole.style.backgroundColor = '';
-                freelancerRole.style.color = 'var(--green)';
-            }
+    //         // Apply visual styling directly to ensure it works
+    //         if (freelancerCheckbox.checked) {
+    //             freelancerRole.style.backgroundColor = 'var(--green)';
+    //             freelancerRole.style.color = 'white';
+    //         } else {
+    //             freelancerRole.style.backgroundColor = '';
+    //             freelancerRole.style.color = 'var(--green)';
+    //         }
 
-            console.log('Freelancer role clicked, checked:', freelancerCheckbox.checked);
-        });
+    //         console.log('Freelancer role clicked, checked:', freelancerCheckbox.checked);
+    //     });
 
-        // Also listen for checkbox change events
-        freelancerCheckbox.addEventListener('change', function () {
-            if (this.checked) {
-                freelancerRole.style.backgroundColor = 'var(--green)';
-                freelancerRole.style.color = 'white';
-            } else {
-                freelancerRole.style.backgroundColor = '';
-                freelancerRole.style.color = 'var(--green)';
-            }
-        });
-    }
+    //     // Also listen for checkbox change events
+    //     freelancerCheckbox.addEventListener('change', function () {
+    //         if (this.checked) {
+    //             freelancerRole.style.backgroundColor = 'var(--green)';
+    //             freelancerRole.style.color = 'white';
+    //         } else {
+    //             freelancerRole.style.backgroundColor = '';
+    //             freelancerRole.style.color = 'var(--green)';
+    //         }
+    //     });
+    // }
 
-    // Keep this for future role selection implementation
-    function resetRoleSelection() {
-        if (clientCheckbox) clientCheckbox.checked = false;
-        if (freelancerCheckbox) freelancerCheckbox.checked = false;
-    }
+    // // Keep this for future role selection implementation
+    // function resetRoleSelection() {
+    //     if (clientCheckbox) clientCheckbox.checked = false;
+    //     if (freelancerCheckbox) freelancerCheckbox.checked = false;
+    // }
 
     // Check for successful signup and show role selection modal
     const urlParams = new URLSearchParams(window.location.search);
@@ -158,14 +158,15 @@ document.addEventListener('DOMContentLoaded', function () {
         const username = urlParams.get('username');
         if (username) {
             // Update the username in the modal if needed
+
             const usernameElement = document.querySelector('.intro-text p:first-child');
-            if (usernameElement) {
-                usernameElement.textContent = `Welcome, ${username}`;
-            }
+            // if (usernameElement) {
+            //     usernameElement.textContent = `Welcome, ${username}`;
+            // }
 
             // Show the choose role modal
             hideAllModals();
-            document.getElementById('choose-role-modal-overlay').classList.remove('hidden');
+            document.getElementById('goflow-modal-overlay').classList.remove('hidden');
 
             // Clean the URL to prevent showing the modal again on refresh
             const cleanUrl = window.location.pathname;
