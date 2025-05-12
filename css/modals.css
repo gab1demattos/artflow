@@ -1,0 +1,317 @@
+/* ============================================== */
+/* GLOBAL MODAL STYLES (applies to ALL modals)   */
+/* ============================================== */
+
+/* Overlay that covers the entire screen behind modals */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Base modal container structure */
+.modal {
+    background-color: white;
+    padding: 0;
+    border-radius: 20px;
+    width: 39.2em;
+    max-width: 800px;
+    height: 27.5em;
+    position: relative;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: row; /* Form and image side-by-side */
+    align-items: center;
+}
+
+/* Content container for modal sections */
+.modal-content {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+/* Shared form styling for both signup/signin */
+.form-container {
+    padding: 2rem;
+    box-sizing: border-box;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Shared form input styles */
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+.form input {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    background: #eee;
+    font-size: 20px;
+    font-family: 'Cormorant Garamond', serif;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border 0.3s ease; /* Smooth border color change */
+    border: 2px solid transparent; /* Reserve space for focus border */
+}
+
+/* Shared button container styles */
+.button-container {
+    display: flex;
+    gap: 1em;
+    margin-top: 0.5em;
+}
+
+.button-container .button {
+    flex: 1;
+    padding: 12px 20px;
+    text-align: center;
+}
+
+/* =========================== */
+/* SHARED SIGNUP/SIGNIN STYLES */
+/* =========================== */
+
+/* Right side container (used in signup) */
+.modal-right {
+    flex: 1;
+    background: transparent;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Left side container (used in signin) */
+.modal-left {
+    flex: 1;
+    background: transparent;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Shared image styles for both modals */
+.modal-right img,
+.modal-left img {
+    max-width: 100%;
+    object-fit: contain;
+}
+
+/* Shared heading styles */
+.modal h2 {
+    font-family: 'Modak', sans-serif;
+    letter-spacing: -1px;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+/* Z-index boost when modal is active */
+#signup-modal,
+#signin-modal {
+    z-index: 1001;
+}
+
+
+/*--- SIGNUP MODAL SPECIFICS ---*/
+
+/* Purple heading for signup */
+#h2-signup {
+    color: var(--purple);
+}
+
+/* Purple focus border for signup inputs */
+#signup-modal .form input:focus {
+    outline: none;
+    border: 2px solid var(--purple); 
+}
+
+/*--- SIGNIN MODAL SPECIFICS ---*/
+
+/* Yellow heading for signin */
+#h2-signin {
+    color: var(--yellow);
+}
+
+/* Yellow focus border for signin inputs */
+#signin-modal .form input:focus {
+    outline: none;
+    border: 2px solid var(--yellow); 
+}
+
+
+/*--- CHOOSE ROLE MODAL SPECIFICS ---*/
+
+#choose-role-modal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+}
+
+#choose-role-modal .intro-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.1em;
+    padding: 2em;
+}
+
+#choose-role-modal .intro-text p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    max-width: 600px;
+    text-align: center;
+    color: black;
+    margin:0;
+    line-height: 1.1;
+}
+
+#choose-role-modal #roles {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+}
+
+#choose-role-modal .role {
+    display: flex; 
+    flex-direction: column;  
+    justify-content: center; /* Vertically center content */
+    align-items: center; /* Horizontally center content */
+    border-radius: 10px;
+    padding: 1.5em;
+    width: 12em;
+    height: 10em;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+#client-role {
+    border: 3px solid var(--yellow);
+    color: var(--yellow);
+}
+
+#freelancer-role {
+    border: 3px solid var(--green);
+    color: var(--green);
+}
+
+/* Style for when client checkbox is checked */
+#client-checkbox:checked + #client-role {
+    background-color: var(--yellow);
+    color: white;
+}
+
+/* Style for when freelancer checkbox is checked */
+#freelancer-checkbox:checked + #freelancer-role {
+    background-color: var(--green);
+    color: white;
+}
+
+/* Hide the default checkbox appearance */
+.role input[type='checkbox'] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+#choose-role-modal #next-btn {
+    align-self: flex-end; 
+    margin-top: 1em;
+    margin-right: 3em;
+}
+
+.corner-image {
+    position: absolute;
+    z-index: 1;
+    pointer-events: none; /* Prevent interaction */
+}
+
+.corner-image #yellow-flowie {
+    width: 7.5625em;
+}
+
+.corner-image #yellow-flowie {
+    width: 10.75em;
+}
+
+.top-left {
+    top: -0.625em;
+    left: -0.625em;
+}
+
+.top-right {
+    top: -0.625em;
+    right: -0.625em;
+}
+
+
+/*--- GO WITH FLOW MODAL SPECIFICS ---*/
+#goflow-modal .modal-content {
+    width: 100%;
+    height: 100%;
+}
+
+#goflow-modal p {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.4rem;
+    color: #000;
+    margin: 0;
+    line-height: 1.2;
+}
+
+#goflow-modal .artflow-text {
+    color: var(--orange);
+}
+
+#goflow-modal img {
+    width: 41.625em;
+    height: 29.625em;
+    position: absolute;
+    top: -0.56em;
+    right: -1.21em;
+    left: -1.21em;
+    bottom: -0.56em;
+}
+
+#goflow-modal .modal-content > p:nth-of-type(1) {
+    font-size: 2rem;
+    position: absolute;
+    left: 4em;
+    top: 2em;
+}
+
+#goflow-modal .modal-content > p:nth-of-type(2) {
+    position: absolute;
+    left: 2.125em;
+    top: 14.25em;
+    text-align: center;
+}
+
+/* Positioning the icon button inside modal */
+#goflow-modal #go-arrow {
+    position: absolute;
+    bottom: 4.5em;
+    right: 6em;
+    z-index: 10;
+}
+
