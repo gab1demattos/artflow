@@ -1,5 +1,5 @@
 <?php
-    declare(strict_types=1);
+    declare(strict_types=0);
 
     require_once(__DIR__ . '/../database/user.class.php');
 
@@ -27,11 +27,10 @@
     }
 
     try {
-        // Create user with both roles set to true (1)
         User::create(
             'regular',  // user_type
-            1,          // isClient (true)
-            1,          // isFreelancer (true)
+            0,          // isClient (false)
+            0,          // isFreelancer (false)
             $name,
             $username,
             $email,
