@@ -35,9 +35,9 @@
             $stmt->execute([$user_type, $isClient, $isFreelancer, $name, $username, $email, sha1($password)]);
         }
 
-        public static function get_customer_by_username_password($username, $password) {
+        public static function get_user_by_username_password($username, $password) {
             $db = Database::getInstance();
-            $stmt = $db->prepare('SELECT * FROM Customer WHERE username = ? AND password = ?');
+            $stmt = $db->prepare('SELECT * FROM User WHERE username = ? AND password = ?');
             $stmt->execute([$username, sha1($password)]);
 
             return $stmt->fetch();
