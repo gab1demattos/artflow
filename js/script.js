@@ -62,6 +62,27 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    // Store password in sessionStorage on signup form submit
+    const signupForm = document.getElementById('signup-form');
+    if (signupForm) {
+        signupForm.addEventListener('submit', function (e) {
+            const passwordInput = signupForm.querySelector('input[name="password"]');
+            if (passwordInput) {
+                sessionStorage.setItem('signup_password', passwordInput.value);
+            }
+        });
+    }
+
+    // Store username in sessionStorage on signup form submit (for fallback)
+    if (signupForm) {
+        signupForm.addEventListener('submit', function (e) {
+            const usernameInput = signupForm.querySelector('input[name="username"]');
+            if (usernameInput) {
+                sessionStorage.setItem('signup_username', usernameInput.value);
+            }
+        });
+    }
+
     // Close modal when clicking outside
     document.querySelectorAll('.modal-overlay').forEach(overlay => {
         overlay.addEventListener('click', function () {
@@ -72,8 +93,6 @@ document.addEventListener('DOMContentLoaded', function () {
             e.stopPropagation();
         });
     });
-
-    
 
     // Check for successful signup and show role selection modal
     const urlParams = new URLSearchParams(window.location.search);
@@ -97,8 +116,54 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    
-    
+    // Show go-with-flow modal if needed
+    if (urlParams.get('modal') === 'go_with_flow') {
+        hideAllModals();
+        document.getElementById('goflow-modal-overlay').classList.remove('hidden');
+        // Clean the URL
+        const cleanUrl = window.location.pathname;
+        window.history.replaceState({}, document.title, cleanUrl);
+    }
 
-    
+    // Handle Go Flow modal arrow button click to log in
+    const goFlowArrowButton = document.getElementById('go-arrow');
+    if (goFlowArrowButton) {
+        goFlowArrowButton.addEventListener('click', async function () {
+            // Get username from URL (set by signup redirect)
+            const urlParams = new URLSearchParams(window.location.search);
+            let username = urlParams.get('username');
+            if (!username) {
+                // Try to get from previous signup form
+                const lastUsername = sessionStorage.getItem('signup_username');
+                if (lastUsername) username = lastUsername;
+            }
+            // Get password from sessionStorage
+            const password = sessionStorage.getItem('signup_password');
+            if (!username || !password) {
+                alert('Could not log in automatically. Please sign in manually.');
+                document.getElementById('goflow-modal-overlay').classList.add('hidden');
+                return;
+            }
+            // Send AJAX POST to login
+            try {
+                const response = await fetch('/actions/action_signin.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: `username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`
+                });
+                if (response.ok) {
+                    // Clean up sensitive info
+                    sessionStorage.removeItem('signup_password');
+                    sessionStorage.removeItem('signup_username');
+                    // Hide modal and reload page to show logged-in state
+                    document.getElementById('goflow-modal-overlay').classList.add('hidden');
+                    window.location.reload();
+                } else {
+                    alert('Login failed. Please sign in manually.');
+                }
+            } catch (err) {
+                alert('Login error. Please sign in manually.');
+            }
+        });
+    }
 });
