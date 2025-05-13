@@ -31,8 +31,20 @@
             string $password
         ) {
             $db = Database::getInstance();
-            $stmt = $db->prepare('INSERT INTO User (user_type, name, username, email, password) VALUES (?, ?, ?, ?, ?)');
-            $stmt->execute([$user_type, $name, $username, $email, sha1($password)]);
+            
+            try {
+                $stmt = $db->prepare('INSERT INTO User (user_type, name, username, email, password) VALUES (?, ?, ?, ?, ?)');
+                $success = $stmt->execute([$user_type, $name, $username, $email, sha1($password)]);
+                
+                if ($success) {
+                    $id = $db->lastInsertId();
+                    return new User((int)$id, $user_type, $name, $username, $email);
+                } else {
+                    return false;
+                }
+            } catch (PDOException $e) {
+                return false;
+            }
         }
 
         public static function get_user_by_username_password($username, $password) {
