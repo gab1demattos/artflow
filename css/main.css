@@ -2,6 +2,7 @@
 
 @import url('components.css');
 @import url('modals.css');
+@import url('responsive/modals-responsive.css');
 
 :root { /*theme colors*/
     --purple: #885784;

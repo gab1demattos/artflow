@@ -1,0 +1,179 @@
+/* ======================================= */
+/* BASE MOBILE STYLES (applied by default) */
+/* ======================================= */
+
+@media screen and (max-width: 767px) {
+	.modal {
+		width: 90%;
+		max-width: 360px;
+		height: auto;
+		min-height: 450px;
+		flex-direction: column;
+		border-radius: 15px;
+		justify-content: center; 
+	}
+
+	/* Special styling for sign-in modal to make it smaller */
+	#signin-modal {
+		min-height: 350px;
+	}
+
+	.form-container {
+		width: 100%;
+		padding: 1.5rem;
+		display: flex;
+		flex-direction: column;
+		justify-content: center; 
+		align-items: center; 
+	}
+
+	/* Make form take full width inside form container */
+	.form {
+		width: 100%;
+		max-width: 280px;
+	}
+
+	.modal h2 {
+		font-size: 1.7rem;
+		text-align: center; 
+		width: 100%;
+	}
+
+	.form input {
+		font-size: 16px;
+		padding: 8px 12px;
+	}
+
+	.button-container {
+		margin-top: 1em;
+		width: 100%; 
+	}
+
+	/* Hide images on mobile */
+	.modal-right,
+	.modal-left, 
+    #goflow-modal img  {
+		display: none;
+	}
+
+	#goflow-modal .modal-content > p:nth-of-type(1) {
+		font-size: 1.8rem; 
+		position: absolute;
+		left: 2em;
+		right: 2em;
+		top: 2.5em; 
+		text-align: left;
+	}
+
+	#goflow-modal .modal-content > p:nth-of-type(2) {
+		position: absolute;
+		left: 2em;
+		right: 2em;
+		top: 12em; 
+		text-align: left;
+		font-size: 1.2rem;
+	}
+
+	/* Style the artflow text without making it a block */
+	#goflow-modal .artflow-text {
+		display: inline; 
+		color: var(--orange); 
+	}
+
+	#goflow-modal #go-arrow {
+		position: absolute;
+		bottom: 3em;
+		right: 2.5em; 
+	}
+}
+
+/* =================== */
+/*    TABLET STYLES    */
+/* =================== */
+
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+	.modal {
+		width: 80%;
+		max-width: 600px;
+		height: auto;
+		min-height: 400px;
+		flex-direction: row;
+		border-radius: 18px;
+	}
+
+	.form-container {
+		width: 50%;
+		padding: 1.7rem;
+	}
+
+	.modal h2 {
+		font-size: 1.8rem;
+	}
+
+	/* Show images on tablet */
+	.modal-right,
+	.modal-left {
+		display: flex;
+		width: 50%;
+	}
+
+	/* Make images overflow proportionally */
+	.modal-right img,
+	.modal-left img {
+		width: 110%;
+		height: auto;
+		object-fit: cover;
+	}
+
+	/* Go with flow modal adjustments for tablet */
+	#goflow-modal img {
+		width: 100%;
+		height: auto;
+		position: absolute;
+		top: -0.3em;
+		right: -1.2em; 
+		left: 0.2em; 
+		bottom: -0.3em;
+	}
+
+	#goflow-modal .modal-content > p:nth-of-type(1) {
+		font-size: 1.7rem;
+		position: absolute;
+		left: 3em;
+		top: 2.3em;
+	}
+
+	#goflow-modal .modal-content > p:nth-of-type(2) {
+		position: absolute;
+		left: 1.8em;
+		top: 14em;
+		text-align: center;
+		font-size: 1.3rem;
+	}
+
+	#goflow-modal #go-arrow {
+		position: absolute;
+		bottom: 3.5em;
+		right: 6em;
+	}
+}
+
+/* ================================== */
+/*    DESKTOP STYLES (above 1200px)   */
+/* ================================== */
+
+/*use the main modals.css settings */
+@media screen and (min-width: 1200px) {
+	/* 
+      The desktop styles are already defined in modals.css
+      This media query ensures we only apply those styles at larger screens
+    */
+
+	/* For ultra-wide screens, adjust proportions */
+	@media screen and (min-width: 2400px) {
+		.modal {
+			max-width: 1000px;
+			height: 33em;
+		}
+	}
+}
