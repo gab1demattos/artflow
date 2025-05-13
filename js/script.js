@@ -6,68 +6,48 @@ document.addEventListener("DOMContentLoaded", function () {
 	const signUpBtn_submit = document.querySelector("#sign-up-submit");
 	const nextBtn = document.querySelector("#next-btn");
 
-	// Function to hide all modals
+	// Modal elements
+	const signupModalOverlay = document.getElementById("signup-modal-overlay");
+	const signinModalOverlay = document.getElementById("signin-modal-overlay");
+	const goflowModalOverlay = document.getElementById("goflow-modal-overlay");
+
+	// Function to hide all modals - with null checks
 	function hideAllModals() {
-		document.getElementById("signup-modal-overlay")?.classList.add("hidden");
-		document.getElementById("signin-modal-overlay")?.classList.add("hidden");
-		document.getElementById("goflow-modal-overlay")?.classList.add("hidden");
+		signupModalOverlay?.classList.add("hidden");
+		signinModalOverlay?.classList.add("hidden");
+		goflowModalOverlay?.classList.add("hidden");
 	}
 
 	// Show sign up modal when clicking sign up button
-	if (signupBtn) {
+	if (signupBtn && signupModalOverlay) {
 		signupBtn.addEventListener("click", function (e) {
 			e.stopPropagation();
 			hideAllModals();
-			document
-				.getElementById("signup-modal-overlay")
-				.classList.remove("hidden");
+			signupModalOverlay.classList.remove("hidden");
 		});
 	}
 
 	// Handle click on sign in button in sign up modal
-	signInButtons.forEach((button) => {
-		button.addEventListener("click", function (e) {
-			e.stopPropagation();
-			hideAllModals();
-			document
-				.getElementById("signin-modal-overlay")
-				.classList.remove("hidden");
+	if (signinModalOverlay) {
+		signInButtons.forEach((button) => {
+			button.addEventListener("click", function (e) {
+				e.stopPropagation();
+				hideAllModals();
+				signinModalOverlay.classList.remove("hidden");
+			});
 		});
-	});
+	}
 
 	// Handle click on sign up button in sign in modal
-	signUpButtons.forEach((button) => {
-		button.addEventListener("click", function (e) {
-			e.stopPropagation();
-			hideAllModals();
-			document
-				.getElementById("signup-modal-overlay")
-				.classList.remove("hidden");
+	if (signupModalOverlay) {
+		signUpButtons.forEach((button) => {
+			button.addEventListener("click", function (e) {
+				e.stopPropagation();
+				hideAllModals();
+				signupModalOverlay.classList.remove("hidden");
+			});
 		});
-	});
-
-	/* // MODIFIED: Handle sign up form submission (direct submit without role selection)
-	if (signUpBtn_submit) {
-		signUpBtn_submit.addEventListener("click", function (e) {
-			// Get the form element
-			const form = document.getElementById("signup-form");
-
-			// Basic client-side validation
-			const password = form.querySelector('input[name="password"]').value;
-			const confirmPassword = form.querySelector(
-				'input[name="confirm_password"]'
-			).value;
-
-			if (password !== confirmPassword) {
-				alert("Passwords do not match!");
-				e.preventDefault();
-				return;
-			}
-
-			// If validation passes, let the form submit normally
-			// All role-related code has been removed for now
-		});
-	} */
+	}
 
 	// Close modal when clicking outside
 	document.querySelectorAll(".modal-overlay").forEach((overlay) => {
@@ -75,34 +55,42 @@ document.addEventListener("DOMContentLoaded", function () {
 			overlay.classList.add("hidden");
 		});
 
-		overlay.querySelector(".modal").addEventListener("click", function (e) {
-			e.stopPropagation();
-		});
+		const modal = overlay.querySelector(".modal");
+		if (modal) {
+			modal.addEventListener("click", function (e) {
+				e.stopPropagation();
+			});
+		}
 	});
 
+	// Toggle password visibility
 	const togglePasswordButtons = document.querySelectorAll(".toggle-password");
-
 	togglePasswordButtons.forEach((button) => {
 		button.addEventListener("click", function () {
 			const input = this.previousElementSibling;
 			const icon = this.querySelector("i.material-icons");
-			if (input.type === "password") {
-				input.type = "text";
-				icon.textContent = "visibility";
-				icon.alt = "Hide password";
-			} else {
-				input.type = "password";
-				icon.textContent = "visibility_off";
-				icon.alt = "Show password";
+			if (input && icon) {
+				if (input.type === "password") {
+					input.type = "text";
+					icon.textContent = "visibility";
+					icon.alt = "Hide password";
+				} else {
+					input.type = "password";
+					icon.textContent = "visibility_off";
+					icon.alt = "Show password";
+				}
 			}
 		});
 	});
 
 	// Check for signup success in session storage instead of URL parameters
-	if (sessionStorage.getItem("signup_success") === "true") {
+	if (
+		sessionStorage.getItem("signup_success") === "true" &&
+		goflowModalOverlay
+	) {
 		// Show the go-with-flow modal after signup
 		hideAllModals();
-		document.getElementById("goflow-modal-overlay").classList.remove("hidden");
+		goflowModalOverlay.classList.remove("hidden");
 
 		// Clear the flag to prevent showing the modal again on refresh
 		sessionStorage.removeItem("signup_success");
@@ -110,7 +98,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	// Handle Go Flow modal arrow button click to log in
 	const goFlowArrowButton = document.getElementById("go-arrow");
-	if (goFlowArrowButton) {
+	if (goFlowArrowButton && goflowModalOverlay) {
 		goFlowArrowButton.addEventListener("click", async function () {
 			// Get username and password from sessionStorage
 			const username = sessionStorage.getItem("signup_username");
@@ -118,7 +106,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 			if (!username || !password) {
 				alert("Could not log in automatically. Please sign in manually.");
-				document.getElementById("goflow-modal-overlay").classList.add("hidden");
+				goflowModalOverlay.classList.add("hidden");
 				return;
 			}
 
@@ -144,14 +132,12 @@ document.addEventListener("DOMContentLoaded", function () {
 					window.location.href = "index.php";
 				} else {
 					alert("Login failed. Please sign in manually.");
-					document
-						.getElementById("goflow-modal-overlay")
-						.classList.add("hidden");
+					goflowModalOverlay.classList.add("hidden");
 				}
 			} catch (err) {
 				console.error("Login error:", err);
 				alert("Login error. Please sign in manually.");
-				document.getElementById("goflow-modal-overlay").classList.add("hidden");
+				goflowModalOverlay.classList.add("hidden");
 			}
 		});
 	}
@@ -160,27 +146,33 @@ document.addEventListener("DOMContentLoaded", function () {
 	const closeNotificationButtons = document.querySelectorAll(
 		".close-notification"
 	);
-	if (closeNotificationButtons) {
+	if (closeNotificationButtons.length > 0) {
 		closeNotificationButtons.forEach((button) => {
 			button.addEventListener("click", function () {
 				const notification = this.closest(".notification");
-				notification.classList.add("fade-out");
-				setTimeout(() => {
-					notification.parentNode.removeChild(notification);
-				}, 500);
+				if (notification) {
+					notification.classList.add("fade-out");
+					setTimeout(() => {
+						if (notification.parentNode) {
+							notification.parentNode.removeChild(notification);
+						}
+					}, 500);
+				}
 			});
 		});
 	}
 
 	// Auto-dismiss notifications after 5 seconds
 	const notifications = document.querySelectorAll(".notification");
-	if (notifications) {
+	if (notifications.length > 0) {
 		notifications.forEach((notification) => {
 			setTimeout(() => {
 				if (notification.parentNode) {
 					notification.classList.add("fade-out");
 					setTimeout(() => {
-						notification.parentNode.removeChild(notification);
+						if (notification.parentNode) {
+							notification.parentNode.removeChild(notification);
+						}
 					}, 500);
 				}
 			}, 5000);
