@@ -11,7 +11,6 @@
     $password = $_POST['password'] ?? '';
     $confirm_password = $_POST['confirm_password'] ?? '';
 
-    // Start session for messages
     $session = Session::getInstance();
     
     // Basic validation

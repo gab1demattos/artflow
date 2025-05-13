@@ -8,8 +8,6 @@ DROP TABLE IF EXISTS Category;
 CREATE TABLE User (
     id INTEGER PRIMARY KEY,
     user_type TEXT NOT NULL CHECK (user_type IN ('regular', 'admin')), -- a regular user can act as a client or freelancer without needing to change accounts
-    -- isClient INT NOT NULL CHECK (isClient IN (0,1)), -- if true (0), the user is a client
-    -- isFreelancer BOOLEAN NOT NULL CHECK (isFreelancer IN (0,1)), -- if true (0), the user is a freelancer
     name TEXT NOT NULL,
     username TEXT NOT NULL,
     email TEXT NOT NULL,

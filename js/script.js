@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		});
 	});
 
-	// Check for signup success in session storage instead of URL parameters
+	// Check for signup success in session storage
 	if (
 		sessionStorage.getItem("signup_success") === "true" &&
 		goflowModalOverlay
@@ -116,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function () {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/x-www-form-urlencoded",
-						"X-Requested-With": "XMLHttpRequest", // Add this for AJAX detection
+						"X-Requested-With": "XMLHttpRequest",
 					},
 					body: `email=${encodeURIComponent(
 						username
@@ -128,7 +128,7 @@ document.addEventListener("DOMContentLoaded", function () {
 					// Clean up sensitive info
 					sessionStorage.removeItem("signup_password");
 					sessionStorage.removeItem("signup_username");
-					// Redirect to index page (without parameters)
+					// Redirect to index page
 					window.location.href = "index.php";
 				} else {
 					alert("Login failed. Please sign in manually.");

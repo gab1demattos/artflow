@@ -6,7 +6,6 @@ require_once(__DIR__ . '/../database/user.class.php');
 $email = $_POST['email'] ?? '';
 $password = $_POST['password'] ?? '';
 
-// We'll use AJAX for the client-side login, so we should support JSON responses
 $isAjax = !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest';
 $session = Session::getInstance();
 
@@ -37,7 +36,6 @@ if (!$user) {
 
 // Successful login
 $session->login($user);
-$_SESSION['success'] = 'Welcome back!';
 
 if ($isAjax) {
     http_response_code(200);
