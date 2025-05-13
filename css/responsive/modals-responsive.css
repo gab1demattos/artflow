@@ -10,12 +10,12 @@
 		min-height: 450px;
 		flex-direction: column;
 		border-radius: 15px;
-		justify-content: center; /* Center content vertically */
+		justify-content: center; 
 	}
 
 	/* Special styling for sign-in modal to make it smaller */
 	#signin-modal {
-		min-height: 350px; /* Reduced height for sign-in modal */
+		min-height: 350px;
 	}
 
 	.form-container {
@@ -23,20 +23,20 @@
 		padding: 1.5rem;
 		display: flex;
 		flex-direction: column;
-		justify-content: center; /* Center form content vertically */
-		align-items: center; /* Center form content horizontally */
+		justify-content: center; 
+		align-items: center; 
 	}
 
 	/* Make form take full width inside form container */
 	.form {
 		width: 100%;
-		max-width: 280px; /* Control maximum width for better appearance */
+		max-width: 280px;
 	}
 
 	.modal h2 {
 		font-size: 1.7rem;
-		text-align: center; /* Ensure heading is centered */
-		width: 100%; /* Full width for proper centering */
+		text-align: center; 
+		width: 100%;
 	}
 
 	.form input {
@@ -46,48 +46,44 @@
 
 	.button-container {
 		margin-top: 1em;
-		width: 100%; /* Full width for proper alignment */
+		width: 100%; 
 	}
 
 	/* Hide images on mobile */
 	.modal-right,
-	.modal-left {
+	.modal-left, 
+    #goflow-modal img  {
 		display: none;
 	}
 
-	/* Go with flow modal adjustments */
-	#goflow-modal img {
-		display: none; /* Hide the image on mobile */
-	}
-
 	#goflow-modal .modal-content > p:nth-of-type(1) {
-		font-size: 1.8rem; /* Increased font size from 1.5rem to 1.8rem */
+		font-size: 1.8rem; 
 		position: absolute;
 		left: 2em;
 		right: 2em;
-		top: 2.5em; /* Moved up slightly to increase spacing */
-		text-align: left; /* Ensuring text is left-aligned */
+		top: 2.5em; 
+		text-align: left;
 	}
 
 	#goflow-modal .modal-content > p:nth-of-type(2) {
 		position: absolute;
 		left: 2em;
 		right: 2em;
-		top: 12em; /* Increased from 10em to 12em for more spacing */
+		top: 12em; 
 		text-align: left;
 		font-size: 1.2rem;
 	}
 
 	/* Style the artflow text without making it a block */
 	#goflow-modal .artflow-text {
-		display: inline; /* Ensure it stays inline */
-		color: var(--orange); /* Keep the orange color */
+		display: inline; 
+		color: var(--orange); 
 	}
 
 	#goflow-modal #go-arrow {
 		position: absolute;
 		bottom: 3em;
-		right: 2.5em; /* Slightly to the right */
+		right: 2.5em; 
 	}
 }
 
@@ -135,22 +131,22 @@
 		height: auto;
 		position: absolute;
 		top: -0.3em;
-		right: -0.6em;
-		left: -0.6em;
+		right: -1.2em; 
+		left: 0.2em; 
 		bottom: -0.3em;
 	}
 
 	#goflow-modal .modal-content > p:nth-of-type(1) {
 		font-size: 1.7rem;
 		position: absolute;
-		left: 2.5em;
-		top: 1.8em;
+		left: 3em;
+		top: 2.3em;
 	}
 
 	#goflow-modal .modal-content > p:nth-of-type(2) {
 		position: absolute;
 		left: 1.8em;
-		top: 12em;
+		top: 14em;
 		text-align: center;
 		font-size: 1.3rem;
 	}
@@ -158,7 +154,7 @@
 	#goflow-modal #go-arrow {
 		position: absolute;
 		bottom: 3.5em;
-		right: 4.5em;
+		right: 6em;
 	}
 }
 

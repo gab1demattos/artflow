@@ -4,114 +4,114 @@
 
 /* Overlay that covers the entire screen behind modals */
 .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 1000;
 }
 
 /* Base modal container structure */
 .modal {
-    background-color: white;
-    padding: 0;
-    border-radius: 20px;
-    width: 39.2em;
-    max-width: 800px;
-    height: 27.5em;
-    position: relative;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-    display: flex;
-    flex-direction: row; /* Form and image side-by-side */
-    align-items: center;
+	background-color: white;
+	padding: 0;
+	border-radius: 20px;
+	width: 39.2em;
+	max-width: 800px;
+	height: 27.5em;
+	position: relative;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+	display: flex;
+	flex-direction: row; /* Form and image side-by-side */
+	align-items: center;
 }
 
 /* Content container for modal sections */
 .modal-content {
-    display: flex;
-    height: 100%;
-    width: 100%;
+	display: flex;
+	height: 100%;
+	width: 100%;
 }
 
 /* Shared form styling for both signup/signin */
 .form-container {
-    padding: 2rem;
-    box-sizing: border-box;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+	padding: 2rem;
+	box-sizing: border-box;
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
 
 /* Shared form input styles */
 
 .form {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5em;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5em;
 }
 
 .form input {
-    padding: 8px 15px;
-    border: none;
-    border-radius: 10px;
-    background: #eee;
-    font-size: 20px;
-    font-family: 'Cormorant Garamond', serif;
-    width: 100%;
-    box-sizing: border-box;
-    transition: border 0.3s ease; /* Smooth border color change */
-    border: 2px solid transparent; /* Reserve space for focus border */
+	padding: 8px 15px;
+	border: none;
+	border-radius: 10px;
+	background: #eee;
+	font-size: 20px;
+	font-family: "Cormorant Garamond", serif;
+	width: 100%;
+	box-sizing: border-box;
+	transition: border 0.3s ease; /* Smooth border color change */
+	border: 2px solid transparent; /* Reserve space for focus border */
 }
 
 /* Style for the password input container */
 .password-input-container {
-    position: relative;
-    display: flex;
-    align-items: center;
+	position: relative;
+	display: flex;
+	align-items: center;
 }
 
 .password-input-container input[type="password"],
 .password-input-container input[type="text"] {
-    padding-right: 40px; /* Make space for the icon */
+	padding-right: 40px; /* Make space for the icon */
 }
 
 .toggle-password {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    display: flex; /* To center the icon vertically and horizontally if needed */
-    align-items: center;
-    justify-content: center;
-    line-height: 0; /* To prevent extra space around the icon */
+	position: absolute;
+	right: 10px;
+	top: 50%;
+	transform: translateY(-50%);
+	background: none;
+	border: none;
+	cursor: pointer;
+	padding: 0;
+	display: flex; /* To center the icon vertically and horizontally if needed */
+	align-items: center;
+	justify-content: center;
+	line-height: 0; /* To prevent extra space around the icon */
 }
 
 .toggle-password i.material-icons {
-    font-size: 1.5em; /* Adjust size as needed */
-    color: rgba(0, 0, 0, 0.54); /* Default icon color */
+	font-size: 1.5em; /* Adjust size as needed */
+	color: rgba(0, 0, 0, 0.54); /* Default icon color */
 }
 
 /* Shared button container styles */
 .button-container {
-    display: flex;
-    gap: 1em;
-    margin-top: 0.5em;
+	display: flex;
+	gap: 1em;
+	margin-top: 0.5em;
 }
 
 .button-container .button {
-    flex: 1;
-    padding: 12px 20px;
-    text-align: center;
+	flex: 1;
+	padding: 12px 20px;
+	text-align: center;
 }
 
 /* =========================== */
@@ -120,123 +120,120 @@
 
 /* Right side container (used in signup) */
 .modal-right {
-    flex: 1;
-    background: transparent;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	flex: 1;
+	background: transparent;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 /* Left side container (used in signin) */
 .modal-left {
-    flex: 1;
-    background: transparent;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	flex: 1;
+	background: transparent;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 /* Shared image styles for both modals */
 .modal-right img,
 .modal-left img {
-    max-width: 100%;
-    object-fit: contain;
+	max-width: 100%;
+	object-fit: contain;
 }
 
 /* Shared heading styles */
 .modal h2 {
-    font-family: 'Modak', sans-serif;
-    letter-spacing: -1px;
-    font-size: 2rem;
-    margin-top: 0;
-    margin-bottom: 0.3em;
-    text-align: center;
-    font-weight: normal;
+	font-family: "Modak", sans-serif;
+	letter-spacing: -1px;
+	font-size: 2rem;
+	margin-top: 0;
+	margin-bottom: 0.3em;
+	text-align: center;
+	font-weight: normal;
 }
 
 /* Z-index boost when modal is active */
 #signup-modal,
 #signin-modal {
-    z-index: 1001;
+	z-index: 1001;
 }
-
 
 /*--- SIGNUP MODAL SPECIFICS ---*/
 
 /* Purple heading for signup */
 #h2-signup {
-    color: var(--purple);
+	color: var(--purple);
 }
 
 /* Purple focus border for signup inputs */
 #signup-modal .form input:focus {
-    outline: none;
-    border: 2px solid var(--purple); 
+	outline: none;
+	border: 2px solid var(--purple);
 }
 
 /*--- SIGNIN MODAL SPECIFICS ---*/
 
 /* Yellow heading for signin */
 #h2-signin {
-    color: var(--yellow);
+	color: var(--yellow);
 }
 
 /* Yellow focus border for signin inputs */
 #signin-modal .form input:focus {
-    outline: none;
-    border: 2px solid var(--yellow); 
+	outline: none;
+	border: 2px solid var(--yellow);
 }
-
 
 /*--- GO WITH FLOW MODAL SPECIFICS ---*/
 #goflow-modal .modal-content {
-    width: 100%;
-    height: 100%;
+	width: 100%;
+	height: 100%;
 }
 
 #goflow-modal p {
-    font-family: 'EB Garamond', serif;
-    font-size: 1.4rem;
-    color: #000;
-    margin: 0;
-    line-height: 1.2;
+	font-family: "EB Garamond", serif;
+	font-size: 1.4rem;
+	color: #000;
+	margin: 0;
+	line-height: 1.2;
 }
 
 #goflow-modal .artflow-text {
-    color: var(--orange);
+	color: var(--orange);
 }
 
 #goflow-modal img {
-    width: 41.625em;
-    height: 29.625em;
-    position: absolute;
-    top: -0.56em;
-    right: -1.21em;
-    left: -1.21em;
-    bottom: -0.56em;
+	width: 41.625em;
+	height: 29.625em;
+	position: absolute;
+	top: -0.56em;
+	right: -1.21em;
+	left: -1.21em;
+	bottom: -0.56em;
 }
 
 #goflow-modal .modal-content > p:nth-of-type(1) {
-    font-size: 2rem;
-    position: absolute;
-    left: 4em;
-    top: 2em;
+	font-size: 2rem;
+	position: absolute;
+	left: 4em;
+	top: 2em;
 }
 
 #goflow-modal .modal-content > p:nth-of-type(2) {
-    position: absolute;
-    left: 2.125em;
-    top: 14.25em;
-    text-align: center;
+	position: absolute;
+	left: 2.125em;
+	top: 14.25em;
+	text-align: center;
 }
 
 /* Positioning the icon button inside modal */
 #goflow-modal #go-arrow {
-    position: absolute;
-    bottom: 4.5em;
-    right: 6em;
-    z-index: 10;
+	position: absolute;
+	bottom: 4.5em;
+	right: 6em;
+	z-index: 10;
 }
-
