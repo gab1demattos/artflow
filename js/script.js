@@ -167,4 +167,22 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
+
+    const togglePasswordButtons = document.querySelectorAll('.toggle-password');
+
+    togglePasswordButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            const input = this.previousElementSibling;
+            const icon = this.querySelector('i.material-icons');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.textContent = 'visibility';
+                icon.alt = 'Hide password';
+            } else {
+                input.type = 'password';
+                icon.textContent = 'visibility_off';
+                icon.alt = 'Show password';
+            }
+        });
+    });
 });
