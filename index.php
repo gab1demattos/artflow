@@ -2,12 +2,6 @@
 require_once(__DIR__ . '/includes/session.php');
 $session = Session::getInstance();
 $user = $session->getUser() ?? null;
-
-// Extract flash messages from session and then clear them
-$error = $_SESSION['error'] ?? null;
-$success = $_SESSION['success'] ?? null;
-unset($_SESSION['error']);
-unset($_SESSION['success']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,23 +32,6 @@ unset($_SESSION['success']);
                 </ul>
             </nav>
         </header>
-        <!-- Session message display -->
-        <?php if ($error || $success): ?>
-        <div class="notification-container">
-            <?php if ($error): ?>
-            <div class="notification error">
-                <?= htmlspecialchars($error) ?>
-                <button class="close-notification">&times;</button>
-            </div>
-            <?php endif; ?>
-            <?php if ($success): ?>
-            <div class="notification success">
-                <?= htmlspecialchars($success) ?>
-                <button class="close-notification">&times;</button>
-            </div>
-            <?php endif; ?>
-        </div>
-        <?php endif; ?>
         <main class="container">
             <section id="title">
                 <h2>where creativity<br>

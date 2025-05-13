@@ -141,41 +141,4 @@ document.addEventListener("DOMContentLoaded", function () {
 			}
 		});
 	}
-
-	// Handle notification close buttons
-	const closeNotificationButtons = document.querySelectorAll(
-		".close-notification"
-	);
-	if (closeNotificationButtons.length > 0) {
-		closeNotificationButtons.forEach((button) => {
-			button.addEventListener("click", function () {
-				const notification = this.closest(".notification");
-				if (notification) {
-					notification.classList.add("fade-out");
-					setTimeout(() => {
-						if (notification.parentNode) {
-							notification.parentNode.removeChild(notification);
-						}
-					}, 500);
-				}
-			});
-		});
-	}
-
-	// Auto-dismiss notifications after 5 seconds
-	const notifications = document.querySelectorAll(".notification");
-	if (notifications.length > 0) {
-		notifications.forEach((notification) => {
-			setTimeout(() => {
-				if (notification.parentNode) {
-					notification.classList.add("fade-out");
-					setTimeout(() => {
-						if (notification.parentNode) {
-							notification.parentNode.removeChild(notification);
-						}
-					}, 500);
-				}
-			}, 5000);
-		});
-	}
 });
