@@ -137,13 +137,16 @@ document.addEventListener('DOMContentLoaded', function () {
                 const lastUsername = sessionStorage.getItem('signup_username');
                 if (lastUsername) username = lastUsername;
             }
+            
             // Get password from sessionStorage
             const password = sessionStorage.getItem('signup_password');
+            
             if (!username || !password) {
                 alert('Could not log in automatically. Please sign in manually.');
                 document.getElementById('goflow-modal-overlay').classList.add('hidden');
                 return;
             }
+            
             // Send AJAX POST to login
             try {
                 const response = await fetch('/actions/action_signin.php', {
@@ -151,18 +154,22 @@ document.addEventListener('DOMContentLoaded', function () {
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                     body: `username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`
                 });
+                
                 if (response.ok) {
+                    const data = await response.json();
                     // Clean up sensitive info
                     sessionStorage.removeItem('signup_password');
                     sessionStorage.removeItem('signup_username');
-                    // Hide modal and reload page to show logged-in state
-                    document.getElementById('goflow-modal-overlay').classList.add('hidden');
-                    window.location.reload();
+                    // Redirect to index with logged_in parameter
+                    window.location.href = '/index.php?logged_in=true';
                 } else {
                     alert('Login failed. Please sign in manually.');
+                    document.getElementById('goflow-modal-overlay').classList.add('hidden');
                 }
             } catch (err) {
+                console.error('Login error:', err);
                 alert('Login error. Please sign in manually.');
+                document.getElementById('goflow-modal-overlay').classList.add('hidden');
             }
         });
     }

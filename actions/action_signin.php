@@ -3,7 +3,6 @@ declare(strict_types=1);
 require_once(__DIR__ . '/../includes/session.php');
 require_once(__DIR__ . '/../database/user.class.php');
 
-// Accept both username and email for login
 $username = $_POST['username'] ?? '';
 $password = $_POST['password'] ?? '';
 
@@ -23,5 +22,6 @@ if (!$user) {
 $session = Session::getInstance();
 $session->login($user);
 http_response_code(200);
-echo 'Logged in';
+echo json_encode(['username' => $user['username']]);
 exit();
+?>

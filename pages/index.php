@@ -1,5 +1,7 @@
 <?php 
-// You can add PHP code here if needed
+require_once(__DIR__ . '/../includes/session.php');
+$session = Session::getInstance();
+$user = $session->getUser() ?? null;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,7 +18,17 @@
                 <input type="checkbox" id="nav_bar">
                 <label class="nav_bar" for="nav_bar"></label>
                 <ul id="buttons">
-                    <li><button class="button filled hovering">Sign Up</button></li>
+                    <?php if ($user): ?>
+                        <li>
+                            <form action="/actions/logout.php" method="post">
+                                <button type="submit" class="button filled hovering">
+                                    <?= htmlspecialchars($user['username']) ?> - Logout
+                                </button>
+                            </form>
+                        </li>
+                    <?php else: ?>
+                        <li><button class="button filled hovering">Sign Up</button></li>
+                    <?php endif; ?>
                 </ul>
             </nav>
         </header>
@@ -33,10 +45,11 @@
             <footer id="end"></footer>
         </main>
 
-        <?php include '../pages/modals/sign-up-modal.php'; ?>
-        <?php include '../pages/modals/sign-in-modal.php'; ?>
-        <?php include '../pages/modals/choose-role-modal.php'; ?>
-        <?php include '../pages/modals/go-with-flow-modal.php'; ?>
+        <?php if (!$user): ?>
+            <?php include '../pages/modals/sign-up-modal.php'; ?>
+            <?php include '../pages/modals/sign-in-modal.php'; ?>
+            <?php include '../pages/modals/go-with-flow-modal.php'; ?>
+        <?php endif; ?>
         
         <script src="js/script.js"></script>
     </body>
