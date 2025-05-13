@@ -1,0 +1,140 @@
+/*========= !! BUTTON STYLES !! =========*/
+
+/* Base button styling - REQUIRED for all buttons */
+.button {
+    font-family: 'Modak', sans-serif;
+    font-weight: normal;
+    font-size: 1rem;
+    transition: all 0.3s;
+    padding: 5px 25px;
+    border-radius: 25px;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+}
+
+.button.garamond {
+    font-family: 'EB Garamond', sans-serif;
+    font-weight: normal;
+}
+
+/* ===== SIZE OPTIONS ===== */
+/* Normal button (default) - No extra class needed, or use .normal */
+/* Example: <button class="button [other classes]">Normal</button> */
+
+/* Long button (full width) */
+.button.long {
+    width: 100%;
+    border-radius: 15px;
+    padding: 5px 20px;
+}
+/* Example: <button class="button long [other classes]">Long</button> */
+
+/* ===== COLOR + FILL OPTIONS ===== */
+/* Purple filled (default filled) */
+.button.filled {
+    background-color: var(--purple);
+    color: var(--beige);
+    border: none;
+}
+/* Example: <button class="button filled [other classes]">Purple Filled</button> */
+
+/* Purple outlined */
+.button.outline {
+    background-color: transparent;
+    color: var(--purple);
+    border: 2px solid var(--purple);
+}
+/* Example: <button class="button outline [other classes]">Purple Outlined</button> */
+
+/* Yellow filled */
+.button.filled.yellow {
+    background-color: var(--yellow);
+    color: #FFFFFF;
+    border: none;
+}
+/* Example: <button class="button filled yellow [other classes]">Yellow Filled</button> */
+
+/* Yellow outlined */
+.button.outline.yellow {
+    background-color: transparent;
+    color: var(--yellow);
+    border: 2px solid var(--yellow);
+}
+/* Example: <button class="button outline yellow [other classes]">Yellow Outlined</button> */
+
+.button.outline.orange {
+    background-color: transparent;
+    color: var(--orange);
+    border: 2px solid var(--orange);
+}
+
+/* ===== HOVER BEHAVIOR OPTIONS ===== */
+/* Classic (no hover effect) - DEFAULT if no .hovering class */
+/* Example: <button class="button [other classes]">Classic</button> */
+
+/* Hovering effect (add .hovering) */
+.button.hovering.filled:hover {
+    background-color: var(--beige);
+    color: var(--purple);
+    border: 2px solid var(--purple);
+}
+
+.button.hovering.outline:hover {
+    background-color: var(--purple);
+    color: var(--beige);
+    border: 2px solid var(--purple);
+}
+
+/* Yellow hovering variants */
+.button.hovering.filled.yellow:hover {
+    background-color: var(--beige);
+    color: var(--yellow);
+    border: 2px solid var(--yellow);
+}
+
+.button.hovering.outline.yellow:hover {
+    background-color: var(--yellow);
+    color: #000000;
+    border: 2px solid var(--yellow);
+}
+/* Example: <button class="button hovering [other classes]">Hoverable</button> */
+
+/* ===== COMBINATION EXAMPLES ===== */
+/*
+  1. Purple filled classic button (no hover effect):
+     <button class="button filled">Submit</button>
+
+  2. Yellow outlined long button with hover effect:
+     <button class="button long outline yellow hovering">Learn More</button>
+
+  3. Purple outlined normal button (classic, no hover):
+     <button class="button outline">Cancel</button>
+
+  4. Yellow filled long button (classic, no hover):
+     <button class="button long filled yellow">Warning</button>
+
+  5. Purple filled hovering button:
+     <button class="button filled hovering">Save</button>
+*/
+
+/* ========== ICON BUTTON (Circular) ========== */
+.icon-button {
+    width: 2.5em;
+    height: 2.5em;
+    border-radius: 50%;
+    background-color: var(--orange);
+    color: white;
+    border: none;
+    font-size: 1.25em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease, background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.icon-button:hover {
+    transform: translateX(5px);
+}
