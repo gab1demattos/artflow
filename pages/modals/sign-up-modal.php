@@ -1,4 +1,3 @@
-
 <div id="signup-modal-overlay" class="modal-overlay hidden">
     <div class="modal" id="signup-modal">
         <div class="modal-content">

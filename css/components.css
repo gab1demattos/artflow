@@ -3,7 +3,7 @@
 /* Base button styling - REQUIRED for all buttons */
 .button {
     font-family: 'Modak', sans-serif;
-    font-weight: 500;
+    font-weight: normal;
     font-size: 1rem;
     transition: all 0.3s;
     padding: 5px 25px;
