@@ -142,14 +142,15 @@ document.addEventListener('DOMContentLoaded', function () {
             
             // Send AJAX POST to login
             try {
-                const response = await fetch('/actions/action_signin.php', {
+                const response = await fetch('/actions/signin-action.php', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                     body: `username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`
                 });
                 
+                // Check for a non-JSON response (your PHP returns a redirect, not JSON)
+                const contentType = response.headers.get('content-type');
                 if (response.ok) {
-                    const data = await response.json();
                     // Clean up sensitive info
                     sessionStorage.removeItem('signup_password');
                     sessionStorage.removeItem('signup_username');
