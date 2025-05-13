@@ -2,20 +2,20 @@
 
 /* Base button styling - REQUIRED for all buttons */
 .button {
-    font-family: 'Modak', sans-serif;
-    font-weight: normal;
-    font-size: 1rem;
-    transition: all 0.3s;
-    padding: 5px 25px;
-    border-radius: 25px;
-    cursor: pointer;
-    display: inline-block;
-    text-align: center;
+	font-family: "Modak", sans-serif;
+	font-weight: normal;
+	font-size: 1rem;
+	transition: all 0.3s;
+	padding: 5px 25px;
+	border-radius: 25px;
+	cursor: pointer;
+	display: inline-block;
+	text-align: center;
 }
 
 .button.garamond {
-    font-family: 'EB Garamond', sans-serif;
-    font-weight: normal;
+	font-family: "EB Garamond", sans-serif;
+	font-weight: normal;
 }
 
 /* ===== SIZE OPTIONS ===== */
@@ -24,49 +24,49 @@
 
 /* Long button (full width) */
 .button.long {
-    width: 100%;
-    border-radius: 15px;
-    padding: 5px 20px;
+	width: 100%;
+	border-radius: 15px;
+	padding: 5px 20px;
 }
 /* Example: <button class="button long [other classes]">Long</button> */
 
 /* ===== COLOR + FILL OPTIONS ===== */
 /* Purple filled (default filled) */
 .button.filled {
-    background-color: var(--purple);
-    color: var(--beige);
-    border: none;
+	background-color: var(--purple);
+	color: var(--beige);
+	border: none;
 }
 /* Example: <button class="button filled [other classes]">Purple Filled</button> */
 
 /* Purple outlined */
 .button.outline {
-    background-color: transparent;
-    color: var(--purple);
-    border: 2px solid var(--purple);
+	background-color: transparent;
+	color: var(--purple);
+	border: 2px solid var(--purple);
 }
 /* Example: <button class="button outline [other classes]">Purple Outlined</button> */
 
 /* Yellow filled */
 .button.filled.yellow {
-    background-color: var(--yellow);
-    color: #FFFFFF;
-    border: none;
+	background-color: var(--yellow);
+	color: #ffffff;
+	border: none;
 }
 /* Example: <button class="button filled yellow [other classes]">Yellow Filled</button> */
 
 /* Yellow outlined */
 .button.outline.yellow {
-    background-color: transparent;
-    color: var(--yellow);
-    border: 2px solid var(--yellow);
+	background-color: transparent;
+	color: var(--yellow);
+	border: 2px solid var(--yellow);
 }
 /* Example: <button class="button outline yellow [other classes]">Yellow Outlined</button> */
 
 .button.outline.orange {
-    background-color: transparent;
-    color: var(--orange);
-    border: 2px solid var(--orange);
+	background-color: transparent;
+	color: var(--orange);
+	border: 2px solid var(--orange);
 }
 
 /* ===== HOVER BEHAVIOR OPTIONS ===== */
@@ -75,28 +75,28 @@
 
 /* Hovering effect (add .hovering) */
 .button.hovering.filled:hover {
-    background-color: var(--beige);
-    color: var(--purple);
-    border: 2px solid var(--purple);
+	background-color: var(--beige);
+	color: var(--purple);
+	border: 2px solid var(--purple);
 }
 
 .button.hovering.outline:hover {
-    background-color: var(--purple);
-    color: var(--beige);
-    border: 2px solid var(--purple);
+	background-color: var(--purple);
+	color: var(--beige);
+	border: 2px solid var(--purple);
 }
 
 /* Yellow hovering variants */
 .button.hovering.filled.yellow:hover {
-    background-color: var(--beige);
-    color: var(--yellow);
-    border: 2px solid var(--yellow);
+	background-color: var(--beige);
+	color: var(--yellow);
+	border: 2px solid var(--yellow);
 }
 
 .button.hovering.outline.yellow:hover {
-    background-color: var(--yellow);
-    color: #000000;
-    border: 2px solid var(--yellow);
+	background-color: var(--yellow);
+	color: #000000;
+	border: 2px solid var(--yellow);
 }
 /* Example: <button class="button hovering [other classes]">Hoverable</button> */
 
@@ -120,21 +120,21 @@
 
 /* ========== ICON BUTTON (Circular) ========== */
 .icon-button {
-    width: 2.5em;
-    height: 2.5em;
-    border-radius: 50%;
-    background-color: var(--orange);
-    color: white;
-    border: none;
-    font-size: 1.25em;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.2s ease, background-color 0.3s ease;
-    cursor: pointer;
+	width: 2.5em;
+	height: 2.5em;
+	border-radius: 50%;
+	background-color: var(--orange);
+	color: white;
+	border: none;
+	font-size: 1.25em;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+	transition: transform 0.2s ease, background-color 0.3s ease;
+	cursor: pointer;
 }
 
 .icon-button:hover {
-    transform: translateX(5px);
+	transform: translateX(5px);
 }

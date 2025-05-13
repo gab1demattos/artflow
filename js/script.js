@@ -1,188 +1,144 @@
-document.addEventListener('DOMContentLoaded', function () {
-    // Button elements
-    const signupBtn = document.querySelector('#buttons li button');
-    const signInButtons = document.querySelectorAll('#sign-in');
-    const signUpButtons = document.querySelectorAll('#sign-up');
-    const signUpBtn_submit = document.querySelector('#sign-up-submit');
-    const nextBtn = document.querySelector('#next-btn');
+document.addEventListener("DOMContentLoaded", function () {
+	// Button elements
+	const signupBtn = document.querySelector("#buttons li button");
+	const signInButtons = document.querySelectorAll("#sign-in");
+	const signUpButtons = document.querySelectorAll("#sign-up");
+	const signUpBtn_submit = document.querySelector("#sign-up-submit");
+	const nextBtn = document.querySelector("#next-btn");
 
+	// Modal elements
+	const signupModalOverlay = document.getElementById("signup-modal-overlay");
+	const signinModalOverlay = document.getElementById("signin-modal-overlay");
+	const goflowModalOverlay = document.getElementById("goflow-modal-overlay");
 
-    // Function to hide all modals
-    function hideAllModals() {
-        document.getElementById('signup-modal-overlay')?.classList.add('hidden');
-        document.getElementById('signin-modal-overlay')?.classList.add('hidden');
-        document.getElementById('goflow-modal-overlay')?.classList.add('hidden');
-    }
+	// Function to hide all modals - with null checks
+	function hideAllModals() {
+		signupModalOverlay?.classList.add("hidden");
+		signinModalOverlay?.classList.add("hidden");
+		goflowModalOverlay?.classList.add("hidden");
+	}
 
-    // Show sign up modal when clicking sign up button
-    if (signupBtn) {
-        signupBtn.addEventListener('click', function (e) {
-            e.stopPropagation();
-            hideAllModals();
-            document.getElementById('signup-modal-overlay').classList.remove('hidden');
-        });
-    }
+	// Show sign up modal when clicking sign up button
+	if (signupBtn && signupModalOverlay) {
+		signupBtn.addEventListener("click", function (e) {
+			e.stopPropagation();
+			hideAllModals();
+			signupModalOverlay.classList.remove("hidden");
+		});
+	}
 
-    // Handle click on sign in button in sign up modal
-    signInButtons.forEach(button => {
-        button.addEventListener('click', function (e) {
-            e.stopPropagation();
-            hideAllModals();
-            document.getElementById('signin-modal-overlay').classList.remove('hidden');
-        });
-    });
+	// Handle click on sign in button in sign up modal
+	if (signinModalOverlay) {
+		signInButtons.forEach((button) => {
+			button.addEventListener("click", function (e) {
+				e.stopPropagation();
+				hideAllModals();
+				signinModalOverlay.classList.remove("hidden");
+			});
+		});
+	}
 
-    // Handle click on sign up button in sign in modal
-    signUpButtons.forEach(button => {
-        button.addEventListener('click', function (e) {
-            e.stopPropagation();
-            hideAllModals();
-            document.getElementById('signup-modal-overlay').classList.remove('hidden');
-        });
-    });
+	// Handle click on sign up button in sign in modal
+	if (signupModalOverlay) {
+		signUpButtons.forEach((button) => {
+			button.addEventListener("click", function (e) {
+				e.stopPropagation();
+				hideAllModals();
+				signupModalOverlay.classList.remove("hidden");
+			});
+		});
+	}
 
-    // MODIFIED: Handle sign up form submission (direct submit without role selection)
-    if (signUpBtn_submit) {
-        signUpBtn_submit.addEventListener('click', function (e) {
-            // Get the form element
-            const form = document.getElementById('signup-form');
+	// Close modal when clicking outside
+	document.querySelectorAll(".modal-overlay").forEach((overlay) => {
+		overlay.addEventListener("click", function () {
+			overlay.classList.add("hidden");
+		});
 
-            // Basic client-side validation
-            const password = form.querySelector('input[name="password"]').value;
-            const confirmPassword = form.querySelector('input[name="confirm_password"]').value;
+		const modal = overlay.querySelector(".modal");
+		if (modal) {
+			modal.addEventListener("click", function (e) {
+				e.stopPropagation();
+			});
+		}
+	});
 
-            if (password !== confirmPassword) {
-                alert('Passwords do not match!');
-                e.preventDefault();
-                return;
-            }
+	// Toggle password visibility
+	const togglePasswordButtons = document.querySelectorAll(".toggle-password");
+	togglePasswordButtons.forEach((button) => {
+		button.addEventListener("click", function () {
+			const input = this.previousElementSibling;
+			const icon = this.querySelector("i.material-icons");
+			if (input && icon) {
+				if (input.type === "password") {
+					input.type = "text";
+					icon.textContent = "visibility";
+					icon.alt = "Hide password";
+				} else {
+					input.type = "password";
+					icon.textContent = "visibility_off";
+					icon.alt = "Show password";
+				}
+			}
+		});
+	});
 
-            // If validation passes, let the form submit normally
-            // All role-related code has been removed for now
-        });
-    }
+	// Check for signup success in session storage
+	if (
+		sessionStorage.getItem("signup_success") === "true" &&
+		goflowModalOverlay
+	) {
+		// Show the go-with-flow modal after signup
+		hideAllModals();
+		goflowModalOverlay.classList.remove("hidden");
 
-    // Store password in sessionStorage on signup form submit
-    const signupForm = document.getElementById('signup-form');
-    if (signupForm) {
-        signupForm.addEventListener('submit', function (e) {
-            const passwordInput = signupForm.querySelector('input[name="password"]');
-            if (passwordInput) {
-                sessionStorage.setItem('signup_password', passwordInput.value);
-            }
-        });
-    }
+		// Clear the flag to prevent showing the modal again on refresh
+		sessionStorage.removeItem("signup_success");
+	}
 
-    // Store username in sessionStorage on signup form submit (for fallback)
-    if (signupForm) {
-        signupForm.addEventListener('submit', function (e) {
-            const usernameInput = signupForm.querySelector('input[name="username"]');
-            if (usernameInput) {
-                sessionStorage.setItem('signup_username', usernameInput.value);
-            }
-        });
-    }
+	// Handle Go Flow modal arrow button click to log in
+	const goFlowArrowButton = document.getElementById("go-arrow");
+	if (goFlowArrowButton && goflowModalOverlay) {
+		goFlowArrowButton.addEventListener("click", async function () {
+			// Get username and password from sessionStorage
+			const username = sessionStorage.getItem("signup_username");
+			const password = sessionStorage.getItem("signup_password");
 
-    // Close modal when clicking outside
-    document.querySelectorAll('.modal-overlay').forEach(overlay => {
-        overlay.addEventListener('click', function () {
-            overlay.classList.add('hidden');
-        });
+			if (!username || !password) {
+				alert("Could not log in automatically. Please sign in manually.");
+				goflowModalOverlay.classList.add("hidden");
+				return;
+			}
 
-        overlay.querySelector('.modal').addEventListener('click', function (e) {
-            e.stopPropagation();
-        });
-    });
+			// Send AJAX POST to login
+			try {
+				const response = await fetch("actions/signin-action.php", {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/x-www-form-urlencoded",
+						"X-Requested-With": "XMLHttpRequest",
+					},
+					body: `email=${encodeURIComponent(
+						username
+					)}&password=${encodeURIComponent(password)}`,
+				});
 
-    // Check for successful signup and show role selection modal
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('signup') === 'success') {
-        const username = urlParams.get('username');
-        if (username) {
-            // Show the choose role modal
-            hideAllModals();
-            document.getElementById('goflow-modal-overlay').classList.remove('hidden');
-
-            // Clean the URL to prevent showing the modal again on refresh
-            const cleanUrl = window.location.pathname;
-            window.history.replaceState({}, document.title, cleanUrl);
-        }
-    }
-
-    // Show go-with-flow modal if needed
-    if (urlParams.get('modal') === 'go_with_flow') {
-        hideAllModals();
-        document.getElementById('goflow-modal-overlay').classList.remove('hidden');
-        // Clean the URL
-        const cleanUrl = window.location.pathname;
-        window.history.replaceState({}, document.title, cleanUrl);
-    }
-
-    // Handle Go Flow modal arrow button click to log in
-    const goFlowArrowButton = document.getElementById('go-arrow');
-    if (goFlowArrowButton) {
-        goFlowArrowButton.addEventListener('click', async function () {
-            // Get username from URL (set by signup redirect)
-            const urlParams = new URLSearchParams(window.location.search);
-            let username = urlParams.get('username');
-            if (!username) {
-                // Try to get from previous signup form
-                const lastUsername = sessionStorage.getItem('signup_username');
-                if (lastUsername) username = lastUsername;
-            }
-            
-            // Get password from sessionStorage
-            const password = sessionStorage.getItem('signup_password');
-            
-            if (!username || !password) {
-                alert('Could not log in automatically. Please sign in manually.');
-                document.getElementById('goflow-modal-overlay').classList.add('hidden');
-                return;
-            }
-            
-            // Send AJAX POST to login
-            try {
-                const response = await fetch('/actions/signin-action.php', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: `username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`
-                });
-                
-                // Check for a non-JSON response (your PHP returns a redirect, not JSON)
-                const contentType = response.headers.get('content-type');
-                if (response.ok) {
-                    // Clean up sensitive info
-                    sessionStorage.removeItem('signup_password');
-                    sessionStorage.removeItem('signup_username');
-                    // Redirect to index with logged_in parameter
-                    window.location.href = '/index.php?logged_in=true';
-                } else {
-                    alert('Login failed. Please sign in manually.');
-                    document.getElementById('goflow-modal-overlay').classList.add('hidden');
-                }
-            } catch (err) {
-                console.error('Login error:', err);
-                alert('Login error. Please sign in manually.');
-                document.getElementById('goflow-modal-overlay').classList.add('hidden');
-            }
-        });
-    }
-
-    const togglePasswordButtons = document.querySelectorAll('.toggle-password');
-
-    togglePasswordButtons.forEach(button => {
-        button.addEventListener('click', function () {
-            const input = this.previousElementSibling;
-            const icon = this.querySelector('i.material-icons');
-            if (input.type === 'password') {
-                input.type = 'text';
-                icon.textContent = 'visibility';
-                icon.alt = 'Hide password';
-            } else {
-                input.type = 'password';
-                icon.textContent = 'visibility_off';
-                icon.alt = 'Show password';
-            }
-        });
-    });
+				// Check response
+				if (response.ok) {
+					// Clean up sensitive info
+					sessionStorage.removeItem("signup_password");
+					sessionStorage.removeItem("signup_username");
+					// Redirect to index page
+					window.location.href = "index.php";
+				} else {
+					alert("Login failed. Please sign in manually.");
+					goflowModalOverlay.classList.add("hidden");
+				}
+			} catch (err) {
+				console.error("Login error:", err);
+				alert("Login error. Please sign in manually.");
+				goflowModalOverlay.classList.add("hidden");
+			}
+		});
+	}
 });
