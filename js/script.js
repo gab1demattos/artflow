@@ -99,13 +99,6 @@ document.addEventListener('DOMContentLoaded', function () {
     if (urlParams.get('signup') === 'success') {
         const username = urlParams.get('username');
         if (username) {
-            // Update the username in the modal if needed
-
-            //const usernameElement = document.querySelector('.intro-text p:first-child');
-            // if (usernameElement) {
-            //     usernameElement.textContent = `Welcome, ${username}`;
-            // }
-
             // Show the choose role modal
             hideAllModals();
             document.getElementById('goflow-modal-overlay').classList.remove('hidden');

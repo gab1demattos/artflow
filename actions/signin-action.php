@@ -7,21 +7,20 @@ $username = $_POST['username'] ?? '';
 $password = $_POST['password'] ?? '';
 
 if (empty($username) || empty($password)) {
-    http_response_code(400);
-    echo 'Missing credentials';
+    header('Location: /index.php?error=missing_credentials');
     exit();
 }
 
 $user = User::get_user_by_username_password($username, $password);
 if (!$user) {
-    http_response_code(401);
-    echo 'Invalid credentials';
+    header('Location: /index.php?error=invalid_credentials');
     exit();
 }
 
 $session = Session::getInstance();
 $session->login($user);
-http_response_code(200);
-echo json_encode(['username' => $user['username']]);
+
+// Redirect on success
+header('Location: /index.php?signin=success');
 exit();
 ?>

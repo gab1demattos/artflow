@@ -6,8 +6,8 @@
             </div>
             <div class="form-container">
                 <h2 id='h2-signin'>Welcome back!</h2>
-                <form id="signin-form" class="form">
-                    <input type="email" placeholder="Email" name="email" required>
+                <form id="signin-form" class="form" method='POST' action='/actions/signin-action.php'>
+                    <input type="text" placeholder="Username" name="username" required>
                     <input type="password" placeholder="Password" name="password" required>
                     <div class="button-container">
                         <button type="submit" class="button long filled classic yellow">Sign In</button>
