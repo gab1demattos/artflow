@@ -42,5 +42,13 @@
 
             return $stmt->fetch();
         }
+
+        public static function get_user_by_email_password($email, $password) {
+            $db = Database::getInstance();
+            $stmt = $db->prepare('SELECT * FROM User WHERE email = ? AND password = ?');
+            $stmt->execute([$email, sha1($password)]);
+
+            return $stmt->fetch();
+        }
     }
 ?>
