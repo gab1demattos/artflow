@@ -10,6 +10,9 @@ $user = $session->getUser() ?? null;
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/components.css">
+        <link rel="stylesheet" href="css/modals.css">
+        <link rel="stylesheet" href="css/modals-responsive.css">
     </head>
     <body>
         <header>
