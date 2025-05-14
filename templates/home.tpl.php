@@ -9,7 +9,7 @@
     </head>
     <body>
         <header>
-            <h1 class='artflow-text'>artflow</h1>
+            <h1 class='artflow-text'><a href="/" style="text-decoration:none;color:inherit;">artflow</a></h1>
             <nav id="menu">
                 <input type="checkbox" id="nav_bar">
                 <label class="nav_bar" for="nav_bar"></label>
