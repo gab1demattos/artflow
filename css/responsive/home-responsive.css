@@ -1,0 +1,23 @@
+@media (max-width: 600px) {
+    body {
+        background-color: var(--green);
+    }
+}
+
+@media (max-width: 1000px) {
+    body {
+        background-color: var(--green);
+    }
+}
+
+
+@media (max-width: 1335px) {
+    /*#categories .category-item {
+        width: 90px;
+        height: 90px;
+    }
+body {
+        background-color: var(--green);
+    }*/
+
+}
