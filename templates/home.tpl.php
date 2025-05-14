@@ -104,9 +104,9 @@
             </footer>
         </main>
         <?php if (!$user): ?>
-            <?php include 'pages/modals/sign-up-modal.php'; ?>
-            <?php include 'pages/modals/sign-in-modal.php'; ?>
-            <?php include 'pages/modals/go-with-flow-modal.php'; ?>
+            <?php include __DIR__ . '/../pages/modals/sign-up-modal.php'; ?>
+            <?php include __DIR__ . '/../pages/modals/sign-in-modal.php'; ?>
+            <?php include __DIR__ . '/../pages/modals/go-with-flow-modal.php'; ?>
         <?php endif; ?>
         
         <script src="js/script.js"></script>
