@@ -50,19 +50,61 @@
                 <section id="categories">
                     <div id="block">
                         <h2>Explore categories</h2>
+                        <?php 
+                        $session = Session::getInstance();
+                        $user = $session->getUser();
+                        if ($user && isset($user['user_type']) && $user['user_type'] === 'admin'): ?>
+                            <button id="open-category-modal" class="button filled hovering" type="button" style="margin-bottom:2em;">Add Category</button>
+                        <?php endif; ?>
                         <div id="category-list">
-                            <?php $categories = getCategories(); ?>
-                            <?php foreach ($categories as $index => $category): ?>
-                                <?php if ($index >= 6) break; // limit to the first 6 categories ?>
+                            <?php 
+                            $categories = getCategories(); 
+                            $db = Database::getInstance();
+                            foreach ($categories as $index => $category):
+                                //if ($index >= 8) break; // limit to the first 8 categories 
+                                // Fetch subcategories
+                                $stmt = $db->prepare('SELECT name FROM Subcategory WHERE category_id = ?');
+                                $stmt->execute([$category['id']]);
+                                $subcategories = $stmt->fetchAll(PDO::FETCH_COLUMN);
+                            ?>
                                 <div class="category-item">
+                                    <?php if (!empty($category['image'])): ?>
+                                        <img src="<?= htmlspecialchars($category['image']) ?>" alt="<?= htmlspecialchars($category['category_type']) ?>" style="max-width:60px;max-height:60px;display:block;margin:auto;" />
+                                    <?php endif; ?>
                                     <a class="category-link"><?= htmlspecialchars($category['category_type']) ?></a>
+                                    <?php if ($subcategories): ?>
+                                        <ul style="padding-left:1em;font-size:0.9em;">
+                                            <?php foreach ($subcategories as $sub): ?>
+                                                <li><?= htmlspecialchars($sub) ?></li>
+                                            <?php endforeach; ?>
+                                        </ul>
+                                    <?php endif; ?>
                                 </div>
                             <?php endforeach; ?>
                         </div>
                         <a id="link">see more -></a>
                     </div>
+                    <?php if ($user && isset($user['user_type']) && $user['user_type'] === 'admin'): ?>
+                    <div id="category-modal-overlay" class="modal-overlay hidden">
+                        <div class="modal" id="category-modal">
+                            <div class="modal-content">
+                                <div class="form-container">
+                                    <h2>Add Category</h2>
+                                    <form id="category-form" class="form" action="/actions/create-category.php" method="post" enctype="multipart/form-data">
+                                        <input type="text" name="category_name" placeholder="Category name" required>
+                                        <input type="file" name="category_image" accept="image/*">
+                                        <input type="text" name="subcategories" placeholder="Subcategories (comma separated)">
+                                        <div class="button-container">
+                                            <button type="submit" class="button filled classic">Create</button>
+                                            <button type="button" id="close-category-modal" class="button outline">Cancel</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <?php endif; ?>
                 </section>
-
 <?php } ?>
 
 <?php function drawInfo(){ ?>

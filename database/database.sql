@@ -61,7 +61,15 @@ CREATE TABLE Review (
 
 CREATE TABLE Category (
     id INTEGER PRIMARY KEY,
-    category_type TEXT NOT NULL
+    category_type TEXT NOT NULL,
+    image TEXT
+);
+
+CREATE TABLE Subcategory (
+    id INTEGER PRIMARY KEY,
+    category_id INTEGER NOT NULL,
+    name TEXT NOT NULL,
+    FOREIGN KEY (category_id) REFERENCES Category(id)
 );
 
 INSERT INTO Category (category_type) VALUES
