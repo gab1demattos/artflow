@@ -3,7 +3,8 @@
 @import url('components.css');
 @import url('modals.css');
 
-:root { /*theme colors*/
+:root {
+    /*theme colors*/
     --purple: #885784;
     --green: #82A899;
     --yellow: #C2AB42;
@@ -16,7 +17,8 @@ body {
     margin: 0 auto;
     padding: 0;
     font-family: 'EB Garamond', serif;
-    padding-top: 50px; /* Space for fixed header */
+    padding-top: 50px;
+    /* Space for fixed header */
 }
 
 .artflow-text {
@@ -25,12 +27,12 @@ body {
     font-size: 1.5rem;
 }
 
-header > h1 {
+header>h1 {
     color: var(--green);
     margin: 0;
 }
 
-ul > li {
+ul>li {
     list-style-type: none;
 }
 
@@ -55,7 +57,7 @@ header:first-of-type {
     width: 100%;
     height: 50px;
     background-color: var(--beige);
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     padding: 0 20px;
     justify-content: space-between;
     z-index: 1000;
@@ -65,17 +67,17 @@ header:first-of-type {
     display: grid;
     grid-template-rows: auto auto auto auto auto;
     grid-template-areas: "header"
-                         "title" 
-                         "categories" 
-                         "info" 
-                         "end";
+        "title"
+        "categories"
+        "info"
+        "end";
 }
 
 #title {
     grid-area: title;
     min-height: 600px;
     padding: 0;
-    align-content:start;
+    align-content: start;
     justify-self: start;
     transform: translateX(100%);
     margin-top: 3em;
@@ -91,7 +93,7 @@ header:first-of-type {
 }
 
 #title p {
-    font-family:'Cormorant Garamond', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 1.5rem;
     max-width: 600px;
     color: #555;
@@ -101,19 +103,19 @@ header:first-of-type {
 }
 
 #boxes {
-    position: relative; 
-    width: 100%; 
-    height: auto; 
+    position: relative;
+    width: 100%;
+    height: auto;
 }
 
 #boxes .box {
-    position: absolute; 
+    position: absolute;
     box-sizing: border-box;
     width: 150px;
     height: 150px;
     padding: 2rem;
     border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     border-color: #B08968;
     border-width: 7px;
     border-style: solid;
@@ -122,18 +124,18 @@ header:first-of-type {
 #box1 {
     background-color: var(--orange);
     top: -150px;
-    left: 500px; 
+    left: 500px;
 }
 
 #box2 {
     background-color: var(--green);
     top: -50px;
-    left: 600px; 
+    left: 600px;
 }
 
 #box3 {
     background-color: var(--yellow);
-    top: 30px; 
+    top: 30px;
     left: 420px;
 }
 
@@ -150,7 +152,7 @@ header:first-of-type {
     grid-area: info;
     min-height: 600px;
     padding: 2rem;
-    background-color: var(--yellow); 
+    background-color: var(--yellow);
     align-content: center;
 }
 
@@ -172,7 +174,7 @@ header:first-of-type {
     margin-top: 0.5em;
 }
 
-#info > div {
+#info>div {
     box-sizing: border-box;
     background-color: white;
     border-radius: 20px;
@@ -180,7 +182,7 @@ header:first-of-type {
     height: 70%;
     margin-left: 25%;
     padding: 2rem;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 
@@ -188,12 +190,12 @@ header:first-of-type {
     grid-area: categories;
     min-height: 600px;
     padding: 2rem;
-    background-color: var(--green); 
+    background-color: var(--green);
     font-family: 'EDGaramond', serif;
     padding-bottom: 10em;
 }
 
-#categories  h2 {
+#categories h2 {
     font-size: 2.5rem;
     line-height: 1.2;
     line-height: 0.7;
@@ -216,7 +218,7 @@ header:first-of-type {
     font-weight: 100;
     text-align: start;
     border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 #category-list {
@@ -226,7 +228,7 @@ header:first-of-type {
     margin-bottom: 1em;
 }
 
-#block > a {
+#block>a {
     margin-left: 78%;
     color: white;
     text-decoration: underline;
@@ -243,11 +245,11 @@ header:first-of-type {
     grid-area: end;
     min-height: 400px;
     padding: 2rem;
-    background-color: white; 
+    background-color: white;
     border-color: var(--green);
-    border-width: 7px 0 0 0; 
+    border-width: 7px 0 0 0;
     border-style: solid;
-} 
+}
 
 #end h2 {
     font-family: 'Modak', serif;
@@ -269,7 +271,8 @@ header:first-of-type {
     font-size: 1.1em;
 }
 
-.author, .footer-link {
+.author,
+.footer-link {
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.1em;
     line-height: 1.7em;
@@ -280,9 +283,9 @@ header:first-of-type {
 }
 
 #end ul {
-    margin-left: 0; 
-    padding-left: 0; 
-    list-style-position: inside; 
+    margin-left: 0;
+    padding-left: 0;
+    list-style-position: inside;
 }
 
 #end-footer {
@@ -294,4 +297,106 @@ header:first-of-type {
     font-size: 1em;
     opacity: 0.6;
     padding-bottom: 0;
+}
+
+/* --- See More Categories Page Styling --- */
+#see-more-categories-container {
+    padding-bottom: 4em;
+} 
+
+#see-more-categories-container h2 {
+    text-align: center;
+    font-size: 2.7rem;
+    color: var(--orange);
+    margin-bottom: 1em;
+    font-family: 'Modak', sans-serif;
+    letter-spacing: -1px;
+    font-weight: normal;
+}
+
+#see-more-category-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3em 4em;
+    justify-content: center;
+}
+
+.see-more-category-card {
+    background: var(--beige);
+    border-radius: 16px;
+    box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.18);
+    width: 270px;
+    min-height: 220px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: box-shadow 0.2s;
+    position: relative;
+    overflow: hidden;
+}
+
+.see-more-category-image-wrapper {
+    width: 100%;
+    height: 70%;
+    min-height: 120px;
+    max-height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f7f3ea;
+}
+
+.see-more-category-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 16px 16px 0 0;
+    box-shadow: none;
+}
+
+.see-more-category-card .category-link {
+    font-size: 1.15rem;
+    color: var(--purple);
+    font-family: 'EB Garamond', serif;
+    font-weight: bold;
+    margin: 0.7em 0 0.3em 0;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+}
+
+.see-more-category-card ul {
+    padding-left: 0.7em;
+    font-size: 0.95em;
+    margin: 0.2em 0 0 0;
+    color: #444;
+    text-align: left;
+}
+
+.see-more-category-card ul li {
+    margin-bottom: 0.2em;
+    list-style: disc inside;
+}
+
+@media (max-width: 900px) {
+    #see-more-categories-container {
+        width: 95%;
+        padding: 1.5em 0.5em 2em 0.5em;
+    }
+
+    #see-more-category-list {
+        gap: 2em 1em;
+    }
+
+    .see-more-category-card {
+        width: 130px;
+        min-height: 130px;
+        padding: 1em 0.5em 0.5em 0.5em;
+    }
+
+    .see-more-category-card img {
+        max-width: 45px;
+        max-height: 45px;
+    }
 }

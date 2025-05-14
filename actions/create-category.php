@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $filename = uniqid('cat_', true) . '_' . basename($_FILES['category_image']['name']);
         $targetPath = $uploadsDir . $filename;
         if (move_uploaded_file($_FILES['category_image']['tmp_name'], $targetPath)) {
-            $imagePath = 'images/categories/' . $filename;
+            $imagePath = '/images/categories/' . $filename;
         }
     }
 
