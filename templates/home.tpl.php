@@ -72,7 +72,7 @@
                                     <?php if (!empty($category['image'])): ?>
                                         <img src="<?= htmlspecialchars($category['image']) ?>" alt="<?= htmlspecialchars($category['category_type']) ?>" style="max-width:60px;max-height:60px;display:block;margin:auto;" />
                                     <?php endif; ?>
-                                    <a class="category-link"><?= htmlspecialchars($category['category_type']) ?></a>
+                                    <a class="category-link" href="/pages/category.php?id=<?= $category['id'] ?>"><?= htmlspecialchars($category['category_type']) ?></a>
                                     <?php if ($subcategories): ?>
                                         <ul style="padding-left:1em;font-size:0.9em;">
                                             <?php foreach ($subcategories as $sub): ?>

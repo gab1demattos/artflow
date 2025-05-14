@@ -21,7 +21,7 @@ drawHeader($user);
                             <img src="<?= htmlspecialchars($category['image']) ?>" alt="<?= htmlspecialchars($category['category_type']) ?>" />
                         </div>
                     <?php endif; ?>
-                    <span class="category-link"><?= htmlspecialchars($category['category_type']) ?></span>
+                    <span class="category-link"><a href="/pages/category.php?id=<?= $category['id'] ?>" style="color:inherit;text-decoration:none;"><?= htmlspecialchars($category['category_type']) ?></a></span>
                 </div>
             <?php endforeach; ?>
         </div>
