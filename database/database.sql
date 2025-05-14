@@ -24,8 +24,8 @@ CREATE TABLE Service (
     delivery_time DATE NOT NULL, -- or INTEGER ?? e.g. 5 days
     images TEXT,  -- comma-separsted 
     videos TEXT,    -- paths to files
-    FOREIGN KEY (user_id) REFERENCES users(id),
-    FOREIGN KEY (category_id) REFERENCES categories(id)
+    FOREIGN KEY (user_id) REFERENCES User(id),
+    FOREIGN KEY (category_id) REFERENCES Category(id)
 );
 
 CREATE TABLE Exchange (
@@ -37,7 +37,7 @@ CREATE TABLE Exchange (
     amount REAL NOT NULL,
     FOREIGN KEY (freelancer_id) REFERENCES User(id),
     FOREIGN KEY (client_id) REFERENCES User(id),
-    FOREIGN KEY (service_id) REFERENCES User(id)
+    FOREIGN KEY (service_id) REFERENCES Service(id)
 );
 
 CREATE TABLE Message (
@@ -56,10 +56,18 @@ CREATE TABLE Review (
     rating INTEGER NOT NULL CHECK (rating BETWEEN 1 AND 5),
     comment TEXT,
     FOREIGN KEY (user_id) REFERENCES User(id),
-    FOREIGN KEY (service_id) REFERENCES User(id)
+    FOREIGN KEY (service_id) REFERENCES Service(id)
 );
 
 CREATE TABLE Category (
     id INTEGER PRIMARY KEY,
     category_type TEXT NOT NULL
 );
+
+INSERT INTO Category (category_type) VALUES
+('Illustration & Digital Art'),
+('Graphic Design and Branding'),
+('Traditional Art & Painting'),
+('3D Art & Animation'),
+('Handmade & Craft Art'),
+('Body Art Design & Tattoo');
