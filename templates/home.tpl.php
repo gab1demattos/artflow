@@ -152,7 +152,7 @@
             <?php include __DIR__ . '/../pages/modals/go-with-flow-modal.php'; ?>
         <?php endif; ?>
         
-        <script src="js/script.js"></script>
+        <script src="/js/script.js"></script>
     </body>
 </html>
 <?php } ?>
