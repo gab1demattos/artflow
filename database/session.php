@@ -22,6 +22,11 @@ class Session {
         return $_SESSION["user"] ?? null;
     }
 
+    public function isAdmin(): bool {
+        $user = $this->getUser();
+        return $user !== null && isset($user['user_type']) && $user['user_type'] === 'admin';
+    }
+
     public function login($user): void {
         $_SESSION["user"] = $user;
     }
