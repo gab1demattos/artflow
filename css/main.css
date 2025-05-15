@@ -203,6 +203,7 @@ header:first-of-type {
     text-align: right;
     padding-top: 0.3em;
     padding-bottom: 0;
+    margin-right: 3em;
 }
 
 .category-item {
@@ -233,18 +234,19 @@ header:first-of-type {
     justify-content: center; /* Center items if needed */
     width: 600px;
     padding: 3em;
+    padding-bottom: 1em;
 }
 
 #block > a {
-    margin-left: 78%;
+    margin-left: 85%;
     color: white;
     text-decoration: underline;
 }
 
 #block {
-    width: 40%;
+    width: 600px;
     height: 100%;
-    margin: 0 auto;
+    margin-left: 35%;
 }
 
 #end {
