@@ -69,9 +69,7 @@
                                 $subcategories = $stmt->fetchAll(PDO::FETCH_COLUMN);
                             ?>
                                 <a href="/pages/category.php?id=<?= $category['id'] ?>" class="category-item" style="text-decoration:none;color:inherit;" aria-label="View category <?= htmlspecialchars($category['category_type']) ?>">
-                                    <?php if (!empty($category['image'])): ?>
-                                        <img src="<?= htmlspecialchars($category['image']) ?>" alt="<?= htmlspecialchars($category['category_type']) ?>" style="max-width:60px;max-height:60px;display:block;margin:auto;" />
-                                    <?php endif; ?>
+                                    
                                     <span class="category-link" style="pointer-events:none;"><?= htmlspecialchars($category['category_type']) ?></span>
                         
                                 </a>

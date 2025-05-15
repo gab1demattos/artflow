@@ -21,12 +21,13 @@ CREATE TABLE Service (
     description TEXT NOT NULL,
     category_id INTEGER NOT NULL,
     price REAL NOT NULL,
-    delivery_time DATE NOT NULL, -- or INTEGER ?? e.g. 5 days
+    delivery_time INTEGER NOT NULL, -- days
     images TEXT,  -- comma-separsted 
     videos TEXT,    -- paths to files
     FOREIGN KEY (user_id) REFERENCES User(id),
     FOREIGN KEY (category_id) REFERENCES Category(id)
 );
+
 
 CREATE TABLE Exchange (
     id INTEGER PRIMARY KEY,
