@@ -72,6 +72,14 @@ CREATE TABLE Subcategory (
     FOREIGN KEY (category_id) REFERENCES Category(id)
 );
 
+CREATE TABLE ServiceSubcategory (
+    service_id INTEGER NOT NULL,
+    subcategory_id INTEGER NOT NULL,
+    PRIMARY KEY (service_id, subcategory_id),
+    FOREIGN KEY (service_id) REFERENCES Service(id),
+    FOREIGN KEY (subcategory_id) REFERENCES Subcategory(id)
+);
+
 INSERT INTO Category (category_type) VALUES
 ('Illustration & Digital Art'),
 ('Graphic Design and Branding'),
