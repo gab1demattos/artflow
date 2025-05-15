@@ -49,7 +49,7 @@
 <?php function drawCategories(){ ?>
                 <section id="categories">
                     <div id="block">
-                        <h2>Explore categories</h2>
+                        <h2>Explore Categories</h2>
                         <?php 
                         $session = Session::getInstance();
                         $user = $session->getUser();
@@ -73,13 +73,7 @@
                                         <img src="<?= htmlspecialchars($category['image']) ?>" alt="<?= htmlspecialchars($category['category_type']) ?>" style="max-width:60px;max-height:60px;display:block;margin:auto;" />
                                     <?php endif; ?>
                                     <span class="category-link" style="pointer-events:none;"><?= htmlspecialchars($category['category_type']) ?></span>
-                                    <?php if ($subcategories): ?>
-                                        <ul style="padding-left:1em;font-size:0.9em;">
-                                            <?php foreach ($subcategories as $sub): ?>
-                                                <li><?= htmlspecialchars($sub) ?></li>
-                                            <?php endforeach; ?>
-                                        </ul>
-                                    <?php endif; ?>
+                        
                                 </a>
                             <?php endforeach; ?>
                         </div>

@@ -37,13 +37,25 @@
     background: white;
     width: 100%;
     min-height: 40vh;
-    padding: 2em 0 4em 0;
+    padding: 2em 1em 4em 1em;
+    /* Add horizontal padding to prevent overlap */
+    box-sizing: border-box;
 }
 
 .category-main-container {
     background: white;
     min-height: 80vh;
     padding: 0;
+}
+
+#services-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px 18px;
+    justify-content: flex-start;
+    align-items: stretch;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .subcategory-carousel-wrapper {
@@ -84,78 +96,91 @@
     border: 0px solid;
 }
 
-/* Service card stub styles */
+/* Service card Pantone style improvements */
 .service-card {
     background: #fff;
     border: 1px solid #eee;
-    border-radius: 12px;
-    padding: 0 0 18px 0;
-    margin-bottom: 16px;
-    font-size: 1.1rem;
     box-shadow: 0 2px 8px 0 #0001;
-    width: 260px;
+    width: 240px;
+    height: 340px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: flex-start;
+    /* Move content to the top */
+    padding: 0;
+    margin-bottom: 16px;
+    font-size: 1.2rem;
+    position: relative;
+    overflow: hidden;
     transition: box-shadow 0.2s;
 }
 
 .pantone-image-wrapper {
-    width: 100%;
+    width: 95%;
+    height: 72%;
+    /* Make image area even larger */
+    background: #f7f3ea;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #f7f3ea;
-    border-radius: 12px 12px 0 0;
-    height: 180px;
     overflow: hidden;
+
+    border-bottom: 1px solid #eee;
+    margin-top: 6px;
 }
 
-.pantone-image {
+.pantone-image,
+.pantone-image-placeholder {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
-}
-
-.pantone-image-placeholder {
-    width: 100%;
-    height: 100%;
-    background: #eee;
-    display: block;
+    margin: 0;
+    padding: 0;
 }
 
 .pantone-title {
-    font-family: 'EB Garamond', serif;
-    font-size: 1.25rem;
-    font-weight: bold;
-    color: #333;
-    margin: 1em 0 0.5em 0;
+    width: 95%;
     text-align: center;
-    width: 90%;
-    word-break: break-word;
+    /* font-family: 'Roboto', Arial, sans-serif; */
+    font-family: 'EB Garamond', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 8px 0 0 0;
+
+    color: #333;
+    letter-spacing: 0.5px;
+    /* text-transform: uppercase; */
 }
 
 .pantone-info-row {
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 90%;
-    margin: 0.2em 0 0 0;
-    font-size: 1.05rem;
+    padding: 0 16px 10px 16px;
+    font-size: 0.98rem;
     color: #666;
+    margin-top: 6px;
+    margin-bottom: 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    box-sizing: border-box;
+    background: #fff;
 }
 
 .pantone-username {
     font-family: 'EB Garamond', serif;
     font-size: 1rem;
-    color: #885784;
+    color: #666;
 }
 
 .pantone-rating {
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: #C2AB42;
-    font-family: 'EB Garamond', serif;
+    font-weight: 600;
 }
 
 @media (max-width: 600px) {
@@ -170,8 +195,11 @@
     }
 
     .service-card {
-        width: 98vw;
+        width: 96vw;
         min-width: 0;
+        max-width: 340px;
+        margin-left: auto;
+        margin-right: auto;
         padding: 0 0 12px 0;
     }
 
@@ -185,5 +213,15 @@
 
     .pantone-info-row {
         font-size: 0.98rem;
+    }
+
+    .category-content {
+        padding: 1em 2vw 2em 2vw;
+        /* More padding on mobile */
+    }
+
+    #services-list {
+        gap: 16px 0;
+        justify-content: center;
     }
 }
