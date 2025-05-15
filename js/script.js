@@ -157,4 +157,42 @@ document.addEventListener("DOMContentLoaded", function () {
             categoryModalOverlay.classList.add("hidden");
         });
     }
+
+    // Subcategory tag multi-select filter logic (category page)
+    const tagContainer = document.getElementById('subcategory-carousel');
+    if (tagContainer) {
+        const tags = tagContainer.querySelectorAll('.subcategory-tag');
+        const servicesList = document.getElementById('services-list');
+        let selectedSubcats = new Set();
+
+        tags.forEach(tag => {
+            tag.addEventListener('click', function () {
+                const subcatId = this.getAttribute('data-subcategory-id');
+                if (selectedSubcats.has(subcatId)) {
+                    selectedSubcats.delete(subcatId);
+                    this.classList.remove('selected');
+                } else {
+                    selectedSubcats.add(subcatId);
+                    this.classList.add('selected');
+                }
+                filterServices();
+            });
+        });
+
+        function filterServices() {
+            if (!servicesList) return;
+            const cards = servicesList.querySelectorAll('.service-card');
+            if (selectedSubcats.size === 0) {
+                // Show all if nothing selected
+                cards.forEach(card => card.style.display = '');
+                return;
+            }
+            cards.forEach(card => {
+                const subcatIds = card.getAttribute('data-subcategory-ids').split(',');
+                // Show if any selected subcat matches
+                const show = Array.from(selectedSubcats).some(id => subcatIds.includes(id));
+                card.style.display = show ? '' : 'none';
+            });
+        }
+    }
 });

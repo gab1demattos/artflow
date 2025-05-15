@@ -45,3 +45,68 @@
     min-height: 80vh;
     padding: 0;
 }
+
+.subcategory-carousel-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    margin: 24px 0 16px 0;
+    padding-bottom: 4px;
+}
+
+.subcategory-carousel {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #bbb #f5f5f5;
+    padding: 0 8px;
+}
+
+.subcategory-tag {
+    background: rgba(221, 141, 110, 0.5);
+    /*border: 1px solid #ddd;*/
+    border-radius: 8px;
+    padding: 8px 18px;
+    font-size: 1rem;
+    font-family: 'EB Garamond', sans-serif;
+    color: #333;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, border 0.2s;
+    outline: none;
+    white-space: nowrap;
+    border: 0px solid;
+}
+
+.subcategory-tag.selected {
+    background: var(--orange);
+    color: #fff;
+    border: 0px solid;
+}
+
+.subcategory-tag:focus {
+    box-shadow: 0 0px 0px 2px #2d72d933;
+}
+
+/* Service card stub styles */
+.service-card {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin-bottom: 16px;
+    font-size: 1.1rem;
+    box-shadow: 0 2px 8px 0 #0001;
+}
+
+@media (max-width: 600px) {
+    .subcategory-carousel {
+        gap: 8px;
+        padding: 0 2px;
+    }
+
+    .subcategory-tag {
+        padding: 7px 12px;
+        font-size: 0.95rem;
+    }
+}
