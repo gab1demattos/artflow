@@ -84,19 +84,78 @@
     border: 0px solid;
 }
 
-.subcategory-tag:focus {
-    box-shadow: 0 0px 0px 2px #2d72d933;
-}
-
 /* Service card stub styles */
 .service-card {
     background: #fff;
     border: 1px solid #eee;
     border-radius: 12px;
-    padding: 18px 20px;
+    padding: 0 0 18px 0;
     margin-bottom: 16px;
     font-size: 1.1rem;
     box-shadow: 0 2px 8px 0 #0001;
+    width: 260px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: box-shadow 0.2s;
+}
+
+.pantone-image-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f7f3ea;
+    border-radius: 12px 12px 0 0;
+    height: 180px;
+    overflow: hidden;
+}
+
+.pantone-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.pantone-image-placeholder {
+    width: 100%;
+    height: 100%;
+    background: #eee;
+    display: block;
+}
+
+.pantone-title {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #333;
+    margin: 1em 0 0.5em 0;
+    text-align: center;
+    width: 90%;
+    word-break: break-word;
+}
+
+.pantone-info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    margin: 0.2em 0 0 0;
+    font-size: 1.05rem;
+    color: #666;
+}
+
+.pantone-username {
+    font-family: 'EB Garamond', serif;
+    font-size: 1rem;
+    color: #885784;
+}
+
+.pantone-rating {
+    font-size: 1.1rem;
+    color: #C2AB42;
+    font-family: 'EB Garamond', serif;
 }
 
 @media (max-width: 600px) {
@@ -108,5 +167,23 @@
     .subcategory-tag {
         padding: 7px 12px;
         font-size: 0.95rem;
+    }
+
+    .service-card {
+        width: 98vw;
+        min-width: 0;
+        padding: 0 0 12px 0;
+    }
+
+    .pantone-image-wrapper {
+        height: 120px;
+    }
+
+    .pantone-title {
+        font-size: 1.1rem;
+    }
+
+    .pantone-info-row {
+        font-size: 0.98rem;
     }
 }

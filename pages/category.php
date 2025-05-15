@@ -52,14 +52,43 @@ drawHeader($user);
         <?php endif; ?>
     </div>
     <div class="category-content">
-        <!-- Future: List of services for this category -->
         <div id="services-list">
-            <!-- Stub: Show all services for this category. Filtering by subcategory will be handled by JS. -->
-            <div class="service-card" data-subcategory-ids="1,2">Service 1 (Subcat 1, 2)</div>
-            <div class="service-card" data-subcategory-ids="2">Service 2 (Subcat 2)</div>
-            <div class="service-card" data-subcategory-ids="3">Service 3 (Subcat 3)</div>
-            <div class="service-card" data-subcategory-ids="1,3">Service 4 (Subcat 1, 3)</div>
-            <!-- Replace with real service data in the future -->
+            <?php
+            // Fetch all services for this category
+            $stmt = $db->prepare('SELECT Service.*, User.username FROM Service JOIN User ON Service.user_id = User.id WHERE Service.category_id = ?');
+            $stmt->execute([$category['id']]);
+            $services = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            if ($services) {
+                foreach ($services as $service) {
+                    // Fetch subcategories for this service
+                    $stmtSub = $db->prepare('SELECT subcategory_id FROM ServiceSubcategory WHERE service_id = ?');
+                    $stmtSub->execute([$service['id']]);
+                    $subcatIds = $stmtSub->fetchAll(PDO::FETCH_COLUMN);
+                    $subcatIdsStr = implode(',', $subcatIds);
+                    // Get first image (if any)
+                    $serviceImages = array_filter(array_map('trim', explode(',', $service['images'] ?? '')));
+                    $serviceImage = count($serviceImages) > 0 ? $serviceImages[0] : null;
+            ?>
+                <div class="service-card" data-subcategory-ids="<?= htmlspecialchars($subcatIdsStr) ?>">
+                    <div class="pantone-image-wrapper">
+                        <?php if ($serviceImage): ?>
+                            <img src="<?= htmlspecialchars($serviceImage) ?>" alt="Service image" class="pantone-image" />
+                        <?php else: ?>
+                            <div class="pantone-image pantone-image-placeholder"></div>
+                        <?php endif; ?>
+                    </div>
+                    <div class="pantone-title"><?= htmlspecialchars($service['title']) ?></div>
+                    <div class="pantone-info-row">
+                        <span class="pantone-username"><?= htmlspecialchars($service['username']) ?></span>
+                        <span class="pantone-rating">★ 0.0</span>
+                    </div>
+                </div>
+            <?php
+                }
+            } else {
+                echo '<p>No services found in this category yet.</p>';
+            }
+            ?>
         </div>
     </div>
 </main>
