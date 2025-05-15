@@ -196,6 +196,7 @@ header:first-of-type {
     background-color: var(--green); 
     font-family: 'EDGaramond', serif;
     padding-bottom: 10em;
+    justify-content: flex-end;
 }
 
 #categories  h2 {
