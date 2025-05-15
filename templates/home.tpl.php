@@ -68,11 +68,11 @@
                                 $stmt->execute([$category['id']]);
                                 $subcategories = $stmt->fetchAll(PDO::FETCH_COLUMN);
                             ?>
-                                <div class="category-item">
+                                <a href="/pages/category.php?id=<?= $category['id'] ?>" class="category-item" style="text-decoration:none;color:inherit;" aria-label="View category <?= htmlspecialchars($category['category_type']) ?>">
                                     <?php if (!empty($category['image'])): ?>
                                         <img src="<?= htmlspecialchars($category['image']) ?>" alt="<?= htmlspecialchars($category['category_type']) ?>" style="max-width:60px;max-height:60px;display:block;margin:auto;" />
                                     <?php endif; ?>
-                                    <a class="category-link" href="/pages/category.php?id=<?= $category['id'] ?>"><?= htmlspecialchars($category['category_type']) ?></a>
+                                    <span class="category-link" style="pointer-events:none;"><?= htmlspecialchars($category['category_type']) ?></span>
                                     <?php if ($subcategories): ?>
                                         <ul style="padding-left:1em;font-size:0.9em;">
                                             <?php foreach ($subcategories as $sub): ?>
@@ -80,7 +80,7 @@
                                             <?php endforeach; ?>
                                         </ul>
                                     <?php endif; ?>
-                                </div>
+                                </a>
                             <?php endforeach; ?>
                         </div>
                         <a id="link" href="/pages/see-more-categories.php">see more -></a>

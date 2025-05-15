@@ -15,14 +15,14 @@ drawHeader($user);
         <h2>All Categories</h2>
         <div id="see-more-category-list">
             <?php foreach ($categories as $category): ?>
-                <div class="see-more-category-card">
+                <a href="/pages/category.php?id=<?= $category['id'] ?>" class="see-more-category-card" style="text-decoration:none;color:inherit;" aria-label="View category <?= htmlspecialchars($category['category_type']) ?>">
                     <?php if (!empty($category['image'])): ?>
                         <div class="see-more-category-image-wrapper">
                             <img src="<?= htmlspecialchars($category['image']) ?>" alt="<?= htmlspecialchars($category['category_type']) ?>" />
                         </div>
                     <?php endif; ?>
-                    <span class="category-link"><a href="/pages/category.php?id=<?= $category['id'] ?>" style="color:inherit;text-decoration:none;"><?= htmlspecialchars($category['category_type']) ?></a></span>
-                </div>
+                    <span class="category-link" style="pointer-events:none;"><?= htmlspecialchars($category['category_type']) ?></span>
+                </a>
             <?php endforeach; ?>
         </div>
     </div>
