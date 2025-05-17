@@ -1,0 +1,226 @@
+/* Category page styling */
+
+.category-page {
+    width: 100%;
+    height: 28vh;
+    min-height: 180px;
+    max-height: 320px;
+    overflow: hidden;
+    position: relative;
+    background: #eee;
+}
+
+.category-page img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.7);
+}
+
+.category-page-title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 3.5rem;
+    font-family: 'EB Garamond', sans-serif;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    margin: 0;
+    z-index: 2;
+    letter-spacing: -1px;
+    text-align: center;
+
+}
+
+.category-content {
+    background: white;
+    width: 100%;
+    min-height: 40vh;
+    padding: 2em 1em 4em 1em;
+    box-sizing: border-box;
+}
+
+.category-main-container {
+    background: white;
+    min-height: 80vh;
+    padding: 0;
+}
+
+#services-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px 18px;
+    justify-content: flex-start;
+    align-items: stretch;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.subcategory-carousel-wrapper {
+    
+    overflow-x: auto;
+    margin: 24px 0 16px 0;
+    padding-bottom: 4px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.subcategory-carousel {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #bbb #f5f5f5;
+    width: 100%;
+    justify-content: center;
+}
+
+.subcategory-tag {
+    flex: 1 1 0;
+    min-width: 120px;
+    text-align: center;
+    background: rgba(221, 141, 110, 0.5);
+    border-radius: 8px;
+    padding: 8px 18px;
+    font-size: 1rem;
+    font-family: 'EB Garamond', sans-serif;
+    color: #333;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, border 0.2s;
+    outline: none;
+    white-space: nowrap;
+    border: 0px solid;
+}
+
+.subcategory-tag.selected {
+    background: var(--orange);
+    color: #fff;
+    border: 0px solid;
+}
+
+/* Service card style */
+.service-card {
+    background: #fff;
+    border: 1px solid #eee;
+    box-shadow: 0 2px 8px 0 #0001;
+    width: 240px;
+    height: 340px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0;
+    margin-bottom: 16px;
+    font-size: 1.2rem;
+    position: relative;
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+}
+
+.pantone-image-wrapper {
+    width: 95%;
+    height: 72%;
+    background: #f7f3ea;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+
+    border-bottom: 1px solid #eee;
+    margin-top: 6px;
+}
+
+.pantone-image,
+.pantone-image-placeholder {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+.pantone-title {
+    width: 95%;
+    text-align: center;
+    font-family: 'EB Garamond', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 8px 0 0 0;
+    color: #333;
+    letter-spacing: 0.5px;
+}
+
+.pantone-info-row {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px 10px 16px;
+    font-size: 0.98rem;
+    color: #666;
+    margin-top: 6px;
+    margin-bottom: 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    box-sizing: border-box;
+    background: #fff;
+}
+
+.pantone-username {
+    font-family: 'EB Garamond', serif;
+    font-size: 1rem;
+    color: #666;
+}
+
+.pantone-rating {
+    font-size: 1rem;
+    color: #C2AB42;
+    font-weight: 600;
+}
+
+@media (max-width: 600px) {
+    .subcategory-carousel {
+        gap: 8px;
+        padding: 0 2px;
+    }
+
+    .subcategory-tag {
+        padding: 7px 12px;
+        font-size: 0.95rem;
+    }
+
+    .service-card {
+        width: 96vw;
+        min-width: 0;
+        max-width: 340px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 0 0 12px 0;
+    }
+
+    .pantone-image-wrapper {
+        height: 120px;
+    }
+
+    .pantone-title {
+        font-size: 1.1rem;
+    }
+
+    .pantone-info-row {
+        font-size: 0.98rem;
+    }
+
+    .category-content {
+        padding: 1em 2vw 2em 2vw;
+        /* More padding on mobile */
+    }
+
+    #services-list {
+        gap: 16px 0;
+        justify-content: center;
+    }
+}
