@@ -43,7 +43,7 @@ foreach ($categories as $cat) {
           <label>Media (images/videos):<br>
             <input type="file" name="media[]" accept="image/*,video/*" multiple required>
             <br>
-            <small>Choose up to 5 files. You will select a primary image after upload.</small>
+            <small>Choose up to 5 files. The first image will be the cover.</small>
           </label>
           <div id="primary-image-section"></div>
           <div class="button-container">

@@ -21,7 +21,8 @@
     background: #fff;
     border-radius: 16px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
-    max-width: 560px;
+    max-width: 640px;
+    max-height: 780px;
     width: 95vw;
     padding: 2.5rem 2rem 2rem 2rem;
     position: relative;
@@ -40,11 +41,7 @@
     }
 }
 
-#new-service-modal h2 {
-    color: var(--purple);
-    font-weight: 100;
-    font-size: 4em;
-}
+
 
 #new-service-modal .modal-content {
     display: flex;
@@ -56,15 +53,16 @@
     width: 100%;
 }
 
-#new-service-modall .form input:focus {
+/* #new-service-modal .form input:focus {
     outline: none;
     border: 2px solid var(--purple);
-}
+} */
 
 #new-service-modal h2 {
+    color: var(--purple);
     margin-bottom: 1.2rem;
-    font-size: 1.7rem;
-    font-weight: 700;
+    font-size: 2.4rem;
+    font-weight: normal;
     text-align: center;
 }
 
@@ -73,6 +71,7 @@
     margin-bottom: 1.1rem;
     font-weight: 500;
     color: #333;
+    font-size: 1.24em;
 }
 
 #new-service-form input[type="text"],
