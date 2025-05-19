@@ -11,14 +11,12 @@
     <header>
         <h1 class='artflow-text'>artflow</h1>
         <nav id="menu">
+            <div id="search-bar">
+                <input type="text" id="search-input" placeholder="Search here..." />
+                <button id="search-button"><img src="images/search.png" alt="Search" id="search-icon"></button>
+            </div>
             <ul id="buttons">
                 <?php if (!$user): ?>
-                    <li>
-                    <div id="search-bar">
-                        <input type="text" id="search-input" placeholder="Search here..." />
-                        <button id="search-button"><img src="images/search.png" alt="Search" id="search-icon"></button>
-                    </div>
-                    </li>
                     <li><button class="button filled hovering">Sign Up</button></li>
                 <?php endif; ?>
             </ul>
