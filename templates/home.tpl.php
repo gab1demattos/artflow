@@ -26,6 +26,7 @@
     <div id="sidebar">
         <button id="sidebar-close" onclick="closeSidebar()">x</button>
         <ul id="sidebar-list">
+            <li id="new-service-button"><button>New Service</buuton></li>
             <li class="sidebar-item"><img src="images/profile.png" alt="Profile" class="logo"><button>Profile</buuton></li>
             <li class="sidebar-item"><img src="images/activity.png" alt="Activity" class="logo"><button>Activity</buuton></li>
             <li class="sidebar-item"><img src="images/messages.png" alt="Messages" class="logo"><button>Messages</buuton></li>

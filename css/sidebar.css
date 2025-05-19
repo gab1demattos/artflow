@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Modak&family=Material+Icons&display=swap');
+
 #sidebar-open {
     font-size: 24px;
     background: none;
@@ -14,8 +16,8 @@
     border: none;
     cursor: pointer;
     color: #333;
-    position: absolute; /* Position it relative to the sidebar */
-    top: 10px; /* Adjust the vertical position */
+    position: absolute; 
+    top: 10px; 
     right: 10px;
 }
 
@@ -74,8 +76,28 @@
     align-items: center;
     justify-content: start;
     gap: 1em;
+    padding: 0.5em;
 }
 
 #settings {
-    border-color: #333;
+    box-sizing: border-box;
+    border-top: 1px solid #3338;
+    padding: 10px;
+    padding-top: 2.5em;
+}
+
+#new-service-button > button {
+    background-color: var(--purple);
+    color: white;
+    border-radius: 10px;
+    width: 100%;
+    padding: 0.7em;
+    font-family: 'EDGaramond', serif;
+    font-size: 20px !important;
+    margin-bottom: 2.5em;
+}
+
+.sidebar-item > button {
+    font-family: 'EDGaramond', serif;
+    font-size: 20px !important;
 }
