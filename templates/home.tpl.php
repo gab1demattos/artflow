@@ -33,19 +33,19 @@
             </li>
             <li class="sidebar-item">
                 <img src="images/activity.png" alt="Activity" class="logo">
-                <button>Activity</buuton>
+                <button>Activity</button>
             </li>
             <li class="sidebar-item">
                 <img src="images/messages.png" alt="Messages" class="logo">
-                <button>Messages</buuton>
+                <button>Messages</button>
             </li>
             <li class="sidebar-item">
                 <img src="images/stats.png" alt="Stats" class="logo">
-                <button>Stats</buuton>
+                <button>Stats</buTton>
             </li>
             <li class="sidebar-item" id="settings">
                 <img src="images/settings.png" alt="Settings" class="logo">
-                <button>Settings</buuton>
+                <button>Settings</button>
             </li>
             <li class="sidebar-item">
                 <img src="images/logout.png" alt="Log Out" class="logo">
