@@ -28,12 +28,12 @@
     <?php if ($user): ?>
     <div id="sidebar">
         <button id="sidebar-close" onclick="closeSidebar()">x</button>
+        <div id="profile">
+            <img src="images/avatar.png" alt="Avatar" id="avatar">
+            <h2 id="profile-name"><?= htmlspecialchars($user['name']) ?></h2>
+        </div>
         <ul id="sidebar-list">
-            <li id="new-service-button"><button>New Service</buuton></li>
-            <li class="sidebar-item">
-                <img src="images/profile.png" alt="Profile" class="logo">
-                <button>Profile</buuton>
-            </li>
+            <li id="new-service-button"><button>New Service</button></li>
             <li class="sidebar-item">
                 <img src="images/activity.png" alt="Activity" class="logo">
                 <button>Activity</button>
@@ -44,7 +44,7 @@
             </li>
             <li class="sidebar-item">
                 <img src="images/stats.png" alt="Stats" class="logo">
-                <button>Stats</buTton>
+                <button>Stats</button>
             </li>
             <li class="sidebar-item" id="settings">
                 <img src="images/settings.png" alt="Settings" class="logo">
