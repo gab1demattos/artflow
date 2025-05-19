@@ -205,16 +205,35 @@
     align-items: stretch;
 }
 
-#subcategory-modal h3 {
-    color: var(--purple);
-    font-size: 1.3rem;
-    font-weight: 600;
+#subcategory-modal h2 {
+    color: var(--yellow);
+    /* font-size: 1.8rem; */
+    font-family: 'Modak', sans-serif;
+    font-weight: normal;
     margin-bottom: 1em;
     text-align: center;
 }
 
 #subcategory-modal .subcategory-checkboxes {
     margin-bottom: 1.2em;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7em 1.5em;
+}
+
+#subcategory-modal .subcategory-checkboxes label {
+    display: flex;
+    align-items: center;
+    font-size: 1.2em;
+    font-weight: 400;
+    margin-bottom: 0.2em;
+    margin-right: 1.2em;
+    cursor: pointer;
+}
+
+#subcategory-modal .subcategory-checkboxes input[type="checkbox"] {
+    margin-right: 0.4em;
+    accent-color: var(--purple);
 }
 
 #subcategory-modal .button-container {

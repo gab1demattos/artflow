@@ -209,9 +209,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     const cbLabel = document.createElement('label');
                     cbLabel.htmlFor = checkbox.id;
                     cbLabel.textContent = subcat.name;
-                    cbLabel.style.marginRight = '1.2em';
-                    cbLabel.style.fontWeight = '400';
-                    cbLabel.style.fontSize = '1em';
                     cbLabel.prepend(checkbox);
                     subcategoryCheckboxesDiv.appendChild(cbLabel);
                 });

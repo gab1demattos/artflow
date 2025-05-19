@@ -95,7 +95,7 @@
 
 .button.hovering.outline.yellow:hover {
 	background-color: var(--yellow);
-	color: #000000;
+	color: #ffffff;
 	border: 2px solid var(--yellow);
 }
 /* Example: <button class="button hovering [other classes]">Hoverable</button> */
