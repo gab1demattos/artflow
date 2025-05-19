@@ -83,14 +83,18 @@
     padding-top: 2.5em;
 }
 
-#new-service-button > button {
+#new-service-button {
     background-color: var(--purple);
     color: white;
     border-radius: 10px;
     width: 100%;
     padding: 0.5em;
     font-family: 'EDGaramond', serif;
-    font-size: 20px !important;
+    padding-right: 0;
+}
+
+#new-service-button > button {
+    color: white;
     font-weight: 700;
 }
 
@@ -139,11 +143,19 @@
     align-items: center;
     justify-content: space-between;
     gap: 1em;
-    padding: 2em;
+    padding-bottom: 2em;
     border-bottom: 1px solid #3338;
+    padding-top: 1em;
 }
 
 #profile-name {
     margin: 0 auto;
     font-weight: 100;
+}
+
+#profile-username {
+    margin: 0 auto;
+    font-weight: 100;
+    font-size: normal;
+    text-align: center;
 }

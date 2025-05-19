@@ -30,10 +30,16 @@
         <button id="sidebar-close" onclick="closeSidebar()">x</button>
         <div id="profile">
             <img src="images/avatar.png" alt="Avatar" id="avatar">
-            <h2 id="profile-name"><?= htmlspecialchars($user['name']) ?></h2>
+            <div>
+                <h2 id="profile-name"><?= htmlspecialchars($user['name']) ?></h2>
+                <h3 id="profile-username">@<?= htmlspecialchars($user['username']) ?></h3>
+            </div>
         </div>
         <ul id="sidebar-list">
-            <li id="new-service-button"><button>New Service</button></li>
+            <li class="sidebar-item" id="new-service-button">
+                <img src="images/add_circle.png" alt="New Service" class="logo">
+                <button>New Service</button>
+            </li>
             <li class="sidebar-item">
                 <img src="images/activity.png" alt="Activity" class="logo">
                 <button>Activity</button>
