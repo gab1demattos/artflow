@@ -11,7 +11,7 @@
 }
 
 #sidebar-close {
-    font-size: 24px;
+    font-size: 28px !important;
     background: none;
     border: none;
     cursor: pointer;
@@ -91,10 +91,12 @@
     color: white;
     border-radius: 10px;
     width: 100%;
-    padding: 0.7em;
+    padding: 0.5em;
     font-family: 'EDGaramond', serif;
     font-size: 20px !important;
     margin-bottom: 2.5em;
+    margin-top: 2.5em;
+    font-weight: 700;
 }
 
 .sidebar-item > button {
