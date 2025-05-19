@@ -312,3 +312,27 @@ header:first-of-type {
     opacity: 0.6;
     padding-bottom: 0;
 }
+
+#search-icon {
+    width: 1em;
+    height: auto;
+}
+
+#search-button {
+    background-color: transparent;
+    border: none;
+}
+
+#search-input {
+    border: none;
+    background-color: transparent;
+}
+
+#search-bar {
+    background-color: white;
+    padding: 1px 5px;
+    border-radius: 3px;
+    width: 15rem;
+    display: flex;
+    justify-content: space-between;
+}
