@@ -27,12 +27,30 @@
         <button id="sidebar-close" onclick="closeSidebar()">x</button>
         <ul id="sidebar-list">
             <li id="new-service-button"><button>New Service</buuton></li>
-            <li class="sidebar-item"><img src="images/profile.png" alt="Profile" class="logo"><button>Profile</buuton></li>
-            <li class="sidebar-item"><img src="images/activity.png" alt="Activity" class="logo"><button>Activity</buuton></li>
-            <li class="sidebar-item"><img src="images/messages.png" alt="Messages" class="logo"><button>Messages</buuton></li>
-            <li class="sidebar-item"><img src="images/stats.png" alt="Stats" class="logo"><button>Stats</buuton></li>
-            <li class="sidebar-item" id="settings"><img src="images/settings.png" alt="Settings" class="logo"><button>Settings</buuton></li>
-            <li class="sidebar-item"><img src="images/logout.png" alt="Log Out" class="logo"><form action="/actions/logout.php" method="post"><button>Log Out</buuton></form></li>
+            <li class="sidebar-item">
+                <img src="images/profile.png" alt="Profile" class="logo">
+                <button>Profile</buuton>
+            </li>
+            <li class="sidebar-item">
+                <img src="images/activity.png" alt="Activity" class="logo">
+                <button>Activity</buuton>
+            </li>
+            <li class="sidebar-item">
+                <img src="images/messages.png" alt="Messages" class="logo">
+                <button>Messages</buuton>
+            </li>
+            <li class="sidebar-item">
+                <img src="images/stats.png" alt="Stats" class="logo">
+                <button>Stats</buuton>
+            </li>
+            <li class="sidebar-item" id="settings">
+                <img src="images/settings.png" alt="Settings" class="logo">
+                <button>Settings</buuton>
+            </li>
+            <li class="sidebar-item">
+                <img src="images/logout.png" alt="Log Out" class="logo">
+                <form action="/actions/logout.php" method="post"><button>Log Out</button></form>
+            </li>
         </ul>
     </div>
     <?php endif; ?>

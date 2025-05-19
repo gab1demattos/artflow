@@ -99,7 +99,19 @@
     font-weight: 700;
 }
 
-.sidebar-item > button {
+.sidebar-item  button {
     font-family: 'EDGaramond', serif;
     font-size: 20px !important;
+}
+
+.sidebar-item form {
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    width: 100%;
+}
+
+.sidebar-item form button {
+    flex-grow: 1; 
+    text-align: center; 
 }
