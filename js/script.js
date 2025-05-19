@@ -158,6 +158,16 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    // New Service Modal logic
+    const openNewServiceModalBtn = document.getElementById("open-new-service-modal");
+    const newServiceModalOverlay = document.getElementById("new-service-modal-overlay");
+    if (openNewServiceModalBtn && newServiceModalOverlay) {
+        openNewServiceModalBtn.addEventListener("click", function (e) {
+            e.stopPropagation();
+            newServiceModalOverlay.classList.remove("hidden");
+        });
+    }
+
     // Subcategory tag multi-select filter logic (category page)
     const tagContainer = document.getElementById('subcategory-carousel');
     if (tagContainer) {

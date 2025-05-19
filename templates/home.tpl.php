@@ -17,7 +17,7 @@
                 <ul id="buttons">
                     <?php if ($user): ?>
                         <li>
-                            <a href="/pages/new-service.php" class="button filled outline hovering" style="margin-right:1em;">New Service</a>
+                            <button id="open-new-service-modal" class="button filled outline hovering" style="margin-right:1em;">New Service</button>
                         </li>
                         <li>
                             <form action="/actions/logout.php" method="post">
@@ -147,7 +147,7 @@
             <?php include __DIR__ . '/../pages/modals/sign-in-modal.php'; ?>
             <?php include __DIR__ . '/../pages/modals/go-with-flow-modal.php'; ?>
         <?php endif; ?>
-        
+        <?php include __DIR__ . '/../pages/modals/new-service-modal.php'; ?>
         <script src="/js/script.js"></script>
     </body>
 </html>
