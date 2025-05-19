@@ -32,14 +32,16 @@ foreach ($categories as $cat) {
             </select>
           </label>
           <div id="subcategory-section"></div>
-          <label>Delivery Time (days):<br>
-            <input type="number" name="delivery_time" min="1" max="60" required>
-            <br>
-          </label>
-          <label>Price (€):<br>
-            <input type="number" name="price" min="0" step="0.01" required>
-            <br>
-          </label>
+          <div class="row-fields">
+            <label>Delivery Time (days):<br>
+              <input type="number" name="delivery_time" min="1" max="60" required>
+              <br>
+            </label>
+            <label>Price (€):<br>
+              <input type="number" name="price" min="0" step="0.01" required>
+              <br>
+            </label>
+          </div>
           <label>Media (images/videos):<br>
             <input type="file" name="media[]" accept="image/*,video/*" multiple required>
             <br>
