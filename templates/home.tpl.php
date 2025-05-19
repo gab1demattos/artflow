@@ -27,7 +27,6 @@
 
     <?php if ($user): ?>
     <div id="sidebar">
-        <button id="sidebar-close" onclick="closeSidebar()">x</button>
         <div id="profile">
             <img src="images/avatar.png" alt="Avatar" id="avatar">
             <div>
