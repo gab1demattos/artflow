@@ -1,4 +1,3 @@
-/* Sidebar Toggle Button */
 #sidebar-toggle {
     font-size: 24px;
     background: none;
@@ -6,20 +5,11 @@
     cursor: pointer;
     color: #333;
     margin: 10px;
+    padding: 1em;
 }
 
-/* Sidebar */
 #sidebar {
-    position: fixed;
-    top: 0;
-    left: -250px; /* Hidden by default */
-    width: 250px;
-    height: 100%;
-    background-color: #f4f4f4;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
-    transition: left 0.3s ease;
-    z-index: 1000;
-    padding: 20px;
+    display: none;
 }
 
 #sidebar ul {
@@ -37,7 +27,15 @@
     font-size: 18px;
 }
 
-/* Sidebar Active State */
 #sidebar.active {
-    left: 0;
+    display: inline;
+    position: fixed;
+    top: 0;
+    width: 250px;
+    height: 100%;
+    background-color: #f4f4f4;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+    transition: left 0.3s ease;
+    z-index: 1000;
+    padding: 20px;
 }
