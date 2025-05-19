@@ -17,6 +17,9 @@
                 <ul id="buttons">
                     <?php if ($user): ?>
                         <li>
+                            <a href="/pages/new-service.php" class="button filled outline hovering" style="margin-right:1em;">New Service</a>
+                        </li>
+                        <li>
                             <form action="/actions/logout.php" method="post">
                                 <button type="submit" class="button filled hovering">
                                     <?= htmlspecialchars($user['username']) ?> - Logout
