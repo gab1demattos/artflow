@@ -143,7 +143,12 @@ document.addEventListener("DOMContentLoaded", function () {
 	}
 });
 
-function toggleSidebar() {
+function openSidebar() {
     const sidebar = document.getElementById('sidebar');
     sidebar.classList.toggle('active');
+}
+
+function closeSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    sidebar.classList.remove('active');
 }

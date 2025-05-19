@@ -28,16 +28,19 @@
             </ul>
         </nav>
         <!-- Sidebar Toggle Button -->
-        <button id="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+        <button id="sidebar-open" onclick="openSidebar()">☰</button>
     </header>
 
     <!-- Sidebar -->
     <div id="sidebar">
+    <button id="sidebar-close" onclick="closeSidebar()">x</button>
         <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Categories</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Contact</a></li>
+            <li>Profile</li>
+            <li>Activity</li>
+            <li>Messages</li>
+            <li>Stats</li>
+            <li>Settings</li>
+            <li>Log Out</li>
         </ul>
     </div>
 

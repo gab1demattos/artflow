@@ -1,4 +1,4 @@
-#sidebar-toggle {
+#sidebar-open {
     font-size: 24px;
     background: none;
     border: none;
@@ -6,6 +6,17 @@
     color: #333;
     margin: 10px;
     padding: 1em;
+}
+
+#sidebar-close {
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #333;
+    position: absolute; /* Position it relative to the sidebar */
+    top: 10px; /* Adjust the vertical position */
+    right: 10px;
 }
 
 #sidebar {
