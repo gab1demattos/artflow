@@ -18,10 +18,9 @@
             <ul id="buttons">
                 <?php if (!$user): ?>
                     <li><button class="button filled hovering">Sign Up</button></li>
+                <?php else: ?>
+                    <li><button id="sidebar-open" onclick="openSidebar()" aria-label="Open Sidebar">☰</button></li>
                 <?php endif; ?>
-                <?php if ($user): ?>
-                <li><button id="sidebar-open" onclick="openSidebar()" aria-label="Open Sidebar">☰</button></li>
-        <?php endif; ?>
             </ul>
         </nav>
     </header>
