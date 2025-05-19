@@ -76,7 +76,7 @@ header:first-of-type {
 
 #title {
     grid-area: title;
-    min-height: 600px;
+    min-height: 700px;
     padding: 0;
     align-content:start;
     justify-self: start;
@@ -151,7 +151,7 @@ header:first-of-type {
 
 #info {
     grid-area: info;
-    min-height: 600px;
+    min-height: 700px;
     padding: 2rem;
     background-color: var(--yellow); 
     align-content: center;
@@ -192,7 +192,7 @@ header:first-of-type {
 
 #categories {
     grid-area: categories;
-    min-height: 600px;
+    min-height: 700px;
     padding: 2rem;
     background-color: var(--green); 
     font-family: 'EDGaramond', serif;
