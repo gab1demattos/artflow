@@ -11,38 +11,30 @@
     <header>
         <h1 class='artflow-text'>artflow</h1>
         <nav id="menu">
-            <input type="checkbox" id="nav_bar">
-            <label class="nav_bar" for="nav_bar"></label>
             <ul id="buttons">
-                <?php if ($user): ?>
-                    <li>
-                        <form action="/actions/logout.php" method="post">
-                            <button type="submit" class="button filled hovering">
-                                <?= htmlspecialchars($user['username']) ?> - Logout
-                            </button>
-                        </form>
-                    </li>
-                <?php else: ?>
+                <?php if (!$user): ?>
                     <li><button class="button filled hovering">Sign Up</button></li>
                 <?php endif; ?>
             </ul>
         </nav>
-        <!-- Sidebar Toggle Button -->
-        <button id="sidebar-open" onclick="openSidebar()">☰</button>
+        <?php if (!$user): ?>
+            <button id="sidebar-open" onclick="openSidebar()" aria-label="Open Sidebar">☰</button>
+        <?php endif; ?>
     </header>
 
-    <!-- Sidebar -->
+    <?php if (!$user): ?>
     <div id="sidebar">
-    <button id="sidebar-close" onclick="closeSidebar()">x</button>
-        <ul>
-            <li>Profile</li>
-            <li>Activity</li>
-            <li>Messages</li>
-            <li>Stats</li>
-            <li>Settings</li>
-            <li>Log Out</li>
+        <button id="sidebar-close" onclick="closeSidebar()">x</button>
+        <ul id="sidebar-list">
+            <li class="sidebar-item"><img src="images/profile.png" alt="Profile" class="logo"><button>Profile</buuton></li>
+            <li class="sidebar-item"><img src="images/activity.png" alt="Activity" class="logo"><button>Activity</buuton></li>
+            <li class="sidebar-item"><img src="images/messages.png" alt="Messages" class="logo"><button>Messages</buuton></li>
+            <li class="sidebar-item"><img src="images/stats.png" alt="Stats" class="logo"><button>Stats</buuton></li>
+            <li class="sidebar-item" id="settings"><img src="images/settings.png" alt="Settings" class="logo"><button>Settings</buuton></li>
+            <li class="sidebar-item"><img src="images/logout.png" alt="Log Out" class="logo"><button>Log Out</buuton></li>
         </ul>
     </div>
+    <?php endif; ?>
 
 <?php } ?>
 

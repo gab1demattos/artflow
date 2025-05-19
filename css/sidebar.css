@@ -52,3 +52,30 @@
     display: inline;
     right: 0;
 }
+
+#sidebar button {
+    background-color: transparent;
+    color: #333;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 0 auto;
+    flex-grow: 1;
+    text-align: center;
+}
+
+.logo {
+    width: 1em;
+    height: auto;
+}
+
+.sidebar-item {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 1em;
+}
+
+#settings {
+    border-color: #333;
+}
