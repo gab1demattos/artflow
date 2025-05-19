@@ -53,6 +53,7 @@
             </li>
         </ul>
     </div>
+    <div id="overlay" onclick="closeSidebar()"></div>
     <?php endif; ?>
 
 <?php } ?>
