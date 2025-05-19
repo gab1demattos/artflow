@@ -21,7 +21,7 @@
     background: #fff;
     border-radius: 16px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
-    max-width: 480px;
+    max-width: 560px;
     width: 95vw;
     padding: 2.5rem 2rem 2rem 2rem;
     position: relative;
@@ -40,6 +40,12 @@
     }
 }
 
+#new-service-modal h2 {
+    color: var(--purple);
+    font-weight: 100;
+    font-size: 4em;
+}
+
 #new-service-modal .modal-content {
     display: flex;
     flex-direction: column;
@@ -48,6 +54,11 @@
 
 #new-service-modal .form-container {
     width: 100%;
+}
+
+#new-service-modall .form input:focus {
+    outline: none;
+    border: 2px solid var(--purple);
 }
 
 #new-service-modal h2 {
@@ -116,7 +127,8 @@
     margin-top: 1.5em;
 }
 
-#new-service-form .button.filled.long {
+/* Remove custom .button.filled.long styles to use components.css button styles */
+/* #new-service-form .button.filled.long {
     width: 100%;
     padding: 0.9em 0;
     font-size: 1.1rem;
@@ -128,11 +140,10 @@
     cursor: pointer;
     transition: background 0.2s;
 }
-
 #new-service-form .button.filled.long:hover,
 #new-service-form .button.filled.long.hovering {
     background: #5b259e;
-}
+} */
 
 #new-service-modal .close-modal {
     position: absolute;
