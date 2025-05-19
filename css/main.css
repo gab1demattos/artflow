@@ -328,6 +328,7 @@ header:first-of-type {
     border: none;
     background-color: transparent;
     margin-left: 6px;
+    outline: none;
 }
 
 #search-bar {
@@ -340,8 +341,8 @@ header:first-of-type {
     translate: 0 5px;
     margin: 0; 
     padding: 4px 6px;
-    margin-bottom: 1em;
-
+    margin-bottom: 0.5em;
+    margin-right: 0;
 }
 
 #menu {
