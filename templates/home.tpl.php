@@ -17,12 +17,12 @@
                 <?php endif; ?>
             </ul>
         </nav>
-        <?php if (!$user): ?>
+        <?php if ($user): ?>
             <button id="sidebar-open" onclick="openSidebar()" aria-label="Open Sidebar">☰</button>
         <?php endif; ?>
     </header>
 
-    <?php if (!$user): ?>
+    <?php if ($user): ?>
     <div id="sidebar">
         <button id="sidebar-close" onclick="closeSidebar()">x</button>
         <ul id="sidebar-list">
