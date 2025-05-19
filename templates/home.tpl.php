@@ -32,7 +32,7 @@
             <li class="sidebar-item"><img src="images/messages.png" alt="Messages" class="logo"><button>Messages</buuton></li>
             <li class="sidebar-item"><img src="images/stats.png" alt="Stats" class="logo"><button>Stats</buuton></li>
             <li class="sidebar-item" id="settings"><img src="images/settings.png" alt="Settings" class="logo"><button>Settings</buuton></li>
-            <li class="sidebar-item"><img src="images/logout.png" alt="Log Out" class="logo"><button>Log Out</buuton></li>
+            <li class="sidebar-item"><img src="images/logout.png" alt="Log Out" class="logo"><form action="/actions/logout.php" method="post"><button>Log Out</buuton></form></li>
         </ul>
     </div>
     <?php endif; ?>
