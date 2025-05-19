@@ -8,26 +8,38 @@
         <link rel="stylesheet" href="css/main.css">
     </head>
     <body>
-        <header>
-            <h1 class='artflow-text'>artflow</h1>
-            <nav id="menu">
-                <input type="checkbox" id="nav_bar">
-                <label class="nav_bar" for="nav_bar"></label>
-                <ul id="buttons">
-                    <?php if ($user): ?>
-                        <li>
-                            <form action="/actions/logout.php" method="post">
-                                <button type="submit" class="button filled hovering">
-                                    <?= htmlspecialchars($user['username']) ?> - Logout
-                                </button>
-                            </form>
-                        </li>
-                    <?php else: ?>
-                        <li><button class="button filled hovering">Sign Up</button></li>
-                    <?php endif; ?>
-                </ul>
-            </nav>
-        </header>
+    <header>
+        <h1 class='artflow-text'>artflow</h1>
+        <nav id="menu">
+            <input type="checkbox" id="nav_bar">
+            <label class="nav_bar" for="nav_bar"></label>
+            <ul id="buttons">
+                <?php if ($user): ?>
+                    <li>
+                        <form action="/actions/logout.php" method="post">
+                            <button type="submit" class="button filled hovering">
+                                <?= htmlspecialchars($user['username']) ?> - Logout
+                            </button>
+                        </form>
+                    </li>
+                <?php else: ?>
+                    <li><button class="button filled hovering">Sign Up</button></li>
+                <?php endif; ?>
+            </ul>
+        </nav>
+        <!-- Sidebar Toggle Button -->
+        <button id="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+    </header>
+
+    <!-- Sidebar -->
+    <div id="sidebar">
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Categories</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </div>
 
 <?php } ?>
 
