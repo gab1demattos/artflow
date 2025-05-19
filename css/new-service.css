@@ -1,73 +1,162 @@
-/* Container and section styling */
-.container {
-    min-height: 80vh;
+/* Style for the New Service Modal */
+#new-service-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s;
 }
 
-.container section {
-    max-width: 600px;
-    margin: 2em auto 3em auto;
-    background: white;
-    padding: 2em 2.5em 2.5em 2.5em;
-    border-radius: 18px;
-    box-shadow: 0 2px 10px #0002;
+#new-service-modal-overlay.hidden {
+    display: none;
 }
 
-.container h2 {
+#new-service-modal {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+    max-width: 480px;
+    width: 95vw;
+    padding: 2.5rem 2rem 2rem 2rem;
+    position: relative;
+    animation: modalFadeIn 0.3s;
+}
+
+@keyframes modalFadeIn {
+    from {
+        transform: translateY(40px) scale(0.98);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+#new-service-modal .modal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+#new-service-modal .form-container {
+    width: 100%;
+}
+
+#new-service-modal h2 {
+    margin-bottom: 1.2rem;
+    font-size: 1.7rem;
+    font-weight: 700;
     text-align: center;
-    font-family: 'Modak', sans-serif;
-    color: var(--purple);
-    margin-bottom: 1.5em;
 }
 
 #new-service-form label {
     display: block;
-    margin-bottom: 1em;
+    margin-bottom: 1.1rem;
     font-weight: 500;
+    color: #333;
 }
 
 #new-service-form input[type="text"],
+#new-service-form input[type="number"],
 #new-service-form textarea,
-#new-service-form select,
-#new-service-form input[type="number"] {
+#new-service-form select {
     width: 100%;
-    margin-bottom: 1em;
-    padding: 0.5em;
-    border: 1px solid #ccc;
+    padding: 0.6em 0.8em;
+    margin-top: 0.3em;
+    border: 1px solid #d1c4e9;
     border-radius: 6px;
-    font-size: 1em;
+    font-size: 1rem;
+    background: #faf7ff;
+    transition: border 0.2s;
     box-sizing: border-box;
+}
+
+#new-service-form input[type="text"]:focus,
+#new-service-form input[type="number"]:focus,
+#new-service-form textarea:focus,
+#new-service-form select:focus {
+    border: 1.5px solid var(--purple, #7c3aed);
+    outline: none;
 }
 
 #new-service-form textarea {
     resize: vertical;
-}
-
-#new-service-form input[type="number"] {
-    width: 120px;
-}
-
-#new-service-form input[type="number"][name="delivery_time"] {
-    width: 100px;
+    min-height: 80px;
+    max-height: 220px;
 }
 
 #new-service-form input[type="file"] {
-    margin-bottom: 0.5em;
-}
-
-#subcategory-section {
-    margin-bottom: 1em;
-}
-
-#primary-image-section {
-    margin: 1em 0;
-}
-
-.button-container {
-    margin-top: 2em;
+    margin-top: 0.5em;
 }
 
 #new-service-form small {
-    color: #666;
-    display: block;
-    margin-bottom: 0.5em;
+    color: #888;
+    font-size: 0.92em;
+}
+
+#subcategory-section {
+    margin-bottom: 1.1rem;
+}
+
+#primary-image-section {
+    margin: 0.7em 0 1.2em 0;
+}
+
+#new-service-form .button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5em;
+}
+
+#new-service-form .button.filled.long {
+    width: 100%;
+    padding: 0.9em 0;
+    font-size: 1.1rem;
+    border-radius: 8px;
+    background: var(--purple, #7c3aed);
+    color: #fff;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+#new-service-form .button.filled.long:hover,
+#new-service-form .button.filled.long.hovering {
+    background: #5b259e;
+}
+
+#new-service-modal .close-modal {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    font-size: 2rem;
+    background: none;
+    border: none;
+    color: #888;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+#new-service-modal .close-modal:hover {
+    color: #333;
+}
+
+@media (max-width: 600px) {
+    #new-service-modal {
+        max-width: 98vw;
+        padding: 1.2rem 0.5rem 1.5rem 0.5rem;
+    }
+
+    #new-service-modal h2 {
+        font-size: 1.2rem;
+    }
 }

@@ -17,9 +17,11 @@ foreach ($categories as $cat) {
         <form id="new-service-form" action="/actions/create-service.php" method="post" enctype="multipart/form-data">
           <label>Title:<br>
             <input type="text" name="title" required maxlength="80">
+            <br>
           </label>
           <label>Description:<br>
             <textarea name="description" required rows="5" maxlength="1000"></textarea>
+            <br>
           </label>
           <label>Category:<br>
             <select name="category_id" id="category-select" required>
@@ -32,12 +34,15 @@ foreach ($categories as $cat) {
           <div id="subcategory-section"></div>
           <label>Delivery Time (days):<br>
             <input type="number" name="delivery_time" min="1" max="60" required>
+            <br>
           </label>
           <label>Price (€):<br>
             <input type="number" name="price" min="0" step="0.01" required>
+            <br>
           </label>
-          <label>Media (images/videos, max 5):<br>
+          <label>Media (images/videos):<br>
             <input type="file" name="media[]" accept="image/*,video/*" multiple required>
+            <br>
             <small>Choose up to 5 files. You will select a primary image after upload.</small>
           </label>
           <div id="primary-image-section"></div>

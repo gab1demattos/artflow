@@ -1,6 +1,6 @@
 <div id="signin-modal-overlay" class="modal-overlay hidden">
-    <div class="modal" id="signin-modal">
-        <div class="modal-content">
+    <div class="modal login" id="signin-modal">
+        <div class="modal-content login">
             <div class="modal-right">
                 <img src="../images/modals/sign_in/sign-in-image.png" alt="Illustration">
             </div>
