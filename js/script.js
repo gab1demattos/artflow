@@ -147,13 +147,13 @@ document.addEventListener("DOMContentLoaded", function () {
 function openSidebar() {
     const sidebar = document.getElementById('sidebar');
 	const overlay = document.getElementById('overlay');
-    sidebar.classList.toggle('active');
-	overlay.style.display = 'block';
+    sidebar.classList.add('active');
+	overlay.style.add('active');
 }
 
 function closeSidebar() {
     const sidebar = document.getElementById('sidebar');
 	const overlay = document.getElementById('overlay');
     sidebar.classList.remove('active');
-	overlay.style.display = 'none';
+	overlay.style.remove('active');
 }
