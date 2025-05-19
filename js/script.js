@@ -161,10 +161,17 @@ document.addEventListener("DOMContentLoaded", function () {
     // New Service Modal logic
     const openNewServiceModalBtn = document.getElementById("open-new-service-modal");
     const newServiceModalOverlay = document.getElementById("new-service-modal-overlay");
+    const closeNewServiceModalBtn = document.querySelector("#new-service-modal .close-modal");
     if (openNewServiceModalBtn && newServiceModalOverlay) {
         openNewServiceModalBtn.addEventListener("click", function (e) {
             e.stopPropagation();
             newServiceModalOverlay.classList.remove("hidden");
+        });
+    }
+    if (closeNewServiceModalBtn && newServiceModalOverlay) {
+        closeNewServiceModalBtn.addEventListener("click", function (e) {
+            e.stopPropagation();
+            newServiceModalOverlay.classList.add("hidden");
         });
     }
 

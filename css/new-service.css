@@ -126,24 +126,6 @@
     margin-top: 1.5em;
 }
 
-/* Remove custom .button.filled.long styles to use components.css button styles */
-/* #new-service-form .button.filled.long {
-    width: 100%;
-    padding: 0.9em 0;
-    font-size: 1.1rem;
-    border-radius: 8px;
-    background: var(--purple, #7c3aed);
-    color: #fff;
-    border: none;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-#new-service-form .button.filled.long:hover,
-#new-service-form .button.filled.long.hovering {
-    background: #5b259e;
-} */
-
 #new-service-modal .close-modal {
     position: absolute;
     top: 1em;
@@ -154,6 +136,7 @@
     color: #888;
     cursor: pointer;
     transition: color 0.2s;
+    z-index: 10;
 }
 
 #new-service-modal .close-modal:hover {

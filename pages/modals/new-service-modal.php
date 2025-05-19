@@ -52,7 +52,7 @@ foreach ($categories as $cat) {
         </form>
       </div>
     </div>
-    <button class="close-modal" aria-label="Close" style="position:absolute;top:1em;right:1em;font-size:2rem;background:none;border:none;color:#888;cursor:pointer;">&times;</button>
+    <button class="close-modal" aria-label="Close">&times;</button>
   </div>
 </div>
 <!-- No inline script here: modal logic is handled in js/script.js -->
