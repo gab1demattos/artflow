@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	const signUpButtons = document.querySelectorAll("#sign-up");
 	const signUpBtn_submit = document.querySelector("#sign-up-submit");
 	const nextBtn = document.querySelector("#next-btn");
+	
 
 	// Modal elements
 	const signupModalOverlay = document.getElementById("signup-modal-overlay");
@@ -142,3 +143,17 @@ document.addEventListener("DOMContentLoaded", function () {
 		});
 	}
 });
+
+function openSidebar() {
+    const sidebar = document.getElementById('sidebar');
+	const overlay = document.getElementById('overlay');
+    sidebar.classList.add('active');
+	overlay.style.add('active');
+}
+
+function closeSidebar() {
+    const sidebar = document.getElementById('sidebar');
+	const overlay = document.getElementById('overlay');
+    sidebar.classList.remove('active');
+	overlay.style.remove('active');
+}

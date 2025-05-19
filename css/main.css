@@ -3,6 +3,7 @@
 @import url('components.css');
 @import url('modals.css');
 @import url('responsive/home-responsive.css');
+@import url('sidebar.css');
 
 
 :root { /*theme colors*/
@@ -38,7 +39,7 @@ ul > li {
 
 #buttons {
     display: flex;
-    gap: 5em;
+    gap: 3em;
     margin-right: 3em;
 }
 
@@ -75,7 +76,7 @@ header:first-of-type {
 
 #title {
     grid-area: title;
-    min-height: 600px;
+    min-height: 700px;
     padding: 0;
     align-content:start;
     justify-self: start;
@@ -150,7 +151,7 @@ header:first-of-type {
 
 #info {
     grid-area: info;
-    min-height: 600px;
+    min-height: 700px;
     padding: 2rem;
     background-color: var(--yellow); 
     align-content: center;
@@ -191,7 +192,7 @@ header:first-of-type {
 
 #categories {
     grid-area: categories;
-    min-height: 600px;
+    min-height: 700px;
     padding: 2rem;
     background-color: var(--green); 
     font-family: 'EDGaramond', serif;
@@ -311,3 +312,46 @@ header:first-of-type {
     opacity: 0.6;
     padding-bottom: 0;
 }
+
+#search-icon {
+    width: 1em;
+    height: auto;
+}
+
+#search-button {
+    background-color: transparent;
+    border: none;
+    margin-right: 6px;
+}
+
+#search-input {
+    border: none;
+    background-color: transparent;
+    margin-left: 6px;
+    outline: none;
+}
+
+#search-bar {
+    background-color: white;
+    border-radius: 3px;
+    width: 15rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    translate: 0 5px;
+    margin: 0; 
+    padding: 4px 6px;
+    margin-bottom: 0.5em;
+    margin-right: 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);}
+
+#menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+}
+
+
