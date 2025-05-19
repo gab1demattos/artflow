@@ -24,12 +24,15 @@ foreach ($categories as $cat) {
             <br>
           </label>
           <label>Category:<br>
-            <select name="category_id" id="category-select" required>
-              <option value="">Select category</option>
-              <?php foreach ($categories as $cat): ?>
-                <option value="<?= $cat['id'] ?>"><?= htmlspecialchars($cat['category_type']) ?></option>
-              <?php endforeach; ?>
-            </select>
+            <div style="display: flex; align-items: center; gap: 0.7em;">
+              <select name="category_id" id="category-select" required>
+                <option value="">Select category</option>
+                <?php foreach ($categories as $cat): ?>
+                  <option value="<?= $cat['id'] ?>"><?= htmlspecialchars($cat['category_type']) ?></option>
+                <?php endforeach; ?>
+              </select>
+              <button type="button" id="open-subcategory-overlay" class="button outline" style="display:none;white-space:nowrap;">Choose subcategories</button>
+            </div>
           </label>
           <div id="subcategory-section"></div>
           <div class="row-fields">
@@ -54,7 +57,23 @@ foreach ($categories as $cat) {
         </form>
       </div>
     </div>
+    <script>
+    // Subcategories data from PHP
+    const subcategoriesByCategory = <?php echo json_encode($subcategoriesByCategory); ?>;
+    </script>
     <button class="close-modal" aria-label="Close">&times;</button>
+  </div>
+</div>
+<div id="subcategory-overlay" class="hidden">
+  <div id="subcategory-modal">
+    <button class="close-subcategory-modal" aria-label="Close">&times;</button>
+    <h3>Select Subcategories</h3>
+    <form id="subcategory-form">
+      <div class="subcategory-checkboxes"></div>
+      <div class="button-container">
+        <button type="submit" class="button filled">Confirm</button>
+      </div>
+    </form>
   </div>
 </div>
 <!-- No inline script here: modal logic is handled in js/script.js -->
