@@ -149,3 +149,7 @@
     font-size: normal;
     text-align: center;
 }
+
+#button-avatar {
+    padding: 0;
+}

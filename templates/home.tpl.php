@@ -10,11 +10,13 @@
     </head>
     <body>
     <header>
-        <h1 class='artflow-text'>artflow</h1>
+        <a href="/" style="text-decoration: none; color: var(--green)">
+            <h1 class='artflow-text'>artflow</h1>
+        </a>
         <nav id="menu">
             <div id="search-bar">
                 <input type="text" id="search-input" placeholder="Search here..." />
-                <button id="search-button"><img src="images/search.png" alt="Search" id="search-icon"></button>
+                <button id="search-button"><img src="../images/logos/search.png" alt="Search" id="search-icon"></button>
             </div>
             <ul id="buttons">
                 <?php if (!$user): ?>
@@ -29,7 +31,7 @@
     <?php if ($user): ?>
     <div id="sidebar">
         <div id="profile">
-            <img src="images/avatar.png" alt="Avatar" id="avatar">
+            <button id="button-avatar"><img src="../images/logos/avatar.png" alt="Avatar" id="avatar"></button>
             <div>
                 <h2 id="profile-name"><?= htmlspecialchars($user['name']) ?></h2>
                 <h3 id="profile-username">@<?= htmlspecialchars($user['username']) ?></h3>
@@ -37,28 +39,28 @@
         </div>
         <ul id="sidebar-list">
             <li class="sidebar-item" id="new-service-button">
-                <img src="images/add_circle.png" alt="New Service" class="logo">
+                <img src="../images/logos/add_circle.png" alt="New Service" class="logo">
                 <button>New Service</button>
             </li>
             <li class="sidebar-item">
-                <img src="images/activity.png" alt="Activity" class="logo">
+                <img src="../images/logos/activity.png" alt="Activity" class="logo">
                 <button>Activity</button>
             </li>
             <li class="sidebar-item">
-                <img src="images/messages.png" alt="Messages" class="logo">
+                <img src="../images/logos/messages.png" alt="Messages" class="logo">
                 <button>Messages</button>
             </li>
             <li class="sidebar-item">
-                <img src="images/stats.png" alt="Stats" class="logo">
+                <img src="../images/logos/stats.png" alt="Stats" class="logo">
                 <button>Stats</button>
             </li>
             <li class="sidebar-item" id="settings">
-                <img src="images/settings.png" alt="Settings" class="logo">
+                <img src="../images/logos/settings.png" alt="Settings" class="logo">
                 <button>Settings</button>
             </li>
             <li class="sidebar-item">
-                <img src="images/logout.png" alt="Log Out" class="logo">
-                <form action="/actions/logout.php" method="post"><button>Log Out</button></form>
+                <img src="../images/logos/logout.png" alt="Log Out" class="logo">
+                <form action="../actions/logout.php" method="post"><button>Log Out</button></form>
             </li>
         </ul>
     </div>
