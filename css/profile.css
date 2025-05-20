@@ -1,17 +1,24 @@
 /* Profile Container Styles */
 .profile {
-	display: flex;
-	align-items: center; /* Changed back to center for vertical alignment */
+	display: grid;
+	grid-template-columns: auto 1fr;
+	grid-template-areas:
+		"image info"
+		"image bio";
 	padding: 20px;
 	margin-bottom: 20px;
+	gap: 15px;
 }
 
 /* Profile Image Styles */
 .profile .profile-img {
+	grid-area: image;
 	position: relative;
 	margin-left: 4.68765em;
 	margin-right: 2.8125em;
 	margin-top: 4.68765em;
+	align-self: start;
+	flex-basis: 12.5em; /* Width of the image */
 }
 
 .profile .profile-img img {
@@ -24,11 +31,18 @@
 
 /* Profile Info Styles */
 .profile .info {
+	grid-area: info;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
-	margin-top: 4.68765em;
-	align-self: center; /* Ensures info is vertically centered */
+	justify-content: flex-start;
+	margin-top: calc(
+		4.68765em + 0.5em
+	); /* Added 0.5em to create slight offset from image top */
+	align-self: flex-start;
+	flex-basis: calc(
+		100% - 20em
+	); /* Take remaining width minus image and margins */
+	margin-right: 20px;
 }
 
 .profile .info .name {
@@ -63,6 +77,30 @@
 .profile .info .tag.admin {
 	background-color: var(--green);
 	color: var(--beige);
+}
+
+/* Bio Styles */
+.profile #bio {
+	grid-area: bio;
+	margin-left: 0;
+	margin-top: 0;
+	padding-top: 0;
+	align-self: start;
+}
+
+#bio-title {
+	font-family: Garamond, serif;
+	font-size: 20px;
+	font-weight: 600;
+	color: #636363;
+	margin-bottom: 8px;
+}
+
+.bio-text {
+	font-family: Garamond, serif;
+	font-size: 16px;
+	line-height: 1.5;
+	color: #8a8a8a;
 }
 
 /* Tabs Styles */

@@ -28,8 +28,12 @@ drawHeader($user);
         <?php endif; ?>
       </div>
     </div>
+    <div id='bio'>
+        <h3 id='bio-title'>About me:</h3>
+        <div class="bio-text"> <?= htmlspecialchars($user['bio'] ?? 'No bio available') ?>
+    </div>
   </div>
-  <div class='bio'></div>
+  </div>
   <div class="tabs">
     <div>Listings</div>
     <div>Reviews</div>
