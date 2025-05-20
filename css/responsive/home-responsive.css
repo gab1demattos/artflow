@@ -2,10 +2,12 @@
     
 }
 
+
 @media (max-width: 1100px) {
 
-    #categories > #block {
-        margin: 0 auto; 
+    #block {
+        margin: 0 auto !important; 
+        transition: all 0.3s ease-in-out !important;
     }
 
     #categories h2 {
@@ -19,6 +21,11 @@
     .box {
         width: 48%; 
         height: 160px; 
+    }
+
+    #info > div {
+        width: 75% !important;
+        margin-left: 13% !important;
     }
 
 }
