@@ -10,7 +10,7 @@
     </head>
     <body>
     <header>
-        <h1 class='artflow-text'>artflow</h1>
+        <h1><a href="/" class='artflow-text'>artflow</a></h1>
         <nav id="menu">
             <div id="search-bar">
                 <input type="text" id="search-input" placeholder="Search here..." />
@@ -183,6 +183,11 @@
             <?php include __DIR__ . '/../pages/modals/go-with-flow-modal.php'; ?>
         <?php endif; ?>
         <?php include __DIR__ . '/../pages/modals/new-service-modal.php'; ?>
+        <!-- Load the modular JavaScript files -->
+        <script src="/js/modals.js"></script>
+        <script src="/js/categories.js"></script>
+        <script src="/js/app.js"></script>
+        <!-- Keep script.js for backward compatibility -->
         <script src="/js/script.js"></script>
     </body>
 </html>

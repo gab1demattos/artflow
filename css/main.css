@@ -30,6 +30,8 @@ body {
     font-family: 'Modak';
     font-weight: 100;
     font-size: 1.5rem;
+    text-decoration: none; 
+    color: inherit;
 }
 
 header>h1 {

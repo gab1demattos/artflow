@@ -94,4 +94,9 @@ drawHeader($user);
 </main>
 <?php drawFooter($user); ?>
 <link rel="stylesheet" href="/css/category.css">
+<!-- Load the modular JavaScript files -->
+<script src="/js/modals.js"></script>
+<script src="/js/categories.js"></script>
+<script src="/js/app.js"></script>
+<!-- Keep script.js for backward compatibility -->
 <script src="/js/script.js"></script>
