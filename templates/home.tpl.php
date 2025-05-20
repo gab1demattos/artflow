@@ -29,11 +29,13 @@
     <?php if ($user): ?>
     <div id="sidebar">
         <div id="profile">
-            <img src="images/avatar.png" alt="Avatar" id="avatar">
-            <div>
-                <h2 id="profile-name"><?= htmlspecialchars($user['name']) ?></h2>
-                <h3 id="profile-username">@<?= htmlspecialchars($user['username']) ?></h3>
-            </div>
+            <a href="/pages/profile.php" style="display: flex; align-items: center; gap: 1em; text-decoration: none; color: inherit; width: 100%;">
+                <img src="../images/user_pfp/default.png" alt="Avatar" id="avatar">
+                <div>
+                    <h2 id="profile-name"><?= htmlspecialchars($user['name']) ?></h2>
+                    <h3 id="profile-username">@<?= htmlspecialchars($user['username']) ?></h3>
+                </div>
+            </a>
         </div>
         <ul id="sidebar-list">
             <li class="sidebar-item" id="new-service-button">

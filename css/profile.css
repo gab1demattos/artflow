@@ -1,0 +1,85 @@
+/* Profile Container Styles */
+.profile {
+	display: flex;
+	align-items: center;
+	padding: 20px;
+	margin-bottom: 20px;
+}
+
+/* Profile Image Styles */
+.profile .profile-img {
+	position: relative;
+	margin-right: 20px;
+}
+
+.profile .profile-img img {
+	width: 120px;
+	height: 120px;
+	border-radius: 50%; /* Makes the image circular */
+	object-fit: cover;
+	border: 2px solid #ddd;
+}
+
+/* Profile Info Styles */
+.profile .info {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.profile .info .name {
+	font-family: Garamond, serif;
+	font-size: 28px;
+	font-weight: 600;
+	margin-bottom: 10px;
+	color: #333;
+}
+
+.profile .info .username {
+    font-family: Garamond, serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+/* Tag Styles */
+.profile .info .tags {
+	display: flex;
+	gap: 10px;
+}
+
+.profile .info .tag {
+	padding: 5px 12px;
+	border-radius: 20px;
+	font-size: 14px;
+	font-weight: 500;
+}
+
+.profile .info .tag.admin{
+	background-color: var(--green);
+	color: var(--beige);
+}
+
+
+/* Tabs Styles */
+.tabs {
+	display: flex;
+	border-bottom: 1px solid #ddd;
+	margin-bottom: 20px;
+}
+
+.tabs div {
+	padding: 10px 20px;
+	cursor: pointer;
+	font-weight: 500;
+}
+
+.tabs div:hover {
+	color: #0080ff;
+}
+
+.space {
+    height: 70em;
+    width: 100%;
+}
