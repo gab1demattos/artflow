@@ -31,7 +31,7 @@ foreach ($categories as $cat) {
                   <option value="<?= $cat['id'] ?>"><?= htmlspecialchars($cat['category_type']) ?></option>
                 <?php endforeach; ?>
               </select>
-              <button type="button" id="open-subcategory-overlay" class="button outline yellow hovering" style="display:none;white-space:nowrap;">Choose subcategories</button>
+              <button type="button" id="open-subcategory-overlay" class="button outline green hovering" style="display:none;white-space:nowrap;">Choose subcategories</button>
             </div>
           </label>
           <div id="subcategory-section"></div>

@@ -8,7 +8,7 @@
     <form id="subcategory-form">
       <div class="subcategory-checkboxes"></div>
       <div class="button-container">
-        <button type="submit" class="button filled yellow">Confirm</button>
+        <button type="submit" class="button filled green">Confirm</button>
       </div>
     </form>
   </div>

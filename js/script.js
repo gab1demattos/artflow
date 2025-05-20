@@ -197,7 +197,6 @@ document.addEventListener("DOMContentLoaded", function () {
             if (!currentCategoryId || !subcategoriesByCategory[currentCategoryId]) return;
             // Show overlay/modal for subcategory selection
             if (subcategoryOverlay && subcategoryCheckboxesDiv) {
-                // Clear previous
                 subcategoryCheckboxesDiv.innerHTML = '';
                 subcategoriesByCategory[currentCategoryId].forEach(subcat => {
                     const checkbox = document.createElement('input');
@@ -209,8 +208,19 @@ document.addEventListener("DOMContentLoaded", function () {
                     const cbLabel = document.createElement('label');
                     cbLabel.htmlFor = checkbox.id;
                     cbLabel.textContent = subcat.name;
-                    cbLabel.prepend(checkbox);
+                    // Tag-like style is now handled by CSS
+                    // Insert checkbox before label for CSS sibling selector
+                    subcategoryCheckboxesDiv.appendChild(checkbox);
                     subcategoryCheckboxesDiv.appendChild(cbLabel);
+                    // Add selected class for checked
+                    if (checkbox.checked) cbLabel.classList.add('selected');
+                    checkbox.addEventListener('change', function () {
+                        if (checkbox.checked) {
+                            cbLabel.classList.add('selected');
+                        } else {
+                            cbLabel.classList.remove('selected');
+                        }
+                    });
                 });
                 subcategoryOverlay.classList.remove('hidden');
             }
