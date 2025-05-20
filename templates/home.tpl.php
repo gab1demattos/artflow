@@ -29,7 +29,7 @@
     <?php if ($user): ?>
     <div id="sidebar">
         <div id="profile">
-            <img src="images/avatar.png" alt="Avatar" id="avatar">
+            <button id="button-avatar"><img src="images/avatar.png" alt="Avatar" id="avatar"></button>
             <div>
                 <h2 id="profile-name"><?= htmlspecialchars($user['name']) ?></h2>
                 <h3 id="profile-username">@<?= htmlspecialchars($user['username']) ?></h3>
