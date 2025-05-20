@@ -24,6 +24,7 @@ if (!$category) {
 
 drawHeader($user);
 drawCategory($category, $db);
-drawFooter($user); ?>
+drawFooter($user); 
+?>
 <link rel="stylesheet" href="/css/category.css">
 <script src="/js/script.js"></script>
