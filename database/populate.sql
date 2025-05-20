@@ -1,13 +1,14 @@
 -- User data (mixture of regular users and admins)
 INSERT INTO User (user_type, name, username, email, password) VALUES
-('admin', 'Admin User', 'admin', 'admin@artflow.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W'), -- password: admin123
-('regular', 'John Doe', 'johndoe', 'john@example.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W'), -- password: admin123
+('admin', 'Admin User', 'admin', 'admin@artflow.com', '701f81be760ef4fada8917640b07b398c855c854'),  -- password: Teresa.mag17
+('regular', 'John Doe', 'johndoe', 'john@example.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W'),
 ('regular', 'Jane Smith', 'janesmith', 'jane@example.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W'),
 ('regular', 'Michael Johnson', 'michaelj', 'michael@example.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W'),
 ('regular', 'Sarah Williams', 'sarahw', 'sarah@example.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W'),
 ('regular', 'David Brown', 'davidb', 'david@example.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W'),
 ('regular', 'Emily Davis', 'emilyd', 'emily@example.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W'),
-('regular', 'Alex Thompson', 'alext', 'alex@example.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W');
+('regular', 'Alex Thompson', 'alext', 'alex@example.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W'),
+('regular', 'Teresa Magalhães', 'teresamag17','teresamag@example.com','701f81be760ef4fada8917640b07b398c855c854'); -- password: Teresa.mag17
 
 -- Categories with images
 INSERT INTO Category (category_type, image) VALUES
