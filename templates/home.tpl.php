@@ -9,6 +9,63 @@
         <link rel="stylesheet" href="/css/see-more.css">
     </head>
     <body>
+<<<<<<< HEAD
+    <header>
+        <h1 class='artflow-text'>artflow</h1>
+        <nav id="menu">
+            <div id="search-bar">
+                <input type="text" id="search-input" placeholder="Search here..." />
+                <button id="search-button"><img src="images/search.png" alt="Search" id="search-icon"></button>
+            </div>
+            <ul id="buttons">
+                <?php if (!$user): ?>
+                    <li><button class="button filled hovering">Sign Up</button></li>
+                <?php else: ?>
+                    <li><button id="sidebar-open" onclick="openSidebar()" aria-label="Open Sidebar">☰</button></li>
+                <?php endif; ?>
+            </ul>
+        </nav>
+    </header>
+
+    <?php if ($user): ?>
+    <div id="sidebar">
+        <div id="profile">
+            <img src="images/avatar.png" alt="Avatar" id="avatar">
+            <div>
+                <h2 id="profile-name"><?= htmlspecialchars($user['name']) ?></h2>
+                <h3 id="profile-username">@<?= htmlspecialchars($user['username']) ?></h3>
+            </div>
+        </div>
+        <ul id="sidebar-list">
+            <li class="sidebar-item" id="new-service-button">
+                <img src="images/add_circle.png" alt="New Service" class="logo">
+                <button>New Service</button>
+            </li>
+            <li class="sidebar-item">
+                <img src="images/activity.png" alt="Activity" class="logo">
+                <button>Activity</button>
+            </li>
+            <li class="sidebar-item">
+                <img src="images/messages.png" alt="Messages" class="logo">
+                <button>Messages</button>
+            </li>
+            <li class="sidebar-item">
+                <img src="images/stats.png" alt="Stats" class="logo">
+                <button>Stats</button>
+            </li>
+            <li class="sidebar-item" id="settings">
+                <img src="images/settings.png" alt="Settings" class="logo">
+                <button>Settings</button>
+            </li>
+            <li class="sidebar-item">
+                <img src="images/logout.png" alt="Log Out" class="logo">
+                <form action="/actions/logout.php" method="post"><button>Log Out</button></form>
+            </li>
+        </ul>
+    </div>
+    <div id="overlay" onclick="closeSidebar()"></div>
+    <?php endif; ?>
+=======
         <header>
             <h1 class='artflow-text'><a href="/" style="text-decoration:none;color:inherit;">artflow</a></h1>
             <nav id="menu">
@@ -29,6 +86,7 @@
                 </ul>
             </nav>
         </header>
+>>>>>>> main
 
 <?php } ?>
 
@@ -103,7 +161,7 @@
 
 <?php function drawInfo(){ ?>
                 <section id="info">
-                    <div>
+                    <div id="info-content">
                         <h2>Our motivation</h2>
                         <p>Etiam pellentesque tempus rutrum. Nullam eget nisl nec nulla ultrices commodo eget eget erat. Phasellus non rutrum erat. Duis nec rhoncus enim. Sed condimentum, odio facilisis maximus aliquet, tellus arcu consequat nibh, nec ultrices erat mauris vitae nisi. In maximus posuere egestas. Aenean congue justo non augue eleifend eleifend. Pellentesque dapibus, orci vitae tempus posuere, dolor risus dapibus augue, sed vehicula orci neque ac orci. Phasellus auctor vulputate volutpat.</p>
                     </div>
