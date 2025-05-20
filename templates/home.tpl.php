@@ -10,7 +10,9 @@
     </head>
     <body>
     <header>
-        <h1 class='artflow-text'>artflow</h1>
+        <a href="/" style="text-decoration: none; color: var(--green)">
+            <h1 class='artflow-text'>artflow</h1>
+        </a>
         <nav id="menu">
             <div id="search-bar">
                 <input type="text" id="search-input" placeholder="Search here..." />
