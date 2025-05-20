@@ -9,21 +9,17 @@
         margin: 0 auto; 
     }
 
-    #category-list {
+    #category-list{
         margin: 0 auto;
+        transition: all 0.3s ease-in-out;
     }
 
     #categories h2 {
-        margin-right: 3em !important; 
+        margin-right: 5em !important; 
     }
 
     #block > a {
         margin-left: 80% !important;
-    }
-
-    #info > div {
-        width: 90% !important; 
-        margin: 0 auto !important;
     }
 
 
@@ -31,13 +27,11 @@
         width: 48%; 
         height: 160px; 
     }
+
 }
 
 
 @media (max-width: 1300px) {
 
-    #info-content {
-        width: 70% !important; 
-        margin: 0 auto !important;
-    }
+
 }
