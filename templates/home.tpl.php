@@ -9,7 +9,6 @@
         <link rel="stylesheet" href="/css/see-more.css">
     </head>
     <body>
-<<<<<<< HEAD
     <header>
         <h1 class='artflow-text'>artflow</h1>
         <nav id="menu">
@@ -65,28 +64,6 @@
     </div>
     <div id="overlay" onclick="closeSidebar()"></div>
     <?php endif; ?>
-=======
-        <header>
-            <h1 class='artflow-text'><a href="/" style="text-decoration:none;color:inherit;">artflow</a></h1>
-            <nav id="menu">
-                <input type="checkbox" id="nav_bar">
-                <label class="nav_bar" for="nav_bar"></label>
-                <ul id="buttons">
-                    <?php if ($user): ?>
-                        <li>
-                            <form action="/actions/logout.php" method="post">
-                                <button type="submit" class="button filled hovering">
-                                    <?= htmlspecialchars($user['username']) ?> - Logout
-                                </button>
-                            </form>
-                        </li>
-                    <?php else: ?>
-                        <li><button class="button filled hovering">Sign Up</button></li>
-                    <?php endif; ?>
-                </ul>
-            </nav>
-        </header>
->>>>>>> main
 
 <?php } ?>
 
