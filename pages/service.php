@@ -24,6 +24,7 @@ if (!$service) {
 }
 
 drawHeader($user);
+drawServiceDisplay($service, $user, $db);
 ?>
 <link rel="stylesheet" href="/css/category.css">
 <script src="/js/script.js"></script>
