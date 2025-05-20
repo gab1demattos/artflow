@@ -10,6 +10,6 @@ $categories = getCategories();
 $db = Database::getInstance();
 
 drawHeader($user);
-drawSeeMoreCategories($category);
+drawSeeMoreCategories($categories);
 drawFooter($user); 
 ?>

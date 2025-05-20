@@ -18,7 +18,7 @@
 </main>
 <?php } ?>
 
-<?php function drawCategories($category){ ?>
+<?php function drawCategory($category, $db){ ?>
 <main class="container category-main-container">
     <div style="width:100%;position:relative;">
         <div class="category-page">

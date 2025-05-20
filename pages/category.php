@@ -23,7 +23,7 @@ if (!$category) {
 }
 
 drawHeader($user);
-drawCategory($category);
+drawCategory($category, $db);
 drawFooter($user); ?>
 <link rel="stylesheet" href="/css/category.css">
 <script src="/js/script.js"></script>
