@@ -18,8 +18,10 @@
             <div id="service-info">
                 <p>Price: <?= htmlspecialchars($service['price']) ?>€</p>
                 <p>Delivery Time: <?= htmlspecialchars($service['delivery_time']) ?></p>
-                <p>Message</p>
-                <p>Continue to Payment</p>
+                <div id="service-options">
+                    <button>Message</button>
+                    <button>Continue to Payment</button>
+                <div>
             </div>
         </div>
     </div>
