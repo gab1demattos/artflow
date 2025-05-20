@@ -21,14 +21,15 @@ drawHeader($user);
     </div>
     <div class="info">
       <div class="name"><?= htmlspecialchars($user['name']) ?></div>
-      <div class="username">@<?= htmlspecialchars($user['username']) ?></div>
-      <div class="tags">
+      <div class="username">
+        @<?= htmlspecialchars($user['username']) ?>
         <?php if ($session->isAdmin()): ?>
         <div class="tag admin">admin</div>
         <?php endif; ?>
       </div>
     </div>
   </div>
+  <div class='bio'></div>
   <div class="tabs">
     <div>Listings</div>
     <div>Reviews</div>

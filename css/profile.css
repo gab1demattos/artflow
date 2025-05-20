@@ -45,8 +45,10 @@
 	font-weight: 400;
 	color: #666;
 	margin-bottom: 10px;
-	/* Remove flex display to place items on separate lines */
-	display: block;
+	/* Change to flex to place tag next to username */
+	display: flex;
+	align-items: center;
+	gap: 10px; /* Add space between username and tag */
 }
 
 /* Tag Styles */
