@@ -179,7 +179,7 @@
             <?php include __DIR__ . '/../pages/modals/sign-in-modal.php'; ?>
             <?php include __DIR__ . '/../pages/modals/go-with-flow-modal.php'; ?>
         <?php endif; ?>
-        
+        <?php include __DIR__ . '/../pages/modals/new-service-modal.php'; ?>
         <script src="/js/script.js"></script>
     </body>
 </html>

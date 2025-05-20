@@ -17,7 +17,7 @@
 }
 
 /* Base modal container structure */
-.modal {
+.modal .login {
 	background-color: white;
 	padding: 0;
 	border-radius: 20px;
@@ -32,7 +32,7 @@
 }
 
 /* Content container for modal sections */
-.modal-content {
+.modal-content .login {
 	display: flex;
 	height: 100%;
 	width: 100%;

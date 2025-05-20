@@ -1,6 +1,6 @@
 <div id="signup-modal-overlay" class="modal-overlay hidden">
-    <div class="modal" id="signup-modal">
-        <div class="modal-content">
+    <div class="modal login" id="signup-modal">
+        <div class="modal-content login">
             <div class="form-container">
                 <h2 id='h2-signup'>Create Account</h2>
                 <form id="signup-form" class="form" method='POST' action='/actions/signup-action.php'>

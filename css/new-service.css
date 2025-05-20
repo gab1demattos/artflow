@@ -1,0 +1,315 @@
+/* Style for the New Service Modal */
+#new-service-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s;
+}
+
+#new-service-modal-overlay.hidden {
+    display: none;
+}
+
+#new-service-modal {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+    max-width: 640px;
+    max-height: 780px;
+    width: 95vw;
+    padding: 2.5rem 2rem 2rem 2rem;
+    position: relative;
+    animation: modalFadeIn 0.3s;
+}
+
+@keyframes modalFadeIn {
+    from {
+        transform: translateY(40px) scale(0.98);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+#new-service-modal .modal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+#new-service-modal .form-container {
+    width: 100%;
+}
+
+/* #new-service-modal .form input:focus {
+    outline: none;
+    border: 2px solid var(--purple);
+} */
+
+#new-service-modal h2 {
+    color: var(--purple);
+    margin-bottom: 1.2rem;
+    font-size: 2.4rem;
+    font-weight: normal;
+    text-align: center;
+}
+
+#new-service-form label {
+    display: block;
+    margin-bottom: 1.1rem;
+    font-weight: 500;
+    color: #333;
+    font-size: 1.24em;
+}
+
+#new-service-form input[type="text"],
+#new-service-form input[type="number"],
+#new-service-form textarea,
+#new-service-form select {
+    width: 100%;
+    padding: 0.6em 0.8em;
+    margin-top: 0.3em;
+    border: 1px solid #9f93b5;
+    border-radius: 6px;
+    font-size: 1rem;
+    background: #eee;
+    transition: border 0.2s;
+    box-sizing: border-box;
+}
+
+#new-service-form input[type="text"]:focus,
+#new-service-form input[type="number"]:focus,
+#new-service-form textarea:focus,
+#new-service-form select:focus {
+    border: 1.5px solid var(--purple, #7c3aed);
+    outline: none;
+}
+
+#new-service-form textarea {
+    resize: vertical;
+    min-height: 80px;
+    max-height: 220px;
+}
+
+/* #new-service-form input[type="file"] {
+    margin-top: 0.5em;
+} */
+
+#new-service-form small {
+    color: #888;
+    font-size: 0.92em;
+}
+
+#subcategory-section {
+    margin-bottom: 1.1rem;
+}
+
+#primary-image-section {
+    margin: 0.7em 0 1.2em 0;
+}
+
+#new-service-form .button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5em;
+}
+
+#new-service-modal .close-modal {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    font-size: 2rem;
+    background: none;
+    border: none;
+    color: #888;
+    cursor: pointer;
+    transition: color 0.2s;
+    z-index: 10;
+}
+
+#new-service-modal .close-modal:hover {
+    color: #333;
+}
+
+.row-fields {
+    display: flex;
+    gap: 1.2em;
+    margin-bottom: 1.1rem;
+}
+
+.row-fields label {
+    flex: 1 1 0;
+    margin-bottom: 0;
+}
+
+.subcategory-checkboxes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7em 1.5em;
+    margin-bottom: 1.1rem;
+}
+
+.subcategory-checkboxes label {
+    display: flex;
+    align-items: center;
+    font-size: 1em;
+    font-weight: 400;
+    margin-bottom: 0.2em;
+    cursor: pointer;
+}
+
+.subcategory-checkboxes input[type="checkbox"] {
+    margin-right: 0.4em;
+    accent-color: var(--purple);
+}
+
+/* Overlay for subcategory selection */
+#subcategory-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s;
+}
+
+#subcategory-overlay.hidden {
+    display: none;
+}
+
+#subcategory-modal {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+    max-width: 400px;
+    width: 92vw;
+    padding: 2rem 1.5rem 1.5rem 1.5rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+#subcategory-modal h2 {
+    color: var(--green);
+    /* font-size: 1.8rem; */
+    font-family: 'Modak', sans-serif;
+    font-weight: normal;
+    margin-bottom: 1em;
+    text-align: center;
+}
+
+#subcategory-modal .subcategory-checkboxes {
+    margin-bottom: 1.2em;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7em 1.5em;
+    justify-content: center;
+    align-items: center;
+}
+
+#subcategory-modal .subcategory-checkboxes label {
+    display: flex;
+    align-items: center;
+    font-size: 1.1em;
+    font-weight: 500;
+    margin-bottom: 0.2em;
+    margin-right: 0;
+    cursor: pointer;
+    background: rgba(221, 141, 110, 0.5);
+    /* orange, semi-transparent */
+    border-radius: 8px;
+    padding: 8px 18px;
+    color: #333;
+    border: 0px solid;
+    transition: background 0.2s, color 0.2s, border 0.2s;
+    white-space: nowrap;
+    margin: 0 0.3em 0.5em 0.3em;
+    position: relative;
+    min-width: 120px;
+    justify-content: center;
+    text-align: center;
+}
+
+#subcategory-modal .subcategory-checkboxes input[type="checkbox"] {
+    display: none;
+}
+
+#subcategory-modal .subcategory-checkboxes input[type="checkbox"]:checked+label,
+#subcategory-modal .subcategory-checkboxes label.selected {
+    background: var(--orange);
+    color: #fff;
+    border: 0px solid;
+}
+
+#subcategory-modal .subcategory-checkboxes label::before {
+    display: none;
+}
+
+#subcategory-modal .subcategory-checkboxes input[type="checkbox"]:checked+label::before {
+    background: var(--orange);
+    border-color: var(--orange);
+    box-shadow: 0 0 0 2px #fff inset;
+}
+
+#subcategory-modal .button-container {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1em;
+}
+
+#subcategory-modal .close-subcategory-modal {
+    position: absolute;
+    top: 0.7em;
+    right: 1em;
+    font-size: 1.7rem;
+    background: none;
+    border: none;
+    color: #888;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+#subcategory-modal .close-subcategory-modal:hover {
+    color: #333;
+}
+
+@media (max-width: 600px) {
+    #new-service-modal {
+        max-width: 98vw;
+        padding: 1.2rem 0.5rem 1.5rem 0.5rem;
+    }
+
+    #new-service-modal h2 {
+        font-size: 1.2rem;
+    }
+
+    .row-fields {
+        flex-direction: column;
+        gap: 0.5em;
+    }
+
+    #subcategory-modal {
+        max-width: 98vw;
+        padding: 1.2rem 0.5rem 1.2rem 0.5rem;
+    }
+
+    #subcategory-modal h3 {
+        font-size: 1.05rem;
+    }
+}

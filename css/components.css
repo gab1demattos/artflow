@@ -69,6 +69,22 @@
 	border: 2px solid var(--orange);
 }
 
+/* Green filled */
+.button.filled.green {
+	background-color: var(--green);
+	color: #ffffff;
+	border: none;
+}
+/* Example: <button class="button filled green [other classes]">Green Filled</button> */
+
+/* Green outlined */
+.button.outline.green {
+	background-color: transparent;
+	color: var(--green);
+	border: 2px solid var(--green);
+}
+/* Example: <button class="button outline green [other classes]">green Outlined</button> */
+
 /* ===== HOVER BEHAVIOR OPTIONS ===== */
 /* Classic (no hover effect) - DEFAULT if no .hovering class */
 /* Example: <button class="button [other classes]">Classic</button> */
@@ -95,8 +111,21 @@
 
 .button.hovering.outline.yellow:hover {
 	background-color: var(--yellow);
-	color: #000000;
+	color: #ffffff;
 	border: 2px solid var(--yellow);
+}
+
+/* Green hovering variants */
+.button.hovering.filled.green:hover {
+	background-color: var(--beige);
+	color: var(--green);
+	border: 2px solid var(--green);
+}
+
+.button.hovering.outline.green:hover {
+	background-color: var(--green);
+	color: #ffffff;
+	border: 2px solid var(--green);
 }
 /* Example: <button class="button hovering [other classes]">Hoverable</button> */
 
