@@ -4,13 +4,14 @@
 
 @media screen and (max-width: 767px) {
 	.modal {
-		width: 90%;
-		max-width: 360px;
+		width: 95%;
+		max-width: 400px;
 		height: auto;
 		min-height: 450px;
 		flex-direction: column;
 		border-radius: 15px;
 		justify-content: center; 
+		padding: 1rem;
 	}
 
 	/* Special styling for sign-in modal to make it smaller */
@@ -20,7 +21,7 @@
 
 	.form-container {
 		width: 100%;
-		padding: 1.5rem;
+		padding: 1rem;
 		display: flex;
 		flex-direction: column;
 		justify-content: center; 
@@ -40,8 +41,8 @@
 	}
 
 	.form input {
-		font-size: 16px;
-		padding: 8px 12px;
+		font-size: 1rem;
+		padding: 10px 15px;
 	}
 
 	.button-container {
@@ -57,12 +58,13 @@
 	}
 
 	#goflow-modal .modal-content > p:nth-of-type(1) {
-		font-size: 1.8rem; 
+		font-size: 1.5rem; 
 		position: absolute;
 		left: 2em;
 		right: 2em;
 		top: 2.5em; 
 		text-align: left;
+		margin: 1em 0;
 	}
 
 	#goflow-modal .modal-content > p:nth-of-type(2) {
@@ -71,7 +73,8 @@
 		right: 2em;
 		top: 12em; 
 		text-align: left;
-		font-size: 1.2rem;
+		font-size: 1rem;
+		margin: 1em 0;
 	}
 
 	/* Style the artflow text without making it a block */
@@ -93,21 +96,22 @@
 
 @media screen and (min-width: 768px) and (max-width: 1199px) {
 	.modal {
-		width: 80%;
-		max-width: 600px;
+		width: 85%;
+		max-width: 650px;
 		height: auto;
 		min-height: 400px;
 		flex-direction: row;
 		border-radius: 18px;
+		padding: 1.5rem;
 	}
 
 	.form-container {
 		width: 50%;
-		padding: 1.7rem;
+		padding: 1.5rem;
 	}
 
 	.modal h2 {
-		font-size: 1.8rem;
+		font-size: 2rem;
 	}
 
 	/* Show images on tablet */
@@ -137,7 +141,7 @@
 	}
 
 	#goflow-modal .modal-content > p:nth-of-type(1) {
-		font-size: 1.7rem;
+		font-size: 1.8rem;
 		position: absolute;
 		left: 3em;
 		top: 2.3em;
@@ -148,7 +152,7 @@
 		left: 1.8em;
 		top: 14em;
 		text-align: center;
-		font-size: 1.3rem;
+		font-size: 1.2rem;
 	}
 
 	#goflow-modal #go-arrow {

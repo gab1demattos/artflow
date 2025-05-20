@@ -2,24 +2,33 @@
     body {
         background-color: var(--green);
     }
+
+    #boxes {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5em; /* Increased gap for better spacing */
+    }
+
+    .box {
+        width: 90%; /* Adjusted width for better fit */
+        height: 120px; /* Adjusted height for better proportions */
+    }
 }
 
 @media (max-width: 1000px) {
 
     #categories > #block {
-        width: 100%;
-        margin-left: auto;
-        margin-right: 0;
-        transition: all 0.3s ease-in-out; 
+        width: 95%; /* Adjusted width for better responsiveness */
+        margin: 0 auto; /* Centered block */
     }
 
     #category-list {
-        margin-left: auto; 
-        margin-right: 0;
+        margin: 0 auto; /* Centered category list */
     }
 
-    #categories  h2 {
-        margin-right: 5em !important;
+    #categories h2 {
+        margin-right: 3em !important; /* Adjusted margin for better alignment */
     }
 
     #block > a {
@@ -27,21 +36,40 @@
     }
 
     #info > div {
-        width: 85% !important;
+        width: 90% !important; /* Adjusted width for better fit */
         margin: 0 auto !important;
-        transition: all 0.3s ease-in-out; 
     }
 
-    
+    #boxes {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1.5em; /* Increased gap for better spacing */
+    }
+
+    .box {
+        width: 48%; /* Adjusted width for better layout */
+        height: 160px; /* Adjusted height for better proportions */
+    }
 }
 
 
 @media (max-width: 1300px) {
 
     #info-content {
-        width: 65% !important;
+        width: 70% !important; /* Adjusted width for better fit */
         margin: 0 auto !important;
-        transition: all 0.3s ease-in-out; 
     }
 
+    #boxes {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around; /* Adjusted alignment for better layout */
+        gap: 1.5em; /* Increased gap for better spacing */
+    }
+
+    .box {
+        width: 32%; /* Adjusted width for better layout */
+        height: 220px; /* Adjusted height for better proportions */
+    }
 }
