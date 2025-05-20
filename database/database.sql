@@ -21,12 +21,13 @@ CREATE TABLE Service (
     description TEXT NOT NULL,
     category_id INTEGER NOT NULL,
     price REAL NOT NULL,
-    delivery_time DATE NOT NULL, -- or INTEGER ?? e.g. 5 days
+    delivery_time INTEGER NOT NULL, -- days
     images TEXT,  -- comma-separsted 
     videos TEXT,    -- paths to files
     FOREIGN KEY (user_id) REFERENCES User(id),
     FOREIGN KEY (category_id) REFERENCES Category(id)
 );
+
 
 CREATE TABLE Exchange (
     id INTEGER PRIMARY KEY,
@@ -61,7 +62,23 @@ CREATE TABLE Review (
 
 CREATE TABLE Category (
     id INTEGER PRIMARY KEY,
-    category_type TEXT NOT NULL
+    category_type TEXT NOT NULL,
+    image TEXT
+);
+
+CREATE TABLE Subcategory (
+    id INTEGER PRIMARY KEY,
+    category_id INTEGER NOT NULL,
+    name TEXT NOT NULL,
+    FOREIGN KEY (category_id) REFERENCES Category(id)
+);
+
+CREATE TABLE ServiceSubcategory (
+    service_id INTEGER NOT NULL,
+    subcategory_id INTEGER NOT NULL,
+    PRIMARY KEY (service_id, subcategory_id),
+    FOREIGN KEY (service_id) REFERENCES Service(id),
+    FOREIGN KEY (subcategory_id) REFERENCES Subcategory(id)
 );
 
 INSERT INTO Category (category_type) VALUES

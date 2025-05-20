@@ -1,7 +1,10 @@
 <?php
+
 declare(strict_types=1);
 require_once(__DIR__ . '/../database/session.php');
 require_once(__DIR__ . '/../database/user.class.php');
+
+
 
 $email = $_POST['email'] ?? '';
 $password = $_POST['password'] ?? '';
