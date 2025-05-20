@@ -45,6 +45,8 @@
 	font-weight: 400;
 	color: #666;
 	margin-bottom: 10px;
+	/* Remove flex display to place items on separate lines */
+	display: block;
 }
 
 /* Tag Styles */
@@ -53,6 +55,7 @@
 	border-radius: 20px;
 	font-size: 14px;
 	font-weight: 500;
+	display: inline-block;
 }
 
 .profile .info .tag.admin {
@@ -65,8 +68,8 @@
 	display: flex;
 	border-bottom: 1px solid #ddd;
 	margin-bottom: 20px;
-    margin-left: 4.68765em;
-    margin-right: 4.68765em;
+	margin-left: 4.68765em;
+	margin-right: 4.68765em;
 }
 
 .tabs div {
