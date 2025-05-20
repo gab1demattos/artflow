@@ -248,7 +248,6 @@ header:first-of-type {
     width: 600px;
     padding: 3em;
     padding-bottom: 1em;
-    transition: all 0.3s ease-in-out;
 }
 
 #block > a {
