@@ -91,7 +91,7 @@ header:first-of-type {
     margin-bottom: 1rem;
     color: black;
     font-weight: 100;
-    margin-left: 0.7em; 
+    margin-left: 1em; 
 }
 
 #title p {
@@ -133,19 +133,19 @@ header:first-of-type {
 #box1 {
     background-color: var(--orange);
     margin-top: -150px; 
-    margin-left: 500px;
+    margin-left: 470px;
 }
 
 #box2 {
     background-color: var(--green);
     margin-top: -50px; 
-    margin-left: 600px; 
+    margin-left: 570px; 
 }
 
 #box3 {
     background-color: var(--yellow);
     margin-top: -50px; 
-    margin-left: 420px; 
+    margin-left: 390px; 
 }
 
 .flow-text {
@@ -205,6 +205,7 @@ header:first-of-type {
     font-family: 'EDGaramond', serif;
     padding-bottom: 10em;
     justify-content: flex-end;
+    align-content: center;
 }
 
 #categories  h2 {
@@ -258,7 +259,7 @@ header:first-of-type {
 
 #block {
     width: 600px;
-    height: 100%;
+    height: auto;
     margin-left: 35%;
 }
 
