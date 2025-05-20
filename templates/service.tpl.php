@@ -16,9 +16,9 @@
                 <p><?= htmlspecialchars($service['description']) ?></p>
             </div>
             <div id="service-info">
-                <p>Price: <?= htmlspecialchars($service['price']) ?>€</p>
-                <p>Delivery Time: <?= htmlspecialchars($service['delivery_time']) ?></p>
-                <div>
+                <p id="price" class="service-info"><?= htmlspecialchars($service['price']) ?>€</p>
+                <p id="delivery" class="service-info">Delivery Time: <?= htmlspecialchars($service['delivery_time']) ?> days</p>
+                <div id="service-options">
                     <button id="message" class="service-options">Message</button>
                     <button id="payment" class="service-options">Continue to Payment</button>
                 <div>
