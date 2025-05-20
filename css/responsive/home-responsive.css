@@ -7,28 +7,28 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 1.5em; /* Increased gap for better spacing */
+        gap: 1.5em; 
     }
 
     .box {
-        width: 90%; /* Adjusted width for better fit */
-        height: 120px; /* Adjusted height for better proportions */
+        width: 90%; 
+        height: 120px; 
     }
 }
 
 @media (max-width: 1000px) {
 
     #categories > #block {
-        width: 95%; /* Adjusted width for better responsiveness */
-        margin: 0 auto; /* Centered block */
+        width: 95%; 
+        margin: 0 auto; 
     }
 
     #category-list {
-        margin: 0 auto; /* Centered category list */
+        margin: 0 auto;
     }
 
     #categories h2 {
-        margin-right: 3em !important; /* Adjusted margin for better alignment */
+        margin-right: 3em !important; 
     }
 
     #block > a {
@@ -36,7 +36,7 @@
     }
 
     #info > div {
-        width: 90% !important; /* Adjusted width for better fit */
+        width: 90% !important; 
         margin: 0 auto !important;
     }
 
@@ -44,12 +44,12 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        gap: 1.5em; /* Increased gap for better spacing */
+        gap: 1.5em; 
     }
 
     .box {
-        width: 48%; /* Adjusted width for better layout */
-        height: 160px; /* Adjusted height for better proportions */
+        width: 48%; 
+        height: 160px; 
     }
 }
 
@@ -57,19 +57,19 @@
 @media (max-width: 1300px) {
 
     #info-content {
-        width: 70% !important; /* Adjusted width for better fit */
+        width: 70% !important; 
         margin: 0 auto !important;
     }
 
     #boxes {
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-around; /* Adjusted alignment for better layout */
-        gap: 1.5em; /* Increased gap for better spacing */
+        justify-content: space-around; 
+        gap: 1.5em; 
     }
 
     .box {
-        width: 32%; /* Adjusted width for better layout */
-        height: 220px; /* Adjusted height for better proportions */
+        width: 32%; 
+        height: 220px; 
     }
 }

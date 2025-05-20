@@ -110,7 +110,7 @@ header:first-of-type {
 }
 
 #boxes .box {
-    position: relative; /* Changed from absolute to relative */
+    position: relative; 
     box-sizing: border-box;
     width: 150px;
     height: 150px;
@@ -124,20 +124,20 @@ header:first-of-type {
 
 #box1 {
     background-color: var(--orange);
-    margin-top: -150px; /* Adjusted to maintain position */
-    margin-left: 500px; /* Adjusted to maintain position */
+    margin-top: -150px; 
+    margin-left: 500px;
 }
 
 #box2 {
     background-color: var(--green);
-    margin-top: -50px; /* Adjusted to maintain position */
-    margin-left: 600px; /* Adjusted to maintain position */
+    margin-top: -50px; 
+    margin-left: 600px; 
 }
 
 #box3 {
     background-color: var(--yellow);
-    margin-top: 30px; /* Adjusted to maintain position */
-    margin-left: 420px; /* Adjusted to maintain position */
+    margin-top: -50px; 
+    margin-left: 420px; 
 }
 
 .flow-text {
@@ -234,9 +234,9 @@ header:first-of-type {
     flex-wrap: wrap;
     gap: 3.5em;
     margin-bottom: 1em;
-    max-height: calc(2 * 100px + 2 * 3.5em); /* Limit to 2 rows of items */
-    overflow-y: hidden; /* Hide overflow if items exceed 2 rows */
-    justify-content: center; /* Center items if needed */
+    max-height: calc(2 * 100px + 2 * 3.5em); 
+    overflow-y: hidden; 
+    justify-content: center; 
     width: 600px;
     padding: 3em;
     padding-bottom: 1em;
