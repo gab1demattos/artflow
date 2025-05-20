@@ -17,7 +17,7 @@ drawHeader($user);
 <main class="container">
   <div class="profile">
     <div class="profile-img">
-      <img src="../images/user_pfp/default.png" alt="Profile Picture" />
+      <img src="<?= isset($user['profile_image']) && $user['profile_image'] ? htmlspecialchars($user['profile_image']) : '/images/user_pfp/default.png' ?>" alt="Profile Picture" />
     </div>
     <div class="info">
       <div class="name"><?= htmlspecialchars($user['name']) ?></div>

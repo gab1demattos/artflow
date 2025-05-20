@@ -8,13 +8,17 @@
         public string $name;
         public string $username;
         public string $email;
+        public string $bio;
+        public string $profile_image;
 
-        public function __construct(int $id, string $user_type, string $name, string $username, string $email) {
+        public function __construct(int $id, string $user_type, string $name, string $username, string $email, string $bio, string $profile_image) {
             $this->id = $id;
             $this->user_type = $user_type;
             $this->name = $name;
             $this->username = $username;
             $this->email = $email;
+            $this->bio = $bio;
+            $this->profile_image = $profile_image;
         }
 
         public static function create(
@@ -27,12 +31,12 @@
             $db = Database::getInstance();
             
             try {
-                $stmt = $db->prepare('INSERT INTO User (user_type, name, username, email, password) VALUES (?, ?, ?, ?, ?)');
+                $stmt = $db->prepare('INSERT INTO User (user_type, name, username, email, password, bio, profile_image) VALUES (?, ?, ?, ?, ?, NULL, NULL)');
                 $success = $stmt->execute([$user_type, $name, $username, $email, sha1($password)]);
                 
                 if ($success) {
                     $id = $db->lastInsertId();
-                    return new User((int)$id, $user_type, $name, $username, $email);
+                    return new User((int)$id, $user_type, $name, $username, $email, '', '');
                 } else {
                     return false;
                 }

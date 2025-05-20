@@ -11,7 +11,9 @@ CREATE TABLE User (
     name TEXT NOT NULL,
     username TEXT NOT NULL,
     email TEXT NOT NULL,
-    password TEXT NOT NULL
+    password TEXT NOT NULL,
+    bio TEXT,
+    profile_image TEXT
 );
 
 CREATE TABLE Service (

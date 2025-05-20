@@ -30,7 +30,7 @@
     <div id="sidebar">
         <div id="profile">
             <a href="/pages/profile.php" id="profile-link" aria-label="View Profile">
-                <img src="../images/user_pfp/default.png" alt="Avatar" id="avatar-sidebar" class="profile-img">
+                <img src="<?= isset($user['profile_image']) && $user['profile_image'] ? htmlspecialchars($user['profile_image']) : '/images/user_pfp/default.png' ?>" alt="Avatar" id="avatar-sidebar" class="profile-img">
                 <div>
                     <h2 id="profile-name"><?= htmlspecialchars($user['name']) ?></h2>
                     <h3 id="profile-username">@<?= htmlspecialchars($user['username']) ?></h3>
