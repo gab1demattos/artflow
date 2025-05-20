@@ -1,9 +1,6 @@
 <?php function drawServiceDisplay($service, $user, $db) { ?>
     <div id="service-display">
-        <div id="service-name">
-            <h2><?= htmlspecialchars($service['title']) ?></h2>
-            <p><?= htmlspecialchars($service['description']) ?></p>
-        </div>
+        <div id="service-img">
         <?php 
         $stmtImg = $db->prepare('SELECT images FROM Service WHERE id = ?');
         $stmtImg->execute([$service['id']]);
@@ -12,11 +9,18 @@
             echo '<img src="' . htmlspecialchars($image['images']) . '" alt="Service Image">';
         }
         ?>
-        <div id="service-info">
-            <p>Price: <?= htmlspecialchars($service['price']) ?>€</p>
-            <p>Delivery Time: <?= htmlspecialchars($service['delivery_time']) ?></p>
-            <p>Message</p>
-            <p>Continue to Payment</p>
+        </div>
+        <div id="service-detail">
+            <div id="service-name">
+                <h2><?= htmlspecialchars($service['title']) ?></h2>
+                <p><?= htmlspecialchars($service['description']) ?></p>
+            </div>
+            <div id="service-info">
+                <p>Price: <?= htmlspecialchars($service['price']) ?>€</p>
+                <p>Delivery Time: <?= htmlspecialchars($service['delivery_time']) ?></p>
+                <p>Message</p>
+                <p>Continue to Payment</p>
+            </div>
         </div>
     </div>
 <?php } ?>
