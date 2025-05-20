@@ -1,15 +1,15 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Button elements
-    const signupBtn = document.querySelector("#buttons li button");
-    const signInButtons = document.querySelectorAll("#sign-in");
-    const signUpButtons = document.querySelectorAll("#sign-up");
-    const signUpBtn_submit = document.querySelector("#sign-up-submit");
-    const nextBtn = document.querySelector("#next-btn");
+	// Button elements
+	const signupBtn = document.querySelector("#buttons li button");
+	const signInButtons = document.querySelectorAll("#sign-in");
+	const signUpButtons = document.querySelectorAll("#sign-up");
+	const signUpBtn_submit = document.querySelector("#sign-up-submit");
+	const nextBtn = document.querySelector("#next-btn");
 
-    // Modal elements
-    const signupModalOverlay = document.getElementById("signup-modal-overlay");
-    const signinModalOverlay = document.getElementById("signin-modal-overlay");
-    const goflowModalOverlay = document.getElementById("goflow-modal-overlay");
+	// Modal elements
+	const signupModalOverlay = document.getElementById("signup-modal-overlay");
+	const signinModalOverlay = document.getElementById("signin-modal-overlay");
+	const goflowModalOverlay = document.getElementById("goflow-modal-overlay");
 
     // Function to hide all modals - with null checks
     function hideAllModals() {
@@ -319,3 +319,17 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 });
+
+function openSidebar() {
+    const sidebar = document.getElementById('sidebar');
+	const overlay = document.getElementById('overlay');
+    sidebar.classList.add('active');
+	overlay.style.add('active');
+}
+
+function closeSidebar() {
+    const sidebar = document.getElementById('sidebar');
+	const overlay = document.getElementById('overlay');
+    sidebar.classList.remove('active');
+	overlay.style.remove('active');
+}
