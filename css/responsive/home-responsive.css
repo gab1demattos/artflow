@@ -1,20 +1,8 @@
 @media (max-width: 600px) {
-   
-
-    #boxes {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 1.5em; 
-    }
-
-    .box {
-        width: 90%; 
-        height: 120px; 
-    }
+    
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1100px) {
 
     #categories > #block {
         width: 95%; 
@@ -38,12 +26,6 @@
         margin: 0 auto !important;
     }
 
-    #boxes {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 1.5em; 
-    }
 
     .box {
         width: 48%; 
@@ -57,17 +39,5 @@
     #info-content {
         width: 70% !important; 
         margin: 0 auto !important;
-    }
-
-    #boxes {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-around; 
-        gap: 1.5em; 
-    }
-
-    .box {
-        width: 32%; 
-        height: 220px; 
     }
 }
