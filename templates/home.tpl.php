@@ -65,6 +65,7 @@
         </ul>
     </div>
     <div id="overlay" onclick="closeSidebar()"></div>
+    <script src="/js/sidebar.js"></script>
     <?php endif; ?>
 
 <?php } ?>
@@ -171,7 +172,7 @@
                     </div>
                 </div>
                 <div id="end-footer">
-                    <p>This website was built in the context of the course Linguagens e Tecnologias Web of the Bachelor’s Informatics and Computing Engineering of University of Porto .</p>
+                    <p>This website was built in the context of the course Linguagens e Tecnologias Web of the Bachelor's Informatics and Computing Engineering of University of Porto .</p>
                     <p>© All rights reserved.</p>
                 </div>
             </footer>

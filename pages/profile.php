@@ -36,4 +36,6 @@ drawHeader($user);
   <div class='space'></div>
 </main>
 
-<?php drawFooter($user); ?>
+<?php 
+drawFooter($user);
+?>
