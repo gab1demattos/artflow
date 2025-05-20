@@ -80,11 +80,3 @@ CREATE TABLE ServiceSubcategory (
     FOREIGN KEY (service_id) REFERENCES Service(id),
     FOREIGN KEY (subcategory_id) REFERENCES Subcategory(id)
 );
-
-INSERT INTO Category (category_type) VALUES
-('Illustration & Digital Art'),
-('Graphic Design and Branding'),
-('Traditional Art & Painting'),
-('3D Art & Animation'),
-('Handmade & Craft Art'),
-('Body Art Design & Tattoo');
