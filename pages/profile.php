@@ -24,7 +24,7 @@ drawHeader($user);
       <div class="username">@<?= htmlspecialchars($user['username']) ?></div>
       <div class="tags">
         <?php if ($session->isAdmin()): ?>
-        <div class="tag admin">Admin</div>
+        <div class="tag admin">admin</div>
         <?php endif; ?>
       </div>
     </div>

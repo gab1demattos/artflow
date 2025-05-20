@@ -29,8 +29,8 @@
     <?php if ($user): ?>
     <div id="sidebar">
         <div id="profile">
-            <a href="/pages/profile.php" style="display: flex; align-items: center; gap: 1em; text-decoration: none; color: inherit; width: 100%;">
-                <img src="../images/user_pfp/default.png" alt="Avatar" id="avatar">
+            <a href="/pages/profile.php" id="profile-link" aria-label="View Profile">
+                <img src="../images/user_pfp/default.png" alt="Avatar" id="avatar-sidebar" class="profile-img">
                 <div>
                     <h2 id="profile-name"><?= htmlspecialchars($user['name']) ?></h2>
                     <h3 id="profile-username">@<?= htmlspecialchars($user['username']) ?></h3>
@@ -39,27 +39,27 @@
         </div>
         <ul id="sidebar-list">
             <li class="sidebar-item" id="new-service-button">
-                <img src="images/add_circle.png" alt="New Service" class="logo">
+                <img src="/images/add_circle.png" alt="New Service" class="logo">
                 <button>New Service</button>
             </li>
             <li class="sidebar-item">
-                <img src="images/activity.png" alt="Activity" class="logo">
+                <img src="/images/activity.png" alt="Activity" class="logo">
                 <button>Activity</button>
             </li>
             <li class="sidebar-item">
-                <img src="images/messages.png" alt="Messages" class="logo">
+                <img src="/images/messages.png" alt="Messages" class="logo">
                 <button>Messages</button>
             </li>
             <li class="sidebar-item">
-                <img src="images/stats.png" alt="Stats" class="logo">
+                <img src="/images/stats.png" alt="Stats" class="logo">
                 <button>Stats</button>
             </li>
             <li class="sidebar-item" id="settings">
-                <img src="images/settings.png" alt="Settings" class="logo">
+                <img src="/images/settings.png" alt="Settings" class="logo">
                 <button>Settings</button>
             </li>
             <li class="sidebar-item">
-                <img src="images/logout.png" alt="Log Out" class="logo">
+                <img src="/images/logout.png" alt="Log Out" class="logo">
                 <form action="/actions/logout.php" method="post"><button>Log Out</button></form>
             </li>
         </ul>
