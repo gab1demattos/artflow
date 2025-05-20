@@ -243,6 +243,21 @@ document.addEventListener("DOMContentLoaded", function () {
                     subcategorySection.innerHTML = '';
                 }
             }
+            // Add hidden inputs for selected subcategories so they are submitted with the form
+            // Remove any previous hidden inputs
+            const form = document.getElementById('new-service-form');
+            if (form) {
+                // Remove old hidden subcategory inputs
+                Array.from(form.querySelectorAll('input[type="hidden"][name="subcategories[]"]')).forEach(el => el.remove());
+                // Add new ones
+                selectedSubcatValues.forEach(val => {
+                    const hidden = document.createElement('input');
+                    hidden.type = 'hidden';
+                    hidden.name = 'subcategories[]';
+                    hidden.value = val;
+                    form.appendChild(hidden);
+                });
+            }
             if (subcategoryOverlay) subcategoryOverlay.classList.add('hidden');
         });
     }
