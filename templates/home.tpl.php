@@ -14,7 +14,7 @@
         <nav id="menu">
             <div id="search-bar">
                 <input type="text" id="search-input" placeholder="Search here..." />
-                <button id="search-button"><img src="images/search.png" alt="Search" id="search-icon"></button>
+                <button id="search-button"><img src="/images/search.png" alt="Search" id="search-icon"></button>
             </div>
             <ul id="buttons">
                 <?php if (!$user): ?>
