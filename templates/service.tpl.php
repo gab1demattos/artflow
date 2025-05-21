@@ -32,6 +32,23 @@ $images = explode(', ', $imagePaths); // Split the string into an array
                     <button id="payment" class="service-options">Continue to Payment</button>
                 </div>
             </div>
+            <div id="reviews">
+                <h3>Reviews</h3>
+                <?php
+                $stmtReviews = $db->prepare('SELECT r.rating, r.comment, u.username FROM Review r JOIN User u ON r.user_id = u.id WHERE r.service_id = ?');
+                $stmtReviews->execute([$service['id']]);
+                $reviews = $stmtReviews->fetchAll(PDO::FETCH_ASSOC);
+                if (count($reviews) > 0) {
+                    foreach ($reviews as $review) { ?>
+                        <div class="review">
+                            <p><strong><?= htmlspecialchars($review['username']) ?>:</strong> <?= htmlspecialchars($review['comment']) ?></p>
+                            <p>Rating: <?= htmlspecialchars($review['rating']) ?>/5</p>
+                        </div>
+                    <?php }
+                } else { ?>
+                    <p>No reviews yet. Be the first to leave a review!</p>
+                <?php } ?>
+            </div>
         </div>
     </div>
     <script src="/js/service-scroll.js"></script>
