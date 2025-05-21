@@ -107,17 +107,23 @@
 
 #service-delivery {
     display: flex;
-    background-color: aquamarine;
     justify-content: space-between;
     padding-right: 3em;
     height: auto;
+    box-sizing: border-box;
+    border-radius: 10px;
+    width: 90%;
+    margin: 0 auto;
+    gap: 1em;
+    border: 2px solid #333;
 }
 
 .service-delivery {
     font-size: 1.2rem;
     text-align: center;
     background-color: blueviolet;
-    margin-top: 1em;
+    margin: 0;
+    padding-bottom: 0;
 }
 
 #service-delivery img{
