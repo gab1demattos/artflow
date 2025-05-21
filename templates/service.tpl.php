@@ -23,7 +23,6 @@ $owner = $stmtOwner->fetch(PDO::FETCH_ASSOC);
             </div>
             <div id="service-details">
                 <p><?= htmlspecialchars($service['description']) ?></p>
-                <p><?= htmlspecialchars($owner['name']) . htmlspecialchars($owner['username'])?></p>
                 <div id="reviews">
                     <h3>Reviews</h3>
                     <?php
@@ -45,6 +44,7 @@ $owner = $stmtOwner->fetch(PDO::FETCH_ASSOC);
         </div>
         <div id="service-checkout">
             <h2><?= htmlspecialchars($service['title']) ?></h2>
+            <p><?= htmlspecialchars($owner['name']) . htmlspecialchars($owner['username'])?></p>
             <div id="service-info">
                 <p id="price" class="service-info"><?= htmlspecialchars($service['price']) ?>€</p>
                 <div id="service-delivery">

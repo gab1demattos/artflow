@@ -3,7 +3,7 @@
 
 #service-display {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     gap: 0;
 }
 
@@ -25,7 +25,6 @@
     padding-top: 0;
     margin-right: 0;
     width: 35%;
-    background-color: aqua;
 }
 
 #service-checkout h2 {
@@ -224,5 +223,4 @@
     align-items: center;
     justify-content: center;
     width: 60%;
-    background-color: brown;
 }
