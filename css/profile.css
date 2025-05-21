@@ -8,12 +8,21 @@
 	padding: 20px;
 	margin-bottom: 20px;
 	gap: 8px;
+	position: relative;
 }
 
 /* Modification for when there's no bio */
 .profile.no-bio {
 	grid-template-areas: "image info";
 	align-items: center;
+}
+
+/* Edit profile button */
+.edit-profile-btn {
+	position: absolute;
+	top: 4.5em;
+	right: 4.5em;
+	z-index: 5;
 }
 
 /* Profile Image Styles */

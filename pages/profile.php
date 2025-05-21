@@ -20,6 +20,9 @@ drawHeader($loggedInUser);
 
 <main class="container">
   <div class="profile<?= !$hasBio ? ' no-bio' : '' ?>">
+    <?php if ($loggedInUser && $loggedInUser['username'] === $user->getUsername()): ?>
+    <button class="button filled green hovering edit-profile-btn">Edit Profile</button>
+    <?php endif; ?>
     <div class="profile-img">
       <img src="<?= ($user->getProfileImage() !== null && $user->getProfileImage() !== '') ? htmlspecialchars($user->getProfileImage()) : '/images/user_pfp/default.png' ?>" alt="Profile Picture" />
     </div>
