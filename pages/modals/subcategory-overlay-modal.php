@@ -1,6 +1,3 @@
-<?php
-// Subcategory selection overlay/modal for new service modal
-?>
 <div id="subcategory-overlay" class="hidden">
   <div id="subcategory-modal">
     <button class="close-subcategory-modal" aria-label="Close">&times;</button>

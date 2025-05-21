@@ -2,6 +2,7 @@
 require_once(__DIR__ . '/../database/session.php');
 require_once(__DIR__ . '/../database/categories.php');
 require_once(__DIR__ . '/../templates/home.tpl.php');
+require_once(__DIR__ . '/../templates/service_card.php');
 
 $session = Session::getInstance();
 $user = $session->getUser() ?? null;
@@ -68,22 +69,9 @@ drawHeader($user);
                     // Get first image (if any)
                     $serviceImages = array_filter(array_map('trim', explode(',', $service['images'] ?? '')));
                     $serviceImage = count($serviceImages) > 0 ? $serviceImages[0] : null;
-            ?>
-                <div class="service-card" data-subcategory-ids="<?= htmlspecialchars($subcatIdsStr) ?>">
-                    <div class="pantone-image-wrapper">
-                        <?php if ($serviceImage): ?>
-                            <img src="<?= htmlspecialchars($serviceImage) ?>" alt="Service image" class="pantone-image" />
-                        <?php else: ?>
-                            <div class="pantone-image pantone-image-placeholder"></div>
-                        <?php endif; ?>
-                    </div>
-                    <div class="pantone-title"><?= htmlspecialchars($service['title']) ?></div>
-                    <div class="pantone-info-row">
-                        <span class="pantone-username"><?= htmlspecialchars($service['username']) ?></span>
-                        <span class="pantone-rating">★ 0.0</span>
-                    </div>
-                </div>
-            <?php
+                    
+                    // Use the new service card component
+                    drawServiceCard($service, $serviceImage, $subcatIdsStr);
                 }
             } else {
                 echo '<p>No services found in this category yet.</p>';
