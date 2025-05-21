@@ -380,10 +380,10 @@
 /* Delete button next to file input */
 .delete-image-btn {
 	border-radius: 50%;
-	width: 30px;
-	height: 30px;
+	width: 35px;
+	height: 35px;
 	cursor: pointer;
-	padding: 0;
+	padding: 0px;
 	line-height: 26px;
 	text-align: center;
 	font-size: 18px;
