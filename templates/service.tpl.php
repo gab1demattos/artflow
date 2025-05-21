@@ -13,11 +13,11 @@ $owner = $stmtOwner->fetch(PDO::FETCH_ASSOC);
     <div id="service-display">
         <div id="service-imgs">
             <?php foreach ($images as $image) { ?>
-                <img src="<?= htmlspecialchars($image) ?>" alt="Service Image">
+                <img class="thumbnail" src="<?= htmlspecialchars($image) ?>" alt="Service Image">
             <?php } ?>
         </div>
         <div id="service-img">
-            <img src="<?= htmlspecialchars($images[0]) ?>" alt="Service Image">
+            <img id="main-image" src="<?= htmlspecialchars($images[0]) ?>" alt="Service Image">
         </div>
         <div id="service-detail">
             <div id="service-name">
