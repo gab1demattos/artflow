@@ -1,23 +1,23 @@
 -- User data (mixture of regular users and admins)
-INSERT INTO User (user_type, name, username, email, password) VALUES
-('admin', 'Admin User', 'admin', 'admin@artflow.com', '701f81be760ef4fada8917640b07b398c855c854'),  -- password: Teresa.mag17
-('regular', 'John Doe', 'johndoe', 'john@example.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W'),
-('regular', 'Jane Smith', 'janesmith', 'jane@example.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W'),
-('regular', 'Michael Johnson', 'michaelj', 'michael@example.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W'),
-('regular', 'Sarah Williams', 'sarahw', 'sarah@example.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W'),
-('regular', 'David Brown', 'davidb', 'david@example.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W'),
-('regular', 'Emily Davis', 'emilyd', 'emily@example.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W'),
-('regular', 'Alex Thompson', 'alext', 'alex@example.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W'),
-('regular', 'Teresa Magalhães', 'teresamag17','teresamag@example.com','701f81be760ef4fada8917640b07b398c855c854'); -- password: Teresa.mag17
+INSERT INTO User (user_type, name, username, email, password, bio, profile_image) VALUES
+('admin', 'Admin User', 'admin', 'admin@artflow.com', '701f81be760ef4fada8917640b07b398c855c854', NULL, NULL),  -- password: Teresa.mag17
+('regular', 'John Doe', 'johndoe', 'john@example.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', 'Digital artist specializing in character design and concept art.', '/images/user_pfp/man.jpg'),
+('regular', 'Jane Smith', 'janesmith', 'jane@example.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', 'Brand identity designer with 5+ years of experience working with startups.', '/images/user_pfp/woman.jpg'),
+('regular', 'Michael Johnson', 'michaelj', 'michael@example.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', 'Traditional artist focusing on oil painting and portraits.', '/images/user_pfp/man.jpg'),
+('regular', 'Sarah Williams', 'sarahw', 'sarah@example.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '3D modeling expert with background in game development.', '/images/user_pfp/woman.jpg'),
+('regular', 'David Brown', 'davidb', 'david@example.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', 'Jewelry craftsman with a passion for unique handmade designs.', '/images/user_pfp/man.jpg'),
+('regular', 'Emily Davis', 'emilyd', 'emily@example.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', 'Tattoo artist specializing in custom designs and cover-ups.', '/images/user_pfp/woman.jpg'),
+('regular', 'Alex Thompson', 'alext', 'alex@example.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', 'Concept artist for video games and animation with 7 years of industry experience.', '/images/user_pfp/man.jpg'),
+('regular', 'Teresa Magalhães', 'teresamag17','teresamag@example.com','701f81be760ef4fada8917640b07b398c855c854', 'Art director and digital illustrator passionate about storytelling through visuals.', '/images/user_pfp/woman.jpg'); -- password: Teresa.mag17
 
 -- Categories with images
 INSERT INTO Category (category_type, image) VALUES
-('Illustration & Digital Art', '../images/categories/digital.jpg'),
-('Graphic Design and Branding', '../images/categories/branding.jpg'),
-('Traditional Art & Painting', '../images/categories/monalisa.jpg'),
-('3D Art & Animation', '../images/categories/3d.jpg'),
-('Handmade & Craft Art', '../images/categories/craft.jpg'),
-('Body Art Design & Tattoo', '../images/categories/tattoo.jpg');
+('Illustration & Digital Art', '/images/categories/digital.jpg'),
+('Graphic Design and Branding', '/images/categories/branding.jpg'),
+('Traditional Art & Painting', '/images/categories/monalisa.jpg'),
+('3D Art & Animation', '/images/categories/3d.jpg'),
+('Handmade & Craft Art', '/images/categories/craft.jpg'),
+('Body Art Design & Tattoo', '/images/categories/tattoo.jpg');
 
 -- Subcategories for each category
 -- Illustration & Digital Art subcategories
@@ -88,14 +88,14 @@ INSERT INTO Subcategory (category_id, name) VALUES
 
 -- Services (varied across users and categories)
 INSERT INTO Service (user_id, title, description, category_id, price, delivery_time, images) VALUES
-(2, 'Character Illustration', 'Custom character illustrations in various styles for your stories, games, or personal use.', 1, 75.00, 5, '../images/services/character_illustration.png'),
-(3, 'Logo Design Package', 'Professional logo design including 3 concepts, unlimited revisions, and all file formats.', 2, 120.00, 7, '../images/services/logo_design_package.png'),
-(4, 'Custom Oil Portrait', 'Handmade oil portrait from your photos. Perfect for gifts or personal collection.', 3, 250.00, 14, '../images/services/srv_682b442734f443.07923633_monalisa.jpg'),
-(5, '3D Character Modeling', 'High-quality 3D character models ready for animation or gaming projects.', 4, 180.00, 10, '../images/services/srv_682b4427347d38.81134772_3d.jpg'),
-(6, 'Handcrafted Jewelry', 'Unique handmade jewelry pieces customized to your preferences.', 5, 95.00, 8, '../images/services/srv_682b442734e0e2.96781324_craft.jpg'),
-(7, 'Custom Tattoo Design', 'Original tattoo designs based on your ideas and preferences.', 6, 85.00, 6, '../images/services/srv_682c36f07ed799.00860090_Capture-2025-02-24-164426.png'),
-(8, 'Digital Concept Art', 'Professional concept art for games, films, or personal projects.', 1, 150.00, 9, '../images/services/digital_concept_art.png'),
-(2, 'Brand Identity Package', 'Complete brand identity design including logo, business cards, letterhead, and brand guidelines.', 2, 350.00, 21, '../images/services/brand_identity_package.jpg');
+(2, 'Character Illustration', 'Custom character illustrations in various styles for your stories, games, or personal use.', 1, 75.00, 5, '/images/services/character_illustration.png'),
+(3, 'Logo Design Package', 'Professional logo design including 3 concepts, unlimited revisions, and all file formats.', 2, 120.00, 7, '/images/services/logo_design_package.png'),
+(4, 'Custom Oil Portrait', 'Handmade oil portrait from your photos. Perfect for gifts or personal collection.', 3, 250.00, 14, '/images/services/srv_682b442734f443.07923633_monalisa.jpg'),
+(5, '3D Character Modeling', 'High-quality 3D character models ready for animation or gaming projects.', 4, 180.00, 10, '/images/services/srv_682b4427347d38.81134772_3d.jpg'),
+(6, 'Handcrafted Jewelry', 'Unique handmade jewelry pieces customized to your preferences.', 5, 95.00, 8, '/images/services/srv_682b442734e0e2.96781324_craft.jpg'),
+(7, 'Custom Tattoo Design', 'Original tattoo designs based on your ideas and preferences.', 6, 85.00, 6, '/images/services/srv_682c36f07ed799.00860090_Capture-2025-02-24-164426.png'),
+(8, 'Digital Concept Art', 'Professional concept art for games, films, or personal projects.', 1, 150.00, 9, '/images/services/digital_concept_art.png'),
+(2, 'Brand Identity Package', 'Complete brand identity design including logo, business cards, letterhead, and brand guidelines.', 2, 350.00, 21, '/images/services/brand_identity_package.jpg');
 
 -- Assign subcategories to services
 INSERT INTO ServiceSubcategory (service_id, subcategory_id) VALUES

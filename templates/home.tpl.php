@@ -10,13 +10,11 @@
     </head>
     <body>
     <header>
-        <a href="/" style="text-decoration: none; color: var(--green)">
-            <h1 class='artflow-text'>artflow</h1>
-        </a>
+        <h1><a href="/" class='artflow-text'>artflow</a></h1>
         <nav id="menu">
             <div id="search-bar">
                 <input type="text" id="search-input" placeholder="Search here..." />
-                <button id="search-button"><img src="../images/logos/search.png" alt="Search" id="search-icon"></button>
+                <button id="search-button"><img src="/images/search.png" alt="Search" id="search-icon"></button>
             </div>
             <ul id="buttons">
                 <?php if (!$user): ?>
@@ -31,40 +29,45 @@
     <?php if ($user): ?>
     <div id="sidebar">
         <div id="profile">
-            <button id="button-avatar"><img src="../images/logos/avatar.png" alt="Avatar" id="avatar"></button>
-            <div>
-                <h2 id="profile-name"><?= htmlspecialchars($user['name']) ?></h2>
-                <h3 id="profile-username">@<?= htmlspecialchars($user['username']) ?></h3>
-            </div>
+        <?php    
+        echo '<a href="/pages/profile.php?username=' . htmlspecialchars($user['username']) . '" id="profile-link" aria-label="View Profile">'
+        ?>
+                <img src="<?= isset($user['profile_image']) && $user['profile_image'] ? htmlspecialchars($user['profile_image']) : '/images/user_pfp/default.png' ?>" alt="Avatar" id="avatar-sidebar" class="profile-img">
+                <div>
+                    <h2 id="profile-name"><?= htmlspecialchars($user['name']) ?></h2>
+                    <h3 id="profile-username">@<?= htmlspecialchars($user['username']) ?></h3>
+                </div>
+            </a>
         </div>
         <ul id="sidebar-list">
             <li class="sidebar-item" id="new-service-button">
-                <img src="../images/logos/add_circle.png" alt="New Service" class="logo">
+                <img src="/images/add_circle.png" alt="New Service" class="logo">
                 <button>New Service</button>
             </li>
             <li class="sidebar-item">
-                <img src="../images/logos/activity.png" alt="Activity" class="logo">
+                <img src="/images/activity.png" alt="Activity" class="logo">
                 <button>Activity</button>
             </li>
             <li class="sidebar-item">
-                <img src="../images/logos/messages.png" alt="Messages" class="logo">
+                <img src="/images/messages.png" alt="Messages" class="logo">
                 <button>Messages</button>
             </li>
             <li class="sidebar-item">
-                <img src="../images/logos/stats.png" alt="Stats" class="logo">
+                <img src="/images/stats.png" alt="Stats" class="logo">
                 <button>Stats</button>
             </li>
             <li class="sidebar-item" id="settings">
-                <img src="../images/logos/settings.png" alt="Settings" class="logo">
+                <img src="/images/settings.png" alt="Settings" class="logo">
                 <button>Settings</button>
             </li>
             <li class="sidebar-item">
-                <img src="../images/logos/logout.png" alt="Log Out" class="logo">
-                <form action="../actions/logout.php" method="post"><button>Log Out</button></form>
+                <img src="/images/logout.png" alt="Log Out" class="logo">
+                <form action="/actions/logout.php" method="post"><button>Log Out</button></form>
             </li>
         </ul>
     </div>
     <div id="overlay" onclick="closeSidebar()"></div>
+    <script src="/js/sidebar.js"></script>
     <?php endif; ?>
 
 <?php } ?>
@@ -171,7 +174,7 @@
                     </div>
                 </div>
                 <div id="end-footer">
-                    <p>This website was built in the context of the course Linguagens e Tecnologias Web of the Bachelor’s Informatics and Computing Engineering of University of Porto .</p>
+                    <p>This website was built in the context of the course Linguagens e Tecnologias Web of the Bachelor's Informatics and Computing Engineering of University of Porto .</p>
                     <p>© All rights reserved.</p>
                 </div>
             </footer>
@@ -182,6 +185,11 @@
             <?php include __DIR__ . '/../pages/modals/go-with-flow-modal.php'; ?>
         <?php endif; ?>
         <?php include __DIR__ . '/../pages/modals/new-service-modal.php'; ?>
+        <!-- Load the modular JavaScript files -->
+        <script src="/js/modals.js"></script>
+        <script src="/js/categories.js"></script>
+        <script src="/js/app.js"></script>
+        <!-- Keep script.js for backward compatibility -->
         <script src="/js/script.js"></script>
     </body>
 </html>

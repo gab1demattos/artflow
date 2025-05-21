@@ -1,0 +1,261 @@
+/* Profile Container Styles */
+.profile {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	grid-template-areas:
+		"image info"
+		"image bio";
+	padding: 20px;
+	margin-bottom: 20px;
+	gap: 8px;
+	position: relative;
+}
+
+/* Modification for when there's no bio */
+.profile.no-bio {
+	grid-template-areas: "image info";
+	align-items: center;
+}
+
+/* Edit profile button */
+.edit-profile-btn {
+	position: absolute;
+	top: 4.5em;
+	right: 4.5em;
+	z-index: 5;
+}
+
+/* Profile Image Styles */
+.profile .profile-img {
+	grid-area: image;
+	position: relative;
+	margin-left: 4.5em;
+	margin-right: 2.8125em;
+	margin-top: 3em;
+	align-self: start;
+	flex-basis: 12.5em; /* Width of the image */
+	display: flex;
+	flex-direction: column;
+	height: 12.5em; /* Same as image height */
+}
+
+/* Adjust image alignment when no bio */
+.profile.no-bio .profile-img {
+	align-self: center;
+	margin-top: 0;
+}
+
+/* Profile Image Styles */
+.profile .profile-img img {
+	width: 12.5em;
+	height: 12.5em;
+	border-radius: 50%; /* Makes the image circular */
+	object-fit: cover;
+	border: 2px solid #ddd;
+}
+
+/* Profile Info Styles */
+.profile .info {
+	grid-area: info;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	margin-top: calc(
+		3em + 1.5em
+	); /* Added 0.5em to create slight offset from image top */
+	align-self: flex-start;
+	flex-basis: calc(
+		100% - 20em
+	); /* Take remaining width minus image and margins */
+	margin-right: 20px;
+}
+
+/* Center the info vertically when no bio */
+.profile.no-bio .info {
+	margin-top: 3em;
+	align-self: center;
+	justify-content: center;
+}
+
+.profile.no-bio .profile-img {
+	margin-top: 3em;
+}
+
+.profile .info .name {
+	font-family: Garamond, serif;
+	font-size: 28px;
+	font-weight: 600;
+	margin-bottom: 10px;
+	color: #333;
+}
+
+.profile .info .username {
+	font-family: Garamond, serif;
+	font-size: 20px;
+	font-weight: 400;
+	color: #666;
+	margin-bottom: 10px;
+	display: flex;
+	align-items: center;
+	gap: 10px; /* Add space between username and tag */
+}
+
+/* Tag Styles */
+.profile .info .tag {
+	padding: 5px 12px;
+	border-radius: 20px;
+	font-size: 14px;
+	font-weight: 500;
+	display: inline-block;
+}
+
+.profile .info .tag.admin {
+	background-color: var(--green);
+	color: var(--beige);
+}
+
+/* Bio Styles */
+.profile #bio {
+	grid-area: bio;
+	margin-left: 0;
+	padding-top: 0;
+	align-self: center;
+	display: flex;
+	flex-direction: column;
+	margin-top: 0;
+	margin-bottom: 0;
+	height: fit-content;
+}
+
+#bio-title {
+	font-family: "Cormorant Garamound", serif;
+	font-size: 1.25rem;
+	font-weight: 600;
+	color: #636363;
+	margin-bottom: 0;
+	margin-top: 0;
+}
+
+.bio-text {
+	font-family: Garamond, serif;
+	font-size: 16px;
+	line-height: 1.5;
+	color: rgb(25, 25, 25);
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+/* Tabs Styles */
+.tabs {
+	display: flex;
+	border-bottom: 1px solid #ddd;
+	margin-bottom: 20px;
+	margin-left: 4.5em;
+	margin-right: 4.5em;
+}
+
+.tabs div {
+	padding: 10px 20px;
+	cursor: pointer;
+	font-weight: 500;
+	position: relative; /* For positioning the active indicator */
+	transition: color 0.3s ease;
+}
+
+.tabs div:hover {
+	color: var(--green);
+}
+
+/* Active tab indicator */
+.tabs div.active {
+	color: var(--green);
+}
+
+.tabs div.active::after {
+	content: "";
+	position: absolute;
+	bottom: -1px; /* Position at the bottom of the tab */
+	left: 0;
+	width: 100%; /* Width of the tab */
+	height: 3px; /* Height of the indicator line */
+	background-color: var(--green);
+	transition: transform 0.3s ease;
+}
+
+/* Tab content containers */
+.tab-content {
+	display: none; /* Hide all tab content by default */
+	min-height: calc(
+		100vh - 25em
+	); /* Use viewport height minus space for header/tabs/etc */
+	width: 100%;
+	flex-direction: column;
+	padding: 0 4.5em; /* Match tab margins */
+	box-sizing: border-box;
+}
+
+/* Only center items in empty state or for reviews tab - horizontal centering */
+.tab-content.empty-state,
+#reviews.tab-content {
+	display: flex !important;
+	justify-content: center !important;
+	text-align: center;
+}
+
+/* Specific styling for reviews tab - position from top */
+#reviews.tab-content {
+	align-items: flex-start !important;
+}
+
+/* Ensure the nothing-img is properly positioned in empty states */
+.tab-content.empty-state .nothing-img,
+#reviews.tab-content .nothing-img {
+	margin: 40px auto 0; /* Top margin of 40px, centered horizontally */
+	display: block;
+}
+
+.tab-content.active {
+	display: flex; /* Show only active tab content */
+}
+
+/* Empty state styling - centered vertically and horizontally */
+.tab-content:empty,
+.tab-content.empty {
+	justify-content: center; /* Center vertically when empty */
+	align-items: center;
+}
+
+/* Service list styling in profile */
+#listings #services-list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 24px 18px;
+	justify-content: flex-start !important; /* Force left alignment */
+	align-items: flex-start !important; /* Force top alignment */
+	width: 100%;
+	padding: 20px 0; /* Remove horizontal padding since it's on the parent */
+	margin: 0; /* Remove margin */
+}
+
+/* Force left-alignment for listings tab */
+#listings.tab-content.active {
+	align-items: flex-start !important;
+	justify-content: flex-start !important;
+}
+
+/* Center the "no services" message and image */
+#listings:not(:has(#services-list)) {
+	justify-content: center; /* Center vertically when no services */
+}
+
+#listings p {
+	margin-top: 20px;
+	font-size: 1.2rem;
+	color: #666;
+}
+
+.nothing-img {
+	max-width: 250px;
+	opacity: 0.7;
+	margin-top: 40px;
+}
