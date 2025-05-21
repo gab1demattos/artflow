@@ -3,6 +3,8 @@ require_once(__DIR__ . '/../database/session.php');
 require_once(__DIR__ . '/../database/categories.php');
 require_once(__DIR__ . '/../templates/home.tpl.php');
 require_once(__DIR__ . '/../templates/service_card.php');
+require_once(__DIR__ . '/../database/classes/category.class.php');
+require_once(__DIR__ . '/../database/classes/service.class.php');
 
 $session = Session::getInstance();
 $user = $session->getUser() ?? null;
@@ -10,10 +12,10 @@ $db = Database::getInstance();
 
 $categoryId = isset($_GET['id']) ? intval($_GET['id']) : 0;
 $category = null;
+
 if ($categoryId > 0) {
-    $stmt = $db->prepare('SELECT * FROM Category WHERE id = ?');
-    $stmt->execute([$categoryId]);
-    $category = $stmt->fetch();
+    // Use Category class method instead of direct database query
+    $category = Category::getCategoryAsArrayById($categoryId);
 }
 
 if (!$category) {
@@ -35,10 +37,8 @@ drawHeader($user);
             </h1>
         </div>
         <?php
-        // Fetch subcategories for this category
-        $stmt = $db->prepare('SELECT id, name FROM Subcategory WHERE category_id = ?');
-        $stmt->execute([$category['id']]);
-        $subcategories = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        // Fetch subcategories for this category using Category class method
+        $subcategories = Category::getSubcategoriesByCategoryId($categoryId);
         ?>
         <?php if ($subcategories): ?>
         <div class="subcategory-carousel-wrapper">
@@ -55,22 +55,21 @@ drawHeader($user);
     <div class="category-content">
         <div id="services-list">
             <?php
-            // Fetch all services for this category
-            $stmt = $db->prepare('SELECT Service.*, User.username FROM Service JOIN User ON Service.user_id = User.id WHERE Service.category_id = ?');
-            $stmt->execute([$category['id']]);
-            $services = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            // Fetch all services for this category using Service class method
+            $services = Service::getServicesByCategory($categoryId);
             if ($services) {
-                foreach ($services as $service) {
-                    // Fetch subcategories for this service
-                    $stmtSub = $db->prepare('SELECT subcategory_id FROM ServiceSubcategory WHERE service_id = ?');
-                    $stmtSub->execute([$service['id']]);
-                    $subcatIds = $stmtSub->fetchAll(PDO::FETCH_COLUMN);
+                foreach ($services as $serviceObj) {
+                    // Get subcategory IDs for this service
+                    $subcatIds = $serviceObj->getSubcategoryIds();
                     $subcatIdsStr = implode(',', $subcatIds);
-                    // Get first image (if any)
-                    $serviceImages = array_filter(array_map('trim', explode(',', $service['images'] ?? '')));
-                    $serviceImage = count($serviceImages) > 0 ? $serviceImages[0] : null;
                     
-                    // Use the new service card component
+                    // Get first image for this service
+                    $serviceImage = $serviceObj->getFirstImage();
+                    
+                    // Convert service object to array for the template
+                    $service = $serviceObj->toArray();
+                    
+                    // Use the service card component
                     drawServiceCard($service, $serviceImage, $subcatIdsStr);
                 }
             } else {
