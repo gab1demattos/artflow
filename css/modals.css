@@ -267,7 +267,7 @@
 #h2-edit-profile {
 	color: var(--orange);
 	font-size: 2.5rem;
-	margin-bottom: 1.2em;
+	margin-bottom: 0.7em;
 }
 
 #edit-profile-form {
@@ -323,7 +323,7 @@
 }
 
 #edit-profile-modal .button-container {
-	margin-top: 2em;
+	margin-top: 0.7em;
 }
 
 /* Style the file input */
