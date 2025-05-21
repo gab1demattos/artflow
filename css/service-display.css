@@ -22,20 +22,20 @@
 #service-detail {
     display: flex;
     flex-direction: column;
-    padding-top: 2em;
+    padding-top: 0;
     margin-right: 0;
     width: 35%;
 }
 
 #service-name h2 {
     font-size: 2.5rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     font-weight: 700;
     margin-top: 0.5em;
 }
 
 #service-name {
-    padding: 1em;
+    padding: 0.5em;
 }
 
 #service-name p {
@@ -70,6 +70,8 @@
     border-radius: 15px;
     border: none;
     font-family: 'EB Garamond', serif;
+    margin: 0 auto;
+    margin-bottom: 1em;
 }
 
 #service-options {
@@ -173,16 +175,20 @@
 }
 
 #reviews {
-    margin-top: 2em;
-    padding: 1em;
+    max-height: 300px; /* Set a fixed height */
+    overflow-y: auto; /* Enable vertical scrolling */
+    padding: 1em; 
+    margin-top: 1em;
     border-radius: 5px;
     font-family: 'EB Garamond', serif;
 }
 
 #reviews h3 {
-    font-size: 2.2rem;
+    font-size: 1.7rem;
     font-weight: 700;
     text-align: center;
+    margin: 0;
+    margin-bottom: 0.5em;
 }
 
 .review {

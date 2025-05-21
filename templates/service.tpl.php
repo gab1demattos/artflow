@@ -5,6 +5,10 @@ $stmtImg->execute([$service['id']]);
 $imageRow = $stmtImg->fetch(PDO::FETCH_ASSOC); // Fetch a single row
 $imagePaths = $imageRow['images']; // Extract the 'images' field
 $images = explode(', ', $imagePaths); // Split the string into an array
+
+$stmtOwner = $db->prepare('SELECT u.name FROM User u JOIN Service s ON u.id = s.user_id WHERE s.id = ?');
+$stmtOwner->execute([$service['id']]);
+$owner = $stmtOwner->fetch(PDO::FETCH_ASSOC);
 ?>
     <div id="service-display">
         <div id="service-imgs">
@@ -28,7 +32,7 @@ $images = explode(', ', $imagePaths); // Split the string into an array
                     <p class="service-delivery"><?= htmlspecialchars($service['delivery_time']) ?> days</p>
                 </div>
                 <div id="service-options">
-                    <button id="message" class="service-options">Message</button>
+                    <button id="message" class="service-options">Message <?= htmlspecialchars($owner['name']) ?></button>
                     <button id="payment" class="service-options">Continue to Payment</button>
                 </div>
             </div>
