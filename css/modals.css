@@ -368,10 +368,44 @@
 	align-items: center;
 	margin-bottom: 15px;
 	border: 2px solid var(--orange);
+	position: relative;
 }
 
 #edit-profile-modal #profile-preview-container img {
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
+}
+
+/* Delete button next to file input */
+.delete-image-btn {
+	border-radius: 50%;
+	width: 30px;
+	height: 30px;
+	cursor: pointer;
+	padding: 0;
+	line-height: 26px;
+	text-align: center;
+	font-size: 18px;
+	margin-left: 10px;
+	background: var(--orange);
+	border: none;
+	color: var(--peach);
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	vertical-align: middle;
+	transition: background-color 0.3s ease;
+}
+
+.delete-image-btn:hover {
+	background-color: #ff6347; /* Red color on hover */
+}
+
+/* File input container for side-by-side elements */
+.file-input-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 10px;
 }

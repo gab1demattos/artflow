@@ -23,6 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 $name = $_POST['name'] ?? '';
 $username = $_POST['username'] ?? '';
 $bio = $_POST['bio'] ?? '';
+$resetProfileImage = isset($_POST['reset_profile_image']) && $_POST['reset_profile_image'] === '1';
 
 // Basic validation
 if (empty($name) || empty($username)) {
@@ -47,7 +48,13 @@ if ($username !== $user['username']) {
 
 // Process profile image if uploaded
 $profileImage = $user['profile_image'] ?? null; // Keep existing by default
-if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] === UPLOAD_ERR_OK) {
+
+// If reset flag is set, set profile image to default
+if ($resetProfileImage) {
+    $profileImage = '/images/user_pfp/default.png';
+} 
+// Otherwise, process uploaded image if any
+else if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] === UPLOAD_ERR_OK) {
     $allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
     $fileType = $_FILES['profile_image']['type'];
     

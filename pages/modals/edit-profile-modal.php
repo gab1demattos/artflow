@@ -14,9 +14,11 @@
                             <div id="profile-preview-container">
                                 <img id="profile-preview" src="<?= $user->getProfileImage() ?? '/images/user_pfp/default.png' ?>" alt="Profile preview">
                             </div>
-                            <div>
+                            <div class="file-input-container">
                                 <input type="file" name="profile_image" id="profile_image" accept="image/*">
                                 <label for="profile_image" class="file-label">Choose file</label>
+                                <button type="button" class="delete-image-btn" id="delete-image-btn">🗑️</button>
+                                <input type="hidden" name="reset_profile_image" id="reset_profile_image" value="0">
                             </div>
                         </div>
                     </div>
@@ -46,6 +48,26 @@
                 const fileName = file.name.length > 15 ? file.name.substring(0, 12) + '...' : file.name;
                 fileLabel.textContent = fileName;
             }
+        }
+    });
+
+    document.getElementById('delete-image-btn').addEventListener('click', function() {
+        document.getElementById('profile-preview').src = '/images/user_pfp/default.png';
+        document.getElementById('profile_image').value = '';
+        document.getElementById('reset_profile_image').value = '1'; // Set the hidden input to indicate reset
+        // Update label to show default text
+        const fileLabel = document.querySelector('.file-label');
+        if (fileLabel) {
+            fileLabel.textContent = 'Choose file';
+        }
+    });
+
+    document.getElementById('profile-preview').addEventListener('load', function() {
+        const deleteBtn = document.getElementById('delete-image-btn');
+        if (this.src !== '/images/user_pfp/default.png') {
+            deleteBtn.style.display = 'block';
+        } else {
+            deleteBtn.style.display = 'none';
         }
     });
 </script>
