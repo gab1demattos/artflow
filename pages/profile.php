@@ -92,9 +92,42 @@ document.addEventListener('DOMContentLoaded', function() {
       document.getElementById(tabId).classList.add('active');
     });
   });
+  
+  // Edit Profile button functionality
+  const editProfileBtn = document.querySelector('.edit-profile-btn');
+  const editProfileModalOverlay = document.getElementById('edit-profile-modal-overlay');
+  const editProfileModal = document.getElementById('edit-profile-modal');
+  const cancelEditProfileBtn = document.getElementById('cancel-edit-profile');
+  
+  if (editProfileBtn && editProfileModalOverlay) {
+    editProfileBtn.addEventListener('click', function() {
+      editProfileModalOverlay.classList.remove('hidden');
+    });
+  }
+  
+  if (cancelEditProfileBtn && editProfileModalOverlay) {
+    cancelEditProfileBtn.addEventListener('click', function() {
+      editProfileModalOverlay.classList.add('hidden');
+    });
+  }
+  
+  if (editProfileModalOverlay && editProfileModal) {
+    // Close modal when clicking outside
+    editProfileModalOverlay.addEventListener('click', function() {
+      editProfileModalOverlay.classList.add('hidden');
+    });
+    
+    // Prevent closing when clicking inside the modal
+    editProfileModal.addEventListener('click', function(e) {
+      e.stopPropagation();
+    });
+  }
 });
 </script>
 
 <?php 
+// Include the edit profile modal
+include_once(__DIR__ . '/modals/edit-profile-modal.php');
+
 drawFooter($loggedInUser);
 ?>
