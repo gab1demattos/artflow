@@ -99,16 +99,32 @@
 #price {
     font-size: 3rem;
     font-weight: 700;
-    margin-top: 0.5em;
+    margin-top: 0.2em;
     text-align: end;
     margin-right: 1em;
     margin-bottom: 0.2em;
 }
 
-#delivery {
+#service-delivery {
+    display: flex;
+    background-color: aquamarine;
+    justify-content: space-between;
+    padding-right: 3em;
+    height: auto;
+}
+
+.service-delivery {
     font-size: 1.2rem;
-    margin-top: 0.5em;
     text-align: center;
-    margin-right: 1em;
-    margin-top: 0;
+    background-color: blueviolet;
+    margin-top: 1em;
+}
+
+#service-delivery img{
+    width: 5em;
+    height: auto;
+    padding: 0;
+    background-color: tomato;
+    margin-left: 2em;
+    transform: scale(0.3);
 }

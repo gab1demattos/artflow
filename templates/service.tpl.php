@@ -17,7 +17,11 @@
             </div>
             <div id="service-info">
                 <p id="price" class="service-info"><?= htmlspecialchars($service['price']) ?>€</p>
-                <p id="delivery" class="service-info">Delivery Time: <?= htmlspecialchars($service['delivery_time']) ?> days</p>
+                <div id="service-delivery">
+                    <img src="/images/logos/local_shipping.png" alt="Star Icon">
+                    <p class="service-delivery" class="service-info">Delivery Time: </p>
+                    <p class="service-delivery"><?= htmlspecialchars($service['delivery_time']) ?> days</p>
+                </div>
                 <div id="service-options">
                     <button id="message" class="service-options">Message</button>
                     <button id="payment" class="service-options">Continue to Payment</button>
