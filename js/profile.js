@@ -1,3 +1,60 @@
+/*== PROFILE PAGE ==*/
+
+document.addEventListener("DOMContentLoaded", function () {
+	const tabTriggers = document.querySelectorAll(".tab-trigger");
+	const tabContents = document.querySelectorAll(".tab-content");
+
+	tabTriggers.forEach((trigger) => {
+		trigger.addEventListener("click", function () {
+			// Remove active class from all triggers and contents
+			tabTriggers.forEach((t) => t.classList.remove("active"));
+			tabContents.forEach((c) => c.classList.remove("active"));
+
+			// Add active class to clicked trigger
+			this.classList.add("active");
+
+			// Show corresponding tab content
+			const tabId = this.getAttribute("data-tab");
+			document.getElementById(tabId).classList.add("active");
+		});
+	});
+
+	// Edit Profile button functionality
+	const editProfileBtn = document.querySelector(".edit-profile-btn");
+	const editProfileModalOverlay = document.getElementById(
+		"edit-profile-modal-overlay"
+	);
+	const editProfileModal = document.getElementById("edit-profile-modal");
+	const cancelEditProfileBtn = document.getElementById("cancel-edit-profile");
+
+	if (editProfileBtn && editProfileModalOverlay) {
+		editProfileBtn.addEventListener("click", function () {
+			editProfileModalOverlay.classList.remove("hidden");
+		});
+	}
+
+	if (cancelEditProfileBtn && editProfileModalOverlay) {
+		cancelEditProfileBtn.addEventListener("click", function () {
+			editProfileModalOverlay.classList.add("hidden");
+		});
+	}
+
+	if (editProfileModalOverlay && editProfileModal) {
+		// Close modal when clicking outside
+		editProfileModalOverlay.addEventListener("click", function () {
+			editProfileModalOverlay.classList.add("hidden");
+		});
+
+		// Prevent closing when clicking inside the modal
+		editProfileModal.addEventListener("click", function (e) {
+			e.stopPropagation();
+		});
+	}
+});
+
+
+/*== EDIT PROFILE ==*/
+
 document.addEventListener("DOMContentLoaded", function () {
 	// Profile image upload preview
 	const profileImageInput = document.getElementById("profile_image");

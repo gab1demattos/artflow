@@ -45,11 +45,11 @@ drawHeader($loggedInUser);
     <div data-tab="reviews" class="tab-trigger">Reviews</div>
   </div>
   
-  <div id="listings" class="tab-content active" style="align-items: flex-start !important; justify-content: flex-start !important;">
+  <div id="listings" class="tab-content active<?= empty($services) ? ' empty-state' : '' ?>">
     <?php if (empty($services)): ?>
         <img src="/images/nothing-to-see-here.png" alt="Nothing to see here!" class="nothing-img" />
     <?php else: ?>
-      <div id="services-list" style="justify-content: flex-start !important; align-items: flex-start !important;">
+      <div id="services-list">
     <?php foreach ($services as $serviceObj): 
           // Get subcategory IDs for this service
           $subcatIds = $serviceObj->getSubcategoryIds();
@@ -68,62 +68,12 @@ drawHeader($loggedInUser);
     <?php endif; ?>
   </div>
   
-  <div id="reviews" class="tab-content">
+  <div id="reviews" class="tab-content empty-state">
     <img src="/images/nothing-to-see-here.png" alt="Nothing to see here!" class="nothing-img" />
   </div>
 </main>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const tabTriggers = document.querySelectorAll('.tab-trigger');
-  const tabContents = document.querySelectorAll('.tab-content');
-  
-  tabTriggers.forEach(trigger => {
-    trigger.addEventListener('click', function() {
-      // Remove active class from all triggers and contents
-      tabTriggers.forEach(t => t.classList.remove('active'));
-      tabContents.forEach(c => c.classList.remove('active'));
-      
-      // Add active class to clicked trigger
-      this.classList.add('active');
-      
-      // Show corresponding tab content
-      const tabId = this.getAttribute('data-tab');
-      document.getElementById(tabId).classList.add('active');
-    });
-  });
-  
-  // Edit Profile button functionality
-  const editProfileBtn = document.querySelector('.edit-profile-btn');
-  const editProfileModalOverlay = document.getElementById('edit-profile-modal-overlay');
-  const editProfileModal = document.getElementById('edit-profile-modal');
-  const cancelEditProfileBtn = document.getElementById('cancel-edit-profile');
-  
-  if (editProfileBtn && editProfileModalOverlay) {
-    editProfileBtn.addEventListener('click', function() {
-      editProfileModalOverlay.classList.remove('hidden');
-    });
-  }
-  
-  if (cancelEditProfileBtn && editProfileModalOverlay) {
-    cancelEditProfileBtn.addEventListener('click', function() {
-      editProfileModalOverlay.classList.add('hidden');
-    });
-  }
-  
-  if (editProfileModalOverlay && editProfileModal) {
-    // Close modal when clicking outside
-    editProfileModalOverlay.addEventListener('click', function() {
-      editProfileModalOverlay.classList.add('hidden');
-    });
-    
-    // Prevent closing when clicking inside the modal
-    editProfileModal.addEventListener('click', function(e) {
-      e.stopPropagation();
-    });
-  }
-});
-</script>
+<script src="/js/profile.js"></script>
 
 <?php 
 // Include the edit profile modal

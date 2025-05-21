@@ -194,12 +194,24 @@
 	box-sizing: border-box;
 }
 
-/* Only center items in empty state or for reviews tab */
+/* Only center items in empty state or for reviews tab - horizontal centering */
 .tab-content.empty-state,
 #reviews.tab-content {
-	align-items: center;
+	display: flex !important;
+	justify-content: center !important;
 	text-align: center;
-	justify-content: center;
+}
+
+/* Specific styling for reviews tab - position from top */
+#reviews.tab-content {
+	align-items: flex-start !important;
+}
+
+/* Ensure the nothing-img is properly positioned in empty states */
+.tab-content.empty-state .nothing-img,
+#reviews.tab-content .nothing-img {
+	margin: 40px auto 0; /* Top margin of 40px, centered horizontally */
+	display: block;
 }
 
 .tab-content.active {

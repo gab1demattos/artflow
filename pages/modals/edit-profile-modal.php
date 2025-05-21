@@ -37,4 +37,4 @@
     </div>
 </div>
 
-<script src="/js/edit-profile.js"></script>
+<script src="/js/profile.js"></script>
