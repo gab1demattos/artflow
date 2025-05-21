@@ -1,6 +1,5 @@
 <?php
 require_once(__DIR__ . '/../database/session.php');
-require_once(__DIR__ . '/../database/categories.php');
 require_once(__DIR__ . '/../templates/home.tpl.php');
 require_once(__DIR__ . '/../templates/service_card.php');
 require_once(__DIR__ . '/../database/classes/category.class.php');
