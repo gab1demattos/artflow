@@ -1,5 +1,11 @@
 <?php function drawServiceDisplay($service, $user, $db) { ?>
     <div id="service-display">
+        <div id="service-imgs">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
         <div id="service-img">
         <?php 
         $stmtImg = $db->prepare('SELECT images FROM Service WHERE id = ?');
