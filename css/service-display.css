@@ -41,7 +41,7 @@
     width: 85%;
     margin: 0 auto;
     font-family: 'EB Garamond', serif;
-    gap: 1em;
+    gap: 0.5em;
     transform: translateY(-1em);
 }
 
