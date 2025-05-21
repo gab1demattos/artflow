@@ -150,6 +150,7 @@
 
 #service-imgs::-webkit-scrollbar {
     height: 12px; 
+    width: 10px;
 }
 
 #service-imgs::-webkit-scrollbar-thumb {
