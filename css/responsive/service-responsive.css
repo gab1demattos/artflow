@@ -17,7 +17,7 @@
         margin: 1em 0;
     }
 
-    #service-name h2 {
+    #service-checkout h2 {
         font-size: 2rem;
     }
 
@@ -58,7 +58,9 @@
     }
 
     #service-main {
-        overflow-y: none;
+        width: 100%;
+        overflow-y:hidden;
+        background-color: blueviolet;
     }
 }
 
