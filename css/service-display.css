@@ -136,12 +136,29 @@
 #service-imgs {
     display: flex;
     flex-direction: column;
-    overflow-x: scroll;
     gap: 0.5em;
     margin: 6em 0 0 2em;
     scroll-behavior: smooth;
     width: 10em;
     height: 27em;
+    overflow-x: scroll; 
+    white-space: nowrap;
+    scrollbar-gutter: stable; /* Ensures the scrollbar is always visible */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling for iOS */
+    scrollbar-width:auto; /* Adjust scrollbar width for Firefox */
+}
+
+#service-imgs::-webkit-scrollbar {
+    height: 12px; 
+}
+
+#service-imgs::-webkit-scrollbar-thumb {
+    background: #8886; 
+    border-radius: 6px; 
+}
+
+#service-imgs::-webkit-scrollbar-thumb:hover {
+    background: #888;
 }
 
 #service-imgs div {
