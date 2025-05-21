@@ -95,7 +95,7 @@ INSERT INTO Service (user_id, title, description, category_id, price, delivery_t
 (6, 'Handcrafted Jewelry', 'Unique handmade jewelry pieces customized to your preferences.', 5, 95.00, 8, '../images/services/srv_682b442734e0e2.96781324_craft.jpg'),
 (7, 'Custom Tattoo Design', 'Original tattoo designs based on your ideas and preferences.', 6, 85.00, 6, '../images/services/srv_682c36f07ed799.00860090_Capture-2025-02-24-164426.png'),
 (8, 'Digital Concept Art', 'Professional concept art for games, films, or personal projects.', 1, 150.00, 9, '../images/services/digital_concept_art.png'),
-(2, 'Brand Identity Package', 'Complete brand identity design including logo, business cards, letterhead, and brand guidelines.', 2, 350.00, 21, '../images/services/brand_identity_package.jpg');
+(2, 'Brand Identity Package', 'Complete brand identity design including logo, business cards, letterhead, and brand guidelines.', 2, 350.00, 21, '../images/services/brand_identity_package.jpg, ../images/services/color.jpeg, ../images/services/camaleao.jpeg, ../images/services/tree.jpeg, ../images/services/sun.jpeg');
 
 -- Assign subcategories to services
 INSERT INTO ServiceSubcategory (service_id, subcategory_id) VALUES

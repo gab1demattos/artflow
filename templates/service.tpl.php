@@ -1,20 +1,19 @@
 <?php function drawServiceDisplay($service, $user, $db) { ?>
+<?php
+$stmtImg = $db->prepare('SELECT images FROM Service WHERE id = ?');
+$stmtImg->execute([$service['id']]);
+$imageRow = $stmtImg->fetch(PDO::FETCH_ASSOC); // Fetch a single row
+$imagePaths = $imageRow['images']; // Extract the 'images' field
+$images = explode(', ', $imagePaths); // Split the string into an array
+?>
     <div id="service-display">
         <div id="service-imgs">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
+            <?php foreach ($images as $image) { ?>
+                <img src="<?= htmlspecialchars($image) ?>" alt="Service Image">
+            <?php } ?>
         </div>
         <div id="service-img">
-        <?php 
-        $stmtImg = $db->prepare('SELECT images FROM Service WHERE id = ?');
-        $stmtImg->execute([$service['id']]);
-        $images = $stmtImg->fetchAll(PDO::FETCH_ASSOC);
-        foreach ($images as $image) {
-            echo '<img src="' . htmlspecialchars($image['images']) . '" alt="Service Image">';
-        }
-        ?>
+            <img src="<?= htmlspecialchars($images[0]) ?>" alt="Service Image">
         </div>
         <div id="service-detail">
             <div id="service-name">
@@ -31,8 +30,9 @@
                 <div id="service-options">
                     <button id="message" class="service-options">Message</button>
                     <button id="payment" class="service-options">Continue to Payment</button>
-                <div>
+                </div>
             </div>
         </div>
     </div>
+    <script src="/js/service-scroll.js"></script>
 <?php } ?>
