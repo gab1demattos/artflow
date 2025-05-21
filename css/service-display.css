@@ -22,16 +22,43 @@
 #service-checkout {
     display: flex;
     flex-direction: column;
-    padding-top: 0;
+    padding-top: 5em;
     margin-right: 0;
     width: 35%;
 }
 
-#service-checkout h2 {
+#service-checkout > h2 {
     font-size: 2.5rem;
     margin-bottom: 0.5rem;
     font-weight: 700;
     margin-top: 0.5em;
+    text-align: center;
+}
+
+#owner-info {
+    display: flex;
+    justify-content: center;
+    width: 85%;
+    margin: 0 auto;
+    font-family: 'EB Garamond', serif;
+    gap: 1em;
+    transform: translateY(-1em);
+}
+
+#owner-info p {
+    font-size: 1.2rem;
+    color: #555;
+    line-height: 1.5;
+    margin-top: 0;
+    text-align: center;
+    transform: translateY(0.5em);
+}
+
+#owner-info img {
+    width: 3em;
+    height: auto;
+    padding: 0;
+    transform: scale(0.6);
 }
 
 #service-name {

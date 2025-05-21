@@ -44,7 +44,11 @@ $owner = $stmtOwner->fetch(PDO::FETCH_ASSOC);
         </div>
         <div id="service-checkout">
             <h2><?= htmlspecialchars($service['title']) ?></h2>
-            <p><?= htmlspecialchars($owner['name']) . htmlspecialchars($owner['username'])?></p>
+            <div id="owner-info">
+                <img src="../images/logos/avatar.png" alt="User Icon">
+                <p><?= htmlspecialchars($owner['name'])?></p>
+                <p>@<?= htmlspecialchars($owner['username'])?></p>
+            </div>
             <div id="service-info">
                 <p id="price" class="service-info"><?= htmlspecialchars($service['price']) ?>€</p>
                 <div id="service-delivery">
