@@ -63,6 +63,12 @@
 }
 /* Example: <button class="button outline yellow [other classes]">Yellow Outlined</button> */
 
+.button.filled.orange {
+	background-color: var(--orange);
+	color: var(--peach);
+	border: none;
+}
+
 .button.outline.orange {
 	background-color: transparent;
 	color: var(--orange);
@@ -127,6 +133,20 @@
 	color: #ffffff;
 	border: 2px solid var(--green);
 }
+
+/* Orange hovering variants */
+.button.hovering.filled.orange:hover {
+	background-color: var(--peach);
+	color: var(--orange);
+	border: 2px solid var(--orange);
+}
+
+.button.hovering.outline.orange:hover {
+	background-color: var(--orange);
+	color: #ffffff;
+	border: 2px solid var(--orange);
+}
+
 /* Example: <button class="button hovering [other classes]">Hoverable</button> */
 
 /* ===== COMBINATION EXAMPLES ===== */

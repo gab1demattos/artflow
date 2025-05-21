@@ -123,9 +123,9 @@
     opacity: 1;
 }
 
-#avatar {
+#avatar-sidebar {
     width: 5em;
-    height: auto;
+    height: 5em;
 }
 
 #profile {
@@ -148,6 +148,15 @@
     font-weight: 100;
     font-size: normal;
     text-align: center;
+}
+
+#profile-link {
+    display: flex; 
+    align-items: center; 
+    gap: 1em; 
+    text-decoration: none; 
+    color: inherit; 
+    width: 100%;
 }
 
 #button-avatar {
