@@ -43,6 +43,7 @@
     font-family: 'EB Garamond', serif;
     gap: 0.5em;
     transform: translateY(-1em);
+    cursor: pointer;
 }
 
 #owner-info p {
