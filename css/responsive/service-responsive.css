@@ -64,3 +64,13 @@
         font-size: 1rem;
     }
 }
+
+@media (max-width: 1065px) {
+    #service-delivery {
+        height: auto;
+    }
+
+    #service-info {
+        width: auto;
+    }
+}
