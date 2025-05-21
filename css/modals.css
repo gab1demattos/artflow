@@ -53,7 +53,6 @@
 .form {
 	display: flex;
 	flex-direction: column;
-	gap: 0.5em;
 }
 
 .form input {
@@ -245,7 +244,7 @@
 	border-radius: 20px;
 	width: 50em;
 	max-width: 800px;
-	height: 40em;
+	height: 43em;
 	position: relative;
 	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 	display: flex;
@@ -286,7 +285,7 @@
 	padding-right: 20px;
 	display: flex;
 	flex-direction: column;
-	gap: 1em;
+	gap: 0.7em; /* Reduced from 1em to bring field groups closer together while maintaining separation */
 }
 
 #edit-profile-form .form-right-column {
@@ -380,8 +379,8 @@
 /* Delete button next to file input */
 .delete-image-btn {
 	border-radius: 50%;
-	width: 35px;
-	height: 35px;
+	width: 2.1875em;
+	height: 2.1875em;
 	cursor: pointer;
 	padding: 0px;
 	line-height: 26px;
@@ -408,4 +407,38 @@
 	align-items: center;
 	justify-content: center;
 	margin-top: 10px;
+}
+
+#edit-profile-modal-overlay .form input:focus {
+	outline: none;
+	border: 2px solid var(--orange);
+}
+
+#edit-profile-modal-overlay .form textarea:focus {
+	outline: none;
+	border: 2px solid var(--orange);
+}
+
+/* Form labels */
+#edit-profile-modal .form label {
+	display: block;
+	margin-bottom: 0.1em; /* Reduced to almost touch input fields */
+	font-family: "Cormorant Garamond", serif;
+	font-size: 1.1rem;
+	font-weight: bold;
+    color: black;
+}
+
+/* Space between input fields and next label */
+#edit-profile-modal .form input,
+#edit-profile-modal .form textarea,
+#edit-profile-modal .form .password-input-container {
+	margin-bottom: 0.7em; /* This creates space between different input/label pairs */
+}
+
+/* Remove the conflicting selector that was added earlier */
+#edit-profile-modal .form > label + input,
+#edit-profile-modal .form > label + textarea,
+#edit-profile-modal .form > label + .password-input-container {
+	margin-bottom: 0; /* Reset this so it doesn't add extra spacing */
 }

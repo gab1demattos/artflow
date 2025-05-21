@@ -6,9 +6,14 @@
                 <form id="edit-profile-form" class="form" method='POST' action='/actions/edit-profile-action.php' enctype="multipart/form-data">
                     <div class="form-layout">
                         <div class="form-left-column">
-                            <input type="text" placeholder="Name" name="name" value="<?= $user->getName() ?>" required>
-                            <input type="text" placeholder="Username" name="username" value="<?= $user->getUsername() ?>" required>
-                            <textarea name="bio" placeholder="Bio (optional)"><?= $user->getBio() ?></textarea>
+                            <label for="name">Name</label>
+                            <input type="text" placeholder="Name" id="name" name="name" value="<?= $user->getName() ?>" required>
+                            
+                            <label for="username">Username</label>
+                            <input type="text" placeholder="Username" id="username" name="username" value="<?= $user->getUsername() ?>" required>
+                            
+                            <label for="bio">Bio</label>
+                            <textarea id="bio" name="bio" placeholder="Bio (optional)"><?= $user->getBio() ?></textarea>
                         </div>
                         <div class="form-right-column">
                             <div id="profile-preview-container">
@@ -16,7 +21,7 @@
                             </div>
                             <div class="file-input-container">
                                 <input type="file" name="profile_image" id="profile_image" accept="image/*">
-                                <label for="profile_image" class="file-label">Choose file</label>
+                                <label for="profile_image"yellow class="file-label">Choose file</label>
                                 <button type="button" class="delete-image-btn" id="delete-image-btn">🗑️</button>
                                 <input type="hidden" name="reset_profile_image" id="reset_profile_image" value="0">
                             </div>
