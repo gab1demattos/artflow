@@ -181,13 +181,27 @@
 	); /* Use viewport height minus space for header/tabs/etc */
 	width: 100%;
 	flex-direction: column;
+	padding: 0 4.5em; /* Match tab margins */
+	box-sizing: border-box;
+}
+
+/* Only center items in empty state or for reviews tab */
+.tab-content.empty-state,
+#reviews.tab-content {
 	align-items: center;
-	justify-content: center;
 	text-align: center;
+	justify-content: center;
 }
 
 .tab-content.active {
 	display: flex; /* Show only active tab content */
+}
+
+/* Empty state styling - centered vertically and horizontally */
+.tab-content:empty,
+.tab-content.empty {
+	justify-content: center; /* Center vertically when empty */
+	align-items: center;
 }
 
 /* Service list styling in profile */
@@ -195,11 +209,22 @@
 	display: flex;
 	flex-wrap: wrap;
 	gap: 24px 18px;
-	justify-content: center;
-	align-items: stretch;
+	justify-content: flex-start !important; /* Force left alignment */
+	align-items: flex-start !important; /* Force top alignment */
 	width: 100%;
-	padding: 20px 4.5em;
-	box-sizing: border-box;
+	padding: 20px 0; /* Remove horizontal padding since it's on the parent */
+	margin: 0; /* Remove margin */
+}
+
+/* Force left-alignment for listings tab */
+#listings.tab-content.active {
+	align-items: flex-start !important;
+	justify-content: flex-start !important;
+}
+
+/* Center the "no services" message and image */
+#listings:not(:has(#services-list)) {
+	justify-content: center; /* Center vertically when no services */
 }
 
 #listings p {
@@ -208,10 +233,8 @@
 	color: #666;
 }
 
-/* Media queries for responsive service list */
-@media (max-width: 768px) {
-	#listings #services-list {
-		padding: 15px 2em;
-		justify-content: center;
-	}
+.nothing-img {
+	max-width: 250px;
+	opacity: 0.7;
+	margin-top: 40px;
 }

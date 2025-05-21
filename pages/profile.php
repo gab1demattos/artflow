@@ -42,12 +42,12 @@ drawHeader($loggedInUser);
     <div data-tab="reviews" class="tab-trigger">Reviews</div>
   </div>
   
-  <div id="listings" class="tab-content active">
+  <div id="listings" class="tab-content active" style="align-items: flex-start !important; justify-content: flex-start !important;">
     <?php if (empty($services)): ?>
         <img src="/images/nothing-to-see-here.png" alt="Nothing to see here!" class="nothing-img" />
     <?php else: ?>
-      <div id="services-list">
-        <?php foreach ($services as $serviceObj): 
+      <div id="services-list" style="justify-content: flex-start !important; align-items: flex-start !important;">
+    <?php foreach ($services as $serviceObj): 
           // Get subcategory IDs for this service
           $subcatIds = $serviceObj->getSubcategoryIds();
           $subcatIdsStr = implode(',', $subcatIds);
