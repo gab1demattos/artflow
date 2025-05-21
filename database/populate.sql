@@ -137,4 +137,4 @@ INSERT INTO Review (user_id, service_id, rating, comment) VALUES
 (5, 1, 5, 'Excellent work! The character illustration exceeded my expectations.'),
 (6, 2, 4, 'Great logo design. Professional and responsive service.'),
 (2, 5, 5, 'Beautiful handcrafted jewelry. Will definitely order again!'),
-(3, 6, 3, 'Good design but could have used more detail in some areas.');
+(3, 8, 3, 'Good design but could have used more detail in some areas.');
