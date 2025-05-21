@@ -110,11 +110,11 @@
 	grid-area: bio;
 	margin-left: 0;
 	padding-top: 0;
-	align-self: center; 
+	align-self: center;
 	display: flex;
 	flex-direction: column;
 	margin-top: 0;
-    margin-bottom: 0;
+	margin-bottom: 0;
 	height: fit-content;
 }
 
@@ -132,8 +132,8 @@
 	font-size: 16px;
 	line-height: 1.5;
 	color: rgb(25, 25, 25);
-    margin-top: 0;
-    margin-bottom: 0;
+	margin-top: 0;
+	margin-bottom: 0;
 }
 
 /* Tabs Styles */
@@ -149,13 +149,55 @@
 	padding: 10px 20px;
 	cursor: pointer;
 	font-weight: 500;
+	position: relative; /* For positioning the active indicator */
+	transition: color 0.3s ease;
 }
 
 .tabs div:hover {
 	color: var(--green);
 }
 
-.space {
-	height: 70em;
+/* Active tab indicator */
+.tabs div.active {
+	color: var(--green);
+}
+
+.tabs div.active::after {
+	content: "";
+	position: absolute;
+	bottom: -1px; /* Position at the bottom of the tab */
+	left: 0;
+	width: 100%; /* Width of the tab */
+	height: 3px; /* Height of the indicator line */
+	background-color: var(--green);
+	transition: transform 0.3s ease;
+}
+
+/* Tab content containers */
+.tab-content {
+	display: none; /* Hide all tab content by default */
+	height: 70em; /* Set specific height as requested */
 	width: 100%;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+}
+
+.tab-content.active {
+	display: flex; /* Show only active tab content */
+}
+
+.tab-content h3 {
+	font-family: "EB Garamond", serif;
+	font-size: 1.8rem;
+	color: var(--purple);
+	margin-bottom: 1rem;
+}
+
+.tab-content p {
+	font-family: "Cormorant Garamond", serif;
+	font-size: 1.2rem;
+	color: #555;
+	max-width: 600px;
 }

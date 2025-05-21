@@ -17,6 +17,9 @@
 	--peach: #f2dac6;
 }
 
+/*== Profile Image ==*/
+/* Used in both the side bar and the profile page*/
+
 .profile-img {
 	border-radius: 50%; /* Makes the image circular */
 	border: 2px solid #ddd;
@@ -30,6 +33,10 @@
 	object-fit: cover; /* Maintains aspect ratio while filling the container */
 	display: block; /* Removes any extra space below the image */
 }
+
+
+
+/*== Home Page ==*/
 
 body {
 	margin: 0 auto;
