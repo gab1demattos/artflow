@@ -15,7 +15,6 @@
 
 #service-img {
     width: 50%;
-    background-color: tomato;
     padding: 5em 0 5em 0;
     margin: 0 1em 0 1em;
 }
@@ -138,10 +137,11 @@
     display: flex;
     flex-direction: column;
     gap: 0.5em;
+    margin: 6em 0 0 2em;
 }
 
 #service-imgs div {
-    background-color: aqua;
     width: 10em;
     height: 7em;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
