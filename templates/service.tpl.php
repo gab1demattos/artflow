@@ -1,6 +1,20 @@
 <?php function drawServiceDisplay($service, $user, $db) { ?>
-<link rel="stylesheet" href="/css/responsive/service-responsive.css">
 <?php
+$serviceId = isset($_GET['id']) ? intval($_GET['id']) : 0;
+if ($serviceId <= 0) {
+    echo "<p>Invalid service ID.</p>";
+    return;
+}
+
+$stmtService = $db->prepare('SELECT * FROM Service WHERE id = ?');
+$stmtService->execute([$serviceId]);
+$service = $stmtService->fetch(PDO::FETCH_ASSOC);
+
+if (!$service) {
+    echo "<p>Service not found.</p>";
+    return;
+}
+
 $stmtImg = $db->prepare('SELECT images FROM Service WHERE id = ?');
 $stmtImg->execute([$service['id']]);
 $imageRow = $stmtImg->fetch(PDO::FETCH_ASSOC); // Fetch a single row
@@ -11,6 +25,7 @@ $stmtOwner = $db->prepare('SELECT u.name, u.username FROM User u JOIN Service s 
 $stmtOwner->execute([$service['id']]);
 $owner = $stmtOwner->fetch(PDO::FETCH_ASSOC);
 ?>
+    <link rel="stylesheet" href="/css/responsive/service-responsive.css">
     <div id="service-display">
         <div id="service-main">
             <div id="images-service">
