@@ -12,33 +12,35 @@ $stmtOwner->execute([$service['id']]);
 $owner = $stmtOwner->fetch(PDO::FETCH_ASSOC);
 ?>
     <div id="service-display">
-        <div id="images-service">
-            <div id="service-imgs">
-                <?php foreach ($images as $image) { ?>
-                    <img class="thumbnail" src="<?= htmlspecialchars($image) ?>" alt="Service Image">
-                <?php } ?>
+        <div id="service-main">
+            <div id="images-service">
+                <div id="service-imgs">
+                    <?php foreach ($images as $image) { ?>
+                        <img class="thumbnail" src="<?= htmlspecialchars($image) ?>" alt="Service Image">
+                    <?php } ?>
+                </div>
+                <div id="main-image"><img class="main-image" src="<?= htmlspecialchars($images[0]) ?>" alt="Service Image"></div>
             </div>
-            <img id="main-image" src="<?= htmlspecialchars($images[0]) ?>" alt="Service Image">
-        </div>
-        <div id="service-details">
-            <p><?= htmlspecialchars($service['description']) ?></p>
-            <p><?= htmlspecialchars($owner['name']) . htmlspecialchars($owner['username'])?></p>
-            <div id="reviews">
-                <h3>Reviews</h3>
-                <?php
-                $stmtReviews = $db->prepare('SELECT r.rating, r.comment, u.username FROM Review r JOIN User u ON r.user_id = u.id WHERE r.service_id = ?');
-                $stmtReviews->execute([$service['id']]);
-                $reviews = $stmtReviews->fetchAll(PDO::FETCH_ASSOC);
-                if (count($reviews) > 0) {
-                    foreach ($reviews as $review) { ?>
-                        <div class="review">
-                            <p><strong><?= htmlspecialchars($review['username']) ?>:</strong> <?= htmlspecialchars($review['comment']) ?></p>
-                            <p>Rating: <?= htmlspecialchars($review['rating']) ?>/5</p>
-                        </div>
-                    <?php }
-                } else { ?>
-                    <p>No reviews yet. Be the first to leave a review!</p>
-                <?php } ?>
+            <div id="service-details">
+                <p><?= htmlspecialchars($service['description']) ?></p>
+                <p><?= htmlspecialchars($owner['name']) . htmlspecialchars($owner['username'])?></p>
+                <div id="reviews">
+                    <h3>Reviews</h3>
+                    <?php
+                    $stmtReviews = $db->prepare('SELECT r.rating, r.comment, u.username FROM Review r JOIN User u ON r.user_id = u.id WHERE r.service_id = ?');
+                    $stmtReviews->execute([$service['id']]);
+                    $reviews = $stmtReviews->fetchAll(PDO::FETCH_ASSOC);
+                    if (count($reviews) > 0) {
+                        foreach ($reviews as $review) { ?>
+                            <div class="review">
+                                <p><strong><?= htmlspecialchars($review['username']) ?>:</strong> <?= htmlspecialchars($review['comment']) ?></p>
+                                <p>Rating: <?= htmlspecialchars($review['rating']) ?>/5</p>
+                            </div>
+                        <?php }
+                    } else { ?>
+                        <p>No reviews yet. Be the first to leave a review!</p>
+                    <?php } ?>
+                </div>
             </div>
         </div>
         <div id="service-checkout">
