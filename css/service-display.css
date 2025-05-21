@@ -111,17 +111,16 @@
 
 #service-delivery {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 60%;
-    padding: 0.8em;
-    margin: 0.8em auto;
-    border: 2px solid var(--green);
+    align-items: center; 
+    width: auto; 
+    height: 2em; 
+    padding: 0; 
+    margin: 0 auto; 
+    gap: 1em; 
+    border: 1px solid #3337; 
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
-    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
-    background-color: #ffffff;
-    text-align: center;
+    padding-right: 1em;
 }
 
 .service-delivery {
