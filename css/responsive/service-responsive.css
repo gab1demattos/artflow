@@ -1,0 +1,66 @@
+/* Responsive styles for service display */
+
+@media (max-width: 768px) {
+    #service-display {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #service-img {
+        width: 90%;
+        margin: 1em 0;
+        padding: 0;
+    }
+
+    #service-detail {
+        width: 90%;
+        margin: 1em 0;
+    }
+
+    #service-name h2 {
+        font-size: 2rem;
+    }
+
+    #service-name p {
+        font-size: 1rem;
+    }
+
+    #service-info {
+        width: 100%;
+    }
+
+    #price {
+        font-size: 2rem;
+        text-align: center;
+        margin: 0.5em 0;
+    }
+
+    #service-delivery {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5em;
+        padding: 1em;
+    }
+
+    #service-imgs {
+        flex-direction: row;
+        overflow-x: auto;
+        width: 100%;
+        height: auto;
+        margin: 1em 0;
+    }
+
+    #service-imgs div {
+        width: 7em;
+        height: 5em;
+    }
+
+    #reviews {
+        max-height: none;
+        margin: 1em 0;
+    }
+
+    .review p {
+        font-size: 1rem;
+    }
+}

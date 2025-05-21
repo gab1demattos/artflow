@@ -1,4 +1,5 @@
 <?php function drawServiceDisplay($service, $user, $db) { ?>
+<link rel="stylesheet" href="/css/responsive/service-responsive.css">
 <?php
 $stmtImg = $db->prepare('SELECT images FROM Service WHERE id = ?');
 $stmtImg->execute([$service['id']]);
