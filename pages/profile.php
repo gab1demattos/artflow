@@ -38,11 +38,11 @@ drawHeader($loggedInUser);
   </div>
   
   <div id="listings" class="tab-content active">
-    <p>This user's listings will appear here.</p>
+    <img src="/images/nothing-to-see-here.png" alt="Nothing to see here!" class="nothing-img" />
   </div>
   
   <div id="reviews" class="tab-content">
-    <p>This user's reviews will appear here.</p>
+    <img src="/images/nothing-to-see-here.png" alt="Nothing to see here!" class="nothing-img" />
   </div>
 </main>
 
