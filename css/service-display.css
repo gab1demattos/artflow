@@ -153,8 +153,7 @@
 }
 
 #service-imgs::-webkit-scrollbar {
-    height: 12px; 
-    width: 10px;
+    width: 7px;
 }
 
 #service-imgs::-webkit-scrollbar-thumb {
