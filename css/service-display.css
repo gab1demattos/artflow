@@ -172,3 +172,37 @@
     background-color: #F5F5F5;
 }
 
+#reviews {
+    margin-top: 2em;
+    padding: 1em;
+    border-radius: 5px;
+    font-family: 'EB Garamond', serif;
+}
+
+#reviews h3 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.review {
+    margin-bottom: 1.5em;
+    padding: 1em;
+    border: 1px solid var(--green);
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.review p {
+    margin: 0.5em 0;
+    font-size: 1.2rem;
+    color: #555;
+}
+
+.review strong {
+    font-weight: 700;
+    color: var(--green);
+    text-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);;
+}
+
