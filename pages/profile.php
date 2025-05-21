@@ -11,11 +11,14 @@ if (!$user) {
     exit();
 }
 
+// Check if user has a bio
+$hasBio = isset($user['bio']) && !empty(trim($user['bio']));
+
 drawHeader($user);
 ?>
 
 <main class="container">
-  <div class="profile">
+  <div class="profile<?= !$hasBio ? ' no-bio' : '' ?>">
     <div class="profile-img">
       <img src="<?= isset($user['profile_image']) && $user['profile_image'] ? htmlspecialchars($user['profile_image']) : '/images/user_pfp/default.png' ?>" alt="Profile Picture" />
     </div>
@@ -28,11 +31,9 @@ drawHeader($user);
         <?php endif; ?>
       </div>
     </div>
-    <div id='bio'>
-        <h3 id='bio-title'>About me:</h3>
-        <div class="bio-text"> <?= htmlspecialchars($user['bio'] ?? 'No bio available') ?>
-    </div>
-  </div>
+    <?php if ($hasBio): ?>
+    <div class="bio-text"><?= htmlspecialchars($user['bio']) ?></div>
+    <?php endif; ?>
   </div>
   <div class="tabs">
     <div>Listings</div>

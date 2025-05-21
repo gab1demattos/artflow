@@ -7,20 +7,36 @@
 		"image bio";
 	padding: 20px;
 	margin-bottom: 20px;
-	gap: 15px;
+	gap: 8px;
+}
+
+/* Modification for when there's no bio */
+.profile.no-bio {
+	grid-template-areas: "image info";
+	align-items: center;
 }
 
 /* Profile Image Styles */
 .profile .profile-img {
 	grid-area: image;
 	position: relative;
-	margin-left: 4.68765em;
+	margin-left: 4.5em;
 	margin-right: 2.8125em;
-	margin-top: 4.68765em;
+	margin-top: 3em;
 	align-self: start;
 	flex-basis: 12.5em; /* Width of the image */
+	display: flex;
+	flex-direction: column;
+	height: 12.5em; /* Same as image height */
 }
 
+/* Adjust image alignment when no bio */
+.profile.no-bio .profile-img {
+	align-self: center;
+	margin-top: 0;
+}
+
+/* Profile Image Styles */
 .profile .profile-img img {
 	width: 12.5em;
 	height: 12.5em;
@@ -36,13 +52,24 @@
 	flex-direction: column;
 	justify-content: flex-start;
 	margin-top: calc(
-		4.68765em + 0.5em
+		3em + 1.5em
 	); /* Added 0.5em to create slight offset from image top */
 	align-self: flex-start;
 	flex-basis: calc(
 		100% - 20em
 	); /* Take remaining width minus image and margins */
 	margin-right: 20px;
+}
+
+/* Center the info vertically when no bio */
+.profile.no-bio .info {
+	margin-top: 3em;
+	align-self: center;
+	justify-content: center;
+}
+
+.profile.no-bio .profile-img {
+	margin-top: 3em;
 }
 
 .profile .info .name {
@@ -59,7 +86,6 @@
 	font-weight: 400;
 	color: #666;
 	margin-bottom: 10px;
-	/* Change to flex to place tag next to username */
 	display: flex;
 	align-items: center;
 	gap: 10px; /* Add space between username and tag */
@@ -83,24 +109,31 @@
 .profile #bio {
 	grid-area: bio;
 	margin-left: 0;
-	margin-top: 0;
 	padding-top: 0;
-	align-self: start;
+	align-self: center; 
+	display: flex;
+	flex-direction: column;
+	margin-top: 0;
+    margin-bottom: 0;
+	height: fit-content;
 }
 
 #bio-title {
-	font-family: Garamond, serif;
-	font-size: 20px;
+	font-family: "Cormorant Garamound", serif;
+	font-size: 1.25rem;
 	font-weight: 600;
 	color: #636363;
-	margin-bottom: 8px;
+	margin-bottom: 0;
+	margin-top: 0;
 }
 
 .bio-text {
 	font-family: Garamond, serif;
 	font-size: 16px;
 	line-height: 1.5;
-	color: #8a8a8a;
+	color: rgb(25, 25, 25);
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 /* Tabs Styles */
@@ -108,8 +141,8 @@
 	display: flex;
 	border-bottom: 1px solid #ddd;
 	margin-bottom: 20px;
-	margin-left: 4.68765em;
-	margin-right: 4.68765em;
+	margin-left: 4.5em;
+	margin-right: 4.5em;
 }
 
 .tabs div {
