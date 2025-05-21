@@ -189,3 +189,29 @@
 .tab-content.active {
 	display: flex; /* Show only active tab content */
 }
+
+/* Service list styling in profile */
+#listings #services-list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 24px 18px;
+	justify-content: center;
+	align-items: stretch;
+	width: 100%;
+	padding: 20px 4.5em;
+	box-sizing: border-box;
+}
+
+#listings p {
+	margin-top: 20px;
+	font-size: 1.2rem;
+	color: #666;
+}
+
+/* Media queries for responsive service list */
+@media (max-width: 768px) {
+	#listings #services-list {
+		padding: 15px 2em;
+		justify-content: center;
+	}
+}

@@ -134,6 +134,39 @@ class Service {
     }
     
     /**
+     * Get services by user ID
+     * 
+     * @param int $userId User ID
+     * @return array Array of Service objects
+     */
+    public static function getServicesByUserId(int $userId): array {
+        $db = Database::getInstance();
+        $stmt = $db->prepare('SELECT Service.*, User.username FROM Service JOIN User ON Service.user_id = User.id WHERE Service.user_id = ?');
+        $stmt->execute([$userId]);
+        $services = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        $result = [];
+        foreach ($services as $service) {
+            $serviceObj = new Service(
+                (int)$service['id'],
+                (int)$service['user_id'],
+                $service['title'],
+                $service['description'],
+                (int)$service['category_id'],
+                (float)$service['price'],
+                (int)$service['delivery_time'],
+                $service['images'],
+                $service['videos'],
+                $service['username'] // Pass the username
+            );
+            
+            $result[] = $serviceObj;
+        }
+        
+        return $result;
+    }
+    
+    /**
      * Create a new service
      * 
      * @return Service|null The newly created service or null if failed
