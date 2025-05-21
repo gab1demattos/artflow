@@ -92,6 +92,7 @@
                     <div id="block">
                         <h2>Explore Categories</h2>
                         <?php 
+                        require_once __DIR__ . '/../database/classes/category.class.php';
                         $session = Session::getInstance();
                         $user = $session->getUser();
                         if ($user && isset($user['user_type']) && $user['user_type'] === 'admin'): ?>
@@ -99,7 +100,7 @@
                         <?php endif; ?>
                         <div id="category-list">
                             <?php 
-                            $categories = getCategories(); 
+                            $categories = Category::getCategories(); 
                             $db = Database::getInstance();
                             // Only show the first 6 categories on the main page
                             $displayedCategories = array_slice($categories, 0, 6);
