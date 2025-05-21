@@ -175,7 +175,7 @@
     scroll-behavior: smooth;
     width: 10em;
     height: 27em;
-    overflow-x: scroll; 
+    overflow-y: scroll; 
     white-space: nowrap;
     scrollbar-gutter: stable; /* Ensures the scrollbar is always visible */
     -webkit-overflow-scrolling: touch; /* Smooth scrolling for iOS */
@@ -196,10 +196,10 @@
     background: #888;
 }
 
-#service-imgs div {
-    width: 10em;
+#service-imgs img {
+    width: 8.7em;
     height: 7em;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.2);
     flex-shrink: 0;
     background-color: #F5F5F5;
 }
