@@ -4,22 +4,25 @@
             <div class="form-container">
                 <h2 id='h2-edit-profile'>Edit Profile</h2>
                 <form id="edit-profile-form" class="form" method='POST' action='/actions/edit-profile-action.php' enctype="multipart/form-data">
-                    <input type="text" placeholder="Name" name="name" value="<?= $user->getName() ?>" required>
-                    <input type="text" placeholder="Username" name="username" value="<?= $user->getUsername() ?>" required>
-                    <textarea name="bio" placeholder="Bio (optional)"><?= $user->getBio() ?></textarea>
-                    <div>
-                        <label>Profile Image:</label>
-                        <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                    <div class="form-layout">
+                        <div class="form-left-column">
+                            <input type="text" placeholder="Name" name="name" value="<?= $user->getName() ?>" required>
+                            <input type="text" placeholder="Username" name="username" value="<?= $user->getUsername() ?>" required>
+                            <textarea name="bio" placeholder="Bio (optional)"><?= $user->getBio() ?></textarea>
+                        </div>
+                        <div class="form-right-column">
                             <div id="profile-preview-container">
                                 <img id="profile-preview" src="<?= $user->getProfileImage() ?? '/images/user_pfp/default.png' ?>" alt="Profile preview">
                             </div>
-                            <input type="file" name="profile_image" id="profile_image" accept="image/*">
-                            <label for="profile_image" class="file-label">Choose file</label>
+                            <div>
+                                <input type="file" name="profile_image" id="profile_image" accept="image/*">
+                                <label for="profile_image" class="file-label">Choose file</label>
+                            </div>
                         </div>
                     </div>
                     <div class="button-container">
-                        <button type="submit" class="button long filled classic green">Save Changes</button>
-                        <button type="button" id="cancel-edit-profile" class="button long outline">Cancel</button>
+                        <button type="submit" class="button hovering long filled orange">Save Changes</button>
+                        <button type="button" id="cancel-edit-profile" class="button long outline orange">Cancel</button>
                     </div>
                 </form>
             </div>

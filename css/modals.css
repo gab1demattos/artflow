@@ -245,7 +245,7 @@
 	border-radius: 20px;
 	width: 50em;
 	max-width: 800px;
-	height: 50em;
+	height: 40em;
 	position: relative;
 	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 	display: flex;
@@ -266,13 +266,35 @@
 }
 
 #h2-edit-profile {
-	color: var(--green);
+	color: var(--orange);
 	font-size: 2.5rem;
 	margin-bottom: 1.2em;
 }
 
 #edit-profile-form {
 	gap: 1em; /* More spacing between form elements */
+}
+
+/* Two-column layout for edit profile form */
+#edit-profile-form .form-layout {
+	display: flex;
+	width: 100%;
+}
+
+#edit-profile-form .form-left-column {
+	flex: 1;
+	padding-right: 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 1em;
+}
+
+#edit-profile-form .form-right-column {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 }
 
 #edit-profile-modal .form textarea {
@@ -337,14 +359,14 @@
 
 /* Image preview styling specific to edit profile modal */
 #edit-profile-modal #profile-preview-container {
-	width: 200px;
-	height: 200px;
+	width: 12.5em;
+	height: 12.5em;
 	border-radius: 50%;
 	overflow: hidden;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin-right: 15px;
+	margin-bottom: 15px;
 	border: 2px solid var(--orange);
 }
 
