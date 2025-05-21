@@ -14,9 +14,9 @@
 }
 
 #main-image {
-    width: 50%;
-    padding: 5em 0 5em 0;
-    margin: 0 1em 0 1em;
+    width: 80%;
+    padding: 5em 0 0 0;
+    margin: 0 0 0 1em;
 }
 
 #service-checkout {
@@ -25,9 +25,10 @@
     padding-top: 0;
     margin-right: 0;
     width: 35%;
+    background-color: aqua;
 }
 
-#service-name h2 {
+#service-checkout h2 {
     font-size: 2.5rem;
     margin-bottom: 0.5rem;
     font-weight: 700;
@@ -178,8 +179,6 @@
 }
 
 #reviews {
-    max-height: 300px; /* Set a fixed height */
-    overflow-y: auto; /* Enable vertical scrolling */
     padding: 1em; 
     margin-top: 1em;
     border-radius: 5px;
@@ -224,5 +223,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100%;
+    width: 60%;
+    background-color: brown;
 }
