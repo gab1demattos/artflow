@@ -8,16 +8,24 @@
 		"categories"
 		"info"
 		"end";
+	min-height: 100vh; /* Make container at least viewport height */
 }
 
 #title {
 	grid-area: title;
-	min-height: 700px;
+	min-height: calc(100vh - 50px); /* Viewport height minus header height */
 	padding: 0;
 	align-content: start;
 	justify-self: start;
 	margin: 0 auto;
-	margin-top: 3em;
+	margin-top: 0;
+	background-color: white;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center; /* Changed back to center for base alignment */
+	padding-left: 0; /* Removed left padding */
+	width: 100%;
 }
 
 #title h2 {
@@ -27,7 +35,8 @@
 	margin-bottom: 1rem;
 	color: black;
 	font-weight: 100;
-	margin-left: 1em;
+	margin-left: -15%; /* Added a negative margin to offset slightly to the left */
+	text-align: center; /* Kept text alignment as center */
 }
 
 #title p {
@@ -36,8 +45,9 @@
 	max-width: 600px;
 	color: #555;
 	line-height: 0.4;
-	margin-top: 0;
-	margin-left: 3em;
+	margin-top: 0.5em;
+	margin-left: -15%; /* Added a negative margin to offset slightly to the left */
+	text-align: center; /* Kept text alignment as center */
 }
 
 #boxes {
@@ -50,13 +60,13 @@
 #boxes .box {
 	position: relative;
 	box-sizing: border-box;
-	width: 150px;
-	height: 150px;
+	width: 200px; /* Increased from 150px */
+	height: 200px; /* Increased from 150px */
 	padding: 2rem;
-	border-radius: 10px;
+	border-radius: 15px; /* Slightly increased for better proportions */
 	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 	border-color: #b08968;
-	border-width: 7px;
+	border-width: 8px; /* Slightly increased from 7px for better proportions */
 	border-style: solid;
 	transition: transform 0.3s ease, box-shadow 0.3s ease,
 		background-color 0.3s ease;
@@ -70,19 +80,19 @@
 #box1 {
 	background-color: var(--orange);
 	margin-top: -150px;
-	margin-left: 470px;
+	margin-left: 1010px;
 }
 
 #box2 {
 	background-color: var(--green);
-	margin-top: -50px;
-	margin-left: 570px;
+	margin-top: -40px;
+	margin-left: 1110px;
 }
 
 #box3 {
 	background-color: var(--yellow);
 	margin-top: -50px;
-	margin-left: 390px;
+	margin-left: 860px;
 }
 
 .flow-text {
