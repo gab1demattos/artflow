@@ -60,5 +60,51 @@
 
             return $stmt->fetch();
         }
+
+        public static function get_user_by_username($username) {
+            $db = Database::getInstance();
+            $stmt = $db->prepare('SELECT * FROM User WHERE username = ?');
+            $stmt->execute([$username]);
+            $user = $stmt->fetch();
+            if ($user) {
+                return new User(
+                    (int)$user['id'],
+                    $user['user_type'],
+                    $user['name'],
+                    $user['username'],
+                    $user['email'],
+                    $user['bio'] ?? '',
+                    $user['profile_image'] ?? ''
+                );
+            }
+        }
+
+        public function getId() {
+            return $this->id;
+        }
+
+        public function getUserType() {
+            return $this->user_type;
+        }
+
+        public function getName() {
+            return $this->name;
+        }
+
+        public function getUsername() {
+            return $this->username;
+        }
+
+        public function getEmail() {
+            return $this->email;
+        }
+
+        public function getBio() {
+            return $this->bio;
+        }
+
+        public function getProfileImage() {
+            return $this->profile_image;
+        }
     }
 ?>
