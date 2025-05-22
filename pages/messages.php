@@ -58,7 +58,13 @@ try {
             <main class="chat-app__main">
                 <div class="chat-app__header">
                     <span id="current-chat-user"></span>
-                    <span class="chat-app__menu-button">⋯</span>
+                    <div class="chat-app__menu-container">
+                        <span class="chat-app__menu-button">⋯</span>
+                        <div class="chat-app__dropdown-menu">
+                            <div class="chat-app__dropdown-item" id="visit-profile">Visit Profile</div>
+                            <div class="chat-app__dropdown-item" id="delete-conversation">Delete Conversation</div>
+                        </div>
+                    </div>
                 </div>
                 <div class="chat-app__messages" id="messages-container">
                     <div class="chat-app__empty-state">

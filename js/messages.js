@@ -15,6 +15,10 @@ const messagesContainer = document.getElementById("messages-container");
 const messageInput = document.getElementById("message-input");
 const sendButton = document.getElementById("send-button");
 const currentChatUser = document.getElementById("current-chat-user");
+const menuButton = document.querySelector(".chat-app__menu-button");
+const dropdownMenu = document.querySelector(".chat-app__dropdown-menu");
+const visitProfileButton = document.getElementById("visit-profile");
+const deleteConversationButton = document.getElementById("delete-conversation");
 
 // Event Listeners
 document.addEventListener("DOMContentLoaded", () => {
@@ -54,6 +58,21 @@ document.addEventListener("DOMContentLoaded", () => {
 	// Handle conversation search
 	if (conversationSearch) {
 		conversationSearch.addEventListener("input", filterConversations);
+	}
+
+	// Handle dropdown menu toggle
+	if (menuButton && dropdownMenu) {
+		menuButton.addEventListener("click", toggleDropdownMenu);
+
+		// Close dropdown when clicking outside
+		document.addEventListener("click", (event) => {
+			if (
+				!menuButton.contains(event.target) &&
+				!dropdownMenu.contains(event.target)
+			) {
+				dropdownMenu.classList.remove("active");
+			}
+		});
 	}
 
 	// Check URL parameters for direct messaging
@@ -346,4 +365,12 @@ function filterConversations() {
 			item.style.display = "none";
 		}
 	});
+}
+
+/**
+ * Toggle dropdown menu visibility
+ */
+function toggleDropdownMenu(event) {
+	event.stopPropagation();
+	dropdownMenu.classList.toggle("active");
 }
