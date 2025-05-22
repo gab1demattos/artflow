@@ -526,24 +526,26 @@
 
 /* Style for the search bar inside the modal */
 #modal-search-bar {
+    width: 60%; /* Reduced width */
+    height: 0.5rem; /* Reduced height */
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 1rem 0;
+	margin: 0 auto;
 }
 
 #modal-search-bar input {
-    padding: 0.5rem;
-    font-size: 1rem;
+    padding: 0.3rem; /* Reduced padding */
+    font-size: 0.5rem; /* Reduced font size */
     border: 1px solid #ccc;
     border-radius: 5px;
     flex: 1;
-    margin-right: 0.5rem;
+    margin-right: 0.3rem; /* Reduced margin */
 }
 
 #modal-search-bar button {
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
+    padding: 0.3rem 0.8rem; /* Reduced padding */
+    font-size: 0.5rem; /* Reduced font size */
     background-color: var(--purple);
     color: white;
     border: none;
