@@ -344,10 +344,21 @@ function sendMessage() {
 
 /**
  * Filter conversations based on search input
+ * Searches for matching usernames in the conversation list
  */
 function filterConversations() {
-	const searchTerm = conversationSearch.value.toLowerCase();
+	const searchTerm = conversationSearch.value.toLowerCase().trim();
 	const conversationItems = document.querySelectorAll(".chat-app__chat-item");
+	const noConversationsMsg = document.querySelector(
+		".chat-app__no-conversations"
+	);
+
+	// If there are no conversations, don't try to filter
+	if (conversationItems.length === 0 && noConversationsMsg) {
+		return;
+	}
+
+	let anyVisible = false;
 
 	conversationItems.forEach((item) => {
 		const username = item
@@ -356,10 +367,26 @@ function filterConversations() {
 
 		if (username.includes(searchTerm)) {
 			item.style.display = "";
+			anyVisible = true;
 		} else {
 			item.style.display = "none";
 		}
 	});
+
+	// Show a message if no results match the search
+	const noResultsMsg = document.getElementById("no-search-results");
+
+	if (!anyVisible && searchTerm !== "") {
+		if (!noResultsMsg) {
+			const message = document.createElement("p");
+			message.id = "no-search-results";
+			message.className = "chat-app__no-conversations";
+			message.textContent = "No conversations match your search";
+			conversationList.appendChild(message);
+		}
+	} else if (noResultsMsg) {
+		noResultsMsg.remove();
+	}
 }
 
 /**
