@@ -6,17 +6,17 @@
                 <h2>Payment Details</h2>
                 <form id="payment-form" autocomplete="off">
                     <label>Card Number
-                        <input type="text" name="card" maxlength="19" placeholder="1234 5678 9012 3456" required pattern="[0-9 ]+">
+                        <input type="text" name="card" maxlength="19" placeholder="1234 5678 9012 3456" required pattern="^(?:\d{4} ?){3}\d{4}$" title="Card number must be 16 digits (can include spaces)">
                     </label>
                     <label>Name on Card
                         <input type="text" name="name" maxlength="40" placeholder="Full Name" required>
                     </label>
                     <div style="display:flex;gap:1em;">
                         <label style="flex:1;">Exp. Date
-                            <input type="text" name="exp" maxlength="5" placeholder="MM/YY" required pattern="[0-9/]+">
+                            <input type="text" name="exp" maxlength="5" placeholder="MM/YY" required pattern="^(0[1-9]|1[0-2])\/(\d{2})$" title="Expiry must be in MM/YY format">
                         </label>
                         <label style="flex:1;">CVV
-                            <input type="text" name="cvv" maxlength="4" placeholder="123" required pattern="[0-9]+">
+                            <input type="text" name="cvv" maxlength="3" placeholder="123" required pattern="^\d{3}$" title="CVV must be 3 digits">
                         </label>
                     </div>
                     <div class="button-container">

@@ -73,13 +73,52 @@ document.addEventListener('DOMContentLoaded', function () {
             const name = paymentForm.elements['name'].value.trim();
             const exp = paymentForm.elements['exp'].value.trim();
             const cvv = paymentForm.elements['cvv'].value.trim();
-            if (!card || !name || !exp || !cvv) {
-                paymentForm.classList.add('input-error');
+
+            // Regex patterns for validation
+            const cardPattern = /^(?:\d{4} ?){3}\d{4}$/;
+            const expPattern = /^(0[1-9]|1[0-2])\/(\d{2})$/;
+            const cvvPattern = /^\d{3}$/;
+
+            let valid = true;
+            let firstInvalid = null;
+
+            if (!cardPattern.test(card)) {
+                paymentForm.elements['card'].classList.add('input-error');
+                valid = false;
+                firstInvalid = firstInvalid || paymentForm.elements['card'];
+            } else {
+                paymentForm.elements['card'].classList.remove('input-error');
+            }
+            if (!expPattern.test(exp)) {
+                paymentForm.elements['exp'].classList.add('input-error');
+                valid = false;
+                firstInvalid = firstInvalid || paymentForm.elements['exp'];
+            } else {
+                paymentForm.elements['exp'].classList.remove('input-error');
+            }
+            if (!cvvPattern.test(cvv)) {
+                paymentForm.elements['cvv'].classList.add('input-error');
+                valid = false;
+                firstInvalid = firstInvalid || paymentForm.elements['cvv'];
+            } else {
+                paymentForm.elements['cvv'].classList.remove('input-error');
+            }
+            if (!name) {
+                paymentForm.elements['name'].classList.add('input-error');
+                valid = false;
+                firstInvalid = firstInvalid || paymentForm.elements['name'];
+            } else {
+                paymentForm.elements['name'].classList.remove('input-error');
+            }
+
+            if (!valid) {
+                if (firstInvalid) firstInvalid.focus();
                 return;
             }
+
             paymentForm.classList.remove('input-error');
             paymentModal.classList.add('hidden');
-            alert('Order placed! (Fake checkout)');
+            alert('Order placed!');
         });
     }
 });
