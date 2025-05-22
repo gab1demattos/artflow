@@ -72,7 +72,6 @@ class Service {
     }
 
     static function searchServices(PDO $db, string $search) : array {
-        $db = Database::getInstance();
         $stmt = $db->prepare('SELECT * FROM Service WHERE title LIKE ? ');
         $stmt->execute(array('%' . $search . '%'));
 
