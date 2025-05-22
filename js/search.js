@@ -44,7 +44,40 @@ document.addEventListener('DOMContentLoaded', () => {
     function loadSearchResults(type) {
         searchResults.innerHTML = ""; // Clear previous results
 
-        if (type === "services") {
+        if (searchResults.classList.contains("empty-input")) {
+            if (type === "services") {
+                searchResults.innerHTML = `
+                <div id="services-list">
+                    <?php
+                    // Fetch all services for this category using Service class method
+                    $services = Service::getAllServices();
+                    if ($services) {
+                        foreach ($services as $serviceObj) {
+                            // Get subcategory IDs for this service
+                            $subcatIds = $serviceObj->getSubcategoryIds();
+                            $subcatIdsStr = implode(',', $subcatIds);
+                            
+                            // Get first image for this service
+                            $serviceImage = $serviceObj->getFirstImage();
+                            
+                            // Convert service object to array for the template
+                            $service = $serviceObj->toArray();
+                            
+                            // Use the service card component
+                            drawServiceCard($service, $serviceImage, $subcatIdsStr);
+                        }
+                    } else {
+                        echo '<p>No services found in this category yet.</p>';
+                    }
+                    ?>
+                </div>`;
+            } else if (type === "names") {
+                searchResults.innerHTML = "<p>No names found. Please enter a search term.</p>";
+            }
+            return;
+        }
+
+        else if (type === "services") {
             // Example: Load services dynamically (replace with actual data fetching)
             const services = ["Service 1", "Service 2", "Service 3", "Service 4"];
             services.forEach(service => {
