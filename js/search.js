@@ -34,9 +34,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Function to load search results dynamically
     function loadSearchResults(type) {
-        searchResults.innerHTML = ""; // Clear previous results
 
         searchInput.addEventListener('input', async function () {
+            searchResults.innerHTML = ""; // Clear previous results
             const query = searchInput.value.trim();
 
             const endpoint = type === "services" 
