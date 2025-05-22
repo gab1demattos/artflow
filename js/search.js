@@ -31,6 +31,45 @@ document.addEventListener('DOMContentLoaded', () => {
     function loadSearchResults(type) {
         searchResults.innerHTML = ""; // Clear previous results
 
+        if (searchResults.classList.contains("empty-input")) {
+            if (type === "services") {
+                // Make an AJAX request to fetch all services
+                fetch('/api/api_all_services.php')
+                    .then(response => response.json())
+                    .then(services => {
+                        if (services.length > 0) {
+                            services.forEach(service => {
+                                const serviceCard = document.createElement('a');
+                                serviceCard.href = `/pages/service.php?id=${encodeURIComponent(service.id)}`;
+                                serviceCard.classList.add('service-card-link');
+                                serviceCard.innerHTML = `
+                                    <div class="service-card" data-subcategory-ids="${encodeURIComponent(service.subcatIdsStr || '')}">
+                                        <div class="pantone-image-wrapper">
+                                            ${service.image ? `<img src="${service.image}" alt="Service image" class="pantone-image" />` : '<div class="pantone-image pantone-image-placeholder"></div>'}
+                                        </div>
+                                        <div class="pantone-title">${service.title}</div>
+                                        <div class="pantone-info-row">
+                                            <span class="pantone-username">${service.username}</span>
+                                            <span class="pantone-rating">★ ${service.rating || '0.0'}</span>
+                                        </div>
+                                    </div>
+                                `;
+                                searchResults.appendChild(serviceCard);
+                            });
+                        } else {
+                            searchResults.innerHTML = '<p>No services found.</p>';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error fetching services:', error);
+                        searchResults.innerHTML = '<p>Error loading services. Please try again later.</p>';
+                    });
+            } else if (type === "names") {
+                searchResults.innerHTML = "<p>No names found. Please enter a search term.</p>";
+            }
+            return;
+        }
+
         if (type === "services") {
             // Make an AJAX request to fetch all services
             fetch('/api/api_all_services.php')
@@ -44,12 +83,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         serviceCard.innerHTML = `
                             <div class="service-card" data-subcategory-ids="${encodeURIComponent(service.subcatIdsStr || '')}">
                                 <div class="pantone-image-wrapper">
-                                    ${service.image ? `<img src="${encodeURIComponent(service.image)}" alt="Service image" class="pantone-image" />` : '<div class="pantone-image pantone-image-placeholder"></div>'}
+                                    ${service.image ? `<img src="${service.image}" alt="Service image" class="pantone-image" />` : '<div class="pantone-image pantone-image-placeholder"></div>'}
                                 </div>
-                                <div class="pantone-title">${encodeURIComponent(service.title)}</div>
+                                <div class="pantone-title">${service.title}</div>
                                 <div class="pantone-info-row">
-                                    <span class="pantone-username">${encodeURIComponent(service.username)}</span>
-                                    <span class="pantone-rating">★ ${encodeURIComponent(service.rating || '0.0')}</span>
+                                    <span class="pantone-username">${service.username}</span>
+                                    <span class="pantone-rating">★ ${service.rating || '0.0'}</span>
                                 </div>
                             </div>
                         `;
