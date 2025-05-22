@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
         searchButton.style.display = 'block';
     });
 
-=
+
     // Function to load search results dynamically
     function loadSearchResults(type) {
         const listener = async function () {
