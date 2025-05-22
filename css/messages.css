@@ -70,10 +70,15 @@
 	border-radius: 12px;
 	padding: 10px;
 	display: flex;
-	align-items: center;
+	align-items: flex-start;
 	gap: 10px;
 	box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
 	cursor: pointer;
+	transition: background-color 0.2s ease;
+}
+
+#messages-page .chat-app__chat-item:hover {
+	background-color: #f8f1ec;
 }
 
 #messages-page .chat-app__avatar {
@@ -83,7 +88,29 @@
 }
 
 #messages-page .chat-app__chat-text {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
 	font-size: 14px;
+	overflow: hidden;
+	width: calc(100% - 50px);
+}
+
+#messages-page .chat-app__username {
+	font-weight: bold;
+	color: #333;
+	margin-bottom: 2px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+#messages-page .chat-app__message-preview {
+	color: #666;
+	font-size: 12px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 #messages-page .chat-app__main {

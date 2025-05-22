@@ -46,8 +46,8 @@ try {
                             <div class="chat-app__chat-item" data-user-id="<?= $otherUserId ?>">
                                 <img src="<?= htmlspecialchars($profileImage) ?>" alt="profile" class="chat-app__avatar" />
                                 <div class="chat-app__chat-text">
-                                    <strong><?= htmlspecialchars($conversation['other_username']) ?></strong>
-                                    <span><?= htmlspecialchars($previewText) ?></span>
+                                    <div class="chat-app__username"><?= htmlspecialchars($conversation['other_username']) ?></div>
+                                    <div class="chat-app__message-preview"><?= htmlspecialchars($previewText) ?></div>
                                 </div>
                             </div>
                         <?php endforeach; ?>

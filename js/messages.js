@@ -109,8 +109,8 @@ function createOrSelectConversation(userId) {
 					newItem.innerHTML = `
                         <img src="${profileImage}" alt="profile" class="chat-app__avatar" />
                         <div class="chat-app__chat-text">
-                            <strong>${user.username}</strong>
-                            <span>Start a conversation</span>
+                            <div class="chat-app__username">${user.username}</div>
+                            <div class="chat-app__message-preview">Start a conversation</div>
                         </div>
                     `;
 
@@ -151,7 +151,7 @@ function selectConversation(item) {
 
 	// Get user ID and name for this conversation
 	selectedUserId = parseInt(item.dataset.userId);
-	const username = item.querySelector("strong").textContent;
+	const username = item.querySelector(".chat-app__username").textContent;
 
 	// Update header with current chat user
 	currentChatUser.textContent = username;
@@ -312,15 +312,15 @@ function sendMessage() {
 					`.chat-app__chat-item[data-user-id="${selectedUserId}"]`
 				);
 				if (conversationItem) {
-					const previewSpan = conversationItem.querySelector(
-						".chat-app__chat-text span"
+					const previewElement = conversationItem.querySelector(
+						".chat-app__message-preview"
 					);
-					if (previewSpan) {
+					if (previewElement) {
 						const previewText =
 							messageText.length > 25
 								? messageText.substring(0, 25) + "..."
 								: messageText;
-						previewSpan.textContent = previewText;
+						previewElement.textContent = previewText;
 					}
 				}
 			}
@@ -336,7 +336,9 @@ function filterConversations() {
 	const conversationItems = document.querySelectorAll(".chat-app__chat-item");
 
 	conversationItems.forEach((item) => {
-		const username = item.querySelector("strong").textContent.toLowerCase();
+		const username = item
+			.querySelector(".chat-app__username")
+			.textContent.toLowerCase();
 
 		if (username.includes(searchTerm)) {
 			item.style.display = "";
