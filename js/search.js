@@ -6,53 +6,53 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchNamesBtn = document.getElementById("search-names");
     const searchResults = document.getElementById("search-results");
 
-    let activeType = "services"; // Default active type
+    // Interrupt event listener when switching between buttons
+    searchServicesBtn.addEventListener("click", () => {
+        searchServicesBtn.classList.add("active");
+        searchNamesBtn.classList.remove("active");
+        searchResults.classList.add("services-active");
+        searchResults.classList.remove("names-active");
+
+        // Remove existing input listener
+        searchInput.removeEventListener('input', searchInput._listener);
+
+        // Add new listener for services
+        loadSearchResults("services");
+    });
+
+    searchNamesBtn.addEventListener("click", () => {
+        searchNamesBtn.classList.add("active");
+        searchServicesBtn.classList.remove("active");
+        searchResults.classList.add("names-active");
+        searchResults.classList.remove("services-active");
+
+        // Remove existing input listener
+        searchInput.removeEventListener('input', searchInput._listener);
+
+        // Add new listener for names
+        loadSearchResults("names");
+    });
 
     const handleSearchBarInteraction = () => {
         searchButton.style.display = 'none';
-        initial(activeType);
+
+        // Determine which button is active and call initial with the appropriate type
+        if (searchServicesBtn.classList.contains("active")) {
+            initial("services");
+        } else if (searchNamesBtn.classList.contains("active")) {
+            initial("names");
+        }
     };
 
     searchInput.addEventListener('focus', handleSearchBarInteraction);
-    searchInput.addEventListener('click', handleSearchBarInteraction);
+    searchServicesBtn.addEventListener('click', handleSearchBarInteraction);
+    searchNamesBtn.addEventListener('click', handleSearchBarInteraction);
 
     searchInput.addEventListener('blur', () => {
         searchButton.style.display = 'block';
     });
 
-    // Update active type and synchronize events when switching between buttons
-    searchServicesBtn.addEventListener("click", () => {
-        if (activeType !== "services") {
-            activeType = "services";
-            searchServicesBtn.classList.add("active");
-            searchNamesBtn.classList.remove("active");
-            searchResults.classList.add("services-active");
-            searchResults.classList.remove("names-active");
-
-            // Remove existing input listener
-            searchInput.removeEventListener('input', searchInput._listener);
-
-            // Add new listener for services
-            loadSearchResults("services");
-        }
-    });
-
-    searchNamesBtn.addEventListener("click", () => {
-        if (activeType !== "names") {
-            activeType = "names";
-            searchNamesBtn.classList.add("active");
-            searchServicesBtn.classList.remove("active");
-            searchResults.classList.add("names-active");
-            searchResults.classList.remove("services-active");
-
-            // Remove existing input listener
-            searchInput.removeEventListener('input', searchInput._listener);
-
-            // Add new listener for names
-            loadSearchResults("names");
-        }
-    });
-
+=
     // Function to load search results dynamically
     function loadSearchResults(type) {
         const listener = async function () {
@@ -163,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <div class="user-card">
                                 <div class="user-info">
                                     <img src="${user.profilePicture || '/images/user_pfp/default.png'}" alt="User profile picture" class="user-profile-picture" />
-                                    <p class="user-name">${user.name}</p>
+                                    <p class="user-username">${user.name}</p>
                                     <p class="user-username">@${user.username}</p>
                                 </div>
                             </div>
