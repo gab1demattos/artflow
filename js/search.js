@@ -52,12 +52,20 @@ document.addEventListener('DOMContentLoaded', () => {
                     .then(services => {
                         if (services.length > 0) {
                             services.forEach(service => {
-                                const serviceCard = document.createElement('div');
-                                serviceCard.classList.add('service-card');
+                                const serviceCard = document.createElement('a');
+                                serviceCard.href = `/pages/service.php?id=${encodeURIComponent(service.id)}`;
+                                serviceCard.classList.add('service-card-link');
                                 serviceCard.innerHTML = `
-                                    <img src="${service.image}" alt="${service.name}">
-                                    <h3>${service.name}</h3>
-                                    <p>${service.description}</p>
+                                    <div class="service-card" data-subcategory-ids="${encodeURIComponent(service.subcatIdsStr || '')}">
+                                        <div class="pantone-image-wrapper">
+                                            ${service.image ? `<img src="${encodeURIComponent(service.image)}" alt="Service image" class="pantone-image" />` : '<div class="pantone-image pantone-image-placeholder"></div>'}
+                                        </div>
+                                        <div class="pantone-title">${encodeURIComponent(service.title)}</div>
+                                        <div class="pantone-info-row">
+                                            <span class="pantone-username">${encodeURIComponent(service.username)}</span>
+                                            <span class="pantone-rating">★ ${encodeURIComponent(service.rating || '0.0')}</span>
+                                        </div>
+                                    </div>
                                 `;
                                 searchResults.appendChild(serviceCard);
                             });
