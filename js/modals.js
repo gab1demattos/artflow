@@ -12,6 +12,7 @@ const Modals = {
 		category: null,
 		newService: null,
 		subcategory: null,
+		search: null,
 	},
 
 	/**
@@ -27,6 +28,7 @@ const Modals = {
 			"new-service-modal-overlay"
 		);
 		this.overlays.subcategory = document.getElementById("subcategory-overlay");
+		this.overlays.search = document.getElementById("search-modal-overlay");
 
 		// Initialize various modal-related events
 		this.setupGenericModalEvents();
@@ -35,6 +37,7 @@ const Modals = {
 		this.setupCategoryModal();
 		this.setupNewServiceModal();
 		this.setupGoFlowModal();
+		this.setupSearchModal();
 	},
 
 	/**
@@ -240,6 +243,34 @@ const Modals = {
 					alert("Login error. Please sign in manually.");
 					Modals.overlays.goFlow.classList.add("hidden");
 				}
+			});
+		}
+	},
+
+	/**
+	 * Set up search modal
+	 */
+	setupSearchModal() {
+		const searchInput = document.getElementById("search-input");
+		const searchButton = document.getElementById("search-button");
+		const searchModalOverlay = document.getElementById("search-modal-overlay");
+		const closeSearchModalBtn = document.querySelector("#search-modal .close-modal");
+
+		if (searchInput && searchModalOverlay) {
+			searchInput.addEventListener("click", () => {
+				searchModalOverlay.classList.remove("hidden");
+			});
+		}
+
+		if (searchButton && searchModalOverlay) {
+			searchButton.addEventListener("click", () => {
+				searchModalOverlay.classList.remove("hidden");
+			});
+		}
+
+		if (closeSearchModalBtn && searchModalOverlay) {
+			closeSearchModalBtn.addEventListener("click", () => {
+				searchModalOverlay.classList.add("hidden");
 			});
 		}
 	},
