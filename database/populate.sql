@@ -23,7 +23,7 @@ VALUES (
         'John Doe',
         'johndoe',
         'john@example.com',
-        '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',
+        '701f81be760ef4fada8917640b07b398c855c854',
         'Digital artist specializing in character design and concept art.',
         '/images/user_pfp/man.jpg'
     ),
@@ -32,7 +32,7 @@ VALUES (
         'Jane Smith',
         'janesmith',
         'jane@example.com',
-        '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',
+        '701f81be760ef4fada8917640b07b398c855c854',
         'Brand identity designer with 5+ years of experience working with startups.',
         '/images/user_pfp/woman.jpg'
     ),
@@ -41,7 +41,7 @@ VALUES (
         'Michael Johnson',
         'michaelj',
         'michael@example.com',
-        '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',
+        '701f81be760ef4fada8917640b07b398c855c854',
         'Traditional artist focusing on oil painting and portraits.',
         '/images/user_pfp/man.jpg'
     ),
@@ -50,7 +50,7 @@ VALUES (
         'Sarah Williams',
         'sarahw',
         'sarah@example.com',
-        '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',
+        '701f81be760ef4fada8917640b07b398c855c854',
         '3D modeling expert with background in game development.',
         '/images/user_pfp/woman.jpg'
     ),
@@ -59,7 +59,7 @@ VALUES (
         'David Brown',
         'davidb',
         'david@example.com',
-        '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',
+        '701f81be760ef4fada8917640b07b398c855c854',
         'Jewelry craftsman with a passion for unique handmade designs.',
         '/images/user_pfp/man.jpg'
     ),
@@ -68,7 +68,7 @@ VALUES (
         'Emily Dickinson',
         'emilyd',
         'emily@example.com',
-        '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',
+        '701f81be760ef4fada8917640b07b398c855c854',
         'Tattoo artist specializing in custom designs and cover-ups.',
         '/images/user_pfp/woman.jpg'
     ),
@@ -77,7 +77,7 @@ VALUES (
         'Alex Thompson',
         'alext',
         'alex@example.com',
-        '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',
+        '701f81be760ef4fada8917640b07b398c855c854',
         'Concept artist for video games and animation with 7 years of industry experience.',
         '/images/user_pfp/man.jpg'
     ),
