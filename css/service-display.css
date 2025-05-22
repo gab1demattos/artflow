@@ -226,6 +226,7 @@
 
 #images-service {
     display: flex;
+    margin-top: 30em;
 }
 
 #service-main {
