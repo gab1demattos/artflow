@@ -192,6 +192,7 @@
         <script src="/js/app.js"></script>
         <!-- Keep script.js for backward compatibility -->
         <script src="/js/script.js"></script>
+        <script src="/js/search.js"></script>
     </body>
 </html>
 <?php } ?>
