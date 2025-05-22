@@ -231,144 +231,23 @@
 		display: flex !important;
 		flex-direction: column !important;
 		justify-content: center !important;
+		position: relative !important;
 	}
 
 	#title h2 {
-		font-size: 2.2rem !important;
+		font-size: 70px !important;
 		margin-left: -5% !important;
+		margin-top: -20vh !important; /* Move title up by 20% of viewport height */
 	}
 
 	#title p {
-		font-size: 1rem !important;
+		font-size: 30px !important;
 		margin-left: -5% !important;
 	}
 
 	/* Hide boxes on tablet */
-	#boxes,
-	#boxes .box,
-	#box1,
-	#box2,
-	#box3 {
-		display: none !important;
-	}
-
-	/* Info section - full viewport height and width */
-	#info {
-		height: 100vh !important;
-		min-height: 100vh !important;
-		width: 100vw !important;
-		max-width: 100vw !important;
-		margin: 0 !important;
-		padding: 2rem 0 !important;
-		display: flex !important;
-		flex-direction: column !important;
-		justify-content: center !important;
-		overflow-x: hidden !important;
-		box-sizing: border-box !important;
-	}
-
-	#info > div {
-		width: 80% !important;
-		margin-left: 10% !important;
-		margin-right: 10% !important;
-		padding: 1.5rem !important;
-		box-sizing: border-box !important;
-	}
-
-	#info h2 {
-		font-size: 1.8rem !important; /* Reduced from desktop's 3rem */
-		margin-top: 0.5em;
-	}
-
-	#info p {
-		font-size: 1rem !important; /* Reduced from desktop's 1.7rem */
-		line-height: 1.3;
-		padding: 0.5em;
-	}
-
-	/* Categories section - full viewport height and width */
-	#categories {
-		height: 100vh !important; /* Full viewport height */
-		min-height: 100vh !important;
-		width: 100vw !important; /* Full viewport width */
-		max-width: 100vw !important;
-		margin: 0 !important;
-		padding: 2rem 0 !important; /* Remove horizontal padding */
-		display: flex !important;
-		flex-direction: column !important;
-		justify-content: center !important;
-		overflow-x: hidden !important; /* Prevent horizontal scrolling */
-		box-sizing: border-box !important;
-	}
-
-	#categories h2 {
-		font-size: 1.8rem !important; /* Reduced from desktop's 3.5rem */
-	}
-
-	#category-list {
-		width: 90% !important;
-		gap: 1.5rem !important;
-		padding: 1.5rem !important;
-	}
-
-	.category-item {
-		width: 5.5em !important; /* Reduced from desktop's 8em */
-		height: 5.5em !important; /* Reduced from desktop's 8em */
-		font-size: 0.9rem !important;
-		padding: 0.7rem !important;
-	}
-
-	/* Adjust text size in category items for tablet */
-	.category-item .category-link {
-		font-size: 14px !important;
-		text-align: center !important;
-		line-height: 1.2 !important;
-		display: flex !important;
-		align-items: center !important;
-		justify-content: center !important;
-		height: 100% !important;
-	}
-
-	#block {
-		width: 90% !important;
-		margin-right: 5% !important;
-		margin-left: 5% !important;
-	}
-
-	#block > a {
-		width: 90% !important;
-		padding-right: 1em !important;
-		font-size: 0.85rem !important; /* Reduced from 0.9rem */
-	}
-
-	/* Footer section */
-	#end {
-		min-height: auto !important;
-		padding: 1.5rem;
-	}
-
-	#end h2 {
-		font-size: 1.8rem !important; /* Reduced from desktop's 3.5rem */
-		margin: 1rem;
-	}
-
-	#end h3 {
-		font-size: 1rem !important;
-	}
-
-	.author,
-	.footer-link {
-		font-size: 0.9rem !important;
-	}
-
-	#end-footer {
-		font-size: 0.8rem !important;
-		gap: 2em !important;
-	}
-
-	#end-content {
-		gap: 3em !important;
-		padding: 1em !important;
+	#boxes {
+		display: none !important; /* Hide boxes on tablet */
 	}
 }
 
@@ -384,6 +263,4 @@
     */
 
 	/* For ultra-wide screens, adjust proportions */
-	@media screen and (min-width: 2400px) {
-	}
-}
+	@media screen and
