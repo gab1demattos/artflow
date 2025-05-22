@@ -4,7 +4,7 @@
             <div class="form-container">
                 <h2 id='h2-edit-profile'>Edit Profile</h2>
                 <form id="edit-profile-form" class="form" method='POST' action='/actions/edit-profile-action.php' enctype="multipart/form-data">
-                    <div class="form-layout">
+                    <div class="form-layout" id='edit-profile-form-layout'>
                         <div class="form-left-column">
                             <label for="name">Name</label>
                             <input type="text" placeholder="Name" id="name" name="name" value="<?= $user->getName() ?>" required>
