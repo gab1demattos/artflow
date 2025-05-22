@@ -83,5 +83,6 @@ $owner = $stmtOwner->fetch(PDO::FETCH_ASSOC);
 
     <?php include __DIR__ . '/../pages/modals/requirements-modal.php'; ?>
     <?php include __DIR__ . '/../pages/modals/payment-modal.php'; ?>
+    <?php include __DIR__ . '/../pages/modals/thankyou-modal.php'; ?>
     <script src="/js/checkout.js"></script>
 <?php } ?>

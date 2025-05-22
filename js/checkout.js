@@ -118,7 +118,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
             paymentForm.classList.remove('input-error');
             paymentModal.classList.add('hidden');
-            alert('Order placed!');
+            // Show thank you modal instead of alert
+            const thankyouModal = document.getElementById('thankyou-modal-overlay');
+            if (thankyouModal) {
+                thankyouModal.classList.remove('hidden');
+                const thankyouClose = document.getElementById('thankyou-close');
+                if (thankyouClose) {
+                    thankyouClose.onclick = function () {
+                        thankyouModal.classList.add('hidden');
+                    };
+                }
+            }
         });
     }
 });
