@@ -83,14 +83,8 @@
         padding: 7px 12px;
     }
 
-    /* MUDAR ISSO DAQUI !!!!!!! */
-    /* MUDAR ISSO DAQUI !!!!!!! */
-    /* Hide search bar in top bar on mobile */
-    .top-bar-search,
-    #search-bar,
-    .search-bar {
-        display: none !important;
-    }
+  
+    
 
     /* Fix service card size on mobile
     .service-card {

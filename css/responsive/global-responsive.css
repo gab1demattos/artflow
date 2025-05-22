@@ -1,0 +1,35 @@
+/* ======================================= */
+/* BASE MOBILE STYLES (applied by default) */
+/* ======================================= */
+
+@media screen and (max-width: 767px) {
+
+    .top-bar-search,
+    #search-bar,
+    .search-bar {
+        display: none !important;
+    }
+
+    /* to do: search icon in mobile!!! */
+}
+
+/* =================== */
+/*    TABLET STYLES    */
+/* =================== */
+
+@media screen and (min-width: 768px) and (max-width: 1199px) {}
+
+/* ================================== */
+/*    DESKTOP STYLES (above 1200px)   */
+/* ================================== */
+
+/*use the main modals.css settings */
+@media screen and (min-width: 1200px) {
+    /* 
+      The desktop styles are already defined 
+      This media query ensures we only apply those styles at larger screens
+    */
+
+    /* For ultra-wide screens, adjust proportions */
+    @media screen and (min-width: 2400px) {}
+}
