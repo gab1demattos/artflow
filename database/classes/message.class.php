@@ -290,4 +290,28 @@ class Message
             'sender_profile_image' => $this->sender_profile_image
         ];
     }
+
+    /**
+     * Delete all messages between two users (a conversation)
+     * 
+     * @param int $user1_id First user ID
+     * @param int $user2_id Second user ID
+     * @return bool True if successful, false otherwise
+     */
+    public static function deleteConversation(int $user1_id, int $user2_id): bool
+    {
+        $db = Database::getInstance();
+
+        try {
+            $stmt = $db->prepare('
+                DELETE FROM Message
+                WHERE (sender_id = ? AND receiver_id = ?) OR (sender_id = ? AND receiver_id = ?)
+            ');
+
+            return $stmt->execute([$user1_id, $user2_id, $user2_id, $user1_id]);
+        } catch (PDOException $e) {
+            error_log("Database error in deleteConversation: " . $e->getMessage());
+            return false;
+        }
+    }
 }

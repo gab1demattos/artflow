@@ -80,6 +80,14 @@ document.addEventListener("DOMContentLoaded", () => {
 		visitProfileButton.addEventListener("click", visitUserProfile);
 	}
 
+	// Handle delete conversation button click
+	if (deleteConversationButton) {
+		deleteConversationButton.addEventListener(
+			"click",
+			confirmDeleteConversation
+		);
+	}
+
 	// Check URL parameters for direct messaging
 	// Only check URL parameters if not already initialized from PHP
 	if (!window.conversationInitialized) {
@@ -379,4 +387,101 @@ function visitUserProfile() {
 			}
 		})
 		.catch((error) => console.error("Error fetching user info:", error));
+}
+
+/**
+ * Confirm conversation deletion with the irreversible modal
+ */
+function confirmDeleteConversation() {
+	if (!selectedUserId) return;
+
+	const username = currentChatUser.textContent;
+
+	// Close the dropdown menu
+	dropdownMenu.classList.remove("active");
+
+	// Show the irreversible confirmation modal
+	Modals.showIrreversibleModal(
+		// Confirm callback - runs when user clicks "Yes"
+		function () {
+			deleteConversation();
+		},
+		// Cancel callback - runs when user clicks "Nevermind"
+		function () {
+			// Do nothing, just close the modal
+		}
+	);
+}
+
+/**
+ * Delete the selected conversation
+ */
+function deleteConversation() {
+	if (!selectedUserId) return;
+
+	// Send delete request to the server
+	fetch("/actions/delete-conversation.php", {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({
+			other_user_id: selectedUserId,
+		}),
+	})
+		.then((response) => response.json())
+		.then((data) => {
+			if (data.success) {
+				// Remove conversation from the list
+				const conversationItem = document.querySelector(
+					`.chat-app__chat-item[data-user-id="${selectedUserId}"]`
+				);
+
+				if (conversationItem) {
+					conversationItem.remove();
+				}
+
+				// Clear the messages container
+				messagesContainer.innerHTML = `
+				<div class="chat-app__empty-state">
+					<p>Select a conversation to start chatting</p>
+				</div>
+			`;
+
+				// Reset the selected user
+				selectedUserId = null;
+				currentChatUser.textContent = "";
+
+				// Disable the input and send button
+				messageInput.disabled = true;
+				sendButton.disabled = true;
+
+				// Stop polling
+				if (messagePollingInterval) {
+					clearInterval(messagePollingInterval);
+					messagePollingInterval = null;
+				}
+
+				// Clear session storage
+				sessionStorage.removeItem("selectedUserId");
+
+				// Check if there are any conversations left
+				const remainingConversations = document.querySelectorAll(
+					".chat-app__chat-item"
+				);
+				if (remainingConversations.length === 0) {
+					// Add the no conversations message
+					conversationList.innerHTML = `
+					<p class="chat-app__no-conversations">No conversations yet. Start chatting with someone!</p>
+				`;
+				}
+			} else {
+				console.error("Error deleting conversation:", data.error);
+				alert("Failed to delete conversation. Please try again.");
+			}
+		})
+		.catch((error) => {
+			console.error("Error:", error);
+			alert("An error occurred. Please try again.");
+		});
 }
