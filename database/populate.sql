@@ -166,8 +166,8 @@ VALUES (5, 'Pottery & Ceramics'),
     (5, 'Paper Crafts'),
     (5, 'Wood Carving'),
     (5, 'Sculpture'),
-    (5, 'Macramé & Fiber Arts'),
-    (5, 'Candle & Soap Making');
+    (5, 'Macramé'),
+    (5, 'Candle Making');
 -- Body Art Design & Tattoo subcategories
 INSERT INTO Subcategory (category_id, name)
 VALUES (6, 'Tattoo Design'),
@@ -175,9 +175,9 @@ VALUES (6, 'Tattoo Design'),
     (6, 'Body Painting'),
     (6, 'Temporary Tattoo'),
     (6, 'Flash Art'),
-    (6, 'Custom Tattoo Concepts'),
+    (6, 'Fine line'),
     (6, 'Cover-up Design'),
-    (6, 'Blackwork & Dotwork');
+    (6, 'Dotwork');
     
 -- Services (varied across users and categories)
 INSERT INTO Service (
