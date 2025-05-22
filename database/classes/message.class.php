@@ -245,7 +245,7 @@ class Message
                         m.id, m.sender_id, m.receiver_id, m.message, m.timestamp
                     FROM Message m
                     WHERE ((m.sender_id = ? AND m.receiver_id = ?) OR (m.sender_id = ? AND m.receiver_id = ?))
-                    ORDER BY m.timestamp DESC
+                    ORDER BY m.timestamp DESC, m.id DESC
                     LIMIT 1
                 ');
                 $msgStmt->execute([$user_id, $otherUserId, $otherUserId, $user_id]);
