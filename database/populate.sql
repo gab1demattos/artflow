@@ -264,7 +264,7 @@ VALUES (
     (
         2,
         'Children Book Illustration',
-        'Whimsical and colorful illustrations for children''s books and educational materials.',
+        'Whimsical and colorful illustrations for childrens books and educational materials.',
         1,
         90.00,
         7,
@@ -1320,7 +1320,7 @@ VALUES (1, 1),
     (53, 4),
     -- Vector Logo Mascot: Vector Illustration
     (54, 8),
-    -- Children’s Book Cover: Book Illustration
+    -- Children's Book Cover: Book Illustration
     (55, 5),
     -- Pixel Art Game Assets: Pixel Art
     (56, 6),
@@ -1390,7 +1390,7 @@ INSERT INTO Message (sender_id, receiver_id, message)
 VALUES (
         2,
         5,
-        'Hello! I''ve started working on your character illustration.'
+        'Hello! Ive started working on your character illustration.'
     ),
     (
         5,
@@ -1412,7 +1412,184 @@ VALUES (
         7,
         'I need some additional details for your oil portrait.'
     ),
-    (7, 4, 'Sure, what information do you need?');
+    (7, 4, 'Sure, what information do you need?'),
+    -- Additional messages for various services
+    (
+        2, 
+        8, 
+        'Hi Alex! I wanted to discuss your requirements for the digital art poster you ordered.'
+    ),
+    (
+        8, 
+        2, 
+        'Hello John! Id like it to have a cyberpunk theme with neon colors. Can you do that?'
+    ),
+    (
+        2, 
+        8, 
+        'Absolutely! I specialize in cyberpunk aesthetics. Ill send you a sketch by tomorrow.'
+    ),
+    (
+        8, 
+        2, 
+        'Sounds perfect! Looking forward to it.'
+    ),
+    -- Conversation about 3D modeling
+    (
+        5, 
+        4, 
+        'Michael, I have some questions about the game assets you ordered.'
+    ),
+    (
+        4, 
+        5, 
+        'Hi Sarah, go ahead!'
+    ),
+    (
+        5, 
+        4, 
+        'What game engine will you be using? That will help me optimize the models correctly.'
+    ),
+    (
+        4, 
+        5, 
+        'Im using Unity 3D. I need low-poly assets to ensure good performance.'
+    ),
+    (
+        5, 
+        4, 
+        'Perfect, Ill make sure theyre optimized for Unity. Ill get started right away.'
+    ),
+    -- Conversation about handcrafted jewelry
+    (
+        6, 
+        3, 
+        'Jane, I have some designs ready for your handcrafted jewelry order.'
+    ),
+    (
+        3, 
+        6, 
+        'Cant wait to see them, David! What materials are you planning to use?'
+    ),
+    (
+        6, 
+        3, 
+        'Im thinking of using sterling silver with some turquoise accents. Would that work for you?'
+    ),
+    (
+        3, 
+        6, 
+        'That sounds beautiful! Yes, please proceed with that combination.'
+    ),
+    -- Conversation about tattoo design
+    (
+        7, 
+        2, 
+        'About your tattoo design request - do you have any reference images you can share?'
+    ),
+    (
+        2, 
+        7, 
+        'Yes Emily, Ive been collecting some inspiration. Ill email them to you right now.'
+    ),
+    (
+        7, 
+        2, 
+        'Got them, thanks! I think I understand the style youre going for. Ill create something unique.'
+    ),
+    (
+        2, 
+        7, 
+        'Great! Im excited to see what you come up with. Its my first tattoo so Im a bit nervous.'
+    ),
+    (
+        7, 
+        2, 
+        'Dont worry, Ill make sure its perfect. We can make adjustments until youre completely satisfied.'
+    ),
+    -- Another character illustration conversation
+    (
+        2, 
+        5, 
+        'Ive finished the initial sketches for your character. Would you like to see them?'
+    ),
+    (
+        5, 
+        2, 
+        'Yes please! Im very curious to see how you’ve interpreted my description.'
+    ),
+    (
+        2, 
+        5, 
+        'Ive sent them to your email. Let me know if you want any changes.'
+    ),
+    (
+        5, 
+        2, 
+        'Just saw them - they look amazing! I especially like the second concept. Could we proceed with that one?'
+    ),
+    (
+        2, 
+        5, 
+        'Absolutely! Ill start working on the final version right away.'
+    ),
+    -- Book illustration discussion
+    (
+        8, 
+        3, 
+        'Hows the progress on the childrens book illustrations coming along?'
+    ),
+    (
+        3, 
+        8, 
+        'Its going well! Ive completed 3 out of the 10 illustrations so far. Would you like a preview?'
+    ),
+    (
+        8, 
+        3, 
+        'Yes, that would be great! I want to make sure they match the storys tone.'
+    ),
+    (
+        3, 
+        8, 
+        'Ive emailed you the first three. Ive tried to capture the whimsical feel you described.'
+    ),
+    (
+        8, 
+        3, 
+        'These are perfect! The characters look exactly how I imagined them. Please continue with the rest.'
+    ),
+    -- Concept art conversation
+    (
+        8, 
+        7, 
+        'Emily, I need some concept art for a new game Im developing. Are you available?'
+    ),
+    (
+        7, 
+        8, 
+        'Hi Alex, yes I am! What kind of game is it?'
+    ),
+    (
+        8, 
+        7, 
+        'Its a fantasy RPG set in a floating island world. I need environment concepts primarily.'
+    ),
+    (
+        7, 
+        8, 
+        'Sounds interesting! I’d love to work on that. When do you need these by?'
+    ),
+    (
+        8, 
+        7, 
+        'Ideally within the next three weeks. Is that doable?'
+    ),
+    (
+        7, 
+        8, 
+        'Yes, that works for my schedule. Lets discuss the details and pricing in our next message.'
+    );
     
 -- Reviews
 INSERT INTO Review (user_id, service_id, rating, comment) VALUES
