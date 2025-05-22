@@ -8,13 +8,15 @@
 		"categories"
 		"info"
 		"end";
-	height: 100vh; /* Make container at least viewport height */
+	min-height: 100vh; /* Make container at least viewport height */
+	max-width: 100%; /* Prevent horizontal overflow */
+	overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
 #title {
 	grid-area: title;
 	height: calc(100vh - 50px); /* Viewport height minus header height */
-	width: 100vw;
+	width: 100%; /* Changed from 100vw to prevent overflow */
 	padding: 0;
 	align-content: start;
 	justify-self: start;
@@ -105,7 +107,7 @@
 	box-sizing: border-box;
 	grid-area: end;
 	min-height: 400px;
-	width: 100vw;
+	width: 100%; /* Changed from 100vw */
 	padding: 2rem;
 	background-color: white;
 	border-color: var(--green);
@@ -152,19 +154,26 @@
 
 #end-footer {
 	display: flex;
-	align-items: start;
-	justify-content: start;
-	gap: 5em;
+	justify-content: space-between; /* Spread items to edges */
+	align-items: flex-start;
+	width: 100%;
 	padding: 1em;
 	font-size: 1em;
 	opacity: 0.6;
 	padding-bottom: 0;
+	margin-top: 2em; /* Add some space from content above */
+}
+
+#end-footer p:last-child {
+	margin-left: 0;
+    margin-right: 1em;
+	font-weight: bold;
 }
 
 #info {
 	grid-area: info;
 	height: 100vh;
-	width: 100vw;
+	width: 100%; /* Changed from 100vw */
 	padding: 2rem;
 	background-color: var(--yellow);
 	align-content: center;
@@ -188,8 +197,8 @@
 	margin-bottom: 1.5rem;
 	line-height: 0.7;
 	font-weight: 100;
-	margin-top: 0.2em; 
-	margin-left: 0.5em; 
+	margin-top: 0.2em;
+	margin-left: 0.5em;
 	align-self: flex-start;
 	max-width: 50em;
 }
@@ -198,12 +207,12 @@
 	box-sizing: border-box;
 	background-color: white;
 	border-radius: 1.25em;
-	width: 45%; 
-	height: auto; 
-	margin-left: 27.5%; 
+	width: 45%;
+	height: auto;
+	margin-left: 27.5%;
 	padding: 2rem;
 	box-shadow: 0 0.25em 0.9em rgba(0, 0, 0, 0.15);
-	aspect-ratio: auto; 
+	aspect-ratio: auto;
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
@@ -213,7 +222,7 @@
 #categories {
 	grid-area: categories;
 	height: 100vh;
-	width: 100vw;
+	width: 100%; /* Changed from 100vw */
 	padding: 2rem;
 	background-color: var(--green);
 	font-family: "EDGaramond", serif;
@@ -226,12 +235,12 @@
 	font-size: 3.5rem;
 	line-height: 1.2;
 	font-weight: 50;
-	text-align: center; 
+	text-align: center;
 	padding-top: 0.3em;
 	padding-bottom: 0;
-	margin-right: 0; 
-	margin-bottom: 0.5em; 
-	white-space: nowrap; 
+	margin-right: 0;
+	margin-bottom: 0.5em;
+	white-space: nowrap;
 }
 
 .category-item {
@@ -260,7 +269,7 @@
 	max-height: none;
 	overflow-y: visible;
 	justify-content: center;
-	width: 50em; 
+	width: 50em;
 	padding: 3em;
 	padding-bottom: 1em;
 }
@@ -269,7 +278,7 @@
 	width: 50em;
 	height: auto;
 	margin: 0 auto;
-	margin-right: 12em; 
+	margin-right: 12em;
 	margin-left: auto;
 	display: flex;
 	flex-direction: column;
