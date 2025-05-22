@@ -484,6 +484,7 @@
     overflow-y: auto;
     padding: 1rem;
 }
+
 #search-modal .close-modal {
     position: absolute;
     top: 0.5rem;
@@ -499,4 +500,8 @@
 
 .modal-overlay.search-modal {
     background-color: transparent !important; /* Ensure no dark background */
+}
+
+#search-results.empty-input {
+	background-color: aqua;
 }

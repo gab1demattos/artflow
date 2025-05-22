@@ -222,3 +222,8 @@ header:first-of-type {
 	margin: 0;
 	height: 100%;
 }
+
+.empty-input {
+	background-color: blue;
+	color: white; /* Optional: to ensure text is visible */
+}

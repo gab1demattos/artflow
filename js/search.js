@@ -2,17 +2,30 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('search-input');
     const searchButton = document.getElementById('search-button');
 
+    const searchServicesBtn = document.getElementById("search-services");
+    const searchNamesBtn = document.getElementById("search-names");
+    const searchResults = document.getElementById("search-results");
+
     searchInput.addEventListener('focus', () => {
         searchButton.style.display = 'none';
+        if (searchInput.value.trim() !== "") {
+            searchResults.classList.remove('empty-input');
+        } else {
+            searchResults.classList.add('empty-input');
+        }
     });
 
     searchInput.addEventListener('blur', () => {
         searchButton.style.display = 'block';
     });
 
-    const searchServicesBtn = document.getElementById("search-services");
-    const searchNamesBtn = document.getElementById("search-names");
-    const searchResults = document.getElementById("search-results");
+    searchInput.addEventListener('input', () => {
+        if (searchInput.value.trim() === "") {
+            searchResults.classList.add('empty-input');
+        } else {
+            searchResults.classList.remove('empty-input');
+        }
+    });
 
     // Toggle active class between buttons
     searchServicesBtn.addEventListener("click", () => {
