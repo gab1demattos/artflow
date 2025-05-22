@@ -1,10 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const thumbnails = document.querySelectorAll('.thumbnail');
-    const mainImage = document.getElementById('main-image');
+    const smallImgs = document.querySelectorAll('.service-imgs');
+    const mainImage = document.querySelector('#main-image img'); // Fixed query selector to target the correct element
 
-    thumbnails.forEach(thumbnail => {
-        thumbnail.addEventListener('click', () => {
-            mainImage.src = thumbnail.src;
+    smallImgs.forEach(smallImg => {
+        smallImg.addEventListener('click', () => {
+            mainImage.src = smallImg.src; // Corrected variable usage
         });
     });
 });

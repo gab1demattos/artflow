@@ -1,6 +1,6 @@
 /* Responsive styles for service display */
 
-@media (max-width: 768px) {
+@media (max-width: 1030px) {
     #service-display {
         flex-direction: column;
         align-items: center;
@@ -40,9 +40,11 @@
     #service-imgs {
         flex-direction: row;
         overflow-x: auto;
-        width: 50%;
+        width: 60%;
         height: 5em;
-        margin: 1em 0;
+        margin: 0 auto;
+        margin-bottom: 1em;
+        margin-top: 2em;
     }
 
     #service-imgs img {
@@ -62,7 +64,9 @@
     #service-main {
         order: 0; /* Keep service-main below service-checkout */
         width: 100%;
+        height: auto;
         overflow-y:hidden;
+        overflow-x: hidden;
     }
 
     #images-service {
