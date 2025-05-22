@@ -12,8 +12,12 @@ $user = User::get_user_by_username((string)$_GET['username']) ?? null;
 // Check if user has a bio
 $hasBio = ($user->getBio() !== NULL && $user->getBio() !== '');
 
-// Get user's services
-$services = Service::getServicesByUserId($user->getId());
+// Pagination for user services
+$page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
+$servicesPerPage = 20; // 4 rows x 5 cards
+$totalServices = Service::countServicesByUserId($user->getId());
+$offset = ($page - 1) * $servicesPerPage;
+$services = Service::getServicesByUserIdPaginated($user->getId(), $servicesPerPage, $offset);
 
 drawHeader($loggedInUser);
 ?>
@@ -65,6 +69,19 @@ drawHeader($loggedInUser);
           drawServiceCard($service, $serviceImage, $subcatIdsStr);
         endforeach; ?>
       </div>
+      <?php
+      $totalPages = ceil($totalServices / $servicesPerPage);
+      if ($totalPages > 1): ?>
+      <nav class="pagination">
+          <?php if ($page > 1): ?>
+              <a href="?username=<?= urlencode($user->getUsername()) ?>&page=<?= $page - 1 ?>" class="pagination-btn">&laquo; Previous</a>
+          <?php endif; ?>
+          <span class="pagination-info">Page <?= $page ?> of <?= $totalPages ?></span>
+          <?php if ($page < $totalPages): ?>
+              <a href="?username=<?= urlencode($user->getUsername()) ?>&page=<?= $page + 1 ?>" class="pagination-btn">Next &raquo;</a>
+          <?php endif; ?>
+      </nav>
+      <?php endif; ?>
     <?php endif; ?>
   </div>
   

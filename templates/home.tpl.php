@@ -7,6 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/css/main.css">
         <link rel="stylesheet" href="/css/see-more.css">
+        <link rel="stylesheet" href="/css/responsive/global-responsive.css">
     </head>
     <body>
     <header>
@@ -42,7 +43,7 @@
         <ul id="sidebar-list">
             <li class="sidebar-item" id="new-service-button">
                 <img src="/images/logos/add_circle.png" alt="New Service" class="logo">
-                <button>New Service</button>
+                <button id="open-new-service-modal">New Service</button>
             </li>
             <li class="sidebar-item">
                 <img src="/images/logos/activity.png" alt="Activity" class="logo">
