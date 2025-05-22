@@ -256,6 +256,11 @@ const Modals = {
 		const searchModalOverlay = document.getElementById("search-modal-overlay");
 		const closeSearchModalBtn = document.querySelector("#search-modal .close-modal");
 
+		if (searchModalOverlay) {
+			// Ensure the overlay has a transparent background
+			searchModalOverlay.style.backgroundColor = "transparent";
+		}
+
 		if (searchInput && searchModalOverlay) {
 			searchInput.addEventListener("click", () => {
 				searchModalOverlay.classList.remove("hidden");
