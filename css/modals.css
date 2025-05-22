@@ -483,6 +483,19 @@
 	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
 }
 
+#requirements-modal-overlay .modal-content {
+	min-width: 480px;
+	min-height: 320px;
+	max-width: 600px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	/* Push content and buttons apart */
+	box-sizing: border-box;
+	padding-left: 2em;
+	padding-right: 2em;
+}
+
 #requirements-modal-overlay h2,
 #payment-modal-overlay h2 {
 	color: var(--orange, #e67e22);
@@ -495,8 +508,13 @@
 	font-size: 1.1em;
 	border-radius: 8px;
 	border: 1.5px solid #ccc;
-	padding: 0.7em;
+	padding: 1em;
 	resize: vertical;
+	min-height: 160px;
+	box-sizing: border-box;
+	width: 100%;
+	margin-left: 0;
+	margin-right: 0;
 }
 
 #payment-modal-overlay input[type="text"] {
@@ -512,4 +530,10 @@
 	font-size: 1em;
 	margin-bottom: 0.5em;
 	display: block;
+}
+
+#requirements-modal-overlay .button-container {
+	margin-top: auto;
+	margin-bottom: 0;
+	justify-content: flex-end;
 }
