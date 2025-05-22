@@ -213,6 +213,52 @@ class Service {
     }
     
     /**
+     * Count services by user (for pagination)
+     * @param int $userId
+     * @return int
+     */
+    public static function countServicesByUserId(int $userId): int {
+        $db = Database::getInstance();
+        $stmt = $db->prepare('SELECT COUNT(*) FROM Service WHERE user_id = ?');
+        $stmt->execute([$userId]);
+        return (int)$stmt->fetchColumn();
+    }
+
+    /**
+     * Get services by user with pagination
+     * @param int $userId
+     * @param int $limit
+     * @param int $offset
+     * @return array
+     */
+    public static function getServicesByUserIdPaginated(int $userId, int $limit, int $offset): array {
+        $db = Database::getInstance();
+        $stmt = $db->prepare('SELECT Service.*, User.username FROM Service JOIN User ON Service.user_id = User.id WHERE Service.user_id = ? LIMIT ? OFFSET ?');
+        $stmt->bindValue(1, $userId, PDO::PARAM_INT);
+        $stmt->bindValue(2, $limit, PDO::PARAM_INT);
+        $stmt->bindValue(3, $offset, PDO::PARAM_INT);
+        $stmt->execute();
+        $services = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $result = [];
+        foreach ($services as $service) {
+            $serviceObj = new Service(
+                (int)$service['id'],
+                (int)$service['user_id'],
+                $service['title'],
+                $service['description'],
+                (int)$service['category_id'],
+                (float)$service['price'],
+                (int)$service['delivery_time'],
+                $service['images'],
+                $service['videos'],
+                $service['username']
+            );
+            $result[] = $serviceObj;
+        }
+        return $result;
+    }
+    
+    /**
      * Create a new service
      * 
      * @return Service|null The newly created service or null if failed

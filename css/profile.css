@@ -33,10 +33,12 @@
 	margin-right: 2.8125em;
 	margin-top: 3em;
 	align-self: start;
-	flex-basis: 12.5em; /* Width of the image */
+	flex-basis: 12.5em;
+	/* Width of the image */
 	display: flex;
 	flex-direction: column;
-	height: 12.5em; /* Same as image height */
+	height: 12.5em;
+	/* Same as image height */
 }
 
 /* Adjust image alignment when no bio */
@@ -49,7 +51,8 @@
 .profile .profile-img img {
 	width: 12.5em;
 	height: 12.5em;
-	border-radius: 50%; /* Makes the image circular */
+	border-radius: 50%;
+	/* Makes the image circular */
 	object-fit: cover;
 	border: 2px solid #ddd;
 }
@@ -60,13 +63,11 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
-	margin-top: calc(
-		3em + 1.5em
-	); /* Added 0.5em to create slight offset from image top */
+	margin-top: calc(3em + 1.5em);
+	/* Added 0.5em to create slight offset from image top */
 	align-self: flex-start;
-	flex-basis: calc(
-		100% - 20em
-	); /* Take remaining width minus image and margins */
+	flex-basis: calc(100% - 20em);
+	/* Take remaining width minus image and margins */
 	margin-right: 20px;
 }
 
@@ -97,7 +98,8 @@
 	margin-bottom: 10px;
 	display: flex;
 	align-items: center;
-	gap: 10px; /* Add space between username and tag */
+	gap: 10px;
+	/* Add space between username and tag */
 }
 
 /* Tag Styles */
@@ -158,7 +160,8 @@
 	padding: 10px 20px;
 	cursor: pointer;
 	font-weight: 500;
-	position: relative; /* For positioning the active indicator */
+	position: relative;
+	/* For positioning the active indicator */
 	transition: color 0.3s ease;
 }
 
@@ -174,23 +177,27 @@
 .tabs div.active::after {
 	content: "";
 	position: absolute;
-	bottom: -1px; /* Position at the bottom of the tab */
+	bottom: -1px;
+	/* Position at the bottom of the tab */
 	left: 0;
-	width: 100%; /* Width of the tab */
-	height: 3px; /* Height of the indicator line */
+	width: 100%;
+	/* Width of the tab */
+	height: 3px;
+	/* Height of the indicator line */
 	background-color: var(--green);
 	transition: transform 0.3s ease;
 }
 
 /* Tab content containers */
 .tab-content {
-	display: none; /* Hide all tab content by default */
-	min-height: calc(
-		100vh - 25em
-	); /* Use viewport height minus space for header/tabs/etc */
+	display: none;
+	/* Hide all tab content by default */
+	min-height: calc(100vh - 25em);
+	/* Use viewport height minus space for header/tabs/etc */
 	width: 100%;
 	flex-direction: column;
-	padding: 0 4.5em; /* Match tab margins */
+	padding: 0 4.5em;
+	/* Match tab margins */
 	box-sizing: border-box;
 }
 
@@ -210,18 +217,21 @@
 /* Ensure the nothing-img is properly positioned in empty states */
 .tab-content.empty-state .nothing-img,
 #reviews.tab-content .nothing-img {
-	margin: 40px auto 0; /* Top margin of 40px, centered horizontally */
+	margin: 40px auto 0;
+	/* Top margin of 40px, centered horizontally */
 	display: block;
 }
 
 .tab-content.active {
-	display: flex; /* Show only active tab content */
+	display: flex;
+	/* Show only active tab content */
 }
 
 /* Empty state styling - centered vertically and horizontally */
 .tab-content:empty,
 .tab-content.empty {
-	justify-content: center; /* Center vertically when empty */
+	justify-content: center;
+	/* Center vertically when empty */
 	align-items: center;
 }
 
@@ -230,11 +240,15 @@
 	display: flex;
 	flex-wrap: wrap;
 	gap: 24px 18px;
-	justify-content: flex-start !important; /* Force left alignment */
-	align-items: flex-start !important; /* Force top alignment */
+	justify-content: flex-start !important;
+	/* Force left alignment */
+	align-items: flex-start !important;
+	/* Force top alignment */
 	width: 100%;
-	padding: 20px 0; /* Remove horizontal padding since it's on the parent */
-	margin: 0; /* Remove margin */
+	padding: 20px 0;
+	/* Remove horizontal padding since it's on the parent */
+	margin: 0;
+	/* Remove margin */
 }
 
 /* Force left-alignment for listings tab */
@@ -245,7 +259,8 @@
 
 /* Center the "no services" message and image */
 #listings:not(:has(#services-list)) {
-	justify-content: center; /* Center vertically when no services */
+	justify-content: center;
+	/* Center vertically when no services */
 }
 
 #listings p {

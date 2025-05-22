@@ -1159,6 +1159,96 @@ VALUES (
         55.00,
         2,
         '/images/services/digital_concept_art.png'
+    ),
+    (
+        2,
+        'Cyberpunk Character Portrait',
+        'Futuristic cyberpunk-style character illustration with neon colors and tech details.',
+        1,
+        85.00,
+        5,
+        '/images/services/character_illustration.png'
+    ),
+    (
+        2,
+        'Fantasy Animal Companion',
+        'Custom fantasy animal companion illustrations for stories or games.',
+        1,
+        70.00,
+        4,
+        '/images/services/character_illustration.png'
+    ),
+    (
+        2,
+        'Digital Art for Album Covers',
+        'Unique digital art for music album covers in any genre.',
+        1,
+        120.00,
+        7,
+        '/images/services/digital_concept_art.png'
+    ),
+    (
+        2,
+        'Comic Book Character Sheet',
+        'Detailed character sheets for comic book or animation projects.',
+        1,
+        95.00,
+        6,
+        '/images/services/character_illustration.png'
+    ),
+    (
+        2,
+        'Digital Art for Social Media',
+        'Eye-catching digital illustrations for Instagram, Twitter, and more.',
+        1,
+        60.00,
+        3,
+        '/images/services/digital_concept_art.png'
+    ),
+    (
+        2,
+        'Chibi Couple Portrait',
+        'Cute chibi-style couple portraits, perfect for gifts.',
+        1,
+        55.00,
+        3,
+        '/images/services/character_illustration.png'
+    ),
+    (
+        2,
+        'Digital Art for Twitch Panels',
+        'Custom digital art for Twitch panels and overlays.',
+        1,
+        75.00,
+        4,
+        '/images/services/digital_concept_art.png'
+    ),
+    (
+        2,
+        'Book Illustration (Children)',
+        'Colorful and whimsical illustrations for children’s books.',
+        1,
+        100.00,
+        7,
+        '/images/services/character_illustration.png'
+    ),
+    (
+        2,
+        'Digital Art for Stickers',
+        'Fun and vibrant digital art for sticker packs.',
+        1,
+        50.00,
+        2,
+        '/images/services/digital_concept_art.png'
+    ),
+    (
+        2,
+        'Fantasy Weapon Design',
+        'Original fantasy weapon illustrations for games or books.',
+        1,
+        80.00,
+        5,
+        '/images/services/digital_concept_art.png'
     );
 -- Assign subcategories to services
 INSERT INTO ServiceSubcategory (service_id, subcategory_id)

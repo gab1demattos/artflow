@@ -33,3 +33,34 @@
     /* For ultra-wide screens, adjust proportions */
     @media screen and (min-width: 2400px) {}
 }
+
+/* Pagination Styles (global for all pages) */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5em;
+    margin: 2em 0 0 0;
+    font-family: "EB Garamond", sans-serif;
+}
+
+.pagination-btn {
+    background: var(--orange, #dd8d6e);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 0.5em 1.2em;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background 0.2s;
+    text-decoration: none;
+}
+
+.pagination-btn:hover {
+    background: #b96a4b;
+}
+
+.pagination-info {
+    color: #333;
+    font-size: 1.1em;
+}
