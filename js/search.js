@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('search-input');
     const searchButton = document.getElementById('search-button');
-
+    const modalSearchInput = document.getElementById('modal-search-input');
+    const modalSearchButton = document.getElementById('modal-search-button');
     const searchServicesBtn = document.getElementById("search-services");
     const searchNamesBtn = document.getElementById("search-names");
     const searchResults = document.getElementById("search-results");
@@ -15,9 +16,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Remove existing input listener
         searchInput.removeEventListener('input', searchInput._listener);
+        modalSearchInput.removeEventListener('input', modalSearchInput._listener);
 
         // Add new listener for services
-        loadSearchResults("services");
+        loadSearchResults("services", modalSearchInput);
     });
 
     searchNamesBtn.addEventListener("click", () => {
@@ -28,9 +30,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Remove existing input listener
         searchInput.removeEventListener('input', searchInput._listener);
+        modalSearchInput.removeEventListener('input', modalSearchInput._listener);
 
         // Add new listener for names
-        loadSearchResults("names");
+        loadSearchResults("names", modalSearchInput);
     });
 
     const handleSearchBarInteraction = () => {
@@ -52,12 +55,11 @@ document.addEventListener('DOMContentLoaded', () => {
         searchButton.style.display = 'block';
     });
 
-
     // Function to load search results dynamically
-    function loadSearchResults(type) {
+    function loadSearchResults(type, inputElement) {
         const listener = async function () {
             searchResults.innerHTML = ""; // Clear previous results
-            const query = searchInput.value.trim();
+            const query = inputElement.value.trim();
 
             const endpoint = type === "services" 
                 ? (query === '' ? '/api/api_all_services.php' : `/api/api_services.php?search=${encodeURIComponent(query)}`)
@@ -110,8 +112,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
 
-        searchInput._listener = listener;
-        searchInput.addEventListener('input', listener);
+        inputElement._listener = listener;
+        inputElement.addEventListener('input', listener);
     }
 
     function initial(type) {
@@ -182,7 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Load default results (services)
-    loadSearchResults("services");
+    loadSearchResults("services", modalSearchInput);
 
 });
 

@@ -16,6 +16,11 @@
 	z-index: 1000;
 }
 
+/* Hide header search bar when search modal is active */
+.modal-overlay:not(.hidden) ~ header #search-bar {
+    display: none;
+}
+
 /* Base modal container structure */
 .modal .login {
 	background-color: white;
@@ -517,6 +522,33 @@
 
 .modal-overlay.search-modal {
     background-color: transparent !important; /* Ensure no dark background */
+}
+
+/* Style for the search bar inside the modal */
+#modal-search-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem 0;
+}
+
+#modal-search-bar input {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    flex: 1;
+    margin-right: 0.5rem;
+}
+
+#modal-search-bar button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    background-color: var(--purple);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 .user-card {
