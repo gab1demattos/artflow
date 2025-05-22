@@ -92,6 +92,17 @@
 	border-radius: 50%;
 }
 
+#messages-page .chat-app__empty-state {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	width: 100%;
+	color: #888;
+	font-size: 23px;
+	text-align: center;
+}
+
 #messages-page .chat-app__chat-text {
 	display: flex;
 	flex-direction: column;
