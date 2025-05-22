@@ -6,42 +6,56 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchNamesBtn = document.getElementById("search-names");
     const searchResults = document.getElementById("search-results");
 
-    searchInput.addEventListener('focus', () => {
+    let activeType = "services"; // Default active type
+
+    const handleSearchBarInteraction = () => {
         searchButton.style.display = 'none';
-        if (searchResults.classList.contains("services-active")) 
-            initial("services");
-        
-        if (searchResults.classList.contains("names-active")) 
-            initial("names");
-        
-    });
+        initial(activeType);
+    };
+
+    searchInput.addEventListener('focus', handleSearchBarInteraction);
+    searchInput.addEventListener('click', handleSearchBarInteraction);
 
     searchInput.addEventListener('blur', () => {
         searchButton.style.display = 'block';
     });
 
-    // Toggle active class between buttons
+    // Update active type and synchronize events when switching between buttons
     searchServicesBtn.addEventListener("click", () => {
-        searchServicesBtn.classList.add("active");
-        searchNamesBtn.classList.remove("active");
-        searchResults.classList.add("services-active");
-        searchResults.classList.remove("names-active");
-        loadSearchResults("services");
+        if (activeType !== "services") {
+            activeType = "services";
+            searchServicesBtn.classList.add("active");
+            searchNamesBtn.classList.remove("active");
+            searchResults.classList.add("services-active");
+            searchResults.classList.remove("names-active");
+
+            // Remove existing input listener
+            searchInput.removeEventListener('input', searchInput._listener);
+
+            // Add new listener for services
+            loadSearchResults("services");
+        }
     });
 
     searchNamesBtn.addEventListener("click", () => {
-        searchNamesBtn.classList.add("active");
-        searchServicesBtn.classList.remove("active");
-        searchResults.classList.add("names-active");
-        searchResults.classList.remove("services-active");
-        searchResults.scrollTop = 0; // Reset scroll position to the top
-        loadSearchResults("names");
+        if (activeType !== "names") {
+            activeType = "names";
+            searchNamesBtn.classList.add("active");
+            searchServicesBtn.classList.remove("active");
+            searchResults.classList.add("names-active");
+            searchResults.classList.remove("services-active");
+
+            // Remove existing input listener
+            searchInput.removeEventListener('input', searchInput._listener);
+
+            // Add new listener for names
+            loadSearchResults("names");
+        }
     });
 
     // Function to load search results dynamically
     function loadSearchResults(type) {
-
-        searchInput.addEventListener('input', async function () {
+        const listener = async function () {
             searchResults.innerHTML = ""; // Clear previous results
             const query = searchInput.value.trim();
 
@@ -94,7 +108,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.error(`Error fetching search results for ${type}:`, error);
                 searchResults.innerHTML = `<p>Error loading search results. Please try again later.</p>`;
             }
-        });
+        };
+
+        searchInput._listener = listener;
+        searchInput.addEventListener('input', listener);
     }
 
     function initial(type) {
@@ -146,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <div class="user-card">
                                 <div class="user-info">
                                     <img src="${user.profilePicture || '/images/user_pfp/default.png'}" alt="User profile picture" class="user-profile-picture" />
-                                    <p class="user-username">${user.name}</p>
+                                    <p class="user-name">${user.name}</p>
                                     <p class="user-username">@${user.username}</p>
                                 </div>
                             </div>
@@ -171,5 +188,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-    
+
 
