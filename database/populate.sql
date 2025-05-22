@@ -178,6 +178,7 @@ VALUES (6, 'Tattoo Design'),
     (6, 'Custom Tattoo Concepts'),
     (6, 'Cover-up Design'),
     (6, 'Blackwork & Dotwork');
+    
 -- Services (varied across users and categories)
 INSERT INTO Service (
         user_id,
@@ -1250,6 +1251,7 @@ VALUES (
         5,
         '/images/services/digital_concept_art.png'
     );
+
 -- Assign subcategories to services
 INSERT INTO ServiceSubcategory (service_id, subcategory_id)
 VALUES (1, 1),
@@ -1367,6 +1369,7 @@ VALUES (1, 1),
     (78, 3),
     (79, 4),
     (80, 5);
+    
 -- Exchanges
 INSERT INTO Exchange (
         freelancer_id,
@@ -1381,6 +1384,7 @@ VALUES (2, 5, 1, 'completed', 75.00),
     (5, 8, 4, 'in progress', 180.00),
     (6, 2, 5, 'completed', 95.00),
     (7, 3, 6, 'cancelled', 85.00);
+    
 -- Messages
 INSERT INTO Message (sender_id, receiver_id, message)
 VALUES (
@@ -1409,29 +1413,14 @@ VALUES (
         'I need some additional details for your oil portrait.'
     ),
     (7, 4, 'Sure, what information do you need?');
+    
 -- Reviews
-INSERT INTO Review (user_id, service_id, rating, comment)
-VALUES (
-        5,
-        1,
-        5,
-        'Excellent work! The character illustration exceeded my expectations.'
-    ),
-    (
-        6,
-        2,
-        4,
-        'Great logo design. Professional and responsive service.'
-    ),
-    (
-        2,
-        5,
-        5,
-        'Beautiful handcrafted jewelry. Will definitely order again!'
-    ),
-    (
-        3,
-        6,
-        3,
-        'Good design but could have used more detail in some areas.'
-    );
+INSERT INTO Review (user_id, service_id, rating, comment) VALUES
+(5, 1, 5, 'Excellent work! The character illustration exceeded my expectations.'),
+(6, 2, 4, 'Great logo design. Professional and responsive service.'),
+(2, 5, 5, 'Beautiful handcrafted jewelry. Will definitely order again!'),
+(3, 8, 3, 'Good design but could have used more detail in some areas.'),
+(2, 8, 5, 'Excellent work! The character illustration exceeded my expectations.'),
+(1, 8, 4, 'Great logo design. Professional and responsive service.'),
+(6, 8, 5, 'Beautiful handcrafted jewelry. Will definitely order again!'),
+(4, 8, 3, 'Good design but could have used more detail in some areas.');

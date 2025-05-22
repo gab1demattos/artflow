@@ -1,0 +1,86 @@
+/* Responsive styles for service display */
+
+@media (max-width: 1030px) {
+    #service-display {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #main-image {
+        width: 60%;
+        margin: 0 auto;
+        padding: 0;
+    }
+
+    #service-checkout {
+        order: -1; /* Move service-checkout to the top */
+        width: 90%;
+        margin: 1em 0;
+        padding-top: 0;
+    }
+
+    #service-checkout h2 {
+        font-size: 2rem;
+    }
+
+    #service-owner p {
+        font-size: 1rem;
+    }
+
+    #service-info {
+        width: 100%;
+    }
+
+    #price {
+        font-size: 2rem;
+        text-align: center;
+        margin: 0.5em 0;
+    }
+
+    #service-imgs {
+        flex-direction: row;
+        overflow-x: auto;
+        width: 60%;
+        height: 5em;
+        margin: 0 auto;
+        margin-bottom: 1em;
+        margin-top: 2em;
+    }
+
+    #service-imgs img {
+        width: 7em;
+        height: 5em;
+    }
+
+    #reviews {
+        height: auto;
+        margin: 1em 0;
+    }
+
+    .review p {
+        font-size: 1rem;
+    }
+
+    #service-main {
+        order: 0; /* Keep service-main below service-checkout */
+        width: 100%;
+        height: auto;
+        overflow-y:hidden;
+        overflow-x: hidden;
+    }
+
+    #images-service {
+        flex-direction: column;
+        margin-top: 1em !important;
+    }
+}
+
+@media (max-width: 1065px) {
+    #service-delivery {
+        height: auto;
+    }
+
+    #service-info {
+        width: auto;
+    }
+}
