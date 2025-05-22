@@ -71,6 +71,7 @@
 
     #images-service {
         flex-direction: column;
+        margin-top: 1em !important;
     }
 }
 
