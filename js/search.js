@@ -18,12 +18,16 @@ document.addEventListener('DOMContentLoaded', () => {
     searchServicesBtn.addEventListener("click", () => {
         searchServicesBtn.classList.add("active");
         searchNamesBtn.classList.remove("active");
+        searchResults.classList.add("services-active");
+        searchResults.classList.remove("names-active");
         loadSearchResults("services");
     });
 
     searchNamesBtn.addEventListener("click", () => {
         searchNamesBtn.classList.add("active");
         searchServicesBtn.classList.remove("active");
+        searchResults.classList.add("names-active");
+        searchResults.classList.remove("services-active");
         loadSearchResults("names");
     });
 

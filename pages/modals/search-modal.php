@@ -6,7 +6,7 @@
                 <button id="search-services" class="active">Services</button>
                 <button id="search-names">Usernames</button>
             </div>
-            <div id="search-results" class="scrollable">
+            <div id="search-results" class="scrollable, services-active" >
                 <!-- Results will be dynamically loaded here -->
             </div>
         </div>
