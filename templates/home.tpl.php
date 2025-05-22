@@ -186,15 +186,7 @@
             <?php include __DIR__ . '/../pages/modals/go-with-flow-modal.php'; ?>
         <?php endif; ?>
         <?php include __DIR__ . '/../pages/modals/new-service-modal.php'; ?>
-        <div id="search-modal-overlay" class="modal-overlay hidden">
-            <div class="modal" id="search-modal">
-                <div class="modal-content">
-                    <h2>Search</h2>
-                    <input type="text" placeholder="Type your search here...">
-                    <button class="close-modal">Close</button>
-                </div>
-            </div>
-        </div>
+        <?php include __DIR__ . '/../pages/modals/search-modal.php'; ?>
         <!-- Load the modular JavaScript files -->
         <script src="/js/modals.js"></script>
         <script src="/js/categories.js"></script>

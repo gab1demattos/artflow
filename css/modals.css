@@ -442,3 +442,41 @@
 #edit-profile-modal .form > label + .password-input-container {
 	margin-bottom: 0; /* Reset this so it doesn't add extra spacing */
 }
+
+/* =========================== */
+/* SEARCH MODAL SPECIFICS     */
+/* =========================== */
+#search-modal {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    width: 80%;
+	height: 80%;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+#search-modal h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: var(--purple);
+}
+#search-modal input[type="text"] {
+    width: 100%;
+    padding: 0.8rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+}
+#search-modal .close-modal {
+    background-color: var(--orange);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+#search-modal .close-modal:hover {
+    background-color: var(--dark-orange);
+}
