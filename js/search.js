@@ -36,152 +36,107 @@ document.addEventListener('DOMContentLoaded', () => {
     function loadSearchResults(type) {
         searchResults.innerHTML = ""; // Clear previous results
 
-        if (type === "services") {
-            searchInput.addEventListener('input', async function () {
-                if (query === '') {
-                    // Make an AJAX request to fetch all services
-                    fetch('/api/api_all_services.php')
+        searchInput.addEventListener('input', async function () {
+            const query = searchInput.value.trim();
+
+            if (query === '') {
+                const endpoint = type === "services" ? '/api/api_all_services.php' : '/api/api_users.php';
+                fetch(endpoint)
                     .then(response => response.json())
-                    .then(services => {
-                        if (services.length > 0) {
-                            services.forEach(service => {
-                                const serviceCard = document.createElement('a');
-                                serviceCard.href = `/pages/service.php?id=${encodeURIComponent(service.id)}`;
-                                serviceCard.classList.add('service-card-link');
-                                serviceCard.innerHTML = `
-                                    <div class="service-card" data-subcategory-ids="${encodeURIComponent(service.subcatIdsStr || '')}">
-                                        <div class="pantone-image-wrapper">
-                                            ${service.image ? `<img src="${service.image}" alt="Service image" class="pantone-image" />` : '<div class="pantone-image pantone-image-placeholder"></div>'}
+                    .then(data => {
+                        if (data.length > 0) {
+                            data.forEach(item => {
+                                const card = document.createElement('a');
+                                if (type === "services") {
+                                    card.href = `/pages/service.php?id=${encodeURIComponent(item.id)}`;
+                                    card.classList.add('service-card-link');
+                                    card.innerHTML = `
+                                        <div class="service-card">
+                                            <div class="pantone-image-wrapper">
+                                                ${item.image ? `<img src="${item.image}" alt="Service image" class="pantone-image" />` : '<div class="pantone-image pantone-image-placeholder"></div>'}
+                                            </div>
+                                            <div class="pantone-title">${item.title}</div>
+                                            <div class="pantone-info-row">
+                                                <span class="pantone-username">${item.username}</span>
+                                                <span class="pantone-rating">★ ${item.rating || '0.0'}</span>
+                                            </div>
                                         </div>
-                                        <div class="pantone-title">${service.title}</div>
-                                        <div class="pantone-info-row">
-                                            <span class="pantone-username">${service.username}</span>
-                                            <span class="pantone-rating">★ ${service.rating || '0.0'}</span>
+                                    `;
+                                } else {
+                                    card.href = `/pages/profile.php?username=${encodeURIComponent(item.username)}`;
+                                    card.classList.add('user-card-link');
+                                    card.innerHTML = `
+                                        <div class="user-card">
+                                            <div class="user-info">
+                                                <img src="${item.profilePicture || '/images/user_pfp/default.png'}" alt="User profile picture" class="user-profile-picture" />
+                                                <p class="user-name">${item.name}</p>
+                                                <p class="user-username">@${item.username}</p>
+                                            </div>
                                         </div>
-                                    </div>
-                                `;
-                                searchResults.appendChild(serviceCard);
+                                    `;
+                                }
+                                searchResults.appendChild(card);
                             });
                         } else {
-                            searchResults.innerHTML = '<p>No services found.</p>';
+                            searchResults.innerHTML = `<p>No ${type} found.</p>`;
                         }
                     })
                     .catch(error => {
-                        console.error('Error fetching services:', error);
-                        searchResults.innerHTML = '<p>Error loading services. Please try again later.</p>';
+                        console.error(`Error fetching ${type}:`, error);
+                        searchResults.innerHTML = `<p>Error loading ${type}. Please try again later.</p>`;
                     });
-                } else  {
-                    try {
-                        // Fetch services and users matching the search query
-                        const [servicesResponse] = await Promise.all([fetch(`/api/api_services.php?search=${encodeURIComponent(query)}`)]);
-                        const services = await servicesResponse.json();
+            } else {
+                const endpoint = type === "services" ? `/api/api_services.php?search=${encodeURIComponent(query)}` : `/api/api_users.php?search=${encodeURIComponent(query)}`;
+                try {
+                    const response = await fetch(endpoint);
+                    const data = await response.json();
 
-                        searchResults.innerHTML = ''; // Clear previous results
-                        // Display services
-                        if (services.length > 0) {
-                            const servicesHeader = document.createElement('h3');
-                            servicesHeader.textContent = 'Services';
-                            searchResults.appendChild(servicesHeader);
-
-                            services.forEach(service => {
-                                const serviceCard = document.createElement('a');
-                                serviceCard.href = `/pages/service.php?id=${encodeURIComponent(service.id)}`;
-                                serviceCard.classList.add('service-card-link');
-                                serviceCard.innerHTML = `
+                    searchResults.innerHTML = ''; // Clear previous results
+                    if (data.length > 0) {
+                        data.forEach(item => {
+                            const card = document.createElement('a');
+                            if (type === "services") {
+                                card.href = `/pages/service.php?id=${encodeURIComponent(item.id)}`;
+                                card.classList.add('service-card-link');
+                                card.innerHTML = `
                                     <div class="service-card">
                                         <div class="pantone-image-wrapper">
-                                            ${service.image ? `<img src="${service.image}" alt="Service image" class="pantone-image" />` : '<div class="pantone-image pantone-image-placeholder"></div>'}
+                                            ${item.image ? `<img src="${item.image}" alt="Service image" class="pantone-image" />` : '<div class="pantone-image pantone-image-placeholder"></div>'}
                                         </div>
-                                        <div class="pantone-title">${service.title}</div>
+                                        <div class="pantone-title">${item.title}</div>
                                         <div class="pantone-info-row">
-                                            <span class="pantone-username">${service.username}</span>
-                                            <span class="pantone-rating">★ ${service.rating || '0.0'}</span>
+                                            <span class="pantone-username">${item.username}</span>
+                                            <span class="pantone-rating">★ ${item.rating || '0.0'}</span>
                                         </div>
                                     </div>
                                 `;
-                                searchResults.appendChild(serviceCard);
-                            });
-                        } else {
-                            searchResults.innerHTML += '<p>No services found.</p>';
-                        }
-                    } catch (error) {
-                        console.error('Error fetching search results:', error);
-                        searchResults.innerHTML = '<p>Error loading search results. Please try again later.</p>';
-                    }
-                }
-            });
-            
-        } else if (type === "names") {
-            searchInput.addEventListener('input', async function () {
-                if (query === '') {
-                    // Make an AJAX request to fetch all users
-                    fetch('/api/api_users.php')
-                    .then(response => response.json())
-                    .then(users => {
-                        if (users.length > 0) {
-                            users.forEach(user => {
-                                const userCard = document.createElement('a');
-                                userCard.href = `/pages/profile.php?username=${encodeURIComponent(user.username)}`;
-                                userCard.classList.add('user-card-link');
-                                userCard.innerHTML = `
+                            } else {
+                                card.href = `/pages/profile.php?username=${encodeURIComponent(item.username)}`;
+                                card.classList.add('user-card-link');
+                                card.innerHTML = `
                                     <div class="user-card">
                                         <div class="user-info">
-                                            <img src="${user.profilePicture || '/images/user_pfp/default.png'}" alt="User profile picture" class="user-profile-picture" />
-                                            <p class="user-name">${user.name}</p>
-                                            <p class="user-username">@${user.username}</p>
+                                            <img src="${item.profilePicture || '/images/user_pfp/default.png'}" alt="User profile picture" class="user-profile-picture" />
+                                            <p class="user-name">${item.name}</p>
+                                            <p class="user-username">@${item.username}</p>
                                         </div>
                                     </div>
                                 `;
-                                searchResults.appendChild(userCard);
-                            });
-                        } else {
-                            searchResults.innerHTML = '<p>No users found.</p>';
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error fetching users:', error);
-                        searchResults.innerHTML = '<p>Error loading users. Please try again later.</p>';
-                    });
-                } else { 
-                    try {
-                        // Fetch services and users matching the search query
-                        const [usersResponse] = await Promise.all([fetch(`/api/api_users.php?search=${encodeURIComponent(query)}`)]);
-                        const users = await usersResponse.json();
-        
-                        searchResults.innerHTML = ''; // Clear previous results
-                        if (users.length > 0) {
-                            const usersHeader = document.createElement('h3');
-                            usersHeader.textContent = 'Users';
-                            searchResults.appendChild(usersHeader);
-        
-                            users.forEach(user => {
-                                const userCard = document.createElement('a');
-                                userCard.href = `/pages/profile.php?username=${encodeURIComponent(user.username)}`;
-                                userCard.classList.add('user-card-link');
-                                userCard.innerHTML = `
-                                    <div class="user-card">
-                                        <div class="user-info">
-                                            <img src="${user.profilePicture || '/images/user_pfp/default.png'}" alt="User profile picture" class="user-profile-picture" />
-                                            <p class="user-name">${user.name}</p>
-                                            <p class="user-username">@${user.username}</p>
-                                        </div>
-                                    </div>
-                                `;
-                                searchResults.appendChild(userCard);
-                            });
-                        } else {
-                            searchResults.innerHTML += '<p>No users found.</p>';
-                        }
-                    } catch (error) {
-                        console.error('Error fetching search results:', error);
-                        searchResults.innerHTML = '<p>Error loading search results. Please try again later.</p>';
+                            }
+                            searchResults.appendChild(card);
+                        });
+                    } else {
+                        searchResults.innerHTML = `<p>No ${type} found.</p>`;
                     }
+                } catch (error) {
+                    console.error(`Error fetching search results for ${type}:`, error);
+                    searchResults.innerHTML = `<p>Error loading search results. Please try again later.</p>`;
                 }
-            });
-        }
+            }
+        });
     }
 
     // Load default results (services)
     loadSearchResults("services");
 
-    
+});
