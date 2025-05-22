@@ -47,7 +47,7 @@
             </li>
             <li class="sidebar-item">
                 <img src="/images/logos/activity.png" alt="Activity" class="logo">
-                <button>Activity</button>
+                <a href="/pages/activity.php"><button>Activity</button></a>
             </li>
             <li class="sidebar-item">
                 <img src="/images/logos/messages.png" alt="Messages" class="logo">
