@@ -63,12 +63,13 @@ const Modals = {
 	 * Set up generic modal events like clicking outside to close
 	 */
 	setupGenericModalEvents() {
-		// Close modal when clicking outside
+		// Close modal when clicking outside, except for the search modal
 		document.querySelectorAll(".modal-overlay").forEach((overlay) => {
+			if (overlay.id === "search-modal-overlay") return; // Skip search modal
+
 			overlay.addEventListener("click", function () {
 				overlay.classList.add("hidden");
 			});
-
 			const modal = overlay.querySelector(".modal");
 			if (modal) {
 				modal.addEventListener("click", function (e) {
