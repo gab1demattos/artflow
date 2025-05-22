@@ -18,63 +18,10 @@ drawHeader($user);
         <button class="activity-tab" data-tab="orders-from-others">Orders From Others</button>
     </div>
     <div class="activity-tab-content active" id="your-orders">
-        <!-- Placeholder: Replace with dynamic order data -->
-        <div class="order-card">
-            <div class="order-header">
-                <span class="order-title">Logo Design Package</span>
-                <span class="order-status completed">Completed</span>
-            </div>
-            <div class="order-details">
-                <div><strong>Seller:</strong> John Doe (@johndoe)</div>
-                <div><strong>Delivery:</strong> 5 days</div>
-                <div><strong>Requirements:</strong> Company name, color preferences</div>
-                <div><strong>Total:</strong> 50€</div>
-                <div><strong>Date:</strong> 2025-05-20</div>
-            </div>
-        </div>
-        <div class="order-card">
-            <div class="order-header">
-                <span class="order-title">Digital Portrait</span>
-                <span class="order-status in-progress">In Progress</span>
-            </div>
-            <div class="order-details">
-                <div><strong>Seller:</strong> Jane Smith (@janesmith)</div>
-                <div><strong>Delivery:</strong> 3 days</div>
-                <div><strong>Requirements:</strong> Photo reference</div>
-                <div><strong>Total:</strong> 30€</div>
-                <div><strong>Date:</strong> 2025-05-21</div>
-            </div>
-        </div>
+        <!-- Orders will be loaded dynamically by JS -->
     </div>
     <div class="activity-tab-content" id="orders-from-others">
-        <!-- Placeholder: Replace with dynamic order data -->
-        <div class="order-card">
-            <div class="order-header">
-                <span class="order-title">Brand Identity Package</span>
-                <span class="order-status not-delivered">Not Delivered</span>
-            </div>
-            <div class="order-details">
-                <div><strong>Buyer:</strong> Alice Brown (@aliceb)</div>
-                <div><strong>Delivery:</strong> 7 days</div>
-                <div><strong>Requirements:</strong> --</div>
-                <div><strong>Total:</strong> 120€</div>
-                <div><strong>Date:</strong> 2025-05-22</div>
-            </div>
-            <button class="button filled green hovering mark-delivered-btn">Mark as Delivered</button>
-        </div>
-        <div class="order-card">
-            <div class="order-header">
-                <span class="order-title">Logo Design Package</span>
-                <span class="order-status delivered">Delivered</span>
-            </div>
-            <div class="order-details">
-                <div><strong>Buyer:</strong> Bob Smith (@bobsmith)</div>
-                <div><strong>Delivery:</strong> 4 days</div>
-                <div><strong>Requirements:</strong> Logo text, style</div>
-                <div><strong>Total:</strong> 80€</div>
-                <div><strong>Date:</strong> 2025-05-18</div>
-            </div>
-        </div>
+        <!-- Orders will be loaded dynamically by JS -->
     </div>
 </main>
 <link rel="stylesheet" href="/css/activity.css">

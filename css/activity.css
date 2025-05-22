@@ -85,11 +85,25 @@
 .mark-delivered-btn {
     position: absolute;
     right: 1.5rem;
-    bottom: 1.2rem;
+    bottom: 1rem;
     z-index: 2;
-    font-size: 0.95em;
-    padding: 3px 14px;
-    /* Match card padding for alignment */
+    font-size: 0.9em;
+    padding: 6px 18px;
+    border-radius: 20px;
+    background: linear-gradient(90deg, #7ecb8f 0%, #4cae6a 100%);
+    color: #fff;
+    border: none;
+    font-family: 'EB Garamond', serif;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(76, 174, 106, 0.10);
+    cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s, color 0.2s;
+}
+
+.mark-delivered-btn:hover {
+    background: linear-gradient(90deg, #4cae6a 0%, #388e4a 100%);
+    color: #eafff2;
+    box-shadow: 0 4px 16px rgba(76, 174, 106, 0.18);
 }
 
 .order-card:hover {
