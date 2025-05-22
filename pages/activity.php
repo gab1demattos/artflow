@@ -51,7 +51,7 @@ drawHeader($user);
         <div class="order-card">
             <div class="order-header">
                 <span class="order-title">Brand Identity Package</span>
-                <span class="order-status awaiting">Awaiting Requirements</span>
+                <span class="order-status not-delivered">Not Delivered</span>
             </div>
             <div class="order-details">
                 <div><strong>Buyer:</strong> Alice Brown (@aliceb)</div>
@@ -59,6 +59,20 @@ drawHeader($user);
                 <div><strong>Requirements:</strong> --</div>
                 <div><strong>Total:</strong> 120€</div>
                 <div><strong>Date:</strong> 2025-05-22</div>
+            </div>
+            <button class="button filled green hovering mark-delivered-btn">Mark as Delivered</button>
+        </div>
+        <div class="order-card">
+            <div class="order-header">
+                <span class="order-title">Logo Design Package</span>
+                <span class="order-status delivered">Delivered</span>
+            </div>
+            <div class="order-details">
+                <div><strong>Buyer:</strong> Bob Smith (@bobsmith)</div>
+                <div><strong>Delivery:</strong> 4 days</div>
+                <div><strong>Requirements:</strong> Logo text, style</div>
+                <div><strong>Total:</strong> 80€</div>
+                <div><strong>Date:</strong> 2025-05-18</div>
             </div>
         </div>
     </div>

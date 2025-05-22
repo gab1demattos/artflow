@@ -11,7 +11,7 @@
 
 .activity-title {
     font-size: 2rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0rem;
     font-weight: 700;
     color: #222;
     text-align: center;
@@ -19,28 +19,31 @@
 
 .activity-tabs {
     display: flex;
-    
+
     border-bottom: 1px solid #ddd;
-	/* margin-bottom: 20px; */
-	margin-left: 4.5em;
-	margin-right: 4.5em;
-    
+    /* margin-bottom: 20px; */
+    margin-left: 4.5em;
+    margin-right: 4.5em;
+
     gap: 0.5rem;
     /* margin-bottom: 1rem;
-    align-items: flex-end; */ 
+    align-items: flex-end; */
 }
 
 .activity-tab {
     background: #f3f3f3;
     border: none;
     border-radius: 6px 6px 0 0;
-    padding: 0.7rem 2.2rem;
+    /* padding: 0.7rem 2.2rem; */
     font-family: 'EB Garamond', sans-serif;
     font-size: 1.1rem;
     font-weight: 500;
     color: #555;
     cursor: pointer;
     transition: background 0.2s, color 0.2s;
+    line-height: 0;
+    height: auto;
+    padding: 0px 1.1rem;
 }
 
 .activity-tab.active {
@@ -53,14 +56,14 @@
     margin-top: 0; */
 
     display: none;
-	/* Hide all tab content by default */
-	min-height: calc(100vh - 25em);
-	/* Use viewport height minus space for header/tabs/etc */
-	width: 100%;
-	flex-direction: column;
-	padding: 0 4.5em;
-	/* Match tab margins */
-	box-sizing: border-box;
+    /* Hide all tab content by default */
+    min-height: calc(100vh - 25em);
+    /* Use viewport height minus space for header/tabs/etc */
+    width: 100%;
+    flex-direction: column;
+    padding: 0 4.5em;
+    /* Match tab margins */
+    box-sizing: border-box;
 }
 
 .activity-tab-content.active {
@@ -75,6 +78,18 @@
     margin-bottom: 1.5rem;
     padding: 1.2rem 1.5rem;
     transition: box-shadow 0.2s;
+    position: relative;
+    /* Needed for absolute button placement */
+}
+
+.mark-delivered-btn {
+    position: absolute;
+    right: 1.5rem;
+    bottom: 1.2rem;
+    z-index: 2;
+    font-size: 0.95em;
+    padding: 3px 14px;
+    /* Match card padding for alignment */
 }
 
 .order-card:hover {
@@ -114,6 +129,16 @@
 }
 
 .order-status.awaiting {
+    background: #ffe0e0;
+    color: #c0392b;
+}
+
+.order-status.delivered {
+    background: #d1f5e6;
+    color: #1a7f4f;
+}
+
+.order-status.not-delivered {
     background: #ffe0e0;
     color: #c0392b;
 }
