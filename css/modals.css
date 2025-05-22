@@ -27,7 +27,8 @@
 	position: relative;
 	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 	display: flex;
-	flex-direction: row; /* Form and image side-by-side */
+	flex-direction: row;
+	/* Form and image side-by-side */
 	align-items: center;
 }
 
@@ -64,8 +65,10 @@
 	font-family: "Cormorant Garamond", serif;
 	width: 100%;
 	box-sizing: border-box;
-	transition: border 0.3s ease; /* Smooth border color change */
-	border: 2px solid transparent; /* Reserve space for focus border */
+	transition: border 0.3s ease;
+	/* Smooth border color change */
+	border: 2px solid transparent;
+	/* Reserve space for focus border */
 }
 
 /* Style for the password input container */
@@ -77,7 +80,8 @@
 
 .password-input-container input[type="password"],
 .password-input-container input[type="text"] {
-	padding-right: 40px; /* Make space for the icon */
+	padding-right: 40px;
+	/* Make space for the icon */
 }
 
 .toggle-password {
@@ -89,15 +93,19 @@
 	border: none;
 	cursor: pointer;
 	padding: 0;
-	display: flex; /* To center the icon vertically and horizontally if needed */
+	display: flex;
+	/* To center the icon vertically and horizontally if needed */
 	align-items: center;
 	justify-content: center;
-	line-height: 0; /* To prevent extra space around the icon */
+	line-height: 0;
+	/* To prevent extra space around the icon */
 }
 
 .toggle-password i.material-icons {
-	font-size: 1.5em; /* Adjust size as needed */
-	color: rgba(0, 0, 0, 0.54); /* Default icon color */
+	font-size: 1.5em;
+	/* Adjust size as needed */
+	color: rgba(0, 0, 0, 0.54);
+	/* Default icon color */
 }
 
 /* Shared button container styles */
@@ -215,14 +223,14 @@
 	bottom: -0.56em;
 }
 
-#goflow-modal .modal-content > p:nth-of-type(1) {
+#goflow-modal .modal-content>p:nth-of-type(1) {
 	font-size: 2rem;
 	position: absolute;
 	left: 4em;
 	top: 2em;
 }
 
-#goflow-modal .modal-content > p:nth-of-type(2) {
+#goflow-modal .modal-content>p:nth-of-type(2) {
 	position: absolute;
 	left: 2.125em;
 	top: 14.25em;
@@ -248,7 +256,8 @@
 	position: relative;
 	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 	display: flex;
-	flex-direction: row; /* Form and image side-by-side */
+	flex-direction: row;
+	/* Form and image side-by-side */
 	align-items: center;
 }
 
@@ -271,7 +280,8 @@
 }
 
 #edit-profile-form {
-	gap: 1em; /* More spacing between form elements */
+	gap: 1em;
+	/* More spacing between form elements */
 }
 
 /* Two-column layout for edit profile form */
@@ -285,7 +295,8 @@
 	padding-right: 20px;
 	display: flex;
 	flex-direction: column;
-	gap: 0.7em; /* Reduced from 1em to bring field groups closer together while maintaining separation */
+	gap: 0.7em;
+	/* Reduced from 1em to bring field groups closer together while maintaining separation */
 }
 
 #edit-profile-form .form-right-column {
@@ -305,14 +316,16 @@
 	font-family: "Cormorant Garamond", serif;
 	width: 100%;
 	box-sizing: border-box;
-	min-height: 150px; /* Taller textarea */
+	min-height: 150px;
+	/* Taller textarea */
 	resize: vertical;
 	transition: border 0.3s ease;
 	border: 2px solid transparent;
 }
 
 #edit-profile-modal .form input {
-	padding: 12px 18px; /* Larger padding */
+	padding: 12px 18px;
+	/* Larger padding */
 	font-size: 20px;
 }
 
@@ -336,7 +349,7 @@
 	z-index: -1;
 }
 
-#edit-profile-modal .form input[type="file"] + label.file-label {
+#edit-profile-modal .form input[type="file"]+label.file-label {
 	padding: 10px 15px;
 	background: var(--orange);
 	color: var(--peach);
@@ -350,7 +363,7 @@
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-#edit-profile-modal .form input[type="file"] + label.file-label:hover {
+#edit-profile-modal .form input[type="file"]+label.file-label:hover {
 	background-color: var(--peach);
 	color: var(--orange);
 	border: 2px solid var(--orange);
@@ -398,7 +411,8 @@
 }
 
 .delete-image-btn:hover {
-	background-color: #ff6347; /* Red color on hover */
+	background-color: #ff6347;
+	/* Red color on hover */
 }
 
 /* File input container for side-by-side elements */
@@ -422,23 +436,218 @@
 /* Form labels */
 #edit-profile-modal .form label {
 	display: block;
-	margin-bottom: 0.1em; /* Reduced to almost touch input fields */
+	margin-bottom: 0.1em;
+	/* Reduced to almost touch input fields */
 	font-family: "Cormorant Garamond", serif;
 	font-size: 1.1rem;
 	font-weight: bold;
-    color: black;
+	color: black;
 }
 
 /* Space between input fields and next label */
 #edit-profile-modal .form input,
 #edit-profile-modal .form textarea,
 #edit-profile-modal .form .password-input-container {
-	margin-bottom: 0.7em; /* This creates space between different input/label pairs */
+	margin-bottom: 0.7em;
+	/* This creates space between different input/label pairs */
 }
 
 /* Remove the conflicting selector that was added earlier */
-#edit-profile-modal .form > label + input,
-#edit-profile-modal .form > label + textarea,
-#edit-profile-modal .form > label + .password-input-container {
-	margin-bottom: 0; /* Reset this so it doesn't add extra spacing */
+#edit-profile-modal .form>label+input,
+#edit-profile-modal .form>label+textarea,
+#edit-profile-modal .form>label+.password-input-container {
+	margin-bottom: 0;
+	/* Reset this so it doesn't add extra spacing */
+}
+
+/* Input error styles */
+.input-error,
+.input-error input,
+.input-error textarea {
+	border: 2px solid var(--orange, #e67e22) !important;
+	background: #fffbe6 !important;
+}
+
+/* Requirements and payment modal specifics */
+#requirements-modal-overlay .modal-content,
+#payment-modal-overlay .modal-content {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	padding: 2em 2em 1em 2em;
+	min-width: 320px;
+	min-height: 200px;
+	max-width: 400px;
+	background: #fff;
+	border-radius: 16px;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+}
+
+#requirements-modal-overlay .modal-content {
+	min-width: 480px;
+	min-height: 320px;
+	max-width: 600px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	/* Push content and buttons apart */
+	box-sizing: border-box;
+	padding-left: 2em;
+	padding-right: 2em;
+}
+
+#payment-modal-overlay .modal-content {
+	min-width: 700px;
+	min-height: 340px;
+	max-width: 900px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	box-sizing: border-box;
+	padding-left: 2em;
+	padding-right: 2em;
+	gap: 2em;
+}
+
+#payment-modal-overlay .payment-form-section {
+	flex: 2;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+#payment-modal-overlay .order-overview-section {
+	flex: 1;
+	background: #faf8f6;
+	border-radius: 12px;
+	padding: 1.5em 1em;
+	margin-top: 1em;
+	margin-bottom: 1em;
+	box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	min-width: 200px;
+	max-width: 260px;
+	font-size: 1em;
+}
+
+#payment-modal-overlay .order-overview-section h3 {
+	font-size: 1.4em;
+	margin-bottom: 0.7em;
+	/* color: var(--orange, #e67e22); */
+	font-family: 'EB Garamond', sans-serif;
+}
+
+#payment-modal-overlay .order-overview-section p {
+	font-size: 1em;
+	font-weight: bold;
+	margin: 0.2em 0;
+	color: #333;
+}
+
+#payment-modal-overlay .order-overview-section p span {
+	font-weight: normal;
+	font-size: 1em;
+}
+
+#payment-modal-overlay .order-overview-section .order-total {
+	font-weight: bold;
+	margin-top: 1em;
+	font-size: 1.4em;
+	color: var(--orange, #e67e22);
+}
+
+#requirements-modal-overlay h2 {
+	color: var(--green);
+	font-family: 'Modak', sans-serif;
+	text-align: center;
+	margin-bottom: 1em;
+	font-weight: normal;
+}
+
+#payment-modal-overlay h2 {
+	color: var(--green);
+	font-family: 'Modak', sans-serif;
+	text-align: center;
+	margin-bottom: 1em;
+	font-weight: normal;
+}
+
+#requirements-modal-overlay textarea {
+	font-size: 1.1em;
+	border-radius: 8px;
+	border: 1.5px solid #ccc;
+	padding: 1em;
+	resize: vertical;
+	min-height: 160px;
+	box-sizing: border-box;
+	width: 100%;
+	margin-left: 0;
+	margin-right: 0;
+}
+
+#payment-modal-overlay input[type="text"] {
+	width: 100%;
+	max-width: 100%;
+	box-sizing: border-box;
+	margin-bottom: 1em;
+	padding: 0.6em 0.8em;
+	border-radius: 6px;
+	border: 1.5px solid #ccc;
+	font-size: 1em;
+}
+
+#payment-modal-overlay label {
+	font-size: 1em;
+	margin-bottom: 0.5em;
+	display: block;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+#requirements-modal-overlay .button-container {
+	margin-top: auto;
+	margin-bottom: 0;
+	justify-content: flex-end;
+}
+
+#payment-modal-overlay .button-container {
+	margin-top: auto;
+	margin-bottom: 0;
+	justify-content: flex-end;
+}
+
+/* Thank You Modal Styles */
+#thankyou-modal-overlay .modal-content {
+    min-width: 400px;
+    max-width: 500px;
+    text-align: center;
+    padding: 2.5em 2em;
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#thankyou-modal-overlay h2 {
+    color: var(--green);
+    font-family: 'Modak', sans-serif;
+    margin-bottom: 1em;
+    font-size: 2em;
+    font-weight: normal;
+}
+
+#thankyou-modal-overlay p {
+    font-size: 1.2em;
+    margin: 0 0 1em 0;
+    color: #333;
+}
+
+#thankyou-close.button {
+    margin-top: 1.5em;
+    width: 100%;
+    max-width: 220px;
 }
