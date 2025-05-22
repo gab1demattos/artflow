@@ -253,6 +253,7 @@ const Modals = {
 	 */
 	setupSearchModal() {
 		const searchInput = document.getElementById("search-input");
+		const searchBar = document.getElementById("search-bar");
 		const searchButton = document.getElementById("search-button");
 		const searchModalOverlay = document.getElementById("search-modal-overlay");
 		const closeSearchModalBtn = document.querySelector("#search-modal .close-modal");
@@ -260,23 +261,27 @@ const Modals = {
 		if (searchModalOverlay) {
 			// Ensure the overlay has a transparent background
 			searchModalOverlay.style.backgroundColor = "transparent";
+			searchBar.style.display = "flex"; // Ensure it starts visible
 		}
 
 		if (searchInput && searchModalOverlay) {
 			searchInput.addEventListener("click", () => {
 				searchModalOverlay.classList.remove("hidden");
+				searchBar.style.display = "none"; // Hide input when modal is active
 			});
 		}
 
 		if (searchButton && searchModalOverlay) {
 			searchButton.addEventListener("click", () => {
 				searchModalOverlay.classList.remove("hidden");
+				searchBar.style.display = "none"; // Hide input when modal is active
 			});
 		}
 
 		if (closeSearchModalBtn && searchModalOverlay) {
 			closeSearchModalBtn.addEventListener("click", () => {
 				searchModalOverlay.classList.add("hidden");
+				searchBar.style.display = "flex"; // Show input when modal is hidden
 			});
 		}
 	},
