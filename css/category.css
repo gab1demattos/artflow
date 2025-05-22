@@ -99,29 +99,59 @@
 }
 
 .service-card {
-		width: 270px;
-		min-width: 0;
-		max-width: 270px;
-		
-		padding: 0 0 12px 0;
-	}
+	width: 250px;
+	min-width: 0;
+	max-width: 250px;
 
-	.pantone-image-wrapper {
-		height: 260px;
-	}
+	padding: 0 0 12px 0;
+}
 
-	.pantone-title {
-		font-size: 1.1rem;
-	}
+.pantone-image-wrapper {
+	height: 260px;
+}
 
-	.pantone-info-row {
-		font-size: 0.98rem;
-	}
+.pantone-title {
+	font-size: 1.1rem;
+}
 
-	.category-content {
-		padding: 1em 2vw 2em 2vw;
-		/* More padding on mobile */
-	}
+.pantone-info-row {
+	font-size: 0.98rem;
+}
+
+.category-content {
+	padding: 1em 2vw 2em 2vw;
+	/* More padding on mobile */
+}
+
+.pagination {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 1.5em;
+	margin: 2em 0 0 0;
+	font-family: "EB Garamond", sans-serif;
+}
+
+.pagination-btn {
+	background: var(--orange, #dd8d6e);
+	color: #fff;
+	border: none;
+	border-radius: 6px;
+	padding: 0.5em 1.2em;
+	font-size: 1.1em;
+	cursor: pointer;
+	transition: background 0.2s;
+	text-decoration: none;
+}
+
+.pagination-btn:hover {
+	background: #b96a4b;
+}
+
+.pagination-info {
+	color: #333;
+	font-size: 1.1em;
+}
 
 @media (max-width: 600px) {
 	.subcategory-carousel {
@@ -134,7 +164,7 @@
 		font-size: 0.95rem;
 	}
 
-	
+
 
 	#services-list {
 		gap: 16px 0;

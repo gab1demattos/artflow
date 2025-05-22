@@ -11,6 +11,8 @@ $user = $session->getUser() ?? null;
 $db = Database::getInstance();
 
 $categoryId = isset($_GET['id']) ? intval($_GET['id']) : 0;
+$page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
+$servicesPerPage = 20; // 4 rows x 5 cards
 $category = null;
 
 if ($categoryId > 0) {
@@ -55,8 +57,10 @@ drawHeader($user);
     <div class="category-content">
         <div id="services-list">
             <?php
-            // Fetch all services for this category using Service class method
-            $services = Service::getServicesByCategory($categoryId);
+            // Pagination: fetch only the services for the current page
+            $offset = ($page - 1) * $servicesPerPage;
+            $totalServices = Service::countServicesByCategory($categoryId);
+            $services = Service::getServicesByCategoryPaginated($categoryId, $servicesPerPage, $offset);
             if ($services) {
                 foreach ($services as $serviceObj) {
                     // Get subcategory IDs for this service
@@ -77,6 +81,20 @@ drawHeader($user);
             }
             ?>
         </div>
+        <?php
+        // Pagination controls
+        $totalPages = ceil($totalServices / $servicesPerPage);
+        if ($totalPages > 1): ?>
+        <nav class="pagination">
+            <?php if ($page > 1): ?>
+                <a href="?id=<?= $categoryId ?>&page=<?= $page - 1 ?>" class="pagination-btn">&laquo; Previous</a>
+            <?php endif; ?>
+            <span class="pagination-info">Page <?= $page ?> of <?= $totalPages ?></span>
+            <?php if ($page < $totalPages): ?>
+                <a href="?id=<?= $categoryId ?>&page=<?= $page + 1 ?>" class="pagination-btn">Next &raquo;</a>
+            <?php endif; ?>
+        </nav>
+        <?php endif; ?>
     </div>
 </main>
 <?php drawFooter($user); ?>
