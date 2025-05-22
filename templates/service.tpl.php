@@ -72,7 +72,7 @@ $owner = $stmtOwner->fetch(PDO::FETCH_ASSOC);
                     <p class="service-delivery"><?= htmlspecialchars($service['delivery_time']) ?> days</p>
                 </div>
                 <div id="service-options">
-                    <button id="message" class="service-options">Message <?= htmlspecialchars($owner['name']) ?></button>
+                    <button id="message" class="service-options">Message <?= htmlspecialchars(explode(' ', $owner['name'])[0]) ?></button>
                     <button id="payment" class="service-options">Continue to Payment</button>
                 </div>
             </div>
