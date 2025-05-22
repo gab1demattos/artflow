@@ -13,6 +13,11 @@
 	text-align: center;
 }
 
+/* Remove underline from anchor tags with button class */
+a.button {
+	text-decoration: none;
+}
+
 .button.garamond {
 	font-family: "EB Garamond", sans-serif;
 	font-weight: normal;
@@ -188,51 +193,50 @@
 	transform: translateX(5px);
 }
 
-
 /**== RESPONSIVE DESIGNS == **/
 
 /* Mobile Button Styles */
 @media screen and (max-width: 767px) {
-    /* Base button styling - adjust size for mobile */
-    .button {
-        font-size: 0.9rem !important;
-        padding: 4px 18px !important;
-        border-radius: 20px !important;
-    }
-    
-    /* Long button adjustments */
-    .button.long {
-        width: 100% !important;
-        border-radius: 12px !important;
-        padding: 4px 15px !important;
-    }
-    
-    /* Outlined buttons - thinner borders */
-    .button.outline {
-        border-width: 1.5px !important;
-    }
-    
-    /* Icon button adjustments */
-    .icon-button {
-        width: 2em !important;
-        height: 2em !important;
-        font-size: 1em !important;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2) !important;
-    }
+	/* Base button styling - adjust size for mobile */
+	.button {
+		font-size: 0.9rem !important;
+		padding: 4px 18px !important;
+		border-radius: 20px !important;
+	}
+
+	/* Long button adjustments */
+	.button.long {
+		width: 100% !important;
+		border-radius: 12px !important;
+		padding: 4px 15px !important;
+	}
+
+	/* Outlined buttons - thinner borders */
+	.button.outline {
+		border-width: 1.5px !important;
+	}
+
+	/* Icon button adjustments */
+	.icon-button {
+		width: 2em !important;
+		height: 2em !important;
+		font-size: 1em !important;
+		box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2) !important;
+	}
 }
 
 /* Tablet Button Styles */
 @media screen and (min-width: 768px) and (max-width: 1199px) {
-    .button {
-        font-size: 0.95rem !important;
-    }
-    
-    .button.long {
-        padding: 5px 18px !important;
-    }
-    
-    .icon-button {
-        width: 2.25em !important;
-        height: 2.25em !important;
-    }
+	.button {
+		font-size: 0.95rem !important;
+	}
+
+	.button.long {
+		padding: 5px 18px !important;
+	}
+
+	.icon-button {
+		width: 2.25em !important;
+		height: 2.25em !important;
+	}
 }
