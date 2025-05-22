@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         searchResults.innerHTML = `<p>Error loading ${type}. Please try again later.</p>`;
                     });
             } else {
-                const endpoint = type === "services" ? `/api/api_services.php?search=${encodeURIComponent(query)}` : `/api/api_users.php?search=${encodeURIComponent(query)}`;
+                const endpoint = type === "services" ? `/api/api_all_services.php?search=${encodeURIComponent(query)}` : `/api/api_users.php?search=${encodeURIComponent(query)}`;
                 try {
                     const response = await fetch(endpoint);
                     const data = await response.json();

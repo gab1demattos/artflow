@@ -70,6 +70,29 @@ class Service {
         
         return $result;
     }
+
+    static function searchServices(PDO $db, string $search) : array {
+        $db = Database::getInstance();
+        $stmt = $db->prepare('SELECT * FROM Service WHERE title LIKE ? ');
+        $stmt->execute(array('%' . $search . '%'));
+
+        $services = [];
+        while ($service = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $services[] = new Service(
+                (int)$service['id'],
+                (int)$service['user_id'],
+                $service['title'],
+                $service['description'],
+                (int)$service['category_id'],
+                (float)$service['price'],
+                (int)$service['delivery_time'],
+                $service['images'],
+                $service['videos']
+            );
+        }
+
+        return $services;
+    }
     
     /**
      * Get service by ID
@@ -317,19 +340,5 @@ class Service {
         return $this->username;
     }
 
-    static function searchServices(PDO $db, string $search, int $count) : array {
-        $stmt = $db->prepare('SELECT id, title FROM Service WHERE title LIKE ? LIMIT ?');
-        $stmt->execute(array($search . '%', $count));
-    
-        $services = array();
-        while ($service = $stmt->fetch()) {
-            $services[] = new User(
-            $service['id'],
-            $service['title']
-          );
-        }
-    
-        return $services;
-      }
 }
 ?>
