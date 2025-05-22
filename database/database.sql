@@ -38,6 +38,7 @@ CREATE TABLE Exchange (
     service_id INTEGER NOT NULL,
     status TEXT NOT NULL CHECK (status IN ('in progress', 'completed')),
     requirements TEXT NOT NULL,
+    date TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (freelancer_id) REFERENCES User(id),
     FOREIGN KEY (client_id) REFERENCES User(id),
     FOREIGN KEY (service_id) REFERENCES Service(id)

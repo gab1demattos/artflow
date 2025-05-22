@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             <div><strong>Delivery:</strong> ${order.delivery_time} days</div>
                             <div><strong>Requirements:</strong> ${order.requirements}</div>
                             <div><strong>Total:</strong> ${order.price}€</div>
+                            <div><strong>Date:</strong> ${order.date ? order.date.split(' ')[0] : ''}</div>
                         </div>
                     </div>`;
                 });
@@ -57,6 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             <div><strong>Delivery:</strong> ${order.delivery_time} days</div>
                             <div><strong>Requirements:</strong> ${order.requirements}</div>
                             <div><strong>Total:</strong> ${order.price}€</div>
+                            <div><strong>Date:</strong> ${order.date ? order.date.split(' ')[0] : ''}</div>
                         </div>
                         ${!delivered ? '<button class="mark-delivered-btn">Mark as Delivered</button>' : ''}
                     </div>`;
@@ -74,25 +76,25 @@ document.addEventListener('DOMContentLoaded', function () {
                         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                         body: `order_id=${encodeURIComponent(orderId)}`
                     })
-                    .then(res => res.json())
-                    .then(result => {
-                        if (result.success) {
-                            const status = card.querySelector('.order-status');
-                            if (status) {
-                                status.textContent = 'Delivered';
-                                status.classList.remove('not-delivered');
-                                status.classList.add('delivered');
+                        .then(res => res.json())
+                        .then(result => {
+                            if (result.success) {
+                                const status = card.querySelector('.order-status');
+                                if (status) {
+                                    status.textContent = 'Delivered';
+                                    status.classList.remove('not-delivered');
+                                    status.classList.add('delivered');
+                                }
+                                btn.remove();
+                            } else {
+                                btn.disabled = false;
+                                alert(result.error || 'Failed to mark as delivered.');
                             }
-                            btn.remove();
-                        } else {
+                        })
+                        .catch(() => {
                             btn.disabled = false;
-                            alert(result.error || 'Failed to mark as delivered.');
-                        }
-                    })
-                    .catch(() => {
-                        btn.disabled = false;
-                        alert('Failed to mark as delivered.');
-                    });
+                            alert('Failed to mark as delivered.');
+                        });
                 });
             });
         });

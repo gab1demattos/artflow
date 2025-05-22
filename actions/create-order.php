@@ -19,10 +19,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 $service_id = intval($_POST['service_id'] ?? 0);
 $requirements = trim($_POST['requirements'] ?? '');
-$price = floatval($_POST['price'] ?? 0);
-$delivery_time = intval($_POST['delivery_time'] ?? 0);
-
-if (!$service_id || $requirements === '' || !$price || !$delivery_time) {
+// Remove price and delivery_time from required fields and ignore them
+if (!$service_id || $requirements === '') {
     http_response_code(400);
     echo json_encode(['success' => false, 'error' => 'Missing required fields']);
     exit();
@@ -30,7 +28,7 @@ if (!$service_id || $requirements === '' || !$price || !$delivery_time) {
 
 $db = Database::getInstance();
 // Get seller id from service
-$stmt = $db->prepare('SELECT user_id FROM Service WHERE id = ?');
+$stmt = $db->prepare('SELECT user_id, price, delivery_time FROM Service WHERE id = ?');
 $stmt->execute([$service_id]);
 $seller = $stmt->fetch(PDO::FETCH_ASSOC);
 if (!$seller) {
@@ -40,7 +38,7 @@ if (!$seller) {
 }
 $seller_id = $seller['user_id'];
 
-// Insert into Exchange
+// Insert into Exchange (date will default to CURRENT_TIMESTAMP)
 $stmt = $db->prepare('INSERT INTO Exchange (client_id, freelancer_id, service_id, requirements, status) VALUES (?, ?, ?, ?, ?)');
 $stmt->execute([
     $user['id'],
