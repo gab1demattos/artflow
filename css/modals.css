@@ -461,21 +461,23 @@
     justify-content: center;
     gap: 1rem;
     margin-bottom: 1rem;
-	border-bottom: #000 1px solid;
+	border-bottom: #3333 1px solid;
 	padding: 0;
 }
 .search-options button {
     padding: 0.5rem 1rem;
     border: none;
-    border-radius: 5px;
     cursor: pointer;
     font-size: 1rem;
     background-color: var(--light-gray);
     color: var(--dark-gray);
+	font-family: 'ED Garamond', serif;
+	transition: background-color 0.3s ease, color 0.3s ease;
+
 }
 .search-options button.active {
-    background-color: var(--purple);
-    color: white;
+    color: var(--purple);
+	border-bottom: var(--purple) 3px solid;
 }
 #search-results {
     max-height: 300px;
