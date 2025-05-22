@@ -551,6 +551,106 @@
 	font-size: 1em;
 }
 
+/* Irreversible Modal Specific */
+.irreversible-modal {
+	display: none;
+	position: fixed;
+	z-index: 10000;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.6);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.3s ease;
+}
+
+.irreversible-modal.show {
+	opacity: 1;
+	pointer-events: auto;
+}
+
+.irreversible-modal-content {
+	background-color: #fff;
+	border-radius: 8px;
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+	padding: 20px;
+	max-width: 400px;
+	width: 90%;
+	text-align: center;
+	transform: scale(0.9);
+	transition: transform 0.3s ease;
+}
+
+.irreversible-modal.show .irreversible-modal-content {
+	transform: scale(1);
+}
+
+.irreversible-modal-message {
+	margin-bottom: 20px;
+}
+
+.irreversible-modal-message p {
+	margin: 5px 0;
+	color: #333;
+}
+
+.irreversible-modal-message p:first-child {
+	font-weight: 600;
+	font-size: 18px;
+}
+
+.irreversible-modal-buttons {
+	display: flex;
+	justify-content: center;
+	gap: 15px;
+}
+
+.irreversible-btn {
+	padding: 8px 20px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	font-weight: 500;
+	transition: background-color 0.2s, transform 0.1s;
+}
+
+.irreversible-btn:hover {
+	transform: translateY(-2px);
+}
+
+.irreversible-btn:active {
+	transform: translateY(0);
+}
+
+.confirm-btn {
+	background-color: #f44336;
+	color: white;
+    font-family: 'EB Garamond', serif;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.confirm-btn:hover {
+	background-color: #d32f2f;
+}
+
+.cancel-btn {
+	background-color: #e0e0e0;
+	color: #333;
+    font-family: 'EB Garamond', serif;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.cancel-btn:hover {
+	background-color: #d5d5d5;
+}
+
 #payment-modal-overlay .order-overview-section .order-total {
 	font-weight: bold;
 	margin-top: 1em;
@@ -651,3 +751,4 @@
     width: 100%;
     max-width: 220px;
 }
+

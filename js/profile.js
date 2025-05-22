@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	});
 
 	// Edit Profile button functionality
-	const editProfileBtn = document.querySelector(".edit-profile-btn");
+	const editProfileBtn = document.getElementById("edit-profile-button");
 	const editProfileModalOverlay = document.getElementById(
 		"edit-profile-modal-overlay"
 	);
@@ -51,7 +51,6 @@ document.addEventListener("DOMContentLoaded", function () {
 		});
 	}
 });
-
 
 /*== EDIT PROFILE ==*/
 

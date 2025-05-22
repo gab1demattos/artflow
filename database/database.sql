@@ -49,6 +49,7 @@ CREATE TABLE Message (
     sender_id INTEGER NOT NULL,
     receiver_id INTEGER NOT NULL,
     message TEXT NOT NULL,
+    timestamp TEXT DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (sender_id) REFERENCES User(id),
     FOREIGN KEY (receiver_id) REFERENCES User(id)
 );

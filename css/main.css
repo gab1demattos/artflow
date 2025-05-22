@@ -12,6 +12,8 @@
 @import url("responsive/footer-responsive.css");
 @import url('service-display.css');
 @import url('responsive/profile-responsive.css');
+@import url('messages.css');
+@import url('irreversible.css');
 
 :root {
 	/*theme colors*/
