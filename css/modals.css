@@ -473,6 +473,7 @@
     color: var(--dark-gray);
 	font-family: 'ED Garamond', serif;
 	transition: background-color 0.3s ease, color 0.3s ease;
+	font-weight: bold;
 
 }
 .search-options button.active {
@@ -545,7 +546,6 @@
 
 .user-username {
 	font-size: 18px;
-	font-weight: bold;
 	color: #333;
 	font-family: "EB Garamond", serif;
 	text-decoration: none;
