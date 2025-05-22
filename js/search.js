@@ -65,7 +65,30 @@ document.addEventListener('DOMContentLoaded', () => {
                         searchResults.innerHTML = '<p>Error loading services. Please try again later.</p>';
                     });
             } else if (type === "names") {
-                searchResults.innerHTML = "<p>No names found. Please enter a search term.</p>";
+                // Make an AJAX request to fetch all users
+                fetch('/api/api_users.php')
+                    .then(response => response.json())
+                    .then(users => {
+                        if (users.length > 0) {
+                            users.forEach(user => {
+                                const userCard = document.createElement('div');
+                                userCard.classList.add('user-card');
+                                userCard.innerHTML = `
+                                    <div class="user-info">
+                                        <img src="${user.profilePicture || '/images/user_pfp/default.png'}" alt="User profile picture" class="user-profile-picture" />
+                                        <span class="user-username">${user.username}</span>
+                                    </div>
+                                `;
+                                searchResults.appendChild(userCard);
+                            });
+                        } else {
+                            searchResults.innerHTML = '<p>No users found.</p>';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error fetching users:', error);
+                        searchResults.innerHTML = '<p>Error loading users. Please try again later.</p>';
+                    });
             }
             return;
         }
@@ -103,7 +126,30 @@ document.addEventListener('DOMContentLoaded', () => {
                 searchResults.innerHTML = '<p>Error loading services. Please try again later.</p>';
             });
         } else if (type === "names") {
-            searchResults.innerHTML = "<p>No names found. Please enter a search term.</p>";
+            // Make an AJAX request to fetch all users
+            fetch('/api/api_users.php')
+            .then(response => response.json())
+            .then(users => {
+                if (users.length > 0) {
+                    users.forEach(user => {
+                        const userCard = document.createElement('div');
+                        userCard.classList.add('user-card');
+                        userCard.innerHTML = `
+                            <div class="user-info">
+                                <img src="${user.profilePicture || '/images/user_pfp/default.png'}" alt="User profile picture" class="user-profile-picture" />
+                                <span class="user-username">${user.username}</span>
+                            </div>
+                        `;
+                        searchResults.appendChild(userCard);
+                    });
+                } else {
+                    searchResults.innerHTML = '<p>No users found.</p>';
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching users:', error);
+                searchResults.innerHTML = '<p>Error loading users. Please try again later.</p>';
+            });
         }
     }
 

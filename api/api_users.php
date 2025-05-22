@@ -8,12 +8,19 @@
   require_once(__DIR__ . '/../database/database.php');
 
   $db = Database::getInstance();
-  $users = User::searchUsers($db, $_GET['search'], 8);
+
+  // Check if the 'search' parameter is provided
+  $search = $_GET['search'] ?? '';
+
+  // Fetch users based on the search parameter or fetch all users if empty
+  $users = empty($search) ? User::getAllUsers($db) : User::searchUsers($db, $search, 8);
 
   echo json_encode(array_map(function($user) {
       return [
           'id' => $user->getId(),
-          'name' => $user->getName()
+          'name' => $user->getName(),
+          'username' => $user->getUsername(),
+          'profilePicture' => $user->getProfileImage()
       ];
   }, $users));
 ?>
