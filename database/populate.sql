@@ -16,5 +16,8 @@
 -- Then populate exchanges
 .read populate/exchanges_populate.sql
 
--- Finally populate messages
+-- Regular message conversations
 .read populate/messages_populate.sql
+
+-- Long conversation between John Doe and Emma Wilson
+.read populate/long_conversation.sql
