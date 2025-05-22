@@ -21,8 +21,12 @@
 #messages-page .chat-app__sidebar {
 	width: 25%;
 	background-color: #fdfaf8;
-	padding: 20px;
+	padding: 20px 20px 0 20px; /* Remove bottom padding */
 	border-right: 1px solid #eee;
+	display: flex;
+	flex-direction: column;
+	position: relative; /* Add position relative for absolute positioning of children */
+	height: 100%; /* Ensure full height */
 }
 
 #messages-page .chat-app__title {
@@ -62,7 +66,12 @@
 	flex-direction: column;
 	gap: 10px;
 	overflow-y: auto;
-	max-height: 70vh;
+	/* Calculate height to align with input area - account for title and search bar heights */
+	height: calc(
+		100% - 125px
+	); /* Approximation for title and search bar height */
+	margin-bottom: 0;
+	padding-bottom: 15px;
 }
 
 #messages-page .chat-app__chat-item {
@@ -285,4 +294,15 @@
 #messages-page .chat-app__dropdown-item#delete-conversation:hover {
 	background-color: #fff0f0;
 	color: #d32f2f;
+}
+
+/* Add this new style to create a fake input area in the sidebar to visually align with main chat */
+#messages-page .chat-app__sidebar::after {
+	content: "";
+	height: 100px; /* Match the height of chat-app__input-area */
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	background-color: #fdfaf8;
 }
