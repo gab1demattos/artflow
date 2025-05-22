@@ -1,12 +1,12 @@
 -- filepath: /home/francisca/uni/2ano/2S/LTW/ltw-project-ltw07g05/database/populate/long_conversation.sql
--- A really long conversation between John Doe and Emma Wilson about a book cover design
+-- A really long conversation between John Doe and Lucas Wilson about a book cover design
 INSERT INTO Message (sender_id, receiver_id, message)
 VALUES 
     -- Initial project inquiry
     (
         2, -- John Doe
-        16, -- Emma Wilson
-        'Hi Emma! I''ve been following your calligraphy work and I''m really impressed with your style. I''m working on a fantasy book cover design for a client and would love your input on the lettering.'
+        16, -- Lucas Wilson
+        'Hi Lucas! I''ve been following your calligraphy work and I''m really impressed with your style. I''m working on a fantasy book cover design for a client and would love your input on the lettering.'
     ),
     (
         16,
@@ -112,7 +112,7 @@ VALUES
     (
         2,
         16,
-        'I love that idea, Emma! Incorporating crystal elements into the letters themselves would tie everything together nicely. Maybe for the T and K in "The" and "Kingdoms"? Those could be the anchor points.'
+        'I love that idea, Lucas! Incorporating crystal elements into the letters themselves would tie everything together nicely. Maybe for the T and K in "The" and "Kingdoms"? Those could be the anchor points.'
     ),
     (
         16,
@@ -138,7 +138,7 @@ VALUES
     (
         2,
         16,
-        'Emma, these are absolutely stunning! I''m blown away by concept #3 especially - the crystalline serifs and the way you integrated those faceted elements is exactly what I was imagining but couldn''t articulate. The client is going to love this!'
+        'Lucas, these are absolutely stunning! I''m blown away by concept #3 especially - the crystalline serifs and the way you integrated those faceted elements is exactly what I was imagining but couldn''t articulate. The client is going to love this!'
     ),
     (
         16,
@@ -189,7 +189,7 @@ VALUES
     (
         2,
         16,
-        'Emma, thank you for the great call today. The client absolutely loved the final concept! The way you incorporated the feedback so quickly during our call was impressive.'
+        'Lucas, thank you for the great call today. The client absolutely loved the final concept! The way you incorporated the feedback so quickly during our call was impressive.'
     ),
     (
         16,
