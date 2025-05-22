@@ -62,7 +62,9 @@
     #service-main {
         order: 0; /* Keep service-main below service-checkout */
         width: 100%;
+        height: auto;
         overflow-y:hidden;
+        overflow-x: hidden;
     }
 
     #images-service {
