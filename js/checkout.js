@@ -64,9 +64,9 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Confirm payment (fake)
+    // Confirm payment (real order creation)
     if (paymentConfirm && paymentForm) {
-        paymentConfirm.addEventListener('click', function (e) {
+        paymentConfirm.addEventListener('click', async function (e) {
             e.preventDefault();
             // Simple validation
             const card = paymentForm.elements['card'].value.trim();
@@ -116,18 +116,48 @@ document.addEventListener('DOMContentLoaded', function () {
                 return;
             }
 
-            paymentForm.classList.remove('input-error');
-            paymentModal.classList.add('hidden');
-            // Show thank you modal instead of alert
-            const thankyouModal = document.getElementById('thankyou-modal-overlay');
-            if (thankyouModal) {
-                thankyouModal.classList.remove('hidden');
-                const thankyouClose = document.getElementById('thankyou-close');
-                if (thankyouClose) {
-                    thankyouClose.onclick = function () {
-                        thankyouModal.classList.add('hidden');
-                    };
+            // Gather order data
+            const serviceId = new URLSearchParams(window.location.search).get('id');
+            const requirements = document.getElementById('requirements-textarea')?.value || '';
+            const price = document.getElementById('price')?.textContent?.replace('€', '').trim() || '';
+            const delivery = document.querySelector('#service-delivery .service-delivery:last-child')?.textContent || '';
+            let deliveryTime = 0;
+            if (delivery) {
+                const match = delivery.match(/(\d+)/);
+                if (match) deliveryTime = parseInt(match[1], 10);
+            }
+
+            // Send AJAX to create order
+            try {
+                const response = await fetch('/actions/create-order.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'X-Requested-With': 'XMLHttpRequest',
+                    },
+                    body: `service_id=${encodeURIComponent(serviceId)}&requirements=${encodeURIComponent(requirements)}&price=${encodeURIComponent(price)}&delivery_time=${encodeURIComponent(deliveryTime)}`
+                });
+                const result = await response.json();
+                if (result.success) {
+                    paymentForm.classList.remove('input-error');
+                    paymentModal.classList.add('hidden');
+                    // Show thank you modal
+                    const thankyouModal = document.getElementById('thankyou-modal-overlay');
+                    if (thankyouModal) {
+                        thankyouModal.classList.remove('hidden');
+                        const thankyouClose = document.getElementById('thankyou-close');
+                        if (thankyouClose) {
+                            thankyouClose.onclick = function () {
+                                thankyouModal.classList.add('hidden');
+                                window.location.reload(); // Optionally reload to update activity/orders
+                            };
+                        }
+                    }
+                } else {
+                    alert(result.error || 'Failed to place order.');
                 }
+            } catch (err) {
+                alert('Error placing order. Please try again.');
             }
         });
     }

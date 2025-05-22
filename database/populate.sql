@@ -23,7 +23,7 @@ VALUES (
         'John Doe',
         'johndoe',
         'john@example.com',
-        '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',
+        '701f81be760ef4fada8917640b07b398c855c854',
         'Digital artist specializing in character design and concept art.',
         '/images/user_pfp/man.jpg'
     ),
@@ -32,7 +32,7 @@ VALUES (
         'Jane Smith',
         'janesmith',
         'jane@example.com',
-        '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',
+        '701f81be760ef4fada8917640b07b398c855c854',
         'Brand identity designer with 5+ years of experience working with startups.',
         '/images/user_pfp/woman.jpg'
     ),
@@ -41,7 +41,7 @@ VALUES (
         'Michael Johnson',
         'michaelj',
         'michael@example.com',
-        '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',
+        '701f81be760ef4fada8917640b07b398c855c854',
         'Traditional artist focusing on oil painting and portraits.',
         '/images/user_pfp/man.jpg'
     ),
@@ -50,7 +50,7 @@ VALUES (
         'Sarah Williams',
         'sarahw',
         'sarah@example.com',
-        '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',
+        '701f81be760ef4fada8917640b07b398c855c854',
         '3D modeling expert with background in game development.',
         '/images/user_pfp/woman.jpg'
     ),
@@ -59,7 +59,7 @@ VALUES (
         'David Brown',
         'davidb',
         'david@example.com',
-        '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',
+        '701f81be760ef4fada8917640b07b398c855c854',
         'Jewelry craftsman with a passion for unique handmade designs.',
         '/images/user_pfp/man.jpg'
     ),
@@ -68,7 +68,7 @@ VALUES (
         'Emily Dickinson',
         'emilyd',
         'emily@example.com',
-        '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',
+        '701f81be760ef4fada8917640b07b398c855c854',
         'Tattoo artist specializing in custom designs and cover-ups.',
         '/images/user_pfp/woman.jpg'
     ),
@@ -77,7 +77,7 @@ VALUES (
         'Alex Thompson',
         'alext',
         'alex@example.com',
-        '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',
+        '701f81be760ef4fada8917640b07b398c855c854',
         'Concept artist for video games and animation with 7 years of industry experience.',
         '/images/user_pfp/man.jpg'
     ),
@@ -1371,19 +1371,19 @@ VALUES (1, 1),
     (80, 5);
     
 -- Exchanges
-INSERT INTO Exchange (
-        freelancer_id,
-        client_id,
-        service_id,
-        status,
-        amount
-    )
-VALUES (2, 5, 1, 'completed', 75.00),
-    (3, 6, 2, 'completed', 120.00),
-    (4, 7, 3, 'in progress', 250.00),
-    (5, 8, 4, 'in progress', 180.00),
-    (6, 2, 5, 'completed', 95.00),
-    (7, 3, 6, 'cancelled', 85.00);
+-- INSERT INTO Exchange (
+--         freelancer_id,
+--         client_id,
+--         service_id,
+--         status,
+--         amount
+--     )
+-- VALUES (2, 5, 1, 'completed', 75.00),
+--     (3, 6, 2, 'completed', 120.00),
+--     (4, 7, 3, 'in progress', 250.00),
+--     (5, 8, 4, 'in progress', 180.00),
+--     (6, 2, 5, 'completed', 95.00),
+--     (7, 3, 6, 'cancelled', 85.00);
     
 -- Messages
 INSERT INTO Message (sender_id, receiver_id, message)
