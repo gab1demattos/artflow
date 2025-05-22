@@ -454,6 +454,7 @@
 #search-modal {
     background-color: white;
     padding: 2rem;
+	padding-top: 0.5em;
     border-radius: 10px;
     width: 80%;
 	height: 70%;
@@ -465,7 +466,7 @@
     display: flex;
     justify-content: center;
     gap: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
 	border-bottom: #3333 1px solid;
 	padding: 0;
 }
@@ -486,25 +487,24 @@
 	border-bottom: var(--purple) 3px solid;
 }
 
-#search-results.services-active {
-    overflow-y: auto;
-    padding: 1rem;
+#search-results {
+	overflow-y: auto;
 	display: flex;
-	flex-wrap: wrap;
 	gap: 1rem;
+	margin-top: 2em;
+	height: 28em;
+}
+
+
+#search-results.services-active {
+	flex-wrap: wrap;
 	justify-content: center;
-	height: 29em;
 }
 
 #search-results.names-active {
-    overflow-y: auto;
-    padding: 1rem;
-    display: flex;
     flex-wrap: nowrap;
     flex-direction: column;
-    gap: 1rem;
     justify-content: flex-start; /* Ensure list starts from the top */
-    height: 29em;
 }
 
 #search-modal .close-modal {
