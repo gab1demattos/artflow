@@ -95,8 +95,25 @@
         padding: 1em 0.5em 0.5em 0.5em;
     }
 
-    .see-more-category-card img {
-        max-width: 45px;
-        max-height: 45px;
+    .see-more-category-image-wrapper {
+        width: 100% !important;
+        height: 120px !important;
+        min-height: 120px !important;
+        max-height: 120px !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f7f3ea;
+        box-sizing: border-box;
+    }
+
+    .see-more-category-image-wrapper img {
+        width: 100% !important;
+        height: 100% !important;
+        max-width: none !important;
+        max-height: none !important;
+        object-fit: cover !important;
+        border-radius: 16px 16px 0 0;
+        box-shadow: none;
     }
 }
