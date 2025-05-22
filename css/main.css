@@ -8,6 +8,7 @@
 @import url("profile.css");
 @import url("home.css");
 @import url("responsive/footer-responsive.css");
+@import url('service-display.css');
 
 :root {
 	/*theme colors*/

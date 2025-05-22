@@ -1,6 +1,7 @@
 <?php
+require_once __DIR__ . '/../../database/classes/category.class.php';
 // Draw the New Service modal (to be included in the main layout, not as a standalone page)
-$categories = getCategories();
+$categories = Category::getCategories();
 $db = Database::getInstance();
 $subcategoriesByCategory = [];
 foreach ($categories as $cat) {

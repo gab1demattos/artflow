@@ -88,14 +88,14 @@ INSERT INTO Subcategory (category_id, name) VALUES
 
 -- Services (varied across users and categories)
 INSERT INTO Service (user_id, title, description, category_id, price, delivery_time, images) VALUES
-(2, 'Character Illustration', 'Custom character illustrations in various styles for your stories, games, or personal use.', 1, 75.00, 5, '/images/services/character_illustration.png'),
-(3, 'Logo Design Package', 'Professional logo design including 3 concepts, unlimited revisions, and all file formats.', 2, 120.00, 7, '/images/services/logo_design_package.png'),
-(4, 'Custom Oil Portrait', 'Handmade oil portrait from your photos. Perfect for gifts or personal collection.', 3, 250.00, 14, '/images/services/srv_682b442734f443.07923633_monalisa.jpg'),
-(5, '3D Character Modeling', 'High-quality 3D character models ready for animation or gaming projects.', 4, 180.00, 10, '/images/services/srv_682b4427347d38.81134772_3d.jpg'),
-(6, 'Handcrafted Jewelry', 'Unique handmade jewelry pieces customized to your preferences.', 5, 95.00, 8, '/images/services/srv_682b442734e0e2.96781324_craft.jpg'),
-(7, 'Custom Tattoo Design', 'Original tattoo designs based on your ideas and preferences.', 6, 85.00, 6, '/images/services/srv_682c36f07ed799.00860090_Capture-2025-02-24-164426.png'),
-(8, 'Digital Concept Art', 'Professional concept art for games, films, or personal projects.', 1, 150.00, 9, '/images/services/digital_concept_art.png'),
-(2, 'Brand Identity Package', 'Complete brand identity design including logo, business cards, letterhead, and brand guidelines.', 2, 350.00, 21, '/images/services/brand_identity_package.jpg');
+(2, 'Character Illustration', 'Custom character illustrations in various styles for your stories, games, or personal use.', 1, 75.00, 5, '../images/services/character_illustration.png'),
+(3, 'Logo Design Package', 'Professional logo design including 3 concepts, unlimited revisions, and all file formats.', 2, 120.00, 7, '../images/services/logo_design_package.png'),
+(4, 'Custom Oil Portrait', 'Handmade oil portrait from your photos. Perfect for gifts or personal collection.', 3, 250.00, 14, '../images/services/srv_682b442734f443.07923633_monalisa.jpg'),
+(5, '3D Character Modeling', 'High-quality 3D character models ready for animation or gaming projects.', 4, 180.00, 10, '../images/services/srv_682b4427347d38.81134772_3d.jpg'),
+(6, 'Handcrafted Jewelry', 'Unique handmade jewelry pieces customized to your preferences.', 5, 95.00, 8, '../images/services/srv_682b442734e0e2.96781324_craft.jpg'),
+(7, 'Custom Tattoo Design', 'Original tattoo designs based on your ideas and preferences.', 6, 85.00, 6, '../images/services/srv_682c36f07ed799.00860090_Capture-2025-02-24-164426.png'),
+(8, 'Digital Concept Art', 'Professional concept art for games, films, or personal projects.', 1, 150.00, 9, '../images/services/digital_concept_art.png'),
+(2, 'Brand Identity Package', 'Complete brand identity design including logo, business cards, letterhead, and brand guidelines.', 2, 350.00, 21, '../images/services/brand_identity_package.jpg, ../images/services/color.jpeg, ../images/services/camaleao.jpeg, ../images/services/tree.jpeg, ../images/services/sun.jpeg');
 
 -- Assign subcategories to services
 INSERT INTO ServiceSubcategory (service_id, subcategory_id) VALUES
@@ -137,4 +137,8 @@ INSERT INTO Review (user_id, service_id, rating, comment) VALUES
 (5, 1, 5, 'Excellent work! The character illustration exceeded my expectations.'),
 (6, 2, 4, 'Great logo design. Professional and responsive service.'),
 (2, 5, 5, 'Beautiful handcrafted jewelry. Will definitely order again!'),
-(3, 6, 3, 'Good design but could have used more detail in some areas.');
+(3, 8, 3, 'Good design but could have used more detail in some areas.'),
+(2, 8, 5, 'Excellent work! The character illustration exceeded my expectations.'),
+(1, 8, 4, 'Great logo design. Professional and responsive service.'),
+(6, 8, 5, 'Beautiful handcrafted jewelry. Will definitely order again!'),
+(4, 8, 3, 'Good design but could have used more detail in some areas.');
