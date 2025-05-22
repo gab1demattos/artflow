@@ -46,31 +46,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (searchResults.classList.contains("empty-input")) {
             if (type === "services") {
-                searchResults.innerHTML = `
-                <div id="services-list">
-                    <?php
-                    // Fetch all services for this category using Service class method
-                    $services = Service::getAllServices();
-                    if ($services) {
-                        foreach ($services as $serviceObj) {
-                            // Get subcategory IDs for this service
-                            $subcatIds = $serviceObj->getSubcategoryIds();
-                            $subcatIdsStr = implode(',', $subcatIds);
-                            
-                            // Get first image for this service
-                            $serviceImage = $serviceObj->getFirstImage();
-                            
-                            // Convert service object to array for the template
-                            $service = $serviceObj->toArray();
-                            
-                            // Use the service card component
-                            drawServiceCard($service, $serviceImage, $subcatIdsStr);
+                // Make an AJAX request to fetch all services
+                fetch('/api/api_all_services.php')
+                    .then(response => response.json())
+                    .then(services => {
+                        if (services.length > 0) {
+                            services.forEach(service => {
+                                const serviceCard = document.createElement('div');
+                                serviceCard.classList.add('service-card');
+                                serviceCard.innerHTML = `
+                                    <img src="${service.image}" alt="${service.name}">
+                                    <h3>${service.name}</h3>
+                                    <p>${service.description}</p>
+                                `;
+                                searchResults.appendChild(serviceCard);
+                            });
+                        } else {
+                            searchResults.innerHTML = '<p>No services found.</p>';
                         }
-                    } else {
-                        echo '<p>No services found in this category yet.</p>';
-                    }
-                    ?>
-                </div>`;
+                    })
+                    .catch(error => {
+                        console.error('Error fetching services:', error);
+                        searchResults.innerHTML = '<p>Error loading services. Please try again later.</p>';
+                    });
             } else if (type === "names") {
                 searchResults.innerHTML = "<p>No names found. Please enter a search term.</p>";
             }
