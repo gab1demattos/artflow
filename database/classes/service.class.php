@@ -316,5 +316,20 @@ class Service {
         
         return $this->username;
     }
+
+    static function searchServices(PDO $db, string $search, int $count) : array {
+        $stmt = $db->prepare('SELECT id, title FROM Service WHERE title LIKE ? LIMIT ?');
+        $stmt->execute(array($search . '%', $count));
+    
+        $services = array();
+        while ($service = $stmt->fetch()) {
+            $services[] = new User(
+            $service['id'],
+            $service['title']
+          );
+        }
+    
+        return $services;
+      }
 }
 ?>

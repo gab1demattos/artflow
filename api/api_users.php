@@ -8,7 +8,12 @@
   require_once(__DIR__ . '/../database/database.php');
 
   $db = Database::getInstance();
-  $users = USer::searchUsers($db, $_GET['search'], 8);
+  $users = User::searchUsers($db, $_GET['search'], 8);
 
-  echo json_encode($artists);
+  echo json_encode(array_map(function($user) {
+      return [
+          'id' => $user->getId(),
+          'name' => $user->getName()
+      ];
+  }, $users));
 ?>
