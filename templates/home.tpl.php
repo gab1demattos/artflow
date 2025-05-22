@@ -155,7 +155,7 @@
 
 <?php function drawFooter($user){ ?>
             <footer id="end">
-                <h2>Artflow</h2>
+                <h2>artflow</h2>
                 <div id="end-content">
                     <div id="authors">
                         <h3>Developed by:</h3>
