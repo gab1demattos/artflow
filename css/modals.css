@@ -593,3 +593,8 @@
 	padding: 0;
 	gap: 1em;
 }
+
+/* Add a CSS rule to ensure dynamically displayed text is not underlined */
+.user-card-link, .service-card-link {
+    text-decoration: none;
+}
