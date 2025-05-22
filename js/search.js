@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
         searchServicesBtn.classList.remove("active");
         searchResults.classList.add("names-active");
         searchResults.classList.remove("services-active");
+        searchResults.scrollTop = 0; // Reset scroll position to the top
         loadSearchResults("names");
     });
 
