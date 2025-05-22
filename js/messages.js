@@ -57,18 +57,30 @@ document.addEventListener("DOMContentLoaded", () => {
 	}
 
 	// Check URL parameters for direct messaging
-	const urlParams = new URLSearchParams(window.location.search);
-	const directMessageUserId = urlParams.get("user_id");
-	if (directMessageUserId) {
-		createOrSelectConversation(parseInt(directMessageUserId));
+	// Only check URL parameters if not already initialized from PHP
+	if (!window.conversationInitialized) {
+		const urlParams = new URLSearchParams(window.location.search);
+		const directMessageUserId = urlParams.get("user_id");
+		if (directMessageUserId) {
+			createOrSelectConversation(parseInt(directMessageUserId));
+		}
 	}
 });
+
+// Track if conversation has been initialized
+window.conversationInitialized = false;
 
 /**
  * Create or select a conversation with a specific user
  * @param {number} userId - User ID to chat with
  */
 function createOrSelectConversation(userId) {
+	// Prevent duplicate initialization
+	if (window.conversationInitialized) {
+		return;
+	}
+	window.conversationInitialized = true;
+
 	// First check if conversation already exists in the list
 	const existingItem = document.querySelector(
 		`.chat-app__chat-item[data-user-id="${userId}"]`
