@@ -44,7 +44,6 @@
     font-family: 'EB Garamond', serif;
     gap: 0.5em;
     transform: translateY(-1em);
-    cursor: pointer;
 }
 
 #owner-info p {
@@ -178,25 +177,8 @@
     width: 10em;
     height: 27em;
     overflow-y: scroll; 
-    white-space: nowrap;
-    scrollbar-gutter: stable; /* Ensures the scrollbar is always visible */
-    -webkit-overflow-scrolling: touch; /* Smooth scrolling for iOS */
-    scrollbar-width:auto; /* Adjust scrollbar width for Firefox */
 }
 
-#service-imgs::-webkit-scrollbar {
-    width: 7px;
-    height: 7px;
-}
-
-#service-imgs::-webkit-scrollbar-thumb {
-    background: #8886; 
-    border-radius: 6px; 
-}
-
-#service-imgs::-webkit-scrollbar-thumb:hover {
-    background: #888;
-}
 
 #service-imgs img {
     width: 8.7em;
