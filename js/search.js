@@ -102,4 +102,84 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Load default results (services)
     loadSearchResults("services");
+
+    if (searchInput) {
+        searchInput.addEventListener('input', async function () {
+            const query = this.value.trim();
+
+            if (query === '') {
+                searchResults.innerHTML = '<p>Start typing to search for services or users.</p>';
+                return;
+            }
+
+            try {
+                // Fetch services and users matching the search query
+                const [servicesResponse, usersResponse] = await Promise.all([
+                    fetch(`/api/api_services.php?search=${encodeURIComponent(query)}`),
+                    fetch(`/api/api_users.php?search=${encodeURIComponent(query)}`)
+                ]);
+
+                const services = await servicesResponse.json();
+                const users = await usersResponse.json();
+
+                searchResults.innerHTML = ''; // Clear previous results
+
+                // Display services
+                if (services.length > 0) {
+                    const servicesHeader = document.createElement('h3');
+                    servicesHeader.textContent = 'Services';
+                    searchResults.appendChild(servicesHeader);
+
+                    services.forEach(service => {
+                        const serviceCard = document.createElement('a');
+                        serviceCard.href = `/pages/service.php?id=${encodeURIComponent(service.id)}`;
+                        serviceCard.classList.add('service-card-link');
+                        serviceCard.innerHTML = `
+                            <div class="service-card">
+                                <div class="pantone-image-wrapper">
+                                    ${service.image ? `<img src="${service.image}" alt="Service image" class="pantone-image" />` : '<div class="pantone-image pantone-image-placeholder"></div>'}
+                                </div>
+                                <div class="pantone-title">${service.title}</div>
+                                <div class="pantone-info-row">
+                                    <span class="pantone-username">${service.username}</span>
+                                    <span class="pantone-rating">★ ${service.rating || '0.0'}</span>
+                                </div>
+                            </div>
+                        `;
+                        searchResults.appendChild(serviceCard);
+                    });
+                } else {
+                    searchResults.innerHTML += '<p>No services found.</p>';
+                }
+
+                // Display users
+                if (users.length > 0) {
+                    const usersHeader = document.createElement('h3');
+                    usersHeader.textContent = 'Users';
+                    searchResults.appendChild(usersHeader);
+
+                    users.forEach(user => {
+                        const userCard = document.createElement('a');
+                        userCard.href = `/pages/profile.php?username=${encodeURIComponent(user.username)}`;
+                        userCard.classList.add('user-card-link');
+                        userCard.innerHTML = `
+                            <div class="user-card">
+                                <div class="user-info">
+                                    <img src="${user.profilePicture || '/images/user_pfp/default.png'}" alt="User profile picture" class="user-profile-picture" />
+                                    <p class="user-username">${user.name}</p>
+                                    <p class="user-username">@${user.username}</p>
+                                </div>
+                            </div>
+                        `;
+                        searchResults.appendChild(userCard);
+                    });
+                } else {
+                    searchResults.innerHTML += '<p>No users found.</p>';
+                }
+            } catch (error) {
+                console.error('Error fetching search results:', error);
+                searchResults.innerHTML = '<p>Error loading search results. Please try again later.</p>';
+            }
+        });
+    }
 });
