@@ -199,27 +199,23 @@ function selectConversation(item) {
 function loadMessages() {
 	if (!selectedUserId) return;
 
-	// Alert for debugging
-	alert("Loading messages for user ID: " + selectedUserId);
-
 	fetch(`/actions/get-messages.php?user_id=${selectedUserId}`)
 		.then((response) => {
 			if (!response.ok) {
-				alert("Error: " + response.status);
+				console.error("Network response was not ok: " + response.status);
 				throw new Error("Network response was not ok: " + response.status);
 			}
 			return response.json();
 		})
 		.then((data) => {
-			alert("Messages loaded: " + (data.messages ? data.messages.length : 0));
 			if (data.success) {
 				displayMessages(data.messages);
 			} else {
-				alert("Error in response: " + (data.error || "Unknown error"));
+				console.error("Error in response: " + (data.error || "Unknown error"));
 			}
 		})
 		.catch((error) => {
-			alert("Error loading messages: " + error.message);
+			console.error("Error loading messages:", error.message);
 		});
 }
 
@@ -233,14 +229,10 @@ function displayMessages(messages) {
 		return;
 	}
 
-	console.log("Displaying messages:", messages);
-	console.log("Current user ID:", currentUser.id);
-
 	// Clear any empty state message
 	messagesContainer.innerHTML = "";
 
 	if (!messages || messages.length === 0) {
-		console.log("No messages to display");
 		messagesContainer.innerHTML = `
             <div class="chat-app__empty-state">
                 <p>No messages yet. Start the conversation!</p>
@@ -271,16 +263,6 @@ function displayMessages(messages) {
 		const messageEl = document.createElement("div");
 		const isSentByCurrentUser =
 			parseInt(message.sender_id) === parseInt(currentUser.id);
-		console.log(
-			"Message:",
-			message.message,
-			"Sender ID:",
-			message.sender_id,
-			"Current user ID:",
-			currentUser.id,
-			"Is sent by current user:",
-			isSentByCurrentUser
-		);
 
 		// The classes need to be flipped here to match the CSS
 		// Since "sent" messages should appear on the right and "received" on the left
