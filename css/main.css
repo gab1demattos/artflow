@@ -223,27 +223,3 @@ header:first-of-type {
 	height: 100%;
 }
 
-.empty-input {
-	background-color: blue;
-	color: white; /* Optional: to ensure text is visible */
-}
-
-/* User Card */
-.user-card {
-	display: flex;
-	align-items: center;
-	margin-bottom: 10px; /* Space between different users */
-}
-
-.user-profile-picture {
-	width: 40px;
-	height: 40px;
-	border-radius: 50%;
-	margin-right: 10px; /* Space between image and text */
-}
-
-.user-username {
-	font-size: 16px;
-	font-weight: bold;
-	color: #333;
-}

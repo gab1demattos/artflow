@@ -81,7 +81,8 @@ document.addEventListener('DOMContentLoaded', () => {
                             <div class="user-card">
                                 <div class="user-info">
                                     <img src="${user.profilePicture || '/images/user_pfp/default.png'}" alt="User profile picture" class="user-profile-picture" />
-                                    <span class="user-username">${user.username}</span>
+                                    <p class="user-username">${user.name}</p>
+                                    <p class="user-username">@${user.username}</p>
                                 </div>
                             </div>
                         `;

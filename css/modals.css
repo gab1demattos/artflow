@@ -517,3 +517,41 @@
 .modal-overlay.search-modal {
     background-color: transparent !important; /* Ensure no dark background */
 }
+
+.user-card {
+	display: flex;
+	align-items: center;
+	border-radius: 8px;
+	transition: box-shadow 0.3s ease;
+	cursor: pointer;
+}
+
+.user-card:hover {
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.user-profile-picture {
+	width: 2.5em;
+	height: 2.5em;
+	border-radius: 50%;
+	margin-right: 15px; /* Space between image and text */
+	border: 2px solid var(--beige);
+	object-fit: cover;
+}
+
+.user-username {
+	font-size: 18px;
+	font-weight: bold;
+	color: #333;
+	font-family: "EB Garamond", serif;
+	text-decoration: none;
+	transform: translateY(-0.5em);
+
+}
+
+.user-info {
+	display: flex;
+	justify-content: center;
+	padding: 0;
+	gap: 1em;
+}
