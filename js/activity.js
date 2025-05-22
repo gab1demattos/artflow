@@ -67,31 +67,33 @@ document.addEventListener('DOMContentLoaded', function () {
                 btn.addEventListener('click', function () {
                     const card = btn.closest('.order-card');
                     if (!card) return;
-                    const status = card.querySelector('.order-status');
-                    if (status) {
-                        status.textContent = 'Delivered';
-                        status.classList.remove('not-delivered');
-                        status.classList.add('delivered');
-                    }
-                    btn.remove();
-                    // TODO: AJAX to backend to mark as delivered
+                    const orderId = card.getAttribute('data-order-id');
+                    btn.disabled = true;
+                    fetch('/actions/mark-delivered.php', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        body: `order_id=${encodeURIComponent(orderId)}`
+                    })
+                    .then(res => res.json())
+                    .then(result => {
+                        if (result.success) {
+                            const status = card.querySelector('.order-status');
+                            if (status) {
+                                status.textContent = 'Delivered';
+                                status.classList.remove('not-delivered');
+                                status.classList.add('delivered');
+                            }
+                            btn.remove();
+                        } else {
+                            btn.disabled = false;
+                            alert(result.error || 'Failed to mark as delivered.');
+                        }
+                    })
+                    .catch(() => {
+                        btn.disabled = false;
+                        alert('Failed to mark as delivered.');
+                    });
                 });
             });
         });
-
-    document.querySelectorAll('.mark-delivered-btn').forEach(function (btn) {
-        btn.addEventListener('click', function () {
-            const card = btn.closest('.order-card');
-            if (!card) return;
-            // Change status
-            const status = card.querySelector('.order-status');
-            if (status) {
-                status.textContent = 'Delivered';
-                status.classList.remove('not-delivered');
-                status.classList.add('delivered');
-            }
-            // Remove the button
-            btn.remove();
-        });
-    });
 });
