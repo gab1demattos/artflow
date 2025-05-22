@@ -26,6 +26,22 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    // Fill order overview in payment modal
+    function fillOrderOverview() {
+        // Get data from DOM
+        const serviceTitle = document.querySelector('#service-checkout h2')?.textContent || '';
+        const ownerName = document.querySelector('#owner-info p')?.textContent || '';
+        const delivery = document.querySelector('#service-delivery .service-delivery:last-child')?.textContent || '';
+        const price = document.getElementById('price')?.textContent?.replace('€', '').trim() || '';
+        const requirements = document.getElementById('requirements-textarea')?.value || '';
+
+        document.querySelector('#order-title span').textContent = serviceTitle;
+        document.querySelector('#order-owner span').textContent = ownerName;
+        document.querySelector('#order-delivery span').textContent = delivery;
+        document.querySelector('#order-total').textContent = price;
+        document.querySelector('#order-requirements span').textContent = requirements;
+    }
+
     // Continue to payment modal
     if (requirementsContinue && requirementsModal && paymentModal) {
         requirementsContinue.addEventListener('click', function () {
@@ -37,6 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
             requirementsTextarea.classList.remove('input-error');
             requirementsModal.classList.add('hidden');
             paymentModal.classList.remove('hidden');
+            fillOrderOverview();
         });
     }
 

@@ -1,8 +1,9 @@
 <!-- Payment Modal -->
-    <div id="payment-modal-overlay" class="modal-overlay hidden">
-        <div class="modal">
-            <div class="modal-content">
-                <h2>Payment</h2>
+<div id="payment-modal-overlay" class="modal-overlay hidden">
+    <div class="modal">
+        <div class="modal-content">
+            <div class="payment-form-section">
+                <h2>Payment Details</h2>
                 <form id="payment-form" autocomplete="off">
                     <label>Card Number
                         <input type="text" name="card" maxlength="19" placeholder="1234 5678 9012 3456" required pattern="[0-9 ]+">
@@ -24,5 +25,14 @@
                     </div>
                 </form>
             </div>
+            <div class="order-overview-section" id="order-overview-section">
+                <h3>Order Overview</h3>
+                <p id="order-title">Service: <span></span></p>
+                <p id="order-owner">Seller: <span></span></p>
+                <p id="order-delivery">Delivery: <span></span></p>
+                <p id="order-requirements">Requirements: <span></span></p>
+                <div class="order-total">Total: <span id="order-total"></span> €</div>
+            </div>
         </div>
     </div>
+</div>
