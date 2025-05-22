@@ -106,5 +106,20 @@
         public function getProfileImage() {
             return $this->profile_image;
         }
+
+        static function searchUsers(PDO $db, string $search, int $count) : array {
+            $stmt = $db->prepare('SELECT id, name FROM User WHERE name LIKE ? LIMIT ?');
+            $stmt->execute(array($search . '%', $count));
+        
+            $users = array();
+            while ($user = $stmt->fetch()) {
+                $users[] = new User(
+                $user['id'],
+                $user['name']
+              );
+            }
+        
+            return $users;
+          }
     }
 ?>
