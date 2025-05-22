@@ -19,9 +19,15 @@
 
 .activity-tabs {
     display: flex;
+    
+    border-bottom: 1px solid #ddd;
+	/* margin-bottom: 20px; */
+	margin-left: 4.5em;
+	margin-right: 4.5em;
+    
     gap: 0.5rem;
-    margin-bottom: 1rem;
-    align-items: flex-end;
+    /* margin-bottom: 1rem;
+    align-items: flex-end; */ 
 }
 
 .activity-tab {
@@ -43,13 +49,24 @@
 }
 
 .activity-tab-content {
+    /* display: none;
+    margin-top: 0; */
+
     display: none;
-    margin-top: 0;
+	/* Hide all tab content by default */
+	min-height: calc(100vh - 25em);
+	/* Use viewport height minus space for header/tabs/etc */
+	width: 100%;
+	flex-direction: column;
+	padding: 0 4.5em;
+	/* Match tab margins */
+	box-sizing: border-box;
 }
 
 .activity-tab-content.active {
     display: block;
 }
+
 
 .order-card {
     background: #fafbfc;
