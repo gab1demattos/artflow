@@ -9,6 +9,7 @@
 @import url("home.css");
 @import url("responsive/footer-responsive.css");
 @import url('service-display.css');
+@import url('responsive/profile-responsive.css');
 
 :root {
 	/*theme colors*/

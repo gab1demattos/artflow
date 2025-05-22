@@ -194,17 +194,19 @@
 	box-sizing: border-box;
 }
 
-/* Only center items in empty state or for reviews tab - horizontal centering */
-.tab-content.empty-state,
-#reviews.tab-content {
-	display: flex !important;
-	justify-content: center !important;
+/* Only apply flex display to empty state when it's also active */
+.tab-content.active.empty-state {
+	display: flex;
+	justify-content: center;
 	text-align: center;
 }
 
-/* Specific styling for reviews tab - position from top */
-#reviews.tab-content {
-	align-items: flex-start !important;
+/* Specific styling for reviews tab - only apply when active */
+#reviews.tab-content.active {
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	align-items: flex-start;
 }
 
 /* Ensure the nothing-img is properly positioned in empty states */
