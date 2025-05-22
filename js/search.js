@@ -74,12 +74,15 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(users => {
                 if (users.length > 0) {
                     users.forEach(user => {
-                        const userCard = document.createElement('div');
-                        userCard.classList.add('user-card');
+                        const userCard = document.createElement('a');
+                        userCard.href = `/pages/profile.php?username=${encodeURIComponent(user.username)}`;
+                        userCard.classList.add('user-card-link');
                         userCard.innerHTML = `
-                            <div class="user-info">
-                                <img src="${user.profilePicture || '/images/user_pfp/default.png'}" alt="User profile picture" class="user-profile-picture" />
-                                <span class="user-username">${user.username}</span>
+                            <div class="user-card">
+                                <div class="user-info">
+                                    <img src="${user.profilePicture || '/images/user_pfp/default.png'}" alt="User profile picture" class="user-profile-picture" />
+                                    <span class="user-username">${user.username}</span>
+                                </div>
                             </div>
                         `;
                         searchResults.appendChild(userCard);
