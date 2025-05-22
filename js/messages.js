@@ -75,6 +75,11 @@ document.addEventListener("DOMContentLoaded", () => {
 		});
 	}
 
+	// Handle visit profile button click
+	if (visitProfileButton) {
+		visitProfileButton.addEventListener("click", visitUserProfile);
+	}
+
 	// Check URL parameters for direct messaging
 	// Only check URL parameters if not already initialized from PHP
 	if (!window.conversationInitialized) {
@@ -355,4 +360,23 @@ function filterConversations() {
 function toggleDropdownMenu(event) {
 	event.stopPropagation();
 	dropdownMenu.classList.toggle("active");
+}
+
+/**
+ * Visit the profile of the selected user
+ */
+function visitUserProfile() {
+	if (!selectedUserId) return;
+
+	// Fetch the username first and then redirect to the profile page with username
+	fetch(`/actions/get-user-info.php?user_id=${selectedUserId}`)
+		.then((response) => response.json())
+		.then((data) => {
+			if (data.success && data.user && data.user.username) {
+				window.location.href = `/pages/profile.php?username=${encodeURIComponent(
+					data.user.username
+				)}`;
+			}
+		})
+		.catch((error) => console.error("Error fetching user info:", error));
 }

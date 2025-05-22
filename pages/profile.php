@@ -7,7 +7,15 @@ require_once(__DIR__ . '/../templates/service_card.php');
 
 $session = Session::getInstance();
 $loggedInUser = $session->getUser() ?? null;
-$user = User::get_user_by_username((string)$_GET['username']) ?? null;
+
+// Get user by username
+$user = User::get_user_by_username((string)$_GET['username'] ?? '') ?? null;
+
+// If user doesn't exist, redirect to homepage
+if (!$user) {
+    header('Location: /');
+    exit();
+}
 
 // Check if user has a bio
 $hasBio = ($user->getBio() !== NULL && $user->getBio() !== '');

@@ -85,6 +85,26 @@ class User
         }
     }
 
+    public static function get_user_by_id($id)
+    {
+        $db = Database::getInstance();
+        $stmt = $db->prepare('SELECT * FROM User WHERE id = ?');
+        $stmt->execute([$id]);
+        $user = $stmt->fetch();
+        if ($user) {
+            return new User(
+                (int)$user['id'],
+                $user['user_type'],
+                $user['name'],
+                $user['username'],
+                $user['email'],
+                $user['bio'] ?? '',
+                $user['profile_image'] ?? ''
+            );
+        }
+        return null;
+    }
+
     public function getId()
     {
         return $this->id;
