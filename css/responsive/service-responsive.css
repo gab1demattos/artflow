@@ -40,9 +40,11 @@
     #service-imgs {
         flex-direction: row;
         overflow-x: auto;
-        width: 50%;
+        width: 70%;
         height: 5em;
-        margin: 1em 0;
+        margin: 0 auto;
+        margin-bottom: 1em;
+        margin-top: 2em;
     }
 
     #service-imgs img {
