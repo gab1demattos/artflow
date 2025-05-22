@@ -11,7 +11,7 @@
 
 	/* Title section - full viewport height */
 	#title {
-		height: 100vh !important; /* Full viewport height */
+		height: 100vh !important; 
 		min-height: 100vh !important;
 		padding: 2rem 1rem;
 		text-align: center;
@@ -21,7 +21,7 @@
 	}
 
 	#title h2 {
-		font-size: 16px !important; /* Use !important to override */
+		font-size: 30px !important; 
 		margin-left: 0 !important;
 		text-align: center !important;
 		width: 100% !important;
@@ -29,7 +29,7 @@
 	}
 
 	#title p {
-		font-size: 16px !important; /* Use !important to override */
+		font-size: 16px !important; 
 		line-height: 1.2 !important;
 		margin-left: 0 !important;
 		margin-top: 1em !important;
@@ -48,16 +48,16 @@
 
 	/* Info section - full viewport height and width */
 	#info {
-		height: 100vh !important; /* Full viewport height */
+		height: 100vh !important; 
 		min-height: 100vh !important;
-		width: 100vw !important; /* Full viewport width */
+		width: 100vw !important; 
 		max-width: 100vw !important;
 		margin: 0 !important;
-		padding: 1.5rem 0 !important; /* Remove horizontal padding */
+		padding: 1.5rem 0 !important; 
 		display: flex !important;
 		flex-direction: column !important;
 		justify-content: center !important;
-		overflow-x: hidden !important; /* Prevent horizontal scrolling */
+		overflow-x: hidden !important; 
 		box-sizing: border-box !important;
 	}
 
@@ -70,7 +70,7 @@
 	}
 
 	#info h2 {
-		font-size: 16px !important; /* Use !important to override */
+		font-size: 16px !important; 
 		margin-left: 0 !important;
 		text-align: center !important;
 		margin-top: 0.5em !important;
@@ -78,14 +78,14 @@
 	}
 
 	#info p {
-		font-size: 16px !important; /* Use !important to override */
+		font-size: 16px !important; 
 		line-height: 1.3 !important;
 		padding: 0.5em !important;
 	}
 
-	/* Categories section - full viewport height */
+	/* Categories section - make bigger and more proportional to green background */
 	#categories {
-		height: 100vh !important; /* Full viewport height */
+		height: 100vh !important; 
 		min-height: 100vh !important;
 		padding: 1.5rem 1rem !important;
 		display: flex !important;
@@ -94,18 +94,20 @@
 	}
 
 	#categories h2 {
-		font-size: 16px !important; /* Use !important to override */
+		font-size: 24px !important; 
 		padding-top: 0.5em !important;
+		margin-bottom: 1.5em !important;
+		line-height: 1.2 !important;
 	}
 
-	/* Make category boxes way smaller on mobile */
+	/* Make category boxes bigger but still mobile-friendly */
 	.category-item {
-		width: 3.2em !important; /* Much smaller from desktop 8em */
-		height: 3.2em !important; /* Much smaller from desktop 8em */
-		font-size: 12px !important; /* Smaller text to match proportions */
-		padding: 0.3rem !important; /* Less padding */
-		border-radius: 6px !important; /* Smaller corners */
-		box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1) !important; /* Smaller shadow */
+		width: 5.2em !important;
+		height: 5.2em !important;
+		font-size: 14px !important;
+		padding: 0.5rem !important;
+		border-radius: 8px !important;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important; 
 		display: flex !important;
 		justify-content: center !important;
 		align-items: center !important;
@@ -113,7 +115,7 @@
 
 	/* Style for the text inside category boxes */
 	.category-item .category-link {
-		font-size: 7px !important; /* Even smaller text */
+		font-size: 10px !important; 
 		text-align: center !important;
 		line-height: 1.1 !important;
 		word-break: break-word !important;
@@ -123,21 +125,22 @@
 		height: 100% !important;
 	}
 
-	/* Arrange category boxes in 3 rows of 2 boxes with columns closer together */
+	/* Arrange category boxes in 3 rows of 2 boxes with columns closer together but bigger */
 	#category-list {
 		width: 100% !important;
-		gap: 8px !important; /* Smaller gaps between items */
-		padding: 0.5rem !important;
+		gap: 15px !important;
+		padding: 0.8rem !important;
 		justify-content: center !important;
 		display: grid !important;
 		grid-template-columns: repeat(
 			2,
-			3.2em
-		) !important; /* 2 columns with exact width */
+			5.2em
+		) !important; /* Updated to match new box width */
 		grid-template-rows: repeat(3, auto) !important; /* 3 rows */
-		max-width: 200px !important; /* Reduced from 250px to bring columns closer */
+		max-width: 320px !important; 
 		margin: 0 auto !important;
-		column-gap: 10px !important; /* Smaller gap between columns */
+		column-gap: 25px !important;
+		row-gap: 25px !important; /* Added increased row gap */
 	}
 
 	/* Make sure all 6 category items are displayed */
@@ -148,14 +151,15 @@
 	#block {
 		width: 100% !important;
 		margin-right: 0 !important;
+		margin-top: 2em !important; /* Added margin top for spacing */
 	}
 
 	#block > a {
 		width: 100% !important;
 		padding-right: 0 !important;
 		text-align: center !important;
-		font-size: 13px !important; /* Reduced from 16px */
-		margin-top: 0.5em !important;
+		font-size: 15px !important;
+		margin-top: 1em !important;
 	}
 
 	/* Footer section */
@@ -165,7 +169,7 @@
 	}
 
 	#end h2 {
-		font-size: 16px !important; /* Use !important to override */
+		font-size: 16px !important; 
 		margin: 0.5rem !important;
 	}
 
@@ -200,7 +204,7 @@
 @media screen and (min-width: 768px) and (max-width: 1199px) {
 	/* Title section - full viewport height */
 	#title {
-		height: 100vh !important; /* Full viewport height */
+		height: 100vh !important; 
 		min-height: 100vh !important;
 		display: flex !important;
 		flex-direction: column !important;
@@ -208,12 +212,12 @@
 	}
 
 	#title h2 {
-		font-size: 2.2rem !important; /* Use !important to override */
+		font-size: 2.2rem !important; 
 		margin-left: -5% !important;
 	}
 
 	#title p {
-		font-size: 1rem !important; /* Use !important to override */
+		font-size: 1rem !important; 
 		margin-left: -5% !important;
 	}
 
@@ -228,16 +232,16 @@
 
 	/* Info section - full viewport height and width */
 	#info {
-		height: 100vh !important; /* Full viewport height */
+		height: 100vh !important; 
 		min-height: 100vh !important;
-		width: 100vw !important; /* Full viewport width */
+		width: 100vw !important; 
 		max-width: 100vw !important;
 		margin: 0 !important;
-		padding: 2rem 0 !important; /* Remove horizontal padding */
+		padding: 2rem 0 !important; 
 		display: flex !important;
 		flex-direction: column !important;
 		justify-content: center !important;
-		overflow-x: hidden !important; /* Prevent horizontal scrolling */
+		overflow-x: hidden !important; 
 		box-sizing: border-box !important;
 	}
 
@@ -262,7 +266,7 @@
 
 	/* Categories section - full viewport height */
 	#categories {
-		height: 100vh !important; /* Full viewport height */
+		height: 100vh !important; 
 		min-height: 100vh !important;
 		padding: 2rem;
 		padding-bottom: 3em;
@@ -355,6 +359,5 @@
 
 	/* For ultra-wide screens, adjust proportions */
 	@media screen and (min-width: 2400px) {
-		
 	}
 }
