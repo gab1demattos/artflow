@@ -172,18 +172,32 @@
 
 #messages-page .chat-app__header {
 	display: flex;
-	justify-content: flex-end;
-	padding-bottom: 10px;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px 20px;
 	background-color: #fdfaf8;
-	border-bottom: 2 px solid #eee;
+	border-bottom: 2px solid #eee;
+	position: relative;
+}
+
+#messages-page #current-chat-user {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	font-weight: bold;
+	font-size: 16px;
+	color: var(--orange);
 }
 
 #messages-page .chat-app__menu-button {
+	margin-left: auto;
 	font-size: 24px;
 	cursor: pointer;
 	padding: 6px 12px;
 	border-radius: 50%;
 	transition: background 0.2s ease;
+	z-index: 1;
+	position: relative;
 }
 
 #messages-page .chat-app__menu-button:hover {
