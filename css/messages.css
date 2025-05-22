@@ -81,6 +81,11 @@
 	background-color: #f8f1ec;
 }
 
+#messages-page .chat-app__chat-item.active {
+	background-color: #f8f1ec;
+	border-left: 3px solid var(--orange);
+}
+
 #messages-page .chat-app__avatar {
 	width: 40px;
 	height: 40px;
