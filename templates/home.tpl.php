@@ -49,8 +49,8 @@
                         <button id="open-new-service-modal">New Service</button>
                     </li>
                     <li class="sidebar-item">
-                        <img src="/images/logos/activity.png" alt="Activity" class="logo">
-                        <button>Activity</button>
+                      <img src="/images/logos/activity.png" alt="Activity" class="logo">
+                      <a href="/pages/activity.php"><button>Activity</button></a>
                     </li>
                     <li class="sidebar-item">
                         <img src="/images/logos/messages.png" alt="Messages" class="logo">
@@ -73,7 +73,6 @@
             <div id="overlay" onclick="closeSidebar()"></div>
             <script src="/js/sidebar.js"></script>
         <?php endif; ?>
-
     <?php } ?>
 
     <?php function drawTitle()

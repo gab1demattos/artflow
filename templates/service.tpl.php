@@ -74,7 +74,7 @@
                 </div>
                 <div id="service-options">
                     <?php if ($user): ?>
-                        <a href="/pages/messages.php?user_id=<?= $service['user_id'] ?>" class="service-options" id="message">Message <?= htmlspecialchars($owner['name']) ?></a>
+                        <a href="/pages/messages.php?user_id=<?= $service['user_id'] ?>" class="service-options" id="message">Message <?=  htmlspecialchars(explode(' ', $owner['name'])[0]) ?></a>
                     <?php else: ?>
                         <button class="button filled hovering service-options">Sign Up to Message</button>
                     <?php endif; ?>
@@ -85,4 +85,9 @@
         </div>
     </div>
     <script src="/js/service-scroll.js"></script>
+
+    <?php include __DIR__ . '/../pages/modals/requirements-modal.php'; ?>
+    <?php include __DIR__ . '/../pages/modals/payment-modal.php'; ?>
+    <?php include __DIR__ . '/../pages/modals/thankyou-modal.php'; ?>
+    <script src="/js/checkout.js"></script>
 <?php } ?>

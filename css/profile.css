@@ -276,3 +276,20 @@
 	opacity: 0.7;
 	margin-top: 40px;
 }
+
+/* Add padding between pagination and footer */
+.pagination {
+	margin-bottom: 3em;
+	padding-bottom: 2em;
+}
+
+/* If your pagination is inside a container, you may also want to add margin-bottom to that container. */
+
+footer,
+#end,
+.footer,
+#end-footer {
+	margin-top: 0 !important;
+}
+
+/* Activity Page Styles - MOVED TO activity.css */
