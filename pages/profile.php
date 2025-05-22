@@ -68,7 +68,7 @@ drawHeader($loggedInUser);
     <?php endif; ?>
   </div>
   
-  <div id="reviews" class="tab-content empty-state">
+  <div id="reviews" class="tab-content">
     <img src="/images/nothing-to-see-here.png" alt="Nothing to see here!" class="nothing-img" />
   </div>
 </main>

@@ -1,0 +1,91 @@
+/* ======================================= */
+/* BASE MOBILE STYLES (applied by default) */
+/* ======================================= */
+
+@media screen and (max-width: 767px) {
+	/* Make the profile picture smaller for mobile */
+	.profile .profile-img {
+		margin-left: 1.5em;
+		margin-right: 1.5em;
+		margin-top: 2em;
+		flex-basis: 8em; /* Smaller width for mobile */
+		height: 8em; /* Smaller height for mobile */
+	}
+
+	.profile .profile-img img {
+		width: 8em;
+		height: 8em;
+	}
+
+	/* Adjust grid layout for better mobile experience */
+	.profile {
+		grid-template-columns: 1fr;
+		grid-template-areas:
+			"image"
+			"info"
+			"bio";
+		padding: 15px;
+		gap: 5px;
+	}
+
+	/* Center the profile image in mobile view */
+	.profile .profile-img {
+		justify-self: center;
+		align-self: center;
+	}
+
+	/* Adjust info section for full width */
+	.profile .info {
+		margin-top: 1.5em;
+		margin-right: 10px;
+		text-align: center;
+	}
+
+	/* Center the username display */
+	.profile .info .username {
+		justify-content: center;
+	}
+
+	/* Adjust tabs for mobile */
+	.tabs {
+		margin-left: 1em;
+		margin-right: 1em;
+	}
+
+	.tab-content {
+		padding: 0 1em;
+	}
+
+	/* Adjust edit profile button position */
+	.edit-profile-btn {
+		top: 1em;
+		right: 1em;
+	}
+}
+
+/* =================== */
+/*    TABLET STYLES    */
+/* =================== */
+
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+	/* 
+      The desktop styles are already defined in profile.css
+      This media query ensures we only apply those styles at larger screens
+    */
+}
+
+/* ================================== */
+/*    DESKTOP STYLES (above 1200px)   */
+/* ================================== */
+
+/*use the main profile.css settings */
+@media screen and (min-width: 1200px) {
+	/* 
+      The desktop styles are already defined in profile.css
+      This media query ensures we only apply those styles at larger screens
+    */
+
+	/* For ultra-wide screens, adjust proportions */
+	@media screen and (min-width: 2400px) {
+	}
+}
