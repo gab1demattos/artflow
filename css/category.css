@@ -98,28 +98,17 @@
 	border: 0px solid;
 }
 
-@media (max-width: 600px) {
-	.subcategory-carousel {
-		gap: 8px;
-		padding: 0 2px;
-	}
-
-	.subcategory-tag {
-		padding: 7px 12px;
-		font-size: 0.95rem;
-	}
-
-	.service-card {
-		width: 96vw;
+.service-card {
+		width: 270px;
 		min-width: 0;
-		max-width: 340px;
-		margin-left: auto;
-		margin-right: auto;
+		max-width: 270px;
+		/* margin-left: auto;
+		margin-right: auto; */
 		padding: 0 0 12px 0;
 	}
 
 	.pantone-image-wrapper {
-		height: 120px;
+		height: 260px;
 	}
 
 	.pantone-title {
@@ -134,6 +123,19 @@
 		padding: 1em 2vw 2em 2vw;
 		/* More padding on mobile */
 	}
+
+@media (max-width: 600px) {
+	.subcategory-carousel {
+		gap: 8px;
+		padding: 0 2px;
+	}
+
+	.subcategory-tag {
+		padding: 7px 12px;
+		font-size: 0.95rem;
+	}
+
+	
 
 	#services-list {
 		gap: 16px 0;
