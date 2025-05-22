@@ -480,9 +480,13 @@
 	border-bottom: var(--purple) 3px solid;
 }
 #search-results {
-    max-height: 300px;
     overflow-y: auto;
     padding: 1rem;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+	justify-content: center;
+	height: 29em;
 }
 
 #search-modal .close-modal {
@@ -500,8 +504,4 @@
 
 .modal-overlay.search-modal {
     background-color: transparent !important; /* Ensure no dark background */
-}
-
-#search-results.empty-input {
-	background-color: aqua;
 }

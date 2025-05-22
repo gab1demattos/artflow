@@ -8,23 +8,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     searchInput.addEventListener('focus', () => {
         searchButton.style.display = 'none';
-        if (searchInput.value.trim() !== "") {
-            searchResults.classList.remove('empty-input');
-        } else {
-            searchResults.classList.add('empty-input');
-        }
     });
 
     searchInput.addEventListener('blur', () => {
         searchButton.style.display = 'block';
-    });
-
-    searchInput.addEventListener('input', () => {
-        if (searchInput.value.trim() === "") {
-            searchResults.classList.add('empty-input');
-        } else {
-            searchResults.classList.remove('empty-input');
-        }
     });
 
     // Toggle active class between buttons
