@@ -74,6 +74,7 @@
 	/* Smooth border color change */
 	border: 2px solid transparent;
 	/* Reserve space for focus border */
+	margin-bottom: 0.5em;
 }
 
 /* Style for the password input container */
@@ -228,14 +229,14 @@
 	bottom: -0.56em;
 }
 
-#goflow-modal .modal-content > p:nth-of-type(1) {
+#goflow-modal .modal-content>p:nth-of-type(1) {
 	font-size: 2rem;
 	position: absolute;
 	left: 4em;
 	top: 2em;
 }
 
-#goflow-modal .modal-content > p:nth-of-type(2) {
+#goflow-modal .modal-content>p:nth-of-type(2) {
 	position: absolute;
 	left: 2.125em;
 	top: 14.25em;
@@ -248,6 +249,148 @@
 	bottom: 4.5em;
 	right: 6em;
 	z-index: 10;
+}
+
+/* --- GO WITH FLOW MODAL RESTORE ORIGINAL LAYOUT --- */
+#goflow-modal .modal-content.login {
+	position: relative;
+	width: 39.2em;
+	max-width: 800px;
+	height: 27.5em;
+	background: #fff;
+	border-radius: 20px;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	padding: 0;
+	overflow: visible;
+}
+
+#goflow-modal img#go-flow {
+	width: 41.625em;
+	height: 29.625em;
+	position: absolute;
+	top: -0.56em;
+	right: -1.21em;
+	left: -1.21em;
+	bottom: -0.56em;
+	z-index: 1;
+	object-fit: cover;
+	pointer-events: none;
+}
+
+#goflow-modal .modal-content.login p {
+	position: absolute;
+	z-index: 2;
+	color: #000;
+	font-family: "EB Garamond", serif;
+	text-align: center;
+	width: 100%;
+	left: 0;
+	right: 0;
+}
+
+#goflow-modal .modal-content.login>p:nth-of-type(1) {
+	font-size: 2rem;
+	top: 2em;
+}
+
+#goflow-modal .modal-content.login>p:nth-of-type(2) {
+	top: 14.25em;
+	font-size: 1.4rem;
+}
+
+#goflow-modal .artflow-text {
+	color: var(--orange);
+}
+
+#goflow-modal #go-arrow {
+	position: absolute;
+	bottom: 3.5em;
+	right: 4.9em;
+	z-index: 3;
+	background: var(--orange);
+	color: #fff;
+	border: none;
+	border-radius: 50%;
+	width: 2.5em;
+	height: 2.5em;
+	font-size: 1.5em;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+	cursor: pointer;
+	transition: background 0.2s;
+}
+
+#goflow-modal .sectext {
+	position: absolute !important;
+	left: 0 !important;
+	right: auto !important;
+	width: auto !important;
+	min-width: 0 !important;
+	max-width: 60%;
+	text-align: left !important;
+	padding-left: 2em;
+	margin: 0 !important;
+	z-index: 3;
+}
+
+#goflow-modal #go-arrow:hover {
+	background: #ffb366;
+}
+
+@media (max-width: 900px) {
+	#goflow-modal .modal-content.login {
+		width: 98vw;
+		height: 60vw;
+		min-height: 20em;
+		max-width: 100vw;
+	}
+
+	#goflow-modal img#go-flow {
+		width: 100vw;
+		height: 60vw;
+		left: 0;
+		right: 0;
+	}
+}
+
+@media (max-width: 600px) {
+	#goflow-modal .modal-content.login {
+		width: 100vw;
+		height: 60vw;
+		min-height: 18em;
+		padding: 0;
+	}
+
+	#goflow-modal img#go-flow {
+		width: 100vw;
+		height: 60vw;
+		left: 0;
+		right: 0;
+	}
+
+	#goflow-modal .modal-content.login>p:nth-of-type(1) {
+		font-size: 1.2rem;
+		top: 1.2em;
+	}
+
+	#goflow-modal .modal-content.login>p:nth-of-type(2) {
+		top: 8.5em;
+		font-size: 1rem;
+	}
+
+	#goflow-modal #go-arrow {
+		bottom: 2em;
+		right: 2em;
+		width: 2em;
+		height: 2em;
+		font-size: 1.1em;
+	}
 }
 
 /*--- EDIT PROFILE MODAL SPECIFICS ---*/
@@ -284,7 +427,8 @@
 	align-items: center;
 	justify-content: center;
 	margin-top: 10px;
-	margin-bottom: 20px; /* Reduced from 40px to 20px to bring elements closer */
+	margin-bottom: 20px;
+	/* Reduced from 40px to 20px to bring elements closer */
 }
 
 #h2-edit-profile {
@@ -363,7 +507,7 @@
 	z-index: -1;
 }
 
-#edit-profile-modal .form input[type="file"] + label.file-label {
+#edit-profile-modal .form input[type="file"]+label.file-label {
 	padding: 10px 15px;
 	background: var(--orange);
 	color: var(--peach);
@@ -377,7 +521,7 @@
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-#edit-profile-modal .form input[type="file"] + label.file-label:hover {
+#edit-profile-modal .form input[type="file"]+label.file-label:hover {
 	background-color: var(--peach);
 	color: var(--orange);
 	border: 2px solid var(--orange);
@@ -386,7 +530,8 @@
 
 /* Change Password Styles */
 .important-changes-container {
-	margin-top: 0; /* Reduced from 1rem to eliminate the gap */
+	margin-top: 0;
+	/* Reduced from 1rem to eliminate the gap */
 	width: 100%;
 	display: flex;
 	flex-direction: column;
@@ -419,9 +564,8 @@ h4.important-changes {
 	padding: 0.6rem;
 	font-size: 0.9rem;
 	/* Make the width match the file input container's effective width */
-	min-width: calc(
-		100% - 3.1875em
-	); /* Account for the trash button width (2.1875em) plus margin (1em) */
+	min-width: calc(100% - 3.1875em);
+	/* Account for the trash button width (2.1875em) plus margin (1em) */
 }
 
 #delete-account-btn {
@@ -487,7 +631,8 @@ h4.important-changes {
 	align-items: center;
 	justify-content: center;
 	margin-top: 10px;
-	margin-bottom: 20px; /* Reduced from 40px to 20px to bring elements closer */
+	margin-bottom: 20px;
+	/* Reduced from 40px to 20px to bring elements closer */
 }
 
 #edit-profile-modal-overlay .form input:focus {
@@ -520,9 +665,9 @@ h4.important-changes {
 }
 
 /* Remove the conflicting selector that was added earlier */
-#edit-profile-modal .form > label + input,
-#edit-profile-modal .form > label + textarea,
-#edit-profile-modal .form > label + .password-input-container {
+#edit-profile-modal .form>label+input,
+#edit-profile-modal .form>label+textarea,
+#edit-profile-modal .form>label+.password-input-container {
 	margin-bottom: 0;
 	/* Reset this so it doesn't add extra spacing */
 }
@@ -620,7 +765,8 @@ h4.important-changes {
 
 /* Irreversible Modal Specific */
 .irreversible-modal {
-	display: none; /* Start with display none */
+	display: none;
+	/* Start with display none */
 	position: fixed;
 	z-index: 10000;
 	left: 0;
@@ -636,7 +782,8 @@ h4.important-changes {
 }
 
 .irreversible-modal.show {
-	display: flex; /* Show as flex when .show class is added */
+	display: flex;
+	/* Show as flex when .show class is added */
 	opacity: 1;
 	pointer-events: auto;
 }
@@ -1162,10 +1309,7 @@ h4.important-changes {
 	display: none;
 }
 
-#subcategory-modal
-	.subcategory-checkboxes
-	input[type="checkbox"]:checked
-	+ label,
+#subcategory-modal .subcategory-checkboxes input[type="checkbox"]:checked+label,
 #subcategory-modal .subcategory-checkboxes label.selected {
 	background: var(--orange);
 	color: #fff;
@@ -1176,10 +1320,7 @@ h4.important-changes {
 	display: none;
 }
 
-#subcategory-modal
-	.subcategory-checkboxes
-	input[type="checkbox"]:checked
-	+ label::before {
+#subcategory-modal .subcategory-checkboxes input[type="checkbox"]:checked+label::before {
 	background: var(--orange);
 	border-color: var(--orange);
 	box-shadow: 0 0 0 2px #fff inset;
@@ -1230,5 +1371,42 @@ h4.important-changes {
 	#subcategory-modal h3 {
 		font-size: 1.05rem;
 	}
+}
+
+/* Error message styling for modals */
+.modal-error {
+	color: var(--orange);
+	background: #fffbe6;
+	border: 1px solid var(--orange);
+	border-radius: 8px;
+	padding: 0.7em 1em;
+	margin-bottom: 1em;
+	text-align: center;
+	font-weight: bold;
+	font-size: 1.05em;
+}
+
+/* Floating error message styling */
+#floating-modal-error {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background: #fffbe6;
+	color: var(--orange);
+	border: 2px solid var(--orange);
+	border-radius: 12px;
+	padding: 1.2em 2.2em;
+	font-size: 1.2em;
+	font-weight: bold;
+	z-index: 9999;
+	box-shadow: 0 4px 32px rgba(0, 0, 0, 0.18);
+	text-align: center;
+	opacity: 1;
+	transition: opacity 0.6s;
+}
+
+#floating-modal-error.fade-out {
+	opacity: 0;
 }
 
