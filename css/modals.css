@@ -224,14 +224,14 @@
 	bottom: -0.56em;
 }
 
-#goflow-modal .modal-content > p:nth-of-type(1) {
+#goflow-modal .modal-content>p:nth-of-type(1) {
 	font-size: 2rem;
 	position: absolute;
 	left: 4em;
 	top: 2em;
 }
 
-#goflow-modal .modal-content > p:nth-of-type(2) {
+#goflow-modal .modal-content>p:nth-of-type(2) {
 	position: absolute;
 	left: 2.125em;
 	top: 14.25em;
@@ -280,7 +280,8 @@
 	align-items: center;
 	justify-content: center;
 	margin-top: 10px;
-	margin-bottom: 20px; /* Reduced from 40px to 20px to bring elements closer */
+	margin-bottom: 20px;
+	/* Reduced from 40px to 20px to bring elements closer */
 }
 
 #h2-edit-profile {
@@ -359,7 +360,7 @@
 	z-index: -1;
 }
 
-#edit-profile-modal .form input[type="file"] + label.file-label {
+#edit-profile-modal .form input[type="file"]+label.file-label {
 	padding: 10px 15px;
 	background: var(--orange);
 	color: var(--peach);
@@ -373,7 +374,7 @@
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-#edit-profile-modal .form input[type="file"] + label.file-label:hover {
+#edit-profile-modal .form input[type="file"]+label.file-label:hover {
 	background-color: var(--peach);
 	color: var(--orange);
 	border: 2px solid var(--orange);
@@ -382,7 +383,8 @@
 
 /* Change Password Styles */
 .important-changes-container {
-	margin-top: 0; /* Reduced from 1rem to eliminate the gap */
+	margin-top: 0;
+	/* Reduced from 1rem to eliminate the gap */
 	width: 100%;
 	display: flex;
 	flex-direction: column;
@@ -415,9 +417,8 @@ h4.important-changes {
 	padding: 0.6rem;
 	font-size: 0.9rem;
 	/* Make the width match the file input container's effective width */
-	min-width: calc(
-		100% - 3.1875em
-	); /* Account for the trash button width (2.1875em) plus margin (1em) */
+	min-width: calc(100% - 3.1875em);
+	/* Account for the trash button width (2.1875em) plus margin (1em) */
 }
 
 #delete-account-btn {
@@ -483,7 +484,8 @@ h4.important-changes {
 	align-items: center;
 	justify-content: center;
 	margin-top: 10px;
-	margin-bottom: 20px; /* Reduced from 40px to 20px to bring elements closer */
+	margin-bottom: 20px;
+	/* Reduced from 40px to 20px to bring elements closer */
 }
 
 #edit-profile-modal-overlay .form input:focus {
@@ -516,9 +518,9 @@ h4.important-changes {
 }
 
 /* Remove the conflicting selector that was added earlier */
-#edit-profile-modal .form > label + input,
-#edit-profile-modal .form > label + textarea,
-#edit-profile-modal .form > label + .password-input-container {
+#edit-profile-modal .form>label+input,
+#edit-profile-modal .form>label+textarea,
+#edit-profile-modal .form>label+.password-input-container {
 	margin-bottom: 0;
 	/* Reset this so it doesn't add extra spacing */
 }
@@ -616,7 +618,8 @@ h4.important-changes {
 
 /* Irreversible Modal Specific */
 .irreversible-modal {
-	display: none; /* Start with display none */
+	display: none;
+	/* Start with display none */
 	position: fixed;
 	z-index: 10000;
 	left: 0;
@@ -632,7 +635,8 @@ h4.important-changes {
 }
 
 .irreversible-modal.show {
-	display: flex; /* Show as flex when .show class is added */
+	display: flex;
+	/* Show as flex when .show class is added */
 	opacity: 1;
 	pointer-events: auto;
 }
@@ -1158,10 +1162,7 @@ h4.important-changes {
 	display: none;
 }
 
-#subcategory-modal
-	.subcategory-checkboxes
-	input[type="checkbox"]:checked
-	+ label,
+#subcategory-modal .subcategory-checkboxes input[type="checkbox"]:checked+label,
 #subcategory-modal .subcategory-checkboxes label.selected {
 	background: var(--orange);
 	color: #fff;
@@ -1172,10 +1173,7 @@ h4.important-changes {
 	display: none;
 }
 
-#subcategory-modal
-	.subcategory-checkboxes
-	input[type="checkbox"]:checked
-	+ label::before {
+#subcategory-modal .subcategory-checkboxes input[type="checkbox"]:checked+label::before {
 	background: var(--orange);
 	border-color: var(--orange);
 	box-shadow: 0 0 0 2px #fff inset;
@@ -1226,4 +1224,41 @@ h4.important-changes {
 	#subcategory-modal h3 {
 		font-size: 1.05rem;
 	}
+}
+
+/* Error message styling for modals */
+.modal-error {
+	color: var(--orange);
+	background: #fffbe6;
+	border: 1px solid var(--orange);
+	border-radius: 8px;
+	padding: 0.7em 1em;
+	margin-bottom: 1em;
+	text-align: center;
+	font-weight: bold;
+	font-size: 1.05em;
+}
+
+/* Floating error message styling */
+#floating-modal-error {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background: #fffbe6;
+	color: var(--orange);
+	border: 2px solid var(--orange);
+	border-radius: 12px;
+	padding: 1.2em 2.2em;
+	font-size: 1.2em;
+	font-weight: bold;
+	z-index: 9999;
+	box-shadow: 0 4px 32px rgba(0, 0, 0, 0.18);
+	text-align: center;
+	opacity: 1;
+	transition: opacity 0.6s;
+}
+
+#floating-modal-error.fade-out {
+	opacity: 0;
 }

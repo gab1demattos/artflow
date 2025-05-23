@@ -307,5 +307,60 @@ const Modals = {
 	},
 };
 
+// Utility to show error message in a modal (global)
+window.showModalError = function (modalId, message) {
+	// Remove any existing floating error
+	let floating = document.getElementById('floating-modal-error');
+	if (floating) floating.remove();
+	// Create floating error
+	floating = document.createElement('div');
+	floating.id = 'floating-modal-error';
+	floating.textContent = message;
+	document.body.appendChild(floating);
+	setTimeout(() => {
+		floating.classList.add('fade-out');
+		setTimeout(() => floating.remove(), 600);
+	}, 3000);
+};
+
+// Intercept sign up form submit
+const signupForm = document.querySelector('#signup-modal-overlay form');
+if (signupForm) {
+	signupForm.addEventListener('submit', function (e) {
+		const password = signupForm.querySelector('input[name="password"]').value;
+		const confirm = signupForm.querySelector('input[name="confirm_password"]').value;
+		if (password.length < 8) {
+			e.preventDefault();
+			showModalError('signup-modal-overlay', 'Password must be at least 8 characters.');
+			return;
+		}
+		if (password !== confirm) {
+			e.preventDefault();
+			showModalError('signup-modal-overlay', 'Password and confirmation do not match.');
+			return;
+		}
+	});
+}
+
+// Intercept sign in form submit for AJAX error display
+const signinForm = document.querySelector('#signin-modal-overlay form');
+if (signinForm) {
+	signinForm.addEventListener('submit', async function (e) {
+		e.preventDefault();
+		const formData = new FormData(signinForm);
+		const res = await fetch(signinForm.action, {
+			method: 'POST',
+			body: formData,
+			headers: { 'X-Requested-With': 'XMLHttpRequest' }
+		});
+		if (!res.ok) {
+			const data = await res.json();
+			showModalError('signin-modal-overlay', data.error || 'Invalid email or password.');
+		} else {
+			window.location.reload();
+		}
+	});
+}
+
 // Export the Modals object for use in other modules
 window.Modals = Modals;
