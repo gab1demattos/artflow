@@ -72,6 +72,12 @@ if (strlen($password) < 8) {
 if (!preg_match('/[0-9]/', $password)) {
     handle_signup_error('Password must contain at least one number.');
 }
+if (!preg_match('/[A-Z]/', $password)) {
+    handle_signup_error('Password must contain at least one uppercase letter.');
+}
+if (!preg_match('/[a-z]/', $password)) {
+    handle_signup_error('Password must contain at least one lowercase letter.');
+}
 if (!preg_match('/[.\?\$#@!&%]/', $password)) {
     handle_signup_error('Password must contain at least one special character (.?$#@!&%).');
 }
