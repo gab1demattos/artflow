@@ -68,30 +68,32 @@ drawHeader($user);
             <form method="GET" action="">
                 <input type="hidden" name="id" value="<?= $categoryId ?>">
 
-                <div id="price-filter">
-                    <label for="price-min">Price Range:</label>
-                    <input type="number" name="price_min" id="price-min" placeholder="Min" min="<?= $priceMin ?>" max="<?= $priceMax ?>" value="<?= $priceMin ?>" step="1">
-                    <input type="number" name="price_max" id="price-max" placeholder="Max" min="<?= $priceMin ?>" max="<?= $priceMax ?>" value="<?= $priceMax ?>" step="1">
-                </div>
-
-                <div id="rating-filter">
-                    <label>Rating:</label>
-                    <div class="rating-checkboxes">
-                        <label><input type="checkbox" name="rating[]" value="5" checked> 5 Stars</label>
-                        <label><input type="checkbox" name="rating[]" value="4" checked> 4 Stars</label>
-                        <label><input type="checkbox" name="rating[]" value="3" checked> 3 Stars</label>
-                        <label><input type="checkbox" name="rating[]" value="2" checked> 2 Stars</label>
-                        <label><input type="checkbox" name="rating[]" value="1" checked> 1 Star</label>
+                <div id="filter-container">
+                    <div id="price-filter">
+                        <label for="price-min">Price Range:</label>
+                        <input type="number" name="price_min" id="price-min" placeholder="Min" min="<?= $priceMin ?>" max="<?= $priceMax ?>" value="<?= $priceMin ?>" step="1">
+                        <input type="number" name="price_max" id="price-max" placeholder="Max" min="<?= $priceMin ?>" max="<?= $priceMax ?>" value="<?= $priceMax ?>" step="1">
                     </div>
-                </div>
 
-                <div id="delivery-filter">
-                    <label for="delivery-min">Delivery Time (days):</label>
-                    <input type="number" name="delivery_min" id="delivery-min" placeholder="Min" min="<?= $deliveryMin ?>" max="<?= $deliveryMax ?>" value="<?= $deliveryMin ?>" step="1">
-                    <input type="number" name="delivery_max" id="delivery-max" placeholder="Max" min="<?= $deliveryMin ?>" max="<?= $deliveryMax ?>" value="<?= $deliveryMax ?>" step="1">
-                </div>
+                    <div id="rating-filter">
+                        <label>Rating:</label>
+                        <div class="rating-checkboxes">
+                            <label><input type="checkbox" name="rating[]" value="5" checked> 5 Stars</label>
+                            <label><input type="checkbox" name="rating[]" value="4" checked> 4 Stars</label>
+                            <label><input type="checkbox" name="rating[]" value="3" checked> 3 Stars</label>
+                            <label><input type="checkbox" name="rating[]" value="2" checked> 2 Stars</label>
+                            <label><input type="checkbox" name="rating[]" value="1" checked> 1 Star</label>
+                        </div>
+                    </div>
 
-                <button type="submit">Apply Filters</button>
+                    <div id="delivery-filter">
+                        <label for="delivery-min">Delivery Time (days):</label>
+                        <input type="number" name="delivery_min" id="delivery-min" placeholder="Min" min="<?= $deliveryMin ?>" max="<?= $deliveryMax ?>" value="<?= $deliveryMin ?>" step="1">
+                        <input type="number" name="delivery_max" id="delivery-max" placeholder="Max" min="<?= $deliveryMin ?>" max="<?= $deliveryMax ?>" value="<?= $deliveryMax ?>" step="1">
+                    </div>
+
+                    <button type="submit">Apply Filters</button>
+                </div>
             </form>
         </div>
 

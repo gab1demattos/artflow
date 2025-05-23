@@ -214,6 +214,20 @@
 	width: 2.5em;
 }
 
+#filter-container {
+	display: flex;
+	flex-direction: row;
+	gap: 1em;
+	align-items: center;
+}
+
+#rating-filter {
+	display: flex;
+	flex-direction: row;
+	gap: 0.5em;
+	align-items: center;
+}
+
 @media (max-width: 600px) {
 	.subcategory-carousel {
 		gap: 8px;
