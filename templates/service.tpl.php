@@ -73,12 +73,12 @@
                     <p class="service-delivery"><?= htmlspecialchars($service['delivery_time']) ?> days</p>
                 </div>
                 <div id="service-options">
-                    <?php if ($user): ?>
+                    <?php if ($user && $service['user_id'] != $user['id']): ?>
                         <a href="/pages/messages.php?user_id=<?= $service['user_id'] ?>" class="service-options" id="message">Message <?=  htmlspecialchars(explode(' ', $owner['name'])[0]) ?></a>
-                    <?php else: ?>
+                        <button id="payment" class="service-options">Continue to Payment</button>
+                    <?php elseif (!$user): ?>
                         <button class="button filled hovering service-options">Sign Up to Message</button>
                     <?php endif; ?>
-                    <button id="payment" class="service-options">Continue to Payment</button>
                 </div>
             </div>
 
