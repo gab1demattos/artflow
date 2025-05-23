@@ -128,10 +128,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         searchResults.appendChild(card);
                     });
                 } else {
+                    searchResults.innerHTML = ""; // Clear previous results
                     searchResults.innerHTML = `<p>No ${type} found.</p>`;
                 }
             } catch (error) {
                 console.error(`Error fetching search results for ${type}:`, error);
+                searchResults.innerHTML = ""; // Clear previous results
                 searchResults.innerHTML = `<p>Error loading search results. Please try again later.</p>`;
             }
         };
@@ -148,6 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
             fetch('/api/api_all_services.php')
             .then(response => response.json())
             .then(services => {
+                searchResults.innerHTML = ""; // Clear previous results
                 if (services.length > 0) {
                     services.forEach(service => {
                         const serviceCard = document.createElement('a');
@@ -168,11 +171,13 @@ document.addEventListener('DOMContentLoaded', () => {
                         searchResults.appendChild(serviceCard);
                     });
                 } else {
+                    searchResults.innerHTML = ""; // Clear previous results
                     searchResults.innerHTML = '<p>No services found.</p>';
                 }
             })
             .catch(error => {
                 console.error('Error fetching services:', error);
+                searchResults.innerHTML = ""; // Clear previous results
                 searchResults.innerHTML = '<p>Error loading services. Please try again later.</p>';
             });
         } else if (type === "names") {
@@ -180,6 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
             fetch('/api/api_users.php')
             .then(response => response.json())
             .then(users => {
+                searchResults.innerHTML = ""; // Clear previous results
                 if (users.length > 0) {
                     users.forEach(user => {
                         const userCard = document.createElement('a');
@@ -197,11 +203,13 @@ document.addEventListener('DOMContentLoaded', () => {
                         searchResults.appendChild(userCard);
                     });
                 } else {
+                    searchResults.innerHTML = ""; // Clear previous results
                     searchResults.innerHTML = '<p>No users found.</p>';
                 }
             })
             .catch(error => {
                 console.error('Error fetching users:', error);
+                searchResults.innerHTML = ""; // Clear previous results
                 searchResults.innerHTML = '<p>Error loading users. Please try again later.</p>';
             });
         }
@@ -226,7 +234,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const services = await response.json();
 
                 const searchResults = document.getElementById('search-results');
-                searchResults.innerHTML = ''; // Clear previous results
+                searchResults.innerHTML = ""; // Clear previous results
 
                 if (services.length > 0) {
                     services.forEach(service => {
@@ -248,10 +256,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         searchResults.appendChild(serviceCard);
                     });
                 } else {
+                    searchResults.innerHTML = ""; // Clear previous results
                     searchResults.innerHTML = '<p>No services found for the selected categories.</p>';
                 }
             } catch (error) {
                 console.error('Error fetching services:', error);
+                searchResults.innerHTML = ""; // Clear previous results
                 searchResults.innerHTML = '<p>Error loading services. Please try again later.</p>';
             }
         });
@@ -283,7 +293,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const response = await fetch(`/api/api_services.php?categories=${selectedCategories.join(',')}&min_price=${minPrice}&max_price=${maxPrice}`);
                 const services = await response.json();
 
-                searchResults.innerHTML = ''; // Clear previous results
+                searchResults.innerHTML = ""; // Clear previous results
 
                 if (services.length > 0) {
                     services.forEach(service => {
@@ -305,10 +315,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         searchResults.appendChild(serviceCard);
                     });
                 } else {
+                    searchResults.innerHTML = ""; // Clear previous results
                     searchResults.innerHTML = '<p>No services found for the selected filters.</p>';
                 }
             } catch (error) {
                 console.error('Error fetching services:', error);
+                searchResults.innerHTML = ""; // Clear previous results
                 searchResults.innerHTML = '<p>Error loading services. Please try again later.</p>';
             }
         });
