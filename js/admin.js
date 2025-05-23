@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Event delegation for all admin tables
     document.getElementById('admin-users').addEventListener('click', function (e) {
         if (e.target.classList.contains('promote-btn')) promoteUser(e);
-        if (e.target.classList.contains('red-btn')) banUser(e);
+        if (e.target.classList.contains('ban-btn') || e.target.classList.contains('red-btn')) banUser(e);
     });
     document.getElementById('admin-services').addEventListener('click', function (e) {
         if (e.target.classList.contains('delete-service-btn')) deleteService(e);
