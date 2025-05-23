@@ -98,7 +98,6 @@ drawHeader($user);
     </div>
 </main>
 <?php drawFooter($user); ?>
-<link rel="stylesheet" href="/css/category.css">
 <link rel="stylesheet" href="/css/responsive/category-responsive.css">
 <!-- Load the modular JavaScript files -->
 <script src="/js/modals.js"></script>

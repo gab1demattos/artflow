@@ -24,6 +24,5 @@ drawHeader($user);
         <!-- Orders will be loaded dynamically by JS -->
     </div>
 </main>
-<link rel="stylesheet" href="/css/activity.css">
 <script src="/js/activity.js"></script>
 <?php drawFooter($user); ?>
