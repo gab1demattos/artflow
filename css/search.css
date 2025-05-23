@@ -230,6 +230,33 @@
     font-style: italic;
 }
 
+#filter-search-delivery {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+    margin-top: 1rem;
+    padding: 0.5rem;
+    background-color: var(--light-gray);
+    border-radius: 8px;
+    box-shadow: 0 2px 5px var(--purple);
+}
+
+#filter-search-delivery label {
+    font-weight: bold;
+    color: #444;
+    font-size: 0.9rem;
+}
+
+#filter-search-delivery input {
+    width: 3em;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    color: #333;
+    border: none;
+    outline: none;
+}
+
 input[type="checkbox"] {
     accent-color: var(--purple);
     opacity: 0.8;
