@@ -54,7 +54,7 @@
     justify-content: flex-start; /* Ensure list starts from the top */
 }
 
-.close-modal {
+.close-search {
     position: absolute;
     top: 1rem;
     right: 1rem;
