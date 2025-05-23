@@ -8,10 +8,13 @@
                         <div class="form-left-column">
                             <label for="name">Name</label>
                             <input type="text" placeholder="Name" id="name" name="name" value="<?= $user->getName() ?>" required>
-                            
+
                             <label for="username">Username</label>
                             <input type="text" placeholder="Username" id="username" name="username" value="<?= $user->getUsername() ?>" required>
-                            
+
+                            <label for="email">Email</label>
+                            <input type="email" placeholder="Email" id="email" name="email" value="<?= $user->getEmail() ?>" required>
+
                             <label for="bio">Bio</label>
                             <textarea id="bio" name="bio" placeholder="Bio (optional)"><?= $user->getBio() ?></textarea>
                         </div>
