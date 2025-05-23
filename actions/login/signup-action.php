@@ -42,6 +42,14 @@ if (empty($name) || empty($username) || empty($email) || empty($password) || emp
     handle_signup_error('Password and confirmation do not match');
 }
 
+// Username validation: at least 3 chars, only letters, numbers, or _
+if (strlen($username) < 3) {
+    handle_signup_error('Username must be at least 3 characters.');
+}
+if (!preg_match('/^[A-Za-z0-9_]+$/', $username)) {
+    handle_signup_error('Username can only contain letters, numbers, or underscores (_).');
+}
+
 // Check for existing email
 $db = Database::getInstance();
 $stmt = $db->prepare('SELECT COUNT(*) FROM User WHERE email = ?');
