@@ -211,9 +211,11 @@
 /* Specific styling for reviews tab - only apply when active */
 #reviews.tab-content.active {
 	display: flex;
-	justify-content: center;
+	flex-direction: column;
+	justify-content: flex-start;
 	text-align: center;
-	align-items: flex-start;
+	align-items: center;
+	padding-top: 1.5rem;
 }
 
 /* Ensure the nothing-img is properly positioned in empty states */
@@ -301,7 +303,7 @@ footer,
 	gap: 1.5rem;
 	padding: 1rem 0;
 	max-width: 800px;
-	margin: 0 auto;
+	margin: 1.5rem auto 0; /* Added top margin to increase spacing from average rating */
 	width: 100%;
 	/* Set height to show one full review plus part of the next one */
 	min-height: 300px; /* Ensure minimum height for smaller reviews */
@@ -368,7 +370,7 @@ footer,
 }
 
 .star {
-	color: var(--text-light);
+	color: #d3d3d3; /* Light grey color for unfilled stars */
 	font-size: 1.2rem;
 }
 
@@ -377,7 +379,7 @@ footer,
 }
 
 #reviews .review-rating .star {
-	color: var(--text-light);
+	color: #d3d3d3; /* Light grey color for unfilled stars */
 	font-size: 1.2rem;
 }
 
@@ -416,4 +418,39 @@ footer,
 	max-width: 100%;
 	max-height: 400px;
 	opacity: 0.8;
+}
+
+/* Average Rating Styles */
+.average-rating {
+	margin: 0;
+	padding: 1rem;
+	background-color: var(--background-light);
+	border-radius: 8px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	width: 100%;
+	max-width: 800px;
+	/* Bottom border removed */
+}
+
+.average-rating .rating-value {
+	font-size: 1.2rem;
+	font-weight: 600;
+	color: var(--text-dark);
+}
+
+.average-rating .review-rating-stars {
+	display: flex;
+	align-items: center;
+}
+
+.average-rating .star {
+	color: #d3d3d3; /* Light grey color for unfilled stars */
+	font-size: 1.4rem;
+}
+
+.average-rating .star.filled {
+	color: var(--yellow);
 }

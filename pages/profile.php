@@ -36,6 +36,10 @@ $userServiceIds = array_map(function ($service) {
 
 // Get reviews for user's services
 $reviews = [];
+$totalRating = 0;
+$reviewCount = 0;
+$averageRating = 0;
+
 if (!empty($userServiceIds)) {
     $db = Database::getInstance();
     $placeholders = implode(',', array_fill(0, count($userServiceIds), '?'));
@@ -50,7 +54,11 @@ if (!empty($userServiceIds)) {
     $stmt->execute($userServiceIds);
     $reviewsData = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+    // Calculate total rating and count
     foreach ($reviewsData as $reviewData) {
+        $totalRating += (float)$reviewData['rating'];
+        $reviewCount++;
+
         $reviews[] = new Review(
             (int)$reviewData['id'],
             (int)$reviewData['user_id'],
@@ -63,6 +71,9 @@ if (!empty($userServiceIds)) {
             $reviewData['service_title']
         );
     }
+
+    // Calculate average rating
+    $averageRating = $reviewCount > 0 ? round($totalRating / $reviewCount, 1) : 0;
 }
 
 drawHeader($loggedInUser);
@@ -137,6 +148,15 @@ drawHeader($loggedInUser);
         <?php if (empty($reviews)): ?>
             <img src="/images/nothing-to-see-here.png" alt="Nothing to see here!" class="nothing-img" />
         <?php else: ?>
+            <div class="average-rating">
+                <strong>Average Rating: </strong>
+                <span class="rating-value"><?= $averageRating > 0 ? htmlspecialchars($averageRating) : 'No ratings yet' ?></span>
+                <div class="review-rating-stars">
+                    <?php for ($i = 1; $i <= 5; $i++): ?>
+                        <span class="star<?= $i <= $averageRating ? ' filled' : '' ?>">&#9733;</span>
+                    <?php endfor; ?>
+                </div>
+            </div>
             <div class="reviews-list">
                 <?php foreach ($reviews as $review): ?>
                     <div class="review-card">
