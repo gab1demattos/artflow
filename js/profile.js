@@ -106,6 +106,62 @@ document.addEventListener("DOMContentLoaded", function () {
 			changePasswordModal.style.display = "none";
 		}
 	});
+
+	// Delete Account button functionality
+	const deleteAccountBtn = document.getElementById("delete-account-btn");
+	const irreversibleModal = document.getElementById("irreversible-modal");
+	const irreversibleConfirmBtn = document.getElementById(
+		"irreversible-confirm-btn"
+	);
+	const irreversibleCancelBtn = document.getElementById(
+		"irreversible-cancel-btn"
+	);
+
+	if (deleteAccountBtn && irreversibleModal) {
+		deleteAccountBtn.addEventListener("click", function (event) {
+			// Stop propagation to prevent the edit profile modal from closing
+			event.stopPropagation();
+
+			// Update the modal message for account deletion
+			const modalMessage = irreversibleModal.querySelector(
+				".irreversible-modal-message"
+			);
+			if (modalMessage) {
+				modalMessage.innerHTML = `
+					<p>Are you sure you want to delete your account?</p>
+					<p>This action cannot be undone and all your data will be permanently removed.</p>
+				`;
+			}
+
+			// Set up the confirm button action for account deletion
+			if (irreversibleConfirmBtn) {
+				irreversibleConfirmBtn.onclick = function () {
+					// Hide the modal - just remove the show class
+					irreversibleModal.classList.remove("show");
+
+					// TODO: Implement actual account deletion functionality
+					console.log("Account deletion would happen here");
+				};
+			}
+
+			// Display the modal with show class - CSS handles display:flex
+			irreversibleModal.classList.add("show");
+		});
+	}
+
+	// Handle canceling the irreversible action
+	if (irreversibleCancelBtn && irreversibleModal) {
+		irreversibleCancelBtn.addEventListener("click", function () {
+			irreversibleModal.classList.remove("show");
+		});
+	}
+
+	// Close irreversible modal when clicking outside
+	window.addEventListener("click", function (event) {
+		if (event.target == irreversibleModal) {
+			irreversibleModal.classList.remove("show");
+		}
+	});
 });
 
 /*== EDIT PROFILE ==*/

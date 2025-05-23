@@ -299,14 +299,27 @@ footer,
 	margin-top: 1rem;
 	width: 100%;
 	display: flex;
-	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.5rem;
 }
 
-#change-password-btn {
+#change-password-btn,
+#delete-account-btn {
 	padding: 0.6rem;
 	font-size: 0.9rem;
 	/* Make the width match the file input container's effective width */
 	min-width: calc(
 		100% - 3.1875em
 	); /* Account for the trash button width (2.1875em) plus margin (1em) */
+}
+
+#delete-account-btn {
+	color: #e74c3c;
+	border-color: #e74c3c;
+}
+
+#delete-account-btn:hover {
+	background-color: #e74c3c;
+	color: white;
 }

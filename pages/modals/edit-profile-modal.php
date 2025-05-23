@@ -30,6 +30,7 @@
                             </div>
                             <div class="password-change-container">
                                 <button type="button" id="change-password-btn" class="button outline hovering">Change Password</button>
+                                <button type="button" id="delete-account-btn" class="button outline hovering">Delete Account</button>
                             </div>
                         </div>
                     </div>
