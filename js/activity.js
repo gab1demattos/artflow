@@ -34,7 +34,9 @@ document.addEventListener("DOMContentLoaded", function () {
 					yourOrders.innerHTML += `
                     <div class="order-card">
                         <div class="order-header">
-                            <span class="order-title">${order.title}</span>
+                            <span class="order-title" data-service-id="${
+															order.service_id
+														}" style="cursor: pointer;">${order.title}</span>
                             <span class="order-status ${
 															isCompleted ? "completed" : "in-progress"
 														}">${
@@ -66,6 +68,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 				// Attach event listeners to the Rate it buttons
 				attachRateItListeners();
+
+				// Attach event listeners to order titles in Your Orders
+				attachOrderTitleListeners();
 			}
 			// Render Orders From Others
 			const ordersFromOthers = document.getElementById("orders-from-others");
@@ -86,7 +91,9 @@ document.addEventListener("DOMContentLoaded", function () {
 					ordersFromOthers.innerHTML += `
                     <div class="order-card" data-order-id="${order.id}">
                         <div class="order-header">
-                            <span class="order-title">${order.title}</span>
+                            <span class="order-title" data-service-id="${
+															order.service_id
+														}" style="cursor: pointer;">${order.title}</span>
                             <span class="order-status ${
 															delivered ? "delivered" : "not-delivered"
 														}">${
@@ -115,6 +122,9 @@ document.addEventListener("DOMContentLoaded", function () {
 												}
                     </div>`;
 				});
+
+				// Attach event listeners to order titles in Orders From Others
+				attachOrderTitleListeners();
 			}
 			// Re-attach mark delivered listeners
 			document.querySelectorAll(".mark-delivered-btn").forEach(function (btn) {
@@ -150,6 +160,18 @@ document.addEventListener("DOMContentLoaded", function () {
 				});
 			});
 		});
+
+	// Function to attach click event listeners to order titles
+	function attachOrderTitleListeners() {
+		document.querySelectorAll(".order-title").forEach((title) => {
+			title.addEventListener("click", function () {
+				const serviceId = this.getAttribute("data-service-id");
+				if (serviceId) {
+					window.location.href = "/pages/service.php?id=" + serviceId;
+				}
+			});
+		});
+	}
 
 	// Function to attach event listeners to all Rate it buttons
 	function attachRateItListeners() {
