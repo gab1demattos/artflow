@@ -3,15 +3,18 @@
         <div class="modal-content" id='edit-profile-modal-content'>
             <div class="form-container">
                 <h2 id='h2-edit-profile'>Edit Profile</h2>
-                <form id="edit-profile-form" class="form" method='POST' action='/actions/edit-profile-action.php' enctype="multipart/form-data">
+                <form id="edit-profile-form" class="form" method='POST' action='/actions/account_settings/edit-profile-action.php' enctype="multipart/form-data">
                     <div class="form-layout" id='edit-profile-form-layout'>
                         <div class="form-left-column">
                             <label for="name">Name</label>
                             <input type="text" placeholder="Name" id="name" name="name" value="<?= $user->getName() ?>" required>
-                            
+
                             <label for="username">Username</label>
                             <input type="text" placeholder="Username" id="username" name="username" value="<?= $user->getUsername() ?>" required>
-                            
+
+                            <label for="email">Email</label>
+                            <input type="email" placeholder="Email" id="email" name="email" value="<?= $user->getEmail() ?>" required>
+
                             <label for="bio">Bio</label>
                             <textarea id="bio" name="bio" placeholder="Bio (optional)"><?= $user->getBio() ?></textarea>
                         </div>
@@ -24,6 +27,12 @@
                                 <label for="profile_image" class="file-label">Choose file</label>
                                 <button type="button" class="delete-image-btn" id="delete-image-btn">🗑️</button>
                                 <input type="hidden" name="reset_profile_image" id="reset_profile_image" value="0">
+                            </div>
+                            <div class="important-changes-container">
+                                <h4 class="important-changes">Important Changes</h4>
+                                <hr class="divider">
+                                <button type="button" id="change-password-btn" class="button outline hovering">Change Password</button>
+                                <button type="button" id="delete-account-btn" class="button outline hovering">Delete Account</button>
                             </div>
                         </div>
                     </div>

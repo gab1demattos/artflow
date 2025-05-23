@@ -1,4 +1,4 @@
-<?php 
+<?php
 require_once(__DIR__ . '/../database/session.php');
 require_once(__DIR__ . '/../database/classes/category.class.php');
 require_once(__DIR__ . '/../templates/home.tpl.php');
@@ -8,8 +8,6 @@ $user = $session->getUser() ?? null;
 
 drawHeader($user);
 drawTitle();
-drawCategories();   
+drawCategories();
 drawInfo();
 drawFooter($user);
-
-?>

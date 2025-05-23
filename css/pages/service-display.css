@@ -1,0 +1,257 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Modak&family=Material+Icons&display=swap");
+
+#service-display {
+	display: flex;
+	justify-content: space-around;
+	gap: 0;
+}
+
+.main-image {
+	width: 100%;
+	height: auto;
+	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#main-image {
+	width: 40em;
+	height: auto;
+	padding: 5em 0 0 0;
+	margin: 0 0 0 1em;
+}
+
+#service-checkout {
+	display: flex;
+	flex-direction: column;
+	padding-top: 5em;
+	margin-right: 0;
+	width: 35%;
+}
+
+#service-checkout > h2 {
+	font-size: 2.5rem;
+	margin-bottom: 0.5rem;
+	font-weight: 700;
+	margin-top: 0.5em;
+	text-align: center;
+}
+
+#owner-info {
+	display: flex;
+	justify-content: center;
+	width: 85%;
+	margin: 0 auto;
+	font-family: "EB Garamond", serif;
+	gap: 0.5em;
+	transform: translateY(-1em);
+}
+
+#owner-info p {
+	font-size: 1.2rem;
+	color: #555;
+	line-height: 1.5;
+	margin-top: 0;
+	text-align: center;
+	transform: translateY(0.5em);
+}
+
+#owner-info img {
+	width: 3em;
+	height: auto;
+	padding: 0;
+	transform: scale(0.6);
+}
+
+#service-name {
+	padding: 0.5em;
+}
+
+#service-name p {
+	font-size: 1.2rem;
+	color: #555;
+	line-height: 1.5;
+	margin-top: 0;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+#service-info {
+	display: flex;
+	flex-direction: column;
+	background-color: #f5f5f5;
+	box-sizing: border-box;
+	border-radius: 10px;
+	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+	width: 85%;
+	margin: 0 auto;
+	font-family: "EB Garamond", serif;
+	padding: 0.2em;
+}
+.service-options {
+	padding: 7px 30px;
+	margin-left: 1em;
+	font-size: 16px;
+	width: auto;
+	height: auto;
+	margin-bottom: 1em;
+	background: transparent;
+	cursor: pointer;
+	border-radius: 15px;
+	border: none;
+	font-family: "EB Garamond", serif;
+	margin: 0 auto;
+	margin-bottom: 1em;
+}
+
+#service-options {
+	display: flex;
+	justify-content: center;
+	gap: 1em;
+	margin-top: 1em;
+}
+
+#message {
+	color: var(--green);
+	border-color: var(--green);
+	border-style: solid;
+	border-width: 1px;
+	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+	display: inline-block;
+	text-decoration: none;
+	text-align: center;
+	padding: 10px;
+	border-radius: 8px;
+	transition: all 0.3s ease-in-out;
+}
+
+#message:hover {
+	background-color: rgba(var(--green-rgb), 0.1);
+	transform: translateY(-2px);
+	box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
+}
+
+#payment {
+	color: white;
+	background-color: var(--green);
+	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.service-options:hover {
+	transform: translateY(-2px);
+	transition: all 0.3s ease-in-out;
+}
+
+#price {
+	font-size: 3rem;
+	font-weight: 700;
+	margin-top: 0.2em;
+	text-align: end;
+	margin-right: 1em;
+	margin-bottom: 0.2em;
+}
+
+#service-delivery {
+	display: flex;
+	align-items: center;
+	width: auto;
+	height: 2em;
+	padding: 0;
+	margin: 0 auto;
+	gap: 1em;
+	border: 1px solid #3337;
+	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+	border-radius: 10px;
+	padding-right: 1em;
+}
+
+.service-delivery {
+	font-size: 1.2rem;
+	text-align: center;
+	margin: 0;
+	padding-bottom: 0;
+}
+
+#service-delivery img {
+	width: 5em;
+	height: auto;
+	padding: 0;
+	transform: scale(0.3);
+	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#service-imgs {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5em;
+	margin: 6em 0 0 2em;
+	scroll-behavior: smooth;
+	width: 9em;
+	height: 27em;
+	overflow-y: scroll;
+}
+
+#service-imgs img {
+	width: 8.7em;
+	height: 7em;
+	box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.2);
+	flex-shrink: 0;
+	background-color: #f5f5f5;
+}
+
+#reviews {
+	padding: 1em;
+	margin-top: 1em;
+	border-radius: 5px;
+	font-family: "EB Garamond", serif;
+}
+
+#reviews h3 {
+	font-size: 1.7rem;
+	font-weight: 700;
+	text-align: center;
+	margin: 0;
+	margin-bottom: 0.5em;
+}
+
+.review {
+	margin-bottom: 1.5em;
+	padding: 0.1em 1em;
+	border: 1px solid var(--green);
+	border-radius: 10px;
+	background-color: #fff;
+	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.review p {
+	margin: 0.5em 0;
+	font-size: 1.2rem;
+	color: #555;
+}
+
+.review strong {
+	font-weight: 700;
+	color: var(--green);
+	text-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#images-service {
+	display: flex;
+	margin-top: 25em;
+}
+
+#service-main {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 60%;
+	overflow-y: auto;
+	height: 100vh;
+}
+
+#service-details > p {
+	font-size: 1.2rem;
+	color: #555;
+	line-height: 1.5;
+	margin-top: 2em;
+	text-align: center;
+}

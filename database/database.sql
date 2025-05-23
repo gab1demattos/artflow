@@ -36,8 +36,9 @@ CREATE TABLE Exchange (
     freelancer_id INTEGER NOT NULL,
     client_id INTEGER NOT NULL,
     service_id INTEGER NOT NULL,
-    status TEXT NOT NULL CHECK (status IN ('in progress', 'completed', 'cancelled')),
-    amount REAL NOT NULL,
+    status TEXT NOT NULL CHECK (status IN ('in progress', 'completed')),
+    requirements TEXT NOT NULL,
+    date TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (freelancer_id) REFERENCES User(id),
     FOREIGN KEY (client_id) REFERENCES User(id),
     FOREIGN KEY (service_id) REFERENCES Service(id)
@@ -48,6 +49,7 @@ CREATE TABLE Message (
     sender_id INTEGER NOT NULL,
     receiver_id INTEGER NOT NULL,
     message TEXT NOT NULL,
+    timestamp TEXT DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (sender_id) REFERENCES User(id),
     FOREIGN KEY (receiver_id) REFERENCES User(id)
 );

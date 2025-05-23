@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	});
 
 	// Edit Profile button functionality
-	const editProfileBtn = document.querySelector(".edit-profile-btn");
+	const editProfileBtn = document.getElementById("edit-profile-button");
 	const editProfileModalOverlay = document.getElementById(
 		"edit-profile-modal-overlay"
 	);
@@ -50,8 +50,119 @@ document.addEventListener("DOMContentLoaded", function () {
 			e.stopPropagation();
 		});
 	}
-});
 
+	// Change Password button functionality
+	const changePasswordBtn = document.getElementById("change-password-btn");
+	const changePasswordModal = document.getElementById("change-password-modal");
+	const changePasswordCancelBtn = document.querySelector(
+		"#change-password-modal .cancel-modal"
+	);
+	const changePasswordCloseBtn = document.querySelector(
+		"#change-password-modal .close"
+	);
+
+	if (changePasswordBtn && changePasswordModal) {
+		console.log("Change Password button found:", changePasswordBtn);
+		console.log("Change Password modal found:", changePasswordModal);
+
+		changePasswordBtn.addEventListener("click", function (event) {
+			console.log("Change Password button clicked");
+			// Stop propagation to prevent the edit profile modal from closing
+			event.stopPropagation();
+
+			// Clear password fields every time the modal opens for security
+			document.getElementById("old-password").value = "";
+			document.getElementById("new-password").value = "";
+
+			// Set both display flex and proper z-index
+			changePasswordModal.style.display = "flex";
+			console.log(
+				"Changed modal display to:",
+				changePasswordModal.style.display
+			);
+		});
+	} else {
+		console.log("Button or modal not found:", {
+			button: changePasswordBtn,
+			modal: changePasswordModal,
+		});
+	}
+
+	if (changePasswordCancelBtn) {
+		changePasswordCancelBtn.addEventListener("click", function () {
+			changePasswordModal.style.display = "none";
+		});
+	}
+
+	if (changePasswordCloseBtn) {
+		changePasswordCloseBtn.addEventListener("click", function () {
+			changePasswordModal.style.display = "none";
+		});
+	}
+
+	// Close change password modal when clicking outside, but keep edit profile modal open
+	window.addEventListener("click", function (event) {
+		if (event.target == changePasswordModal) {
+			changePasswordModal.style.display = "none";
+		}
+	});
+
+	// Delete Account button functionality
+	const deleteAccountBtn = document.getElementById("delete-account-btn");
+	const irreversibleModal = document.getElementById("irreversible-modal");
+	const irreversibleConfirmBtn = document.getElementById(
+		"irreversible-confirm-btn"
+	);
+	const irreversibleCancelBtn = document.getElementById(
+		"irreversible-cancel-btn"
+	);
+
+	if (deleteAccountBtn && irreversibleModal) {
+		deleteAccountBtn.addEventListener("click", function (event) {
+			// Stop propagation to prevent the edit profile modal from closing
+			event.stopPropagation();
+
+			// Update the modal message for account deletion
+			const modalMessage = irreversibleModal.querySelector(
+				".irreversible-modal-message"
+			);
+			if (modalMessage) {
+				modalMessage.innerHTML = `
+					<p>Are you sure you want to delete your account?</p>
+					<p>This action cannot be undone and all your data will be permanently removed.</p>
+				`;
+			}
+
+			// Set up the confirm button action for account deletion
+			if (irreversibleConfirmBtn) {
+				irreversibleConfirmBtn.onclick = function () {
+					// Hide the modal
+					irreversibleModal.classList.remove("show");
+
+					// Redirect to the delete account action
+					window.location.href = "/actions/account_settings/delete-account-action.php";
+				};
+			}
+
+			// Display the modal with show class - CSS handles display:flex
+			irreversibleModal.classList.add("show");
+		});
+	}
+
+	// Handle canceling the irreversible action
+	if (irreversibleCancelBtn && irreversibleModal) {
+		irreversibleCancelBtn.addEventListener("click", function () {
+			irreversibleModal.classList.remove("show");
+		});
+	}
+
+	// Close irreversible modal when clicking outside
+	window.addEventListener("click", function (event) {
+		if (event.target == irreversibleModal) {
+			irreversibleModal.classList.remove("show");
+		}
+	});
+});
 
 /*== EDIT PROFILE ==*/
 
