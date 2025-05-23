@@ -42,6 +42,18 @@ document.addEventListener('DOMContentLoaded', () => {
             showTab(tab);
         });
     });
+
+    // Event delegation for all admin tables
+    document.getElementById('admin-users').addEventListener('click', function (e) {
+        if (e.target.classList.contains('promote-btn')) promoteUser(e);
+        if (e.target.classList.contains('ban-btn')) banUser(e);
+    });
+    document.getElementById('admin-services').addEventListener('click', function (e) {
+        if (e.target.classList.contains('delete-service-btn')) deleteService(e);
+    });
+    document.getElementById('admin-categories-table').addEventListener('click', function (e) {
+        if (e.target.classList.contains('delete-category-btn')) deleteCategory(e);
+    });
 });
 
 function fetchStats() {
@@ -102,6 +114,7 @@ function renderCategoriesTab() {
                     <th>ID</th>
                     <th>Name</th>
                     <th>Image</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody></tbody>
@@ -131,8 +144,6 @@ function fetchUsers() {
                 `;
                 tbody.appendChild(tr);
             });
-            document.querySelectorAll('.promote-btn').forEach(btn => btn.addEventListener('click', promoteUser));
-            document.querySelectorAll('.ban-btn').forEach(btn => btn.addEventListener('click', banUser));
         });
 }
 
@@ -153,7 +164,6 @@ function fetchServices() {
                 `;
                 tbody.appendChild(tr);
             });
-            document.querySelectorAll('.delete-service-btn').forEach(btn => btn.addEventListener('click', deleteService));
         });
 }
 
@@ -169,6 +179,7 @@ function fetchCategories() {
                     <td>${cat.id}</td>
                     <td>${cat.type}</td>
                     <td><img src="${cat.image}" alt="" style="max-width:40px;max-height:40px;"></td>
+                    <td><button class="delete-category-btn" data-id="${cat.id}">Delete</button></td>
                 `;
                 tbody.appendChild(tr);
             });
@@ -186,23 +197,86 @@ function promoteUser(e) {
 
 function banUser(e) {
     const id = e.target.dataset.id;
-    fetch('/actions/ban-user.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: `user_id=${id}`
-    }).then(() => fetchUsers());
+    if (window.Modals && typeof window.Modals.showIrreversibleModal === 'function') {
+        window.Modals.showIrreversibleModal(
+            function onConfirm() {
+                fetch('/actions/ban-user.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: `user_id=${id}`
+                }).then(() => fetchUsers());
+            },
+            function onCancel() {
+                // Do nothing
+            }
+        );
+    } else {
+        fetch('/actions/ban-user.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: `user_id=${id}`
+        }).then(() => fetchUsers());
+    }
 }
 
 function deleteService(e) {
     const id = e.target.dataset.id;
-    fetch('/actions/delete-service.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: `service_id=${id}`
-    }).then(() => {
-        fetchServices();
-        fetchStats();
-    });
+    if (window.Modals && typeof window.Modals.showIrreversibleModal === 'function') {
+        window.Modals.showIrreversibleModal(
+            function onConfirm() {
+                fetch('/actions/delete-service.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: `service_id=${id}`
+                }).then(() => {
+                    fetchServices();
+                    fetchStats();
+                });
+            },
+            function onCancel() {
+                // Do nothing
+            }
+        );
+    } else {
+        fetch('/actions/delete-service.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: `service_id=${id}`
+        }).then(() => {
+            fetchServices();
+            fetchStats();
+        });
+    }
+}
+
+function deleteCategory(e) {
+    const id = e.target.dataset.id;
+    if (window.Modals && typeof window.Modals.showIrreversibleModal === 'function') {
+        window.Modals.showIrreversibleModal(
+            function onConfirm() {
+                fetch('/actions/delete-category.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: `category_id=${id}`
+                }).then(() => {
+                    fetchCategories();
+                    fetchStats();
+                });
+            },
+            function onCancel() {
+                // Do nothing
+            }
+        );
+    } else {
+        fetch('/actions/delete-category.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: `category_id=${id}`
+        }).then(() => {
+            fetchCategories();
+            fetchStats();
+        });
+    }
 }
 
 function addCategory(e) {
