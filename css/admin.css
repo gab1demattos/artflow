@@ -125,9 +125,7 @@
 
 } */
 
-.admin-action-btn.ban,
-.ban-btn,
-.delete-service-btn {
+.red-btn {
     background: linear-gradient(90deg, #c62828 0%, #a31515 100%) !important;
     color: #fff !important;
     border: 1.5px solid #a31515 !important;

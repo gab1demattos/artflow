@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Event delegation for all admin tables
     document.getElementById('admin-users').addEventListener('click', function (e) {
         if (e.target.classList.contains('promote-btn')) promoteUser(e);
-        if (e.target.classList.contains('ban-btn')) banUser(e);
+        if (e.target.classList.contains('red-btn')) banUser(e);
     });
     document.getElementById('admin-services').addEventListener('click', function (e) {
         if (e.target.classList.contains('delete-service-btn')) deleteService(e);
@@ -180,7 +180,7 @@ function fetchUsers() {
                     <td>${user.user_type}</td>
                     <td>
                         <button class="promote-btn" data-id="${user.id}" ${user.user_type === 'admin' ? 'disabled' : ''}>Promote</button>
-                        <button class="ban-btn" data-id="${user.id}" ${user.banned ? 'disabled' : ''}>Ban</button>
+                        <button class="red-btn" data-id="${user.id}" ${user.banned ? 'disabled' : ''}>Ban</button>
                     </td>
                 `;
                 tbody.appendChild(tr);
@@ -201,7 +201,7 @@ function fetchServices() {
                     <td>${service.title}</td>
                     <td>${service.owner}</td>
                     <td>${service.category}</td>
-                    <td><button class="delete-service-btn" data-id="${service.id}">Delete</button></td>
+                    <td><button class="delete-service-btn red-btn" data-id="${service.id}">Delete</button></td>
                 `;
                 tbody.appendChild(tr);
             });
@@ -220,7 +220,7 @@ function fetchCategories() {
                     <td>${cat.id}</td>
                     <td>${cat.type}</td>
                     <td><img src="${cat.image}" alt="" style="max-width:40px;max-height:40px;"></td>
-                    <td><button class="delete-category-btn ban-btn" data-id="${cat.id}">Delete</button></td>
+                    <td><button class="delete-category-btn red-btn" data-id="${cat.id}">Delete</button></td>
                 `;
                 tbody.appendChild(tr);
             });
