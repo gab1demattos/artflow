@@ -52,6 +52,7 @@
     flex-wrap: nowrap;
     flex-direction: column;
     justify-content: flex-start; /* Ensure list starts from the top */
+    padding: 1em;
 }
 
 
@@ -62,7 +63,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-	margin: 0 auto;
+	
 	outline: none ;
 	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
@@ -138,4 +139,22 @@
     text-decoration: none;
 	color: #333;
 	font-size: 18px;
+}
+
+#search-tools {
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+}
+
+#search-filter {
+    background-color: transparent;
+    border: none;
+    transform: translateY(-0.5em);
+}
+
+#search-filter img {
+    width: 1.5em;
+    height: 1.5em;
+    cursor: pointer;
 }
