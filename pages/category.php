@@ -26,6 +26,15 @@ if (!$category) {
     exit();
 }
 
+// Fetch min and max values for price and delivery time
+$priceRange = Service::getPriceRangeByCategory($categoryId);
+$deliveryRange = Service::getDeliveryRangeByCategory($categoryId);
+
+$priceMin = $priceRange['min'] ?? 0;
+$priceMax = $priceRange['max'] ?? 1000;
+$deliveryMin = $deliveryRange['min'] ?? 0;
+$deliveryMax = $deliveryRange['max'] ?? 30;
+
 drawHeader($user);
 ?>
 <main class="container category-main-container">
@@ -59,17 +68,26 @@ drawHeader($user);
             <form method="GET" action="">
                 <input type="hidden" name="id" value="<?= $categoryId ?>">
 
-                <label for="price-min">Price Range:</label>
-                <input type="number" name="price_min" id="price-min" placeholder="Min" min="0" step="0.01">
-                <input type="number" name="price_max" id="price-max" placeholder="Max" min="0" step="0.01">
+                <label for="price-range">Price Range:</label>
+                <input type="range" name="price_min" id="price-range-min" min="<?= $priceMin ?>" max="<?= $priceMax ?>" step="1" oninput="document.getElementById('price-min-display').textContent = this.value">
+                <span id="price-min-display"><?= $priceMin ?></span>
+                <input type="range" name="price_max" id="price-range-max" min="<?= $priceMin ?>" max="<?= $priceMax ?>" step="1" oninput="document.getElementById('price-max-display').textContent = this.value">
+                <span id="price-max-display"><?= $priceMax ?></span>
 
-                <label for="rating-min">Rating:</label>
-                <input type="number" name="rating_min" id="rating-min" placeholder="Min" min="0" max="5" step="0.1">
-                <input type="number" name="rating_max" id="rating-max" placeholder="Max" min="0" max="5" step="0.1">
+                <label for="delivery-range">Delivery Time (days):</label>
+                <input type="range" name="delivery_min" id="delivery-range-min" min="<?= $deliveryMin ?>" max="<?= $deliveryMax ?>" step="1" oninput="document.getElementById('delivery-min-display').textContent = this.value">
+                <span id="delivery-min-display"><?= $deliveryMin ?></span>
+                <input type="range" name="delivery_max" id="delivery-range-max" min="<?= $deliveryMin ?>" max="<?= $deliveryMax ?>" step="1" oninput="document.getElementById('delivery-max-display').textContent = this.value">
+                <span id="delivery-max-display"><?= $deliveryMax ?></span>
 
-                <label for="delivery-min">Delivery Time (days):</label>
-                <input type="number" name="delivery_min" id="delivery-min" placeholder="Min" min="0" step="1">
-                <input type="number" name="delivery_max" id="delivery-max" placeholder="Max" min="0" step="1">
+                <label>Rating:</label>
+                <div class="rating-checkboxes">
+                    <label><input type="checkbox" name="rating[]" value="5"> 5 Stars</label>
+                    <label><input type="checkbox" name="rating[]" value="4"> 4 Stars</label>
+                    <label><input type="checkbox" name="rating[]" value="3"> 3 Stars</label>
+                    <label><input type="checkbox" name="rating[]" value="2"> 2 Stars</label>
+                    <label><input type="checkbox" name="rating[]" value="1"> 1 Star</label>
+                </div>
 
                 <button type="submit">Apply Filters</button>
             </form>

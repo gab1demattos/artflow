@@ -595,6 +595,30 @@ class Service {
 
         return $result;
     }
+
+    /**
+     * Get the price range (min and max) for a specific category
+     * @param int $categoryId
+     * @return array ['min' => float, 'max' => float]
+     */
+    public static function getPriceRangeByCategory(int $categoryId): array {
+        $db = Database::getInstance();
+        $stmt = $db->prepare('SELECT MIN(price) as min, MAX(price) as max FROM Service WHERE category_id = ?');
+        $stmt->execute([$categoryId]);
+        return $stmt->fetch(PDO::FETCH_ASSOC) ?: ['min' => 0, 'max' => 0];
+    }
+
+    /**
+     * Get the delivery time range (min and max) for a specific category
+     * @param int $categoryId
+     * @return array ['min' => int, 'max' => int]
+     */
+    public static function getDeliveryRangeByCategory(int $categoryId): array {
+        $db = Database::getInstance();
+        $stmt = $db->prepare('SELECT MIN(delivery_time) as min, MAX(delivery_time) as max FROM Service WHERE category_id = ?');
+        $stmt->execute([$categoryId]);
+        return $stmt->fetch(PDO::FETCH_ASSOC) ?: ['min' => 0, 'max' => 0];
+    }
     
 }
 ?>
