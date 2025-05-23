@@ -186,7 +186,6 @@
             <?php include __DIR__ . '/../pages/modals/go-with-flow-modal.php'; ?>
         <?php endif; ?>
         <?php include __DIR__ . '/../pages/modals/new-service-modal.php'; ?>
-        <?php include __DIR__ . '/../pages/modals/search-modal.php'; ?>
         <!-- Load the modular JavaScript files -->
         <script src="/js/modals.js"></script>
         <script src="/js/categories.js"></script>
