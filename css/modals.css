@@ -1291,73 +1291,32 @@ h4.important-changes {
 #rate-it-modal-overlay .stars {
 	display: flex;
 	cursor: pointer;
-	font-size: 1.8em;
+	font-size: 2.5em; 
 	line-height: 1;
+	gap: 0.1em; /* Add spacing between stars */
 }
 
 #rate-it-modal-overlay .star-icon {
 	color: #ddd;
 	position: relative;
-	width: 0.5em;
-	overflow: hidden;
 	font-style: normal;
 	transition: color 0.2s ease-in-out;
+	cursor: pointer;
+	user-select: none;
+	width: 1em; /* Make each star a consistent width */
+	text-align: center; /* Center the star character */
 }
 
 #rate-it-modal-overlay .star-icon.active {
 	color: var(--yellow);
 }
 
-#rate-it-modal-overlay .rating-display {
-	font-size: 1.2em;
-	font-weight: bold;
-	color: #333;
-	margin-top: 0.5em;
-}
-
-#rate-it-modal-overlay .public-review {
-	display: flex;
-	justify-content: center;
-	margin-bottom: 1.5em;
-}
-
-#rate-it-modal-overlay .public-review label {
-	display: flex;
-	align-items: center;
-	font-family: "Cormorant Garamond", serif;
-	font-size: 1.1em;
-	cursor: pointer;
-}
-
-#rate-it-modal-overlay .public-review input[type="checkbox"] {
-	margin-right: 0.5em;
-	cursor: pointer;
-	accent-color: var(--yellow);
-	width: 1.2em;
-	height: 1.2em;
+#rate-it-modal-overlay .star-icon.active.half {
 	position: relative;
-	appearance: none;
-	border: 2px solid var(--yellow);
-	border-radius: 3px;
-	background-color: white;
+	display: inline-block;
 }
 
-#rate-it-modal-overlay .public-review input[type="checkbox"]:checked {
-	background-color: var(--yellow);
-}
-
-#rate-it-modal-overlay .public-review input[type="checkbox"]:checked::after {
-	content: "✓";
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	font-size: 0.9em;
-	color: var(--beige);
-	font-weight: bold;
-}
-
-/* Responsive styles for rate-it modal */
+/* Make the star larger for better click targets */
 @media (max-width: 600px) {
 	#rate-it-modal-overlay .modal-content {
 		min-width: 300px;

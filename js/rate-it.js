@@ -92,10 +92,27 @@ function updateStarDisplay(rating) {
 
 	stars.forEach((star) => {
 		const starValue = parseFloat(star.getAttribute("data-value"));
-		if (starValue <= rating) {
-			star.classList.add("active");
-		} else {
-			star.classList.remove("active");
+		const starIndex = Math.ceil(starValue) - 1;
+		const starPosition = stars.length > 5 ? starIndex * 2 : starIndex;
+		const currentStar = stars[starPosition];
+
+		if (!currentStar) return;
+
+		// Full star
+		if (rating >= starValue) {
+			currentStar.textContent = "★";
+			currentStar.classList.add("active");
+			currentStar.classList.remove("half");
+		}
+		// Half star - if rating is X.5
+		else if (rating === starValue - 0.5) {
+			currentStar.textContent = "⯪"; // Half star character
+			currentStar.classList.add("active", "half");
+		}
+		// Empty star
+		else {
+			currentStar.textContent = "★";
+			currentStar.classList.remove("active", "half");
 		}
 	});
 

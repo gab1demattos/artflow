@@ -190,15 +190,10 @@ document.addEventListener("DOMContentLoaded", function () {
 											<label>Rating:</label>
 											<div class="stars-container">
 												<div class="stars">
-													<i class="star-icon" data-value="0.5">★</i>
 													<i class="star-icon" data-value="1.0">★</i>
-													<i class="star-icon" data-value="1.5">★</i>
 													<i class="star-icon" data-value="2.0">★</i>
-													<i class="star-icon" data-value="2.5">★</i>
 													<i class="star-icon" data-value="3.0">★</i>
-													<i class="star-icon" data-value="3.5">★</i>
 													<i class="star-icon" data-value="4.0">★</i>
-													<i class="star-icon" data-value="4.5">★</i>
 													<i class="star-icon" data-value="5.0">★</i>
 												</div>
 											</div>
@@ -281,6 +276,8 @@ document.addEventListener("DOMContentLoaded", function () {
 						document.getElementById("rating-text").textContent = "0.0";
 						document.querySelectorAll(".star-icon").forEach((star) => {
 							star.classList.remove("active");
+							star.classList.remove("half");
+							star.textContent = "★";
 						});
 					}
 				}
@@ -302,10 +299,22 @@ document.addEventListener("DOMContentLoaded", function () {
 		function updateStarDisplay(rating) {
 			stars.forEach((star) => {
 				const starValue = parseFloat(star.getAttribute("data-value"));
+
+				// Full star
 				if (starValue <= rating) {
 					star.classList.add("active");
-				} else {
-					star.classList.remove("active");
+					star.classList.remove("half");
+					star.textContent = "★";
+				}
+				// Half star - if rating is X.5 and this is the next star
+				else if (starValue - 0.5 === rating) {
+					star.classList.add("active", "half");
+					star.textContent = "⯪";
+				}
+				// Empty star
+				else {
+					star.classList.remove("active", "half");
+					star.textContent = "★";
 				}
 			});
 
@@ -314,17 +323,41 @@ document.addEventListener("DOMContentLoaded", function () {
 			ratingValue.value = rating;
 		}
 
-		// Event for hovering over stars
-		stars.forEach((star) => {
+		// Handle click events for full and half stars
+		stars.forEach((star, index) => {
+			const starContainer = star.parentElement;
+			const starRect = star.getBoundingClientRect();
+			const starWidth = starRect.width;
+
 			// Show preview on hover
-			star.addEventListener("mouseover", function () {
-				const hoverRating = parseFloat(this.getAttribute("data-value"));
-				updateStarDisplay(hoverRating);
+			star.addEventListener("mousemove", function (e) {
+				const rect = this.getBoundingClientRect();
+				const x = e.clientX - rect.left; // x position within the element
+				const starValue = parseFloat(this.getAttribute("data-value"));
+
+				if (x < rect.width / 2) {
+					// Left half of the star - show half star
+					updateStarDisplay(starValue - 0.5);
+				} else {
+					// Right half of the star - show full star
+					updateStarDisplay(starValue);
+				}
 			});
 
 			// Set rating on click
-			star.addEventListener("click", function () {
-				currentRating = parseFloat(this.getAttribute("data-value"));
+			star.addEventListener("click", function (e) {
+				const rect = this.getBoundingClientRect();
+				const x = e.clientX - rect.left;
+				const starValue = parseFloat(this.getAttribute("data-value"));
+
+				if (x < rect.width / 2) {
+					// Left half of the star clicked
+					currentRating = starValue - 0.5;
+				} else {
+					// Right half or whole star clicked
+					currentRating = starValue;
+				}
+
 				updateStarDisplay(currentRating);
 			});
 		});
