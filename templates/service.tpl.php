@@ -75,7 +75,10 @@
                         foreach ($reviews as $review) { ?>
                             <div class="review">
                                 <div class="review-header">
-                                    <p><strong><?= htmlspecialchars($review->username) ?></strong></p>
+                                    <div class="review-user">
+                                        <img class="review-user-img" src="<?= ($review->profile_image !== null && $review->profile_image !== '') ? htmlspecialchars($review->profile_image) : '/images/user_pfp/default.png' ?>" alt="Reviewer">
+                                        <p><strong><?= htmlspecialchars($review->username) ?></strong></p>
+                                    </div>
                                     <div class="review-rating">
                                         <?php
                                         // Show stars for this review's rating

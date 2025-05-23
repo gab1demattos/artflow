@@ -89,7 +89,7 @@ class Review
         $db = Database::getInstance();
 
         $query = '
-            SELECT Review.*, User.username
+            SELECT Review.*, User.username, User.profile_image
             FROM Review 
             JOIN User ON Review.user_id = User.id
             WHERE Review.service_id = ?
@@ -110,7 +110,9 @@ class Review
                 $review['comment'],
                 $review['created_at'],
                 $review['updated_at'],
-                $review['username']
+                $review['username'],
+                null,
+                $review['profile_image']
             );
         }
 
