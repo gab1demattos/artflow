@@ -12,18 +12,19 @@ if (!$user) {
 drawHeader($user);
 ?>
 <link rel="stylesheet" href="/css/admin.css">
+<link rel="stylesheet" href="/css/components.css">
 <main class="admin-panel-container">
-    <h2 class="admin-title">Your Stats</h2>
-    <div class="admin-stats-row">
-        <div class="admin-stat-box">
+    <h2 class="admin-title">Your Freelancer Stats</h2>
+    <div class="stat-row">
+        <div class="stat-box stat-box--yellow">
             <div class="stat-label">Total Earnings</div>
             <div class="stat-value" id="stat-earnings">&mdash;</div>
         </div>
-        <div class="admin-stat-box">
+        <div class="stat-box stat-box--yellow">
             <div class="stat-label">Completed Services</div>
             <div class="stat-value" id="stat-completed">&mdash;</div>
         </div>
-        <div class="admin-stat-box">
+        <div class="stat-box stat-box--yellow">
             <div class="stat-label">Current Listings</div>
             <div class="stat-value" id="stat-listings">&mdash;</div>
         </div>
