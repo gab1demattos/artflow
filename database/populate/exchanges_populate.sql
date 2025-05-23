@@ -7,9 +7,99 @@ INSERT INTO Exchange (
         requirements,
         date
     )
-VALUES (2, 5, 1, 'completed', 'Logo design with modern aesthetic and 3 revisions', '2025-01-15 10:30:45'),
-    (3, 6, 2, 'completed', 'Website mockup with responsive design', '2025-02-02 14:22:10'),
-    (4, 7, 3, 'in progress', 'Full character concept art with color palette', '2025-04-18 09:15:30'),
-    (5, 8, 4, 'in progress', 'Brand identity package with style guide', '2025-04-30 16:45:22'),
-    (6, 2, 5, 'completed', 'Digital illustration in anime style', '2025-03-10 11:20:15'),
-    (2, 3, 6, 'in progress', 'UI design for mobile application', '2025-05-01 08:30:00');
+VALUES (
+        2,
+        5,
+        1,
+        'completed',
+        'Logo for tech startup, blue color scheme',
+        '2025-05-10 14:00:00'
+    ),
+    (
+        3,
+        6,
+        2,
+        'completed',
+        'Brand identity for bakery, include pink',
+        '2025-05-12 09:30:00'
+    ),
+    (
+        4,
+        7,
+        3,
+        'in progress',
+        'Portrait in oil, 30x40cm',
+        '2025-05-15 16:45:00'
+    ),
+    (
+        5,
+        8,
+        4,
+        'in progress',
+        'Tattoo design, floral theme',
+        '2025-05-18 11:20:00'
+    ),
+    (
+        6,
+        2,
+        5,
+        'completed',
+        '3D model of a chair, modern style',
+        '2025-05-20 17:10:00'
+    ),
+    (
+        7,
+        3,
+        6,
+        'completed',
+        'Logo for a bakery, vintage style',
+        '2025-05-21 10:00:00'
+    ),
+    (
+        8,
+        4,
+        7,
+        'in progress',
+        'Digital painting, fantasy landscape',
+        '2025-05-22 15:30:00'
+    ),
+    (
+        2,
+        6,
+        8,
+        'completed',
+        'Tattoo design, geometric shapes',
+        '2025-05-23 12:45:00'
+    ),
+    (
+        3,
+        2,
+        9,
+        'in progress',
+        'Branding for coffee shop, earth tones',
+        '2025-05-23 17:00:00'
+    ),
+    (
+        4,
+        5,
+        10,
+        'completed',
+        '3D model of a lamp, modern style',
+        '2025-05-22 09:15:00'
+    ),
+    (
+        5,
+        7,
+        11,
+        'in progress',
+        'Portrait, watercolor, A4 size',
+        '2025-05-23 13:20:00'
+    ),
+    (
+        6,
+        8,
+        12,
+        'completed',
+        'Logo for tech event, minimal',
+        '2025-05-23 08:10:00'
+    );
