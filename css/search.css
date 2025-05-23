@@ -226,3 +226,7 @@
     font-style: italic;
 }
 
+input[type="checkbox"] {
+    accent-color: purple;
+    opacity: 0.8;
+}
