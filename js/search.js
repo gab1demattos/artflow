@@ -32,12 +32,14 @@ document.addEventListener('DOMContentLoaded', () => {
         SearchInputPage.value = "";
 
         // Reset filters when switching buttons
-        const filterInputs = document.querySelectorAll('.filter-option-category input[type="checkbox"], .filter-option-rating input[type="checkbox"], #min-price, #max-price');
+        const filterInputs = document.querySelectorAll('.filter-option-category input[type="checkbox"], .filter-option-rating input[type="checkbox"], #min-price, #max-price, #delivery-time');
         filterInputs.forEach(input => {
             if (input.type === 'checkbox') {
                 input.checked = true; // Set all checkboxes to checked
-            } else {
+            } else if (input.id === 'min-price' || input.id === 'max-price') {
                 input.value = input.id === 'min-price' ? input.min : input.max;// Set price inputs to initial values
+            } else if (input.id === 'delivery-time') {
+                input.value = input.max; // Set delivery time to max value
             }
         });
 
@@ -362,6 +364,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (services.length > 0) {
                 services.forEach(service => {
+                if (service.delivery_time <= maxDeliveryTime) { // Ensure delivery time filter is applied
                     const serviceCard = document.createElement('a');
                     serviceCard.href = `/pages/service.php?id=${encodeURIComponent(service.id)}`;
                     serviceCard.classList.add('service-card-link');
@@ -378,6 +381,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
                     `;
                     searchResults.appendChild(serviceCard);
+}
                 });
             } else {
                 searchResults.innerHTML = ""; // Clear previous results
