@@ -204,29 +204,28 @@
     gap: 15px;
     margin-top: 1rem;
     padding: 0.5rem;
-    background-color: #f7f7f7;
+    background-color: var(--light-gray);
     border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px var(--purple);
 }
 
 #filter-search-price label {
     font-weight: bold;
     color: #444;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
 }
 
 #filter-search-price input {
-    width: 100px;
-    padding: 0.4rem;
-    border: 1px solid #ccc;
+    width: 3em;
     border-radius: 5px;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     color: #333;
+    border: none;
+    outline: none;
 }
 
-#price-range-values {
-    margin-left: 10px;
-    font-size: 0.9rem;
+#min-price, #max-price {
+    font-size: 0.3rem;
     color: #666;
     font-style: italic;
 }
