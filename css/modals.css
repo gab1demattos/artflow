@@ -69,6 +69,7 @@
 	/* Smooth border color change */
 	border: 2px solid transparent;
 	/* Reserve space for focus border */
+	margin-bottom: 0.5em;
 }
 
 /* Style for the password input container */
