@@ -58,9 +58,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('admin-services').addEventListener('click', function (e) {
         if (e.target.classList.contains('delete-service-btn')) deleteService(e);
     });
-    document.getElementById('admin-categories-table').addEventListener('click', function (e) {
-        if (e.target.classList.contains('delete-category-btn')) deleteCategory(e);
-    });
 
     // Intercept category form submit for AJAX
     document.body.addEventListener('submit', function (e) {
@@ -154,6 +151,17 @@ function renderCategoriesTab() {
         </table>
     `;
     fetchCategories();
+    // Re-attach event delegation for delete-category-btn after rendering
+    container.removeEventListener('click', handleCategoryTableClick, false);
+    container.addEventListener('click', handleCategoryTableClick, false);
+    // Re-initialize modals to ensure irreversible modal is ready
+    if (window.Modals && typeof window.Modals.init === 'function') {
+        window.Modals.init();
+    }
+}
+
+function handleCategoryTableClick(e) {
+    if (e.target.classList.contains('delete-category-btn')) deleteCategory(e);
 }
 
 function fetchUsers() {
