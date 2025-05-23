@@ -190,3 +190,9 @@
 #search-page-bar.names-active {
     margin: 0 auto;
 }
+
+#filter-search-rating {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
