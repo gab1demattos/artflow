@@ -221,7 +221,12 @@
 	gap: 1em;
 	align-items: center;
 	justify-content: space-between;
-	width: 80em;
+	width: 130%;
+}
+
+.rating-checkboxes input[type='checkbox']  {
+	width: 1.3em;
+	accent-color: var(--orange);
 }
 
 

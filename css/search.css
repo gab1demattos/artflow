@@ -231,6 +231,6 @@
 }
 
 input[type="checkbox"] {
-    accent-color: purple;
+    accent-color: var(--purple);
     opacity: 0.8;
 }
