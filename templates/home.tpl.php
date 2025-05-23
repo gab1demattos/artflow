@@ -107,9 +107,7 @@
                     require_once __DIR__ . '/../database/classes/category.class.php';
                     $session = Session::getInstance();
                     $user = $session->getUser();
-                    if ($user && isset($user['user_type']) && $user['user_type'] === 'admin'): ?>
-                        <button id="open-category-modal" class="button filled hovering" type="button" style="margin-bottom:2em;">Add Category</button>
-                    <?php endif; ?>
+                    ?>
                     <div id="category-list">
                         <?php
                         $categories = Category::getCategories();
@@ -131,26 +129,6 @@
                     </div>
                     <a id="link" href="/pages/see-more-categories.php">see more -></a>
                 </div>
-                <?php if ($user && isset($user['user_type']) && $user['user_type'] === 'admin'): ?>
-                    <div id="category-modal-overlay" class="modal-overlay hidden">
-                        <div class="modal" id="category-modal">
-                            <div class="modal-content">
-                                <div class="form-container">
-                                    <h2>Add Category</h2>
-                                    <form id="category-form" class="form" action="/actions/create-category.php" method="post" enctype="multipart/form-data">
-                                        <input type="text" name="category_name" placeholder="Category name" required>
-                                        <input type="file" name="category_image" accept="image/*">
-                                        <input type="text" name="subcategories" placeholder="Subcategories (comma separated)">
-                                        <div class="button-container">
-                                            <button type="submit" class="button filled classic">Create</button>
-                                            <button type="button" id="close-category-modal" class="button outline">Cancel</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php endif; ?>
             </section>
         <?php } ?>
 

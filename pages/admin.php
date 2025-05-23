@@ -34,7 +34,28 @@ drawHeader($user);
     </div>
     <div class="admin-tab-content active" id="admin-users"></div>
     <div class="admin-tab-content" id="admin-services"></div>
-    <div class="admin-tab-content" id="admin-categories"></div>
+    <div class="admin-tab-content" id="admin-categories">
+        <button id="open-category-modal" class="button filled hovering" type="button" style="margin-bottom:2em;">Add Category</button>
+        <div id="admin-categories-table"></div>
+    </div>
+    <div id="category-modal-overlay" class="modal-overlay hidden">
+        <div class="modal" id="category-modal">
+            <div class="modal-content">
+                <div class="form-container">
+                    <h2>Add Category</h2>
+                    <form id="category-form" class="form" action="/actions/create-category.php" method="post" enctype="multipart/form-data">
+                        <input type="text" name="category_name" placeholder="Category name" required>
+                        <input type="file" name="category_image" accept="image/*">
+                        <input type="text" name="subcategories" placeholder="Subcategories (comma separated)">
+                        <div class="button-container">
+                            <button type="submit" class="button filled classic">Create</button>
+                            <button type="button" id="close-category-modal" class="button outline">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </main>
 <link rel="stylesheet" href="/css/admin.css">
 <script src="/js/admin.js"></script>
