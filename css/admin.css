@@ -12,7 +12,7 @@
     text-align: center;
     font-size: 2.5rem;
     font-weight: 700;
-    color: var(--purple);
+    color: var(--yellow);
     margin-bottom: 2rem;
 }
 
@@ -24,9 +24,9 @@
 }
 
 .admin-stat-box {
-    background: linear-gradient(90deg, #f3e9ff 0%, #e0d7fa 100%);
+    background: linear-gradient(90deg, #f6dd8b 0%, #fcedb7 100%);
     border-radius: 12px;
-    box-shadow: 0 2px 12px rgba(120, 80, 200, 0.07);
+    box-shadow: 0 2px 12px rgba(200, 160, 40, 0.07);
     padding: 1.5rem 2.5rem;
     min-width: 180px;
     text-align: center;
@@ -37,7 +37,7 @@
 
 .stat-label {
     font-size: 1.1rem;
-    color: #7c5eb6;
+    color: var(--yellow);
     font-weight: 600;
     margin-bottom: 0.5em;
 }
@@ -45,7 +45,7 @@
 .stat-value {
     font-size: 2.2rem;
     font-weight: 800;
-    color: #4a2e8a;
+    color: var(--yellow);
 }
 
 .admin-tabs-row {
@@ -69,7 +69,7 @@
 }
 
 .admin-tab-btn.active {
-    background: var(--purple);
+    background: var(--yellow);
     color: #fff;
 }
 
@@ -101,9 +101,10 @@
 }
 
 .admin-table th {
-    background: #f3e9ff;
-    color: #4a2e8a;
+    background: #fffbe0;
+    color: var(--yellow);
     font-weight: 700;
+    border-bottom: 2px solid var(--yellow);
 }
 
 .admin-table td {
@@ -176,7 +177,7 @@
 }
 
 .admin-add-category-form button {
-    background: var(--purple);
+    background: var(--yellow);
     color: #fff;
     border: none;
     border-radius: 8px;
@@ -189,7 +190,7 @@
 }
 
 .admin-add-category-form button:hover {
-    background: #4a2e8a;
+    background: #e6b800;
 }
 
 #category-modal-overlay.modal-overlay {
@@ -231,7 +232,7 @@
     margin-bottom: 1.3em;
     text-align: center;
     font-size: 2rem;
-    color: var(--purple);
+    color: var(--yellow);
 }
 
 #category-modal .form input,
