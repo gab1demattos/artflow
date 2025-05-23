@@ -305,16 +305,14 @@ document.addEventListener("DOMContentLoaded", function () {
 								.then((result) => {
 									// Check if result is a string (HTML) or an object
 									if (typeof result === "string") {
-										// Success - close the modal and show alert
+										// Success - close the modal and redirect
 										rateItModal.style.display = "none";
-										alert("Review submitted successfully!");
 
 										// Redirect to the service page
 										window.location.href = "/pages/service.php?id=" + serviceId;
 									} else if (result.success) {
 										// Success with JSON response
 										rateItModal.style.display = "none";
-										alert("Review submitted successfully!");
 
 										// Redirect to the service page
 										window.location.href = "/pages/service.php?id=" + serviceId;
