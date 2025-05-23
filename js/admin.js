@@ -61,6 +61,32 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('admin-categories-table').addEventListener('click', function (e) {
         if (e.target.classList.contains('delete-category-btn')) deleteCategory(e);
     });
+
+    // Intercept category form submit for AJAX
+    document.body.addEventListener('submit', function (e) {
+        const form = e.target;
+        if (form && form.id === 'category-form') {
+            e.preventDefault();
+            const formData = new FormData(form);
+            fetch('/actions/add-category.php', {
+                method: 'POST',
+                body: formData
+            })
+                .then(r => r.json())
+                .then(result => {
+                    if (result.success) {
+                        // Hide modal, refresh categories and stats
+                        document.getElementById('category-modal-overlay').classList.add('hidden');
+                        fetchCategories();
+                        fetchStats();
+                        form.reset();
+                    } else {
+                        alert(result.error || 'Failed to add category.');
+                    }
+                })
+                .catch(() => alert('Failed to add category.'));
+        }
+    });
 });
 
 function fetchStats() {
