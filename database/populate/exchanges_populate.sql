@@ -102,4 +102,69 @@ VALUES (
         'completed',
         'Logo for tech event, minimal',
         '2025-05-23 08:10:00'
+    ),
+    -- Adding new completed exchanges
+    (
+        7,
+        4,
+        13,
+        'completed',
+        'Custom knitted scarf with floral pattern',
+        '2025-05-18 13:45:00'
+    ),
+    (
+        8,
+        2,
+        14,
+        'completed',
+        'Digital portrait with fantasy elements',
+        '2025-05-19 09:30:00'
+    ),
+    (
+        2,
+        3,
+        15,
+        'completed',
+        'Website UI design for a fitness app',
+        '2025-05-17 14:20:00'
+    ),
+    (
+        3,
+        5,
+        16,
+        'completed',
+        'Brand guidelines for a pet shop',
+        '2025-05-16 11:15:00'
+    ),
+    (
+        4,
+        6,
+        17,
+        'completed',
+        'Watercolor landscape of mountain scene',
+        '2025-05-15 16:30:00'
+    ),
+    (
+        5,
+        2,
+        18,
+        'completed',
+        'Minimalist tattoo design for wrist',
+        '2025-05-14 10:45:00'
+    ),
+    (
+        6,
+        3,
+        19,
+        'completed',
+        '3D model of a futuristic car',
+        '2025-05-13 15:50:00'
+    ),
+    (
+        7,
+        5,
+        20,
+        'completed',
+        'Hand-sewn doll with custom outfit',
+        '2025-05-12 09:25:00'
     );
