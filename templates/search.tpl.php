@@ -38,16 +38,16 @@
                         <label for="filter-option-3"> 2</label>
                     </div>
                     <div class="filter-option-rating">
-                        <input type="checkbox" id="filter-option-3" checked>
-                        <label for="filter-option-3"> 3</label>
+                        <input type="checkbox" id="filter-option-4" checked>
+                        <label for="filter-option-4"> 3</label>
                     </div>
                     <div class="filter-option-rating">
-                        <input type="checkbox" id="filter-option-3" checked>
-                        <label for="filter-option-3"> 4</label>
+                        <input type="checkbox" id="filter-option-5" checked>
+                        <label for="filter-option-5"> 4</label>
                     </div>
                     <div class="filter-option-rating">
-                        <input type="checkbox" id="filter-option-3" checked>
-                        <label for="filter-option-3"> 5</label>
+                        <input type="checkbox" id="filter-option-6" checked>
+                        <label for="filter-option-6"> 5</label>
                     </div>
                 </div>
                 <?php 
@@ -57,12 +57,10 @@
                 ?>
                 <h3>Price</h3>
                 <div id="filter-search-price">
-                    <input type="range" id="min-price" min="<?php echo htmlspecialchars($priceRange['min_price']); ?>" max="<?php echo htmlspecialchars($priceRange['max_price']); ?>" value="<?php echo htmlspecialchars($priceRange['min_price']); ?>" step="1" oninput="updatePriceRange()">
-                    <input type="range" id="max-price" min="<?php echo htmlspecialchars($priceRange['min_price']); ?>" max="<?php echo htmlspecialchars($priceRange['max_price']); ?>" value="<?php echo htmlspecialchars($priceRange['max_price']); ?>" step="1" oninput="updatePriceRange()">
-                    <div id="price-range-values">
-                        <span id="min-price-value"><?php echo htmlspecialchars($priceRange['min_price']); ?></span> - 
-                        <span id="max-price-value"><?php echo htmlspecialchars($priceRange['max_price']); ?></span>
-                    </div>
+                    <label for="min-price">Min Price:</label>
+                    <input type="number" id="min-price" min="<?php echo htmlspecialchars($priceRange['min_price']); ?>" max="<?php echo htmlspecialchars($priceRange['max_price']); ?>" value="<?php echo htmlspecialchars($priceRange['min_price']); ?>" step="1">
+                    <label for="max-price">Max Price:</label>
+                    <input type="number" id="max-price" min="<?php echo htmlspecialchars($priceRange['min_price']); ?>" max="<?php echo htmlspecialchars($priceRange['max_price']); ?>" value="<?php echo htmlspecialchars($priceRange['max_price']); ?>" step="1">
                 </div>
 
                 <script src="js/search.js"></script>

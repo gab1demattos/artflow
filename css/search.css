@@ -199,9 +199,22 @@
 
 #filter-search-price {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    gap: 1rem;
-    border-radius: 8px;
+    gap: 10px;
+}
+
+#filter-search-price label {
+    margin: 0;
+}
+
+#filter-search-price input {
+    width: 80px;
+}
+
+#price-range-values {
+    margin-left: 10px;
+    font-size: 0.9em;
+    color: #555;
 }
 
