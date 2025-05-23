@@ -206,49 +206,11 @@ const Modals = {
 			sessionStorage.removeItem("signup_success");
 		}
 
-		// Handle Go Flow modal arrow button click to log in
+		// Handle Go Flow modal arrow button click to reload page
 		const goFlowArrowButton = document.getElementById("go-arrow");
 		if (goFlowArrowButton && this.overlays.goFlow) {
-			goFlowArrowButton.addEventListener("click", async function () {
-				// Get username and password from sessionStorage
-				const username = sessionStorage.getItem("signup_username");
-				const password = sessionStorage.getItem("signup_password");
-
-				if (!username || !password) {
-					alert("Could not log in automatically. Please sign in manually.");
-					Modals.overlays.goFlow.classList.add("hidden");
-					return;
-				}
-
-				// Send AJAX POST to login
-				try {
-					const response = await fetch("actions/login/signin-action.php", {
-						method: "POST",
-						headers: {
-							"Content-Type": "application/x-www-form-urlencoded",
-							"X-Requested-With": "XMLHttpRequest",
-						},
-						body: `email=${encodeURIComponent(
-							username
-						)}&password=${encodeURIComponent(password)}`,
-					});
-
-					// Check response
-					if (response.ok) {
-						// Clean up sensitive info
-						sessionStorage.removeItem("signup_password");
-						sessionStorage.removeItem("signup_username");
-						// Redirect to index page
-						window.location.href = "index.php";
-					} else {
-						alert("Login failed. Please sign in manually.");
-						Modals.overlays.goFlow.classList.add("hidden");
-					}
-				} catch (err) {
-					console.error("Login error:", err);
-					alert("Login error. Please sign in manually.");
-					Modals.overlays.goFlow.classList.add("hidden");
-				}
+			goFlowArrowButton.addEventListener("click", function () {
+				window.location.reload();
 			});
 		}
 	},
@@ -321,6 +283,15 @@ window.showModalError = function (modalId, message) {
 		floating.classList.add('fade-out');
 		setTimeout(() => floating.remove(), 600);
 	}, 3000);
+};
+
+// Show Go Flow modal globally
+window.showGoFlowModal = function () {
+	// Hide all modals
+	document.querySelectorAll('.modal-overlay').forEach(m => m.classList.add('hidden'));
+	// Show Go Flow modal
+	const goFlow = document.getElementById('goflow-modal-overlay');
+	if (goFlow) goFlow.classList.remove('hidden');
 };
 
 // Intercept sign up form submit
