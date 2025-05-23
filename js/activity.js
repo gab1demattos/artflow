@@ -211,13 +211,13 @@ document.addEventListener("DOMContentLoaded", function () {
 									<div class="public-review">
 										<label for="make-public">
 											<input type="checkbox" id="make-public" name="make_public" value="1">
-											Make my review public
+											Make my requirements public
 										</label>
 									</div>
 									
 									<div class="button-container">
-										<button type="button" id="close-rate-it" class="button secondary">Cancel</button>
-										<button type="submit" id="submit-rating" class="button primary">Submit Review</button>
+										<button type="button" id="close-rate-it" class="button outline yellow">Cancel</button>
+										<button type="submit" id="submit-rating" class="button filled yellow">Submit Review</button>
 									</div>
 								</form>
 							</div>
