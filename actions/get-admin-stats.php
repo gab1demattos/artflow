@@ -9,4 +9,14 @@ if (!$user || $user['user_type'] !== 'admin') {
     echo json_encode(['error' => 'Forbidden']);
     exit();
 }
-// TODO: Fetch users, services, categories from DB
+
+require_once(__DIR__ . '/../database/database.php');
+$db = Database::getInstance();
+$users = $db->query('SELECT COUNT(*) FROM User')->fetchColumn();
+$services = $db->query('SELECT COUNT(*) FROM Service')->fetchColumn();
+$categories = $db->query('SELECT COUNT(*) FROM Category')->fetchColumn();
+echo json_encode([
+    'users' => (int)$users,
+    'services' => (int)$services,
+    'categories' => (int)$categories
+]);
