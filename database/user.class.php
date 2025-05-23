@@ -139,4 +139,23 @@ class User
     {
         return $this->profile_image;
     }
+
+    /**
+     * Update user password
+     *
+     * @param int $userId The user ID
+     * @param string $hashedPassword The hashed password
+     * @return bool True if successful, false otherwise
+     */
+    public static function updatePassword(int $userId, string $hashedPassword): bool
+    {
+        $db = Database::getInstance();
+
+        try {
+            $stmt = $db->prepare('UPDATE User SET password = ? WHERE id = ?');
+            return $stmt->execute([$hashedPassword, $userId]);
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
 }

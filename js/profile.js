@@ -50,6 +50,62 @@ document.addEventListener("DOMContentLoaded", function () {
 			e.stopPropagation();
 		});
 	}
+
+	// Change Password button functionality
+	const changePasswordBtn = document.getElementById("change-password-btn");
+	const changePasswordModal = document.getElementById("change-password-modal");
+	const changePasswordCancelBtn = document.querySelector(
+		"#change-password-modal .cancel-modal"
+	);
+	const changePasswordCloseBtn = document.querySelector(
+		"#change-password-modal .close"
+	);
+
+	if (changePasswordBtn && changePasswordModal) {
+		console.log("Change Password button found:", changePasswordBtn);
+		console.log("Change Password modal found:", changePasswordModal);
+
+		changePasswordBtn.addEventListener("click", function (event) {
+			console.log("Change Password button clicked");
+			// Stop propagation to prevent the edit profile modal from closing
+			event.stopPropagation();
+
+			// Clear password fields every time the modal opens for security
+			document.getElementById("old-password").value = "";
+			document.getElementById("new-password").value = "";
+
+			// Set both display flex and proper z-index
+			changePasswordModal.style.display = "flex";
+			console.log(
+				"Changed modal display to:",
+				changePasswordModal.style.display
+			);
+		});
+	} else {
+		console.log("Button or modal not found:", {
+			button: changePasswordBtn,
+			modal: changePasswordModal,
+		});
+	}
+
+	if (changePasswordCancelBtn) {
+		changePasswordCancelBtn.addEventListener("click", function () {
+			changePasswordModal.style.display = "none";
+		});
+	}
+
+	if (changePasswordCloseBtn) {
+		changePasswordCloseBtn.addEventListener("click", function () {
+			changePasswordModal.style.display = "none";
+		});
+	}
+
+	// Close change password modal when clicking outside, but keep edit profile modal open
+	window.addEventListener("click", function (event) {
+		if (event.target == changePasswordModal) {
+			changePasswordModal.style.display = "none";
+		}
+	});
 });
 
 /*== EDIT PROFILE ==*/

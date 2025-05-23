@@ -105,6 +105,8 @@ drawHeader($loggedInUser);
 <?php
 // Include the edit profile modal
 include_once(__DIR__ . '/modals/edit-profile-modal.php');
+// Include the change password modal
+include_once(__DIR__ . '/modals/change-password.php');
 
 drawFooter($loggedInUser);
 ?>
