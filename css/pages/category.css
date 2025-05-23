@@ -170,7 +170,6 @@
 /* Styling for filter labels */
 .filters-container label {
     font-size: 1em;
-    font-weight: bold;
     margin-right: 0.5em;
 }
 
@@ -205,6 +204,7 @@
 	outline: none;
 	width: 2.5em;
 	background-color: transparent;
+	font-size: 0.8em;
 }
 
 #price-min, #price-max {
