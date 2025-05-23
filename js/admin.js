@@ -1,6 +1,10 @@
 // admin.js - Handles fetching and admin actions for the admin panel
 
 document.addEventListener('DOMContentLoaded', () => {
+    if (window.Modals && typeof window.Modals.init === 'function') {
+        window.Modals.init();
+    }
+
     // Tab switching logic
     const tabButtons = document.querySelectorAll('.admin-tab-btn');
     const tabContents = document.querySelectorAll('.admin-tab-content');
@@ -15,7 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
         tabContents.forEach(c => c.classList.remove('active'));
         tabMap[tab].classList.add('active');
         document.querySelector(`.admin-tab-btn[data-tab="${tab}"]`).classList.add('active');
-        // Render only the active tab's content
         if (tab === 'users') {
             renderUsersTab();
             tabMap['services'].innerHTML = '';
@@ -29,6 +32,10 @@ document.addEventListener('DOMContentLoaded', () => {
             tabMap['services'].innerHTML = '';
             tabMap['categories'].innerHTML = '<button id="open-category-modal" class="button filled hovering" type="button" style="margin-bottom:2em;">Add Category</button><div id="admin-categories-table"></div>';
             renderCategoriesTab();
+        }
+        // Re-initialize modals after dynamic content
+        if (window.Modals && typeof window.Modals.init === 'function') {
+            window.Modals.init();
         }
     }
 
