@@ -1,15 +1,16 @@
 <?php
+// POST: category_type, image
+// Adds new category
 require_once(__DIR__ . '/../database/session.php');
-require_once(__DIR__ . '/../database/database.php');
-
 $session = Session::getInstance();
-if (!$session->isAdmin()) {
+$user = $session->getUser() ?? null;
+if (!$user || $user['user_type'] !== 'admin') {
     http_response_code(403);
-    $_SESSION['error'] = 'Forbidden: Admins only.';
-    header('Location: /');
+    echo json_encode(['error' => 'Forbidden']);
     exit();
 }
 
+// Handle AJAX POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = trim($_POST['category_name'] ?? '');
     $subcategories = trim($_POST['subcategories'] ?? ''); // comma-separated
@@ -27,6 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if ($name !== '') {
+        require_once(__DIR__ . '/../database/database.php');
         $db = Database::getInstance();
         $stmt = $db->prepare('INSERT INTO Category (category_type, image) VALUES (?, ?)');
         $stmt->execute([$name, $imagePath]);
@@ -42,16 +44,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
             }
         }
-        header('Location: /');
+        header('Content-Type: application/json');
+        echo json_encode(['success' => true]);
         exit();
     } else {
-        $_SESSION['error'] = 'Category name is required.';
-        header('Location: /');
+        http_response_code(400);
+        echo json_encode(['error' => 'Category name is required.']);
         exit();
     }
-} else {
-    http_response_code(405);
-    $_SESSION['error'] = 'Method Not Allowed';
-    header('Location: /');
-    exit();
 }

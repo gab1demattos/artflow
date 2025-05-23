@@ -78,6 +78,7 @@ class Service
     }
 
     /**
+
      * Get service by ID
      * 
      * @param int $id Service ID
@@ -380,6 +381,17 @@ class Service
     }
 
     /**
+     * Delete a service by ID
+     * @param int $id
+     * @return bool
+     */
+    public static function deleteServiceById(int $id): bool {
+        $db = Database::getInstance();
+        $stmt = $db->prepare('DELETE FROM Service WHERE id = ?');
+        return $stmt->execute([$id]);
+    }
+    
+    /**
      * Get the category for this service
      * 
      * @return Category|null The category for this service
@@ -473,4 +485,233 @@ class Service
 
         return $this->username;
     }
+
+    /**
+     * Get all services
+     * 
+     * @return array Array of Service objects
+     */
+    public static function getAllServices(?float $minPrice = null, ?float $maxPrice = null): array {
+        $db = Database::getInstance();
+        $query = 'SELECT * FROM Service';
+        $params = [];
+
+        if ($minPrice !== null || $maxPrice !== null) {
+            $query .= ' WHERE';
+            if ($minPrice !== null) {
+                $query .= ' price >= ?';
+                $params[] = $minPrice;
+            }
+            if ($maxPrice !== null) {
+                $query .= ($minPrice !== null ? ' AND' : '') . ' price <= ?';
+                $params[] = $maxPrice;
+            }
+        }
+
+        $stmt = $db->prepare($query);
+        $stmt->execute($params);
+        $services = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $result = [];
+        foreach ($services as $service) {
+            $result[] = new Service(
+                (int)$service['id'],
+                (int)$service['user_id'],
+                $service['title'],
+                $service['description'],
+                (int)$service['category_id'],
+                (float)$service['price'],
+                (int)$service['delivery_time'],
+                $service['images'],
+                $service['videos']
+            );
+        }
+
+        return $result;
+    }
+
+    public static function searchServices(PDO $db, string $search, ?float $minPrice = null, ?float $maxPrice = null): array {
+        $query = 'SELECT * FROM Service WHERE title LIKE ?';
+        $params = ['%' . $search . '%'];
+
+        if ($minPrice !== null) {
+            $query .= ' AND price >= ?';
+            $params[] = $minPrice;
+        }
+        if ($maxPrice !== null) {
+            $query .= ' AND price <= ?';
+            $params[] = $maxPrice;
+        }
+
+        $stmt = $db->prepare($query);
+        $stmt->execute($params);
+        $services = [];
+        while ($service = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $services[] = new Service(
+                (int)$service['id'],
+                (int)$service['user_id'],
+                $service['title'],
+                $service['description'],
+                (int)$service['category_id'],
+                (float)$service['price'],
+                (int)$service['delivery_time'],
+                $service['images'],
+                $service['videos']
+            );
+        }
+        return $services;
+    }
+
+    /**
+     * Get services by multiple category IDs
+     * 
+     * @param PDO $db Database connection
+     * @param array $categoryIds Array of category IDs
+     * @return array Array of Service objects
+     */
+    public static function getServicesByCategories(PDO $db, array $categoryIds, ?float $minPrice = null, ?float $maxPrice = null): array {
+        $placeholders = implode(',', array_fill(0, count($categoryIds), '?'));
+        $query = "SELECT Service.*, User.username FROM Service JOIN User ON Service.user_id = User.id WHERE Service.category_id IN ($placeholders)";
+        $params = $categoryIds;
+
+        if ($minPrice !== null) {
+            $query .= ' AND price >= ?';
+            $params[] = $minPrice;
+        }
+        if ($maxPrice !== null) {
+            $query .= ' AND price <= ?';
+            $params[] = $maxPrice;
+        }
+
+        $stmt = $db->prepare($query);
+        $stmt->execute($params);
+        $services = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $result = [];
+        foreach ($services as $service) {
+            $result[] = new Service(
+                (int)$service['id'],
+                (int)$service['user_id'],
+                $service['title'],
+                $service['description'],
+                (int)$service['category_id'],
+                (float)$service['price'],
+                (int)$service['delivery_time'],
+                $service['images'],
+                $service['videos'],
+                $service['username']
+            );
+        }
+        return $result;
+    }
+
+    /**
+     * Get filtered services by category with pagination
+     * @param int $categoryId
+     * @param int $limit
+     * @param int $offset
+     * @param float|null $priceMin
+     * @param float|null $priceMax
+     * @param float|null $ratingMin
+     * @param float|null $ratingMax
+     * @param int|null $deliveryMin
+     * @param int|null $deliveryMax
+     * @return array
+     */
+    public static function getFilteredServicesByCategory(
+        int $categoryId,
+        int $limit,
+        int $offset,
+        ?float $priceMin,
+        ?float $priceMax,
+        ?float $ratingMin,
+        ?float $ratingMax,
+        ?int $deliveryMin,
+        ?int $deliveryMax
+    ): array {
+        $db = Database::getInstance();
+
+        $query = 'SELECT Service.*, User.username FROM Service JOIN User ON Service.user_id = User.id WHERE Service.category_id = ?';
+        $params = [$categoryId];
+
+        // Apply price range filter
+        if ($priceMin !== null) {
+            $query .= ' AND Service.price >= ?';
+            $params[] = $priceMin;
+        }
+        if ($priceMax !== null) {
+            $query .= ' AND Service.price <= ?';
+            $params[] = $priceMax;
+        }
+
+        // Apply rating range filter (assuming a rating column exists)
+        if ($ratingMin !== null) {
+            $query .= ' AND Service.rating >= ?';
+            $params[] = $ratingMin;
+        }
+        if ($ratingMax !== null) {
+            $query .= ' AND Service.rating <= ?';
+            $params[] = $ratingMax;
+        }
+
+        // Apply delivery time range filter
+        if ($deliveryMin !== null) {
+            $query .= ' AND Service.delivery_time >= ?';
+            $params[] = $deliveryMin;
+        }
+        if ($deliveryMax !== null) {
+            $query .= ' AND Service.delivery_time <= ?';
+            $params[] = $deliveryMax;
+        }
+
+        $query .= ' LIMIT ? OFFSET ?';
+        $params[] = $limit;
+        $params[] = $offset;
+
+        $stmt = $db->prepare($query);
+        $stmt->execute($params);
+        $services = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $result = [];
+        foreach ($services as $service) {
+            $result[] = new Service(
+                (int)$service['id'],
+                (int)$service['user_id'],
+                $service['title'],
+                $service['description'],
+                (int)$service['category_id'],
+                (float)$service['price'],
+                (int)$service['delivery_time'],
+                $service['images'],
+                $service['videos'],
+                $service['username']
+            );
+        }
+
+        return $result;
+    }
+
+    /**
+     * Get the price range (min and max) for a specific category
+     * @param int $categoryId
+     * @return array ['min' => float, 'max' => float]
+     */
+    public static function getPriceRangeByCategory(int $categoryId): array {
+        $db = Database::getInstance();
+        $stmt = $db->prepare('SELECT MIN(price) as min, MAX(price) as max FROM Service WHERE category_id = ?');
+        $stmt->execute([$categoryId]);
+        return $stmt->fetch(PDO::FETCH_ASSOC) ?: ['min' => 0, 'max' => 0];
+    }
+
+    /**
+     * Get the delivery time range (min and max) for a specific category
+     * @param int $categoryId
+     * @return array ['min' => int, 'max' => int]
+     */
+    public static function getDeliveryRangeByCategory(int $categoryId): array {
+        $db = Database::getInstance();
+        $stmt = $db->prepare('SELECT MIN(delivery_time) as min, MAX(delivery_time) as max FROM Service WHERE category_id = ?');
+        $stmt->execute([$categoryId]);
+        return $stmt->fetch(PDO::FETCH_ASSOC) ?: ['min' => 0, 'max' => 0];
+    }
+    
 }

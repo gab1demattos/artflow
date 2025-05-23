@@ -33,6 +33,7 @@ a.button {
 	border-radius: 15px;
 	padding: 5px 20px;
 }
+
 /* Example: <button class="button long [other classes]">Long</button> */
 
 /* ===== COLOR + FILL OPTIONS ===== */
@@ -42,6 +43,7 @@ a.button {
 	color: var(--beige);
 	border: none;
 }
+
 /* Example: <button class="button filled [other classes]">Purple Filled</button> */
 
 /* Purple outlined */
@@ -50,6 +52,7 @@ a.button {
 	color: var(--purple);
 	border: 2px solid var(--purple);
 }
+
 /* Example: <button class="button outline [other classes]">Purple Outlined</button> */
 
 /* Yellow filled */
@@ -58,6 +61,7 @@ a.button {
 	color: #ffffff;
 	border: none;
 }
+
 /* Example: <button class="button filled yellow [other classes]">Yellow Filled</button> */
 
 /* Yellow outlined */
@@ -66,6 +70,7 @@ a.button {
 	color: var(--yellow);
 	border: 2px solid var(--yellow);
 }
+
 /* Example: <button class="button outline yellow [other classes]">Yellow Outlined</button> */
 
 .button.filled.orange {
@@ -86,6 +91,7 @@ a.button {
 	color: #ffffff;
 	border: none;
 }
+
 /* Example: <button class="button filled green [other classes]">Green Filled</button> */
 
 /* Green outlined */
@@ -94,6 +100,7 @@ a.button {
 	color: var(--green);
 	border: 2px solid var(--green);
 }
+
 /* Example: <button class="button outline green [other classes]">green Outlined</button> */
 
 /* ===== HOVER BEHAVIOR OPTIONS ===== */
@@ -197,6 +204,7 @@ a.button {
 
 /* Mobile Button Styles */
 @media screen and (max-width: 767px) {
+
 	/* Base button styling - adjust size for mobile */
 	.button {
 		font-size: 0.9rem !important;
@@ -240,6 +248,7 @@ a.button {
 		height: 2.25em !important;
 	}
 }
+
 /*========= !! END BUTTON STYLES !! =========*/
 
 /*========= !! SIDEBAR STYLES !! =========*/
@@ -324,17 +333,19 @@ a.button {
 	border-radius: 10px;
 	width: 100%;
 	padding: 0.5em;
-	font-family: "EDGaramond", serif;
+
+	font-family: 'EDGaramond', serif;
 	padding-right: 0;
 }
 
-#new-service-button > button {
+#new-service-button>button {
+
 	color: white;
 	font-weight: 700;
 }
 
 .sidebar-item button {
-	font-family: "EB Garamond", sans-serif;
+	font-family: 'EB Garamond', sans-serif;
 	font-size: 20px !important;
 }
 
@@ -362,6 +373,7 @@ a.button {
 	opacity: 0;
 	transition: opacity 0.3s ease-in-out;
 }
+
 
 #sidebar.active + #overlay {
 	display: block;
@@ -407,6 +419,7 @@ a.button {
 #button-avatar {
 	padding: 0;
 }
+
 /*========= !! END SIDEBAR STYLES !! =========*/
 
 /*========= !! STAR RATING STYLES !! =========*/
@@ -435,3 +448,67 @@ a.button {
 	color: var(--yellow);
 }
 /*========= !! END STAR RATING STYLES !! =========*/
+
+
+/* === Stat Box Component === */
+.stat-box {
+	border-radius: 12px;
+	box-shadow: 0 2px 12px rgba(200, 160, 40, 0.07);
+	padding: 1.5rem 2.5rem;
+	min-width: 180px;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background: linear-gradient(90deg, #f6dd8b 0%, #fcedb7 100%);
+	/* default yellow */
+}
+
+.stat-box--yellow {
+	background: linear-gradient(90deg, #f6dd8b 0%, #fcedb7 100%);
+}
+
+.stat-box--green {
+	background: linear-gradient(90deg, #b2eee2 0%, #e8f8f4 100%);
+}
+
+.stat-label {
+	font-size: 1.1rem;
+	font-weight: 600;
+}
+
+.stat-label--yellow {
+	color: var(--yellow);
+}
+
+.stat-label--green {
+	color: var(--green);
+}
+
+.stat-value {
+	font-size: 2.1rem;
+	font-weight: 700;
+	margin-top: 0.5rem;
+	color: #222;
+}
+
+.stat-value--yellow {
+	color: var(--yellow)
+}
+
+.stat-value--green {
+	color: var(--green);
+}
+
+.stat-box+.stat-box {
+	margin-left: 2.5rem;
+}
+
+.stat-row {
+	display: flex;
+	gap: 2.5rem;
+	justify-content: center;
+	margin-bottom: 2.5rem;
+}
+
+

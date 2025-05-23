@@ -1,5 +1,4 @@
-<?php
-
+<?php 
 declare(strict_types=1);
 require_once(__DIR__ . '/../database.php');
 
@@ -219,4 +218,44 @@ class User
             return false;
         }
     }
+    static function searchUsers(PDO $db, string $search, int $count) : array {
+            $stmt = $db->prepare('SELECT id, name, username, email, bio, profile_image FROM User WHERE name LIKE ? LIMIT ?');
+            $stmt->execute(array($search . '%', $count));
+
+            $users = array();
+            while ($user = $stmt->fetch()) {
+                $users[] = new User(
+                    (int)$user['id'],
+                    'regular', // Default user type
+                    $user['name'],
+                    $user['username'],
+                    $user['email'],
+                    $user['bio'] ?? '',
+                    $user['profile_image'] ?? ''
+                );
+            }
+
+            return $users;
+        }
+
+        public static function getAllUsers(PDO $db) : array {
+            $stmt = $db->prepare('SELECT id, name, username, email, bio, profile_image FROM User');
+            $stmt->execute();
+
+            $users = array();
+            while ($user = $stmt->fetch()) {
+                $users[] = new User(
+                    (int)$user['id'],
+                    'regular', // Default user type
+                    $user['name'],
+                    $user['username'],
+                    $user['email'],
+                    $user['bio'] ?? '',
+                    $user['profile_image'] ?? ''
+                );
+            }
+
+            return $users;
+        }
 }
+?>

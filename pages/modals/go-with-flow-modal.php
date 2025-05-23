@@ -6,7 +6,7 @@
                 You're all set<br>
                 — now just go with the <span class='flow-text'>flow</span>.
             </p>
-            <p>
+            <p class="sectext">
                 Explore, discover, and let <br>
                 <span class='artflow-text'>artflow</span> guide you effortlessly.
             </p>
