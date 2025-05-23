@@ -8,4 +8,14 @@ if (!$user || $user['user_type'] !== 'admin') {
     echo json_encode(['error' => 'Forbidden']);
     exit();
 }
-// TODO: Fetch all categories from DB
+
+require_once(__DIR__ . '/../database/classes/category.class.php');
+$categories = Category::getAllCategories();
+$result = array_map(function($cat) {
+    return [
+        'id' => $cat->id,
+        'type' => $cat->category_type,
+        'image' => $cat->image
+    ];
+}, $categories);
+echo json_encode($result);

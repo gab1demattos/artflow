@@ -9,28 +9,37 @@ document.addEventListener('DOMContentLoaded', () => {
         services: document.getElementById('admin-services'),
         categories: document.getElementById('admin-categories')
     };
-    tabButtons.forEach(btn => {
-        btn.addEventListener('click', function () {
-            tabButtons.forEach(b => b.classList.remove('active'));
-            tabContents.forEach(c => c.classList.remove('active'));
-            this.classList.add('active');
-            const tab = this.getAttribute('data-tab');
-            tabMap[tab].classList.add('active');
-        });
-    });
 
+    function showTab(tab) {
+        tabButtons.forEach(b => b.classList.remove('active'));
+        tabContents.forEach(c => c.classList.remove('active'));
+        tabMap[tab].classList.add('active');
+        document.querySelector(`.admin-tab-btn[data-tab="${tab}"]`).classList.add('active');
+        // Render only the active tab's content
+        if (tab === 'users') {
+            renderUsersTab();
+            tabMap['services'].innerHTML = '';
+            tabMap['categories'].innerHTML = '<button id="open-category-modal" class="button filled hovering" type="button" style="margin-bottom:2em;">Add Category</button><div id="admin-categories-table"></div>';
+        } else if (tab === 'services') {
+            renderServicesTab();
+            tabMap['users'].innerHTML = '';
+            tabMap['categories'].innerHTML = '<button id="open-category-modal" class="button filled hovering" type="button" style="margin-bottom:2em;">Add Category</button><div id="admin-categories-table"></div>';
+        } else if (tab === 'categories') {
+            tabMap['users'].innerHTML = '';
+            tabMap['services'].innerHTML = '';
+            tabMap['categories'].innerHTML = '<button id="open-category-modal" class="button filled hovering" type="button" style="margin-bottom:2em;">Add Category</button><div id="admin-categories-table"></div>';
+            renderCategoriesTab();
+        }
+    }
+
+    // Initial load: show users tab
+    showTab('users');
     fetchStats();
-    renderUsersTab();
-    renderServicesTab();
-    renderCategoriesTab();
 
-    // Re-render tab content on tab switch
     tabButtons.forEach(btn => {
         btn.addEventListener('click', function () {
             const tab = this.getAttribute('data-tab');
-            if (tab === 'users') renderUsersTab();
-            if (tab === 'services') renderServicesTab();
-            if (tab === 'categories') renderCategoriesTab();
+            showTab(tab);
         });
     });
 });
