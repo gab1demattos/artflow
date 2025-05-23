@@ -96,13 +96,9 @@
 	cursor: pointer;
 	padding-left: 1em;
 	padding-top: 1em;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-.user-card:hover {
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-	transform: translateY(-0.1em);
-	transition: transform 0.3s ease;
-}
 
 .user-profile-picture {
 	width: 2.5em;
