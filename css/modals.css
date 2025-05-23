@@ -303,8 +303,8 @@
 
 #goflow-modal #go-arrow {
 	position: absolute;
-	bottom: 4.5em;
-	right: 6em;
+	bottom: 3.5em;
+	right: 4.9em;
 	z-index: 3;
 	background: var(--orange);
 	color: #fff;
@@ -319,6 +319,19 @@
 	box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
 	cursor: pointer;
 	transition: background 0.2s;
+}
+
+#goflow-modal .sectext {
+	position: absolute !important;
+	left: 0 !important;
+	right: auto !important;
+	width: auto !important;
+	min-width: 0 !important;
+	max-width: 60%;
+	text-align: left !important;
+	padding-left: 2em;
+	margin: 0 !important;
+	z-index: 3;
 }
 
 #goflow-modal #go-arrow:hover {
