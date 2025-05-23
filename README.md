@@ -25,7 +25,7 @@
 **Admins:**
 
 - [ ] Elevate a user to admin status.
-- [ ] Introduce new service categories and other pertinent entities.
+- [x] Introduce new service categories and other pertinent entities.
 - [ ] Oversee and ensure the smooth operation of the entire system.
 
 **Extra:**
