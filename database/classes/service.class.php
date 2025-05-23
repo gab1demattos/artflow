@@ -189,6 +189,43 @@ class Service {
     }
     
     /**
+     * Get services by multiple category IDs
+     * 
+     * @param PDO $db Database connection
+     * @param array $categoryIds Array of category IDs
+     * @return array Array of Service objects
+     */
+    public static function getServicesByCategories(PDO $db, array $categoryIds): array {
+        $placeholders = implode(',', array_fill(0, count($categoryIds), '?'));
+        $stmt = $db->prepare(
+            "SELECT Service.*, User.username 
+             FROM Service 
+             JOIN User ON Service.user_id = User.id 
+             WHERE Service.category_id IN ($placeholders)"
+        );
+        $stmt->execute($categoryIds);
+        $services = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $result = [];
+        foreach ($services as $service) {
+            $result[] = new Service(
+                (int)$service['id'],
+                (int)$service['user_id'],
+                $service['title'],
+                $service['description'],
+                (int)$service['category_id'],
+                (float)$service['price'],
+                (int)$service['delivery_time'],
+                $service['images'],
+                $service['videos'],
+                $service['username']
+            );
+        }
+
+        return $result;
+    }
+    
+    /**
      * Create a new service
      * 
      * @return Service|null The newly created service or null if failed

@@ -8,11 +8,15 @@
   require_once(__DIR__ . '/../database/database.php');
 
   $db = Database::getInstance();
-  $services = Service::searchServices($db, $_GET['search'], 8);
 
-  $search = $_GET['search'] ?? '';
-  $services = empty($search) ? Service::getAllServices() : Service::searchServices($db, $search);
+  $categories = isset($_GET['categories']) ? explode(',', $_GET['categories']) : [];
 
+  if (!empty($categories)) {
+      $services = Service::getServicesByCategories($db, $categories);
+  } else {
+      $search = $_GET['search'] ?? '';
+      $services = empty($search) ? Service::getAllServices() : Service::searchServices($db, $search);
+  }
 
   echo json_encode(array_map(function($service) {
     return [
