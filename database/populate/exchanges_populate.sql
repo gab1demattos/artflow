@@ -102,4 +102,58 @@ VALUES (
         'completed',
         'Logo for tech event, minimal',
         '2025-05-23 08:10:00'
+    ),
+    (
+        2,
+        -- John Doe as freelancer
+        9,
+        13,
+        'completed',
+        'Logo for eco-friendly brand, green palette',
+        '2025-05-18 10:00:00'
+    ),
+    (
+        2,
+        -- John Doe as freelancer
+        10,
+        14,
+        'completed',
+        'Business card design, minimal style',
+        '2025-05-20 15:30:00'
+    ),
+    (
+        2,
+        -- John Doe as freelancer
+        11,
+        15,
+        'completed',
+        'Flyer for local event, vibrant colors',
+        '2025-05-11 11:00:00'
+    ),
+    (
+        2,
+        -- John Doe as freelancer
+        12,
+        16,
+        'completed',
+        'Social media kit, modern look',
+        '2025-05-13 16:45:00'
+    ),
+    (
+        2,
+        -- John Doe as freelancer
+        13,
+        17,
+        'in progress',
+        'Poster for music festival, bold typography',
+        '2025-05-26 09:00:00'
+    ),
+    (
+        2,
+        -- John Doe as freelancer
+        14,
+        18,
+        'in progress',
+        'Menu design for restaurant, illustrated icons',
+        '2025-05-26 14:30:00'
     );
