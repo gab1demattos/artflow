@@ -17,6 +17,7 @@ class Service
     public ?string $images;
     public ?string $videos;
     public ?string $username = null; // Added username property
+    public float $avg_rating = 0; // Added avg_rating property
 
     /**
      * Constructor for Service
@@ -31,7 +32,8 @@ class Service
         int $delivery_time,
         ?string $images = null,
         ?string $videos = null,
-        ?string $username = null // Added username parameter
+        ?string $username = null, // Added username parameter
+        ?float $avg_rating = 0 // Added avg_rating parameter
     ) {
         $this->id = $id;
         $this->user_id = $user_id;
@@ -43,6 +45,7 @@ class Service
         $this->images = $images;
         $this->videos = $videos;
         $this->username = $username; // Initialize username property
+        $this->avg_rating = $avg_rating ?? 0; // Initialize avg_rating property
     }
 
     /**
@@ -179,7 +182,8 @@ class Service
                 (int)$service['delivery_time'],
                 $service['images'],
                 $service['videos'],
-                $service['username']
+                $service['username'],
+                isset($service['avg_rating']) ? (float)$service['avg_rating'] : 0
             );
             $result[] = $serviceObj;
         }
@@ -261,7 +265,8 @@ class Service
                 (int)$service['delivery_time'],
                 $service['images'],
                 $service['videos'],
-                $service['username']
+                $service['username'],
+                isset($service['avg_rating']) ? (float)$service['avg_rating'] : 0
             );
             $result[] = $serviceObj;
         }
@@ -443,7 +448,8 @@ class Service
             'delivery_time' => $this->delivery_time,
             'images' => $this->images,
             'videos' => $this->videos,
-            'username' => $this->username ?? null
+            'username' => $this->username ?? null,
+            'avg_rating' => $this->avg_rating ?? null
         ];
     }
 
