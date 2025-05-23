@@ -58,38 +58,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 exit();
             }
 
-            // Check if the user has already reviewed this service
-            $existingReview = Review::getUserReviewForService($userId, $serviceId);
+            // Always create a new review instead of updating existing ones
+            $review = Review::createReview(
+                $userId,
+                $serviceId,
+                $rating,
+                $reviewText,
+                $isPublic
+            );
 
-            if ($existingReview) {
-                // Update the existing review
-                $updated = Review::updateReview(
-                    $existingReview->id,
-                    $rating,
-                    $reviewText,
-                    $isPublic
-                );
-
-                if ($updated) {
-                    echo json_encode(['success' => true, 'message' => 'Your review has been updated']);
-                } else {
-                    echo json_encode(['success' => false, 'error' => 'Failed to update your review']);
-                }
+            if ($review) {
+                echo json_encode(['success' => true, 'message' => 'Your review has been submitted']);
             } else {
-                // Create a new review
-                $review = Review::createReview(
-                    $userId,
-                    $serviceId,
-                    $rating,
-                    $reviewText,
-                    $isPublic
-                );
-
-                if ($review) {
-                    echo json_encode(['success' => true, 'message' => 'Your review has been submitted']);
-                } else {
-                    echo json_encode(['success' => false, 'error' => 'Failed to submit your review']);
-                }
+                echo json_encode(['success' => false, 'error' => 'Failed to submit your review']);
             }
 
             // Update the average rating for the service
