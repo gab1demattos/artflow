@@ -126,7 +126,8 @@
 } */
 
 .admin-action-btn.ban,
-.ban-btn, .delete-service-btn {
+.ban-btn,
+.delete-service-btn {
     background: linear-gradient(90deg, #c62828 0%, #a31515 100%) !important;
     color: #fff !important;
     border: 1.5px solid #a31515 !important;
@@ -191,6 +192,68 @@
 
 .admin-add-category-form button:hover {
     background: #4a2e8a;
+}
+
+#category-modal-overlay.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.45);
+    /* standard dark overlay */
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s;
+}
+
+#category-modal-overlay.hidden {
+    display: none;
+}
+
+#category-modal {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+    padding: 2.5rem 2.5rem 2rem 2.5rem;
+    max-width: 420px;
+    width: 100%;
+    position: relative;
+    z-index: 2100;
+}
+
+#category-modal .form-container {
+    padding: 0;
+}
+
+#category-modal h2 {
+    margin-top: 0;
+    margin-bottom: 1.3em;
+    text-align: center;
+    font-size: 2rem;
+    color: var(--purple);
+}
+
+#category-modal .form input,
+#category-modal .form input[type="file"],
+#category-modal .form textarea,
+#category-modal .form select {
+    margin-bottom: 0.8em;
+}
+
+#category-modal .form input:last-child,
+#category-modal .form textarea:last-child,
+#category-modal .form select:last-child {
+    margin-bottom: 0;
+}
+
+#category-modal .button-container {
+    display: flex;
+    gap: 1em;
+    margin-top: 1.5em;
+    justify-content: flex-end;
 }
 
 @media (max-width: 800px) {
