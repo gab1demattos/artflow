@@ -57,19 +57,34 @@ if ($stmt->fetchColumn() > 0) {
     handle_signup_error('An account with this username already exists.');
 }
 
-// Password length check
+// Password length and complexity check
 if (strlen($password) < 8) {
     handle_signup_error('Password must be at least 8 characters.');
 }
+if (!preg_match('/[0-9]/', $password)) {
+    handle_signup_error('Password must contain at least one number.');
+}
+if (!preg_match('/[.\?\$#@!&%]/', $password)) {
+    handle_signup_error('Password must contain at least one special character (.?$#@!&%).');
+}
 
-$user = User::create('regular', $name, $username, $email, $password);
+$user = User::create($name, $username, $email, $password, 'regular');
 if ($user) {
-    // Set client-side storage variables via JavaScript
+    $session->login([
+        'id' => $user->id,
+        'user_type' => $user->user_type,
+        'name' => $user->name,
+        'username' => $user->username,
+        'email' => $user->email,
+        'bio' => $user->bio,
+        'profile_image' => $user->profile_image
+    ]);
     echo '<script>
-            sessionStorage.setItem("signup_success", "true");
-            sessionStorage.setItem("signup_username", "' . addslashes($email) . '");
-            sessionStorage.setItem("signup_password", "' . addslashes($password) . '");
-            window.location.href = "/pages/index.php";
+            if (window.parent && window.parent.showGoFlowModal) {
+                window.parent.showGoFlowModal();
+            } else {
+                window.parent.location.href = "/pages/index.php";
+            }
         </script>';
     exit();
 } else {
