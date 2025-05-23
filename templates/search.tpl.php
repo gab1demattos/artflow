@@ -1,4 +1,15 @@
-<?php function drawSearchPage($user) { ?>
+<?php 
+require_once(__DIR__ . '/../database/session.php');
+require_once(__DIR__ . '/../database/database.php'); // Added this line to include the Database class
+require_once(__DIR__ . '/../templates/home.tpl.php');
+require_once(__DIR__ . '/../templates/categories.tpl.php');
+require_once(__DIR__ . '/../templates/service.tpl.php');
+
+$session = Session::getInstance();
+$user = $session->getUser() ?? null;
+$db = Database::getInstance();
+
+    function drawSearchPage($db) { ?>
     <div class="search-content">
         <div class="search-options">
             <button id="search-services" class="active">Services</button>
@@ -10,21 +21,17 @@
         </div>
         <div id="search-main">
             <div id="filter-search">
-                <div id="filter-search-categories">
-                    <h3>Categories</h3>
+                <h3>Categories</h3>
+                <?php 
+                $stmt = $db->prepare('SELECT * FROM Category');
+                $stmt->execute();
+                $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($categories as $category) { ?>
                     <div class="filter-option-category">
-                        <input type="checkbox" id="filter-option-1" checked>
-                        <label for="filter-option-1">Category 1</label>
+                        <input type="checkbox" id="filter-option-<?php echo $category['id']; ?>" checked>
+                        <label for="filter-option-<?php echo $category['id']; ?>"><?php echo htmlspecialchars($category['name']); ?></label>
                     </div>
-                    <div class="filter-option-category">
-                        <input type="checkbox" id="filter-option-2" checked>
-                        <label for="filter-option-2">Category 2</label>
-                    </div>
-                    <div class="filter-option-category">
-                        <input type="checkbox" id="filter-option-3" checked>
-                        <label for="filter-option-3">Category 3</label>
-                    </div>
-                </div>
+                <?php } ?>
                 <div id="filter-search-rating">
                     <h3>Rating</h3>
                     <div class="filter-option-rating">
