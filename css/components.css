@@ -438,7 +438,7 @@ a.button {
 }
 
 .stat-box--green {
-	background: linear-gradient(90deg, #f6dd8b 0%, #fcedb7 100%);
+	background: linear-gradient(90deg, #a1ecc4 0%, #e6f9ef 100%);
 }
 
 .stat-label {
@@ -450,6 +450,10 @@ a.button {
 	color: var(--yellow);
 }
 
+.stat-label--green {
+	color: var(--green);
+}
+
 .stat-value {
 	font-size: 2.1rem;
 	font-weight: 700;
@@ -459,6 +463,10 @@ a.button {
 
 .stat-value--yellow {
 	color: var(--yellow)
+}
+
+.stat-value--green {
+	color: var(--green);
 }
 
 .stat-box+.stat-box {

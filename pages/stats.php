@@ -14,19 +14,19 @@ drawHeader($user);
 <link rel="stylesheet" href="/css/admin.css">
 <link rel="stylesheet" href="/css/components.css">
 <main class="admin-panel-container">
-    <h2 class="admin-title">Your Freelancer Stats</h2>
+    <h2 class="admin-title" style="color:var(--green)">Your Freelancer Stats</h2>
     <div class="stat-row">
-        <div class="stat-box stat-box--yellow">
-            <div class="stat-label">Total Earnings</div>
-            <div class="stat-value" id="stat-earnings">&mdash;</div>
+        <div class="stat-box stat-box--green">
+            <div class="stat-label stat-label--green">Total Earnings</div>
+            <div class="stat-value stat-value--green" id="stat-earnings">&mdash;</div>
         </div>
-        <div class="stat-box stat-box--yellow">
-            <div class="stat-label">Completed Services</div>
-            <div class="stat-value" id="stat-completed">&mdash;</div>
+        <div class="stat-box stat-box--green">
+            <div class="stat-label stat-label--green">Completed Services</div>
+            <div class="stat-value stat-value--green" id="stat-completed">&mdash;</div>
         </div>
-        <div class="stat-box stat-box--yellow">
-            <div class="stat-label">Current Listings</div>
-            <div class="stat-value" id="stat-listings">&mdash;</div>
+        <div class="stat-box stat-box--green">
+            <div class="stat-label stat-label--green">Current Listings</div>
+            <div class="stat-value stat-value--green" id="stat-listings">&mdash;</div>
         </div>
     </div>
     <div style="max-width:700px;margin:0 auto;">
