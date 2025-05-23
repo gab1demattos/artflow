@@ -1,6 +1,6 @@
 <?php
-require_once(__DIR__ . '/../database/session.php');
-require_once(__DIR__ . '/../database/classes/message.class.php');
+require_once(__DIR__ . '/../../database/session.php');
+require_once(__DIR__ . '/../../database/classes/message.class.php');
 
 // Ensure user is logged in
 $session = Session::getInstance();

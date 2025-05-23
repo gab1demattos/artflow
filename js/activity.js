@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Fetch and render orders dynamically
-    fetch('/actions/get-orders.php')
+    fetch('/actions/activity/get-orders.php')
         .then(res => res.json())
         .then(data => {
             if (!data.success) return;
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (!card) return;
                     const orderId = card.getAttribute('data-order-id');
                     btn.disabled = true;
-                    fetch('/actions/mark-delivered.php', {
+                    fetch('/actions/activity/mark-delivered.php', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                         body: `order_id=${encodeURIComponent(orderId)}`

@@ -140,7 +140,7 @@ document.addEventListener("DOMContentLoaded", function () {
 					irreversibleModal.classList.remove("show");
 
 					// Redirect to the delete account action
-					window.location.href = "/actions/delete-account-action.php";
+					window.location.href = "/actions/account_settings/delete-account-action.php";
 				};
 			}
 
