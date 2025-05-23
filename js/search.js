@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     searchBar.addEventListener('click', () => {
         window.location.href = '../pages/search.php';
         searchBar.style.display = 'none !important';
+        handleSearchBarInteraction();
     });
 
     // Interrupt event listener when switching between buttons
