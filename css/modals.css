@@ -1311,6 +1311,22 @@ h4.important-changes {
 	color: var(--yellow);
 }
 
+#rate-it-modal-overlay .star-icon.active.half-filled {
+	position: relative;
+	color: #e0e0e0;
+}
+
+#rate-it-modal-overlay .star-icon.active.half-filled::before {
+	content: "★";
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 50%;
+	overflow: hidden;
+	color: var(--yellow);
+}
+
+/* Old half star style - keeping for backward compatibility */
 #rate-it-modal-overlay .star-icon.active.half {
 	position: relative;
 	display: inline-block;

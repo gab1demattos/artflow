@@ -349,7 +349,7 @@ footer,
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	margin-bottom: 0.75rem;
+	margin-bottom: 0.5em;
 }
 
 .review-user {
@@ -384,22 +384,10 @@ footer,
 	align-items: center;
 }
 
-.star {
-	color: #d3d3d3; /* Light grey color for unfilled stars */
-	font-size: 1.2rem;
-}
-
-.star.filled {
-	color: var(--yellow);
-}
-
-#reviews .review-rating .star {
-	color: #d3d3d3; /* Light grey color for unfilled stars */
-	font-size: 1.2rem;
-}
-
-#reviews .review-rating .star.filled {
-	color: var(--yellow) !important;
+.rating-value {
+	margin-left: 0.5em;
+	font-weight: bold;
+	color: #555;
 }
 
 .review-body {

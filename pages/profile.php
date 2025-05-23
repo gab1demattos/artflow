@@ -113,11 +113,20 @@ drawHeader($loggedInUser);
         <?php else: ?>
             <div class="average-rating">
                 <strong>Average Rating: </strong>
-                <span class="rating-value"><?= $averageRating > 0 ? htmlspecialchars($averageRating) : 'No ratings yet' ?></span>
+                <span class="rating-value"><?= $averageRating > 0 ? htmlspecialchars(number_format($averageRating, 1)) : 'No ratings yet' ?></span>
                 <div class="review-rating-stars">
-                    <?php for ($i = 1; $i <= 5; $i++): ?>
-                        <span class="star<?= $i <= $averageRating ? ' filled' : '' ?>">&#9733;</span>
-                    <?php endfor; ?>
+                    <?php for ($i = 1; $i <= 5; $i++):
+                        if ($averageRating >= $i) {
+                            // Full star
+                            echo '<span class="star filled">★</span>';
+                        } else if ($averageRating >= $i - 0.5) {
+                            // Half star
+                            echo '<span class="star half-filled">&#9733;</span>';
+                        } else {
+                            // Empty star
+                            echo '<span class="star">☆</span>';
+                        }
+                    endfor; ?>
                 </div>
             </div>
             <div class="reviews-list">
@@ -132,9 +141,18 @@ drawHeader($loggedInUser);
                                 </div>
                             </div>
                             <div class="review-rating">
-                                <?php for ($i = 1; $i <= 5; $i++): ?>
-                                    <span class="star<?= $i <= $review->rating ? ' filled' : '' ?>">&#9733;</span>
-                                <?php endfor; ?>
+                                <?php for ($i = 1; $i <= 5; $i++):
+                                    if ($review->rating >= $i) {
+                                        // Full star
+                                        echo '<span class="star filled">★</span>';
+                                    } else if ($review->rating >= $i - 0.5) {
+                                        // Half star
+                                        echo '<span class="star half-filled">&#9733;</span>';
+                                    } else {
+                                        // Empty star
+                                        echo '<span class="star">☆</span>';
+                                    }
+                                endfor; ?>
                             </div>
                         </div>
                         <div class="review-body">

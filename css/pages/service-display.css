@@ -259,12 +259,6 @@
 	color: #333;
 }
 
-.stars-display {
-	font-size: 1.4rem;
-	color: #ccc;
-	letter-spacing: 0.2em;
-}
-
 .review-header {
 	display: flex;
 	justify-content: space-between;
@@ -276,20 +270,6 @@
 	display: flex;
 	align-items: center;
 	font-size: 1.1rem;
-}
-
-.star {
-	color: #ccc;
-	margin-right: 0.1em;
-}
-
-.star.filled {
-	color: var(--green);
-}
-
-.star.half {
-	color: var(--green);
-	position: relative;
 }
 
 .rating-value {

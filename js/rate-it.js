@@ -102,17 +102,18 @@ function updateStarDisplay(rating) {
 		if (rating >= starValue) {
 			currentStar.textContent = "★";
 			currentStar.classList.add("active");
-			currentStar.classList.remove("half");
+			currentStar.classList.remove("half-filled", "half");
 		}
 		// Half star - if rating is X.5
 		else if (rating === starValue - 0.5) {
-			currentStar.textContent = "⯪"; // Half star character
-			currentStar.classList.add("active", "half");
+			currentStar.textContent = "&#9733;"; // Using regular star character now
+			currentStar.classList.add("active", "half-filled");
+			currentStar.classList.remove("half");
 		}
 		// Empty star
 		else {
 			currentStar.textContent = "★";
-			currentStar.classList.remove("active", "half");
+			currentStar.classList.remove("active", "half-filled", "half");
 		}
 	});
 

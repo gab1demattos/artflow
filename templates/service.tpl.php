@@ -1,8 +1,8 @@
 <?php function drawServiceDisplay($service, $user, $db)
 { ?>
     <?php
-    require_once(__DIR__ . '/../database/classes/review.class.php');
     require_once(__DIR__ . '/../database/classes/service.class.php');
+    require_once(__DIR__ . '/../database/classes/review.class.php');
 
     $serviceId = isset($_GET['id']) ? intval($_GET['id']) : 0;
     if ($serviceId <= 0) {
@@ -59,7 +59,7 @@
                             if ($i <= floor($avgRating)) {
                                 echo '<span class="star filled">★</span>';
                             } elseif ($i - 0.5 <= $avgRating) {
-                                echo '<span class="star half">⯪</span>';
+                                echo '<span class="star half-filled">&#9733;</span>';
                             } else {
                                 echo '<span class="star">☆</span>';
                             }
@@ -86,7 +86,7 @@
                                             if ($i <= floor($review->rating)) {
                                                 echo '<span class="star filled">★</span>';
                                             } elseif ($i - 0.5 <= $review->rating) {
-                                                echo '<span class="star half">⯪</span>';
+                                                echo '<span class="star half-filled">&#9733;</span>';
                                             } else {
                                                 echo '<span class="star">☆</span>';
                                             }
