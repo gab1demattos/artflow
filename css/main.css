@@ -16,6 +16,7 @@
 @import url("responsive/home-responsive.css");
 @import url("responsive/modals-responsive.css");
 @import url('responsive/profile-responsive.css');
+@import url('search.css');
 
 :root {
 	/*theme colors*/
@@ -227,3 +228,4 @@ header:first-of-type {
 	margin: 0;
 	height: 100%;
 }
+

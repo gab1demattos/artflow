@@ -44,34 +44,6 @@ class Service {
     }
     
     /**
-     * Get all services
-     * 
-     * @return array Array of Service objects
-     */
-    public static function getAllServices(): array {
-        $db = Database::getInstance();
-        $stmt = $db->query('SELECT * FROM Service');
-        $services = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        
-        $result = [];
-        foreach ($services as $service) {
-            $result[] = new Service(
-                (int)$service['id'],
-                (int)$service['user_id'],
-                $service['title'],
-                $service['description'],
-                (int)$service['category_id'],
-                (float)$service['price'],
-                (int)$service['delivery_time'],
-                $service['images'],
-                $service['videos']
-            );
-        }
-        
-        return $result;
-    }
-    
-    /**
      * Get service by ID
      * 
      * @param int $id Service ID
@@ -419,5 +391,124 @@ class Service {
         
         return $this->username;
     }
+
+    /**
+     * Get all services
+     * 
+     * @return array Array of Service objects
+     */
+    public static function getAllServices(?float $minPrice = null, ?float $maxPrice = null): array {
+        $db = Database::getInstance();
+        $query = 'SELECT * FROM Service';
+        $params = [];
+
+        if ($minPrice !== null || $maxPrice !== null) {
+            $query .= ' WHERE';
+            if ($minPrice !== null) {
+                $query .= ' price >= ?';
+                $params[] = $minPrice;
+            }
+            if ($maxPrice !== null) {
+                $query .= ($minPrice !== null ? ' AND' : '') . ' price <= ?';
+                $params[] = $maxPrice;
+            }
+        }
+
+        $stmt = $db->prepare($query);
+        $stmt->execute($params);
+        $services = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $result = [];
+        foreach ($services as $service) {
+            $result[] = new Service(
+                (int)$service['id'],
+                (int)$service['user_id'],
+                $service['title'],
+                $service['description'],
+                (int)$service['category_id'],
+                (float)$service['price'],
+                (int)$service['delivery_time'],
+                $service['images'],
+                $service['videos']
+            );
+        }
+
+        return $result;
+    }
+
+    public static function searchServices(PDO $db, string $search, ?float $minPrice = null, ?float $maxPrice = null): array {
+        $query = 'SELECT * FROM Service WHERE title LIKE ?';
+        $params = ['%' . $search . '%'];
+
+        if ($minPrice !== null) {
+            $query .= ' AND price >= ?';
+            $params[] = $minPrice;
+        }
+        if ($maxPrice !== null) {
+            $query .= ' AND price <= ?';
+            $params[] = $maxPrice;
+        }
+
+        $stmt = $db->prepare($query);
+        $stmt->execute($params);
+        $services = [];
+        while ($service = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $services[] = new Service(
+                (int)$service['id'],
+                (int)$service['user_id'],
+                $service['title'],
+                $service['description'],
+                (int)$service['category_id'],
+                (float)$service['price'],
+                (int)$service['delivery_time'],
+                $service['images'],
+                $service['videos']
+            );
+        }
+        return $services;
+    }
+
+    /**
+     * Get services by multiple category IDs
+     * 
+     * @param PDO $db Database connection
+     * @param array $categoryIds Array of category IDs
+     * @return array Array of Service objects
+     */
+    public static function getServicesByCategories(PDO $db, array $categoryIds, ?float $minPrice = null, ?float $maxPrice = null): array {
+        $placeholders = implode(',', array_fill(0, count($categoryIds), '?'));
+        $query = "SELECT Service.*, User.username FROM Service JOIN User ON Service.user_id = User.id WHERE Service.category_id IN ($placeholders)";
+        $params = $categoryIds;
+
+        if ($minPrice !== null) {
+            $query .= ' AND price >= ?';
+            $params[] = $minPrice;
+        }
+        if ($maxPrice !== null) {
+            $query .= ' AND price <= ?';
+            $params[] = $maxPrice;
+        }
+
+        $stmt = $db->prepare($query);
+        $stmt->execute($params);
+        $services = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $result = [];
+        foreach ($services as $service) {
+            $result[] = new Service(
+                (int)$service['id'],
+                (int)$service['user_id'],
+                $service['title'],
+                $service['description'],
+                (int)$service['category_id'],
+                (float)$service['price'],
+                (int)$service['delivery_time'],
+                $service['images'],
+                $service['videos'],
+                $service['username']
+            );
+        }
+        return $result;
+    }
+    
 }
 ?>
