@@ -1,10 +1,12 @@
 <?php
+
 declare(strict_types=1);
 
 require_once(__DIR__ . '/../database.php');
 require_once(__DIR__ . '/category.class.php');
 
-class Service {
+class Service
+{
     public int $id;
     public int $user_id;
     public string $title;
@@ -15,21 +17,23 @@ class Service {
     public ?string $images;
     public ?string $videos;
     public ?string $username = null; // Added username property
-    
+    public float $avg_rating = 0; // Added avg_rating property
+
     /**
      * Constructor for Service
      */
     public function __construct(
-        int $id, 
-        int $user_id, 
-        string $title, 
+        int $id,
+        int $user_id,
+        string $title,
         string $description,
         int $category_id,
         float $price,
         int $delivery_time,
         ?string $images = null,
         ?string $videos = null,
-        ?string $username = null // Added username parameter
+        ?string $username = null, // Added username parameter
+        ?float $avg_rating = 0 // Added avg_rating parameter
     ) {
         $this->id = $id;
         $this->user_id = $user_id;
@@ -41,20 +45,52 @@ class Service {
         $this->images = $images;
         $this->videos = $videos;
         $this->username = $username; // Initialize username property
+        $this->avg_rating = $avg_rating ?? 0; // Initialize avg_rating property
     }
-    
+
     /**
+     * Get all services
+     * 
+     * @return array Array of Service objects
+     */
+    public static function getAllServices(): array
+    {
+        $db = Database::getInstance();
+        $stmt = $db->query('SELECT * FROM Service');
+        $services = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $result = [];
+        foreach ($services as $service) {
+            $result[] = new Service(
+                (int)$service['id'],
+                (int)$service['user_id'],
+                $service['title'],
+                $service['description'],
+                (int)$service['category_id'],
+                (float)$service['price'],
+                (int)$service['delivery_time'],
+                $service['images'],
+                $service['videos']
+            );
+        }
+
+        return $result;
+    }
+
+    /**
+
      * Get service by ID
      * 
      * @param int $id Service ID
      * @return Service|null Service object or null if not found
      */
-    public static function getServiceById(int $id): ?Service {
+    public static function getServiceById(int $id): ?Service
+    {
         $db = Database::getInstance();
         $stmt = $db->prepare('SELECT * FROM Service WHERE id = ?');
         $stmt->execute([$id]);
         $service = $stmt->fetch(PDO::FETCH_ASSOC);
-        
+
         if ($service) {
             return new Service(
                 (int)$service['id'],
@@ -68,22 +104,23 @@ class Service {
                 $service['videos']
             );
         }
-        
+
         return null;
     }
-    
+
     /**
      * Get services by category ID
      * 
      * @param int $categoryId Category ID
      * @return array Array of Service objects
      */
-    public static function getServicesByCategory(int $categoryId): array {
+    public static function getServicesByCategory(int $categoryId): array
+    {
         $db = Database::getInstance();
         $stmt = $db->prepare('SELECT Service.*, User.username FROM Service JOIN User ON Service.user_id = User.id WHERE Service.category_id = ?');
         $stmt->execute([$categoryId]);
         $services = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        
+
         $result = [];
         foreach ($services as $service) {
             $serviceObj = new Service(
@@ -98,19 +135,20 @@ class Service {
                 $service['videos'],
                 $service['username'] // Pass the username
             );
-            
+
             $result[] = $serviceObj;
         }
-        
+
         return $result;
     }
-    
+
     /**
      * Count services by category (for pagination)
      * @param int $categoryId
      * @return int
      */
-    public static function countServicesByCategory(int $categoryId): int {
+    public static function countServicesByCategory(int $categoryId): int
+    {
         $db = Database::getInstance();
         $stmt = $db->prepare('SELECT COUNT(*) FROM Service WHERE category_id = ?');
         $stmt->execute([$categoryId]);
@@ -124,7 +162,8 @@ class Service {
      * @param int $offset
      * @return array
      */
-    public static function getServicesByCategoryPaginated(int $categoryId, int $limit, int $offset): array {
+    public static function getServicesByCategoryPaginated(int $categoryId, int $limit, int $offset): array
+    {
         $db = Database::getInstance();
         $stmt = $db->prepare('SELECT Service.*, User.username FROM Service JOIN User ON Service.user_id = User.id WHERE Service.category_id = ? LIMIT ? OFFSET ?');
         $stmt->bindValue(1, $categoryId, PDO::PARAM_INT);
@@ -144,25 +183,27 @@ class Service {
                 (int)$service['delivery_time'],
                 $service['images'],
                 $service['videos'],
-                $service['username']
+                $service['username'],
+                isset($service['avg_rating']) ? (float)$service['avg_rating'] : 0
             );
             $result[] = $serviceObj;
         }
         return $result;
     }
-    
+
     /**
      * Get services by user ID
      * 
      * @param int $userId User ID
      * @return array Array of Service objects
      */
-    public static function getServicesByUserId(int $userId): array {
+    public static function getServicesByUserId(int $userId): array
+    {
         $db = Database::getInstance();
         $stmt = $db->prepare('SELECT Service.*, User.username FROM Service JOIN User ON Service.user_id = User.id WHERE Service.user_id = ?');
         $stmt->execute([$userId]);
         $services = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        
+
         $result = [];
         foreach ($services as $service) {
             $serviceObj = new Service(
@@ -177,19 +218,20 @@ class Service {
                 $service['videos'],
                 $service['username'] // Pass the username
             );
-            
+
             $result[] = $serviceObj;
         }
-        
+
         return $result;
     }
-    
+
     /**
      * Count services by user (for pagination)
      * @param int $userId
      * @return int
      */
-    public static function countServicesByUserId(int $userId): int {
+    public static function countServicesByUserId(int $userId): int
+    {
         $db = Database::getInstance();
         $stmt = $db->prepare('SELECT COUNT(*) FROM Service WHERE user_id = ?');
         $stmt->execute([$userId]);
@@ -203,7 +245,8 @@ class Service {
      * @param int $offset
      * @return array
      */
-    public static function getServicesByUserIdPaginated(int $userId, int $limit, int $offset): array {
+    public static function getServicesByUserIdPaginated(int $userId, int $limit, int $offset): array
+    {
         $db = Database::getInstance();
         $stmt = $db->prepare('SELECT Service.*, User.username FROM Service JOIN User ON Service.user_id = User.id WHERE Service.user_id = ? LIMIT ? OFFSET ?');
         $stmt->bindValue(1, $userId, PDO::PARAM_INT);
@@ -223,22 +266,23 @@ class Service {
                 (int)$service['delivery_time'],
                 $service['images'],
                 $service['videos'],
-                $service['username']
+                $service['username'],
+                isset($service['avg_rating']) ? (float)$service['avg_rating'] : 0
             );
             $result[] = $serviceObj;
         }
         return $result;
     }
-    
+
     /**
      * Create a new service
      * 
      * @return Service|null The newly created service or null if failed
      */
     public static function createService(
-        int $user_id, 
-        string $title, 
-        string $description, 
+        int $user_id,
+        string $title,
+        string $description,
         int $category_id,
         float $price,
         int $delivery_time,
@@ -247,44 +291,51 @@ class Service {
         array $subcategories = []
     ): ?Service {
         $db = Database::getInstance();
-        
+
         try {
             $db->beginTransaction();
-            
+
             $stmt = $db->prepare('INSERT INTO Service (user_id, title, description, category_id, price, delivery_time, images, videos) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
             $success = $stmt->execute([
-                $user_id, $title, $description, $category_id, $price, $delivery_time, $images, $videos
+                $user_id,
+                $title,
+                $description,
+                $category_id,
+                $price,
+                $delivery_time,
+                $images,
+                $videos
             ]);
-            
+
             if (!$success) {
                 $db->rollBack();
                 return null;
             }
-            
+
             $serviceId = (int)$db->lastInsertId();
-            
+
             // Add subcategories
             foreach ($subcategories as $subcatId) {
                 $stmt = $db->prepare('INSERT INTO ServiceSubcategory (service_id, subcategory_id) VALUES (?, ?)');
                 $success = $stmt->execute([$serviceId, $subcatId]);
-                
+
                 if (!$success) {
                     $db->rollBack();
                     return null;
                 }
             }
-            
+
             $db->commit();
-            
+
             return new Service(
-                $serviceId, 
-                $user_id, 
-                $title, 
-                $description, 
-                $category_id, 
-                $price, 
-                $delivery_time, 
-                $images, 
+                $serviceId,
+                $user_id,
+                $title,
+                $description,
+                $category_id,
+                $price,
+                $delivery_time,
+                $images,
                 $videos
             );
         } catch (PDOException $e) {
@@ -292,7 +343,43 @@ class Service {
             return null;
         }
     }
-    
+
+    /**
+     * Update the average rating for a service based on reviews
+     * 
+     * @param int $serviceId Service ID to update rating for
+     * @return bool True if update was successful
+     */
+    public static function updateAverageRating(int $serviceId): bool
+    {
+        $db = Database::getInstance();
+
+        try {
+            // Calculate average rating from all reviews
+            $stmt = $db->prepare('
+                SELECT AVG(rating) as avg_rating
+                FROM Review
+                WHERE service_id = ?
+            ');
+            $stmt->execute([$serviceId]);
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            $avgRating = $result['avg_rating'] ? (float)$result['avg_rating'] : 0;
+
+            // Update the service with new average rating
+            $updateStmt = $db->prepare('
+                UPDATE Service
+                SET avg_rating = ?
+                WHERE id = ?
+            ');
+
+            return $updateStmt->execute([$avgRating, $serviceId]);
+        } catch (PDOException $e) {
+            error_log('Error updating average rating: ' . $e->getMessage());
+            return false;
+        }
+    }
+
     /**
      * Delete a service by ID
      * @param int $id
@@ -309,55 +396,60 @@ class Service {
      * 
      * @return Category|null The category for this service
      */
-    public function getCategory(): ?Category {
+    public function getCategory(): ?Category
+    {
         return Category::getCategoryById($this->category_id);
     }
-    
+
     /**
      * Get subcategories for this service
      * 
      * @return array Array of subcategory IDs
      */
-    public function getSubcategoryIds(): array {
+    public function getSubcategoryIds(): array
+    {
         $db = Database::getInstance();
         $stmt = $db->prepare('SELECT subcategory_id FROM ServiceSubcategory WHERE service_id = ?');
         $stmt->execute([$this->id]);
         return $stmt->fetchAll(PDO::FETCH_COLUMN);
     }
-    
+
     /**
      * Get the first image for this service
      * 
      * @return string|null The first image path or null if no images
      */
-    public function getFirstImage(): ?string {
+    public function getFirstImage(): ?string
+    {
         if (empty($this->images)) {
             return null;
         }
-        
+
         $imageArray = array_filter(array_map('trim', explode(',', $this->images)));
         return count($imageArray) > 0 ? $imageArray[0] : null;
     }
-    
+
     /**
      * Get all image paths as array
      * 
      * @return array Array of image paths
      */
-    public function getImagesArray(): array {
+    public function getImagesArray(): array
+    {
         if (empty($this->images)) {
             return [];
         }
-        
+
         return array_filter(array_map('trim', explode(',', $this->images)));
     }
-    
+
     /**
      * Convert to associative array for JSON output or template usage
      * 
      * @return array Associative array of service properties
      */
-    public function toArray(): array {
+    public function toArray(): array
+    {
         return [
             'id' => $this->id,
             'user_id' => $this->user_id,
@@ -368,16 +460,18 @@ class Service {
             'delivery_time' => $this->delivery_time,
             'images' => $this->images,
             'videos' => $this->videos,
-            'username' => $this->username ?? null
+            'username' => $this->username ?? null,
+            'avg_rating' => $this->avg_rating ?? null
         ];
     }
-    
+
     /**
      * Get the username of the service provider
      * 
      * @return string|null Username or null if not available
      */
-    public function getUsername(): ?string {
+    public function getUsername(): ?string
+    {
         if ($this->username === null) {
             // If username is not set, fetch it from the database
             $db = Database::getInstance();
@@ -388,7 +482,7 @@ class Service {
                 $this->username = $result['username'];
             }
         }
-        
+
         return $this->username;
     }
 
@@ -621,4 +715,3 @@ class Service {
     }
     
 }
-?>

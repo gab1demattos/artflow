@@ -1,11 +1,17 @@
 <?php function drawServiceDisplay($service, $user, $db)
 { ?>
     <?php
+    require_once(__DIR__ . '/../database/classes/service.class.php');
+    require_once(__DIR__ . '/../database/classes/review.class.php');
+
     $serviceId = isset($_GET['id']) ? intval($_GET['id']) : 0;
     if ($serviceId <= 0) {
         echo "<p>Invalid service ID.</p>";
         return;
     }
+
+    // Automatically update the average rating for this service
+    Service::updateAverageRating($serviceId);
 
     $stmtService = $db->prepare('SELECT * FROM Service WHERE id = ?');
     $stmtService->execute([$serviceId]);
@@ -42,14 +48,59 @@
                 <div id="reviews">
                     <h3>Reviews</h3>
                     <?php
-                    $stmtReviews = $db->prepare('SELECT r.rating, r.comment, u.username FROM Review r JOIN User u ON r.user_id = u.id WHERE r.service_id = ?');
-                    $stmtReviews->execute([$service['id']]);
-                    $reviews = $stmtReviews->fetchAll(PDO::FETCH_ASSOC);
+                    // Display average rating for this service if available
+                    $avgRating = isset($service['avg_rating']) ? (float)$service['avg_rating'] : 0;
+                    if ($avgRating > 0) {
+                        echo '<div class="service-avg-rating">';
+                        echo '<p><strong>Average Rating:</strong> ' . number_format($avgRating, 1) . ' / 5.0</p>';
+                        echo '<div class="stars-display">';
+                        // Display filled stars based on rating
+                        for ($i = 1; $i <= 5; $i++) {
+                            if ($i <= floor($avgRating)) {
+                                echo '<span class="star filled">★</span>';
+                            } elseif ($i - 0.5 <= $avgRating) {
+                                echo '<span class="star half-filled">&#9733;</span>';
+                            } else {
+                                echo '<span class="star">☆</span>';
+                            }
+                        }
+                        echo '</div>';
+                        echo '</div>';
+                    }
+
+                    // Use Review class to get reviews
+                    $reviews = Review::getReviewsByServiceId($service['id']);
+
                     if (count($reviews) > 0) {
                         foreach ($reviews as $review) { ?>
                             <div class="review">
-                                <p><strong><?= htmlspecialchars($review['username']) ?>:</strong> <?= htmlspecialchars($review['comment']) ?></p>
-                                <p>Rating: <?= htmlspecialchars($review['rating']) ?>/5</p>
+                                <div class="review-header">
+                                    <div class="review-user">
+                                        <img class="review-user-img" src="<?= ($review->profile_image !== null && $review->profile_image !== '') ? htmlspecialchars($review->profile_image) : '/images/user_pfp/default.png' ?>" alt="Reviewer">
+                                        <p><strong><?= htmlspecialchars($review->username) ?></strong></p>
+                                    </div>
+                                    <div class="review-rating">
+                                        <?php
+                                        // Show stars for this review's rating
+                                        for ($i = 1; $i <= 5; $i++) {
+                                            if ($i <= floor($review->rating)) {
+                                                echo '<span class="star filled">★</span>';
+                                            } elseif ($i - 0.5 <= $review->rating) {
+                                                echo '<span class="star half-filled">&#9733;</span>';
+                                            } else {
+                                                echo '<span class="star">☆</span>';
+                                            }
+                                        }
+                                        ?>
+                                        <span class="rating-value"><?= number_format($review->rating, 1) ?></span>
+                                    </div>
+                                </div>
+                                <div class="review-content">
+                                    <p><?= htmlspecialchars($review->comment) ?></p>
+                                </div>
+                                <div class="review-date">
+                                    <small>Posted on: <?= date('M j, Y', strtotime($review->created_at)) ?></small>
+                                </div>
                             </div>
                         <?php }
                     } else { ?>
@@ -74,7 +125,7 @@
                 </div>
                 <div id="service-options">
                     <?php if ($user && $service['user_id'] != $user['id']): ?>
-                        <a href="/pages/messages.php?user_id=<?= $service['user_id'] ?>" class="service-options" id="message">Message <?=  htmlspecialchars(explode(' ', $owner['name'])[0]) ?></a>
+                        <a href="/pages/messages.php?user_id=<?= $service['user_id'] ?>" class="service-options" id="message">Message <?= htmlspecialchars(explode(' ', $owner['name'])[0]) ?></a>
                         <button id="payment" class="service-options">Continue to Payment</button>
                     <?php elseif (!$user): ?>
                         <button class="button filled hovering service-options">Sign Up to Message</button>
