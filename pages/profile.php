@@ -3,6 +3,7 @@ require_once(__DIR__ . '/../database/session.php');
 require_once(__DIR__ . '/../templates/home.tpl.php');
 require_once(__DIR__ . '/../database/classes/user.class.php');
 require_once(__DIR__ . '/../database/classes/service.class.php');
+require_once(__DIR__ . '/../database/classes/review.class.php');
 require_once(__DIR__ . '/../templates/service_card.php');
 
 $session = Session::getInstance();
@@ -26,6 +27,43 @@ $servicesPerPage = 20; // 4 rows x 5 cards
 $totalServices = Service::countServicesByUserId($user->getId());
 $offset = ($page - 1) * $servicesPerPage;
 $services = Service::getServicesByUserIdPaginated($user->getId(), $servicesPerPage, $offset);
+
+// Get all services by the user (for retrieving reviews)
+$allUserServices = Service::getServicesByUserId($user->getId());
+$userServiceIds = array_map(function ($service) {
+    return $service->id; // Access the id property directly, not via getId()
+}, $allUserServices);
+
+// Get reviews for user's services
+$reviews = [];
+if (!empty($userServiceIds)) {
+    $db = Database::getInstance();
+    $placeholders = implode(',', array_fill(0, count($userServiceIds), '?'));
+    $stmt = $db->prepare("
+        SELECT Review.*, User.username, Service.title as service_title 
+        FROM Review 
+        JOIN User ON Review.user_id = User.id 
+        JOIN Service ON Review.service_id = Service.id 
+        WHERE Review.service_id IN ($placeholders) 
+        ORDER BY Review.created_at DESC
+    ");
+    $stmt->execute($userServiceIds);
+    $reviewsData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    foreach ($reviewsData as $reviewData) {
+        $reviews[] = new Review(
+            (int)$reviewData['id'],
+            (int)$reviewData['user_id'],
+            (int)$reviewData['service_id'],
+            (float)$reviewData['rating'],
+            $reviewData['comment'],
+            $reviewData['created_at'],
+            $reviewData['updated_at'],
+            $reviewData['username'],
+            $reviewData['service_title']
+        );
+    }
+}
 
 drawHeader($loggedInUser);
 ?>
@@ -96,7 +134,31 @@ drawHeader($loggedInUser);
     </div>
 
     <div id="reviews" class="tab-content">
-        <img src="/images/nothing-to-see-here.png" alt="Nothing to see here!" class="nothing-img" />
+        <?php if (empty($reviews)): ?>
+            <img src="/images/nothing-to-see-here.png" alt="Nothing to see here!" class="nothing-img" />
+        <?php else: ?>
+            <div class="reviews-list">
+                <?php foreach ($reviews as $review): ?>
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="review-user">
+                                <strong><?= htmlspecialchars($review->username) ?></strong>
+                                <span class="review-date"><?= htmlspecialchars($review->created_at) ?></span>
+                            </div>
+                            <div class="review-rating">
+                                <?php for ($i = 1; $i <= 5; $i++): ?>
+                                    <span class="star<?= $i <= $review->rating ? ' filled' : '' ?>">&#9733;</span>
+                                <?php endfor; ?>
+                            </div>
+                        </div>
+                        <div class="review-body">
+                            <p class="review-comment"><?= htmlspecialchars($review->comment) ?></p>
+                            <p class="review-service">Service: <?= htmlspecialchars($review->service_title) ?></p>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
     </div>
 </main>
 
