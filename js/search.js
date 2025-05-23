@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (input.type === 'checkbox') {
                 input.checked = true; // Set all checkboxes to checked
             } else {
-                input.value = input.id === 'min-price' ? '0' : '1000'; // Set price inputs to initial values
+                input.value = input.id === 'min-price' ? input.min : input.max;// Set price inputs to initial values
             }
         });
 
