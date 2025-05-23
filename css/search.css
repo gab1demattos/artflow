@@ -186,3 +186,7 @@
 	height: 37em;
     width: 80%;
 }
+
+#search-page-bar.names-active {
+    margin: 0 auto;
+}

@@ -42,6 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Hide filter-search when names are active
         filterSearch.classList.add("hidden");
+        SearchBarPage.classList.add("names-active");
 
         // Add new listener for names
         loadSearchResults("names", SearchInputPage);
