@@ -6,6 +6,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchServicesBtn = document.getElementById("search-services");
     const searchNamesBtn = document.getElementById("search-names");
     const searchResults = document.getElementById("search-results");
+    const searchBar = document.getElementById('search-bar');
+
+    // Redirect to search.php when the search bar is clicked
+    searchBar.addEventListener('click', () => {
+        window.location.href = '../pages/search.php';
+    });
 
     // Interrupt event listener when switching between buttons
     searchServicesBtn.addEventListener("click", () => {

@@ -1,6 +1,4 @@
-<?php
-function drawSearchPage() {
-    ?>
+<?php function drawSearchPage($user) { ?>
     <div class="search-content">
         <button class="close-modal">x</button>
         <div class="search-options">
@@ -11,6 +9,4 @@ function drawSearchPage() {
                 
         </div>
     </div>
-     <?php
-}
-?>
+<?php } ?>
