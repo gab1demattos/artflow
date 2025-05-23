@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchNamesBtn = document.getElementById("search-names");
     const searchResults = document.getElementById("search-results");
     const searchBar = document.getElementById('search-bar');
+    const filterSearch = document.getElementById("filter-search");
 
     // Redirect to search.php when the search bar is clicked
     searchBar.addEventListener('click', () => {
@@ -26,6 +27,9 @@ document.addEventListener('DOMContentLoaded', () => {
         searchResults.classList.add("services-active");
         searchResults.classList.remove("names-active");
 
+        // Show filter-search when services are active
+        filterSearch.classList.remove("hidden");
+
         // Add new listener for services
         loadSearchResults("services", SearchInputPage);
     });
@@ -35,6 +39,9 @@ document.addEventListener('DOMContentLoaded', () => {
         searchServicesBtn.classList.remove("active");
         searchResults.classList.add("names-active");
         searchResults.classList.remove("services-active");
+
+        // Hide filter-search when names are active
+        filterSearch.classList.add("hidden");
 
         // Add new listener for names
         loadSearchResults("names", SearchInputPage);

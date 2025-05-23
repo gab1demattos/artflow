@@ -46,6 +46,7 @@
     flex-direction: column;
     justify-content: flex-start; /* Ensure list starts from the top */
     padding: 1em;
+    width: 100%;
 }
 
 
