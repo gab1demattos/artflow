@@ -12,7 +12,13 @@ const Modals = {
 		category: null,
 		newService: null,
 		subcategory: null,
-		search: null,
+		irreversible: null,
+	},
+
+	// Callback functions for irreversible modal
+	irreversibleCallbacks: {
+		confirm: null,
+		cancel: null,
 	},
 
 	/**
@@ -28,7 +34,7 @@ const Modals = {
 			"new-service-modal-overlay"
 		);
 		this.overlays.subcategory = document.getElementById("subcategory-overlay");
-		this.overlays.search = document.getElementById("search-modal-overlay");
+		this.overlays.irreversible = document.getElementById("irreversible-modal");
 
 		// Initialize various modal-related events
 		this.setupGenericModalEvents();
@@ -37,7 +43,7 @@ const Modals = {
 		this.setupCategoryModal();
 		this.setupNewServiceModal();
 		this.setupGoFlowModal();
-		this.setupSearchModal();
+		this.setupIrreversibleModal();
 	},
 
 	/**
@@ -63,13 +69,12 @@ const Modals = {
 	 * Set up generic modal events like clicking outside to close
 	 */
 	setupGenericModalEvents() {
-		// Close modal when clicking outside, except for the search modal
+		// Close modal when clicking outside
 		document.querySelectorAll(".modal-overlay").forEach((overlay) => {
-			if (overlay.id === "search-modal-overlay") return; // Skip search modal
-
 			overlay.addEventListener("click", function () {
 				overlay.classList.add("hidden");
 			});
+
 			const modal = overlay.querySelector(".modal");
 			if (modal) {
 				modal.addEventListener("click", function (e) {
@@ -217,7 +222,7 @@ const Modals = {
 
 				// Send AJAX POST to login
 				try {
-					const response = await fetch("actions/signin-action.php", {
+					const response = await fetch("actions/login/signin-action.php", {
 						method: "POST",
 						headers: {
 							"Content-Type": "application/x-www-form-urlencoded",
@@ -245,6 +250,59 @@ const Modals = {
 					Modals.overlays.goFlow.classList.add("hidden");
 				}
 			});
+		}
+	},
+
+	/**
+	 * Set up irreversible action confirmation modal
+	 */
+	setupIrreversibleModal() {
+		if (!this.overlays.irreversible) return;
+
+		const confirmBtn = document.getElementById("irreversible-confirm-btn");
+		const cancelBtn = document.getElementById("irreversible-cancel-btn");
+
+		if (confirmBtn) {
+			confirmBtn.addEventListener("click", () => {
+				this.hideIrreversibleModal();
+				if (typeof this.irreversibleCallbacks.confirm === "function") {
+					this.irreversibleCallbacks.confirm();
+				}
+			});
+		}
+
+		if (cancelBtn) {
+			cancelBtn.addEventListener("click", () => {
+				this.hideIrreversibleModal();
+				if (typeof this.irreversibleCallbacks.cancel === "function") {
+					this.irreversibleCallbacks.cancel();
+				}
+			});
+		}
+	},
+
+	/**
+	 * Show the irreversible confirmation modal with custom callbacks
+	 * @param {Function} confirmCallback - Function to call if user confirms
+	 * @param {Function} cancelCallback - Function to call if user cancels
+	 */
+	showIrreversibleModal(confirmCallback = null, cancelCallback = null) {
+		if (!this.overlays.irreversible) return;
+
+		// Set callback functions
+		this.irreversibleCallbacks.confirm = confirmCallback;
+		this.irreversibleCallbacks.cancel = cancelCallback;
+
+		// Show the modal
+		this.overlays.irreversible.classList.add("show");
+	},
+
+	/**
+	 * Hide the irreversible confirmation modal
+	 */
+	hideIrreversibleModal() {
+		if (this.overlays.irreversible) {
+			this.overlays.irreversible.classList.remove("show");
 		}
 	},
 };
