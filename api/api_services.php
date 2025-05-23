@@ -10,12 +10,14 @@
   $db = Database::getInstance();
 
   $categories = isset($_GET['categories']) ? explode(',', $_GET['categories']) : [];
+  $minPrice = isset($_GET['min_price']) ? (float)$_GET['min_price'] : null;
+  $maxPrice = isset($_GET['max_price']) ? (float)$_GET['max_price'] : null;
 
   if (!empty($categories)) {
-      $services = Service::getServicesByCategories($db, $categories);
+      $services = Service::getServicesByCategories($db, $categories, $minPrice, $maxPrice);
   } else {
       $search = $_GET['search'] ?? '';
-      $services = empty($search) ? Service::getAllServices() : Service::searchServices($db, $search);
+      $services = empty($search) ? Service::getAllServices($minPrice, $maxPrice) : Service::searchServices($db, $search, $minPrice, $maxPrice);
   }
 
   echo json_encode(array_map(function($service) {
@@ -28,5 +30,5 @@
         'username' => $service->getUsername(),
         'subcategories' => implode(',', $service->getSubcategoryIds())
     ];
-}, $services));
+  }, $services));
 ?>
