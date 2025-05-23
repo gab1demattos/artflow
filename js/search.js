@@ -30,12 +30,21 @@ document.addEventListener('DOMContentLoaded', () => {
         // Clear the search input when switching buttons
         SearchInputPage.value = "";
 
+        // Reset filters when switching buttons
+        const filterInputs = document.querySelectorAll('.filter-option-category input[type="checkbox"], #min-price, #max-price');
+        filterInputs.forEach(input => {
+            if (input.type === 'checkbox') {
+                input.checked = true; // Set all checkboxes to checked
+            } else {
+                input.value = input.id === 'min-price' ? '0' : '1000'; // Set price inputs to initial values
+            }
+        });
+
         // Show filter-search when services are active
         filterSearch.classList.remove("hidden");
 
         // Restore and reapply the saved filter state
         restoreFilterState();
-        const filterInputs = document.querySelectorAll('.filter-option-category input[type="checkbox"], #min-price, #max-price');
         filterInputs.forEach(input => {
             const event = new Event('change');
             input.dispatchEvent(event);
@@ -53,6 +62,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Clear the search input when switching buttons
         SearchInputPage.value = "";
+
+        // Reset filters when switching buttons
+        const filterInputs = document.querySelectorAll('.filter-option-category input[type="checkbox"], #min-price, #max-price');
+        filterInputs.forEach(input => {
+            if (input.type === 'checkbox') {
+                input.checked = true; // Set all checkboxes to checked
+            } else {
+                input.value = input.id === 'min-price' ? '0' : '1000'; // Set price inputs to initial values
+            }
+        });
 
         // Hide filter-search when names are active
         filterSearch.classList.add("hidden");
