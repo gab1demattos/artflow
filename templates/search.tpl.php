@@ -57,15 +57,22 @@
                 ?>
                 <h3>Price</h3>
                 <div id="filter-search-price">
-                    <div class="filter-option-price">
-                        <label for="min-price">Min:</label>
-                        <input type="number" id="min-price" placeholder="0" min="0" value="<?php echo htmlspecialchars($priceRange['min_price']); ?>">
-                    </div>
-                    <div class="filter-option-price">
-                        <label for="max-price">Max:</label>
-                        <input type="number" id="max-price" placeholder="1000" min="0" value="<?php echo htmlspecialchars($priceRange['max_price']); ?>">
+                    <input type="range" id="min-price" min="<?php echo htmlspecialchars($priceRange['min_price']); ?>" max="<?php echo htmlspecialchars($priceRange['max_price']); ?>" value="<?php echo htmlspecialchars($priceRange['min_price']); ?>" step="1" oninput="updatePriceRange()">
+                    <input type="range" id="max-price" min="<?php echo htmlspecialchars($priceRange['min_price']); ?>" max="<?php echo htmlspecialchars($priceRange['max_price']); ?>" value="<?php echo htmlspecialchars($priceRange['max_price']); ?>" step="1" oninput="updatePriceRange()">
+                    <div id="price-range-values">
+                        <span id="min-price-value"><?php echo htmlspecialchars($priceRange['min_price']); ?></span> - 
+                        <span id="max-price-value"><?php echo htmlspecialchars($priceRange['max_price']); ?></span>
                     </div>
                 </div>
+
+                <script>
+                    function updatePriceRange() {
+                        const minPrice = document.getElementById('min-price').value;
+                        const maxPrice = document.getElementById('max-price').value;
+                        document.getElementById('min-price-value').textContent = minPrice;
+                        document.getElementById('max-price-value').textContent = maxPrice;
+                    }
+                </script>
                 
             </div>
             <div id="search-results" class="scrollable services-active"></div>
