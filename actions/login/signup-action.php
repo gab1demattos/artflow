@@ -50,6 +50,13 @@ if ($stmt->fetchColumn() > 0) {
     handle_signup_error('An account with this email already exists.');
 }
 
+// Check for existing username
+$stmt = $db->prepare('SELECT COUNT(*) FROM User WHERE username = ?');
+$stmt->execute([$username]);
+if ($stmt->fetchColumn() > 0) {
+    handle_signup_error('An account with this username already exists.');
+}
+
 // Password length check
 if (strlen($password) < 8) {
     handle_signup_error('Password must be at least 8 characters.');
