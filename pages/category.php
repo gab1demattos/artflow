@@ -69,8 +69,8 @@ drawHeader($user);
                 <input type="hidden" name="id" value="<?= $categoryId ?>">
 
                 <label for="price-min">Price Range:</label>
-                <input type="number" name="price_min" id="price-min" placeholder="Min" min="<?= $priceMin ?>" max="<?= $priceMax ?>" value="<?= $priceMin ?>" step="0.01">
-                <input type="number" name="price_max" id="price-max" placeholder="Max" min="<?= $priceMin ?>" max="<?= $priceMax ?>" value="<?= $priceMax ?>" step="0.01">
+                <input type="number" name="price_min" id="price-min" placeholder="Min" min="<?= $priceMin ?>" max="<?= $priceMax ?>" value="<?= $priceMin ?>" step="1">
+                <input type="number" name="price_max" id="price-max" placeholder="Max" min="<?= $priceMin ?>" max="<?= $priceMax ?>" value="<?= $priceMax ?>" step="1">
 
                 <label>Rating:</label>
                 <div class="rating-checkboxes">

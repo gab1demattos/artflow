@@ -199,9 +199,19 @@
     background-color: #b96a4b;
 }
 
-#price-min, #price-max {
+#price-min, #price-max, #delivery-min, #delivery-max {
 	border: none;
 	outline: none;
+	width: 2.5em;
+	background-color: transparent;
+}
+
+#price-min, #price-max {
+	width: 3em;
+}
+
+#delivery-min, #delivery-max  {
+	width: 2.5em;
 }
 
 @media (max-width: 600px) {
