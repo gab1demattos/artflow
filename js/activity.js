@@ -243,15 +243,83 @@ document.addEventListener("DOMContentLoaded", function () {
 					const rateForm = document.getElementById("rate-it-form");
 					if (rateForm) {
 						rateForm.addEventListener("submit", function (event) {
+							event.preventDefault(); // Prevent the default form submission
+
 							const currentRating = parseFloat(
 								document.getElementById("rating-value").value
 							);
 							if (currentRating === 0) {
-								event.preventDefault();
 								alert("Please select a rating before submitting");
 								return false;
 							}
-							// Form is valid, will submit
+
+							// Get form data
+							const serviceId = document.querySelector(
+								"input[name='service_id']"
+							).value;
+							console.log("Service ID being submitted:", serviceId); // Debug log
+
+							if (!serviceId || serviceId === "0" || serviceId === 0) {
+								alert("Error: Invalid service ID. Please try again.");
+								return false;
+							}
+
+							const rating = document.getElementById("rating-value").value;
+							const reviewText = document.getElementById("review-text").value;
+							const makePublic = document.getElementById("make-public").checked
+								? "1"
+								: "0";
+
+							// Create URL-encoded form data
+							const formData = new URLSearchParams();
+							formData.append("service_id", serviceId);
+							formData.append("rating", rating);
+							formData.append("review_text", reviewText);
+							formData.append("make_public", makePublic);
+
+							console.log("Submitting form data:", formData.toString()); // Debug log
+
+							// Submit the review via fetch API
+							fetch("/actions/submit-review.php", {
+								method: "POST",
+								headers: {
+									"Content-Type": "application/x-www-form-urlencoded",
+								},
+								body: formData.toString(),
+							})
+								.then((response) =>
+									response.json().catch(() => response.text())
+								)
+								.then((result) => {
+									// Check if result is a string (HTML) or an object
+									if (typeof result === "string") {
+										// Success - close the modal and show alert
+										rateItModal.style.display = "none";
+										alert("Review submitted successfully!");
+
+										// Redirect to the service page
+										window.location.href = "/pages/service.php?id=" + serviceId;
+									} else if (result.success) {
+										// Success with JSON response
+										rateItModal.style.display = "none";
+										alert("Review submitted successfully!");
+
+										// Redirect to the service page
+										window.location.href = "/pages/service.php?id=" + serviceId;
+									} else {
+										// Error
+										alert(
+											result.error ||
+												"An error occurred while submitting your review."
+										);
+									}
+								})
+								.catch((error) => {
+									console.error("Error submitting review:", error);
+									alert(
+										"An error occurred while submitting your review. Please try again."
+									);
+								});
 						});
 					}
 				} else {

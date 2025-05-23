@@ -7,14 +7,20 @@ require_once(__DIR__ . '/../database/database.php');
 require_once(__DIR__ . '/../database/classes/service.class.php');
 require_once(__DIR__ . '/../database/classes/review.class.php');
 
-// Check if user is logged in
-if (!isset($_SESSION['id'])) {
-    header('Location: /index.php');
+// Set header for JSON response
+header('Content-Type: application/json');
+
+// Initialize session and check if user is logged in
+$session = Session::getInstance();
+$user = $session->getUser();
+
+if (!$user || !isset($user['id'])) {
+    echo json_encode(['success' => false, 'error' => 'User not logged in']);
     exit();
 }
 
 // Get the current user ID
-$userId = $_SESSION['id'];
+$userId = $user['id'];
 
 // Check if the form was submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -48,8 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $service = Service::getServiceById($serviceId);
 
             if (!$service) {
-                $_SESSION['error'] = 'Service not found';
-                header('Location: /pages/service.php?id=' . $serviceId);
+                echo json_encode(['success' => false, 'error' => 'Service not found']);
                 exit();
             }
 
@@ -66,9 +71,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 );
 
                 if ($updated) {
-                    $_SESSION['success'] = 'Your review has been updated';
+                    echo json_encode(['success' => true, 'message' => 'Your review has been updated']);
                 } else {
-                    $_SESSION['error'] = 'Failed to update your review';
+                    echo json_encode(['success' => false, 'error' => 'Failed to update your review']);
                 }
             } else {
                 // Create a new review
@@ -81,32 +86,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 );
 
                 if ($review) {
-                    $_SESSION['success'] = 'Your review has been submitted';
+                    echo json_encode(['success' => true, 'message' => 'Your review has been submitted']);
                 } else {
-                    $_SESSION['error'] = 'Failed to submit your review';
+                    echo json_encode(['success' => false, 'error' => 'Failed to submit your review']);
                 }
             }
 
             // Update the average rating for the service
             Service::updateAverageRating($serviceId);
 
-            // Redirect back to the service page
-            header('Location: /pages/service.php?id=' . $serviceId);
             exit();
         } catch (PDOException $e) {
-            $_SESSION['error'] = 'There was an error submitting your review. Please try again.';
             error_log('Review submission error: ' . $e->getMessage());
-            header('Location: /pages/service.php?id=' . $serviceId);
+            echo json_encode(['success' => false, 'error' => 'There was an error submitting your review. Please try again.']);
             exit();
         }
     } else {
-        // Store errors in session
-        $_SESSION['error'] = implode('<br>', $errors);
-        header('Location: /pages/service.php?id=' . $serviceId);
+        // Return validation errors
+        echo json_encode(['success' => false, 'error' => implode('<br>', $errors)]);
         exit();
     }
 } else {
     // Not a POST request
-    header('Location: /index.php');
+    echo json_encode(['success' => false, 'error' => 'Invalid request method']);
     exit();
 }
