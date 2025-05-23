@@ -58,7 +58,7 @@
                     </li>
                     <li class="sidebar-item">
                         <img src="/images/logos/stats.png" alt="Stats" class="logo">
-                        <button>Stats</button>
+                        <a href="/pages/stats.php" style="text-decoration: none; color: inherit;"><button>Stats</button></a>
                     </li>
                     <?php if (isset($user['user_type']) && $user['user_type'] === 'admin'): ?>
                     <li class="sidebar-item">
