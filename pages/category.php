@@ -68,17 +68,9 @@ drawHeader($user);
             <form method="GET" action="">
                 <input type="hidden" name="id" value="<?= $categoryId ?>">
 
-                <label for="price-range">Price Range:</label>
-                <input type="range" name="price_min" id="price-range-min" min="<?= $priceMin ?>" max="<?= $priceMax ?>" step="1" oninput="document.getElementById('price-min-display').textContent = this.value">
-                <span id="price-min-display"><?= $priceMin ?></span>
-                <input type="range" name="price_max" id="price-range-max" min="<?= $priceMin ?>" max="<?= $priceMax ?>" step="1" oninput="document.getElementById('price-max-display').textContent = this.value">
-                <span id="price-max-display"><?= $priceMax ?></span>
-
-                <label for="delivery-range">Delivery Time (days):</label>
-                <input type="range" name="delivery_min" id="delivery-range-min" min="<?= $deliveryMin ?>" max="<?= $deliveryMax ?>" step="1" oninput="document.getElementById('delivery-min-display').textContent = this.value">
-                <span id="delivery-min-display"><?= $deliveryMin ?></span>
-                <input type="range" name="delivery_max" id="delivery-range-max" min="<?= $deliveryMin ?>" max="<?= $deliveryMax ?>" step="1" oninput="document.getElementById('delivery-max-display').textContent = this.value">
-                <span id="delivery-max-display"><?= $deliveryMax ?></span>
+                <label for="price-min">Price Range:</label>
+                <input type="number" name="price_min" id="price-min" placeholder="Min" min="<?= $priceMin ?>" max="<?= $priceMax ?>" value="<?= $priceMin ?>" step="0.01">
+                <input type="number" name="price_max" id="price-max" placeholder="Max" min="<?= $priceMin ?>" max="<?= $priceMax ?>" value="<?= $priceMax ?>" step="0.01">
 
                 <label>Rating:</label>
                 <div class="rating-checkboxes">
@@ -88,6 +80,10 @@ drawHeader($user);
                     <label><input type="checkbox" name="rating[]" value="2"> 2 Stars</label>
                     <label><input type="checkbox" name="rating[]" value="1"> 1 Star</label>
                 </div>
+
+                <label for="delivery-min">Delivery Time (days):</label>
+                <input type="number" name="delivery_min" id="delivery-min" placeholder="Min" min="<?= $deliveryMin ?>" max="<?= $deliveryMax ?>" value="<?= $deliveryMin ?>" step="1">
+                <input type="number" name="delivery_max" id="delivery-max" placeholder="Max" min="<?= $deliveryMin ?>" max="<?= $deliveryMax ?>" value="<?= $deliveryMax ?>" step="1">
 
                 <button type="submit">Apply Filters</button>
             </form>
