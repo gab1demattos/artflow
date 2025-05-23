@@ -1,178 +1,201 @@
 /* Activity Page Styles */
 /* --- MOVED FROM PROFILE.CSS --- */
 .activity-container {
-    max-width: 700px;
-    margin: 2rem auto;
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
-    padding: 2rem 2.5rem 2.5rem 2.5rem;
+	max-width: 700px;
+	margin: 2rem auto;
+	background: #fff;
+	border-radius: 12px;
+	box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+	padding: 2rem 2.5rem 2.5rem 2.5rem;
 }
 
 .activity-title {
-    font-size: 2rem;
-    margin-bottom: 0rem;
-    font-weight: 700;
-    color: #222;
-    text-align: center;
+	font-size: 2rem;
+	margin-bottom: 0rem;
+	font-weight: 700;
+	color: #222;
+	text-align: center;
 }
 
 .activity-tabs {
-    display: flex;
+	display: flex;
 
-    border-bottom: 1px solid #ddd;
-    /* margin-bottom: 20px; */
-    margin-left: 4.5em;
-    margin-right: 4.5em;
+	border-bottom: 1px solid #ddd;
+	/* margin-bottom: 20px; */
+	margin-left: 4.5em;
+	margin-right: 4.5em;
 
-    gap: 0.5rem;
-    /* margin-bottom: 1rem;
+	gap: 0.5rem;
+	/* margin-bottom: 1rem;
     align-items: flex-end; */
 }
 
 .activity-tab {
-    background: #f3f3f3;
-    border: none;
-    border-radius: 6px 6px 0 0;
-    /* padding: 0.7rem 2.2rem; */
-    font-family: 'EB Garamond', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 500;
-    color: #555;
-    cursor: pointer;
-    transition: background 0.2s, color 0.2s;
-    line-height: 0;
-    height: auto;
-    padding: 0px 1.1rem;
+	background: #f3f3f3;
+	border: none;
+	border-radius: 6px 6px 0 0;
+	/* padding: 0.7rem 2.2rem; */
+	font-family: "EB Garamond", sans-serif;
+	font-size: 1.1rem;
+	font-weight: 500;
+	color: #555;
+	cursor: pointer;
+	transition: background 0.2s, color 0.2s;
+	line-height: 0;
+	height: auto;
+	padding: 0px 1.1rem;
 }
 
 .activity-tab.active {
-    background: var(--purple);
-    color: #fff;
+	background: var(--purple);
+	color: #fff;
 }
 
 .activity-tab-content {
-    /* display: none;
+	/* display: none;
     margin-top: 0; */
 
-    display: none;
-    /* Hide all tab content by default */
-    min-height: calc(100vh - 25em);
-    /* Use viewport height minus space for header/tabs/etc */
-    width: 100%;
-    flex-direction: column;
-    padding: 0 4.5em;
-    /* Match tab margins */
-    box-sizing: border-box;
+	display: none;
+	/* Hide all tab content by default */
+	min-height: calc(100vh - 25em);
+	/* Use viewport height minus space for header/tabs/etc */
+	width: 100%;
+	flex-direction: column;
+	padding: 0 4.5em;
+	/* Match tab margins */
+	box-sizing: border-box;
 }
 
 .activity-tab-content.active {
-    display: block;
+	display: block;
 }
 
-
 .order-card {
-    background: #fafbfc;
-    border-radius: 8px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
-    margin-bottom: 1.5rem;
-    padding: 1.2rem 1.5rem;
-    transition: box-shadow 0.2s;
-    position: relative;
-    /* Needed for absolute button placement */
+	background: #fafbfc;
+	border-radius: 8px;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+	margin-bottom: 1.5rem;
+	padding: 1.2rem 1.5rem;
+	transition: box-shadow 0.2s;
+	position: relative;
+	/* Needed for absolute button placement */
 }
 
 .mark-delivered-btn {
-    position: absolute;
-    right: 1.5rem;
-    bottom: 1rem;
-    z-index: 2;
-    font-size: 0.9em;
-    padding: 6px 18px;
-    border-radius: 20px;
-    background: linear-gradient(90deg, #7ecb8f 0%, #4cae6a 100%);
-    color: #fff;
-    border: none;
-    font-family: 'EB Garamond', serif;
-    font-weight: 600;
-    box-shadow: 0 2px 8px rgba(76, 174, 106, 0.10);
-    cursor: pointer;
-    transition: background 0.2s, box-shadow 0.2s, color 0.2s;
+	position: absolute;
+	right: 1.5rem;
+	bottom: 1rem;
+	z-index: 2;
+	font-size: 0.9em;
+	padding: 6px 18px;
+	border-radius: 20px;
+	background: linear-gradient(90deg, #7ecb8f 0%, #4cae6a 100%);
+	color: #fff;
+	border: none;
+	font-family: "EB Garamond", serif;
+	font-weight: 600;
+	box-shadow: 0 2px 8px rgba(76, 174, 106, 0.1);
+	cursor: pointer;
+	transition: background 0.2s, box-shadow 0.2s, color 0.2s;
+}
+
+.rate-it-btn {
+	position: absolute;
+	right: 1.5rem;
+	bottom: 1rem;
+	z-index: 2;
+	font-size: 0.9em;
+	padding: 6px 18px;
+	border-radius: 20px;
+	background: linear-gradient(90deg, #ffdb58 0%, #ffb300 100%);
+	color: #fff;
+	border: none;
+	font-family: "EB Garamond", serif;
+	font-weight: 700;
+	box-shadow: 0 2px 8px rgba(255, 179, 0, 0.15);
+	cursor: pointer;
+	transition: background 0.2s, box-shadow 0.2s, color 0.2s;
+}
+
+.rate-it-btn:hover {
+	background: linear-gradient(90deg, #ffb300 0%, #ff8c00 100%);
+	color: #fff;
+	box-shadow: 0 4px 16px rgba(255, 179, 0, 0.25);
 }
 
 .mark-delivered-btn:hover {
-    background: linear-gradient(90deg, #4cae6a 0%, #388e4a 100%);
-    color: #eafff2;
-    box-shadow: 0 4px 16px rgba(76, 174, 106, 0.18);
+	background: linear-gradient(90deg, #4cae6a 0%, #388e4a 100%);
+	color: #eafff2;
+	box-shadow: 0 4px 16px rgba(76, 174, 106, 0.18);
 }
 
 .order-card:hover {
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
 }
 
 .order-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 0.7rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 0.7rem;
 }
 
 .order-title {
-    font-size: 1.15rem;
-    font-weight: 600;
-    color: #222;
+	font-size: 1.15rem;
+	font-weight: 600;
+	color: #222;
 }
 
 .order-status {
-    font-size: 0.98rem;
-    font-weight: 500;
-    padding: 0.2rem 0.8rem;
-    border-radius: 5px;
-    background: #e5e5e5;
-    color: #555;
+	font-size: 0.98rem;
+	font-weight: 500;
+	padding: 0.2rem 0.8rem;
+	border-radius: 5px;
+	background: #e5e5e5;
+	color: #555;
 }
 
 .order-status.completed {
-    background: #d1f5e6;
-    color: #1a7f4f;
+	background: #d1f5e6;
+	color: #1a7f4f;
 }
 
 .order-status.in-progress {
-    background: #fff3cd;
-    color: #b8860b;
+	background: #fff3cd;
+	color: #b8860b;
 }
 
 .order-status.awaiting {
-    background: #ffe0e0;
-    color: #c0392b;
+	background: #ffe0e0;
+	color: #c0392b;
 }
 
 .order-status.delivered {
-    background: #d1f5e6;
-    color: #1a7f4f;
+	background: #d1f5e6;
+	color: #1a7f4f;
 }
 
 .order-status.not-delivered {
-    background: #ffe0e0;
-    color: #c0392b;
+	background: #ffe0e0;
+	color: #c0392b;
 }
 
 .order-details {
-    font-size: 1rem;
-    color: #444;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.4rem 1.5rem;
+	font-size: 1rem;
+	color: #444;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 0.4rem 1.5rem;
 }
 
 @media (max-width: 600px) {
-    .activity-container {
-        padding: 1rem 0.5rem;
-    }
+	.activity-container {
+		padding: 1rem 0.5rem;
+	}
 
-    .order-details {
-        grid-template-columns: 1fr;
-    }
+	.order-details {
+		grid-template-columns: 1fr;
+	}
 }
 
 /* --- END MOVED STYLES --- */
