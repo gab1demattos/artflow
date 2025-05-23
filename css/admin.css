@@ -16,38 +16,6 @@
     margin-bottom: 2rem;
 }
 
-.admin-stats-row {
-    display: flex;
-    gap: 2.5rem;
-    justify-content: center;
-    margin-bottom: 2.5rem;
-}
-
-.admin-stat-box {
-    background: linear-gradient(90deg, #f6dd8b 0%, #fcedb7 100%);
-    border-radius: 12px;
-    box-shadow: 0 2px 12px rgba(200, 160, 40, 0.07);
-    padding: 1.5rem 2.5rem;
-    min-width: 180px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.stat-label {
-    font-size: 1.1rem;
-    color: var(--yellow);
-    font-weight: 600;
-    margin-bottom: 0.5em;
-}
-
-.stat-value {
-    font-size: 2.2rem;
-    font-weight: 800;
-    color: var(--yellow);
-}
-
 .admin-tabs-row {
     display: flex;
     justify-content: center;

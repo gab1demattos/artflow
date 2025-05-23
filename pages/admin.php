@@ -13,18 +13,18 @@ drawHeader($user);
 ?>
 <main class="container admin-panel-container">
     <h1 class="admin-title">Admin Panel</h1>
-    <div class="admin-stats-row">
-        <div class="admin-stat-box" id="stat-users">
-            <div class="stat-label">Users</div>
-            <div class="stat-value" id="user-count">...</div>
+    <div class="stat-row">
+        <div class="stat-box stat-box--yellow" id="stat-users">
+            <div class="stat-label stat-label--yellow">Users</div>
+            <div class="stat-value stat-value--yellow" id="user-count">...</div>
         </div>
-        <div class="admin-stat-box" id="stat-services">
-            <div class="stat-label">Services</div>
-            <div class="stat-value" id="service-count">...</div>
+        <div class="stat-box stat-box--yellow" id="stat-services">
+            <div class="stat-label stat-label--yellow">Services</div>
+            <div class="stat-value stat-value--yellow" id="service-count">...</div>
         </div>
-        <div class="admin-stat-box" id="stat-categories">
-            <div class="stat-label">Categories</div>
-            <div class="stat-value" id="category-count">...</div>
+        <div class="stat-box stat-box--yellow" id="stat-categories">
+            <div class="stat-label stat-label--yellow">Categories</div>
+            <div class="stat-value stat-value--yellow" id="category-count">...</div>
         </div>
     </div>
     <div class="admin-tabs-row">
@@ -60,6 +60,7 @@ drawHeader($user);
 <?php include_once(__DIR__ . '/../templates/irreversible-modal.tpl.php'); ?>
 <link rel="stylesheet" href="/css/admin.css">
 <link rel="stylesheet" href="/css/modals.css">
+<link rel="stylesheet" href="/css/components.css">
 <script src="/js/modals.js"></script>
 <script src="/js/admin.js"></script>
 <?php drawFooter($user); ?>

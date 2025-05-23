@@ -33,6 +33,7 @@ a.button {
 	border-radius: 15px;
 	padding: 5px 20px;
 }
+
 /* Example: <button class="button long [other classes]">Long</button> */
 
 /* ===== COLOR + FILL OPTIONS ===== */
@@ -42,6 +43,7 @@ a.button {
 	color: var(--beige);
 	border: none;
 }
+
 /* Example: <button class="button filled [other classes]">Purple Filled</button> */
 
 /* Purple outlined */
@@ -50,6 +52,7 @@ a.button {
 	color: var(--purple);
 	border: 2px solid var(--purple);
 }
+
 /* Example: <button class="button outline [other classes]">Purple Outlined</button> */
 
 /* Yellow filled */
@@ -58,6 +61,7 @@ a.button {
 	color: #ffffff;
 	border: none;
 }
+
 /* Example: <button class="button filled yellow [other classes]">Yellow Filled</button> */
 
 /* Yellow outlined */
@@ -66,6 +70,7 @@ a.button {
 	color: var(--yellow);
 	border: 2px solid var(--yellow);
 }
+
 /* Example: <button class="button outline yellow [other classes]">Yellow Outlined</button> */
 
 .button.filled.orange {
@@ -86,6 +91,7 @@ a.button {
 	color: #ffffff;
 	border: none;
 }
+
 /* Example: <button class="button filled green [other classes]">Green Filled</button> */
 
 /* Green outlined */
@@ -94,6 +100,7 @@ a.button {
 	color: var(--green);
 	border: 2px solid var(--green);
 }
+
 /* Example: <button class="button outline green [other classes]">green Outlined</button> */
 
 /* ===== HOVER BEHAVIOR OPTIONS ===== */
@@ -197,6 +204,7 @@ a.button {
 
 /* Mobile Button Styles */
 @media screen and (max-width: 767px) {
+
 	/* Base button styling - adjust size for mobile */
 	.button {
 		font-size: 0.9rem !important;
@@ -240,173 +248,236 @@ a.button {
 		height: 2.25em !important;
 	}
 }
+
 /*========= !! END BUTTON STYLES !! =========*/
 
 
 /*========= !! SIDEBAR STYLES !! =========*/
 #sidebar-open {
-    font-size: 24px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: #333;
+	font-size: 24px;
+	background: none;
+	border: none;
+	cursor: pointer;
+	color: #333;
 }
 
 
 #sidebar {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 250px;
-    height: 100%;
-    background-color: var(--beige);
-    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
-    transform: translateX(100%);
-    transition: transform 0.3s ease-in-out;
-    z-index: 1001;
-    padding: 20px;
+	position: fixed;
+	top: 0;
+	right: 0;
+	width: 250px;
+	height: 100%;
+	background-color: var(--beige);
+	box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+	transform: translateX(100%);
+	transition: transform 0.3s ease-in-out;
+	z-index: 1001;
+	padding: 20px;
 }
 
 #sidebar ul {
-    list-style: none;
-    padding: 0;
+	list-style: none;
+	padding: 0;
 }
 
 #sidebar ul li {
-    margin: 15px 0;
-    width: 100%;
-    text-align: center;
+	margin: 15px 0;
+	width: 100%;
+	text-align: center;
 }
 
 #sidebar ul li a,
 #sidebar ul li button {
-    display: inline-block;
-    width: 100%;
-    text-align: center;
+	display: inline-block;
+	width: 100%;
+	text-align: center;
 }
 
 #sidebar.active {
-    transform: translateX(0);
+	transform: translateX(0);
 }
 
 #sidebar button {
-    background-color: transparent;
-    color: #333;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    margin: 0 auto;
-    flex-grow: 1;
-    text-align: center;
+	background-color: transparent;
+	color: #333;
+	border: none;
+	cursor: pointer;
+	font-size: 16px;
+	margin: 0 auto;
+	flex-grow: 1;
+	text-align: center;
 }
 
 .logo {
-    width: 1em;
-    height: auto;
+	width: 1em;
+	height: auto;
 }
 
 .sidebar-item {
-    display: flex;
-    align-items: center;
-    justify-content: start;
-    gap: 1em;
-    padding: 0.5em;
+	display: flex;
+	align-items: center;
+	justify-content: start;
+	gap: 1em;
+	padding: 0.5em;
 }
 
 #settings {
-    box-sizing: border-box;
-    border-top: 1px solid #3338;
-    padding: 10px;
-    padding-top: 2.5em;
+	box-sizing: border-box;
+	border-top: 1px solid #3338;
+	padding: 10px;
+	padding-top: 2.5em;
 }
 
 #new-service-button {
-    background-color: var(--purple);
-    color: white;
-    border-radius: 10px;
-    width: 100%;
-    padding: 0.5em;
-    font-family: 'EDGaramond', serif;
-    padding-right: 0;
+	background-color: var(--purple);
+	color: white;
+	border-radius: 10px;
+	width: 100%;
+	padding: 0.5em;
+	font-family: 'EDGaramond', serif;
+	padding-right: 0;
 }
 
 #new-service-button>button {
-    color: white;
-    font-weight: 700;
+	color: white;
+	font-weight: 700;
 }
 
 .sidebar-item button {
-    font-family: 'EB Garamond', sans-serif;
-    font-size: 20px !important;
+	font-family: 'EB Garamond', sans-serif;
+	font-size: 20px !important;
 }
 
 .sidebar-item form {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
 }
 
 .sidebar-item form button {
-    flex-grow: 1;
-    text-align: center;
+	flex-grow: 1;
+	text-align: center;
 }
 
 #overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.2);
-    z-index: 1000;
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.2);
+	z-index: 1000;
+	opacity: 0;
+	transition: opacity 0.3s ease-in-out;
 }
 
 #sidebar.active+#overlay {
-    display: block;
-    opacity: 1;
+	display: block;
+	opacity: 1;
 }
 
 #avatar-sidebar {
-    width: 5em;
-    height: 5em;
+	width: 5em;
+	height: 5em;
 }
 
 #profile {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1em;
-    padding-bottom: 2em;
-    border-bottom: 1px solid #3338;
-    padding-top: 1em;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1em;
+	padding-bottom: 2em;
+	border-bottom: 1px solid #3338;
+	padding-top: 1em;
 }
 
 #profile-name {
-    margin: 0 auto;
-    font-weight: 100;
+	margin: 0 auto;
+	font-weight: 100;
 }
 
 #profile-username {
-    margin: 0 auto;
-    font-weight: 100;
-    font-size: normal;
-    text-align: center;
+	margin: 0 auto;
+	font-weight: 100;
+	font-size: normal;
+	text-align: center;
 }
 
 #profile-link {
-    display: flex;
-    align-items: center;
-    gap: 1em;
-    text-decoration: none;
-    color: inherit;
-    width: 100%;
+	display: flex;
+	align-items: center;
+	gap: 1em;
+	text-decoration: none;
+	color: inherit;
+	width: 100%;
 }
 
 #button-avatar {
-    padding: 0;
+	padding: 0;
 }
+
+/* === Stat Box Component === */
+.stat-box {
+	border-radius: 12px;
+	box-shadow: 0 2px 12px rgba(200, 160, 40, 0.07);
+	padding: 1.5rem 2.5rem;
+	min-width: 180px;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background: linear-gradient(90deg, #f6dd8b 0%, #fcedb7 100%);
+	/* default yellow */
+}
+
+.stat-box--yellow {
+	background: linear-gradient(90deg, #f6dd8b 0%, #fcedb7 100%);
+}
+
+.stat-box--green {
+	background: linear-gradient(90deg, #b2eee2 0%, #e8f8f4 100%);
+}
+
+.stat-label {
+	font-size: 1.1rem;
+	font-weight: 600;
+}
+
+.stat-label--yellow {
+	color: var(--yellow);
+}
+
+.stat-label--green {
+	color: var(--green);
+}
+
+.stat-value {
+	font-size: 2.1rem;
+	font-weight: 700;
+	margin-top: 0.5rem;
+	color: #222;
+}
+
+.stat-value--yellow {
+	color: var(--yellow)
+}
+
+.stat-value--green {
+	color: var(--green);
+}
+
+.stat-box+.stat-box {
+	margin-left: 2.5rem;
+}
+
+.stat-row {
+	display: flex;
+	gap: 2.5rem;
+	justify-content: center;
+	margin-bottom: 2.5rem;
+}
+
 /*========= !! END SIDEBAR STYLES !! =========*/
