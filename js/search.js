@@ -11,9 +11,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // Redirect to search.php when the search bar is clicked
     searchBar.addEventListener('click', () => {
         window.location.href = '../pages/search.php';
-        searchBar.style.display = 'none !important';
-        handleSearchBarInteraction();
+        searchBar.classList.add('hidden'); // Use a CSS class to hide the search bar
     });
+
+    // Call initial() when the search.php page loads
+    if (window.location.pathname.includes('search.php')) {
+        initial("services"); // Default to "services" on page load
+    }
 
     // Interrupt event listener when switching between buttons
     searchServicesBtn.addEventListener("click", () => {
@@ -21,10 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
         searchNamesBtn.classList.remove("active");
         searchResults.classList.add("services-active");
         searchResults.classList.remove("names-active");
-
-        // Remove existing input listener
-        searchInput.removeEventListener('input', searchInput._listener);
-        SearchInputPage.removeEventListener('input', SearchInputPage._listener);
 
         // Add new listener for services
         loadSearchResults("services", SearchInputPage);
@@ -36,17 +36,11 @@ document.addEventListener('DOMContentLoaded', () => {
         searchResults.classList.add("names-active");
         searchResults.classList.remove("services-active");
 
-        // Remove existing input listener
-        searchInput.removeEventListener('input', searchInput._listener);
-        SearchInputPage.removeEventListener('input', SearchInputPage._listener);
-
         // Add new listener for names
         loadSearchResults("names", SearchInputPage);
     });
 
     const handleSearchBarInteraction = () => {
-        searchButton.style.display = 'none';
-
         // Determine which button is active and call initial with the appropriate type
         if (searchServicesBtn.classList.contains("active")) {
             initial("services");
