@@ -1,5 +1,5 @@
 <?php
-// Returns JSON: [ {id, name, username, email, user_type, banned} ... ]
+// Returns JSON: [ {id, name, username, email, user_type} ... ]
 require_once(__DIR__ . '/../database/session.php');
 require_once(__DIR__ . '/../database/user.class.php');
 require_once(__DIR__ . '/../database/database.php');
@@ -13,6 +13,6 @@ if (!$user || $user['user_type'] !== 'admin') {
 }
 
 $db = Database::getInstance();
-$stmt = $db->query('SELECT id, name, username, email, user_type, banned FROM User');
+$stmt = $db->query('SELECT id, name, username, email, user_type FROM User');
 $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 echo json_encode($users);
