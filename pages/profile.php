@@ -34,47 +34,10 @@ $userServiceIds = array_map(function ($service) {
     return $service->id; // Access the id property directly, not via getId()
 }, $allUserServices);
 
-// Get reviews for user's services
-$reviews = [];
-$totalRating = 0;
-$reviewCount = 0;
-$averageRating = 0;
-
-if (!empty($userServiceIds)) {
-    $db = Database::getInstance();
-    $placeholders = implode(',', array_fill(0, count($userServiceIds), '?'));
-    $stmt = $db->prepare("
-        SELECT Review.*, User.username, Service.title as service_title 
-        FROM Review 
-        JOIN User ON Review.user_id = User.id 
-        JOIN Service ON Review.service_id = Service.id 
-        WHERE Review.service_id IN ($placeholders) 
-        ORDER BY Review.created_at DESC
-    ");
-    $stmt->execute($userServiceIds);
-    $reviewsData = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    // Calculate total rating and count
-    foreach ($reviewsData as $reviewData) {
-        $totalRating += (float)$reviewData['rating'];
-        $reviewCount++;
-
-        $reviews[] = new Review(
-            (int)$reviewData['id'],
-            (int)$reviewData['user_id'],
-            (int)$reviewData['service_id'],
-            (float)$reviewData['rating'],
-            $reviewData['comment'],
-            $reviewData['created_at'],
-            $reviewData['updated_at'],
-            $reviewData['username'],
-            $reviewData['service_title']
-        );
-    }
-
-    // Calculate average rating
-    $averageRating = $reviewCount > 0 ? round($totalRating / $reviewCount, 1) : 0;
-}
+// Get reviews for user's services using the refactored method
+$reviewsData = Review::getReviewsByServiceIds($userServiceIds);
+$reviews = $reviewsData['reviews'];
+$averageRating = $reviewsData['averageRating'];
 
 drawHeader($loggedInUser);
 ?>

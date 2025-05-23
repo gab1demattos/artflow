@@ -288,6 +288,88 @@ class Review
     }
 
     /**
+     * Get reviews for multiple services
+     * 
+     * @param array $serviceIds Array of service IDs
+     * @return array Array containing reviews and rating information
+     */
+    public static function getReviewsByServiceIds(array $serviceIds): array
+    {
+        if (empty($serviceIds)) {
+            return [
+                'reviews' => [],
+                'averageRating' => 0,
+                'reviewCount' => 0
+            ];
+        }
+
+        $db = Database::getInstance();
+        $placeholders = implode(',', array_fill(0, count($serviceIds), '?'));
+        $stmt = $db->prepare("
+            SELECT Review.*, User.username, Service.title as service_title 
+            FROM Review 
+            JOIN User ON Review.user_id = User.id 
+            JOIN Service ON Review.service_id = Service.id 
+            WHERE Review.service_id IN ($placeholders) 
+            ORDER BY Review.created_at DESC
+        ");
+        $stmt->execute($serviceIds);
+        $reviewsData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $reviews = [];
+        $totalRating = 0;
+        $reviewCount = 0;
+
+        foreach ($reviewsData as $reviewData) {
+            $totalRating += (float)$reviewData['rating'];
+            $reviewCount++;
+
+            $reviews[] = new Review(
+                (int)$reviewData['id'],
+                (int)$reviewData['user_id'],
+                (int)$reviewData['service_id'],
+                (float)$reviewData['rating'],
+                $reviewData['comment'],
+                $reviewData['created_at'],
+                $reviewData['updated_at'],
+                $reviewData['username'],
+                $reviewData['service_title']
+            );
+        }
+
+        // Calculate average rating
+        $averageRating = $reviewCount > 0 ? round($totalRating / $reviewCount, 1) : 0;
+
+        return [
+            'reviews' => $reviews,
+            'averageRating' => $averageRating,
+            'reviewCount' => $reviewCount
+        ];
+    }
+
+    /**
+     * Calculate average rating from an array of reviews
+     * 
+     * @param array $reviews Array of Review objects
+     * @return float Average rating rounded to 1 decimal place
+     */
+    public static function calculateAverageRating(array $reviews): float
+    {
+        if (empty($reviews)) {
+            return 0;
+        }
+
+        $totalRating = 0;
+        $reviewCount = count($reviews);
+
+        foreach ($reviews as $review) {
+            $totalRating += $review->rating;
+        }
+
+        return round($totalRating / $reviewCount, 1);
+    }
+
+    /**
      * Convert to associative array for JSON output or template usage
      * 
      * @return array Associative array of review properties
