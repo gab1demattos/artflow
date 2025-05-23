@@ -51,7 +51,7 @@
                     </div>
                 </div>
                 <?php 
-                $stmt = $db->prepare('SELECT MIN(price) as min_price, MAX(price) as max_price FROM Service');
+                $stmt = $db->prepare('SELECT MIN(price) as min_price, MAX(price) as max_price, MAX(delivery_time) as max_delivery FROM Service');
                 $stmt->execute();
                 $priceRange = $stmt->fetch(PDO::FETCH_ASSOC);
                 ?>
@@ -65,7 +65,7 @@
                 <h3>Delivery Time</h3>
                 <div id="filter-search-delivery">
                     <label for="delivery-time">Max Delivery Time (days):</label>
-                    <input type="number" id="delivery-time" min="1" step="1" value="7">
+                    <input type="number" id="delivery-time" min="1" step="1" max="<?php echo htmlspecialchars($priceRange['max_delivery']); ?>" value="<?php echo htmlspecialchars($priceRange['max_delivery']); ?>" step="1">
                 </div>
 
                 <script src="js/search.js"></script>
