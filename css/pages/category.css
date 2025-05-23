@@ -153,6 +153,52 @@
 	font-size: 1.1em;
 }
 
+/* Styling for the filter container */
+.filters-container {
+    margin: 20px 0;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: center;
+}
+
+/* Styling for filter labels */
+.filters-container label {
+    font-size: 14px;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+/* Styling for filter dropdowns */
+.filters-container select {
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+/* Updated styling for the apply filters button to use orange */
+.filters-container button {
+    padding: 10px 15px;
+    font-size: 14px;
+    color: #fff;
+    background-color: var(--orange, #dd8d6e);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.filters-container button:hover {
+    background-color: #b96a4b;
+}
+
 @media (max-width: 600px) {
 	.subcategory-carousel {
 		gap: 8px;

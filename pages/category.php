@@ -55,29 +55,53 @@ drawHeader($user);
         <?php endif; ?>
     </div>
     <div class="category-content">
+        <div class="filters-container">
+            <form method="GET" action="">
+                <input type="hidden" name="id" value="<?= $categoryId ?>">
+
+                <label for="price-min">Price Range:</label>
+                <input type="number" name="price_min" id="price-min" placeholder="Min" min="0" step="0.01">
+                <input type="number" name="price_max" id="price-max" placeholder="Max" min="0" step="0.01">
+
+                <label for="rating-min">Rating:</label>
+                <input type="number" name="rating_min" id="rating-min" placeholder="Min" min="0" max="5" step="0.1">
+                <input type="number" name="rating_max" id="rating-max" placeholder="Max" min="0" max="5" step="0.1">
+
+                <label for="delivery-min">Delivery Time (days):</label>
+                <input type="number" name="delivery_min" id="delivery-min" placeholder="Min" min="0" step="1">
+                <input type="number" name="delivery_max" id="delivery-max" placeholder="Max" min="0" step="1">
+
+                <button type="submit">Apply Filters</button>
+            </form>
+        </div>
+
         <div id="services-list">
             <?php
+            // Capture filter inputs
+            $priceMin = $_GET['price_min'] ?? null;
+            $priceMax = $_GET['price_max'] ?? null;
+            $ratingMin = $_GET['rating_min'] ?? null;
+            $ratingMax = $_GET['rating_max'] ?? null;
+            $deliveryMin = $_GET['delivery_min'] ?? null;
+            $deliveryMax = $_GET['delivery_max'] ?? null;
+
             // Pagination: fetch only the services for the current page
             $offset = ($page - 1) * $servicesPerPage;
             $totalServices = Service::countServicesByCategory($categoryId);
-            $services = Service::getServicesByCategoryPaginated($categoryId, $servicesPerPage, $offset);
+
+            // Fetch filtered services
+            $services = Service::getFilteredServicesByCategory($categoryId, $servicesPerPage, $offset, $priceMin, $priceMax, $ratingMin, $ratingMax, $deliveryMin, $deliveryMax);
+
             if ($services) {
                 foreach ($services as $serviceObj) {
-                    // Get subcategory IDs for this service
                     $subcatIds = $serviceObj->getSubcategoryIds();
                     $subcatIdsStr = implode(',', $subcatIds);
-                    
-                    // Get first image for this service
                     $serviceImage = $serviceObj->getFirstImage();
-                    
-                    // Convert service object to array for the template
                     $service = $serviceObj->toArray();
-                    
-                    // Use the service card component
                     drawServiceCard($service, $serviceImage, $subcatIdsStr);
                 }
             } else {
-                echo '<p>No services found in this category yet.</p>';
+                echo '<p>No services found matching the selected filters.</p>';
             }
             ?>
         </div>
