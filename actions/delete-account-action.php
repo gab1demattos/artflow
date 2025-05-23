@@ -23,8 +23,7 @@ if ($success) {
     // Log the user out by destroying the session
     $session->logout();
 
-    // Redirect to homepage with success message
-    header('Location: ../index.php?deleted=success');
+    header('Location: ../pages/index.php');
 } else {
     // If deletion failed, redirect back to profile with error
     header('Location: ../pages/profile.php?username=' . urlencode($user['username']) . '&error=delete_failed');
