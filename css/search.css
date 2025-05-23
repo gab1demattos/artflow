@@ -46,8 +46,6 @@
     flex-direction: column;
     justify-content: flex-start; /* Ensure list starts from the top */
     padding: 1em;
-    padding-top: 0.5em;
-    width: 100%;
 }
 
 
@@ -139,11 +137,12 @@
 
 #search-main {
     display: flex;
+    justify-content: space-between;
+    padding-top: 1em;
 }
 
 #filter-search {
-    width: 30%;
-    background-color: var(--light-gray);
+    width: 13em;
     padding: 1rem;
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
@@ -184,4 +183,5 @@
 	display: flex;
 	gap: 1rem;
 	height: 37em;
+    width: 80%;
 }
