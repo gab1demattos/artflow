@@ -1,4 +1,4 @@
-<?php function drawHeader($user){ ?>
+<?php function drawHeader($user, $currentPage = ''){ ?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -12,7 +12,7 @@
     <header>
         <h1><a href="/" class='artflow-text'>artflow</a></h1>
         <nav id="menu">
-            <div id="search-bar">
+            <div id="search-bar" style="<?php echo $currentPage === 'search.php' ? 'display: none;' : ''; ?>">
                 <input type="text" id="search-input" placeholder="Search here..." />
                 <button id="search-button"><img src="/images/logos/search.png" alt="Search" id="search-icon"></button>
             </div>

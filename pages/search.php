@@ -9,8 +9,8 @@ $session = Session::getInstance();
 $user = $session->getUser() ?? null;
 $db = Database::getInstance();
 
-
-drawHeader($user);
+// Pass the current page name to drawHeader
+drawHeader($user, 'search.php');
 drawSearchPage($user);?>
 <link rel="stylesheet" href="/css/search.css">
 <!-- Load the modular JavaScript files -->
