@@ -186,6 +186,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Load default results (services)
     loadSearchResults("services", modalSearchInput);
 
+    
+
 });
 
 
