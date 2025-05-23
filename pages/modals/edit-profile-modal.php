@@ -28,7 +28,9 @@
                                 <button type="button" class="delete-image-btn" id="delete-image-btn">🗑️</button>
                                 <input type="hidden" name="reset_profile_image" id="reset_profile_image" value="0">
                             </div>
-                            <div class="password-change-container">
+                            <div class="important-changes-container">
+                                <h4 class="important-changes">Important Changes</h4>
+                                <hr class="divider">
                                 <button type="button" id="change-password-btn" class="button outline hovering">Change Password</button>
                                 <button type="button" id="delete-account-btn" class="button outline hovering">Delete Account</button>
                             </div>
