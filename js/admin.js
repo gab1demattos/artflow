@@ -220,7 +220,7 @@ function fetchCategories() {
                     <td>${cat.id}</td>
                     <td>${cat.type}</td>
                     <td><img src="${cat.image}" alt="" style="max-width:40px;max-height:40px;"></td>
-                    <td><button class="delete-category-btn" data-id="${cat.id}">Delete</button></td>
+                    <td><button class="delete-category-btn ban-btn" data-id="${cat.id}">Delete</button></td>
                 `;
                 tbody.appendChild(tr);
             });
