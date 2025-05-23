@@ -124,7 +124,7 @@ function createOrSelectConversation(userId) {
 	} else {
 		// Conversation doesn't exist yet, need to create it
 		// First, fetch user information
-		fetch(`/actions/get-user-info.php?user_id=${userId}`)
+		fetch(`/actions/messages/get-user-info.php?user_id=${userId}`)
 			.then((response) => response.json())
 			.then((data) => {
 				if (data.success) {
@@ -212,7 +212,7 @@ function selectConversation(item) {
 function loadMessages() {
 	if (!selectedUserId) return;
 
-	fetch(`/actions/get-messages.php?user_id=${selectedUserId}`)
+	fetch(`/actions/messages/get-messages.php?user_id=${selectedUserId}`)
 		.then((response) => {
 			if (!response.ok) {
 				console.error("Network response was not ok: " + response.status);
@@ -305,7 +305,7 @@ function sendMessage() {
 	messageInput.value = "";
 
 	// Send message via API
-	fetch("/actions/send-message.php", {
+	fetch("/actions/messages/send-message.php", {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
@@ -404,7 +404,7 @@ function visitUserProfile() {
 	if (!selectedUserId) return;
 
 	// Fetch the username first and then redirect to the profile page with username
-	fetch(`/actions/get-user-info.php?user_id=${selectedUserId}`)
+	fetch(`/actions/messages/get-user-info.php?user_id=${selectedUserId}`)
 		.then((response) => response.json())
 		.then((data) => {
 			if (data.success && data.user && data.user.username) {
@@ -447,7 +447,7 @@ function deleteConversation() {
 	if (!selectedUserId) return;
 
 	// Send delete request to the server
-	fetch("/actions/delete-conversation.php", {
+	fetch("/actions/messages/delete-conversation.php", {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",

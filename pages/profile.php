@@ -1,7 +1,7 @@
 <?php
 require_once(__DIR__ . '/../database/session.php');
 require_once(__DIR__ . '/../templates/home.tpl.php');
-require_once(__DIR__ . '/../database/user.class.php');
+require_once(__DIR__ . '/../database/classes/user.class.php');
 require_once(__DIR__ . '/../database/classes/service.class.php');
 require_once(__DIR__ . '/../templates/service_card.php');
 
@@ -107,6 +107,8 @@ drawHeader($loggedInUser);
 include_once(__DIR__ . '/modals/edit-profile-modal.php');
 // Include the change password modal
 include_once(__DIR__ . '/modals/change-password.php');
+// Include the irreversible action modal
+include_once(__DIR__ . '/../templates/irreversible-modal.tpl.php');
 
 drawFooter($loggedInUser);
 ?>

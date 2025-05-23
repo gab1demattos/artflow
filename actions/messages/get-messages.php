@@ -1,8 +1,8 @@
 <?php
 
 declare(strict_types=1);
-require_once(__DIR__ . '/../database/session.php');
-require_once(__DIR__ . '/../database/classes/message.class.php');
+require_once(__DIR__ . '/../../database/session.php');
+require_once(__DIR__ . '/../../database/classes/message.class.php');
 
 // For debugging
 error_reporting(E_ALL);

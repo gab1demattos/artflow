@@ -222,7 +222,7 @@ const Modals = {
 
 				// Send AJAX POST to login
 				try {
-					const response = await fetch("actions/signin-action.php", {
+					const response = await fetch("actions/login/signin-action.php", {
 						method: "POST",
 						headers: {
 							"Content-Type": "application/x-www-form-urlencoded",

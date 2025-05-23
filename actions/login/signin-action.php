@@ -1,8 +1,8 @@
 <?php
 
 declare(strict_types=1);
-require_once(__DIR__ . '/../database/session.php');
-require_once(__DIR__ . '/../database/user.class.php');
+require_once(__DIR__ . '/../../database/session.php');
+require_once(__DIR__ . '/../../database/classes/user.class.php');
 
 
 
@@ -19,7 +19,7 @@ if (empty($email) || empty($password)) {
         echo json_encode(['error' => 'Missing credentials']);
     } else {
         $_SESSION['error'] = 'Please provide both email and password';
-        header('Location: ../index.php');
+        header('Location: ../../index.php');
     }
     exit();
 }
@@ -32,7 +32,7 @@ if (!$user) {
         echo json_encode(['error' => 'Invalid credentials']);
     } else {
         $_SESSION['error'] = 'Invalid email or password';
-        header('Location: ../index.php');
+        header('Location: ../../index.php');
     }
     exit();
 }
@@ -44,7 +44,7 @@ if ($isAjax) {
     http_response_code(200);
     echo json_encode(['success' => true]);
 } else {
-    header('Location: ../index.php');
+    header('Location: ../../index.php');
 }
 exit();
 ?>

@@ -1,7 +1,7 @@
 <?php
-// actions/get-orders.php
-require_once(__DIR__ . '/../database/database.php');
-require_once(__DIR__ . '/../database/session.php');
+// actions/activity/get-orders.php
+require_once(__DIR__ . '/../../database/database.php');
+require_once(__DIR__ . '/../../database/session.php');
 
 header('Content-Type: application/json');
 $session = Session::getInstance();

@@ -25,8 +25,6 @@ try {
     // Get all conversations for the current user
     $conversations = Message::getConversationsForUser($user['id']);
 ?>
-    <link rel="stylesheet" href="/css/messages.css">
-    <link rel="stylesheet" href="/css/irreversible.css">
     <?php include_once(__DIR__ . '/../templates/irreversible-modal.tpl.php'); ?>
     <div id='messages-page'>
         <div class="chat-app__container">

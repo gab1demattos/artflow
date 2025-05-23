@@ -1,19 +1,21 @@
 @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Modak&family=Material+Icons&display=swap");
 
+
 @import url("components.css");
 @import url("modals.css");
-@import url("new-service.css");
+
+@import url("pages/home.css");
+@import url('pages/category.css');
+@import url("pages/activity.css");
+@import url('pages/messages.css');
+@import url("pages/profile.css");
+@import url('pages/service-display.css');
+
+
+@import url("responsive/footer-responsive.css");
 @import url("responsive/home-responsive.css");
 @import url("responsive/modals-responsive.css");
-@import url("sidebar.css");
-@import url("profile.css");
-@import url("activity.css");
-@import url("home.css");
-@import url("responsive/footer-responsive.css");
-@import url('service-display.css');
 @import url('responsive/profile-responsive.css');
-@import url('messages.css');
-@import url('irreversible.css');
 
 :root {
 	/*theme colors*/

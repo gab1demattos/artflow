@@ -9,7 +9,7 @@ require_once(__DIR__ . '/../../database/session.php');
             <span class="close">&times;</span>
         </div>
         <div class="modal-body">
-            <form id="change-password-form" action="../../actions/change-password-action.php" method="post">
+            <form id="change-password-form" action="../../actions/account_settings/change-password-action.php" method="post">
                 <div class="form-group">
                     <label for="old-password">Old Password</label>
                     <input type="password" id="old-password" name="old-password" required>
