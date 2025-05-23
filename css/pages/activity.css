@@ -64,6 +64,11 @@
     padding: 0 4.5em;
     /* Match tab margins */
     box-sizing: border-box;
+
+    /* Prevent order cards from overflowing the tab content */
+    max-height: 600px;
+    overflow-y: auto;
+    padding-bottom: 1em;
 }
 
 .activity-tab-content.active {
@@ -80,6 +85,7 @@
     transition: box-shadow 0.2s;
     position: relative;
     /* Needed for absolute button placement */
+    box-sizing: border-box;
 }
 
 .mark-delivered-btn {

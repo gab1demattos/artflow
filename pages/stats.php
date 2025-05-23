@@ -53,12 +53,12 @@ async function loadStats() {
             datasets: [{
                 label: 'Earnings (€)',
                 data: values,
-                borderColor: '#e6b800',
-                backgroundColor: 'rgba(246,221,139,0.2)',
+                borderColor: getComputedStyle(document.documentElement).getPropertyValue('--green').trim() || '#3bb77e',
+                backgroundColor: 'rgba(61, 217, 188, 0.15)', // light green fill
                 fill: true,
                 tension: 0.3,
                 pointRadius: 4,
-                pointBackgroundColor: '#e6b800',
+                pointBackgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--green').trim() || '#3bb77e',
                 pointBorderColor: '#fff',
                 pointHoverRadius: 6
             }]
