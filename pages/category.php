@@ -74,11 +74,11 @@ drawHeader($user);
 
                 <label>Rating:</label>
                 <div class="rating-checkboxes">
-                    <label><input type="checkbox" name="rating[]" value="5"> 5 Stars</label>
-                    <label><input type="checkbox" name="rating[]" value="4"> 4 Stars</label>
-                    <label><input type="checkbox" name="rating[]" value="3"> 3 Stars</label>
-                    <label><input type="checkbox" name="rating[]" value="2"> 2 Stars</label>
-                    <label><input type="checkbox" name="rating[]" value="1"> 1 Star</label>
+                    <label><input type="checkbox" name="rating[]" value="5" checked> 5 Stars</label>
+                    <label><input type="checkbox" name="rating[]" value="4" checked> 4 Stars</label>
+                    <label><input type="checkbox" name="rating[]" value="3" checked> 3 Stars</label>
+                    <label><input type="checkbox" name="rating[]" value="2" checked> 2 Stars</label>
+                    <label><input type="checkbox" name="rating[]" value="1" checked> 1 Star</label>
                 </div>
 
                 <label for="delivery-min">Delivery Time (days):</label>
