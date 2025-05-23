@@ -10,18 +10,35 @@
         </div>
         <div id="search-main">
             <div id="filter-search">
-                <div id="filter-search-options">
-                    <div class="filter-option">
+                <div id="filter-search-categories">
+                    <h3>Categories</h3>
+                    <div class="filter-option-category">
                         <input type="checkbox" id="filter-option-1" checked>
-                        <label for="filter-option-1">Option 1</label>
+                        <label for="filter-option-1">Category 1</label>
                     </div>
-                    <div class="filter-option">
+                    <div class="filter-option-category">
                         <input type="checkbox" id="filter-option-2" checked>
-                        <label for="filter-option-2">Option 2</label>
+                        <label for="filter-option-2">Category 2</label>
                     </div>
-                    <div class="filter-option">
+                    <div class="filter-option-category">
                         <input type="checkbox" id="filter-option-3" checked>
-                        <label for="filter-option-3">Option 3</label>
+                        <label for="filter-option-3">Category 3</label>
+                    </div>
+                </div>
+                <div id="filter-search-rating">
+                    <h3>Rating</h3>
+                    <div class="filter-option-rating">
+                        <input type="checkbox" id="filter-option-1" checked>
+                        <label for="filter-option-1">Rating 1</label>
+                    </div>
+                    <div class="filter-option-rating">
+                        <input type="checkbox" id="filter-option-2" checked>
+                        <label for="filter-option-2">Rating 2</label>
+                    </div>
+                    <div class="filter-option-rating">
+    
+                        <input type="checkbox" id="filter-option-3" checked>
+                        <label for="filter-option-3">Rating 3</label>
                     </div>
                 </div>
             </div>
