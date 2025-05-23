@@ -122,14 +122,33 @@
     margin-right: 0.5em;
     cursor: pointer;
     transition: background 0.2s, box-shadow 0.2s;
+
 }
 
-.admin-action-btn.ban {
-    background: linear-gradient(90deg, #ffb3b3 0%, #e57373 100%);
+.admin-action-btn.ban,
+.ban-btn {
+    background: linear-gradient(90deg, #c62828 0%, #a31515 100%) !important;
+    color: #fff !important;
+    border: 1.5px solid #a31515 !important;
+    border-radius: 5px !important;
 }
 
-.admin-action-btn.promote {
-    background: linear-gradient(90deg, #b3e0ff 0%, #4a90e2 100%);
+.admin-action-btn.promote,
+.promote-btn {
+    background: linear-gradient(90deg, #105ca8 0%, #093c77 100%) !important;
+    color: #fff !important;
+    border: 1.5px solid #1565c0 !important;
+    border-radius: 5px !important;
+}
+
+.admin-action-btn.promote:disabled,
+.promote-btn:disabled {
+    background: #8d9bb9 !important;
+    color: #fff !important;
+    border: 1.5px solid #8d9bb9 !important;
+    cursor: not-allowed !important;
+    opacity: 0.7 !important;
+    box-shadow: none !important;
 }
 
 .admin-action-btn.delete {
