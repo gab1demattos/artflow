@@ -65,14 +65,7 @@
                     </div>
                 </div>
 
-                <script>
-                    function updatePriceRange() {
-                        const minPrice = document.getElementById('min-price').value;
-                        const maxPrice = document.getElementById('max-price').value;
-                        document.getElementById('min-price-value').textContent = minPrice;
-                        document.getElementById('max-price-value').textContent = maxPrice;
-                    }
-                </script>
+                <script src="js/search.js"></script>
                 
             </div>
             <div id="search-results" class="scrollable services-active"></div>

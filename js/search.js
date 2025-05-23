@@ -196,7 +196,28 @@ document.addEventListener('DOMContentLoaded', () => {
     // Load default results (services)
     loadSearchResults("services", SearchInputPage);
 
-    
+    function updatePriceRange() {
+        const minPriceInput = document.getElementById('min-price');
+        const maxPriceInput = document.getElementById('max-price');
+        const minPriceValue = document.getElementById('min-price-value');
+        const maxPriceValue = document.getElementById('max-price-value');
+
+        minPriceValue.textContent = minPriceInput.value;
+        maxPriceValue.textContent = maxPriceInput.value;
+
+        if (parseInt(minPriceInput.value) > parseInt(maxPriceInput.value)) {
+            minPriceInput.value = maxPriceInput.value;
+            minPriceValue.textContent = maxPriceInput.value;
+        }
+    }
+
+    const minPriceInput = document.getElementById('min-price');
+    const maxPriceInput = document.getElementById('max-price');
+
+    if (minPriceInput && maxPriceInput) {
+        minPriceInput.addEventListener('input', updatePriceRange);
+        maxPriceInput.addEventListener('input', updatePriceRange);
+    }
 
 });
 
