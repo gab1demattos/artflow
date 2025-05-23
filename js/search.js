@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Redirect to search.php when the search bar is clicked
     searchBar.addEventListener('click', () => {
         window.location.href = '../pages/search.php';
+        searchBar.style.display = 'none !important';
     });
 
     // Interrupt event listener when switching between buttons

@@ -1,0 +1,154 @@
+#search-content {
+    background-color: white;
+    padding: 2rem;
+	padding-top: 0.5em;
+    border-radius: 10px;
+    width: 80%;
+	height: 70%;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    position: relative; /* Ensure the modal is the positioning context */
+}
+.search-options {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+	border-bottom: #3333 1px solid;
+	padding: 0;
+}
+.search-options button {
+    padding: 0.5rem 1rem;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    background-color: var(--light-gray);
+    color: var(--dark-gray);
+	font-family: 'ED Garamond', serif;
+	transition: background-color 0.3s ease, color 0.3s ease;
+	font-weight: bold;
+
+}
+.search-options button.active {
+    color: var(--purple);
+	border-bottom: var(--purple) 3px solid;
+}
+
+#search-results {
+	overflow-y: auto;
+	display: flex;
+	gap: 1rem;
+	margin-top: 2em;
+	height: 37em;
+}
+
+
+#search-results.services-active {
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+#search-results.names-active {
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: flex-start; /* Ensure list starts from the top */
+}
+
+.close-modal {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: #333;
+    padding: 0.5rem;
+    text-align: center;
+
+}
+
+/* Style for the search bar inside the modal */
+#search-page-bar {
+    width: 60%; /* Reduced width */
+    height: 0.5rem; /* Reduced height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+	margin: 0 auto;
+	outline: none ;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+#search-page-bar input {
+    padding: 0.3rem; /* Reduced padding */
+    font-size: 0.7rem; /* Reduced font size */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    flex: 1;
+    margin-right: 0.3rem; /* Reduced margin */
+}
+
+#search-page-bar button {
+    padding: 0.3rem 0.8rem; /* Reduced padding */
+    font-size: 0.7rem; /* Reduced font size */
+    background-color: var(--purple);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#search-page-bar:focus, #search-page-bar input:focus {
+    outline: none;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border: none; /* Ensure no border is applied */
+}
+
+.user-card {
+	display: flex;
+	align-items: center;
+	border-radius: 8px;
+	transition: box-shadow 0.3s ease;
+	cursor: pointer;
+	padding-left: 1em;
+	padding-top: 1em;
+}
+
+.user-card:hover {
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+	transform: translateY(-0.1em);
+	transition: transform 0.3s ease;
+}
+
+.user-profile-picture {
+	width: 2.5em;
+	height: 2.5em;
+	border-radius: 50%;
+	margin-right: 15px; /* Space between image and text */
+	border: 2px solid var(--beige);
+	object-fit: cover;
+}
+
+.user-username {
+	font-size: 18px;
+	color: #333;
+	font-family: "EB Garamond", serif;
+	text-decoration: none;
+	transform: translateY(-0.5em);
+
+}
+
+.user-info {
+	display: flex;
+	justify-content: center;
+	padding: 0;
+	gap: 1em;
+}
+
+/* Add a CSS rule to ensure dynamically displayed text is not underlined */
+.user-card-link, .service-card-link {
+    text-decoration: none;
+	color: #333;
+	font-size: 18px;
+}
