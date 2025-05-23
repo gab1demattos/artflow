@@ -322,6 +322,17 @@ class Service {
     }
     
     /**
+     * Delete a service by ID
+     * @param int $id
+     * @return bool
+     */
+    public static function deleteServiceById(int $id): bool {
+        $db = Database::getInstance();
+        $stmt = $db->prepare('DELETE FROM Service WHERE id = ?');
+        return $stmt->execute([$id]);
+    }
+    
+    /**
      * Get the category for this service
      * 
      * @return Category|null The category for this service

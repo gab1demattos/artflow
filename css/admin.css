@@ -110,7 +110,7 @@
     color: #333;
 }
 
-.admin-action-btn {
+/* .admin-action-btn {
     background: linear-gradient(90deg, #7ecb8f 0%, #4cae6a 100%);
     color: #fff;
     border: none;
@@ -123,7 +123,7 @@
     cursor: pointer;
     transition: background 0.2s, box-shadow 0.2s;
 
-}
+} */
 
 .admin-action-btn.ban,
 .ban-btn {
@@ -131,6 +131,7 @@
     color: #fff !important;
     border: 1.5px solid #a31515 !important;
     border-radius: 5px !important;
+    cursor: pointer;
 }
 
 .admin-action-btn.promote,
@@ -139,6 +140,7 @@
     color: #fff !important;
     border: 1.5px solid #1565c0 !important;
     border-radius: 5px !important;
+    cursor: pointer;
 }
 
 .admin-action-btn.promote:disabled,
