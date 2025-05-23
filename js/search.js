@@ -337,6 +337,60 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // Add event listener for delivery time filter
+    const deliveryTimeInput = document.getElementById('delivery-time');
+
+    deliveryTimeInput.addEventListener('change', async () => {
+        const maxDeliveryTime = parseInt(deliveryTimeInput.value);
+
+        const selectedCategories = Array.from(categoryCheckboxes)
+            .filter(cb => cb.checked)
+            .map(cb => cb.id.replace('filter-option-', ''));
+
+        const minPrice = parseFloat(minPriceInput.value);
+        const maxPrice = parseFloat(maxPriceInput.value);
+
+        console.log('Selected Categories:', selectedCategories);
+        console.log('Price Range:', minPrice, maxPrice);
+        console.log('Max Delivery Time:', maxDeliveryTime);
+
+        // Fetch services dynamically based on selected categories, price range, and delivery time
+        try {
+            const response = await fetch(`/api/api_services.php?categories=${selectedCategories.join(',')}&min_price=${minPrice}&max_price=${maxPrice}&max_delivery_time=${maxDeliveryTime}`);
+            const services = await response.json();
+
+            searchResults.innerHTML = ""; // Clear previous results
+
+            if (services.length > 0) {
+                services.forEach(service => {
+                    const serviceCard = document.createElement('a');
+                    serviceCard.href = `/pages/service.php?id=${encodeURIComponent(service.id)}`;
+                    serviceCard.classList.add('service-card-link');
+                    serviceCard.innerHTML = `
+                        <div class="service-card">
+                            <div class="pantone-image-wrapper">
+                                ${service.image ? `<img src="${service.image}" alt="Service image" class="pantone-image" />` : '<div class="pantone-image pantone-image-placeholder"></div>'}
+                            </div>
+                            <div class="pantone-title">${service.title}</div>
+                            <div class="pantone-info-row">
+                                <span class="pantone-username">${service.username}</span>
+                                <span class="pantone-rating">★ ${service.rating || '0.0'}</span>
+                            </div>
+                        </div>
+                    `;
+                    searchResults.appendChild(serviceCard);
+                });
+            } else {
+                searchResults.innerHTML = ""; // Clear previous results
+                searchResults.innerHTML = '<p>No services found for the selected filters.</p>';
+            }
+        } catch (error) {
+            console.error('Error fetching services:', error);
+            searchResults.innerHTML = ""; // Clear previous results
+            searchResults.innerHTML = '<p>Error loading services. Please try again later.</p>';
+        }
+    });
 });
 
 

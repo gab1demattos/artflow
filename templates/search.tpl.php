@@ -62,6 +62,11 @@
                     <label for="max-price">Max Price:</label>
                     <input type="number" id="max-price" min="<?php echo htmlspecialchars($priceRange['min_price']); ?>" max="<?php echo htmlspecialchars($priceRange['max_price']); ?>" value="<?php echo htmlspecialchars($priceRange['max_price']); ?>" step="1">
                 </div>
+                <h3>Delivery Time</h3>
+                <div id="filter-search-delivery">
+                    <label for="delivery-time">Max Delivery Time (days):</label>
+                    <input type="number" id="delivery-time" min="1" step="1" value="7">
+                </div>
 
                 <script src="js/search.js"></script>
                 
