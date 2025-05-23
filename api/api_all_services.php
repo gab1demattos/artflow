@@ -14,9 +14,11 @@ require_once(__DIR__ . '/../templates/service_card.php');
           'title' => $service->title,
           'description' => $service->description,
           'price' => $service->price,
+          'delivery_time' => $service->delivery_time,
           'image' => $service->getFirstImage(),
           'username' => $service->getUsername(),
           'subcategories' => implode(',', $service->getSubcategoryIds())
+          
       ];
   }, $services));
 ?>
