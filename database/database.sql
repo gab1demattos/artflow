@@ -60,6 +60,8 @@ CREATE TABLE Review (
     service_id INTEGER NOT NULL,    --  before a user being able to leave a review we need to check if the service's status is 'completed'
     rating INTEGER NOT NULL CHECK (rating BETWEEN 1 AND 5),
     comment TEXT,
+    created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+    updated_at TEXT,
     FOREIGN KEY (user_id) REFERENCES User(id),
     FOREIGN KEY (service_id) REFERENCES Service(id)
 );

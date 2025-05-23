@@ -65,7 +65,7 @@
                     }
 
                     // Use Review class to get reviews
-                    $reviews = Review::getReviewsByServiceId($service['id'], true); // Get only public reviews
+                    $reviews = Review::getReviewsByServiceId($service['id']);
 
                     if (count($reviews) > 0) {
                         foreach ($reviews as $review) { ?>
@@ -89,7 +89,7 @@
                                     </div>
                                 </div>
                                 <div class="review-content">
-                                    <p><?= htmlspecialchars($review->review_text) ?></p>
+                                    <p><?= htmlspecialchars($review->comment) ?></p>
                                 </div>
                                 <div class="review-date">
                                     <small>Posted on: <?= date('M j, Y', strtotime($review->created_at)) ?></small>

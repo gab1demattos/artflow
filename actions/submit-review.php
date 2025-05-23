@@ -27,8 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get form data
     $serviceId = isset($_POST['service_id']) ? intval($_POST['service_id']) : 0;
     $rating = isset($_POST['rating']) ? floatval($_POST['rating']) : 0;
-    $reviewText = isset($_POST['review_text']) ? htmlspecialchars($_POST['review_text']) : '';
-    $isPublic = isset($_POST['make_public']) ? 1 : 0;
+    $comment = isset($_POST['review_text']) ? htmlspecialchars($_POST['review_text']) : '';
 
     // Basic validation
     $errors = [];
@@ -41,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = 'Please provide a rating between 0.5 and 5';
     }
 
-    if (empty($reviewText)) {
+    if (empty($comment)) {
         $errors[] = 'Please provide review text';
     }
 
@@ -58,13 +57,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 exit();
             }
 
-            // Always create a new review instead of updating existing ones
+            // Create a new review
             $review = Review::createReview(
                 $userId,
                 $serviceId,
                 $rating,
-                $reviewText,
-                $isPublic
+                $comment
             );
 
             if ($review) {
