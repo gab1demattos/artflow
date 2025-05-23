@@ -22,7 +22,14 @@ document.addEventListener('DOMContentLoaded', function () {
             if (data.yourOrders.length === 0) {
                 yourOrders.innerHTML = '<div class="no-orders">No orders found.</div>';
             } else {
-                data.yourOrders.forEach(order => {
+                // Sort: in progress first, then completed
+                const sortedOrders = data.yourOrders.slice().sort((a, b) => {
+                    if (a.status === b.status) return 0;
+                    if (a.status === 'in progress') return -1;
+                    if (b.status === 'in progress') return 1;
+                    return 0;
+                });
+                sortedOrders.forEach(order => {
                     yourOrders.innerHTML += `
                     <div class="order-card">
                         <div class="order-header">
@@ -45,7 +52,14 @@ document.addEventListener('DOMContentLoaded', function () {
             if (data.ordersFromOthers.length === 0) {
                 ordersFromOthers.innerHTML = '<div class="no-orders">No orders found.</div>';
             } else {
-                data.ordersFromOthers.forEach(order => {
+                // Sort: not delivered (in progress) first, then delivered (completed)
+                const sortedOrders = data.ordersFromOthers.slice().sort((a, b) => {
+                    if (a.status === b.status) return 0;
+                    if (a.status === 'in progress') return -1;
+                    if (b.status === 'in progress') return 1;
+                    return 0;
+                });
+                sortedOrders.forEach(order => {
                     const delivered = order.status === 'completed';
                     ordersFromOthers.innerHTML += `
                     <div class="order-card" data-order-id="${order.id}">
