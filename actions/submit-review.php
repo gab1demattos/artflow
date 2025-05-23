@@ -88,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
 
             // Update the average rating for the service
-            //Service::updateAverageRating($db, $serviceId);
+            Service::updateAverageRating($serviceId);
 
             // Redirect back to the service page
             header('Location: /pages/service.php?id=' . $serviceId);
