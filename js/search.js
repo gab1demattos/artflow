@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('search-input');
     const searchButton = document.getElementById('search-button');
-    const modalSearchInput = document.getElementById('modal-search-input');
-    const modalSearchButton = document.getElementById('modal-search-button');
+    const SearchInputPage = document.getElementById('search-page-input');
+    const SearchBarPage = document.getElementById('search-page-bar');
     const searchServicesBtn = document.getElementById("search-services");
     const searchNamesBtn = document.getElementById("search-names");
     const searchResults = document.getElementById("search-results");
@@ -23,10 +23,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Remove existing input listener
         searchInput.removeEventListener('input', searchInput._listener);
-        modalSearchInput.removeEventListener('input', modalSearchInput._listener);
+        SearchInputPage.removeEventListener('input', SearchInputPage._listener);
 
         // Add new listener for services
-        loadSearchResults("services", modalSearchInput);
+        loadSearchResults("services", SearchInputPage);
     });
 
     searchNamesBtn.addEventListener("click", () => {
@@ -37,10 +37,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Remove existing input listener
         searchInput.removeEventListener('input', searchInput._listener);
-        modalSearchInput.removeEventListener('input', modalSearchInput._listener);
+        SearchInputPage.removeEventListener('input', SearchInputPage._listener);
 
         // Add new listener for names
-        loadSearchResults("names", modalSearchInput);
+        loadSearchResults("names", SearchInputPage);
     });
 
     const handleSearchBarInteraction = () => {
@@ -191,7 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Load default results (services)
-    loadSearchResults("services", modalSearchInput);
+    loadSearchResults("services", SearchInputPage);
 
     
 

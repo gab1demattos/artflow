@@ -54,19 +54,6 @@
     justify-content: flex-start; /* Ensure list starts from the top */
 }
 
-.close-search {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    font-size: 1.2rem;
-    color: #333;
-    padding: 0.5rem;
-    text-align: center;
-
-}
 
 /* Style for the search bar inside the modal */
 #search-page-bar {
