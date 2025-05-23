@@ -48,12 +48,14 @@ class Service
         $this->avg_rating = $avg_rating ?? 0; // Initialize avg_rating property
     }
 
+    
+
     /**
      * Get all services
      * 
      * @return array Array of Service objects
      */
-    public static function getAllServices(): array
+    /*public static function getAllServices(): array
     {
         $db = Database::getInstance();
         $stmt = $db->query('SELECT * FROM Service');
@@ -75,7 +77,7 @@ class Service
         }
 
         return $result;
-    }
+    }*/
 
     /**
 
