@@ -11,6 +11,7 @@
 @import url("responsive/footer-responsive.css");
 @import url('service-display.css');
 @import url('responsive/profile-responsive.css');
+@import url('search.css');
 
 :root {
 	/*theme colors*/
