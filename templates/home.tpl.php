@@ -62,7 +62,7 @@
             </li>
             <li class="sidebar-item">
                 <img src="/images/logos/logout.png" alt="Log Out" class="logo">
-                <form action="/actions/logout.php" method="post"><button>Log Out</button></form>
+                <form action="/actions/login/logout.php" method="post"><button>Log Out</button></form>
             </li>
         </ul>
     </div>
