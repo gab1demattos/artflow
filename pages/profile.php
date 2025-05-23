@@ -1,7 +1,7 @@
 <?php
 require_once(__DIR__ . '/../database/session.php');
 require_once(__DIR__ . '/../templates/home.tpl.php');
-require_once(__DIR__ . '/../database/user.class.php');
+require_once(__DIR__ . '/../database/classes/user.class.php');
 require_once(__DIR__ . '/../database/classes/service.class.php');
 require_once(__DIR__ . '/../templates/service_card.php');
 
