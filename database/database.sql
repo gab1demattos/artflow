@@ -26,6 +26,7 @@ CREATE TABLE Service (
     delivery_time INTEGER NOT NULL, -- days
     images TEXT,  -- comma-separsted 
     videos TEXT,    -- paths to files
+    avg_rating REAL DEFAULT 0,
     FOREIGN KEY (user_id) REFERENCES User(id),
     FOREIGN KEY (category_id) REFERENCES Category(id)
 );

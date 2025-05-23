@@ -2,12 +2,16 @@
 { ?>
     <?php
     require_once(__DIR__ . '/../database/classes/review.class.php');
+    require_once(__DIR__ . '/../database/classes/service.class.php');
 
     $serviceId = isset($_GET['id']) ? intval($_GET['id']) : 0;
     if ($serviceId <= 0) {
         echo "<p>Invalid service ID.</p>";
         return;
     }
+
+    // Automatically update the average rating for this service
+    Service::updateAverageRating($serviceId);
 
     $stmtService = $db->prepare('SELECT * FROM Service WHERE id = ?');
     $stmtService->execute([$serviceId]);
