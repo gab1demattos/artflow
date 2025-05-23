@@ -26,6 +26,15 @@ if (!$category) {
     exit();
 }
 
+// Fetch min and max values for price and delivery time
+$priceRange = Service::getPriceRangeByCategory($categoryId);
+$deliveryRange = Service::getDeliveryRangeByCategory($categoryId);
+
+$priceMin = $priceRange['min'] ?? 0;
+$priceMax = $priceRange['max'] ?? 1000;
+$deliveryMin = $deliveryRange['min'] ?? 0;
+$deliveryMax = $deliveryRange['max'] ?? 30;
+
 drawHeader($user);
 ?>
 <main class="container category-main-container">
@@ -55,29 +64,66 @@ drawHeader($user);
         <?php endif; ?>
     </div>
     <div class="category-content">
+        <div class="filters-container">
+            <form method="GET" action="">
+                <input type="hidden" name="id" value="<?= $categoryId ?>">
+
+                <div id="filter-container">
+                    <div id="price-filter">
+                        <label for="price-min">Price Range:</label>
+                        <input type="number" name="price_min" id="price-min" placeholder="Min" min="<?= $priceMin ?>" max="<?= $priceMax ?>" value="<?= $priceMin ?>" step="1">
+                        <input type="number" name="price_max" id="price-max" placeholder="Max" min="<?= $priceMin ?>" max="<?= $priceMax ?>" value="<?= $priceMax ?>" step="1">
+                    </div>
+
+                    <div id="rating-filter">
+                        <label>Rating:</label>
+                        <div class="rating-checkboxes">
+                            <label><input type="checkbox" name="rating[]" value="5" checked> 5 Stars</label>
+                            <label><input type="checkbox" name="rating[]" value="4" checked> 4 Stars</label>
+                            <label><input type="checkbox" name="rating[]" value="3" checked> 3 Stars</label>
+                            <label><input type="checkbox" name="rating[]" value="2" checked> 2 Stars</label>
+                            <label><input type="checkbox" name="rating[]" value="1" checked> 1 Star</label>
+                        </div>
+                    </div>
+
+                    <div id="delivery-filter">
+                        <label for="delivery-min">Delivery Time (days):</label>
+                        <input type="number" name="delivery_min" id="delivery-min" placeholder="Min" min="<?= $deliveryMin ?>" max="<?= $deliveryMax ?>" value="<?= $deliveryMin ?>" step="1">
+                        <input type="number" name="delivery_max" id="delivery-max" placeholder="Max" min="<?= $deliveryMin ?>" max="<?= $deliveryMax ?>" value="<?= $deliveryMax ?>" step="1">
+                    </div>
+
+                    <button type="submit">Apply Filters</button>
+                </div>
+            </form>
+        </div>
+
         <div id="services-list">
             <?php
+            // Capture filter inputs
+            $priceMin = $_GET['price_min'] ?? null;
+            $priceMax = $_GET['price_max'] ?? null;
+            $ratingMin = $_GET['rating_min'] ?? null;
+            $ratingMax = $_GET['rating_max'] ?? null;
+            $deliveryMin = $_GET['delivery_min'] ?? null;
+            $deliveryMax = $_GET['delivery_max'] ?? null;
+
             // Pagination: fetch only the services for the current page
             $offset = ($page - 1) * $servicesPerPage;
             $totalServices = Service::countServicesByCategory($categoryId);
-            $services = Service::getServicesByCategoryPaginated($categoryId, $servicesPerPage, $offset);
+
+            // Fetch filtered services
+            $services = Service::getFilteredServicesByCategory($categoryId, $servicesPerPage, $offset, $priceMin, $priceMax, $ratingMin, $ratingMax, $deliveryMin, $deliveryMax);
+
             if ($services) {
                 foreach ($services as $serviceObj) {
-                    // Get subcategory IDs for this service
                     $subcatIds = $serviceObj->getSubcategoryIds();
                     $subcatIdsStr = implode(',', $subcatIds);
-                    
-                    // Get first image for this service
                     $serviceImage = $serviceObj->getFirstImage();
-                    
-                    // Convert service object to array for the template
                     $service = $serviceObj->toArray();
-                    
-                    // Use the service card component
                     drawServiceCard($service, $serviceImage, $subcatIdsStr);
                 }
             } else {
-                echo '<p>No services found in this category yet.</p>';
+                echo '<p>No services found matching the selected filters.</p>';
             }
             ?>
         </div>
