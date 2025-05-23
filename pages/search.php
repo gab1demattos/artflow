@@ -11,7 +11,7 @@ $db = Database::getInstance();
 
 // Pass the current page name to drawHeader
 drawHeader($user, 'search.php');
-drawSearchPage($bd);?>
+drawSearchPage($db);?>
 <link rel="stylesheet" href="/css/search.css">
 <!-- Load the modular JavaScript files -->
 <script src="/js/modals.js"></script>
