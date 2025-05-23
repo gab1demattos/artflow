@@ -58,11 +58,14 @@ document.addEventListener("DOMContentLoaded", function () {
                         </div>
                         ${
 													isCompleted
-														? '<button class="rate-it-btn">Rate it!</button>'
+														? `<button class="rate-it-btn" data-service-id="${order.service_id}" data-service-title="${order.title}">Rate it!</button>`
 														: ""
 												}
                     </div>`;
 				});
+
+				// Attach event listeners to the Rate it buttons
+				attachRateItListeners();
 			}
 			// Render Orders From Others
 			const ordersFromOthers = document.getElementById("orders-from-others");
@@ -147,4 +150,191 @@ document.addEventListener("DOMContentLoaded", function () {
 				});
 			});
 		});
+
+	// Function to attach event listeners to all Rate it buttons
+	function attachRateItListeners() {
+		document.querySelectorAll(".rate-it-btn").forEach((button) => {
+			button.addEventListener("click", function () {
+				const serviceId = this.getAttribute("data-service-id");
+				const serviceTitle = this.getAttribute("data-service-title");
+
+				console.log("Rate It button clicked:", serviceId, serviceTitle);
+
+				// Check if modal already exists
+				let rateItModal = document.getElementById("rate-it-modal-overlay");
+
+				if (!rateItModal) {
+					// Create the modal dynamically
+					rateItModal = document.createElement("div");
+					rateItModal.id = "rate-it-modal-overlay";
+					rateItModal.className = "modal-overlay";
+
+					rateItModal.innerHTML = `
+						<div id="rate-it-modal" class="modal">
+							<div class="modal-content">
+								<h2>Rate Service</h2>
+								<div class="service-title">
+									<h3>${serviceTitle}</h3>
+								</div>
+								<form id="rate-it-form" action="/actions/submit-review.php" method="POST">
+									<input type="hidden" name="service_id" value="${serviceId}">
+									<input type="hidden" name="rating" id="rating-value" value="0">
+									
+									<div class="form-group">
+										<label for="review-text">Write your review:</label>
+										<textarea id="review-text" name="review_text" placeholder="Share your experience with this service..." required></textarea>
+									</div>
+									
+									<div class="rating-section">
+										<div class="rating-container">
+											<label>Rating:</label>
+											<div class="stars-container">
+												<div class="stars">
+													<i class="star-icon" data-value="0.5">★</i>
+													<i class="star-icon" data-value="1.0">★</i>
+													<i class="star-icon" data-value="1.5">★</i>
+													<i class="star-icon" data-value="2.0">★</i>
+													<i class="star-icon" data-value="2.5">★</i>
+													<i class="star-icon" data-value="3.0">★</i>
+													<i class="star-icon" data-value="3.5">★</i>
+													<i class="star-icon" data-value="4.0">★</i>
+													<i class="star-icon" data-value="4.5">★</i>
+													<i class="star-icon" data-value="5.0">★</i>
+												</div>
+											</div>
+											<div class="rating-display">
+												<span id="rating-text">0.0</span>/5
+											</div>
+										</div>
+									</div>
+									
+									<div class="public-review">
+										<label for="make-public">
+											<input type="checkbox" id="make-public" name="make_public" value="1">
+											Make my review public
+										</label>
+									</div>
+									
+									<div class="button-container">
+										<button type="button" id="close-rate-it" class="button secondary">Cancel</button>
+										<button type="submit" id="submit-rating" class="button primary">Submit Review</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					`;
+
+					document.body.appendChild(rateItModal);
+
+					// Setup stars functionality
+					setupRatingStars();
+
+					// Close modal handlers
+					const closeButton = document.getElementById("close-rate-it");
+					if (closeButton) {
+						closeButton.addEventListener("click", function () {
+							rateItModal.style.display = "none";
+						});
+					}
+
+					// Close when clicking outside content
+					rateItModal.addEventListener("click", function (event) {
+						if (event.target === rateItModal) {
+							rateItModal.style.display = "none";
+						}
+					});
+
+					// Form validation
+					const rateForm = document.getElementById("rate-it-form");
+					if (rateForm) {
+						rateForm.addEventListener("submit", function (event) {
+							const currentRating = parseFloat(
+								document.getElementById("rating-value").value
+							);
+							if (currentRating === 0) {
+								event.preventDefault();
+								alert("Please select a rating before submitting");
+								return false;
+							}
+							// Form is valid, will submit
+						});
+					}
+				} else {
+					// Modal exists, update its content
+					const serviceIdInput = rateItModal.querySelector(
+						"input[name='service_id']"
+					);
+					if (serviceIdInput) {
+						serviceIdInput.value = serviceId;
+					}
+
+					const titleElement = rateItModal.querySelector(".service-title h3");
+					if (titleElement) {
+						titleElement.textContent = serviceTitle;
+					}
+
+					// Reset the form
+					const rateForm = document.getElementById("rate-it-form");
+					if (rateForm) {
+						rateForm.reset();
+						document.getElementById("rating-value").value = "0";
+						document.getElementById("rating-text").textContent = "0.0";
+						document.querySelectorAll(".star-icon").forEach((star) => {
+							star.classList.remove("active");
+						});
+					}
+				}
+
+				// Display the modal
+				rateItModal.style.display = "flex";
+			});
+		});
+	}
+
+	// Function to setup rating star functionality
+	function setupRatingStars() {
+		const stars = document.querySelectorAll(".star-icon");
+		const ratingValue = document.getElementById("rating-value");
+		const ratingText = document.getElementById("rating-text");
+		let currentRating = 0;
+
+		// Function to update stars display
+		function updateStarDisplay(rating) {
+			stars.forEach((star) => {
+				const starValue = parseFloat(star.getAttribute("data-value"));
+				if (starValue <= rating) {
+					star.classList.add("active");
+				} else {
+					star.classList.remove("active");
+				}
+			});
+
+			// Update the rating text and hidden value
+			ratingText.textContent = rating.toFixed(1);
+			ratingValue.value = rating;
+		}
+
+		// Event for hovering over stars
+		stars.forEach((star) => {
+			// Show preview on hover
+			star.addEventListener("mouseover", function () {
+				const hoverRating = parseFloat(this.getAttribute("data-value"));
+				updateStarDisplay(hoverRating);
+			});
+
+			// Set rating on click
+			star.addEventListener("click", function () {
+				currentRating = parseFloat(this.getAttribute("data-value"));
+				updateStarDisplay(currentRating);
+			});
+		});
+
+		// Reset to current rating when mouse leaves the star container
+		const starsContainer = document.querySelector(".stars-container");
+		if (starsContainer) {
+			starsContainer.addEventListener("mouseleave", function () {
+				updateStarDisplay(currentRating);
+			});
+		}
+	}
 });
