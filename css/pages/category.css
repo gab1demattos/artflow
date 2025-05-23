@@ -164,6 +164,7 @@
 	flex-direction: row;
     gap: 1em;
     align-items: center;
+	justify-content: space-between;
 }
 
 /* Styling for filter labels */
@@ -219,7 +220,10 @@
 	flex-direction: row;
 	gap: 1em;
 	align-items: center;
+	justify-content: space-between;
+	width: 80em;
 }
+
 
 #rating-filter {
 	display: flex;
