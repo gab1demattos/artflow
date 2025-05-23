@@ -1316,49 +1316,6 @@ h4.important-changes {
 	display: inline-block;
 }
 
-#rate-it-modal-overlay .public-review {
-	display: flex;
-	justify-content: center;
-	margin-top: 0.5em;
-	margin-bottom: 1em;
-}
-
-#rate-it-modal-overlay .public-review label {
-	display: flex;
-	align-items: center;
-	font-family: "Cormorant Garamond", serif;
-	font-size: 1.1em;
-	cursor: pointer;
-}
-
-#rate-it-modal-overlay .public-review input[type="checkbox"] {
-	margin-right: 0.5em;
-	cursor: pointer;
-	accent-color: var(--yellow);
-	width: 1.2em;
-	height: 1.2em;
-	position: relative;
-	appearance: none;
-	border: 2px solid var(--yellow);
-	border-radius: 3px;
-	background-color: white;
-}
-
-#rate-it-modal-overlay .public-review input[type="checkbox"]:checked {
-	background-color: var(--yellow);
-}
-
-#rate-it-modal-overlay .public-review input[type="checkbox"]:checked::after {
-	content: "✓";
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	font-size: 0.9em;
-	color: var(--beige);
-	font-weight: bold;
-}
-
 /* Make the star larger for better click targets */
 @media (max-width: 600px) {
 	#rate-it-modal-overlay .modal-content {

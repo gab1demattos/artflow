@@ -203,13 +203,6 @@ document.addEventListener("DOMContentLoaded", function () {
 										</div>
 									</div>
 									
-									<div class="public-review">
-										<label for="make-public">
-											<input type="checkbox" id="make-public" name="make_public" value="1">
-											Make my requirements public
-										</label>
-									</div>
-									
 									<div class="button-container">
 										<button type="button" id="close-rate-it" class="button outline yellow">Cancel</button>
 										<button type="submit" id="submit-rating" class="button filled yellow">Submit Review</button>
@@ -266,16 +259,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
 							const rating = document.getElementById("rating-value").value;
 							const reviewText = document.getElementById("review-text").value;
-							const makePublic = document.getElementById("make-public").checked
-								? "1"
-								: "0";
 
 							// Create URL-encoded form data
 							const formData = new URLSearchParams();
 							formData.append("service_id", serviceId);
 							formData.append("rating", rating);
 							formData.append("review_text", reviewText);
-							formData.append("make_public", makePublic);
+							formData.append("make_public", "0");
 
 							console.log("Submitting form data:", formData.toString()); // Debug log
 
