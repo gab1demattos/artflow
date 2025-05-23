@@ -60,6 +60,12 @@
                         <img src="/images/logos/stats.png" alt="Stats" class="logo">
                         <button>Stats</button>
                     </li>
+                    <?php if (isset($user['user_type']) && $user['user_type'] === 'admin'): ?>
+                    <li class="sidebar-item">
+                        <img src="/images/logos/admin_panel.png" alt="Admin Panel" class="logo">
+                        <a href="/pages/admin.php" style="text-decoration: none; color: inherit;"><button>Admin Panel</button></a>
+                    </li>
+                    <?php endif; ?>
                     <li class="sidebar-item" id="settings">
                         <img src="/images/logos/settings.png" alt="Settings" class="logo">
                         <button>Settings</button>
