@@ -15,7 +15,7 @@ if (!$user) {
 $db = Database::getInstance();
 
 // Fetch orders placed by the user (as client)
-$stmt = $db->prepare('SELECT e.id, e.status, e.requirements, e.date, s.title, s.price, s.delivery_time, u.name as seller_name, u.username as seller_username FROM Exchange e JOIN Service s ON e.service_id = s.id JOIN User u ON s.user_id = u.id WHERE e.client_id = ? ORDER BY e.id DESC');
+$stmt = $db->prepare('SELECT e.id, e.status, e.requirements, e.date, s.title, s.price, s.delivery_time, u.name as seller_name, u.username as seller_username FROM Exchange e JOIN Service s ON e.service_id = s.id JOIN User u ON e.freelancer_id = u.id WHERE e.client_id = ? ORDER BY e.id DESC');
 $stmt->execute([$user['id']]);
 $yourOrders = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
