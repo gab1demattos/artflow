@@ -87,8 +87,7 @@ drawHeader($user);
                     </div>
 
                     <div id="delivery-filter">
-                        <label for="delivery-min">Delivery Time (days):</label>
-                        <input type="number" name="delivery_min" id="delivery-min" placeholder="Min" min="<?= $deliveryMin ?>" max="<?= $deliveryMax ?>" value="<?= $deliveryMin ?>" step="1">
+                        <label for="delivery-max">Delivery Time (max days):</label>
                         <input type="number" name="delivery_max" id="delivery-max" placeholder="Max" min="<?= $deliveryMin ?>" max="<?= $deliveryMax ?>" value="<?= $deliveryMax ?>" step="1">
                     </div>
 
