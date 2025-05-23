@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
         SearchInputPage.value = "";
 
         // Reset filters when switching buttons
-        const filterInputs = document.querySelectorAll('.filter-option-category input[type="checkbox"], #min-price, #max-price');
+        const filterInputs = document.querySelectorAll('.filter-option-category input[type="checkbox"], .filter-option-rating input[type="checkbox"], #min-price, #max-price');
         filterInputs.forEach(input => {
             if (input.type === 'checkbox') {
                 input.checked = true; // Set all checkboxes to checked
@@ -42,13 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Show filter-search when services are active
         filterSearch.classList.remove("hidden");
-
-        // Restore and reapply the saved filter state
-        restoreFilterState();
-        filterInputs.forEach(input => {
-            const event = new Event('change');
-            input.dispatchEvent(event);
-        });
 
         // Add new listener for services
         loadSearchResults("services", SearchInputPage);
@@ -64,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
         SearchInputPage.value = "";
 
         // Reset filters when switching buttons
-        const filterInputs = document.querySelectorAll('.filter-option-category input[type="checkbox"], #min-price, #max-price');
+        const filterInputs = document.querySelectorAll('.filter-option-category input[type="checkbox"], .filter-option-rating input[type="checkbox"], #min-price, #max-price');
         filterInputs.forEach(input => {
             if (input.type === 'checkbox') {
                 input.checked = true; // Set all checkboxes to checked
@@ -342,52 +335,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 searchResults.innerHTML = ""; // Clear previous results
                 searchResults.innerHTML = '<p>Error loading services. Please try again later.</p>';
             }
-        });
-    });
-
-    // Add a function to save the current filter state
-    function saveFilterState() {
-        const selectedCategories = Array.from(document.querySelectorAll('.filter-option-category input[type="checkbox"]:checked'))
-            .map(cb => cb.id);
-        const minPrice = document.getElementById('min-price').value;
-        const maxPrice = document.getElementById('max-price').value;
-
-        localStorage.setItem('filterState', JSON.stringify({
-            selectedCategories,
-            minPrice,
-            maxPrice
-        }));
-    }
-
-    // Add a function to restore the filter state
-    function restoreFilterState() {
-        const filterState = JSON.parse(localStorage.getItem('filterState'));
-        if (filterState) {
-            filterState.selectedCategories.forEach(id => {
-                const checkbox = document.getElementById(id);
-                if (checkbox) checkbox.checked = true;
-            });
-
-            document.getElementById('min-price').value = filterState.minPrice;
-            document.getElementById('max-price').value = filterState.maxPrice;
-        }
-    }
-
-    // Save filter state when filters are changed
-    const filterInputs = document.querySelectorAll('.filter-option-category input[type="checkbox"], #min-price, #max-price');
-    filterInputs.forEach(input => {
-        input.addEventListener('change', saveFilterState);
-    });
-
-    // Ensure the filter state is restored when the page loads
-    document.addEventListener('DOMContentLoaded', () => {
-        restoreFilterState();
-
-        // Reapply the saved filters to trigger the filtering logic
-        const filterInputs = document.querySelectorAll('.filter-option-category input[type="checkbox"], #min-price, #max-price');
-        filterInputs.forEach(input => {
-            const event = new Event('change');
-            input.dispatchEvent(event);
         });
     });
 });
