@@ -158,4 +158,65 @@ class User
             return false;
         }
     }
+
+    /**
+     * Delete a user account and all associated data
+     *
+     * @param int $userId The user ID to delete
+     * @return bool True if successful, false otherwise
+     */
+    public static function deleteAccount(int $userId): bool
+    {
+        $db = Database::getInstance();
+
+        try {
+            // Start a transaction to ensure data integrity
+            $db->beginTransaction();
+
+            // 1. Delete user's reviews
+            $stmt = $db->prepare('DELETE FROM Review WHERE user_id = ?');
+            $stmt->execute([$userId]);
+
+            // 2. Delete messages sent or received by the user
+            $stmt = $db->prepare('DELETE FROM Message WHERE sender_id = ? OR receiver_id = ?');
+            $stmt->execute([$userId, $userId]);
+
+            // 3. Get services by this user
+            $stmt = $db->prepare('SELECT id FROM Service WHERE user_id = ?');
+            $stmt->execute([$userId]);
+            $services = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+            // 4. For each service, delete related records
+            foreach ($services as $serviceId) {
+                // Delete service subcategories
+                $stmt = $db->prepare('DELETE FROM ServiceSubcategory WHERE service_id = ?');
+                $stmt->execute([$serviceId]);
+
+                // Delete reviews for the service
+                $stmt = $db->prepare('DELETE FROM Review WHERE service_id = ?');
+                $stmt->execute([$serviceId]);
+            }
+
+            // 5. Delete exchanges involving the user
+            $stmt = $db->prepare('DELETE FROM Exchange WHERE freelancer_id = ? OR client_id = ?');
+            $stmt->execute([$userId, $userId]);
+
+            // 6. Delete the user's services
+            $stmt = $db->prepare('DELETE FROM Service WHERE user_id = ?');
+            $stmt->execute([$userId]);
+
+            // 7. Finally, delete the user
+            $stmt = $db->prepare('DELETE FROM User WHERE id = ?');
+            $stmt->execute([$userId]);
+
+            // Commit the transaction
+            $db->commit();
+            return true;
+        } catch (PDOException $e) {
+            // Rollback the transaction if something failed
+            $db->rollBack();
+            error_log("Error deleting account: " . $e->getMessage());
+            return false;
+        }
+    }
 }

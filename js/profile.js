@@ -136,11 +136,11 @@ document.addEventListener("DOMContentLoaded", function () {
 			// Set up the confirm button action for account deletion
 			if (irreversibleConfirmBtn) {
 				irreversibleConfirmBtn.onclick = function () {
-					// Hide the modal - just remove the show class
+					// Hide the modal
 					irreversibleModal.classList.remove("show");
 
-					// TODO: Implement actual account deletion functionality
-					console.log("Account deletion would happen here");
+					// Redirect to the delete account action
+					window.location.href = "/actions/delete-account-action.php";
 				};
 			}
 
