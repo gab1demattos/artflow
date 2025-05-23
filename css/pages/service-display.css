@@ -4,6 +4,7 @@
 	display: flex;
 	justify-content: space-around;
 	gap: 0;
+	min-height: 100vh;
 }
 
 .main-image {
@@ -305,17 +306,25 @@
 
 #images-service {
 	display: flex;
-	margin-top: 25em;
+	margin-top: 0; /* Kept the removal of 25em top margin */
+	position: static; /* Changed from sticky to static */
+	z-index: auto; /* Reset z-index */
 }
 
 #service-main {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: center;
 	width: 60%;
-	overflow-y: auto;
-	height: 100vh;
+	height: auto;
+	padding-bottom: 2em;
+	overflow-y: auto; /* Changed back to auto to enable scrolling within this container */
+	max-height: 100vh; /* Limit height to viewport height but allow content to scroll */
+}
+
+#service-details {
+	margin-top: 2em; /* Add some space between images and details */
+	width: 100%;
 }
 
 #service-details > p {
