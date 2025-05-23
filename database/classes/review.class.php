@@ -15,6 +15,7 @@ class Review
     public ?string $updated_at = null;
     public ?string $username = null;
     public ?string $service_title = null;
+    public ?string $profile_image = null;
 
     /**
      * Constructor for Review
@@ -28,7 +29,8 @@ class Review
         string $created_at = '',
         ?string $updated_at = null,
         ?string $username = null,
-        ?string $service_title = null
+        ?string $service_title = null,
+        ?string $profile_image = null
     ) {
         $this->id = $id;
         $this->user_id = $user_id;
@@ -39,6 +41,7 @@ class Review
         $this->updated_at = $updated_at;
         $this->username = $username;
         $this->service_title = $service_title;
+        $this->profile_image = $profile_image;
     }
 
     /**
@@ -306,7 +309,7 @@ class Review
         $db = Database::getInstance();
         $placeholders = implode(',', array_fill(0, count($serviceIds), '?'));
         $stmt = $db->prepare("
-            SELECT Review.*, User.username, Service.title as service_title 
+            SELECT Review.*, User.username, User.profile_image, Service.title as service_title 
             FROM Review 
             JOIN User ON Review.user_id = User.id 
             JOIN Service ON Review.service_id = Service.id 
@@ -333,7 +336,8 @@ class Review
                 $reviewData['created_at'],
                 $reviewData['updated_at'],
                 $reviewData['username'],
-                $reviewData['service_title']
+                $reviewData['service_title'],
+                $reviewData['profile_image']
             );
         }
 

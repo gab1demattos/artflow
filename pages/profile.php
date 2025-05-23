@@ -125,8 +125,11 @@ drawHeader($loggedInUser);
                     <div class="review-card">
                         <div class="review-header">
                             <div class="review-user">
-                                <strong><?= htmlspecialchars($review->username) ?></strong>
-                                <span class="review-date"><?= htmlspecialchars($review->created_at) ?></span>
+                                <img class="review-user-img" src="<?= ($review->profile_image !== null && $review->profile_image !== '') ? htmlspecialchars($review->profile_image) : '/images/user_pfp/default.png' ?>" alt="Reviewer">
+                                <div class="review-user-details">
+                                    <strong><?= htmlspecialchars($review->username) ?></strong>
+                                    <span class="review-date"><?= htmlspecialchars($review->created_at) ?></span>
+                                </div>
                             </div>
                             <div class="review-rating">
                                 <?php for ($i = 1; $i <= 5; $i++): ?>

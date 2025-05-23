@@ -358,10 +358,25 @@ footer,
 	gap: 0.5rem;
 }
 
+.review-user-img {
+	width: 2.5rem;
+	height: 2.5rem;
+	border-radius: 50%;
+	object-fit: cover;
+	border: 1px solid var(--light-border);
+}
+
+.review-user-details {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 0.1rem;
+}
+
 .review-date {
 	color: var(--text-light);
 	font-size: 0.9rem;
-	margin-left: 0.5rem;
+	margin-left: 0;
 }
 
 .review-rating {
