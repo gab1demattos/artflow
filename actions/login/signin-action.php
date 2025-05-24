@@ -40,7 +40,15 @@ $token = $_POST['csrf_token'] ?? '';
 if (!CSRF::validate($token, 'signin_csrf_token')) {
     if ($isAjax) {
         http_response_code(403);
-        echo json_encode(['error' => 'Invalid security token']);
+        // Add more detailed error for debugging
+        $errorDetails = 'Invalid security token';
+        if (empty($token)) {
+            $errorDetails .= ' (token is empty)';
+        }
+        if (!isset($_SESSION['signin_csrf_token'])) {
+            $errorDetails .= ' (no token in session)';
+        }
+        echo json_encode(['error' => $errorDetails]);
     } else {
         $_SESSION['error'] = 'Invalid security token. Please try again.';
         redirect_home();
