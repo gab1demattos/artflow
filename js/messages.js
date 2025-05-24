@@ -3,48 +3,6 @@
  * Handles sending and receiving messages in real-time
  */
 
-// Security utility functions
-/**
- * Escapes HTML to prevent XSS attacks
- * @param {string} unsafe - The unsafe string to be escaped
- * @return {string} The escaped string
- */
-function escapeHtml(unsafe) {
-	if (typeof unsafe !== "string") {
-		return "";
-	}
-	return unsafe
-		.replace(/&/g, "&amp;")
-		.replace(/</g, "&lt;")
-		.replace(/>/g, "&gt;")
-		.replace(/"/g, "&quot;")
-		.replace(/'/g, "&#039;");
-}
-
-/**
- * Creates a safe DOM element with escaped content
- * @param {string} tag - HTML tag name
- * @param {Object} attributes - Element attributes
- * @param {string} textContent - Element text content
- * @return {HTMLElement} The created element
- */
-function createSafeElement(tag, attributes = {}, textContent = "") {
-	const element = document.createElement(tag);
-
-	// Set attributes safely
-	for (const [key, value] of Object.entries(attributes)) {
-		if (key.startsWith("on")) continue; // Skip event handlers
-		element.setAttribute(key, value);
-	}
-
-	// Set text content safely
-	if (textContent) {
-		element.textContent = textContent;
-	}
-
-	return element;
-}
-
 // Global variables
 let selectedUserId = null;
 let messagePollingInterval = null;
@@ -101,6 +59,9 @@ document.addEventListener("DOMContentLoaded", () => {
 	if (conversationSearch) {
 		conversationSearch.addEventListener("input", filterConversations);
 	}
+
+	// Handle responsive design for mobile
+	checkIfMobile();
 
 	// Handle dropdown menu toggle
 	if (menuButton && dropdownMenu) {
@@ -197,7 +158,7 @@ function createOrSelectConversation(userId) {
 					// Select the conversation
 					selectConversation(newItem);
 
-					// Remove no Converstations message if it exists
+					// Remove no conversations message if it exists
 					const noConversationsMsg = document.querySelector(
 						".chat-app__no-conversations"
 					);
@@ -288,16 +249,11 @@ function displayMessages(messages) {
 	messagesContainer.innerHTML = "";
 
 	if (!messages || messages.length === 0) {
-		const emptyState = createSafeElement("div", {
-			class: "chat-app__empty-state",
-		});
-		const emptyText = createSafeElement(
-			"p",
-			{},
-			"No messages yet. Start the conversation!"
-		);
-		emptyState.appendChild(emptyText);
-		messagesContainer.appendChild(emptyState);
+		messagesContainer.innerHTML = `
+            <div class="chat-app__empty-state">
+                <p>No messages yet. Start the conversation!</p>
+            </div>
+        `;
 		return;
 	}
 
@@ -306,39 +262,37 @@ function displayMessages(messages) {
 
 	messages.forEach((message) => {
 		// Get message date
-		const messageDate = new Date(message.timestamp).toLocaleDateString();
+		const messageDate = new Date(message.timestamp);
+		const formattedDate = messageDate.toLocaleDateString();
 
-		// Add date separator if date changes
-		if (messageDate !== currentDate) {
-			currentDate = messageDate;
+		// Add date separator if this is a new date
+		if (formattedDate !== currentDate) {
+			currentDate = formattedDate;
 
-			const dateSeparator = createSafeElement(
-				"div",
-				{ class: "chat-app__timestamp" },
-				messageDate
-			);
+			const dateSeparator = document.createElement("div");
+			dateSeparator.className = "chat-app__timestamp";
+			dateSeparator.textContent = currentDate;
 			messagesContainer.appendChild(dateSeparator);
 		}
 
 		// Create message element
-		const messageElement = createSafeElement("div", {
-			class: `chat-app__message ${
-				message.sender_id == currentUser.id
-					? "chat-app__message--received"
-					: "chat-app__message--sent"
-			}`,
-			"data-message-id": message.id,
-		});
+		const messageEl = document.createElement("div");
+		const isSentByCurrentUser =
+			parseInt(message.sender_id) === parseInt(currentUser.id);
 
-		// Create and append the message text (properly escaped)
-		const messageText = createSafeElement("div", {}, message.content);
-		messageElement.appendChild(messageText);
+		// The classes need to be flipped here to match the CSS
+		// Since "sent" messages should appear on the right and "received" on the left
+		messageEl.className = isSentByCurrentUser
+			? "chat-app__message chat-app__message--received" // Your message (should be on right)
+			: "chat-app__message chat-app__message--sent"; // Their message (should be on left)
 
-		// Add the message to the container
-		messagesContainer.appendChild(messageElement);
+		messageEl.textContent = message.message;
+
+		// Add message to container
+		messagesContainer.appendChild(messageEl);
 	});
 
-	// Scroll to the bottom
+	// Scroll to bottom
 	messagesContainer.scrollTop = messagesContainer.scrollHeight;
 }
 
@@ -353,77 +307,27 @@ function sendMessage() {
 	// Clear input field
 	messageInput.value = "";
 
-	// Send the message via AJAX
+	// Send message via API
 	fetch("/actions/messages/send-message.php", {
 		method: "POST",
 		headers: {
-			"Content-Type": "application/x-www-form-urlencoded",
+			"Content-Type": "application/json",
 		},
-		body: `recipient_id=${encodeURIComponent(
-			selectedUserId
-		)}&content=${encodeURIComponent(messageText)}`,
+		body: JSON.stringify({
+			receiver_id: selectedUserId,
+			message: messageText,
+		}),
 	})
 		.then((response) => response.json())
 		.then((data) => {
 			if (data.success) {
-				// Message sent successfully - add it to the chat
-				const newMessage = {
-					id: data.message_id,
-					sender_id: currentUser.id,
-					recipient_id: selectedUserId,
-					content: messageText,
-					timestamp: new Date().toISOString(),
-				};
+				// Load messages to show the new message
+				loadMessages();
 
-				// Create a new array with the new message
-				const messages =
-					messagesContainer.querySelectorAll(".chat-app__message");
-				const hasMessages = messages.length > 0;
-
-				// Display the message
-				if (!hasMessages) {
-					// If this is the first message, clear any empty state message
-					displayMessages([newMessage]);
-				} else {
-					// Check if we need to add a date separator
-					const today = new Date().toLocaleDateString();
-					const lastDateSeparator = messagesContainer.querySelector(
-						".chat-app__timestamp:last-child"
-					);
-
-					// If there's no date separator for today, add one
-					if (!lastDateSeparator || lastDateSeparator.textContent !== today) {
-						const dateSeparator = createSafeElement(
-							"div",
-							{ class: "chat-app__timestamp" },
-							today
-						);
-						messagesContainer.appendChild(dateSeparator);
-					}
-
-					// Create and add the new message element
-					const messageElement = createSafeElement("div", {
-						class: "chat-app__message chat-app__message--received",
-						"data-message-id": newMessage.id,
-					});
-
-					const messageTextElement = createSafeElement(
-						"div",
-						{},
-						newMessage.content
-					);
-					messageElement.appendChild(messageTextElement);
-					messagesContainer.appendChild(messageElement);
-
-					// Scroll to the bottom
-					messagesContainer.scrollTop = messagesContainer.scrollHeight;
-				}
-
-				// Update preview in conversation list
+				// Update the preview text in the conversation list
 				const conversationItem = document.querySelector(
 					`.chat-app__chat-item[data-user-id="${selectedUserId}"]`
 				);
-
 				if (conversationItem) {
 					const previewElement = conversationItem.querySelector(
 						".chat-app__message-preview"
@@ -610,4 +514,128 @@ function deleteConversation() {
 			console.error("Error:", error);
 			alert("An error occurred. Please try again.");
 		});
+}
+
+/**
+ * Checks if the device is a mobile device and applies mobile-specific behavior
+ */
+function checkIfMobile() {
+	// Check if screen width is mobile size (under 768px)
+	const isMobile = window.innerWidth < 768;
+
+	// Set up mobile specific UI and interactions
+	setupMobileLayout(isMobile);
+
+	// Add window resize listener to check for orientation changes
+	window.addEventListener("resize", handleResize);
+}
+
+/**
+ * Sets up mobile specific layout and interactions
+ * @param {boolean} isMobile - Whether the device is mobile
+ */
+function setupMobileLayout(isMobile) {
+	const sidebar = document.querySelector(".chat-app__sidebar");
+	const mainChat = document.querySelector(".chat-app__main");
+	const backButton = document.getElementById("back-to-conversations");
+
+	if (!sidebar || !mainChat || !backButton) return;
+
+	if (isMobile) {
+		// Initialize with sidebar visible and main chat hidden
+		if (!selectedUserId) {
+			sidebar.classList.remove("hidden");
+			mainChat.classList.remove("visible");
+		} else {
+			// If a conversation is already selected, show the chat view
+			sidebar.classList.add("hidden");
+			mainChat.classList.add("visible");
+			backButton.classList.add("visible");
+		}
+
+		// Set up back button functionality
+		backButton.addEventListener("click", showConversationList);
+
+		// Override conversation selection behavior for mobile
+		const chatItems = document.querySelectorAll(".chat-app__chat-item");
+		chatItems.forEach((item) => {
+			// Remove any existing event listeners first
+			const newItem = item.cloneNode(true);
+			item.parentNode.replaceChild(newItem, item);
+
+			// Add our mobile-specific click event
+			newItem.addEventListener("click", function () {
+				const userId = this.dataset.userId;
+				const existingItem = document.querySelector(
+					`.chat-app__chat-item[data-user-id="${userId}"]`
+				);
+
+				if (existingItem) {
+					selectConversation(existingItem);
+					showMainChatView();
+				}
+			});
+		});
+	} else {
+		// For desktop/tablet, use normal layout
+		sidebar.classList.remove("hidden");
+		mainChat.classList.remove("visible");
+		backButton.classList.remove("visible");
+
+		// Remove mobile-specific event listeners
+		backButton.removeEventListener("click", showConversationList);
+	}
+}
+
+/**
+ * Shows the conversation list/sidebar view on mobile
+ * No animations, just toggle visibility classes
+ */
+function showConversationList() {
+	const sidebar = document.querySelector(".chat-app__sidebar");
+	const mainChat = document.querySelector(".chat-app__main");
+	const backButton = document.getElementById("back-to-conversations");
+
+	if (!sidebar || !mainChat) return;
+
+	// No animations, just toggle classes
+	sidebar.classList.remove("hidden");
+	mainChat.classList.remove("visible");
+	backButton.classList.remove("visible");
+}
+
+/**
+ * Shows the main chat view on mobile
+ * No animations, just toggle visibility classes
+ */
+function showMainChatView() {
+	const sidebar = document.querySelector(".chat-app__sidebar");
+	const mainChat = document.querySelector(".chat-app__main");
+	const backButton = document.getElementById("back-to-conversations");
+
+	if (!sidebar || !mainChat) return;
+
+	// No animations, just toggle classes
+	sidebar.classList.add("hidden");
+	mainChat.classList.add("visible");
+	backButton.classList.add("visible");
+}
+
+/**
+ * Handles window resize events for responsive behavior
+ */
+function handleResize() {
+	// Check if device is mobile
+	const isMobile = window.innerWidth < 768;
+
+	// Set up layout based on screen size
+	setupMobileLayout(isMobile);
+
+	// If user has selected a conversation, make sure it stays visible after resize
+	if (selectedUserId) {
+		// Re-scroll to bottom of messages if needed
+		if (messagesContainer) {
+			messagesContainer.scrollTop = messagesContainer.scrollHeight;
+		}
+	}
 }

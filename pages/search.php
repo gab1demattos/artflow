@@ -14,7 +14,10 @@ $db = Database::getInstance();
 drawHeader($user, 'search.php');
 drawSearchPage($db); ?>
 <link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/responsive/search-responsive.css">
+
 <!-- Load the modular JavaScript files -->
+<script src="/js/rate-it.js"></script>
 <script src="/js/modals.js"></script>
 <script src="/js/categories.js"></script>
 <script src="/js/search.js"></script>

@@ -1,0 +1,256 @@
+/* ======================================= */
+/* BASE MOBILE STYLES (applied by default) */
+/* ======================================= */
+
+@media screen and (max-width: 767px) {
+	#messages-page .chat-app__container {
+		width: 100%;
+		height: calc(100vh - 100px);
+		flex-direction: row;
+		margin: 0;
+		position: relative;
+	}
+
+	/* Hide the back button by default */
+	#messages-page .chat-app__back-button {
+		display: none;
+		align-items: center;
+		gap: 8px;
+		color: var(--orange);
+		font-weight: bold;
+		cursor: pointer;
+		padding: 0 0 0 15px;
+		font-size: 16px;
+		z-index: 15;
+		position: absolute;
+		left: 0;
+		top: 50%;
+		transform: translateY(-50%);
+		height: 30px;
+		width: 40px;
+	}
+
+	/* Only show the back button on mobile when visible class is added */
+	#messages-page .chat-app__back-button.visible {
+		display: flex;
+	}
+
+	#messages-page .chat-app__back-icon {
+		font-size: 26px;
+	}
+
+	/* Sidebar styles - full-width by default on mobile */
+	#messages-page .chat-app__sidebar {
+		width: 100%;
+		height: 100%;
+		border-right: none;
+		padding: 15px;
+		box-sizing: border-box;
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 10;
+		background-color: #fdfaf8;
+		transform: translateX(0);
+	}
+
+	/* When conversation is selected, hide sidebar */
+	#messages-page .chat-app__sidebar.hidden {
+		transform: translateX(-100%);
+	}
+
+	#messages-page .chat-app__title {
+		font-size: 24px;
+		margin-bottom: 15px;
+	}
+
+	#messages-page .chat-app__search-bar {
+		padding: 10px;
+		margin-bottom: 15px;
+	}
+
+	#messages-page .chat-app__chat-list {
+		height: calc(100% - 120px);
+		flex-direction: column;
+		overflow-y: auto;
+		overflow-x: hidden;
+		gap: 10px;
+		padding: 5px 0;
+		width: 100%;
+		box-sizing: border-box;
+	}
+
+	#messages-page .chat-app__chat-item {
+		flex-direction: row;
+		align-items: flex-start;
+		padding: 10px;
+		width: 100%;
+		box-sizing: border-box;
+		margin-right: 15px;
+	}
+
+	#messages-page .chat-app__chat-text {
+		width: calc(100% - 60px);
+		text-align: left;
+		overflow: hidden;
+	}
+
+	#messages-page .chat-app__username {
+		font-size: 14px;
+		margin-bottom: 4px;
+	}
+
+	#messages-page .chat-app__message-preview {
+		display: block;
+		font-size: 12px;
+	}
+
+	/* Main chat area - also full-width but initially positioned off-screen */
+	#messages-page .chat-app__main {
+		flex: 1;
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		transform: translateX(100%);
+		z-index: 5;
+		background-color: white;
+	}
+
+	/* When conversation is selected, show main chat area */
+	#messages-page .chat-app__main.visible {
+		transform: translateX(0);
+	}
+
+	#messages-page .chat-app__messages {
+		margin-bottom: 70px;
+		padding: 15px;
+	}
+
+	#messages-page .chat-app__message {
+		max-width: 80%;
+		padding: 12px;
+		font-size: 14px;
+	}
+
+	#messages-page .chat-app__input-area {
+		padding: 12px;
+		height: 65px;
+	}
+
+	#messages-page .chat-app__input {
+		padding: 10px;
+	}
+
+	#messages-page .chat-app__send-button {
+		width: 40px;
+		height: 40px;
+	}
+
+	#messages-page .chat-app__header {
+		padding: 15px 0;
+		display: flex;
+		align-items: center;
+		position: relative;
+		width: 100%;
+		height: 60px;
+		box-sizing: border-box;
+		border-bottom: 2px solid #eee;
+		background-color: #fdfaf8;
+	}
+
+	#messages-page #current-chat-user {
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+		font-weight: bold;
+		font-size: 17px;
+		color: var(--orange);
+		/* Ensure text doesn't overlap when back button is visible */
+		max-width: 58%;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	/* Remove the fake input area in sidebar as layout is now different */
+	#messages-page .chat-app__sidebar::after {
+		display: none;
+	}
+
+	/* No transitions */
+
+	/* Improve mobile header alignment for longer usernames */
+	#messages-page .chat-app__menu-container {
+		z-index: 15;
+		position: absolute;
+		right: 15px;
+		top: 50%;
+		transform: translateY(-50%);
+	}
+
+	#messages-page .chat-app__menu-button {
+		font-size: 26px;
+		padding: 8px;
+	}
+}
+
+/* =================== */
+/*    TABLET STYLES    */
+/* =================== */
+
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+	#messages-page .chat-app__container {
+		width: 95%;
+		height: 90vh;
+	}
+
+	#messages-page .chat-app__sidebar {
+		width: 35%;
+	}
+
+	#messages-page .chat-app__title {
+		font-size: 28px;
+	}
+
+	#messages-page .chat-app__message {
+		max-width: 70%;
+	}
+
+	#messages-page .chat-app__chat-item {
+		padding: 8px;
+	}
+
+	/* Force hide the back button on tablets regardless of visible class */
+	#messages-page .chat-app__back-button,
+	#messages-page .chat-app__back-button.visible {
+		display: none !important;
+	}
+}
+
+/* ================================== */
+/*    DESKTOP STYLES (above 1200px)   */
+/* ================================== */
+
+/* Use the main messages.css settings */
+@media screen and (min-width: 1200px) {
+	/* 
+      The desktop styles are already defined in messages.css
+      This media query ensures we only apply those styles at larger screens
+    */
+
+	/* Force hide the back button on desktop regardless of visible class */
+	#messages-page .chat-app__back-button,
+	#messages-page .chat-app__back-button.visible {
+		display: none !important;
+	}
+
+	/* For ultra-wide screens, adjust proportions */
+	@media screen and (min-width: 2400px) {
+		#messages-page .chat-app__container {
+			width: 70%;
+			max-width: 2000px;
+		}
+	}
+}
