@@ -3,48 +3,6 @@
  * Handles sending and receiving messages in real-time
  */
 
-// Security utility functions
-/**
- * Escapes HTML to prevent XSS attacks
- * @param {string} unsafe - The unsafe string to be escaped
- * @return {string} The escaped string
- */
-function escapeHtml(unsafe) {
-	if (typeof unsafe !== "string") {
-		return "";
-	}
-	return unsafe
-		.replace(/&/g, "&amp;")
-		.replace(/</g, "&lt;")
-		.replace(/>/g, "&gt;")
-		.replace(/"/g, "&quot;")
-		.replace(/'/g, "&#039;");
-}
-
-/**
- * Creates a safe DOM element with escaped content
- * @param {string} tag - HTML tag name
- * @param {Object} attributes - Element attributes
- * @param {string} textContent - Element text content
- * @return {HTMLElement} The created element
- */
-function createSafeElement(tag, attributes = {}, textContent = "") {
-	const element = document.createElement(tag);
-
-	// Set attributes safely
-	for (const [key, value] of Object.entries(attributes)) {
-		if (key.startsWith("on")) continue; // Skip event handlers
-		element.setAttribute(key, value);
-	}
-
-	// Set text content safely
-	if (textContent) {
-		element.textContent = textContent;
-	}
-
-	return element;
-}
-
 // Global variables
 let selectedUserId = null;
 let messagePollingInterval = null;
@@ -101,9 +59,6 @@ document.addEventListener("DOMContentLoaded", () => {
 	if (conversationSearch) {
 		conversationSearch.addEventListener("input", filterConversations);
 	}
-
-	// Handle responsive design for mobile
-	checkIfMobile();
 
 	// Handle dropdown menu toggle
 	if (menuButton && dropdownMenu) {
@@ -194,27 +149,13 @@ function createOrSelectConversation(userId) {
 					// Add to conversation list
 					conversationList.prepend(newItem);
 
-					// Add click event - different for mobile vs desktop
-					if (window.innerWidth < 768) {
-						newItem.addEventListener("click", function () {
-							selectConversation(newItem);
-							showMainChatView();
-						});
-					} else {
-						newItem.addEventListener("click", () =>
-							selectConversation(newItem)
-						);
-					}
+					// Add click event
+					newItem.addEventListener("click", () => selectConversation(newItem));
 
 					// Select the conversation
 					selectConversation(newItem);
 
-					// On mobile, switch to main chat view
-					if (window.innerWidth < 768) {
-						showMainChatView();
-					}
-
-					// Remove no Converstations message if it exists
+					// Remove no conversations message if it exists
 					const noConversationsMsg = document.querySelector(
 						".chat-app__no-conversations"
 					);
@@ -250,6 +191,7 @@ function selectConversation(item) {
 	// Enable input and send button
 	messageInput.disabled = false;
 	sendButton.disabled = false;
+	messageInput.focus();
 
 	// Load messages for this conversation
 	loadMessages();
@@ -262,15 +204,6 @@ function selectConversation(item) {
 
 	// Store the selected conversation in session storage
 	sessionStorage.setItem("selectedUserId", selectedUserId);
-
-	// On mobile, focus the input after a slight delay to ensure UI is updated
-	if (window.innerWidth < 768) {
-		setTimeout(() => {
-			messageInput.focus();
-		}, 300);
-	} else {
-		messageInput.focus();
-	}
 }
 
 /**
@@ -313,16 +246,11 @@ function displayMessages(messages) {
 	messagesContainer.innerHTML = "";
 
 	if (!messages || messages.length === 0) {
-		const emptyState = createSafeElement("div", {
-			class: "chat-app__empty-state",
-		});
-		const emptyText = createSafeElement(
-			"p",
-			{},
-			"No messages yet. Start the conversation!"
-		);
-		emptyState.appendChild(emptyText);
-		messagesContainer.appendChild(emptyState);
+		messagesContainer.innerHTML = `
+            <div class="chat-app__empty-state">
+                <p>No messages yet. Start the conversation!</p>
+            </div>
+        `;
 		return;
 	}
 
@@ -331,39 +259,37 @@ function displayMessages(messages) {
 
 	messages.forEach((message) => {
 		// Get message date
-		const messageDate = new Date(message.timestamp).toLocaleDateString();
+		const messageDate = new Date(message.timestamp);
+		const formattedDate = messageDate.toLocaleDateString();
 
-		// Add date separator if date changes
-		if (messageDate !== currentDate) {
-			currentDate = messageDate;
+		// Add date separator if this is a new date
+		if (formattedDate !== currentDate) {
+			currentDate = formattedDate;
 
-			const dateSeparator = createSafeElement(
-				"div",
-				{ class: "chat-app__timestamp" },
-				messageDate
-			);
+			const dateSeparator = document.createElement("div");
+			dateSeparator.className = "chat-app__timestamp";
+			dateSeparator.textContent = currentDate;
 			messagesContainer.appendChild(dateSeparator);
 		}
 
 		// Create message element
-		const messageElement = createSafeElement("div", {
-			class: `chat-app__message ${
-				message.sender_id == currentUser.id
-					? "chat-app__message--received"
-					: "chat-app__message--sent"
-			}`,
-			"data-message-id": message.id,
-		});
+		const messageEl = document.createElement("div");
+		const isSentByCurrentUser =
+			parseInt(message.sender_id) === parseInt(currentUser.id);
 
-		// Create and append the message text (properly escaped)
-		const messageText = createSafeElement("div", {}, message.content);
-		messageElement.appendChild(messageText);
+		// The classes need to be flipped here to match the CSS
+		// Since "sent" messages should appear on the right and "received" on the left
+		messageEl.className = isSentByCurrentUser
+			? "chat-app__message chat-app__message--received" // Your message (should be on right)
+			: "chat-app__message chat-app__message--sent"; // Their message (should be on left)
 
-		// Add the message to the container
-		messagesContainer.appendChild(messageElement);
+		messageEl.textContent = message.message;
+
+		// Add message to container
+		messagesContainer.appendChild(messageEl);
 	});
 
-	// Scroll to the bottom
+	// Scroll to bottom
 	messagesContainer.scrollTop = messagesContainer.scrollHeight;
 }
 
@@ -378,77 +304,27 @@ function sendMessage() {
 	// Clear input field
 	messageInput.value = "";
 
-	// Send the message via AJAX
+	// Send message via API
 	fetch("/actions/messages/send-message.php", {
 		method: "POST",
 		headers: {
-			"Content-Type": "application/x-www-form-urlencoded",
+			"Content-Type": "application/json",
 		},
-		body: `recipient_id=${encodeURIComponent(
-			selectedUserId
-		)}&content=${encodeURIComponent(messageText)}`,
+		body: JSON.stringify({
+			receiver_id: selectedUserId,
+			message: messageText,
+		}),
 	})
 		.then((response) => response.json())
 		.then((data) => {
 			if (data.success) {
-				// Message sent successfully - add it to the chat
-				const newMessage = {
-					id: data.message_id,
-					sender_id: currentUser.id,
-					recipient_id: selectedUserId,
-					content: messageText,
-					timestamp: new Date().toISOString(),
-				};
+				// Load messages to show the new message
+				loadMessages();
 
-				// Create a new array with the new message
-				const messages =
-					messagesContainer.querySelectorAll(".chat-app__message");
-				const hasMessages = messages.length > 0;
-
-				// Display the message
-				if (!hasMessages) {
-					// If this is the first message, clear any empty state message
-					displayMessages([newMessage]);
-				} else {
-					// Check if we need to add a date separator
-					const today = new Date().toLocaleDateString();
-					const lastDateSeparator = messagesContainer.querySelector(
-						".chat-app__timestamp:last-child"
-					);
-
-					// If there's no date separator for today, add one
-					if (!lastDateSeparator || lastDateSeparator.textContent !== today) {
-						const dateSeparator = createSafeElement(
-							"div",
-							{ class: "chat-app__timestamp" },
-							today
-						);
-						messagesContainer.appendChild(dateSeparator);
-					}
-
-					// Create and add the new message element
-					const messageElement = createSafeElement("div", {
-						class: "chat-app__message chat-app__message--received",
-						"data-message-id": newMessage.id,
-					});
-
-					const messageTextElement = createSafeElement(
-						"div",
-						{},
-						newMessage.content
-					);
-					messageElement.appendChild(messageTextElement);
-					messagesContainer.appendChild(messageElement);
-
-					// Scroll to the bottom
-					messagesContainer.scrollTop = messagesContainer.scrollHeight;
-				}
-
-				// Update preview in conversation list
+				// Update the preview text in the conversation list
 				const conversationItem = document.querySelector(
 					`.chat-app__chat-item[data-user-id="${selectedUserId}"]`
 				);
-
 				if (conversationItem) {
 					const previewElement = conversationItem.querySelector(
 						".chat-app__message-preview"
@@ -615,11 +491,6 @@ function deleteConversation() {
 
 				// Clear session storage
 				sessionStorage.removeItem("selectedUserId");
-
-				// On mobile, return to conversation list view
-				if (window.innerWidth < 768) {
-					showConversationList();
-				}
 
 				// Check if there are any conversations left
 				const remainingConversations = document.querySelectorAll(

@@ -3,11 +3,9 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-require_once(__DIR__ . '/../database/security/security_bootstrap.php');
 require_once(__DIR__ . '/../database/session.php');
 require_once(__DIR__ . '/../templates/home.tpl.php');
 require_once(__DIR__ . '/../database/classes/message.class.php');
-require_once(__DIR__ . '/../database/security/security.php');
 
 $session = Session::getInstance();
 $user = $session->getUser() ?? null;
@@ -27,6 +25,8 @@ try {
     // Get all conversations for the current user
     $conversations = Message::getConversationsForUser($user['id']);
 ?>
+    <link rel="stylesheet" href="/css/messages.css">
+    <link rel="stylesheet" href="/css/irreversible.css">
     <?php include_once(__DIR__ . '/../templates/irreversible-modal.tpl.php'); ?>
     <div id='messages-page'>
         <div class="chat-app__container">
@@ -59,9 +59,6 @@ try {
 
             <main class="chat-app__main">
                 <div class="chat-app__header">
-                    <div class="chat-app__back-button" id="back-to-conversations">
-                        <span class="chat-app__back-icon">←</span>
-                    </div>
                     <span id="current-chat-user"></span>
                     <div class="chat-app__menu-container">
                         <span class="chat-app__menu-button">⋯</span>
@@ -85,8 +82,8 @@ try {
     </div>
 
     <script>
-        // Store current user data for use in JavaScript - using secure encoding
-        const currentUser = <?= Security::jsonEncodeForHTML([
+        // Store current user data for use in JavaScript
+        const currentUser = <?= json_encode([
                                 'id' => $user['id'],
                                 'username' => $user['username'],
                                 'profile_image' => $user['profile_image'] ?? '/images/user_pfp/default.png'
@@ -96,7 +93,7 @@ try {
         <?php if ($directMessageUserId): ?>
             document.addEventListener("DOMContentLoaded", function() {
                 // Check if user exists in conversation list
-                const existingItem = document.querySelector(`.chat-app__chat-item[data-user-id="<?= (int)$directMessageUserId ?>"]`);
+                const existingItem = document.querySelector(`.chat-app__chat-item[data-user-id="<?= $directMessageUserId ?>"]`);
 
                 if (existingItem) {
                     // If conversation exists, trigger a click on it
