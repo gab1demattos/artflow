@@ -111,7 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	document
 		.getElementById("admin-services")
 		.addEventListener("click", function (e) {
-			if (e.target.classList.contains("delete-service-btn")) deleteService(e);
+			if (e.target.classList.contains("delete-service-admin-btn")) deleteService(e);
 		});
 
 	// Intercept category form submit for AJAX
@@ -305,7 +305,7 @@ function fetchServices() {
 				const deleteBtn = createSafeElement(
 					"button",
 					{
-						class: "delete-service-btn red-btn",
+						class: "delete-service-admin-btn red-btn",
 						"data-id": service.id,
 					},
 					"Delete"
