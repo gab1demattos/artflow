@@ -146,7 +146,7 @@
         class="button filled hovering service-options">
         Edit Service
     </button>
-    <button id="delete-service-btn" class="button red service-options" type="button">Delete Service</button>
+    <button id="delete-service-btn" class="delete-service-btn" type="button">Delete Service</button>
                     <?php endif; ?>
                 </div>
             </div>
