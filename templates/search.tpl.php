@@ -64,7 +64,7 @@
                         </div>
                         <div>
                             <label>Max</label>
-                            <p id="min-value"><?php echo htmlspecialchars($priceRange['max_price']); ?></p>
+                            <p id="max-value"><?php echo htmlspecialchars($priceRange['max_price']); ?></p>
                         </div>
                     </div>
                     <div class="price-range-slider">

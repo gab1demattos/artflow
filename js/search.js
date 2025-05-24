@@ -349,9 +349,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     maxPriceInput.addEventListener('input', () => {
+        console.log('Max Price Input Changed:', maxPriceInput.value); // Debugging log
         if (parseFloat(maxPriceInput.value) < parseFloat(minPriceInput.value)) {
             maxPriceInput.value = minPriceInput.value;
         }
+        maxPriceDisplay.textContent = maxPriceInput.value; // Ensure maxPriceDisplay is updated
         updatePriceRange();
     });
 
