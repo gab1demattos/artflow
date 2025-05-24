@@ -110,9 +110,7 @@
                     require_once __DIR__ . '/../database/classes/category.class.php';
                     $session = Session::getInstance();
                     $user = $session->getUser();
-                    if ($user && isset($user['user_type']) && $user['user_type'] === 'admin'): ?>
-                        <button id="open-category-modal" class="button filled hovering" type="button" style="margin-bottom:2em;">Add Category</button>
-                    <?php endif; ?>
+                    ?>
                     <div id="category-list">
                         <?php
                         $categories = Category::getCategories();
