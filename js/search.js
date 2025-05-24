@@ -289,12 +289,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const maxPriceDisplay = document.getElementById('max-value');
 
     const updatePriceRange = async () => {
-        const minPrice = parseFloat(minPriceInput.value);
-        const maxPrice = parseFloat(maxPriceInput.value);
+        let minPrice = parseFloat(minPriceInput.value);
+        let maxPrice = parseFloat(maxPriceInput.value);
 
         if (minPrice > maxPrice) {
-            console.error('Min price cannot be greater than max price.');
-            return;
+            minPrice = maxPrice;
+            minPriceInput.value = minPrice;
         }
 
         minPriceDisplay.textContent = minPrice;
@@ -341,8 +341,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    minPriceInput.addEventListener('input', updatePriceRange);
-    maxPriceInput.addEventListener('input', updatePriceRange);
+    minPriceInput.addEventListener('input', () => {
+        if (parseFloat(minPriceInput.value) > parseFloat(maxPriceInput.value)) {
+            minPriceInput.value = maxPriceInput.value;
+        }
+        updatePriceRange();
+    });
+
+    maxPriceInput.addEventListener('input', () => {
+        if (parseFloat(maxPriceInput.value) < parseFloat(minPriceInput.value)) {
+            maxPriceInput.value = minPriceInput.value;
+        }
+        updatePriceRange();
+    });
 
     deliveryTimeInput.addEventListener('change', async () => {
         const maxDeliveryTime = parseFloat(deliveryTimeInput.value);
