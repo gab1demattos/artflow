@@ -1648,6 +1648,25 @@ h4.important-changes {
 	margin-top: 0.5em;
 }
 
+/* Edit Service Modal - price and delivery side by side */
+.edit-service-row {
+	display: flex;
+	gap: 1.5em;
+	margin-bottom: 1.1em;
+}
+
+.edit-service-col {
+	flex: 1 1 0;
+	min-width: 0;
+}
+
+@media (max-width: 600px) {
+	.edit-service-row {
+		flex-direction: column;
+		gap: 0.5em;
+	}
+}
+
 #edit-service-image-preview img {
 	width: 60px;
 	height: 60px;
@@ -1665,4 +1684,15 @@ body.modal-open {
 		max-width: 98vw;
 		padding: 1em 0.5em;
 	}
+}
+
+/* Center the Edit Service Modal overlay and content */
+#editServiceModal.modal {
+	display: flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+}
+
+#editServiceModal .modal-content {
+	margin: 0 auto;
 }

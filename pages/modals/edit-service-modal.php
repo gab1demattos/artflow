@@ -35,11 +35,16 @@ foreach ($categories as $cat) {
         <!-- Subcategories will be populated by JS -->
       </select>
 
-      <label for="edit-service-price">Price (€)</label>
-      <input type="number" id="edit-service-price" name="price" min="1" step="0.01" required>
-
-      <label for="edit-service-delivery">Delivery Time (days)</label>
-      <input type="number" id="edit-service-delivery" name="delivery_time" min="1" required>
+      <div class="edit-service-row">
+        <div class="edit-service-col">
+          <label for="edit-service-price">Price (€)</label>
+          <input type="number" id="edit-service-price" name="price" min="1" step="0.01" required>
+        </div>
+        <div class="edit-service-col">
+          <label for="edit-service-delivery">Delivery Time (days)</label>
+          <input type="number" id="edit-service-delivery" name="delivery_time" min="1" required>
+        </div>
+      </div>
 
       <label for="edit-service-images">Images</label>
       <input type="file" id="edit-service-images" name="images[]" accept="image/*" multiple>
