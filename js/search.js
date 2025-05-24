@@ -657,7 +657,6 @@ document.addEventListener("DOMContentLoaded", () => {
 			)
 		).map((cb) => cb.id.replace("filter-option-", ""));
 
-		// Use safe defaults and check if elements exist
 		let minPrice = 0;
 		let maxPrice = 1000;
 		let maxDeliveryTime = 30;
@@ -666,6 +665,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		const minPriceElement = document.querySelector(".min-price");
 		const maxPriceElement = document.querySelector(".max-price");
 		const deliveryTimeElement = document.getElementById("delivery-time");
+		const filterRatingValue = document.getElementById("filter-rating-value");
 
 		if (minPriceElement) {
 			minPrice = parseFloat(minPriceElement.value) || 0;
@@ -776,6 +776,15 @@ document.addEventListener("DOMContentLoaded", () => {
 			window.currentFilterRating = 0;
 			updateFilterStarDisplay(0);
 			fetchFilteredServices(); // Update results
+		});
+	}
+
+	// Add "Apply Filters" button functionality
+	const applyFiltersButton = document.querySelector("#apply-filters-button");
+
+	if (applyFiltersButton) {
+		applyFiltersButton.addEventListener("click", () => {
+			fetchFilteredServices();
 		});
 	}
 
