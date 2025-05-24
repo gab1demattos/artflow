@@ -267,9 +267,20 @@ input[type="checkbox"] {
 /* Updated styles for the price range slider */
 .price-range-content {
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    margin: 0 10px;
+    align-items: center; /* Align labels and values vertically */
+    gap: 10px; /* Add spacing between items */
+}
+
+#max-value, #min-value {
+    margin: 0;
+    padding: 0;
+}
+
+.price-range-content div {
+    display: flex;
+    flex-direction: column; /* Stack label and value */
+    align-items: center; /* Center align label and value */
 }
 
 .price-range-slider {
