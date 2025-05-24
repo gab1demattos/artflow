@@ -101,13 +101,24 @@ drawHeader($user);
                     </div>
 
                     <div id="rating-filter">
-                        <label>Rating:</label>
-                        <div class="rating-checkboxes">
-                            <label><input type="checkbox" name="rating[]" value="5" checked> 5 Stars</label>
-                            <label><input type="checkbox" name="rating[]" value="4" checked> 4 Stars</label>
-                            <label><input type="checkbox" name="rating[]" value="3" checked> 3 Stars</label>
-                            <label><input type="checkbox" name="rating[]" value="2" checked> 2 Stars</label>
-                            <label><input type="checkbox" name="rating[]" value="1" checked> 1 Star</label>
+                        <label>Minimum Rating</label>
+                        <div id="filter-search-rating">
+                            <div class="rating-container">
+                                <div class="stars-container">
+                                    <div class="stars">
+                                        <i class="star-icon" data-value="1.0">★</i>
+                                        <i class="star-icon" data-value="2.0">★</i>
+                                        <i class="star-icon" data-value="3.0">★</i>
+                                        <i class="star-icon" data-value="4.0">★</i>
+                                        <i class="star-icon" data-value="5.0">★</i>
+                                    </div>
+                                </div>
+                                <input type="hidden" id="filter-rating-value" value="0">
+                                <div class="rating-display">
+                                    <span id="filter-rating-text">0.0</span>/5
+                                    <button id="clear-rating" title="Clear rating filter">×</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
