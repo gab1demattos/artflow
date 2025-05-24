@@ -2,8 +2,8 @@
 require_once(__DIR__ . '/../../database/database.php');
 require_once(__DIR__ . '/../../database/classes/user.class.php');
 require_once(__DIR__ . '/../../database/session.php');
-require_once(__DIR__ . '/../../database/csrf.php');
-require_once(__DIR__ . '/../../database/security.php');
+require_once(__DIR__ . '/../../database/security/csrf.php');
+require_once(__DIR__ . '/../../database/security/security.php');
 
 // Get the session and check if user is logged in
 $session = Session::getInstance();

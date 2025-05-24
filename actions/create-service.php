@@ -29,7 +29,7 @@ if ($title === '' || $description === '' || !$category_id || !$delivery_time || 
 }
 
 // Include security utilities
-require_once(__DIR__ . '/../database/security.php');
+require_once(__DIR__ . '/../database/security/security.php');
 
 // Sanitize inputs
 $title = Security::sanitizeInput($title);

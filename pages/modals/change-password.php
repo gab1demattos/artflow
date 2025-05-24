@@ -11,7 +11,7 @@ require_once(__DIR__ . '/../../database/session.php');
         <div class="modal-body">
             <form id="change-password-form" action="../../actions/account_settings/change-password-action.php" method="post">
                 <?php
-                require_once(__DIR__ . '/../../database/csrf.php');
+                require_once(__DIR__ . '/../../database/security/csrf.php');
                 echo CSRF::getTokenField('change_password_csrf_token');
                 ?>
                 <div class="form-group">

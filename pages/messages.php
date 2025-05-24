@@ -3,11 +3,11 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-require_once(__DIR__ . '/../database/security_bootstrap.php');
+require_once(__DIR__ . '/../database/security/security_bootstrap.php');
 require_once(__DIR__ . '/../database/session.php');
 require_once(__DIR__ . '/../templates/home.tpl.php');
 require_once(__DIR__ . '/../database/classes/message.class.php');
-require_once(__DIR__ . '/../database/security.php');
+require_once(__DIR__ . '/../database/security/security.php');
 
 $session = Session::getInstance();
 $user = $session->getUser() ?? null;
