@@ -34,6 +34,7 @@
     $owner = $stmtOwner->fetch(PDO::FETCH_ASSOC);
     ?>
     <link rel="stylesheet" href="/css/responsive/service-responsive.css">
+    <link rel="stylesheet" href="/css/modals.css">
     <div id="service-display">
         <div id="service-main">
             <div id="images-service">
@@ -133,6 +134,18 @@
                         <button id="payment" class="service-options">Continue to Payment</button>
                     <?php elseif (!$user): ?>
                         <button class="button filled hovering service-options">Sign Up to Message</button>
+                    <?php elseif ($user && $service['user_id'] == $user['id']): ?>
+    <button id="edit-service-btn"
+        data-service-id="<?= $service['id'] ?>"
+        data-title="<?= htmlspecialchars($service['title'], ENT_QUOTES) ?>"
+        data-description="<?= htmlspecialchars($service['description'], ENT_QUOTES) ?>"
+        data-category="<?= $service['category_id'] ?? '' ?>"
+        data-subcategory="<?= $service['subcategory_id'] ?? '' ?>"
+        data-price="<?= htmlspecialchars($service['price']) ?>"
+        data-delivery="<?= htmlspecialchars($service['delivery_time']) ?>"
+        class="button filled hovering service-options">
+        Edit Service
+    </button>
                     <?php endif; ?>
                 </div>
             </div>
@@ -144,9 +157,11 @@
         </div>
     </div>
     <script src="/js/service-scroll.js"></script>
+    <script src="/js/edit-service-modal.js"></script>
 
     <?php include __DIR__ . '/../pages/modals/requirements-modal.php'; ?>
     <?php include __DIR__ . '/../pages/modals/payment-modal.php'; ?>
     <?php include __DIR__ . '/../pages/modals/thankyou-modal.php'; ?>
+    <?php include __DIR__ . '/../pages/modals/edit-service-modal.php'; ?>
     <script src="/js/checkout.js"></script>
 <?php } ?>
