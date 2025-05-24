@@ -6,7 +6,8 @@
 		"image info"
 		"image bio";
 	padding: 20px;
-	margin-bottom: 20px;
+	margin-bottom: 0;
+	/* Remove bottom margin to maintain consistent spacing */
 	gap: 8px;
 	position: relative;
 }
@@ -152,9 +153,8 @@
 	display: flex;
 	align-items: center;
 	border-bottom: 1px solid #ddd;
-	margin-bottom: 20px;
-	margin-left: 4.5em;
-	margin-right: 4.5em;
+	margin: 1rem 4.5em;
+	/* Consistent margins all around */
 	gap: 0;
 	height: 40px;
 }
@@ -206,10 +206,10 @@
 	/* Use viewport height minus space for header/tabs/etc */
 	width: 100%;
 	flex-direction: column;
-	padding: 4rem 4.5em;
-	/* Increase top padding to match spacing with content */
-	margin-top: -2rem;Ant9
-	/* Pull up to compensate for the profile section margin */
+	padding: 2rem 4.5em;
+	/* Standard padding */
+	margin-top: 0;
+	/* Remove negative margin */
 	box-sizing: border-box;
 	transition: opacity 0.2s ease;
 	/* Smooth transition when switching tabs */
@@ -223,9 +223,13 @@
 
 /* Empty state styling for active tabs */
 .tab-content.active.empty-state {
-	justify-content: center;
+	justify-content: flex-start;
 	align-items: center;
 	text-align: center;
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	min-height: 50vh;
 }
 
 /* Specific styling for reviews tab - only apply when active */
@@ -237,13 +241,12 @@
 	padding-top: 1.5rem;
 }
 
-/* Ensure the nothing-img is properly positioned in empty states */
-.tab-content.empty-state .nothing-img {
-	margin: 20px auto;
-	/* Centered horizontally with some margin */
+/* Empty state image container positioning */
+.tab-content.empty-state::before {
+	content: "";
 	display: block;
-	max-width: 300px;
-	/* Control the maximum width */
+	height: 220px;
+	/* Fixed height to ensure consistent spacing */
 }
 
 .tab-content.active {
@@ -296,8 +299,11 @@
 .nothing-img {
 	max-width: 300px;
 	opacity: 0.8;
-	margin: 0 auto;
-	/* Remove vertical margin to let container padding control spacing */
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	/* Center precisely both vertically and horizontally */
 }
 
 /* Add padding between pagination and footer */
@@ -433,11 +439,10 @@ footer,
 /* Empty state styling */
 .tab-content.empty-state {
 	display: flex;
-	justify-content: flex-start;
-	/* Align to top like non-empty states */
+	justify-content: center;
 	align-items: center;
-	padding-top: 4rem;
-	/* Match the spacing of non-empty states */
+	height: 60vh;
+	/* Fixed height to ensure consistent positioning */
 }
 
 /* Average Rating Styles */
