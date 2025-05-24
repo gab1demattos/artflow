@@ -1,4 +1,8 @@
-<?php function drawHeader($user, $currentPage = '')
+<?php
+require_once(__DIR__ . '/../database/csp_helper.php');
+CSPHelper::apply();
+
+function drawHeader($user, $currentPage = '')
 { ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -61,17 +65,17 @@
                         <a href="/pages/stats.php"><button>Stats</button></a>
                     </li>
                     <?php if (isset($user['user_type']) && $user['user_type'] === 'admin'): ?>
-                    <li class="sidebar-item">
-                        <img src="/images/logos/admin_panel.png" alt="Admin Panel" class="logo">
-                        <a href="/pages/admin.php"><button>Admin Panel</button></a>
-                    </li>
+                        <li class="sidebar-item">
+                            <img src="/images/logos/admin_panel.png" alt="Admin Panel" class="logo">
+                            <a href="/pages/admin.php"><button>Admin Panel</button></a>
+                        </li>
                     <?php endif; ?>
-                   
+
                     <li class="sidebar-item" id="settings">
                         <img src="/images/logos/settings.png" alt="Settings" class="logo">
                         <button>Settings</button>
                     </li>
-                    
+
                     <li class="sidebar-item">
                         <img src="/images/logos/logout.png" alt="Log Out" class="logo">
                         <form action="/actions/login/logout.php" method="post"><button>Log Out</button></form>

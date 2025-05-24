@@ -1,37 +1,43 @@
 <?php
 
 declare(strict_types=1);
-
-require_once(__DIR__ . '/../../database/classes/user.class.php');
+require_once(__DIR__ . '/../../database/security_bootstrap.php');
 require_once(__DIR__ . '/../../database/session.php');
+require_once(__DIR__ . '/../../database/classes/user.class.php');
 require_once(__DIR__ . '/../../database/database.php');
+require_once(__DIR__ . '/../../database/csrf.php');
+require_once(__DIR__ . '/../../database/security.php');
 
-// Use absolute path for redirect to homepage
-function redirect_home() {
-    header('Location: /pages/index.php');
+function redirect_home()
+{
+    header('Location: /');
     exit();
 }
 
-// If AJAX, return JSON error, else show error in alert
-function handle_signup_error($msg) {
-    echo '<script>
-        if (window.parent && window.parent.showModalError) {
-            window.parent.showModalError("signup-modal-overlay", "' . addslashes($msg) . '");
-            if (window.parent.showModal) window.parent.showModal("signUp");
-        } else {
-            alert("' . addslashes($msg) . '");
-        }
-        if (window.parent) window.parent.postMessage({modalError: true}, "*");
-    </script>';
+function handle_signup_error($msg)
+{
+    $_SESSION['signup_error'] = $msg;
+    header('Location: /');
     exit();
 }
 
-// Get form data
-$name = $_POST['name'] ?? '';
-$username = $_POST['username'] ?? '';
-$email = $_POST['email'] ?? '';
-$password = $_POST['password'] ?? '';
-$confirm_password = $_POST['confirm_password'] ?? '';
+// Check if this is a POST request
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    redirect_home();
+}
+
+// Validate CSRF token
+$token = $_POST['csrf_token'] ?? '';
+if (!CSRF::validate($token, 'signup_csrf_token')) {
+    handle_signup_error('Invalid security token. Please try again.');
+}
+
+// Get and sanitize form data
+$name = Security::sanitizeInput($_POST['name'] ?? '');
+$username = Security::sanitizeInput($_POST['username'] ?? '');
+$email = Security::sanitizeInput($_POST['email'] ?? '');
+$password = $_POST['password'] ?? ''; // Don't sanitize passwords
+$confirm_password = $_POST['confirm_password'] ?? ''; // Don't sanitize passwords
 
 $session = Session::getInstance();
 
@@ -86,21 +92,18 @@ $user = User::create($name, $username, $email, $password, 'regular');
 if ($user) {
     $session->login([
         'id' => $user->id,
-        'user_type' => $user->user_type,
         'name' => $user->name,
         'username' => $user->username,
+        'user_type' => $user->user_type,
         'email' => $user->email,
         'bio' => $user->bio,
         'profile_image' => $user->profile_image
     ]);
-    echo '<script>
-            if (window.parent && window.parent.showGoFlowModal) {
-                window.parent.showGoFlowModal();
-            } else {
-                window.parent.location.href = "/pages/index.php";
-            }
-        </script>';
+
+    // Set success message and redirect
+    $_SESSION['signup_success'] = true;
+    header('Location: /');
     exit();
 } else {
-    handle_signup_error('Signup failed');
+    handle_signup_error('Account creation failed. Please try again.');
 }

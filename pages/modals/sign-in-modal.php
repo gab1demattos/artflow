@@ -7,6 +7,10 @@
             <div class="form-container">
                 <h2 id='h2-signin'>Welcome back!</h2>
                 <form id="signin-form" class="form" method='POST' action='/actions/login/signin-action.php'>
+                    <?php
+                    require_once(__DIR__ . '/../../database/csrf.php');
+                    echo CSRF::getTokenField('signin_csrf_token');
+                    ?>
                     <input type="email" placeholder="Email" name="email" required>
                     <div class="password-input-container">
                         <input type="password" placeholder="Password" name="password" required>

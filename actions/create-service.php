@@ -28,10 +28,25 @@ if ($title === '' || $description === '' || !$category_id || !$delivery_time || 
     exit();
 }
 
+// Include security utilities
+require_once(__DIR__ . '/../database/security.php');
+
+// Sanitize inputs
+$title = Security::sanitizeInput($title);
+$description = Security::sanitizeInput($description);
+$category_id = Security::validateInteger($category_id) ? $category_id : 0;
+$delivery_time = Security::validateInteger($delivery_time) ? $delivery_time : 0;
+$price = Security::validateFloat($price) ? $price : 0;
+$subcategories = is_array($subcategories) ? array_map([Security::class, 'sanitizeInput'], $subcategories) : [];
+
 // Handle media upload (max 5 files)
 $mediaPaths = [];
 $primaryImage = null;
-$allowedTypes = ['image/jpeg','image/png','image/gif','image/webp','video/mp4','video/quicktime','video/webm'];
+$allowedImageTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+$allowedVideoTypes = ['video/mp4', 'video/quicktime', 'video/webm'];
+$allowedTypes = array_merge($allowedImageTypes, $allowedVideoTypes);
+$maxFileSize = 10 * 1024 * 1024; // 10MB limit
+
 if (!empty($_FILES['media']['name'][0])) {
     $totalFiles = count($_FILES['media']['name']);
     if ($totalFiles > 5) {
@@ -41,16 +56,57 @@ if (!empty($_FILES['media']['name'][0])) {
     }
     $uploadsDir = __DIR__ . '/../images/services/';
     if (!is_dir($uploadsDir)) mkdir($uploadsDir, 0777, true);
+
     for ($i = 0; $i < $totalFiles; $i++) {
-        $tmpName = $_FILES['media']['tmp_name'][$i];
-        $name = basename($_FILES['media']['name'][$i]);
-        $type = $_FILES['media']['type'][$i];
-        if (!in_array($type, $allowedTypes)) continue;
-        $filename = uniqid('srv_', true) . '_' . $name;
+        // Create a file array structure for a single file
+        $file = [
+            'name' => $_FILES['media']['name'][$i],
+            'type' => $_FILES['media']['type'][$i],
+            'tmp_name' => $_FILES['media']['tmp_name'][$i],
+            'error' => $_FILES['media']['error'][$i],
+            'size' => $_FILES['media']['size'][$i],
+        ];
+
+        // Use enhanced security validation for media files
+        $isImage = strpos($file['type'], 'image/') === 0;
+
+        // For images, use our enhanced validation
+        if ($isImage) {
+            $validation = Security::validateImageUpload(
+                $file,
+                $allowedImageTypes,
+                $maxFileSize
+            );
+
+            if (!$validation['valid']) {
+                $_SESSION['error'] = 'File ' . $file['name'] . ': ' . $validation['error'];
+                header('Location: /pages/new-service.php');
+                exit();
+            }
+
+            // Create a more secure filename that preserves the extension
+            $fileInfo = pathinfo($file['name']);
+            $extension = isset($fileInfo['extension']) ? '.' . $fileInfo['extension'] : '';
+            $filename = uniqid('srv_', true) . $extension;
+        }
+        // For videos, perform basic checks
+        else if (in_array($file['type'], $allowedVideoTypes)) {
+            if ($file['size'] > $maxFileSize) {
+                $_SESSION['error'] = 'Video file too large. Maximum size is 10MB.';
+                header('Location: /pages/new-service.php');
+                exit();
+            }
+            $filename = uniqid('srv_', true) . '_' . basename($file['name']);
+        }
+        // Skip files that aren't allowed
+        else {
+            continue;
+        }
+
         $targetPath = $uploadsDir . $filename;
-        if (move_uploaded_file($tmpName, $targetPath)) {
+        if (move_uploaded_file($file['tmp_name'], $targetPath)) {
             $mediaPaths[] = '/images/services/' . $filename;
-            if ($primaryImage === null && strpos($type, 'image/') === 0) {
+            if ($primaryImage === null && $isImage) {
                 $primaryImage = '/images/services/' . $filename;
             }
         }

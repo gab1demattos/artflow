@@ -2,10 +2,12 @@
 
 declare(strict_types=1);
 
+require_once(__DIR__ . '/../database/security_bootstrap.php');
 require_once(__DIR__ . '/../database/session.php');
 require_once(__DIR__ . '/../database/database.php');
 require_once(__DIR__ . '/../database/classes/service.class.php');
 require_once(__DIR__ . '/../database/classes/review.class.php');
+require_once(__DIR__ . '/../database/security.php');
 
 // Set header for JSON response
 header('Content-Type: application/json');
@@ -24,12 +26,12 @@ $userId = $user['id'];
 
 // Check if the form was submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Get form data
+    // Get and sanitize form data
     $serviceId = isset($_POST['service_id']) ? intval($_POST['service_id']) : 0;
     $rating = isset($_POST['rating']) ? floatval($_POST['rating']) : 0;
-    $comment = isset($_POST['review_text']) ? htmlspecialchars($_POST['review_text']) : '';
+    $comment = isset($_POST['review_text']) ? Security::sanitizeInput($_POST['review_text']) : '';
 
-    // Basic validation
+    // Enhanced validation
     $errors = [];
 
     if ($serviceId <= 0) {

@@ -1,26 +1,29 @@
 <?php
-  declare(strict_types = 1);
 
-  require_once(__DIR__ . '/../database/session.php');
-  $session = new Session();
+declare(strict_types=1);
 
-  require_once(__DIR__ . '/../database/classes/service.class.php');
-  require_once(__DIR__ . '/../database/database.php');
+require_once(__DIR__ . '/../api/api_security.php'); // Apply API security headers and CORS
+require_once(__DIR__ . '/../database/security.php'); // Load security helpers
+require_once(__DIR__ . '/../database/session.php');
+$session = new Session();
 
-  $db = Database::getInstance();
+require_once(__DIR__ . '/../database/classes/service.class.php');
+require_once(__DIR__ . '/../database/database.php');
 
-  $categories = isset($_GET['categories']) ? explode(',', $_GET['categories']) : [];
-  $minPrice = isset($_GET['min_price']) ? (float)$_GET['min_price'] : null;
-  $maxPrice = isset($_GET['max_price']) ? (float)$_GET['max_price'] : null;
+$db = Database::getInstance();
 
-  if (!empty($categories)) {
-      $services = Service::getServicesByCategories($db, $categories, $minPrice, $maxPrice);
-  } else {
-      $search = $_GET['search'] ?? '';
-      $services = empty($search) ? Service::getAllServices($minPrice, $maxPrice) : Service::searchServices($db, $search, $minPrice, $maxPrice);
-  }
+$categories = isset($_GET['categories']) ? explode(',', $_GET['categories']) : [];
+$minPrice = isset($_GET['min_price']) ? (float)$_GET['min_price'] : null;
+$maxPrice = isset($_GET['max_price']) ? (float)$_GET['max_price'] : null;
 
-  echo json_encode(array_map(function($service) {
+if (!empty($categories)) {
+    $services = Service::getServicesByCategories($db, $categories, $minPrice, $maxPrice);
+} else {
+    $search = $_GET['search'] ?? '';
+    $services = empty($search) ? Service::getAllServices($minPrice, $maxPrice) : Service::searchServices($db, $search, $minPrice, $maxPrice);
+}
+
+echo json_encode(array_map(function ($service) {
     return [
         'id' => $service->id,
         'title' => $service->title,
@@ -30,5 +33,4 @@
         'username' => $service->getUsername(),
         'subcategories' => implode(',', $service->getSubcategoryIds())
     ];
-  }, $services));
-?>
+}, $services));

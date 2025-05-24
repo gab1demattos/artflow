@@ -1,5 +1,47 @@
 /*== PROFILE PAGE ==*/
 
+// Security utility functions
+/**
+ * Escapes HTML to prevent XSS attacks
+ * @param {string} unsafe - The unsafe string to be escaped
+ * @return {string} The escaped string
+ */
+function escapeHtml(unsafe) {
+	if (typeof unsafe !== "string") {
+		return "";
+	}
+	return unsafe
+		.replace(/&/g, "&amp;")
+		.replace(/</g, "&lt;")
+		.replace(/>/g, "&gt;")
+		.replace(/"/g, "&quot;")
+		.replace(/'/g, "&#039;");
+}
+
+/**
+ * Creates a safe DOM element with escaped content
+ * @param {string} tag - HTML tag name
+ * @param {Object} attributes - Element attributes
+ * @param {string} textContent - Element text content
+ * @return {HTMLElement} The created element
+ */
+function createSafeElement(tag, attributes = {}, textContent = "") {
+	const element = document.createElement(tag);
+
+	// Set attributes safely
+	for (const [key, value] of Object.entries(attributes)) {
+		if (key.startsWith("on")) continue; // Skip event handlers
+		element.setAttribute(key, value);
+	}
+
+	// Set text content safely
+	if (textContent) {
+		element.textContent = textContent;
+	}
+
+	return element;
+}
+
 document.addEventListener("DOMContentLoaded", function () {
 	const tabTriggers = document.querySelectorAll(".tab-trigger");
 	const tabContents = document.querySelectorAll(".tab-content");
