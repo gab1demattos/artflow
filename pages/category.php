@@ -74,11 +74,11 @@ drawHeader($user);
                         <div class="price-filter-content">
                             <div>
                                 <label>Min Price</label>
-                                <p id="min-value-filter"><?= $priceMin ?></p>
+                                <p id="min-value-filter"><?= isset($_GET['price_min']) ? $_GET['price_min'] : $priceMin ?></p>
                             </div>
                             <div>
                                 <label>Max Price</label>
-                                <p id="max-value-filter"><?= $priceMax ?></p>
+                                <p id="max-value-filter"><?= isset($_GET['price_max']) ? $_GET['price_max'] : $priceMax ?></p>
                             </div>
                         </div>
                         <div class="price-filter-slider">
@@ -86,17 +86,19 @@ drawHeader($user);
                             <input 
                                 type="range" 
                                 class="min-price-filter" 
+                                name="price_min"
                                 min="<?= $priceMin ?>" 
                                 max="<?= $priceMax ?>" 
-                                value="<?= $priceMin ?>" 
+                                value="<?= isset($_GET['price_min']) ? $_GET['price_min'] : $priceMin ?>" 
                             >
                             <input 
                                 type="range" 
                                 class="max-price-filter" 
+                                name="price_max"
                                 min="<?= $priceMin ?>" 
                                 max="<?= $priceMax ?>" 
-                                value="<?= $priceMax ?>" 
-                                >
+                                value="<?= isset($_GET['price_max']) ? $_GET['price_max'] : $priceMax ?>" 
+                            >
                         </div>
                     </div>
 
@@ -192,6 +194,51 @@ drawHeader($user);
         const filterRatingText = document.getElementById("filter-rating-text");
         const clearRatingBtn = document.getElementById("clear-rating");
         let currentFilterRating = 0;
+
+        // Price range filter elements
+        const minPriceInput = document.querySelector(".min-price-filter");
+        const maxPriceInput = document.querySelector(".max-price-filter");
+        const minPriceDisplay = document.getElementById("min-value-filter");
+        const maxPriceDisplay = document.getElementById("max-value-filter");
+        const rangeFill = document.querySelector(".range-fill");
+
+        // Function to update the visual range fill
+        function updateRangeFill() {
+            if (minPriceInput && maxPriceInput && rangeFill) {
+                const minVal = parseInt(minPriceInput.value);
+                const maxVal = parseInt(maxPriceInput.value);
+                const minRange = parseInt(minPriceInput.min);
+                const maxRange = parseInt(minPriceInput.max);
+                
+                const leftPercent = ((minVal - minRange) / (maxRange - minRange)) * 100;
+                const rightPercent = ((maxVal - minRange) / (maxRange - minRange)) * 100;
+                
+                rangeFill.style.left = leftPercent + "%";
+                rangeFill.style.width = (rightPercent - leftPercent) + "%";
+            }
+        }
+
+        // Add event listeners for price range inputs
+        if (minPriceInput && maxPriceInput) {
+            minPriceInput.addEventListener("input", () => {
+                if (parseFloat(minPriceInput.value) > parseFloat(maxPriceInput.value)) {
+                    minPriceInput.value = maxPriceInput.value;
+                }
+                minPriceDisplay.textContent = minPriceInput.value;
+                updateRangeFill();
+            });
+
+            maxPriceInput.addEventListener("input", () => {
+                if (parseFloat(maxPriceInput.value) < parseFloat(minPriceInput.value)) {
+                    maxPriceInput.value = minPriceInput.value;
+                }
+                maxPriceDisplay.textContent = maxPriceInput.value;
+                updateRangeFill();
+            });
+
+            // Initialize the range fill on page load
+            updateRangeFill();
+        }
 
         function updateFilterStarDisplay(rating) {
             filterRatingStars.forEach((star) => {
