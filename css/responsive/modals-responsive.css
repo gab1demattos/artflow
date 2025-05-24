@@ -33,7 +33,45 @@
 
 	/* Special styling for sign-in modal to make it smaller */
 	#signin-modal {
-		min-height: 350px;
+		min-height: 350px !important;
+		height: auto !important;
+		margin: 0 !important;
+		width: 100% !important;
+		max-width: 100% !important;
+		padding: 1rem !important;
+		overflow-x: hidden !important;
+		box-sizing: border-box !important;
+	}
+
+	#signin-modal .modal-content {
+		flex-direction: column !important;
+		height: auto !important;
+		width: 100% !important;
+		overflow-x: hidden !important;
+	}
+
+	#signin-modal .form-container {
+		width: 100% !important;
+		padding: 0.5rem !important;
+		box-sizing: border-box !important;
+	}
+
+	#signin-modal .form {
+		width: 100% !important;
+		max-width: 280px !important;
+		margin: 0 auto !important;
+	}
+
+	#signin-modal .button-container {
+		flex-direction: column !important;
+		gap: 0.8rem !important;
+		margin-top: 1rem !important;
+	}
+
+	#signin-modal .button-container button {
+		width: 100% !important;
+		padding: 12px !important;
+		margin: 0 !important;
 	}
 
 	/* Edit profile modal specific styles for mobile - full page appearance */
@@ -209,6 +247,65 @@
 		position: absolute;
 		bottom: 3em;
 		right: 2.5em;
+	}
+
+	/* Sign up modal specific mobile styles */
+	#signup-modal {
+		min-height: 480px !important;
+		height: auto !important;
+		margin: 0 !important;
+		width: 100% !important;
+		max-width: 100% !important;
+		padding: 1rem !important;
+		overflow-x: hidden !important;
+		box-sizing: border-box !important;
+	}
+
+	#signup-modal .modal-content {
+		flex-direction: column !important;
+		height: auto !important;
+		width: 100% !important;
+		overflow-x: hidden !important;
+	}
+
+	#signup-modal .form-container {
+		width: 100% !important;
+		padding: 0.5rem !important;
+		box-sizing: border-box !important;
+	}
+
+	#signup-modal .form {
+		width: 100% !important;
+		max-width: 280px !important;
+		margin: 0 auto !important;
+	}
+
+	#signup-modal h2 {
+		font-size: 1.8rem !important;
+		margin-bottom: 1.2rem !important;
+	}
+
+	#signup-modal input,
+	#signup-modal .password-input-container {
+		margin-bottom: 0.8rem !important;
+		font-size: 16px !important;
+	}
+
+	#signup-modal .button-container {
+		flex-direction: column !important;
+		gap: 0.8rem !important;
+		margin-top: 1rem !important;
+	}
+
+	#signup-modal .button-container button {
+		width: 100% !important;
+		padding: 12px !important;
+		margin: 0 !important;
+	}
+
+	/* Hide illustration on mobile */
+	#signup-modal .modal-right {
+		display: none !important;
 	}
 }
 
