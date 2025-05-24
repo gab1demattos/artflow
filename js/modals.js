@@ -181,6 +181,19 @@ const Modals = {
 			openNewServiceModalBtn.addEventListener("click", (e) => {
 				e.stopPropagation();
 				this.overlays.newService.classList.remove("hidden");
+				
+				// Auto-close the sidebar when the new service modal is opened
+				if (typeof closeSidebar === 'function') {
+					closeSidebar();
+				} else {
+					// Fallback if closeSidebar function is not available
+					const sidebar = document.getElementById("sidebar");
+					const overlay = document.getElementById("overlay");
+					if (sidebar && overlay) {
+						sidebar.classList.remove("active");
+						overlay.classList.remove("active");
+					}
+				}
 			});
 		}
 
