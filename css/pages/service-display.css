@@ -2,9 +2,10 @@
 
 #service-display {
 	display: flex;
+	flex-direction: row;
 	justify-content: space-around;
-	gap: 0;
-	min-height: 100vh;
+	gap: 2em;
+	width: 100%;
 }
 
 .main-image {
@@ -28,7 +29,7 @@
 	width: 35%;
 }
 
-#service-checkout > h2 {
+#service-checkout>h2 {
 	font-size: 2.5rem;
 	margin-bottom: 0.5rem;
 	font-weight: 700;
@@ -87,6 +88,7 @@
 	font-family: "EB Garamond", serif;
 	padding: 0.2em;
 }
+
 .service-options {
 	padding: 7px 30px;
 	margin-left: 1em;
@@ -186,8 +188,8 @@
 	margin: 6em 0 0 2em;
 	scroll-behavior: smooth;
 	width: 9em;
-	height: 27em;
-	overflow-y: scroll;
+	height: auto;
+	overflow-y: visible;
 }
 
 #service-imgs img {
@@ -304,7 +306,8 @@
 	object-fit: cover;
 	border: 1px solid #ddd;
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-	margin-top: 0.5rem; /* Added padding on top of profile pictures */
+	margin-top: 0.5rem;
+	/* Added padding on top of profile pictures */
 }
 
 .review-user p {
@@ -313,9 +316,12 @@
 
 #images-service {
 	display: flex;
-	margin-top: 0; /* Kept the removal of 25em top margin */
-	position: static; /* Changed from sticky to static */
-	z-index: auto; /* Reset z-index */
+	margin-top: 0;
+	/* Kept the removal of 25em top margin */
+	position: static;
+	/* Changed from sticky to static */
+	z-index: auto;
+	/* Reset z-index */
 }
 
 #service-main {
@@ -325,19 +331,36 @@
 	width: 60%;
 	height: auto;
 	padding-bottom: 2em;
-	overflow-y: auto; /* Changed back to auto to enable scrolling within this container */
-	max-height: 100vh; /* Limit height to viewport height but allow content to scroll */
+	overflow: visible;
+	/* Remove any overflow/scroll styles */
 }
 
 #service-details {
-	margin-top: 2em; /* Add some space between images and details */
+	margin-top: 2em;
+	/* Add some space between images and details */
 	width: 100%;
 }
 
-#service-details > p {
+#service-details>p {
 	font-size: 1.2rem;
 	color: #555;
 	line-height: 1.5;
 	margin-top: 2em;
 	text-align: center;
+}
+
+/* Ensure body and html allow for natural scrolling */
+body,
+html {
+	height: auto;
+	overflow-y: auto;
+}
+
+/* Remove any remaining fixed heights that could cause column scroll */
+#service-main,
+#service-details,
+#service-imgs,
+#service-checkout {
+	height: auto !important;
+	max-height: none !important;
 }
