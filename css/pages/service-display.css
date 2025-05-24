@@ -108,7 +108,7 @@
 #service-options {
 	display: flex;
 	justify-content: center;
-	gap: 1em;
+	gap: 0;
 	margin-top: 1em;
 }
 
@@ -380,6 +380,8 @@ html {
 	transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
 	box-shadow: 0px 4px 8px rgba(229, 57, 53, 0.15);
 	display: inline-block;
+	margin-left: 0;
+	/* Tiny left margin for separation */
 }
 
 .delete-service-btn:hover,

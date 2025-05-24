@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.target.classList.contains('ban-btn') || e.target.classList.contains('red-btn')) banUser(e);
     });
     document.getElementById('admin-services').addEventListener('click', function (e) {
-        if (e.target.classList.contains('delete-service-btn')) deleteService(e);
+        if (e.target.classList.contains('delete-service-admin-btn')) deleteService(e);
     });
 
     // Intercept category form submit for AJAX
@@ -201,7 +201,7 @@ function fetchServices() {
                     <td>${service.title}</td>
                     <td>${service.owner}</td>
                     <td>${service.category}</td>
-                    <td><button class="delete-service-btn red-btn" data-id="${service.id}">Delete</button></td>
+                    <td><button class="delete-service-admin-btn red-btn" data-id="${service.id}">Delete</button></td>
                 `;
                 tbody.appendChild(tr);
             });
