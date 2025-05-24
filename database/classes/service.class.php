@@ -48,7 +48,7 @@ class Service
         $this->avg_rating = $avg_rating ?? 0; // Initialize avg_rating property
     }
 
-    
+
 
     /**
      * Get all services
@@ -387,12 +387,13 @@ class Service
      * @param int $id
      * @return bool
      */
-    public static function deleteServiceById(int $id): bool {
+    public static function deleteServiceById(int $id): bool
+    {
         $db = Database::getInstance();
         $stmt = $db->prepare('DELETE FROM Service WHERE id = ?');
         return $stmt->execute([$id]);
     }
-    
+
     /**
      * Get the category for this service
      * 
@@ -493,9 +494,14 @@ class Service
      * 
      * @return array Array of Service objects
      */
-    public static function getAllServices(?float $minPrice = null, ?float $maxPrice = null, ?int $maxDeliveryTime = null): array {
+    public static function getAllServices(?float $minPrice = null, ?float $maxPrice = null, ?int $maxDeliveryTime = null, ?float $minRating = 0): array
+    {
         $db = Database::getInstance();
-        $query = 'SELECT * FROM Service';
+        $query = 'SELECT Service.*, User.username, COALESCE(AVG(Review.rating), 0) as avg_rating 
+                 FROM Service 
+                 JOIN User ON Service.user_id = User.id
+                 LEFT JOIN Review ON Service.id = Review.service_id
+                 GROUP BY Service.id';
         $params = [];
         $conditions = [];
 
@@ -508,12 +514,17 @@ class Service
             $params[] = $maxPrice;
         }
         if ($maxDeliveryTime !== null) {
-            $conditions[] = 'delivery_time <= ?';
+            $conditions[] = 'Service.delivery_time <= ?';
             $params[] = $maxDeliveryTime;
         }
 
+        if ($minRating > 0) {
+            $conditions[] = 'COALESCE(AVG(Review.rating), 0) >= ?';
+            $params[] = $minRating;
+        }
+
         if (!empty($conditions)) {
-            $query .= ' WHERE ' . implode(' AND ', $conditions);
+            $query .= ' HAVING ' . implode(' AND ', $conditions);
         }
 
         $stmt = $db->prepare($query);
@@ -537,12 +548,19 @@ class Service
         return $result;
     }
 
-    public static function searchServices(PDO $db, string $search, ?float $minPrice = null, ?float $maxPrice = null): array {
-        $query = 'SELECT * FROM Service WHERE title LIKE ?';
+    public static function searchServices(PDO $db, string $search, ?float $minPrice = null, ?float $maxPrice = null, ?int $maxDeliveryTime = null, ?float $minRating = 0): array
+    {
+        $query = 'SELECT Service.*, User.username, COALESCE(AVG(Review.rating), 0) as avg_rating
+                 FROM Service 
+                 JOIN User ON Service.user_id = User.id
+                 LEFT JOIN Review ON Service.id = Review.service_id
+                 WHERE title LIKE ?
+                 GROUP BY Service.id';
         $params = ['%' . $search . '%'];
+        $havingConditions = [];
 
         if ($minPrice !== null) {
-            $query .= ' AND price >= ?';
+            $havingConditions[] = 'Service.price >= ?';
             $params[] = $minPrice;
         }
         if ($maxPrice !== null) {
@@ -576,18 +594,37 @@ class Service
      * @param array $categoryIds Array of category IDs
      * @return array Array of Service objects
      */
-    public static function getServicesByCategories(PDO $db, array $categoryIds, ?float $minPrice = null, ?float $maxPrice = null): array {
+    public static function getServicesByCategories(PDO $db, array $categoryIds, ?float $minPrice = null, ?float $maxPrice = null, ?int $maxDeliveryTime = null, ?float $minRating = 0): array
+    {
         $placeholders = implode(',', array_fill(0, count($categoryIds), '?'));
-        $query = "SELECT Service.*, User.username FROM Service JOIN User ON Service.user_id = User.id WHERE Service.category_id IN ($placeholders)";
+        $query = "SELECT Service.*, User.username, COALESCE(AVG(Review.rating), 0) as avg_rating 
+                FROM Service 
+                JOIN User ON Service.user_id = User.id
+                LEFT JOIN Review ON Service.id = Review.service_id
+                WHERE Service.category_id IN ($placeholders)
+                GROUP BY Service.id";
         $params = $categoryIds;
+        $havingConditions = [];
 
         if ($minPrice !== null) {
-            $query .= ' AND price >= ?';
+            $havingConditions[] = 'Service.price >= ?';
             $params[] = $minPrice;
         }
         if ($maxPrice !== null) {
-            $query .= ' AND price <= ?';
+            $havingConditions[] = 'Service.price <= ?';
             $params[] = $maxPrice;
+        }
+        if ($maxDeliveryTime !== null) {
+            $havingConditions[] = 'Service.delivery_time <= ?';
+            $params[] = $maxDeliveryTime;
+        }
+        if ($minRating > 0) {
+            $havingConditions[] = 'COALESCE(AVG(Review.rating), 0) >= ?';
+            $params[] = $minRating;
+        }
+
+        if (!empty($havingConditions)) {
+            $query .= ' HAVING ' . implode(' AND ', $havingConditions);
         }
 
         $stmt = $db->prepare($query);
@@ -605,7 +642,8 @@ class Service
                 (int)$service['delivery_time'],
                 $service['images'],
                 $service['videos'],
-                $service['username']
+                $service['username'],
+                (float)$service['avg_rating']
             );
         }
         return $result;
@@ -702,7 +740,8 @@ class Service
      * @param int $categoryId
      * @return array ['min' => float, 'max' => float]
      */
-    public static function getPriceRangeByCategory(int $categoryId): array {
+    public static function getPriceRangeByCategory(int $categoryId): array
+    {
         $db = Database::getInstance();
         $stmt = $db->prepare('SELECT MIN(price) as min, MAX(price) as max FROM Service WHERE category_id = ?');
         $stmt->execute([$categoryId]);
@@ -714,11 +753,11 @@ class Service
      * @param int $categoryId
      * @return array ['min' => int, 'max' => int]
      */
-    public static function getDeliveryRangeByCategory(int $categoryId): array {
+    public static function getDeliveryRangeByCategory(int $categoryId): array
+    {
         $db = Database::getInstance();
         $stmt = $db->prepare('SELECT MIN(delivery_time) as min, MAX(delivery_time) as max FROM Service WHERE category_id = ?');
         $stmt->execute([$categoryId]);
         return $stmt->fetch(PDO::FETCH_ASSOC) ?: ['min' => 0, 'max' => 0];
     }
-    
 }
