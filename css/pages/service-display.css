@@ -95,7 +95,6 @@
 	font-size: 16px;
 	width: auto;
 	height: auto;
-	margin-bottom: 1em;
 	background: transparent;
 	cursor: pointer;
 	border-radius: 15px;
@@ -103,6 +102,8 @@
 	font-family: "EB Garamond", serif;
 	margin: 0 auto;
 	margin-bottom: 1em;
+	
+	transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
 }
 
 #service-options {
@@ -139,17 +140,18 @@
 }
 
 .service-options:hover {
-	transform: translateY(-2px);
-	transition: all 0.3s ease-in-out;
+	background-color: #a123c7;
+	color: #fff;
+	box-shadow: 0px 6px 12px rgba(173, 31, 235, 0.25);
+	transform: translateY(-2px) scale(1.03);
+	outline: none;
 }
 
 #price {
 	font-size: 3rem;
 	font-weight: 700;
-	margin-top: 0.2em;
 	text-align: end;
-	margin-right: 1em;
-	margin-bottom: 0.2em;
+	margin: 0.2em 1em 0.2em 0;
 }
 
 #service-delivery {
@@ -317,11 +319,8 @@
 #images-service {
 	display: flex;
 	margin-top: 0;
-	/* Kept the removal of 25em top margin */
 	position: static;
-	/* Changed from sticky to static */
 	z-index: auto;
-	/* Reset z-index */
 }
 
 #service-main {
@@ -332,12 +331,10 @@
 	height: auto;
 	padding-bottom: 2em;
 	overflow: visible;
-	/* Remove any overflow/scroll styles */
 }
 
 #service-details {
 	margin-top: 2em;
-	/* Add some space between images and details */
 	width: 100%;
 }
 
@@ -381,7 +378,6 @@ html {
 	box-shadow: 0px 4px 8px rgba(229, 57, 53, 0.15);
 	display: inline-block;
 	margin-left: 0;
-	/* Tiny left margin for separation */
 }
 
 .delete-service-btn:hover,
