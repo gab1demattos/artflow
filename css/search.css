@@ -1,93 +1,92 @@
 @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Modak&family=Material+Icons&display=swap");
 
 #search-content {
-    background-color: white;
-    padding: 2rem;
+	background-color: white;
+	padding: 2rem;
 	padding-top: 0.5em;
-    border-radius: 10px;
-    width: 80%;
+	border-radius: 10px;
+	width: 80%;
 	height: 70%;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    position: relative; /* Ensure the modal is the positioning context */
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+	text-align: center;
+	position: relative; /* Ensure the modal is the positioning context */
 }
 .search-options {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
+	display: flex;
+	justify-content: center;
+	gap: 1rem;
+	margin-bottom: 1.5rem;
 	border-bottom: #3333 1px solid;
 	padding: 0;
-    padding-top: 1em;
+	padding-top: 1em;
 }
 .search-options button {
-    padding: 0.5rem 1rem;
-    border: none;
-    cursor: pointer;
-    font-size: 1rem;
-    background-color: var(--light-gray);
-    color: var(--dark-gray);
-	font-family: 'ED Garamond', serif;
+	padding: 0.5rem 1rem;
+	border: none;
+	cursor: pointer;
+	font-size: 1rem;
+	background-color: var(--light-gray);
+	color: var(--dark-gray);
+	font-family: "ED Garamond", serif;
 	transition: background-color 0.3s ease, color 0.3s ease;
 	font-weight: bold;
-
 }
 .search-options button.active {
-    color: var(--purple);
+	color: var(--purple);
 	border-bottom: var(--purple) 3px solid;
 }
 
 #search-results.services-active {
 	flex-wrap: wrap;
 	justify-content: center;
-    padding-top: 1em;
+	padding-top: 1em;
 }
 
 #search-results.names-active {
-    flex-wrap: nowrap;
-    flex-direction: column;
-    justify-content: flex-start; /* Ensure list starts from the top */
-    padding: 1em;
-    width: 100%;
+	flex-wrap: nowrap;
+	flex-direction: column;
+	justify-content: flex-start; /* Ensure list starts from the top */
+	padding: 1em;
+	width: 100%;
 }
-
 
 /* Style for the search bar inside the modal */
 #search-page-bar {
-    width: 60%; /* Reduced width */
-    height: 0.5rem; /* Reduced height */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-	outline: none ;
+	width: 60%; /* Reduced width */
+	height: 0.5rem; /* Reduced height */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	outline: none;
 	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    margin-left: auto; /* Aligns the search bar to the right */
-    margin-right: 8em;
+	margin-left: auto; /* Aligns the search bar to the right */
+	margin-right: 8em;
 }
 
 #search-page-bar input {
-    padding: 0.3rem; /* Reduced padding */
-    font-size: 0.7rem; /* Reduced font size */
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    flex: 1;
-    margin-right: 0.3rem; /* Reduced margin */
+	padding: 0.3rem; /* Reduced padding */
+	font-size: 0.7rem; /* Reduced font size */
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	flex: 1;
+	margin-right: 0.3rem; /* Reduced margin */
 }
 
 #search-page-bar button {
-    padding: 0.3rem 0.8rem; /* Reduced padding */
-    font-size: 0.7rem; /* Reduced font size */
-    background-color: var(--purple);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+	padding: 0.3rem 0.8rem; /* Reduced padding */
+	font-size: 0.7rem; /* Reduced font size */
+	background-color: var(--purple);
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
 }
 
-#search-page-bar:focus, #search-page-bar input:focus {
-    outline: none;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    border: none; /* Ensure no border is applied */
+#search-page-bar:focus,
+#search-page-bar input:focus {
+	outline: none;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+	border: none; /* Ensure no border is applied */
 }
 
 .user-card {
@@ -98,9 +97,8 @@
 	cursor: pointer;
 	padding-left: 1em;
 	padding-top: 1em;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
-
 
 .user-profile-picture {
 	width: 2.5em;
@@ -117,7 +115,6 @@
 	font-family: "EB Garamond", serif;
 	text-decoration: none;
 	transform: translateY(-0.5em);
-
 }
 
 .user-info {
@@ -128,55 +125,56 @@
 }
 
 /* Add a CSS rule to ensure dynamically displayed text is not underlined */
-.user-card-link, .service-card-link {
-    text-decoration: none;
+.user-card-link,
+.service-card-link {
+	text-decoration: none;
 	color: #333;
 	font-size: 18px;
 }
 
 #search-main {
-    display: flex;
-    justify-content: space-between;
-    padding-top: 1em;
+	display: flex;
+	justify-content: space-between;
+	padding-top: 1em;
 }
 
 #filter-search {
-    width: 13em;
-    padding: 1rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    font-family: 'EB Garamond', serif;
-    font-size: 1rem;
-    color: var(--dark-gray);
+	width: 13em;
+	padding: 1rem;
+	border-radius: 10px;
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+	font-family: "EB Garamond", serif;
+	font-size: 1rem;
+	color: var(--dark-gray);
 }
 
 /* Style for filter titles */
 #filter-search h3 {
-    font-size: 1.5rem;
-    color: var(--purple);
-    margin-bottom: 0.5rem;
-    font-family: 'Modak', sans-serif;
-    height: auto;
-    font-weight: 100;
+	font-size: 1.5rem;
+	color: var(--purple);
+	margin-bottom: 0.5rem;
+	font-family: "Modak", sans-serif;
+	height: auto;
+	font-weight: 100;
 }
 
 /* Style for individual checkboxes */
 .checkbox-section label {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    padding: 0.5rem;
-    border-radius: 5px;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+	padding: 0.5rem;
+	border-radius: 5px;
 }
 
 .checkbox-section label:hover {
-    background-color: rgba(0, 0, 0, 0.05);
+	background-color: rgba(0, 0, 0, 0.05);
 }
 
 .checkbox-section input[type="checkbox"] {
-    accent-color: var(--purple);
+	accent-color: var(--purple);
 }
 
 #search-results {
@@ -184,147 +182,228 @@
 	display: flex;
 	gap: 1rem;
 	height: 37em;
-    width: 80%;
+	width: 80%;
 }
 
 #search-page-bar.names-active {
-    margin: 0 auto;
+	margin: 0 auto;
 }
 
 #filter-search-rating {
-    display: flex;
-    gap: 0.5rem;
-    align-items: center;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 0.5rem;
+	padding: 0.5rem;
+	background-color: var(--light-gray);
+	border-radius: 8px;
+	box-shadow: 0 2px 5px var(--purple);
+	margin-top: 1rem;
+}
+
+#filter-search-rating .rating-container {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 0.5rem;
+}
+
+#filter-search-rating .stars-container {
+	display: flex;
+	align-items: center;
+}
+
+#filter-search-rating .stars {
+	display: flex;
+	gap: 0.4rem;
+}
+
+#filter-search-rating .star-icon {
+	font-size: 2.5rem;
+	cursor: pointer;
+	transition: color 0.2s;
+	color: #ddd;
+	font-style: normal;
+}
+
+#filter-search-rating .star-icon:hover {
+	color: var(--yellow);
+}
+
+#filter-search-rating .rating-display {
+	font-size: 0.9rem;
+	color: #666;
+	margin-left: 0.5rem;
+	position: relative;
+}
+
+/* Using the same styles as rate-it modal for consistency */
+#filter-search-rating .star-icon.active {
+	color: var(--yellow);
+}
+
+#filter-search-rating .star-icon.half {
+	position: relative;
+	color: #ddd;
+}
+
+#filter-search-rating .star-icon.half::before {
+	content: "★";
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 50%;
+	overflow: hidden;
+	color: var(--yellow);
+}
+
+#filter-search-rating #clear-rating {
+	position: absolute;
+	left: 10em;
+	bottom: 0.1em;
+	background: none;
+	border: none;
+	color: #999;
+	font-size: 1rem;
+	cursor: pointer;
+	padding: 0.2em;
+	line-height: 0.8;
+	opacity: 0.6;
+	transition: opacity 0.2s;
+}
+
+#filter-search-rating #clear-rating:hover {
+	opacity: 1;
 }
 
 #filter-search-price {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 15px;
-    margin-top: 1rem;
-    padding: 0.5rem;
-    background-color: var(--light-gray);
-    border-radius: 8px;
-    box-shadow: 0 2px 5px var(--purple);
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 15px;
+	margin-top: 1rem;
+	padding: 0.5rem;
+	background-color: var(--light-gray);
+	border-radius: 8px;
+	box-shadow: 0 2px 5px var(--purple);
 }
 
 #filter-search-price label {
-    font-weight: bold;
-    color: #444;
-    font-size: 0.9rem;
+	font-weight: bold;
+	color: #444;
+	font-size: 0.9rem;
 }
 
 #filter-search-price input {
-    width: 3em;
-    border-radius: 5px;
-    font-size: 0.8rem;
-    color: #333;
-    border: none;
-    outline: none;
+	width: 3em;
+	border-radius: 5px;
+	font-size: 0.8rem;
+	color: #333;
+	border: none;
+	outline: none;
 }
 
-#min-price, #max-price {
-    font-size: 0.3rem;
-    color: #666;
-    font-style: italic;
+#min-price,
+#max-price {
+	font-size: 0.3rem;
+	color: #666;
+	font-style: italic;
 }
 
 #filter-search-delivery {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 15px;
-    margin-top: 1rem;
-    padding: 0.5rem;
-    background-color: var(--light-gray);
-    border-radius: 8px;
-    box-shadow: 0 2px 5px var(--purple);
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 15px;
+	margin-top: 1rem;
+	padding: 0.5rem;
+	background-color: var(--light-gray);
+	border-radius: 8px;
+	box-shadow: 0 2px 5px var(--purple);
 }
 
 #filter-search-delivery label {
-    font-weight: bold;
-    color: #444;
-    font-size: 0.9rem;
+	font-weight: bold;
+	color: #444;
+	font-size: 0.9rem;
 }
 
 #filter-search-delivery input {
-    width: 3em;
-    border-radius: 5px;
-    font-size: 0.8rem;
-    color: #333;
-    border: none;
-    outline: none;
+	width: 3em;
+	border-radius: 5px;
+	font-size: 0.8rem;
+	color: #333;
+	border: none;
+	outline: none;
 }
 
 input[type="checkbox"] {
-    accent-color: var(--purple);
-    opacity: 0.8;
+	accent-color: var(--purple);
+	opacity: 0.8;
 }
-
-
 
 /* Updated styles for the price range slider */
 .price-range-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center; /* Align labels and values vertically */
-    gap: 10px; /* Add spacing between items */
+	display: flex;
+	justify-content: space-between;
+	align-items: center; /* Align labels and values vertically */
+	gap: 10px; /* Add spacing between items */
 }
 
-#max-value, #min-value {
-    margin: 0;
-    padding: 0;
+#max-value,
+#min-value {
+	margin: 0;
+	padding: 0;
 }
 
 .price-range-content div {
-    display: flex;
-    flex-direction: column; /* Stack label and value */
-    align-items: center; /* Center align label and value */
+	display: flex;
+	flex-direction: column; /* Stack label and value */
+	align-items: center; /* Center align label and value */
 }
 
 .price-range-slider {
-    width: 100%; /* Adjusted to take full width */
-    position: relative;
-    margin: 10px 0 30px 0;
+	width: 100%; /* Adjusted to take full width */
+	position: relative;
+	margin: 10px 0 30px 0;
 }
 
 .range-fill {
-    height: 5px;
-    background-color: var(--light-gray); /* Set the bar to purple */
-    position: absolute;
-    z-index: 1;
-    border-radius: 3px; /* Added for smoother edges */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+	height: 5px;
+	background-color: var(--light-gray); /* Set the bar to purple */
+	position: absolute;
+	z-index: 1;
+	border-radius: 3px; /* Added for smoother edges */
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 input[type="range"] {
-    -webkit-appearance: none;
-    width: 100%;
-    background: transparent;
-    position: absolute;
-    left: 0;
-    z-index: 2; /* Ensure sliders are above the fill */
+	-webkit-appearance: none;
+	width: 100%;
+	background: transparent;
+	position: absolute;
+	left: 0;
+	z-index: 2; /* Ensure sliders are above the fill */
 }
 
 input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 13px;
-    height: 13px;
-    border-radius: 50%;
-    background-color: var(--purple); 
-    cursor: pointer;
-    position: relative;
-    margin-top: -4px; /* Center the thumb vertically */
-    z-index: 3; /* Ensure thumbs are above everything */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+	-webkit-appearance: none;
+	width: 13px;
+	height: 13px;
+	border-radius: 50%;
+	background-color: var(--purple);
+	cursor: pointer;
+	position: relative;
+	margin-top: -4px; /* Center the thumb vertically */
+	z-index: 3; /* Ensure thumbs are above everything */
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 input[type="range"]::-webkit-slider-runnable-track {
-    width: 100%;
-    height: 4px; /* Adjusted to match fill height */
-    background-color: var(--light-gray); /* Set the bar to purple */
-    border-radius: 3px;
-    border: none;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+	width: 100%;
+	height: 4px; /* Adjusted to match fill height */
+	background-color: var(--light-gray); /* Set the bar to purple */
+	border-radius: 3px;
+	border: none;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
