@@ -18,6 +18,7 @@
 @import url('responsive/profile-responsive.css');
 @import url('responsive/activity-responsive.css');
 @import url('responsive/stats-responsive.css');
+@import url('responsive/admin-responsive.css');
 @import url('search.css');
 
 :root {

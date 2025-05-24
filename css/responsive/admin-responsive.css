@@ -1,0 +1,243 @@
+@media screen and (max-width: 767px) {
+
+    /* Admin panel container */
+    .admin-panel-container {
+        padding: 1rem 0.5rem;
+        margin: 1rem auto;
+        border-radius: 10px;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        overflow-x: hidden;
+    }
+
+    /* Improve button visibility */
+    #open-category-modal,
+    .button.filled.hovering {
+        display: block;
+        width: 100%;
+        max-width: none;
+        margin: 0.75rem auto 1.5rem;
+        text-align: center;
+        padding: 0.75rem 1rem;
+    }
+
+    /* Adjust admin title size */
+    .admin-title {
+        font-size: 1.75rem;
+        margin-bottom: 1.25rem;
+    }
+
+    /* Make tabs scrollable */
+    .admin-tabs-row {
+        display: flex;
+        overflow-x: auto;
+        padding-bottom: 0.5rem;
+        gap: 0.5rem;
+        justify-content: flex-start;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* Adjust tab buttons */
+    .admin-tab-btn {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+        flex: 0 0 auto;
+    }
+
+    /* Adjust content padding */
+    .admin-tab-content {
+        padding: 1rem 0.5rem;
+    }
+
+    /* Make tables responsive */
+    .admin-table {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* Style table headers and cells for mobile */
+    .admin-table th,
+    .admin-table td {
+        padding: 0.6rem 0.5rem;
+        font-size: 0.9rem;
+        white-space: nowrap;
+    }
+
+    /* Mobile table styles for medium-small screens (scroll horizontally) */
+    @media screen and (min-width: 481px) and (max-width: 767px) {
+        .admin-table {
+            display: block;
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            border-collapse: collapse;
+        }
+
+        .admin-table th,
+        .admin-table td {
+            min-width: 100px;
+            /* Ensure columns have a minimum width */
+        }
+    }
+
+    /* Mobile card-based layout for very small screens */
+    @media screen and (max-width: 480px) {
+        .admin-table {
+            display: block;
+            width: 100%;
+            border: 0;
+        }
+
+        .admin-table thead {
+            border: none;
+            clip: rect(0 0 0 0);
+            height: 1px;
+            margin: -1px;
+            overflow: hidden;
+            padding: 0;
+            position: absolute;
+            width: 1px;
+        }
+
+        .admin-table tr {
+            display: block;
+            margin-bottom: 1.5rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .admin-table td {
+            display: block;
+            text-align: right;
+            border-bottom: 1px solid #f0f0f0;
+            padding-left: 120px;
+            position: relative;
+            min-height: 1.5rem;
+        }
+
+        .admin-table td:last-child {
+            border-bottom: none;
+        }
+
+        .admin-table td::before {
+            content: attr(data-label);
+            position: absolute;
+            left: 0.5rem;
+            width: 110px;
+            font-weight: bold;
+            text-align: left;
+            color: var(--yellow);
+        }
+
+        /* Handle action buttons in mobile view */
+        .admin-table td:last-child,
+        .admin-table td.action-cell {
+            display: flex;
+            justify-content: flex-end;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            padding: 0.8rem;
+        }
+
+        .admin-action-btn,
+        .promote-btn,
+        .ban-btn,
+        .red-btn,
+        .delete-service-admin-btn {
+            padding: 0.4rem 0.7rem;
+            font-size: 0.8rem;
+            margin: 0.1rem !important;
+            white-space: nowrap;
+            flex: 1;
+            min-width: 80px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Improve button visibility on mobile */
+        .admin-action-btn+.admin-action-btn,
+        .promote-btn+.red-btn,
+        .promote-btn+.ban-btn {
+            margin-left: 0.25rem !important;
+        }
+    }
+
+    /* Improve modal display for small screens */
+    #category-modal {
+        max-width: 90% !important;
+        width: 90% !important;
+        padding: 1.5rem 1rem !important;
+    }
+
+    #category-modal h2 {
+        font-size: 1.5rem !important;
+        margin-bottom: 1rem !important;
+    }
+
+    #category-modal .form input,
+    #category-modal .form input[type="file"],
+    #category-modal .form textarea,
+    #category-modal .form select {
+        padding: 0.6rem !important;
+        font-size: 0.9rem !important;
+    }
+
+    #category-modal .button-container {
+        flex-direction: column !important;
+        gap: 0.5rem !important;
+    }
+
+    #category-modal .button-container button {
+        width: 100% !important;
+        margin: 0 !important;
+    }
+
+    /* Make stat boxes responsive */
+    .stat-row {
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 0.5rem !important;
+    }
+
+    .stat-box {
+        min-width: 28% !important;
+        width: 28% !important;
+        margin: 0.25rem !important;
+        padding: 0.5rem !important;
+    }
+
+    /* Irreversible modal styling for mobile */
+    .irreversible-modal {
+        width: 90% !important;
+        max-width: 350px !important;
+        padding: 1.25rem 1rem !important;
+    }
+
+    .irreversible-modal h3 {
+        font-size: 1.2rem !important;
+        margin-bottom: 0.75rem !important;
+    }
+
+    .irreversible-modal p {
+        font-size: 0.9rem !important;
+        margin-bottom: 1rem !important;
+    }
+
+    .irreversible-modal .button-container {
+        flex-direction: column !important;
+        gap: 0.5rem !important;
+    }
+
+    .irreversible-modal .button-container button {
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0.6rem !important;
+    }
+}
