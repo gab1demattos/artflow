@@ -5,7 +5,7 @@
                 <h2 id='h2-signup'>Create Account</h2>
                 <form id="signup-form" class="form" method="POST" action="/actions/login/signup-action.php">
                     <?php
-                    require_once(__DIR__ . '/../../database/csrf.php');
+                    require_once(__DIR__ . '/../../database/security/csrf.php');
                     echo CSRF::getTokenField('signup_csrf_token');
                     ?>
                     <input type="text" placeholder="Name" name="name" required>

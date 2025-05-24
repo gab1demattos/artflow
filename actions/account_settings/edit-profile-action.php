@@ -3,8 +3,8 @@
 declare(strict_types=1);
 require_once(__DIR__ . '/../../database/session.php');
 require_once(__DIR__ . '/../../database/database.php');
-require_once(__DIR__ . '/../../database/csrf.php');
-require_once(__DIR__ . '/../../database/security.php');
+require_once(__DIR__ . '/../../database/security/csrf.php');
+require_once(__DIR__ . '/../../database/security/security.php');
 
 // Check if user is logged in
 $session = Session::getInstance();

@@ -3,9 +3,9 @@
 declare(strict_types=1);
 require_once(__DIR__ . '/../../database/session.php');
 require_once(__DIR__ . '/../../database/classes/user.class.php');
-require_once(__DIR__ . '/../../database/csrf.php');
-require_once(__DIR__ . '/../../database/security.php');
-require_once(__DIR__ . '/../../database/rate_limiter.php');
+require_once(__DIR__ . '/../../database/security/csrf.php');
+require_once(__DIR__ . '/../../database/security/security.php');
+require_once(__DIR__ . '/../../database/security/rate_limiter.php');
 
 function redirect_home()
 {

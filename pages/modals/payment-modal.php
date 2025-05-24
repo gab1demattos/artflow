@@ -6,7 +6,7 @@
                 <h2>Payment Details</h2>
                 <form id="payment-form" autocomplete="off">
                     <?php
-                    require_once(__DIR__ . '/../../database/csrf.php');
+                    require_once(__DIR__ . '/../../database/security/csrf.php');
                     echo CSRF::getTokenField('payment_csrf_token');
                     ?>
                     <label>Card Number

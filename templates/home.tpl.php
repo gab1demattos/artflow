@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__ . '/../database/csp_helper.php');
+require_once(__DIR__ . '/../database/security/csp_helper.php');
 CSPHelper::apply();
 
 function drawHeader($user, $currentPage = '')

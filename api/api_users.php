@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 require_once(__DIR__ . '/../api/api_security.php'); // Apply API security headers and CORS
-require_once(__DIR__ . '/../database/security.php'); // Load security helpers
+require_once(__DIR__ . '/../database/security/security.php'); // Load security helpers
 require_once(__DIR__ . '/../database/session.php');
 $session = new Session();
 
