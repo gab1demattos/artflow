@@ -12,4 +12,18 @@
         width: 35%;
         margin: 0 auto;
     }
+
+    /* Make filter rating stars smaller on mobile */
+    #filter-search-rating .stars {
+        font-size: 1.3rem !important;
+    }
+
+    #filter-search-rating .star-icon {
+        font-size: 1.3rem !important;
+    }
+
+    /* Make service card rating stars smaller on mobile */
+    .pantone-rating {
+        font-size: 0.85rem !important;
+    }
 }
