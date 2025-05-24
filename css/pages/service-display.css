@@ -58,7 +58,11 @@
 
 #owner-info img {
 	width: 3em;
-	height: auto;
+	height: 3em;
+	border-radius: 50%;
+	object-fit: cover;
+	border: 1px solid #ddd;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 	padding: 0;
 	transform: scale(0.6);
 }
@@ -102,7 +106,7 @@
 	font-family: "EB Garamond", serif;
 	margin: 0 auto;
 	margin-bottom: 1em;
-	
+
 	transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
 }
 

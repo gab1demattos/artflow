@@ -29,7 +29,7 @@
     // Fix: split on comma only, trim whitespace, and filter out empty values
     $images = array_filter(array_map('trim', explode(',', $imagePaths)));
 
-    $stmtOwner = $db->prepare('SELECT u.name, u.username FROM User u JOIN Service s ON u.id = s.user_id WHERE s.id = ?');
+    $stmtOwner = $db->prepare('SELECT u.name, u.username, u.profile_image FROM User u JOIN Service s ON u.id = s.user_id WHERE s.id = ?');
     $stmtOwner->execute([$service['id']]);
     $owner = $stmtOwner->fetch(PDO::FETCH_ASSOC);
     ?>
@@ -117,7 +117,7 @@
         <div id="service-checkout">
             <h2><?= htmlspecialchars($service['title']) ?></h2>
             <div id="owner-info">
-                <img src="../images/logos/avatar.png" alt="User Icon">
+                <img src="<?= ($owner['profile_image'] !== null && $owner['profile_image'] !== '') ? htmlspecialchars($owner['profile_image']) : '/images/user_pfp/default.png' ?>" alt="User Icon">
                 <p><?= htmlspecialchars($owner['name']) ?></p>
                 <p>@<?= htmlspecialchars($owner['username']) ?></p>
             </div>
