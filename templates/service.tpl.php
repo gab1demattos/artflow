@@ -44,7 +44,6 @@
                 <div id="main-image"><img class="main-image" src="<?= htmlspecialchars($images[0]) ?>" alt="Service Image"></div>
             </div>
             <div id="service-details">
-                <p><?= htmlspecialchars($service['description']) ?></p>
                 <div id="reviews">
                     <h3>Reviews</h3>
                     <?php
@@ -132,7 +131,11 @@
                     <?php endif; ?>
                 </div>
             </div>
-
+            <div id="service-description">
+                <!-- <h3>Description</h3> -->
+                 <br>
+                <p><?= htmlspecialchars($service['description']) ?></p>
+            </div>
         </div>
     </div>
     <script src="/js/service-scroll.js"></script>
