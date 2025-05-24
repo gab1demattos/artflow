@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 declare(strict_types=1);
 require_once(__DIR__ . '/../database.php');
 
@@ -33,8 +34,11 @@ class User
         $db = Database::getInstance();
 
         try {
+            // Use password_hash with bcrypt (default algorithm)
+            $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+
             $stmt = $db->prepare('INSERT INTO User (user_type, name, username, email, password, bio, profile_image) VALUES (?, ?, ?, ?, ?, NULL, NULL)');
-            $success = $stmt->execute([$user_type, $name, $username, $email, sha1($password)]);
+            $success = $stmt->execute([$user_type, $name, $username, $email, $passwordHash]);
 
             if ($success) {
                 $id = $db->lastInsertId();
@@ -50,19 +54,55 @@ class User
     public static function get_user_by_username_password($username, $password)
     {
         $db = Database::getInstance();
+        // First get the user by username only
+        $stmt = $db->prepare('SELECT * FROM User WHERE username = ?');
+        $stmt->execute([$username]);
+        $user = $stmt->fetch();
+
+        // Verify the password hash
+        if ($user && password_verify($password, $user['password'])) {
+            return $user;
+        }
+
+        // For backward compatibility with sha1 hashes
+        // This should be removed after all passwords have been migrated
         $stmt = $db->prepare('SELECT * FROM User WHERE username = ? AND password = ?');
         $stmt->execute([$username, sha1($password)]);
+        $user = $stmt->fetch();
 
-        return $stmt->fetch();
+        if ($user) {
+            // Upgrade old password hash to new format
+            self::updatePassword($user['id'], $password);
+        }
+
+        return $user;
     }
 
     public static function get_user_by_email_password($email, $password)
     {
         $db = Database::getInstance();
+        // First get the user by email only
+        $stmt = $db->prepare('SELECT * FROM User WHERE email = ?');
+        $stmt->execute([$email]);
+        $user = $stmt->fetch();
+
+        // Verify the password hash
+        if ($user && password_verify($password, $user['password'])) {
+            return $user;
+        }
+
+        // For backward compatibility with sha1 hashes
+        // This should be removed after all passwords have been migrated
         $stmt = $db->prepare('SELECT * FROM User WHERE email = ? AND password = ?');
         $stmt->execute([$email, sha1($password)]);
+        $user = $stmt->fetch();
 
-        return $stmt->fetch();
+        if ($user) {
+            // Upgrade old password hash to new format
+            self::updatePassword($user['id'], $password);
+        }
+
+        return $user;
     }
 
     public static function get_user_by_username($username)
@@ -146,13 +186,23 @@ class User
      * @param string $hashedPassword The hashed password
      * @return bool True if successful, false otherwise
      */
-    public static function updatePassword(int $userId, string $hashedPassword): bool
+    /**
+     * Update user password with secure hashing
+     *
+     * @param int $userId The user ID
+     * @param string $password The plain text password
+     * @return bool True if successful, false otherwise
+     */
+    public static function updatePassword(int $userId, string $password): bool
     {
         $db = Database::getInstance();
 
         try {
+            // Hash the password using secure algorithm
+            $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+
             $stmt = $db->prepare('UPDATE User SET password = ? WHERE id = ?');
-            return $stmt->execute([$hashedPassword, $userId]);
+            return $stmt->execute([$passwordHash, $userId]);
         } catch (PDOException $e) {
             return false;
         }
@@ -218,44 +268,45 @@ class User
             return false;
         }
     }
-    static function searchUsers(PDO $db, string $search, int $count) : array {
-            $stmt = $db->prepare('SELECT id, name, username, email, bio, profile_image FROM User WHERE name LIKE ? LIMIT ?');
-            $stmt->execute(array($search . '%', $count));
+    static function searchUsers(PDO $db, string $search, int $count): array
+    {
+        $stmt = $db->prepare('SELECT id, name, username, email, bio, profile_image FROM User WHERE name LIKE ? LIMIT ?');
+        $stmt->execute(array($search . '%', $count));
 
-            $users = array();
-            while ($user = $stmt->fetch()) {
-                $users[] = new User(
-                    (int)$user['id'],
-                    'regular', // Default user type
-                    $user['name'],
-                    $user['username'],
-                    $user['email'],
-                    $user['bio'] ?? '',
-                    $user['profile_image'] ?? ''
-                );
-            }
-
-            return $users;
+        $users = array();
+        while ($user = $stmt->fetch()) {
+            $users[] = new User(
+                (int)$user['id'],
+                'regular', // Default user type
+                $user['name'],
+                $user['username'],
+                $user['email'],
+                $user['bio'] ?? '',
+                $user['profile_image'] ?? ''
+            );
         }
 
-        public static function getAllUsers(PDO $db) : array {
-            $stmt = $db->prepare('SELECT id, name, username, email, bio, profile_image FROM User');
-            $stmt->execute();
+        return $users;
+    }
 
-            $users = array();
-            while ($user = $stmt->fetch()) {
-                $users[] = new User(
-                    (int)$user['id'],
-                    'regular', // Default user type
-                    $user['name'],
-                    $user['username'],
-                    $user['email'],
-                    $user['bio'] ?? '',
-                    $user['profile_image'] ?? ''
-                );
-            }
+    public static function getAllUsers(PDO $db): array
+    {
+        $stmt = $db->prepare('SELECT id, name, username, email, bio, profile_image FROM User');
+        $stmt->execute();
 
-            return $users;
+        $users = array();
+        while ($user = $stmt->fetch()) {
+            $users[] = new User(
+                (int)$user['id'],
+                'regular', // Default user type
+                $user['name'],
+                $user['username'],
+                $user['email'],
+                $user['bio'] ?? '',
+                $user['profile_image'] ?? ''
+            );
         }
+
+        return $users;
+    }
 }
-?>

@@ -4,6 +4,10 @@
             <div class="form-container">
                 <h2 id='h2-edit-profile'>Edit Profile</h2>
                 <form id="edit-profile-form" class="form" method='POST' action='/actions/account_settings/edit-profile-action.php' enctype="multipart/form-data">
+                    <?php
+                    require_once(__DIR__ . '/../../database/security/csrf.php');
+                    echo CSRF::getTokenField('edit_profile_csrf_token');
+                    ?>
                     <div class="form-layout" id='edit-profile-form-layout'>
                         <div class="form-left-column">
                             <label for="name">Name</label>
