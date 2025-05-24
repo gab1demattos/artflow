@@ -69,10 +69,35 @@ drawHeader($user);
                 <input type="hidden" name="id" value="<?= $categoryId ?>">
 
                 <div id="filter-container">
-                    <div id="price-filter">
-                        <label for="price-min">Price Range:</label>
-                        <input type="number" name="price_min" id="price-min" placeholder="Min" min="<?= $priceMin ?>" max="<?= $priceMax ?>" value="<?= $priceMin ?>" step="1">
-                        <input type="number" name="price_max" id="price-max" placeholder="Max" min="<?= $priceMin ?>" max="<?= $priceMax ?>" value="<?= $priceMax ?>" step="1">
+
+                    <div class="price-range-filter">
+                        <div class="price-filter-content">
+                            <div>
+                                <label>Min Price</label>
+                                <p id="min-value-filter"><?= $priceMin ?></p>
+                            </div>
+                            <div>
+                                <label>Max Price</label>
+                                <p id="max-value-filter"><?= $priceMax ?></p>
+                            </div>
+                        </div>
+                        <div class="price-filter-slider">
+                            <div class="range-fill"></div>
+                            <input 
+                                type="range" 
+                                class="min-price-filter" 
+                                min="<?= $priceMin ?>" 
+                                max="<?= $priceMax ?>" 
+                                value="<?= $priceMin ?>" 
+                            >
+                            <input 
+                                type="range" 
+                                class="max-price-filter" 
+                                min="<?= $priceMin ?>" 
+                                max="<?= $priceMax ?>" 
+                                value="<?= $priceMax ?>" 
+                                >
+                        </div>
                     </div>
 
                     <div id="rating-filter">
@@ -87,9 +112,8 @@ drawHeader($user);
                     </div>
 
                     <div id="delivery-filter">
-                        <label for="delivery-min">Delivery Time (days):</label>
-                        <input type="number" name="delivery_min" id="delivery-min" placeholder="Min" min="<?= $deliveryMin ?>" max="<?= $deliveryMax ?>" value="<?= $deliveryMin ?>" step="1">
-                        <input type="number" name="delivery_max" id="delivery-max" placeholder="Max" min="<?= $deliveryMin ?>" max="<?= $deliveryMax ?>" value="<?= $deliveryMax ?>" step="1">
+                        <label for="delivery-max">Delivery Time (max days):</label>
+                        <input type="number" name="delivery_max" id="delivery-max" placeholder="Max" min="1" max="<?= $deliveryMax ?>" value="<?= $deliveryMax ?>" step="1">
                     </div>
 
                     <button type="submit">Apply Filters</button>
@@ -100,19 +124,16 @@ drawHeader($user);
         <div id="services-list">
             <?php
             // Capture filter inputs
-            $priceMin = $_GET['price_min'] ?? null;
-            $priceMax = $_GET['price_max'] ?? null;
-            $ratingMin = $_GET['rating_min'] ?? null;
-            $ratingMax = $_GET['rating_max'] ?? null;
-            $deliveryMin = $_GET['delivery_min'] ?? null;
-            $deliveryMax = $_GET['delivery_max'] ?? null;
+            $priceMin = isset($_GET['price_min']) ? floatval($_GET['price_min']) : null;
+            $priceMax = isset($_GET['price_max']) ? floatval($_GET['price_max']) : null;
+            $deliveryMax = isset($_GET['delivery_max']) ? intval($_GET['delivery_max']) : null;
 
             // Pagination: fetch only the services for the current page
             $offset = ($page - 1) * $servicesPerPage;
             $totalServices = Service::countServicesByCategory($categoryId);
 
             // Fetch filtered services
-            $services = Service::getFilteredServicesByCategory($categoryId, $servicesPerPage, $offset, $priceMin, $priceMax, $ratingMin, $ratingMax, $deliveryMin, $deliveryMax);
+            $services = Service::getFilteredServicesByCategory($categoryId, $servicesPerPage, $offset, $priceMin, $priceMax, null, null, null, $deliveryMax);
 
             if ($services) {
                 foreach ($services as $serviceObj) {

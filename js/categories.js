@@ -14,6 +14,7 @@ const Categories = {
 	init() {
 		this.setupSubcategoryOverlay();
 		this.setupSubcategoryTagFiltering();
+		this.setupFilters(); // Added filters setup
 	},
 
 	/**
@@ -223,6 +224,37 @@ const Categories = {
 					card.style.display = show ? "" : "none";
 				});
 			}
+		}
+	},
+
+	/**
+	 * Set up filtering for services by price range and max delivery days
+	 */
+	setupFilters() {
+		const minPriceInput = document.querySelector('.min-price-filter');
+		const maxPriceInput = document.querySelector('.max-price-filter');
+		const minValueDisplay = document.getElementById('min-value-filter');
+		const maxValueDisplay = document.getElementById('max-value-filter');
+
+		if (minPriceInput && maxPriceInput) {
+			const updateDisplayedValues = () => {
+				let minPrice = parseFloat(minPriceInput.value);
+				let maxPrice = parseFloat(maxPriceInput.value);
+
+				// Ensure the circles do not cross each other
+				if (minPrice > maxPrice) {
+					minPrice = maxPrice;
+					minPriceInput.value = minPrice;
+				}
+
+				// Update displayed values
+				minValueDisplay.textContent = minPrice;
+				maxValueDisplay.textContent = maxPrice;
+			};
+
+			// Attach event listeners to range inputs to update displayed values
+			minPriceInput.addEventListener('input', updateDisplayedValues);
+			maxPriceInput.addEventListener('input', updateDisplayedValues);
 		}
 	},
 };

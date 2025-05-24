@@ -230,7 +230,101 @@
     font-style: italic;
 }
 
+#filter-search-delivery {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+    margin-top: 1rem;
+    padding: 0.5rem;
+    background-color: var(--light-gray);
+    border-radius: 8px;
+    box-shadow: 0 2px 5px var(--purple);
+}
+
+#filter-search-delivery label {
+    font-weight: bold;
+    color: #444;
+    font-size: 0.9rem;
+}
+
+#filter-search-delivery input {
+    width: 3em;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    color: #333;
+    border: none;
+    outline: none;
+}
+
 input[type="checkbox"] {
     accent-color: var(--purple);
     opacity: 0.8;
+}
+
+
+
+/* Updated styles for the price range slider */
+.price-range-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Align labels and values vertically */
+    gap: 10px; /* Add spacing between items */
+}
+
+#max-value, #min-value {
+    margin: 0;
+    padding: 0;
+}
+
+.price-range-content div {
+    display: flex;
+    flex-direction: column; /* Stack label and value */
+    align-items: center; /* Center align label and value */
+}
+
+.price-range-slider {
+    width: 100%; /* Adjusted to take full width */
+    position: relative;
+    margin: 10px 0 30px 0;
+}
+
+.range-fill {
+    height: 5px;
+    background-color: var(--light-gray); /* Set the bar to purple */
+    position: absolute;
+    z-index: 1;
+    border-radius: 3px; /* Added for smoother edges */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    background: transparent;
+    position: absolute;
+    left: 0;
+    z-index: 2; /* Ensure sliders are above the fill */
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background-color: var(--purple); 
+    cursor: pointer;
+    position: relative;
+    margin-top: -4px; /* Center the thumb vertically */
+    z-index: 3; /* Ensure thumbs are above everything */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 4px; /* Adjusted to match fill height */
+    background-color: var(--light-gray); /* Set the bar to purple */
+    border-radius: 3px;
+    border: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }

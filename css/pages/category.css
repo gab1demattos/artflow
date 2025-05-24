@@ -222,6 +222,7 @@
 	align-items: center;
 	justify-content: space-between;
 	width: 130%;
+	height: 2.5em;
 }
 
 .rating-checkboxes input[type='checkbox']  {
@@ -235,6 +236,84 @@
 	flex-direction: row;
 	gap: 0.5em;
 	align-items: center;
+}
+
+/* Updated styling for the price range filter */
+.price-range-filter {
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+	gap: -0.5em;
+	margin-top: 0.8em;
+	margin-left: 2em;
+}
+
+
+.price-filter-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+	gap: 2em;
+}
+
+.price-filter-content div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.price-filter-content p {
+    font-size: 0.85em;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+}
+
+.price-filter-slider {
+	width: 100%; /* Adjusted to take full width */
+    position: relative;
+    margin: 10px 0 30px 0;
+}
+
+.price-filter-slider .range-fill {
+    height: 5px;
+    background-color: var(--light-gray); /* Set the bar to purple */
+    position: absolute;
+    z-index: 1;
+    border-radius: 3px; /* Added for smoother edges */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.price-filter-slider input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    background: transparent;
+    position: absolute;
+    left: 0;
+    z-index: 2; /* Ensure sliders are above the fill */
+}
+
+.price-filter-slider input[type="range"]::-webkit-slider-thumb {
+	-webkit-appearance: none;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background-color: var(--orange); 
+    cursor: pointer;
+    position: relative;
+    margin-top: -4px; /* Center the thumb vertically */
+    z-index: 3; /* Ensure thumbs are above everything */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.price-filter-slider input[type="range"]::-moz-range-thumb {
+	width: 100%;
+    height: 4px; /* Adjusted to match fill height */
+    background-color: var(--light-gray); /* Set the bar to purple */
+    border-radius: 3px;
+    border: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 @media (max-width: 600px) {

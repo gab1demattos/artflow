@@ -37,6 +37,7 @@
             $stmt->execute([$category['id']]);
             $subcategories = $stmt->fetchAll(PDO::FETCH_ASSOC);
             ?>
+
             <?php if ($subcategories): ?>
                 <div class="subcategory-carousel-wrapper">
                     <div class="subcategory-carousel" id="subcategory-carousel">

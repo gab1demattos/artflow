@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchResults = document.getElementById("search-results");
     const searchBar = document.getElementById('search-bar');
     const filterSearch = document.getElementById("filter-search");
+    const deliveryTimeInput = document.getElementById('delivery-time');
 
     // Redirect to search.php when the search bar is clicked
     searchBar.addEventListener('click', () => {
@@ -31,14 +32,27 @@ document.addEventListener('DOMContentLoaded', () => {
         SearchInputPage.value = "";
 
         // Reset filters when switching buttons
-        const filterInputs = document.querySelectorAll('.filter-option-category input[type="checkbox"], .filter-option-rating input[type="checkbox"], #min-price, #max-price');
+        const filterInputs = document.querySelectorAll('.filter-option-category input[type="checkbox"], .filter-option-rating input[type="checkbox"], #min-price, #max-price, #delivery-time');
         filterInputs.forEach(input => {
             if (input.type === 'checkbox') {
                 input.checked = true; // Set all checkboxes to checked
-            } else {
+            } else if (input.id === 'min-price' || input.id === 'max-price') {
                 input.value = input.id === 'min-price' ? input.min : input.max;// Set price inputs to initial values
+            } else if (input.id === 'delivery-time') {
+                input.value = input.max; // Set delivery time to max value
             }
         });
+
+        // Reset price range inputs to their initial values
+        minPriceInput.value = minPriceInput.min;
+        maxPriceInput.value = maxPriceInput.max;
+
+        // Update the displayed values
+        minPriceDisplay.textContent = minPriceInput.min;
+        maxPriceDisplay.textContent = maxPriceInput.max;
+
+        // Trigger the price range update logic
+        updatePriceRange();
 
         // Show filter-search when services are active
         filterSearch.classList.remove("hidden");
@@ -121,6 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                     <div class="pantone-info-row">
                                         <span class="pantone-username">${item.username}</span>
                                         <span class="pantone-rating">★ ${item.rating || '0.0'}</span>
+                                        <span class="pantone-delivery-time">${service.price}€</span>
                                     </div>
                                 </div>
                             `;
@@ -177,6 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <div class="pantone-info-row">
                                     <span class="pantone-username">${service.username}</span>
                                     <span class="pantone-rating">★ ${service.rating || '0.0'}</span>
+                                    <span class="pantone-delivery-time">${service.price}€</span>
                                 </div>
                             </div>
                         `;
@@ -262,6 +278,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <div class="pantone-info-row">
                                     <span class="pantone-username">${service.username}</span>
                                     <span class="pantone-rating">★ ${service.rating || '0.0'}</span>
+                                    <span class="pantone-delivery-time">${service.price}€</span>
                                 </div>
                             </div>
                         `;
@@ -280,35 +297,108 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Add event listeners for price range inputs
-    const minPriceInput = document.getElementById('min-price');
-    const maxPriceInput = document.getElementById('max-price');
+    const minPriceInput = document.querySelector('.min-price');
+    const maxPriceInput = document.querySelector('.max-price');
+    const minPriceDisplay = document.getElementById('min-value');
+    const maxPriceDisplay = document.getElementById('max-value');
 
-    [minPriceInput, maxPriceInput].forEach(input => {
-        input.addEventListener('change', async () => {
-            const minPrice = parseFloat(minPriceInput.value);
-            const maxPrice = parseFloat(maxPriceInput.value);
+    const updatePriceRange = async () => {
+        let minPrice = parseFloat(minPriceInput.value);
+        let maxPrice = parseFloat(maxPriceInput.value);
 
-            if (minPrice > maxPrice) {
-                console.error('Min price cannot be greater than max price.');
-                return;
+        if (minPrice > maxPrice) {
+            minPrice = maxPrice;
+            minPriceInput.value = minPrice;
+        }
+
+        minPriceDisplay.textContent = minPrice;
+        maxPriceDisplay.textContent = maxPrice;
+
+        const selectedCategories = Array.from(document.querySelectorAll('.filter-option-category input[type="checkbox"]'))
+            .filter(cb => cb.checked)
+            .map(cb => cb.id.replace('filter-option-', ''));
+
+        console.log('Selected Categories:', selectedCategories);
+        console.log('Price Range:', minPrice, maxPrice);
+
+        try {
+            const response = await fetch(`/api/api_services.php?categories=${selectedCategories.join(',')}&min_price=${minPrice}&max_price=${maxPrice}`);
+            const services = await response.json();
+
+            searchResults.innerHTML = ""; // Clear previous results
+
+            if (services.length > 0) {
+                services.forEach(service => {
+                    const serviceCard = document.createElement('a');
+                    serviceCard.href = `/pages/service.php?id=${encodeURIComponent(service.id)}`;
+                    serviceCard.classList.add('service-card-link');
+                    serviceCard.innerHTML = `
+                        <div class="service-card">
+                            <div class="pantone-image-wrapper">
+                                ${service.image ? `<img src="${service.image}" alt="Service image" class="pantone-image" />` : '<div class="pantone-image pantone-image-placeholder"></div>'}
+                            </div>
+                            <div class="pantone-title">${service.title}</div>
+                            <div class="pantone-info-row">
+                                <span class="pantone-username">${service.username}</span>
+                                <span class="pantone-rating">★ ${service.rating || '0.0'}</span>
+                                <span class="pantone-delivery-time">${service.price}€</span>
+                            </div>
+                        </div>
+                    `;
+                    searchResults.appendChild(serviceCard);
+                });
+            } else {
+                searchResults.innerHTML = '<p>No services found for the selected filters.</p>';
             }
+        } catch (error) {
+            console.error('Error fetching services:', error);
+            searchResults.innerHTML = '<p>Error loading services. Please try again later.</p>';
+        }
+    };
 
-            const selectedCategories = Array.from(categoryCheckboxes)
-                .filter(cb => cb.checked)
-                .map(cb => cb.id.replace('filter-option-', ''));
+    minPriceInput.addEventListener('input', () => {
+        if (parseFloat(minPriceInput.value) > parseFloat(maxPriceInput.value)) {
+            minPriceInput.value = maxPriceInput.value;
+        }
+        updatePriceRange();
+    });
 
-            console.log('Selected Categories:', selectedCategories);
-            console.log('Price Range:', minPrice, maxPrice);
+    maxPriceInput.addEventListener('input', () => {
+        console.log('Max Price Input Changed:', maxPriceInput.value); // Debugging log
+        if (parseFloat(maxPriceInput.value) < parseFloat(minPriceInput.value)) {
+            maxPriceInput.value = minPriceInput.value;
+        }
+        maxPriceDisplay.textContent = maxPriceInput.value; // Ensure maxPriceDisplay is updated
+        updatePriceRange();
+    });
 
-            // Fetch services dynamically based on selected categories and price range
-            try {
-                const response = await fetch(`/api/api_services.php?categories=${selectedCategories.join(',')}&min_price=${minPrice}&max_price=${maxPrice}`);
-                const services = await response.json();
+    deliveryTimeInput.addEventListener('change', async () => {
+        const maxDeliveryTime = parseFloat(deliveryTimeInput.value);
 
-                searchResults.innerHTML = ""; // Clear previous results
+        const selectedCategories = Array.from(categoryCheckboxes)
+            .filter(cb => cb.checked)
+            .map(cb => cb.id.replace('filter-option-', ''));
 
-                if (services.length > 0) {
-                    services.forEach(service => {
+        const minPrice = parseFloat(minPriceInput.value);
+        const maxPrice = parseFloat(maxPriceInput.value);
+
+        console.log('Selected Categories:', selectedCategories);
+        console.log('Price Range:', minPrice, maxPrice);
+        console.log('Max Delivery Time:', maxDeliveryTime);
+
+        // Fetch services dynamically based on selected categories, price range, and delivery time
+        try {
+            const response = await fetch(`/api/api_services.php?categories=${selectedCategories.join(',')}&min_price=${minPrice}&max_price=${maxPrice}&max_delivery_time=${maxDeliveryTime}`);
+            const services = await response.json();
+
+            console.log('Fetched Services:', services); // Debugging log
+
+            searchResults.innerHTML = ""; // Clear previous results
+
+            if (services.length > 0) {
+                services.forEach(service => {
+                    if (service.delivery_time <= maxDeliveryTime) { // Ensure filtering is applied
+                        console.log('Service Passed Filter:', service); // Debugging log
                         const serviceCard = document.createElement('a');
                         serviceCard.href = `/pages/service.php?id=${encodeURIComponent(service.id)}`;
                         serviceCard.classList.add('service-card-link');
@@ -321,21 +411,22 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <div class="pantone-info-row">
                                     <span class="pantone-username">${service.username}</span>
                                     <span class="pantone-rating">★ ${service.rating || '0.0'}</span>
+                                    <span class="pantone-delivery-time">${service.price}€</span>
                                 </div>
                             </div>
                         `;
                         searchResults.appendChild(serviceCard);
-                    });
-                } else {
-                    searchResults.innerHTML = ""; // Clear previous results
-                    searchResults.innerHTML = '<p>No services found for the selected filters.</p>';
-                }
-            } catch (error) {
-                console.error('Error fetching services:', error);
-                searchResults.innerHTML = ""; // Clear previous results
-                searchResults.innerHTML = '<p>Error loading services. Please try again later.</p>';
+                    } else {
+                        console.log('Service Failed Filter:', service); // Debugging log
+                    }
+                });
+            } else {
+                searchResults.innerHTML = '<p>No services found for the selected filters.</p>';
             }
-        });
+        } catch (error) {
+            console.error('Error fetching services:', error);
+            searchResults.innerHTML = '<p>Error loading services. Please try again later.</p>';
+        }
     });
 });
 

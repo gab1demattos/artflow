@@ -11,14 +11,18 @@ require_once(__DIR__ . '/../templates/service_card.php');
 $db = Database::getInstance();
 $services = Service::getAllServices();
 
-echo json_encode(array_map(function ($service) {
-    return [
-        'id' => $service->id,
-        'title' => $service->title,
-        'description' => $service->description,
-        'price' => $service->price,
-        'image' => $service->getFirstImage(),
-        'username' => $service->getUsername(),
-        'subcategories' => implode(',', $service->getSubcategoryIds())
-    ];
-}, $services));
+  echo json_encode(array_map(function($service) {
+      return [
+          'id' => $service->id,
+          'title' => $service->title,
+          'description' => $service->description,
+          'price' => $service->price,
+          'delivery_time' => $service->delivery_time,
+          'image' => $service->getFirstImage(),
+          'username' => $service->getUsername(),
+          'subcategories' => implode(',', $service->getSubcategoryIds())
+          
+      ];
+  }, $services));
+?>
+
