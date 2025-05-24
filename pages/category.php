@@ -239,7 +239,7 @@ drawHeader($user);
                 }
 
                 updateFilterStarDisplay(currentFilterRating);
-                applyFilters();
+                // Removed applyFilters() call - only save the rating, don't apply immediately
             });
         });
 
@@ -254,15 +254,16 @@ drawHeader($user);
             clearRatingBtn.addEventListener("click", () => {
                 currentFilterRating = 0;
                 updateFilterStarDisplay(0);
-                applyFilters();
+                // Removed applyFilters() call - only clear the rating, don't apply immediately
             });
         }
 
-        function applyFilters() {
-            const minRating = parseFloat(filterRatingValue.value) || 0;
-            const urlParams = new URLSearchParams(window.location.search);
-            urlParams.set("min_rating", minRating);
-            window.location.search = urlParams.toString();
+        // Apply filters only when the form is submitted
+        const filterForm = document.querySelector('.filters-container form');
+        if (filterForm) {
+            filterForm.addEventListener('submit', function(e) {
+                // The form will submit normally with all the filter values including min_rating
+            });
         }
     });
 </script>
