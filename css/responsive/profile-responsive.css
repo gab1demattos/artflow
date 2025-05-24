@@ -38,12 +38,20 @@
 	.profile .info {
 		margin-top: 1.5em;
 		margin-right: 10px;
+		margin-left: 10px;
 		text-align: center;
 	}
 
 	/* Center the username display */
 	.profile .info .username {
 		justify-content: center;
+	}
+
+	/* Center bio text on mobile */
+	.profile .bio-text {
+		text-align: center;
+		padding: 0 1em;
+		margin-bottom: 1em;
 	}
 
 	/* Adjust tabs for mobile */
@@ -56,10 +64,15 @@
 		padding: 0 1em;
 	}
 
-	/* Adjust edit profile button position */
-	.edit-profile-btn {
+	/* Adjust buttons position for mobile */
+	.edit-profile-btn,
+	.button.filled.yellow.hovering.edit-profile-btn,
+	#edit-profile-button.button.filled.orange.hovering.edit-profile-btn {
+		position: absolute;
 		top: 1em;
 		right: 1em;
+		font-size: 0.9em;
+		padding: 0.5em 1em;
 	}
 
 	/* Adjust empty state image and container for mobile */
@@ -77,6 +90,40 @@
 	#listings.tab-content.active.empty-state,
 	#reviews.tab-content.active.empty-state {
 		padding-top: 2rem;
+	}
+
+	/* Adjust service card grid for mobile */
+	#services-list {
+		grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+		gap: 10px;
+		padding: 10px 5px;
+	}
+
+	/* Adjust review cards on mobile */
+	.reviews-list .review-card {
+		padding: 12px;
+		margin-bottom: 10px;
+	}
+
+	.average-rating {
+		padding: 0 1em;
+		margin: 1em 0;
+	}
+
+	/* For profile with no bio on mobile */
+	.profile.no-bio {
+		grid-template-areas:
+			"image"
+			"info";
+		align-items: center;
+	}
+
+	.profile.no-bio .info {
+		margin-top: 1em;
+	}
+
+	.profile.no-bio .profile-img {
+		margin-top: 1.5em;
 	}
 }
 
@@ -97,6 +144,26 @@
 
 	.nothing-img {
 		max-width: 250px;
+	}
+
+	/* Smaller buttons for tablet */
+	.edit-profile-btn {
+		top: 2em;
+		right: 2em;
+	}
+
+	/* Adjust profile image size for tablet */
+	.profile .profile-img {
+		margin-left: 3em;
+		margin-right: 2.5em;
+		margin-top: 2.5em;
+		flex-basis: 10em;
+		height: 10em;
+	}
+
+	.profile .profile-img img {
+		width: 10em;
+		height: 10em;
 	}
 }
 
