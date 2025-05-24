@@ -51,7 +51,6 @@
 		left: 0;
 		z-index: 10;
 		background-color: #fdfaf8;
-		transition: transform 0.3s ease;
 		transform: translateX(0);
 	}
 
@@ -115,7 +114,6 @@
 		top: 0;
 		left: 0;
 		transform: translateX(100%);
-		transition: transform 0.3s ease;
 		z-index: 5;
 		background-color: white;
 	}
@@ -181,13 +179,7 @@
 		display: none;
 	}
 
-	/* Add transition for smoother experience */
-	#messages-page .chat-app__container,
-	#messages-page .chat-app__sidebar,
-	#messages-page .chat-app__main,
-	#messages-page .chat-app__back-button {
-		transition: transform 0.3s ease;
-	}
+	/* No transitions */
 
 	/* Improve mobile header alignment for longer usernames */
 	#messages-page .chat-app__menu-container {

@@ -59,6 +59,9 @@ try {
 
             <main class="chat-app__main">
                 <div class="chat-app__header">
+                    <div class="chat-app__back-button" id="back-to-conversations">
+                        <span class="chat-app__back-icon">←</span>
+                    </div>
                     <span id="current-chat-user"></span>
                     <div class="chat-app__menu-container">
                         <span class="chat-app__menu-button">⋯</span>

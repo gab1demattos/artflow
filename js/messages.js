@@ -60,6 +60,9 @@ document.addEventListener("DOMContentLoaded", () => {
 		conversationSearch.addEventListener("input", filterConversations);
 	}
 
+	// Handle responsive design for mobile
+	checkIfMobile();
+
 	// Handle dropdown menu toggle
 	if (menuButton && dropdownMenu) {
 		menuButton.addEventListener("click", toggleDropdownMenu);
@@ -586,7 +589,7 @@ function setupMobileLayout(isMobile) {
 
 /**
  * Shows the conversation list/sidebar view on mobile
- * Animates the transition back to the conversation list
+ * No animations, just toggle visibility classes
  */
 function showConversationList() {
 	const sidebar = document.querySelector(".chat-app__sidebar");
@@ -595,8 +598,7 @@ function showConversationList() {
 
 	if (!sidebar || !mainChat) return;
 
-	// Simply use the CSS classes for the transition
-	// This prevents the double animation effect
+	// No animations, just toggle classes
 	sidebar.classList.remove("hidden");
 	mainChat.classList.remove("visible");
 	backButton.classList.remove("visible");
@@ -604,7 +606,7 @@ function showConversationList() {
 
 /**
  * Shows the main chat view on mobile
- * Animates the transition to show the chat view
+ * No animations, just toggle visibility classes
  */
 function showMainChatView() {
 	const sidebar = document.querySelector(".chat-app__sidebar");
@@ -613,8 +615,7 @@ function showMainChatView() {
 
 	if (!sidebar || !mainChat) return;
 
-	// Simply use the CSS classes for the transition
-	// This prevents the double animation effect
+	// No animations, just toggle classes
 	sidebar.classList.add("hidden");
 	mainChat.classList.add("visible");
 	backButton.classList.add("visible");
