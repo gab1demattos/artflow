@@ -63,10 +63,20 @@
         padding-right: 0.5em;
     }
 
+    .category-content {
+        width: 100vw;
+        max-width: 100vw;
+        padding: 1em 0.5em 2em 0.5em;
+        box-sizing: border-box;
+        background: white;
+    }
+
     #filter-container {
         display: flex;
         align-items: center;
-        width: 100vw;
+        width: 90vw;
+        height: 4em;
+        overflow-y: hidden;
         max-width: 100vw;
         padding: 0.5em;
         box-sizing: border-box;
