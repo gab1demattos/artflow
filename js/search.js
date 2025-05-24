@@ -368,7 +368,8 @@ document.addEventListener('DOMContentLoaded', () => {
         updatePriceRange();
     });
 
-    deliveryTimeInput.addEventListener('change', async () => {
+
+    deliveryTimeInput.addEventListener('chnage', async () => {
         const maxDeliveryTime = parseFloat(deliveryTimeInput.value);
 
         const selectedCategories = Array.from(categoryCheckboxes)
@@ -421,22 +422,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Fetch the maximum delivery time dynamically and set it as the default value
-    async function setDefaultDeliveryTime() {
-        try {
-            const response = await fetch('/api/api_all_services.php');
-            const services = await response.json();
-
-            if (services.length > 0) {
-                const maxDeliveryTime = Math.max(...services.map(service => service.delivery_time));
-                deliveryTimeInput.value = maxDeliveryTime;
-            }
-        } catch (error) {
-            console.error('Error fetching services for default delivery time:', error);
-        }
-    }
-
-    setDefaultDeliveryTime();
+   
 });
 
 
