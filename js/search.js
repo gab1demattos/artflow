@@ -43,6 +43,17 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
+        // Reset price range inputs to their initial values
+        minPriceInput.value = minPriceInput.min;
+        maxPriceInput.value = maxPriceInput.max;
+
+        // Update the displayed values
+        minPriceDisplay.textContent = minPriceInput.min;
+        maxPriceDisplay.textContent = maxPriceInput.max;
+
+        // Trigger the price range update logic
+        updatePriceRange();
+
         // Show filter-search when services are active
         filterSearch.classList.remove("hidden");
 
