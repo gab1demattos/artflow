@@ -1,32 +1,23 @@
 <?php
 
 declare(strict_types=1);
-
-require_once(__DIR__ . '/../../database/classes/user.class.php');
+require_once(__DIR__ . '/../../database/security_bootstrap.php');
 require_once(__DIR__ . '/../../database/session.php');
+require_once(__DIR__ . '/../../database/classes/user.class.php');
 require_once(__DIR__ . '/../../database/database.php');
 require_once(__DIR__ . '/../../database/csrf.php');
 require_once(__DIR__ . '/../../database/security.php');
 
-// Use absolute path for redirect to homepage
 function redirect_home()
 {
-    header('Location: /pages/index.php');
+    header('Location: /');
     exit();
 }
 
-// If AJAX, return JSON error, else show error in alert
 function handle_signup_error($msg)
 {
-    echo '<script>
-        if (window.parent && window.parent.showModalError) {
-            window.parent.showModalError("signup-modal-overlay", "' . addslashes($msg) . '");
-            if (window.parent.showModal) window.parent.showModal("signUp");
-        } else {
-            alert("' . addslashes($msg) . '");
-        }
-        if (window.parent) window.parent.postMessage({modalError: true}, "*");
-    </script>';
+    $_SESSION['signup_error'] = $msg;
+    header('Location: /');
     exit();
 }
 
@@ -101,21 +92,18 @@ $user = User::create($name, $username, $email, $password, 'regular');
 if ($user) {
     $session->login([
         'id' => $user->id,
-        'user_type' => $user->user_type,
         'name' => $user->name,
         'username' => $user->username,
+        'user_type' => $user->user_type,
         'email' => $user->email,
         'bio' => $user->bio,
         'profile_image' => $user->profile_image
     ]);
-    echo '<script>
-            if (window.parent && window.parent.showGoFlowModal) {
-                window.parent.showGoFlowModal();
-            } else {
-                window.parent.location.href = "/pages/index.php";
-            }
-        </script>';
+
+    // Set success message and redirect
+    $_SESSION['signup_success'] = true;
+    header('Location: /');
     exit();
 } else {
-    handle_signup_error('Signup failed');
+    handle_signup_error('Account creation failed. Please try again.');
 }

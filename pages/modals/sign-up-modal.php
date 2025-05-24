@@ -3,7 +3,7 @@
         <div class="modal-content login">
             <div class="form-container">
                 <h2 id='h2-signup'>Create Account</h2>
-                <form id="signup-form" class="form" method="POST" action="/actions/login/signup-action.php" target="signup-iframe">
+                <form id="signup-form" class="form" method="POST" action="/actions/login/signup-action.php">
                     <?php
                     require_once(__DIR__ . '/../../database/csrf.php');
                     echo CSRF::getTokenField('signup_csrf_token');
@@ -28,7 +28,6 @@
                         <button type="button" id="sign-in" class="button long outline">Sign In</button>
                     </div>
                 </form>
-                <iframe name="signup-iframe" style="display:none;"></iframe>
             </div>
             <div class="modal-right">
                 <img src="../images/modals/sign_up/sign-up-image.png" alt="Illustration">
