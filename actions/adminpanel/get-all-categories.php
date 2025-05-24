@@ -1,6 +1,6 @@
 <?php
 // Returns JSON: [ {id, type, image} ... ]
-require_once(__DIR__ . '/../database/session.php');
+require_once(__DIR__ . '/../../database/session.php');
 $session = Session::getInstance();
 $user = $session->getUser() ?? null;
 if (!$user || $user['user_type'] !== 'admin') {
@@ -9,7 +9,7 @@ if (!$user || $user['user_type'] !== 'admin') {
     exit();
 }
 
-require_once(__DIR__ . '/../database/classes/category.class.php');
+require_once(__DIR__ . '/../../database/classes/category.class.php');
 $categories = Category::getAllCategories();
 $result = array_map(function($cat) {
     return [

@@ -1,8 +1,8 @@
 <?php
 // POST: service_id
 // Deletes service
-require_once(__DIR__ . '/../database/session.php');
-require_once(__DIR__ . '/../database/classes/service.class.php');
+require_once(__DIR__ . '/../../database/session.php');
+require_once(__DIR__ . '/../../database/classes/service.class.php');
 
 $session = Session::getInstance();
 $user = $session->getUser() ?? null;

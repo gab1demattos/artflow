@@ -43,7 +43,7 @@ drawHeader($user);
             <div class="modal-content">
                 <div class="form-container">
                     <h2>Add Category</h2>
-                    <form id="category-form" class="form" action="/actions/add-category.php" method="post" enctype="multipart/form-data">
+                    <form id="category-form" class="form" action="/actions/adminpanel/add-category.php" method="post" enctype="multipart/form-data">
                         <input type="text" name="category_name" placeholder="Category name" required>
                         <input type="file" name="category_image" accept="image/*">
                         <input type="text" name="subcategories" placeholder="Subcategories (comma separated)">

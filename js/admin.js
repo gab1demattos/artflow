@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (form && form.id === 'category-form') {
             e.preventDefault();
             const formData = new FormData(form);
-            fetch('/actions/add-category.php', {
+            fetch('/actions/adminpanel/add-category.php', {
                 method: 'POST',
                 body: formData
             })
@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function fetchStats() {
-    fetch('/actions/get-admin-stats.php')
+    fetch('/actions/adminpanel/get-admin-stats.php')
         .then(r => r.json())
         .then(data => {
             document.querySelector('#stat-users .stat-value').textContent = data.users || '0';
@@ -165,7 +165,7 @@ function handleCategoryTableClick(e) {
 }
 
 function fetchUsers() {
-    fetch('/actions/get-all-users.php')
+    fetch('/actions/adminpanel/get-all-users.php')
         .then(r => r.json())
         .then(users => {
             const tbody = document.querySelector('#users-table tbody');
@@ -189,7 +189,7 @@ function fetchUsers() {
 }
 
 function fetchServices() {
-    fetch('/actions/get-all-services.php')
+    fetch('/actions/adminpanel/get-all-services.php')
         .then(r => r.json())
         .then(services => {
             const tbody = document.querySelector('#services-table tbody');
@@ -209,7 +209,7 @@ function fetchServices() {
 }
 
 function fetchCategories() {
-    fetch('/actions/get-all-categories.php')
+    fetch('/actions/adminpanel/get-all-categories.php')
         .then(r => r.json())
         .then(categories => {
             const tbody = document.querySelector('#categories-table tbody');
@@ -229,7 +229,7 @@ function fetchCategories() {
 
 function promoteUser(e) {
     const id = e.target.dataset.id;
-    fetch('/actions/promote-user.php', {
+    fetch('/actions/adminpanel/promote-user.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: `user_id=${id}`
@@ -241,7 +241,7 @@ function banUser(e) {
     if (window.Modals && typeof window.Modals.showIrreversibleModal === 'function') {
         window.Modals.showIrreversibleModal(
             function onConfirm() {
-                fetch('/actions/ban-user.php', {
+                fetch('/actions/adminpanel/ban-user.php', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                     body: `user_id=${id}`
@@ -252,7 +252,7 @@ function banUser(e) {
             }
         );
     } else {
-        fetch('/actions/ban-user.php', {
+        fetch('/actions/adminpanel/ban-user.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: `user_id=${id}`
@@ -265,7 +265,7 @@ function deleteService(e) {
     if (window.Modals && typeof window.Modals.showIrreversibleModal === 'function') {
         window.Modals.showIrreversibleModal(
             function onConfirm() {
-                fetch('/actions/delete-service.php', {
+                fetch('/actions/adminpanel/delete-service.php', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                     body: `service_id=${id}`
@@ -279,7 +279,7 @@ function deleteService(e) {
             }
         );
     } else {
-        fetch('/actions/delete-service.php', {
+        fetch('/actions/adminpanel/delete-service.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: `service_id=${id}`
@@ -295,7 +295,7 @@ function deleteCategory(e) {
     if (window.Modals && typeof window.Modals.showIrreversibleModal === 'function') {
         window.Modals.showIrreversibleModal(
             function onConfirm() {
-                fetch('/actions/delete-category.php', {
+                fetch('/actions/adminpanel/delete-category.php', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                     body: `category_id=${id}`
@@ -309,7 +309,7 @@ function deleteCategory(e) {
             }
         );
     } else {
-        fetch('/actions/delete-category.php', {
+        fetch('/actions/adminpanel/delete-category.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: `category_id=${id}`
@@ -324,7 +324,7 @@ function addCategory(e) {
     e.preventDefault();
     const form = e.target;
     const data = new URLSearchParams(new FormData(form));
-    fetch('/actions/add-category.php', {
+    fetch('/actions/adminpanel/add-category.php', {
         method: 'POST',
         body: data
     }).then(() => {
