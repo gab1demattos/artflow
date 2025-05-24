@@ -9,7 +9,9 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-if (!isset($_SESSION['id'])) {
+$session = Session::getInstance();
+$user = $session->getUser() ?? null;
+if (!$user) {
     http_response_code(401);
     echo json_encode(['error' => 'Not authenticated.']);
     exit;
@@ -23,18 +25,18 @@ $subcategory = intval($_POST['subcategory'] ?? 0);
 $price = floatval($_POST['price'] ?? 0);
 $delivery = intval($_POST['delivery_time'] ?? 0);
 
-if ($serviceId <= 0 || !$title || !$description || $category <= 0 || $subcategory <= 0 || $price <= 0 || $delivery <= 0) {
+if ($serviceId <= 0 || !$title || !$description || $category <= 0 || $price <= 0 || $delivery <= 0) {
     http_response_code(400);
     echo json_encode(['error' => 'Missing or invalid fields.']);
     exit;
 }
 
-$db = getDatabaseConnection();
+$db = Database::getInstance();
 $stmt = $db->prepare('SELECT user_id, images FROM Service WHERE id = ?');
 $stmt->execute([$serviceId]);
 $service = $stmt->fetch(PDO::FETCH_ASSOC);
 
-if (!$service || $service['user_id'] != $_SESSION['id']) {
+if (!$service || $service['user_id'] != $user['id']) {
     http_response_code(403);
     echo json_encode(['error' => 'Not authorized.']);
     exit;
@@ -60,8 +62,19 @@ if (!empty($_FILES['images']['name'][0])) {
     }
 }
 
-$update = $db->prepare('UPDATE Service SET title = ?, description = ?, category_id = ?, subcategory_id = ?, price = ?, delivery_time = ?, images = ? WHERE id = ?');
-$update->execute([$title, $description, $category, $subcategory, $price, $delivery, $images, $serviceId]);
+// Update Service main fields (no subcategory_id column!)
+$update = $db->prepare('UPDATE Service SET title = ?, description = ?, category_id = ?, price = ?, delivery_time = ?, images = ? WHERE id = ?');
+$update->execute([$title, $description, $category, $price, $delivery, $images, $serviceId]);
+
+// Update subcategories (ServiceSubcategory table)
+if (isset($_POST['subcategory']) && is_numeric($_POST['subcategory'])) {
+    // Remove old subcategories
+    $stmt = $db->prepare('DELETE FROM ServiceSubcategory WHERE service_id = ?');
+    $stmt->execute([$serviceId]);
+    // Insert new subcategory
+    $stmt = $db->prepare('INSERT INTO ServiceSubcategory (service_id, subcategory_id) VALUES (?, ?)');
+    $stmt->execute([$serviceId, intval($_POST['subcategory'])]);
+}
 
 header('Location: /pages/service.php?id=' . $serviceId);
 exit;

@@ -68,13 +68,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Submit form
     form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        // Gather data from form
-        const formData = new FormData(form);
-        // Send data to server or handle it as needed
-        // ...
-
-        // Close the modal after submission
-        modal.style.display = 'none';
+        // Allow default form submission (POST to PHP)
+        // Optionally, you can show a loading spinner or disable the button here
     });
 });

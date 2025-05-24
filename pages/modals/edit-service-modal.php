@@ -50,7 +50,7 @@ foreach ($categories as $cat) {
       <input type="file" id="edit-service-images" name="images[]" accept="image/*" multiple>
       <div id="edit-service-image-preview"></div>
 
-      <button type="submit" class="btn">Save Changes</button>
+      <button type="submit" class="button filled hovering" id="edit-service-save-btn">Save Changes</button>
     </form>
   </div>
 </div>
