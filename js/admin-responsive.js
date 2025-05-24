@@ -34,8 +34,16 @@ document.addEventListener('DOMContentLoaded', function () {
     // Also apply when tab content changes
     document.querySelectorAll('.admin-tab-btn').forEach(function (button) {
         button.addEventListener('click', function () {
+            // Add transition class to body for smooth tab switching
+            document.body.classList.add('tab-transitioning');
+            
+            // Remove transitioning class after animation completes
+            setTimeout(() => {
+                document.body.classList.remove('tab-transitioning');
+            }, 300);
+            
             // Give tables time to render
-            setTimeout(makeTablesResponsive, 100);
+            setTimeout(makeTablesResponsive, 150);
         });
     });
 
