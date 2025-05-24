@@ -56,13 +56,33 @@ document.addEventListener("DOMContentLoaded", () => {
 			window.filterRating.setRating(0);
 		}
 
-		// Reset price range inputs to their initial values
-		minPriceInput.value = minPriceInput.min;
-		maxPriceInput.value = maxPriceInput.max;
+		// Reset price range inputs to their initial values - check if they exist first
+		if (typeof minPriceInput !== "undefined" && minPriceInput) {
+			minPriceInput.value = minPriceInput.min;
+		}
 
-		// Update the displayed values
-		minPriceDisplay.textContent = minPriceInput.min;
-		maxPriceDisplay.textContent = maxPriceInput.max;
+		if (typeof maxPriceInput !== "undefined" && maxPriceInput) {
+			maxPriceInput.value = maxPriceInput.max;
+		}
+
+		// Update the displayed values - check if they exist first
+		if (
+			typeof minPriceDisplay !== "undefined" &&
+			minPriceDisplay &&
+			typeof minPriceInput !== "undefined" &&
+			minPriceInput
+		) {
+			minPriceDisplay.textContent = minPriceInput.min;
+		}
+
+		if (
+			typeof maxPriceDisplay !== "undefined" &&
+			maxPriceDisplay &&
+			typeof maxPriceInput !== "undefined" &&
+			maxPriceInput
+		) {
+			maxPriceDisplay.textContent = maxPriceInput.max;
+		}
 
 		// Trigger the price range update logic
 		updatePriceRange();
@@ -637,12 +657,31 @@ document.addEventListener("DOMContentLoaded", () => {
 			)
 		).map((cb) => cb.id.replace("filter-option-", ""));
 
-		const minPrice = parseFloat(document.getElementById("min-price").value);
-		const maxPrice = parseFloat(document.getElementById("max-price").value);
-		const maxDeliveryTime = parseFloat(
-			document.getElementById("delivery-time").value
-		);
-		const minRating = parseFloat(filterRatingValue.value);
+		// Use safe defaults and check if elements exist
+		let minPrice = 0;
+		let maxPrice = 1000;
+		let maxDeliveryTime = 30;
+		let minRating = 0;
+
+		const minPriceElement = document.querySelector(".min-price");
+		const maxPriceElement = document.querySelector(".max-price");
+		const deliveryTimeElement = document.getElementById("delivery-time");
+
+		if (minPriceElement) {
+			minPrice = parseFloat(minPriceElement.value) || 0;
+		}
+
+		if (maxPriceElement) {
+			maxPrice = parseFloat(maxPriceElement.value) || 1000;
+		}
+
+		if (deliveryTimeElement) {
+			maxDeliveryTime = parseFloat(deliveryTimeElement.value) || 30;
+		}
+
+		if (filterRatingValue) {
+			minRating = parseFloat(filterRatingValue.value) || 0;
+		}
 
 		console.log("Fetching services with filters:", {
 			categories: selectedCategories,

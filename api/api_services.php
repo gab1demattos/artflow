@@ -27,14 +27,6 @@ if (!empty($categories)) {
         : Service::searchServices($db, $search, $minPrice, $maxPrice, $maxDeliveryTime, $minRating);
 }
 
-
-if (!empty($categories)) {
-    $services = Service::getServicesByCategories($db, $categories, $minPrice, $maxPrice);
-} else {
-    $search = $_GET['search'] ?? '';
-    $services = empty($search) ? Service::getAllServices($minPrice, $maxPrice) : Service::searchServices($db, $search, $minPrice, $maxPrice);
-}
-
 echo json_encode(array_map(function ($service) {
     return [
         'id' => $service->id,

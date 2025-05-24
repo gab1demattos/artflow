@@ -500,31 +500,37 @@ class Service
         $query = 'SELECT Service.*, User.username, COALESCE(AVG(Review.rating), 0) as avg_rating 
                  FROM Service 
                  JOIN User ON Service.user_id = User.id
-                 LEFT JOIN Review ON Service.id = Review.service_id
-                 GROUP BY Service.id';
+                 LEFT JOIN Review ON Service.id = Review.service_id';
         $params = [];
-        $conditions = [];
+        $whereConditions = [];
+        $havingConditions = [];
 
         if ($minPrice !== null) {
-            $conditions[] = 'price >= ?';
+            $whereConditions[] = 'Service.price >= ?';
             $params[] = $minPrice;
         }
         if ($maxPrice !== null) {
-            $conditions[] = 'price <= ?';
+            $whereConditions[] = 'Service.price <= ?';
             $params[] = $maxPrice;
         }
         if ($maxDeliveryTime !== null) {
-            $conditions[] = 'Service.delivery_time <= ?';
+            $whereConditions[] = 'Service.delivery_time <= ?';
             $params[] = $maxDeliveryTime;
         }
 
+        if (!empty($whereConditions)) {
+            $query .= ' WHERE ' . implode(' AND ', $whereConditions);
+        }
+
+        $query .= ' GROUP BY Service.id';
+
         if ($minRating > 0) {
-            $conditions[] = 'COALESCE(AVG(Review.rating), 0) >= ?';
+            $havingConditions[] = 'avg_rating >= ?';
             $params[] = $minRating;
         }
 
-        if (!empty($conditions)) {
-            $query .= ' HAVING ' . implode(' AND ', $conditions);
+        if (!empty($havingConditions)) {
+            $query .= ' HAVING ' . implode(' AND ', $havingConditions);
         }
 
         $stmt = $db->prepare($query);
@@ -542,7 +548,9 @@ class Service
                 (float)$service['price'],
                 (int)$service['delivery_time'],
                 $service['images'],
-                $service['videos']
+                $service['videos'],
+                $service['username'],
+                isset($service['avg_rating']) ? (float)$service['avg_rating'] : 0
             );
         }
         return $result;
@@ -554,18 +562,27 @@ class Service
                  FROM Service 
                  JOIN User ON Service.user_id = User.id
                  LEFT JOIN Review ON Service.id = Review.service_id
-                 WHERE title LIKE ?
-                 GROUP BY Service.id';
+                 WHERE title LIKE ?';
         $params = ['%' . $search . '%'];
-        $havingConditions = [];
 
         if ($minPrice !== null) {
-            $havingConditions[] = 'Service.price >= ?';
+            $query .= ' AND Service.price >= ?';
             $params[] = $minPrice;
         }
         if ($maxPrice !== null) {
-            $query .= ' AND price <= ?';
+            $query .= ' AND Service.price <= ?';
             $params[] = $maxPrice;
+        }
+        if ($maxDeliveryTime !== null) {
+            $query .= ' AND Service.delivery_time <= ?';
+            $params[] = $maxDeliveryTime;
+        }
+
+        $query .= ' GROUP BY Service.id';
+
+        if ($minRating > 0) {
+            $query .= ' HAVING avg_rating >= ?';
+            $params[] = $minRating;
         }
 
         $stmt = $db->prepare($query);
@@ -581,7 +598,9 @@ class Service
                 (float)$service['price'],
                 (int)$service['delivery_time'],
                 $service['images'],
-                $service['videos']
+                $service['videos'],
+                $service['username'],
+                isset($service['avg_rating']) ? (float)$service['avg_rating'] : 0
             );
         }
         return $services;
@@ -601,25 +620,36 @@ class Service
                 FROM Service 
                 JOIN User ON Service.user_id = User.id
                 LEFT JOIN Review ON Service.id = Review.service_id
-                WHERE Service.category_id IN ($placeholders)
-                GROUP BY Service.id";
+                WHERE Service.category_id IN ($placeholders)";
         $params = $categoryIds;
+
+        $whereConditions = [];
         $havingConditions = [];
 
         if ($minPrice !== null) {
-            $havingConditions[] = 'Service.price >= ?';
+            $whereConditions[] = 'Service.price >= ?';
             $params[] = $minPrice;
         }
         if ($maxPrice !== null) {
-            $havingConditions[] = 'Service.price <= ?';
+            $whereConditions[] = 'Service.price <= ?';
             $params[] = $maxPrice;
         }
         if ($maxDeliveryTime !== null) {
-            $havingConditions[] = 'Service.delivery_time <= ?';
+            $whereConditions[] = 'Service.delivery_time <= ?';
             $params[] = $maxDeliveryTime;
         }
+
+        // Add WHERE conditions if there are any
+        if (!empty($whereConditions)) {
+            $query .= ' AND ' . implode(' AND ', $whereConditions);
+        }
+
+        // Add GROUP BY clause
+        $query .= ' GROUP BY Service.id';
+
+        // Rating must use HAVING since it's an aggregate function result
         if ($minRating > 0) {
-            $havingConditions[] = 'COALESCE(AVG(Review.rating), 0) >= ?';
+            $havingConditions[] = 'avg_rating >= ?';
             $params[] = $minRating;
         }
 
