@@ -55,12 +55,35 @@
                 $stmt->execute();
                 $priceRange = $stmt->fetch(PDO::FETCH_ASSOC);
                 ?>
-                <h3>Price</h3>
-                <div id="filter-search-price">
-                    <label for="min-price">Min Price:</label>
-                    <input type="number" id="min-price" min="<?php echo htmlspecialchars($priceRange['min_price']); ?>" max="<?php echo htmlspecialchars($priceRange['max_price']); ?>" value="<?php echo htmlspecialchars($priceRange['min_price']); ?>" step="1">
-                    <label for="max-price">Max Price:</label>
-                    <input type="number" id="max-price" min="<?php echo htmlspecialchars($priceRange['min_price']); ?>" max="<?php echo htmlspecialchars($priceRange['max_price']); ?>" value="<?php echo htmlspecialchars($priceRange['max_price']); ?>" step="1">
+                <div class="price-range-card">
+                    <h3>Price</h3>
+                    <div class="price-range-content">
+                        <div>
+                            <label>Min</label>
+                            <p id="min-value"><?php echo htmlspecialchars($priceRange['min_price']); ?></p>
+                        </div>
+                        <div>
+                            <label>Max</label>
+                            <p id="min-value"><?php echo htmlspecialchars($priceRange['max_price']); ?></p>
+                        </div>
+                    </div>
+                    <div class="price-range-slider">
+                        <div class="range-fill"></div>
+                        <input 
+                            type="range" 
+                            class="min-price" 
+                            min="<?php echo htmlspecialchars($priceRange['min_price']); ?>" 
+                            max="<?php echo htmlspecialchars($priceRange['max_price']); ?>" 
+                            value="<?php echo htmlspecialchars($priceRange['min_price']); ?>" 
+                            step="1">           
+                        <input 
+                            type="range" 
+                            class="max-price" 
+                            min="<?php echo htmlspecialchars($priceRange['min_price']); ?>" 
+                            max="<?php echo htmlspecialchars($priceRange['max_price']); ?>" 
+                            value="<?php echo htmlspecialchars($priceRange['max_price']); ?>" 
+                            step="1"> 
+                    </div>
                 </div>
                 <h3>Delivery Time</h3>
                 <div id="filter-search-delivery">
@@ -75,3 +98,5 @@
         </div>
     </div>
 <?php } ?>
+
+
