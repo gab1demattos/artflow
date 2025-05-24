@@ -69,10 +69,36 @@ drawHeader($user);
                 <input type="hidden" name="id" value="<?= $categoryId ?>">
 
                 <div id="filter-container">
-                    <div id="price-filter">
-                        <label for="price-min">Price Range:</label>
-                        <input type="number" name="price_min" id="price-min" placeholder="Min" min="<?= $priceMin ?>" max="<?= $priceMax ?>" value="<?= $priceMin ?>" step="1">
-                        <input type="number" name="price_max" id="price-max" placeholder="Max" min="<?= $priceMin ?>" max="<?= $priceMax ?>" value="<?= $priceMax ?>" step="1">
+
+                    <div class="price-range-filter">
+                        <h3>Price</h3>
+                        <div class="price-filter-content">
+                            <div>
+                                <label>Min</label>
+                                <p id="min-value-filter"><?= $priceMin ?></p>
+                            </div>
+                            <div>
+                                <label>Max</label>
+                                <p id="max-value-filter"><?= $priceMax ?></p>
+                            </div>
+                        </div>
+                        <div class="price-filter-slider">
+                            <div class="range-fill"></div>
+                            <input 
+                                type="range" 
+                                class="min-price-filter" 
+                                min="<?= $priceMin ?>" 
+                                max="<?= $priceMax ?>" 
+                                value="<?= $priceMin ?>" 
+                            >
+                            <input 
+                                type="range" 
+                                class="max-price-filter" 
+                                min="<?= $priceMin ?>" 
+                                max="<?= $priceMax ?>" 
+                                value="<?= $priceMax ?>" 
+                                >
+                        </div>
                     </div>
 
                     <div id="rating-filter">
