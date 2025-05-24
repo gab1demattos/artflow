@@ -190,16 +190,6 @@
 	margin: 0 auto;
 }
 
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	gap: 0.5rem;
-	padding: 0.5rem;
-	background-color: var(--light-gray);
-	border-radius: 8px;
-	box-shadow: 0 2px 5px var(--purple);
-	margin-top: 1rem;
-}
 
 #filter-search-rating .rating-container {
 	display: flex;
@@ -215,7 +205,9 @@
 
 #filter-search-rating .stars {
 	display: flex;
-	gap: 0.4rem;
+	gap: 0.2rem; /* Reduced gap for better alignment */
+	justify-content: center; /* Center align stars */
+	align-items: center; /* Vertically align stars */
 }
 
 #filter-search-rating .star-icon {
