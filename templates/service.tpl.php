@@ -185,7 +185,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     .then(r => r.json())
                     .then(result => {
                         if (result.success) {
-                            window.location.href = '/';
+                            window.location.href = '/pages/profile.php?username=<?= urlencode($owner['username']) ?>';
                         } else {
                             alert(result.error || 'Failed to delete service.');
                         }
