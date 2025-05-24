@@ -190,6 +190,18 @@
 	margin: 0 auto;
 }
 
+#filter-search-rating {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 0.5rem;
+	padding: 0.5rem;
+	background-color: var(--light-gray);
+	border-radius: 8px;
+	box-shadow: 0 2px 5px var(--purple);
+	margin-top: 1rem;
+	padding-left: 0;
+}
 
 #filter-search-rating .rating-container {
 	display: flex;
