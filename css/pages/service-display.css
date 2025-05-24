@@ -44,7 +44,15 @@
 	margin: 0 auto;
 	font-family: "EB Garamond", serif;
 	gap: 0.5em;
-	transform: translateY(-1em);
+}
+
+#owner-info a {
+	display: flex;
+	align-items: center;
+	gap: 0.5em;
+	text-decoration: none;
+	color: inherit;
+	height: 3em;
 }
 
 #owner-info p {
@@ -53,18 +61,24 @@
 	line-height: 1.5;
 	margin-top: 0;
 	text-align: center;
-	transform: translateY(0.5em);
 }
 
 #owner-info img {
-	width: 3em;
-	height: 3em;
+	width: 2em;
+	height: 2em;
 	border-radius: 50%;
 	object-fit: cover;
 	border: 1px solid #ddd;
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 	padding: 0;
-	transform: scale(0.6);
+	vertical-align: middle;
+}
+
+#owner-info div {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 0.5em;
 }
 
 #service-name {

@@ -119,7 +119,7 @@
             <div id="owner-info">
                 <a href="/pages/profile.php?username=<?= urlencode($owner['username']) ?>" style="display: flex; align-items: center; gap: 0.5em; text-decoration: none; color: inherit;">
                     <img src="<?= ($owner['profile_image'] !== null && $owner['profile_image'] !== '') ? htmlspecialchars($owner['profile_image']) : '/images/user_pfp/default.png' ?>" alt="User Icon">
-                    <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                    <div style="display: flex; flex-direction: row; align-items: center; gap: 0.5em;">
                         <p style="margin: 0; font-weight: 600;"><?= htmlspecialchars($owner['name']) ?></p>
                         <p style="margin: 0; opacity: 0.7;">@<?= htmlspecialchars($owner['username']) ?></p>
                     </div>
