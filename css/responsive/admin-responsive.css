@@ -325,6 +325,19 @@
         .promote-btn+.ban-btn {
             margin-left: 0.25rem !important;
         }
+
+        .admin-table td[data-label]::before {
+            content: attr(data-label) !important;
+            display: block !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+
+        /* Prevent any script or style from hiding our data labels */
+        .admin-table td::before {
+            display: block !important;
+            visibility: visible !important;
+        }
     }
 
     /* Improve modal display for small screens */
@@ -414,4 +427,6 @@
     .admin-tabs-row.has-overflow::after {
         background: linear-gradient(to left, #fff 60%, #ffd700 100%);
     }
+
+   
 }
