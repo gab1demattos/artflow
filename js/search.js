@@ -135,6 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                     <div class="pantone-info-row">
                                         <span class="pantone-username">${item.username}</span>
                                         <span class="pantone-rating">★ ${item.rating || '0.0'}</span>
+                                        <span class="pantone-delivery-time">${service.price}€</span>
                                     </div>
                                 </div>
                             `;
@@ -191,6 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <div class="pantone-info-row">
                                     <span class="pantone-username">${service.username}</span>
                                     <span class="pantone-rating">★ ${service.rating || '0.0'}</span>
+                                    <span class="pantone-delivery-time">${service.price}€</span>
                                 </div>
                             </div>
                         `;
@@ -276,6 +278,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <div class="pantone-info-row">
                                     <span class="pantone-username">${service.username}</span>
                                     <span class="pantone-rating">★ ${service.rating || '0.0'}</span>
+                                    <span class="pantone-delivery-time">${service.price}€</span>
                                 </div>
                             </div>
                         `;
@@ -338,6 +341,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <div class="pantone-info-row">
                                 <span class="pantone-username">${service.username}</span>
                                 <span class="pantone-rating">★ ${service.rating || '0.0'}</span>
+                                <span class="pantone-delivery-time">${service.price}€</span>
                             </div>
                         </div>
                     `;
@@ -407,7 +411,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <div class="pantone-info-row">
                                     <span class="pantone-username">${service.username}</span>
                                     <span class="pantone-rating">★ ${service.rating || '0.0'}</span>
-                                    <span class="pantone-delivery-time">${service.delivery_time} days</span>
+                                    <span class="pantone-delivery-time">${service.price}€</span>
                                 </div>
                             </div>
                         `;

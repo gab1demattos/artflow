@@ -22,6 +22,7 @@ function drawServiceCard($service, $serviceImage = null, $subcatIdsStr = '') {
             <div class="pantone-info-row">
                 <span class="pantone-username"><?= htmlspecialchars($service['username']) ?></span>
                 <span class="pantone-rating">★ 0.0</span>
+                <span class="pantone-price"><?= htmlspecialchars($service['price']) ?>€</span>
             </div>
         </div>
     </a>
