@@ -264,8 +264,7 @@ input[type="checkbox"] {
 
 
 
-/* Style range price slider */
-
+/* Updated styles for the price range slider */
 .price-range-content {
     display: flex;
     align-items: center;
@@ -274,7 +273,7 @@ input[type="checkbox"] {
 }
 
 .price-range-slider {
-    width: 400px;
+    width: 100%; /* Adjusted to take full width */
     position: relative;
     margin: 10px 0 30px 0;
 }
@@ -284,6 +283,7 @@ input[type="checkbox"] {
     background-color: var(--purple);
     position: absolute;
     z-index: 1;
+    border-radius: 3px; /* Added for smoother edges */
 }
 
 input[type="range"] {
@@ -292,23 +292,23 @@ input[type="range"] {
     background: transparent;
     position: absolute;
     left: 0;
+    z-index: 2; /* Ensure sliders are above the fill */
 }
 
 input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     width: 15px;
-    height: 15  px;
+    height: 15px; /* Fixed typo */
     border-radius: 50%;
     background-color: var(--purple);
     cursor: pointer;
     position: relative;
-    margin-top: -2px ;
-    z-index: 1;
-} 
+    z-index: 3; /* Ensure thumbs are above everything */
+}
 
 input[type="range"]::-webkit-slider-runnable-track {
     width: 100%;
-    height: 5px;
+    height: 6px; /* Adjusted to match fill height */
     background-color: var(--light-gray);
     border-radius: 3px;
     border: none;
