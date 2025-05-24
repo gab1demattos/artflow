@@ -71,14 +71,13 @@ drawHeader($user);
                 <div id="filter-container">
 
                     <div class="price-range-filter">
-                        <h3>Price</h3>
                         <div class="price-filter-content">
                             <div>
-                                <label>Min</label>
+                                <label>Min Price</label>
                                 <p id="min-value-filter"><?= $priceMin ?></p>
                             </div>
                             <div>
-                                <label>Max</label>
+                                <label>Max Price</label>
                                 <p id="max-value-filter"><?= $priceMax ?></p>
                             </div>
                         </div>

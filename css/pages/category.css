@@ -237,6 +237,83 @@
 	align-items: center;
 }
 
+/* Updated styling for the price range filter */
+.price-range-filter {
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+
+.price-filter-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1em;
+}
+
+.price-filter-content div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.price-filter-content p {
+    font-size: 1em;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+}
+
+.price-filter-slider {
+    position: relative;
+    width: 100%;
+    height: 5px;
+    background: #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.price-filter-slider .range-fill {
+    position: absolute;
+    height: 100%;
+    background: var(--orange, #dd8d6e);
+    border-radius: 4px;
+}
+
+.price-filter-slider input[type="range"] {
+    position: absolute;
+    width: 100%;
+    height: 8px;
+    -webkit-appearance: none;
+    background: none;
+    pointer-events: none;
+}
+
+.price-filter-slider input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background: var(--orange, #dd8d6e);
+    border-radius: 50%;
+    cursor: pointer;
+    pointer-events: auto;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.price-filter-slider input[type="range"]::-moz-range-thumb {
+    width: 13px;
+    height: 13px;
+    background: var(--orange, #dd8d6e);
+    border-radius: 50%;
+    cursor: pointer;
+    pointer-events: auto;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
 @media (max-width: 600px) {
 	.subcategory-carousel {
 		gap: 8px;
