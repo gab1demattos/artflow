@@ -86,6 +86,8 @@ async function loadStats() {
         }
     });
 }
-loadStats();
+loadStats(); 
 </script>
-<?php // Optionally, add a footer or close tags if needed ?>
+<?php 
+drawFooter($user);
+ ?>
