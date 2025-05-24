@@ -146,6 +146,7 @@
         class="button filled hovering service-options">
         Edit Service
     </button>
+    <button id="delete-service-btn" class="button red service-options" type="button">Delete Service</button>
                     <?php endif; ?>
                 </div>
             </div>
@@ -163,5 +164,36 @@
     <?php include __DIR__ . '/../pages/modals/payment-modal.php'; ?>
     <?php include __DIR__ . '/../pages/modals/thankyou-modal.php'; ?>
     <?php include __DIR__ . '/../pages/modals/edit-service-modal.php'; ?>
-    <script src="/js/checkout.js"></script>
+    <?php include __DIR__ . '/../templates/irreversible-modal.tpl.php'; ?>
+    <script src="/js/modals.js"></script>
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    const deleteBtn = document.getElementById('delete-service-btn');
+    if (deleteBtn && window.Modals && typeof window.Modals.showIrreversibleModal === 'function') {
+        deleteBtn.addEventListener('click', function() {
+            window.Modals.showIrreversibleModal(
+                function onConfirm() {
+                    fetch('/actions/adminpanel/delete-service.php', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        body: 'service_id=<?= $service['id'] ?>'
+                    })
+                    .then(r => r.json())
+                    .then(result => {
+                        if (result.success) {
+                            window.location.href = '/';
+                        } else {
+                            alert(result.error || 'Failed to delete service.');
+                        }
+                    })
+                    .catch(() => alert('Failed to delete service.'));
+                },
+                function onCancel() {
+                    // Do nothing
+                }
+            );
+        });
+    }
+});
+</script>
 <?php } ?>
