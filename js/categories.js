@@ -14,6 +14,7 @@ const Categories = {
 	init() {
 		this.setupSubcategoryOverlay();
 		this.setupSubcategoryTagFiltering();
+		this.setupFilters(); // Added filters setup
 	},
 
 	/**
@@ -215,6 +216,63 @@ const Categories = {
 					card.style.display = show ? "" : "none";
 				});
 			}
+		}
+	},
+
+	/**
+	 * Set up filtering for services by price range and max delivery days
+	 */
+	setupFilters() {
+		const minPriceInput = document.querySelector('.min-price-filter');
+		const maxPriceInput = document.querySelector('.max-price-filter');
+		const minValueDisplay = document.getElementById('min-value-filter');
+		const maxValueDisplay = document.getElementById('max-value-filter');
+		const deliveryMaxInput = document.getElementById('delivery-max');
+		const applyFiltersButton = document.querySelector('.filters-container button');
+		const servicesList = document.getElementById('services-list');
+
+		if (minPriceInput && maxPriceInput && deliveryMaxInput && servicesList && applyFiltersButton) {
+			const updateDisplayedValues = () => {
+				const minPrice = parseFloat(minPriceInput.value);
+				const maxPrice = parseFloat(maxPriceInput.value);
+
+				// Update displayed values
+				minValueDisplay.textContent = minPrice;
+				maxValueDisplay.textContent = maxPrice;
+			};
+
+			const applyFilters = () => {
+				const minPrice = parseFloat(minPriceInput.value);
+				const maxPrice = parseFloat(maxPriceInput.value);
+				const maxDelivery = parseInt(deliveryMaxInput.value, 10);
+
+				// Filter services directly in the DOM
+				const cards = servicesList.querySelectorAll('.service-card');
+				cards.forEach((card) => {
+					const servicePrice = parseFloat(card.getAttribute('data-price'));
+					const serviceDelivery = parseInt(card.getAttribute('data-delivery'), 10);
+
+					if (
+						servicePrice >= minPrice &&
+						servicePrice <= maxPrice &&
+						serviceDelivery <= maxDelivery
+					) {
+						card.style.display = '';
+					} else {
+						card.style.display = 'none';
+					}
+				});
+			};
+
+			// Attach event listeners to range inputs to update displayed values
+			minPriceInput.addEventListener('input', updateDisplayedValues);
+			maxPriceInput.addEventListener('input', updateDisplayedValues);
+
+			// Attach event listener to apply filters button
+			applyFiltersButton.addEventListener('click', (event) => {
+				event.preventDefault(); // Prevent form submission
+				applyFilters();
+			});
 		}
 	},
 };
