@@ -53,7 +53,6 @@ foreach ($categories as $cat) {
         </form>
       </div>
     </div>
-    <button class="close-modal" id="close-edit-service-modal" aria-label="Close">&times;</button>
   </div>
 </div>
 <script>

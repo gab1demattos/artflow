@@ -67,13 +67,17 @@ $update = $db->prepare('UPDATE Service SET title = ?, description = ?, category_
 $update->execute([$title, $description, $category, $price, $delivery, $images, $serviceId]);
 
 // Update subcategories (ServiceSubcategory table)
-if (isset($_POST['subcategory']) && is_numeric($_POST['subcategory'])) {
+if (isset($_POST['subcategories']) && is_array($_POST['subcategories'])) {
     // Remove old subcategories
     $stmt = $db->prepare('DELETE FROM ServiceSubcategory WHERE service_id = ?');
     $stmt->execute([$serviceId]);
-    // Insert new subcategory
-    $stmt = $db->prepare('INSERT INTO ServiceSubcategory (service_id, subcategory_id) VALUES (?, ?)');
-    $stmt->execute([$serviceId, intval($_POST['subcategory'])]);
+    // Insert new subcategories
+    foreach ($_POST['subcategories'] as $subcatId) {
+        if (is_numeric($subcatId)) {
+            $stmt = $db->prepare('INSERT INTO ServiceSubcategory (service_id, subcategory_id) VALUES (?, ?)');
+            $stmt->execute([$serviceId, intval($subcatId)]);
+        }
+    }
 }
 
 header('Location: /pages/service.php?id=' . $serviceId);
