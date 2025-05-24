@@ -84,7 +84,10 @@ document.addEventListener("DOMContentLoaded", () => {
 			maxPriceDisplay.textContent = maxPriceInput.max;
 		}
 
-			// Show filter-search when services are active
+		// Trigger the price range update logic
+		updatePriceRange();
+
+		// Show filter-search when services are active
 		filterSearch.classList.remove("hidden");
 
 		// Add new listener for services
@@ -334,12 +337,68 @@ document.addEventListener("DOMContentLoaded", () => {
 	);
 
 	categoryCheckboxes.forEach((checkbox) => {
-		checkbox.addEventListener("change", () => {
+		checkbox.addEventListener("change", async () => {
 			const selectedCategories = Array.from(categoryCheckboxes)
 				.filter((cb) => cb.checked)
 				.map((cb) => cb.id.replace("filter-option-", ""));
 
 			console.log("Selected Categories:", selectedCategories);
+
+			// Fetch services dynamically based on selected categories
+			try {
+				const response = await fetch(
+					`/api/api_services.php?categories=${selectedCategories.join(",")}`
+				);
+				const services = await response.json();
+
+				const searchResults = document.getElementById("search-results");
+				searchResults.innerHTML = ""; // Clear previous results
+
+				if (services.length > 0) {
+					services.forEach((service) => {
+						const serviceCard = document.createElement("a");
+						serviceCard.href = `/pages/service.php?id=${encodeURIComponent(
+							service.id
+						)}`;
+						serviceCard.classList.add("service-card-link");
+						serviceCard.innerHTML = `
+                            <div class="service-card">
+                                <div class="pantone-image-wrapper">
+                                    ${
+																			service.image
+																				? `<img src="${service.image}" alt="Service image" class="pantone-image" />`
+																				: '<div class="pantone-image pantone-image-placeholder"></div>'
+																		}
+                                </div>
+                                <div class="pantone-title">${
+																	service.title
+																}</div>
+                                <div class="pantone-info-row">
+                                    <span class="pantone-username">${
+																			service.username
+																		}</span>
+                                    <span class="pantone-rating">★ ${
+																			service.rating || "0.0"
+																		}</span>
+                                    <span class="pantone-delivery-time">${
+																			service.price
+																		}€</span>
+                                </div>
+                            </div>
+                        `;
+						searchResults.appendChild(serviceCard);
+					});
+				} else {
+					searchResults.innerHTML = ""; // Clear previous results
+					searchResults.innerHTML =
+						"<p>No services found for the selected categories.</p>";
+				}
+			} catch (error) {
+				console.error("Error fetching services:", error);
+				searchResults.innerHTML = ""; // Clear previous results
+				searchResults.innerHTML =
+					"<p>Error loading services. Please try again later.</p>";
+			}
 		});
 	});
 
@@ -349,11 +408,87 @@ document.addEventListener("DOMContentLoaded", () => {
 	const minPriceDisplay = document.getElementById("min-value");
 	const maxPriceDisplay = document.getElementById("max-value");
 
+	const updatePriceRange = async () => {
+		let minPrice = parseFloat(minPriceInput.value);
+		let maxPrice = parseFloat(maxPriceInput.value);
+
+		if (minPrice > maxPrice) {
+			minPrice = maxPrice;
+			minPriceInput.value = minPrice;
+		}
+
+		minPriceDisplay.textContent = minPrice;
+		maxPriceDisplay.textContent = maxPrice;
+
+		const selectedCategories = Array.from(
+			document.querySelectorAll(
+				'.filter-option-category input[type="checkbox"]'
+			)
+		)
+			.filter((cb) => cb.checked)
+			.map((cb) => cb.id.replace("filter-option-", ""));
+
+		console.log("Selected Categories:", selectedCategories);
+		console.log("Price Range:", minPrice, maxPrice);
+
+		try {
+			const response = await fetch(
+				`/api/api_services.php?categories=${selectedCategories.join(
+					","
+				)}&min_price=${minPrice}&max_price=${maxPrice}`
+			);
+			const services = await response.json();
+
+			searchResults.innerHTML = ""; // Clear previous results
+
+			if (services.length > 0) {
+				services.forEach((service) => {
+					const serviceCard = document.createElement("a");
+					serviceCard.href = `/pages/service.php?id=${encodeURIComponent(
+						service.id
+					)}`;
+					serviceCard.classList.add("service-card-link");
+					serviceCard.innerHTML = `
+                        <div class="service-card">
+                            <div class="pantone-image-wrapper">
+                                ${
+																	service.image
+																		? `<img src="${service.image}" alt="Service image" class="pantone-image" />`
+																		: '<div class="pantone-image pantone-image-placeholder"></div>'
+																}
+                            </div>
+                            <div class="pantone-title">${service.title}</div>
+                            <div class="pantone-info-row">
+                                <span class="pantone-username">${
+																	service.username
+																}</span>
+                                <span class="pantone-rating">★ ${
+																	service.rating || "0.0"
+																}</span>
+                                <span class="pantone-delivery-time">${
+																	service.price
+																}€</span>
+                            </div>
+                        </div>
+                    `;
+					searchResults.appendChild(serviceCard);
+				});
+			} else {
+				searchResults.innerHTML =
+					"<p>No services found for the selected filters.</p>";
+			}
+		} catch (error) {
+			console.error("Error fetching services:", error);
+			searchResults.innerHTML =
+				"<p>Error loading services. Please try again later.</p>";
+		}
+	};
+
 	minPriceInput.addEventListener("input", () => {
 		if (parseFloat(minPriceInput.value) > parseFloat(maxPriceInput.value)) {
 			minPriceInput.value = maxPriceInput.value;
 		}
-		minPriceDisplay.textContent = minPriceInput.value;
+		updatePriceRange();
 	});
 
 	maxPriceInput.addEventListener("input", () => {
@@ -362,9 +497,10 @@ document.addEventListener("DOMContentLoaded", () => {
 			maxPriceInput.value = minPriceInput.value;
 		}
 		maxPriceDisplay.textContent = maxPriceInput.value; // Ensure maxPriceDisplay is updated
+		updatePriceRange();
 	});
 
-	deliveryTimeInput.addEventListener("change", () => {
+	deliveryTimeInput.addEventListener("change", async () => {
 		const maxDeliveryTime = parseFloat(deliveryTimeInput.value);
 
 		const selectedCategories = Array.from(categoryCheckboxes)
@@ -377,6 +513,69 @@ document.addEventListener("DOMContentLoaded", () => {
 		console.log("Selected Categories:", selectedCategories);
 		console.log("Price Range:", minPrice, maxPrice);
 		console.log("Max Delivery Time:", maxDeliveryTime);
+
+		// Fetch services dynamically based on selected categories, price range, and delivery time
+		try {
+			const response = await fetch(
+				`/api/api_services.php?categories=${selectedCategories.join(
+					","
+				)}&min_price=${minPrice}&max_price=${maxPrice}&max_delivery_time=${maxDeliveryTime}`
+			);
+			const services = await response.json();
+
+			console.log("Fetched Services:", services); // Debugging log
+
+			searchResults.innerHTML = ""; // Clear previous results
+
+			if (services.length > 0) {
+				services.forEach((service) => {
+					if (service.delivery_time <= maxDeliveryTime) {
+						// Ensure filtering is applied
+						console.log("Service Passed Filter:", service); // Debugging log
+						const serviceCard = document.createElement("a");
+						serviceCard.href = `/pages/service.php?id=${encodeURIComponent(
+							service.id
+						)}`;
+						serviceCard.classList.add("service-card-link");
+						serviceCard.innerHTML = `
+                            <div class="service-card">
+                                <div class="pantone-image-wrapper">
+                                    ${
+																			service.image
+																				? `<img src="${service.image}" alt="Service image" class="pantone-image" />`
+																				: '<div class="pantone-image pantone-image-placeholder"></div>'
+																		}
+                                </div>
+                                <div class="pantone-title">${
+																	service.title
+																}</div>
+                                <div class="pantone-info-row">
+                                    <span class="pantone-username">${
+																			service.username
+																		}</span>
+                                    <span class="pantone-rating">★ ${
+																			service.rating || "0.0"
+																		}</span>
+                                    <span class="pantone-delivery-time">${
+																			service.price
+																		}€</span>
+                                </div>
+                            </div>
+                        `;
+						searchResults.appendChild(serviceCard);
+					} else {
+						console.log("Service Failed Filter:", service); // Debugging log
+					}
+				});
+			} else {
+				searchResults.innerHTML =
+					"<p>No services found for the selected filters.</p>";
+			}
+		} catch (error) {
+			console.error("Error fetching services:", error);
+			searchResults.innerHTML =
+				"<p>Error loading services. Please try again later.</p>";
+		}
 	});
 
 	// Initialize star rating filter functionality
@@ -436,6 +635,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			}
 
 			updateFilterStarDisplay(window.currentFilterRating);
+			fetchFilteredServices(); // Trigger search update with new rating filter
 		});
 	});
 
@@ -449,24 +649,6 @@ document.addEventListener("DOMContentLoaded", () => {
 		});
 	}
 
-	// Add clear rating button functionality
-	const clearRatingBtn = document.getElementById("clear-rating");
-	if (clearRatingBtn) {
-		clearRatingBtn.addEventListener("click", () => {
-			window.currentFilterRating = 0;
-			updateFilterStarDisplay(0);
-		});
-	}
-
-	// Add "Apply Filters" button functionality
-	const applyFiltersButton = document.querySelector("#apply-filters-button");
-
-	if (applyFiltersButton) {
-		applyFiltersButton.addEventListener("click", () => {
-			fetchFilteredServices();
-		});
-	}
-
 	// Modified fetchFilteredServices function to include rating filter
 	async function fetchFilteredServices() {
 		const selectedCategories = Array.from(
@@ -475,6 +657,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			)
 		).map((cb) => cb.id.replace("filter-option-", ""));
 
+		// Use safe defaults and check if elements exist
 		let minPrice = 0;
 		let maxPrice = 1000;
 		let maxDeliveryTime = 30;
@@ -483,7 +666,6 @@ document.addEventListener("DOMContentLoaded", () => {
 		const minPriceElement = document.querySelector(".min-price");
 		const maxPriceElement = document.querySelector(".max-price");
 		const deliveryTimeElement = document.getElementById("delivery-time");
-		const filterRatingValue = document.getElementById("filter-rating-value");
 
 		if (minPriceElement) {
 			minPrice = parseFloat(minPriceElement.value) || 0;
@@ -508,6 +690,184 @@ document.addEventListener("DOMContentLoaded", () => {
 			maxDeliveryTime,
 			minRating,
 		});
+
+		try {
+			const response = await fetch(
+				`/api/api_services.php?categories=${selectedCategories.join(
+					","
+				)}&min_price=${minPrice}&max_price=${maxPrice}&max_delivery_time=${maxDeliveryTime}&min_rating=${minRating}`
+			);
+			const services = await response.json();
+
+			const searchResults = document.getElementById("search-results");
+			searchResults.innerHTML = ""; // Clear previous results
+
+			if (services.length > 0) {
+				services.forEach((service) => {
+					const serviceCard = document.createElement("a");
+					serviceCard.href = `/pages/service.php?id=${encodeURIComponent(
+						service.id
+					)}`;
+					serviceCard.classList.add("service-card-link");
+					serviceCard.innerHTML = `
+                        <div class="service-card">
+                            <div class="pantone-image-wrapper">
+                                ${
+																	service.image
+																		? `<img src="${service.image}" alt="Service image" class="pantone-image" />`
+																		: '<div class="pantone-image pantone-image-placeholder"></div>'
+																}
+                            </div>
+                            <div class="pantone-title">${service.title}</div>
+                            <div class="pantone-info-row">
+                                <span class="pantone-username">${
+																	service.username
+																}</span>
+                                <span class="pantone-rating">★ ${
+																	service.rating || "0.0"
+																}</span>
+                                <span class="pantone-delivery-time">${
+																	service.price
+																}€</span>
+                            </div>
+                        </div>
+                    `;
+					searchResults.appendChild(serviceCard);
+				});
+			} else {
+				searchResults.innerHTML =
+					"<p>No services found for the selected filters.</p>";
+			}
+		} catch (error) {
+			console.error("Error fetching services:", error);
+			searchResults.innerHTML =
+				"<p>Error loading services. Please try again later.</p>";
+		}
+	}
+
+	// Add event listeners for filter changes
+	document
+		.querySelectorAll('.filter-option-category input[type="checkbox"]')
+		.forEach((checkbox) => {
+			checkbox.addEventListener("change", fetchFilteredServices);
+		});
+
+	minPriceInput.addEventListener("input", () => {
+		if (parseFloat(minPriceInput.value) > parseFloat(maxPriceInput.value)) {
+			minPriceInput.value = maxPriceInput.value;
+		}
+		fetchFilteredServices();
+	});
+
+	maxPriceInput.addEventListener("input", () => {
+		if (parseFloat(maxPriceInput.value) < parseFloat(minPriceInput.value)) {
+			maxPriceInput.value = minPriceInput.value;
+		}
+		maxPriceDisplay.textContent = maxPriceInput.value;
+		fetchFilteredServices();
+	});
+
+	deliveryTimeInput.addEventListener("change", fetchFilteredServices);
+
+	// Add clear rating button functionality
+	const clearRatingBtn = document.getElementById("clear-rating");
+	if (clearRatingBtn) {
+		clearRatingBtn.addEventListener("click", () => {
+			window.currentFilterRating = 0;
+			updateFilterStarDisplay(0);
+			fetchFilteredServices(); // Update results
+		});
+	}
+
+	// End of the file
+	let currentFilterRating = 0;
+
+	// Function to update filter stars display
+	function updateFilterStarDisplay(rating) {
+		filterRatingStars.forEach((star) => {
+			const starValue = parseFloat(star.getAttribute("data-value"));
+			const starIndex = Math.ceil(starValue) - 1;
+
+			// Full star
+			if (rating >= starValue) {
+				star.textContent = "★";
+				star.classList.add("active");
+				star.classList.remove("half");
+			}
+			// Half star
+			else if (rating === starValue - 0.5) {
+				star.textContent = "★";
+				star.classList.add("active", "half");
+			}
+			// Empty star
+			else {
+				star.textContent = "★";
+				star.classList.remove("active", "half");
+			}
+		});
+
+		// Update the rating text and hidden value
+		filterRatingText.textContent = rating.toFixed(1);
+		filterRatingValue.value = rating;
+	}
+
+	// Handle star hover for preview
+	filterRatingStars.forEach((star) => {
+		star.addEventListener("mousemove", function (e) {
+			const rect = this.getBoundingClientRect();
+			const x = e.clientX - rect.left; // x position within the star
+			const starValue = parseFloat(this.getAttribute("data-value"));
+
+			if (x < rect.width / 2) {
+				// Left half of the star - show half star
+				updateFilterStarDisplay(starValue - 0.5);
+			} else {
+				// Right half of the star - show full star
+				updateFilterStarDisplay(starValue);
+			}
+		});
+
+		// Set rating on click
+		star.addEventListener("click", function (e) {
+			const rect = this.getBoundingClientRect();
+			const x = e.clientX - rect.left;
+			const starValue = parseFloat(this.getAttribute("data-value"));
+
+			if (x < rect.width / 2) {
+				currentFilterRating = starValue - 0.5;
+			} else {
+				currentFilterRating = starValue;
+			}
+
+			updateFilterStarDisplay(currentFilterRating);
+			updateSearchResults(); // Trigger search update with new rating filter
+		});
+	});
+
+	// Reset to current rating when mouse leaves container
+	const starsContainer = document.querySelector(
+		"#filter-search-rating .stars-container"
+	);
+	if (starsContainer) {
+		starsContainer.addEventListener("mouseleave", function () {
+			updateFilterStarDisplay(currentFilterRating);
+		});
+	}
+
+	// Modified updateSearchResults to include rating filter
+	async function updateSearchResults() {
+		const selectedCategories = Array.from(
+			document.querySelectorAll(
+				'.filter-option-category input[type="checkbox"]:checked'
+			)
+		).map((cb) => cb.id.replace("filter-option-", ""));
+
+		const minPrice = parseFloat(document.querySelector(".min-price").value);
+		const maxPrice = parseFloat(document.querySelector(".max-price").value);
+		const maxDeliveryTime = parseFloat(
+			document.getElementById("delivery-time").value
+		);
+		const minRating = currentFilterRating;
 
 		try {
 			const response = await fetch(
