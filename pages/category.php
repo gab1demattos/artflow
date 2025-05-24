@@ -112,10 +112,10 @@ drawHeader($user);
                                         <i class="star-icon" data-value="4.0">★</i>
                                         <i class="star-icon" data-value="5.0">★</i>
                                     </div>
-                                    <input type="hidden" id="filter-rating-value" value="0">
+                                    <input type="hidden" id="filter-rating-value" name="min_rating" value="0">
                                     <div class="rating-display">
                                         <span id="filter-rating-text">0.0</span>/5
-                                        <button id="clear-rating" title="Clear rating filter">×</button>
+                                        <button id="clear-rating" type="button" title="Clear rating filter">×</button>
                                     </div>
                                 </div>
                                 
@@ -139,13 +139,14 @@ drawHeader($user);
             $priceMin = isset($_GET['price_min']) ? floatval($_GET['price_min']) : null;
             $priceMax = isset($_GET['price_max']) ? floatval($_GET['price_max']) : null;
             $deliveryMax = isset($_GET['delivery_max']) ? intval($_GET['delivery_max']) : null;
+            $minRating = isset($_GET['min_rating']) ? floatval($_GET['min_rating']) : null;
 
             // Pagination: fetch only the services for the current page
             $offset = ($page - 1) * $servicesPerPage;
             $totalServices = Service::countServicesByCategory($categoryId);
 
             // Fetch filtered services
-            $services = Service::getFilteredServicesByCategory($categoryId, $servicesPerPage, $offset, $priceMin, $priceMax, null, null, null, $deliveryMax);
+            $services = Service::getFilteredServicesByCategory($categoryId, $servicesPerPage, $offset, $priceMin, $priceMax, $minRating, null, null, $deliveryMax);
 
             if ($services) {
                 foreach ($services as $serviceObj) {
@@ -184,3 +185,84 @@ drawHeader($user);
 <script src="/js/app.js"></script>
 <!-- Keep script.js for backward compatibility -->
 <script src="/js/script.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const filterRatingStars = document.querySelectorAll("#filter-search-rating .star-icon");
+        const filterRatingValue = document.getElementById("filter-rating-value");
+        const filterRatingText = document.getElementById("filter-rating-text");
+        const clearRatingBtn = document.getElementById("clear-rating");
+        let currentFilterRating = 0;
+
+        function updateFilterStarDisplay(rating) {
+            filterRatingStars.forEach((star) => {
+                const starValue = parseFloat(star.getAttribute("data-value"));
+
+                if (rating >= starValue) {
+                    star.textContent = "★";
+                    star.classList.add("active");
+                    star.classList.remove("half");
+                } else if (rating === starValue - 0.5) {
+                    star.textContent = "★";
+                    star.classList.add("active", "half");
+                } else {
+                    star.textContent = "★";
+                    star.classList.remove("active", "half");
+                }
+            });
+
+            filterRatingValue.value = rating;
+            filterRatingText.textContent = rating.toFixed(1);
+        }
+
+        filterRatingStars.forEach((star) => {
+            star.addEventListener("mousemove", function (e) {
+                const rect = this.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const starValue = parseFloat(this.getAttribute("data-value"));
+
+                if (x < rect.width / 2) {
+                    updateFilterStarDisplay(starValue - 0.5);
+                } else {
+                    updateFilterStarDisplay(starValue);
+                }
+            });
+
+            star.addEventListener("click", function (e) {
+                const rect = this.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const starValue = parseFloat(this.getAttribute("data-value"));
+
+                if (x < rect.width / 2) {
+                    currentFilterRating = starValue - 0.5;
+                } else {
+                    currentFilterRating = starValue;
+                }
+
+                updateFilterStarDisplay(currentFilterRating);
+                applyFilters();
+            });
+        });
+
+        const filterStarsContainer = document.querySelector("#filter-search-rating .stars-container");
+        if (filterStarsContainer) {
+            filterStarsContainer.addEventListener("mouseleave", function () {
+                updateFilterStarDisplay(currentFilterRating);
+            });
+        }
+
+        if (clearRatingBtn) {
+            clearRatingBtn.addEventListener("click", () => {
+                currentFilterRating = 0;
+                updateFilterStarDisplay(0);
+                applyFilters();
+            });
+        }
+
+        function applyFilters() {
+            const minRating = parseFloat(filterRatingValue.value) || 0;
+            const urlParams = new URLSearchParams(window.location.search);
+            urlParams.set("min_rating", minRating);
+            window.location.search = urlParams.toString();
+        }
+    });
+</script>
