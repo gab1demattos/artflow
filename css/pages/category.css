@@ -316,6 +316,14 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
+#rating-filter .stars-container {
+	display: flex;
+	flex-direction: column;
+}
+
+#rating-filter .rating-display {
+	margin-right: 10em;
+}
 
 @media (max-width: 600px) {
 	.subcategory-carousel {
