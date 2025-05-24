@@ -18,10 +18,8 @@ foreach ($categories as $cat) {
           <input type="hidden" name="service_id" id="edit-service-id" value="">
           <label for="edit-service-title">Title</label>
           <input type="text" id="edit-service-title" name="title" required>
-
           <label for="edit-service-description">Description</label>
           <textarea id="edit-service-description" name="description" rows="4" required></textarea>
-
           <label for="edit-service-category">Category</label>
           <div style="display: flex; align-items: center; gap: 0.7em; margin-bottom: 1.1em;">
             <select id="edit-service-category" name="category" required>
