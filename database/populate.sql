@@ -17,6 +17,9 @@
 -- Then populate exchanges
 .read populate/exchanges_populate.sql
 
+-- Then populate reviews
+.read populate/reviews_populate.sql
+
 -- Regular message conversations
 .read populate/messages_populate.sql
 

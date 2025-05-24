@@ -251,7 +251,6 @@ a.button {
 
 /*========= !! END BUTTON STYLES !! =========*/
 
-
 /*========= !! SIDEBAR STYLES !! =========*/
 #sidebar-open {
 	font-size: 24px;
@@ -260,7 +259,6 @@ a.button {
 	cursor: pointer;
 	color: #333;
 }
-
 
 #sidebar {
 	position: fixed;
@@ -335,11 +333,13 @@ a.button {
 	border-radius: 10px;
 	width: 100%;
 	padding: 0.5em;
+
 	font-family: 'EDGaramond', serif;
 	padding-right: 0;
 }
 
 #new-service-button>button {
+
 	color: white;
 	font-weight: 700;
 }
@@ -374,7 +374,8 @@ a.button {
 	transition: opacity 0.3s ease-in-out;
 }
 
-#sidebar.active+#overlay {
+
+#sidebar.active + #overlay {
 	display: block;
 	opacity: 1;
 }
@@ -418,6 +419,36 @@ a.button {
 #button-avatar {
 	padding: 0;
 }
+
+/*========= !! END SIDEBAR STYLES !! =========*/
+
+/*========= !! STAR RATING STYLES !! =========*/
+.star {
+	color: #d3d3d3; /* Light grey color for unfilled stars */
+	font-size: 1.2rem;
+}
+
+.star.filled {
+	color: var(--yellow);
+}
+
+/* Half-filled star styling */
+.star.half-filled {
+	position: relative;
+	color: #e0e0e0;
+}
+
+.star.half-filled::before {
+	content: "★";
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 50%;
+	overflow: hidden;
+	color: var(--yellow);
+}
+/*========= !! END STAR RATING STYLES !! =========*/
+
 
 /* === Stat Box Component === */
 .stat-box {
@@ -480,4 +511,4 @@ a.button {
 	margin-bottom: 2.5rem;
 }
 
-/*========= !! END SIDEBAR STYLES !! =========*/
+

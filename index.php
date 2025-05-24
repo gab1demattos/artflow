@@ -1,3 +1,3 @@
 <?php
-  header('Location: pages');
-?>
+require_once(__DIR__ . '/database/security/security_bootstrap.php');
+header('Location: pages');

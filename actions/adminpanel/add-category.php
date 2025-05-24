@@ -1,7 +1,7 @@
 <?php
 // POST: category_type, image
 // Adds new category
-require_once(__DIR__ . '/../database/session.php');
+require_once(__DIR__ . '/../../database/session.php');
 $session = Session::getInstance();
 $user = $session->getUser() ?? null;
 if (!$user || $user['user_type'] !== 'admin') {
@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Handle image upload
     if (isset($_FILES['category_image']) && $_FILES['category_image']['error'] === UPLOAD_ERR_OK) {
-        $uploadsDir = __DIR__ . '/../images/categories/';
+        $uploadsDir = __DIR__ . '/../../images/categories/';
         if (!is_dir($uploadsDir)) mkdir($uploadsDir, 0777, true);
         $filename = uniqid('cat_', true) . '_' . basename($_FILES['category_image']['name']);
         $targetPath = $uploadsDir . $filename;
@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if ($name !== '') {
-        require_once(__DIR__ . '/../database/database.php');
+        require_once(__DIR__ . '/../../database/database.php');
         $db = Database::getInstance();
         $stmt = $db->prepare('INSERT INTO Category (category_type, image) VALUES (?, ?)');
         $stmt->execute([$name, $imagePath]);

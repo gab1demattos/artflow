@@ -125,10 +125,18 @@ const Categories = {
 					if (Categories.selectedSubcatValues.length > 0) {
 						const summary = document.createElement("div");
 						summary.className = "subcategory-summary";
+						// Fix: Only show the names of the checked subcategories, not all
 						summary.textContent =
 							"Selected: " +
 							checked
-								.map((cb) => cb.parentElement.textContent.trim())
+								.map((cb) => {
+									// Find the label associated with this checkbox
+									const label = subcategoryCheckboxesDiv.querySelector(
+										'label[for="' + cb.id + '"]'
+									);
+									return label ? label.textContent.trim() : "";
+								})
+								.filter(Boolean)
 								.join(", ");
 						subcategorySection.innerHTML = "";
 						subcategorySection.appendChild(summary);

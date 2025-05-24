@@ -3,9 +3,11 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
+require_once(__DIR__ . '/../database/security/security_bootstrap.php');
 require_once(__DIR__ . '/../database/session.php');
 require_once(__DIR__ . '/../templates/home.tpl.php');
 require_once(__DIR__ . '/../database/classes/message.class.php');
+require_once(__DIR__ . '/../database/security/security.php');
 
 $session = Session::getInstance();
 $user = $session->getUser() ?? null;
@@ -80,8 +82,8 @@ try {
     </div>
 
     <script>
-        // Store current user data for use in JavaScript
-        const currentUser = <?= json_encode([
+        // Store current user data for use in JavaScript - using secure encoding
+        const currentUser = <?= Security::jsonEncodeForHTML([
                                 'id' => $user['id'],
                                 'username' => $user['username'],
                                 'profile_image' => $user['profile_image'] ?? '/images/user_pfp/default.png'
@@ -91,7 +93,7 @@ try {
         <?php if ($directMessageUserId): ?>
             document.addEventListener("DOMContentLoaded", function() {
                 // Check if user exists in conversation list
-                const existingItem = document.querySelector(`.chat-app__chat-item[data-user-id="<?= $directMessageUserId ?>"]`);
+                const existingItem = document.querySelector(`.chat-app__chat-item[data-user-id="<?= (int)$directMessageUserId ?>"]`);
 
                 if (existingItem) {
                     // If conversation exists, trigger a click on it

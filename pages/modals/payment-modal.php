@@ -5,6 +5,10 @@
             <div class="payment-form-section">
                 <h2>Payment Details</h2>
                 <form id="payment-form" autocomplete="off">
+                    <?php
+                    require_once(__DIR__ . '/../../database/security/csrf.php');
+                    echo CSRF::getTokenField('payment_csrf_token');
+                    ?>
                     <label>Card Number
                         <input type="text" name="card" maxlength="19" placeholder="1234 5678 9012 3456" required pattern="^(?:\d{4} ?){3}\d{4}$" title="Card number must be 16 digits (can include spaces)">
                     </label>

@@ -3,6 +3,8 @@
 declare(strict_types=1);
 require_once(__DIR__ . '/../../database/session.php');
 require_once(__DIR__ . '/../../database/database.php');
+require_once(__DIR__ . '/../../database/security/csrf.php');
+require_once(__DIR__ . '/../../database/security/security.php');
 
 // Check if user is logged in
 $session = Session::getInstance();
@@ -20,11 +22,19 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit();
 }
 
-// Get form data
-$name = $_POST['name'] ?? '';
-$username = $_POST['username'] ?? '';
-$email = $_POST['email'] ?? '';
-$bio = $_POST['bio'] ?? '';
+// Validate CSRF token
+$token = $_POST['csrf_token'] ?? '';
+if (!CSRF::validate($token, 'edit_profile_csrf_token')) {
+    $_SESSION['error'] = 'Invalid security token. Please try again.';
+    header('Location: /pages/profile.php?username=' . $user['username']);
+    exit();
+}
+
+// Get and sanitize form data
+$name = Security::sanitizeInput($_POST['name'] ?? '');
+$username = Security::sanitizeInput($_POST['username'] ?? '');
+$email = Security::sanitizeInput($_POST['email'] ?? '');
+$bio = Security::sanitizeInput($_POST['bio'] ?? '');
 $resetProfileImage = isset($_POST['reset_profile_image']) && $_POST['reset_profile_image'] === '1';
 
 // Basic validation
@@ -71,22 +81,29 @@ if ($resetProfileImage) {
 }
 // Otherwise, process uploaded image if any
 else if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] === UPLOAD_ERR_OK) {
-    $allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
-    $fileType = $_FILES['profile_image']['type'];
+    // Use enhanced image validation
+    $imageValidation = Security::validateImageUpload(
+        $_FILES['profile_image'],
+        ['image/jpeg', 'image/png', 'image/gif', 'image/webp'],
+        2097152 // 2MB limit
+    );
 
-    if (!in_array($fileType, $allowedTypes)) {
-        $_SESSION['error'] = 'Only JPG, PNG, GIF, and WEBP images are allowed';
+    if (!$imageValidation['valid']) {
+        $_SESSION['error'] = $imageValidation['error'];
         header('Location: /pages/profile.php?username=' . $user['username']);
         exit();
     }
 
     // Save the image
-    $uploadsDir = __DIR__ . '/../images/user_pfp/';
+    $uploadsDir = __DIR__ . '/../../images/user_pfp/';
     if (!is_dir($uploadsDir)) {
         mkdir($uploadsDir, 0777, true);
     }
 
-    $filename = uniqid('user_', true) . '_' . basename($_FILES['profile_image']['name']);
+    // Create a more secure filename that preserves the extension
+    $fileInfo = pathinfo($_FILES['profile_image']['name']);
+    $extension = isset($fileInfo['extension']) ? '.' . $fileInfo['extension'] : '';
+    $filename = uniqid('user_', true) . $extension;
     $targetPath = $uploadsDir . $filename;
 
     if (move_uploaded_file($_FILES['profile_image']['tmp_name'], $targetPath)) {

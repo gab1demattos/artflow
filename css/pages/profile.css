@@ -211,9 +211,11 @@
 /* Specific styling for reviews tab - only apply when active */
 #reviews.tab-content.active {
 	display: flex;
-	justify-content: center;
+	flex-direction: column;
+	justify-content: flex-start;
 	text-align: center;
-	align-items: flex-start;
+	align-items: center;
+	padding-top: 1.5rem;
 }
 
 /* Ensure the nothing-img is properly positioned in empty states */
@@ -293,3 +295,165 @@ footer,
 }
 
 /* Activity Page Styles - MOVED TO activity.css */
+
+/* Reviews tab styling */
+.reviews-list {
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+	padding: 1rem 0;
+	max-width: 800px;
+	margin: 1.5rem auto 0; /* Added top margin to increase spacing from average rating */
+	width: 100%;
+	/* Set height to show one full review plus part of the next one */
+	min-height: 300px; /* Ensure minimum height for smaller reviews */
+	max-height: 500px; /* Increased height to see at least one full review */
+	overflow-y: auto;
+	padding-right: 10px;
+	scrollbar-width: thin;
+	scrollbar-color: var(--yellow) transparent;
+}
+
+/* Custom scrollbar for Webkit browsers */
+.reviews-list::-webkit-scrollbar {
+	width: 6px;
+}
+
+.reviews-list::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+.reviews-list::-webkit-scrollbar-thumb {
+	background-color: var(--yellow);
+	border-radius: 3px;
+}
+
+/* Draggable reviews list styling */
+.reviews-list.draggable {
+	cursor: grab;
+}
+
+.reviews-list.draggable:active {
+	cursor: grabbing;
+}
+
+.review-card {
+	background-color: var(--card-bg);
+	border-radius: 8px;
+	padding: 1.2rem;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+	border: 2px solid var(--yellow); /* Adding yellow border to review cards */
+}
+
+.review-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 0.5em;
+}
+
+.review-user {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.review-user-img {
+	width: 2.5rem;
+	height: 2.5rem;
+	border-radius: 50%;
+	object-fit: cover;
+	border: 1px solid var(--light-border);
+}
+
+.review-user-details {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 0.1rem;
+}
+
+.review-date {
+	color: var(--text-light);
+	font-size: 0.9rem;
+	margin-left: 0;
+}
+
+.review-rating {
+	display: flex;
+	align-items: center;
+}
+
+.rating-value {
+	margin-left: 0.5em;
+	font-weight: bold;
+	color: #555;
+}
+
+.review-body {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.review-comment {
+	font-size: 1rem;
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+.review-service {
+	font-size: 0.9rem;
+	color: var(--text-medium);
+	font-style: italic;
+	margin-top: 0.5rem;
+}
+
+/* Empty state styling */
+.tab-content.empty-state {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 20rem;
+}
+
+.nothing-img {
+	max-width: 100%;
+	max-height: 400px;
+	opacity: 0.8;
+}
+
+/* Average Rating Styles */
+.average-rating {
+	margin: 0;
+	padding: 1rem;
+	background-color: var(--background-light);
+	border-radius: 8px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	width: 100%;
+	max-width: 800px;
+	/* Bottom border removed */
+}
+
+.average-rating .rating-value {
+	font-size: 1.2rem;
+	font-weight: 600;
+	color: var(--text-dark);
+}
+
+.average-rating .review-rating-stars {
+	display: flex;
+	align-items: center;
+}
+
+.average-rating .star {
+	color: #d3d3d3; /* Light grey color for unfilled stars */
+	font-size: 1.4rem;
+}
+
+.average-rating .star.filled {
+	color: var(--yellow);
+}

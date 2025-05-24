@@ -4,6 +4,8 @@ DROP TABLE IF EXISTS Exchange;
 DROP TABLE IF EXISTS Message;
 DROP TABLE IF EXISTS Review;
 DROP TABLE IF EXISTS Category;
+DROP TABLE IF EXISTS Subcategory;
+DROP TABLE IF EXISTS ServiceSubcategory;
 
 CREATE TABLE User (
     id INTEGER PRIMARY KEY,
@@ -26,6 +28,7 @@ CREATE TABLE Service (
     delivery_time INTEGER NOT NULL, -- days
     images TEXT,  -- comma-separsted 
     videos TEXT,    -- paths to files
+    avg_rating REAL DEFAULT 0,
     FOREIGN KEY (user_id) REFERENCES User(id),
     FOREIGN KEY (category_id) REFERENCES Category(id)
 );
@@ -58,8 +61,10 @@ CREATE TABLE Review (
     id INTEGER PRIMARY KEY,
     user_id INTEGER NOT NULL,
     service_id INTEGER NOT NULL,    --  before a user being able to leave a review we need to check if the service's status is 'completed'
-    rating INTEGER NOT NULL CHECK (rating BETWEEN 1 AND 5),
+    rating REAL NOT NULL CHECK (rating IN (0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0)),
     comment TEXT,
+    created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+    updated_at TEXT,
     FOREIGN KEY (user_id) REFERENCES User(id),
     FOREIGN KEY (service_id) REFERENCES Service(id)
 );

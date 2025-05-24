@@ -1,5 +1,47 @@
 /*== PROFILE PAGE ==*/
 
+// Security utility functions
+/**
+ * Escapes HTML to prevent XSS attacks
+ * @param {string} unsafe - The unsafe string to be escaped
+ * @return {string} The escaped string
+ */
+function escapeHtml(unsafe) {
+	if (typeof unsafe !== "string") {
+		return "";
+	}
+	return unsafe
+		.replace(/&/g, "&amp;")
+		.replace(/</g, "&lt;")
+		.replace(/>/g, "&gt;")
+		.replace(/"/g, "&quot;")
+		.replace(/'/g, "&#039;");
+}
+
+/**
+ * Creates a safe DOM element with escaped content
+ * @param {string} tag - HTML tag name
+ * @param {Object} attributes - Element attributes
+ * @param {string} textContent - Element text content
+ * @return {HTMLElement} The created element
+ */
+function createSafeElement(tag, attributes = {}, textContent = "") {
+	const element = document.createElement(tag);
+
+	// Set attributes safely
+	for (const [key, value] of Object.entries(attributes)) {
+		if (key.startsWith("on")) continue; // Skip event handlers
+		element.setAttribute(key, value);
+	}
+
+	// Set text content safely
+	if (textContent) {
+		element.textContent = textContent;
+	}
+
+	return element;
+}
+
 document.addEventListener("DOMContentLoaded", function () {
 	const tabTriggers = document.querySelectorAll(".tab-trigger");
 	const tabContents = document.querySelectorAll(".tab-content");
@@ -140,7 +182,8 @@ document.addEventListener("DOMContentLoaded", function () {
 					irreversibleModal.classList.remove("show");
 
 					// Redirect to the delete account action
-					window.location.href = "/actions/account_settings/delete-account-action.php";
+					window.location.href =
+						"/actions/account_settings/delete-account-action.php";
 				};
 			}
 
@@ -224,5 +267,58 @@ document.addEventListener("DOMContentLoaded", function () {
 				deleteImageBtn.style.display = "none";
 			}
 		});
+	}
+
+	// Make reviews list draggable when there are more than 2 reviews
+	const reviewsList = document.querySelector(".reviews-list");
+	if (reviewsList) {
+		const reviewItems = reviewsList.querySelectorAll(".review-card");
+
+		// Make draggable if there are any reviews
+		if (reviewItems.length > 0) {
+			reviewsList.classList.add("draggable");
+
+			// Calculate exact height for 2 reviews
+			if (reviewItems.length >= 2) {
+				const firstReviewHeight = reviewItems[0].offsetHeight;
+				const secondReviewHeight =
+					reviewItems.length > 1 ? reviewItems[1].offsetHeight : 0;
+				const gapHeight = 24; // 1.5rem = 24px typically
+
+				// Set max-height to show exactly 2 reviews plus the gap between them
+				reviewsList.style.maxHeight =
+					firstReviewHeight + secondReviewHeight + gapHeight + "px";
+			}
+
+			let isDown = false;
+			let startY;
+			let scrollTop;
+
+			// Mouse events for drag scrolling
+			reviewsList.addEventListener("mousedown", (e) => {
+				isDown = true;
+				reviewsList.classList.add("active");
+				startY = e.pageY - reviewsList.offsetTop;
+				scrollTop = reviewsList.scrollTop;
+			});
+
+			reviewsList.addEventListener("mouseleave", () => {
+				isDown = false;
+				reviewsList.classList.remove("active");
+			});
+
+			reviewsList.addEventListener("mouseup", () => {
+				isDown = false;
+				reviewsList.classList.remove("active");
+			});
+
+			reviewsList.addEventListener("mousemove", (e) => {
+				if (!isDown) return;
+				e.preventDefault();
+				const y = e.pageY - reviewsList.offsetTop;
+				const walk = (y - startY) * 2; // Scroll speed multiplier
+				reviewsList.scrollTop = scrollTop - walk;
+			});
+		}
 	}
 });

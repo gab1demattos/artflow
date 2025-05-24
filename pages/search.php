@@ -1,6 +1,7 @@
 <?php
+require_once(__DIR__ . '/../database/security/security_bootstrap.php');
 require_once(__DIR__ . '/../database/session.php');
-require_once(__DIR__ . '/../database/database.php'); // Added this line to include the Database class
+require_once(__DIR__ . '/../database/database.php');
 require_once(__DIR__ . '/../templates/home.tpl.php');
 require_once(__DIR__ . '/../templates/categories.tpl.php');
 require_once(__DIR__ . '/../templates/search.tpl.php');
@@ -11,7 +12,7 @@ $db = Database::getInstance();
 
 // Pass the current page name to drawHeader
 drawHeader($user, 'search.php');
-drawSearchPage($db);?>
+drawSearchPage($db); ?>
 <link rel="stylesheet" href="/css/search.css">
 <!-- Load the modular JavaScript files -->
 <script src="/js/modals.js"></script>

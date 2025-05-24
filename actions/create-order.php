@@ -1,6 +1,8 @@
 <?php
 require_once(__DIR__ . '/../database/session.php');
 require_once(__DIR__ . '/../database/database.php');
+require_once(__DIR__ . '/../database/security/csrf.php');
+require_once(__DIR__ . '/../database/security/security.php');
 
 header('Content-Type: application/json');
 $session = Session::getInstance();
@@ -17,8 +19,19 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit();
 }
 
+// CSRF token validation - disable for AJAX requests using a dedicated API token approach
+// Uncomment this section if you're implementing AJAX CSRF protection
+/*
+$token = $_POST['csrf_token'] ?? '';
+if (!CSRF::validate($token, 'payment_csrf_token')) {
+    http_response_code(403);
+    echo json_encode(['success' => false, 'error' => 'Invalid security token']);
+    exit();
+}
+*/
+
 $service_id = intval($_POST['service_id'] ?? 0);
-$requirements = trim($_POST['requirements'] ?? '');
+$requirements = Security::sanitizeInput(trim($_POST['requirements'] ?? ''));
 // Remove price and delivery_time from required fields and ignore them
 if (!$service_id || $requirements === '') {
     http_response_code(400);

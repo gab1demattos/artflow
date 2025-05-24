@@ -17,8 +17,8 @@
 }
 
 /* Hide header search bar when search modal is active */
-.modal-overlay:not(.hidden) ~ header #search-bar {
-    display: none;
+.modal-overlay:not(.hidden)~header #search-bar {
+	display: none;
 }
 
 /* Base modal container structure */
@@ -74,6 +74,7 @@
 	/* Smooth border color change */
 	border: 2px solid transparent;
 	/* Reserve space for focus border */
+	margin-bottom: 0.5em;
 }
 
 /* Style for the password input container */
@@ -228,14 +229,14 @@
 	bottom: -0.56em;
 }
 
-#goflow-modal .modal-content > p:nth-of-type(1) {
+#goflow-modal .modal-content>p:nth-of-type(1) {
 	font-size: 2rem;
 	position: absolute;
 	left: 4em;
 	top: 2em;
 }
 
-#goflow-modal .modal-content > p:nth-of-type(2) {
+#goflow-modal .modal-content>p:nth-of-type(2) {
 	position: absolute;
 	left: 2.125em;
 	top: 14.25em;
@@ -248,6 +249,148 @@
 	bottom: 4.5em;
 	right: 6em;
 	z-index: 10;
+}
+
+/* --- GO WITH FLOW MODAL RESTORE ORIGINAL LAYOUT --- */
+#goflow-modal .modal-content.login {
+	position: relative;
+	width: 39.2em;
+	max-width: 800px;
+	height: 27.5em;
+	background: #fff;
+	border-radius: 20px;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	padding: 0;
+	overflow: visible;
+}
+
+#goflow-modal img#go-flow {
+	width: 41.625em;
+	height: 29.625em;
+	position: absolute;
+	top: -0.56em;
+	right: -1.21em;
+	left: -1.21em;
+	bottom: -0.56em;
+	z-index: 1;
+	object-fit: cover;
+	pointer-events: none;
+}
+
+#goflow-modal .modal-content.login p {
+	position: absolute;
+	z-index: 2;
+	color: #000;
+	font-family: "EB Garamond", serif;
+	text-align: center;
+	width: 100%;
+	left: 0;
+	right: 0;
+}
+
+#goflow-modal .modal-content.login>p:nth-of-type(1) {
+	font-size: 2rem;
+	top: 2em;
+}
+
+#goflow-modal .modal-content.login>p:nth-of-type(2) {
+	top: 14.25em;
+	font-size: 1.4rem;
+}
+
+#goflow-modal .artflow-text {
+	color: var(--orange);
+}
+
+#goflow-modal #go-arrow {
+	position: absolute;
+	bottom: 3.5em;
+	right: 4.9em;
+	z-index: 3;
+	background: var(--orange);
+	color: #fff;
+	border: none;
+	border-radius: 50%;
+	width: 2.5em;
+	height: 2.5em;
+	font-size: 1.5em;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+	cursor: pointer;
+	transition: background 0.2s;
+}
+
+#goflow-modal .sectext {
+	position: absolute !important;
+	left: 0 !important;
+	right: auto !important;
+	width: auto !important;
+	min-width: 0 !important;
+	max-width: 60%;
+	text-align: left !important;
+	padding-left: 2em;
+	margin: 0 !important;
+	z-index: 3;
+}
+
+#goflow-modal #go-arrow:hover {
+	background: #ffb366;
+}
+
+@media (max-width: 900px) {
+	#goflow-modal .modal-content.login {
+		width: 98vw;
+		height: 60vw;
+		min-height: 20em;
+		max-width: 100vw;
+	}
+
+	#goflow-modal img#go-flow {
+		width: 100vw;
+		height: 60vw;
+		left: 0;
+		right: 0;
+	}
+}
+
+@media (max-width: 600px) {
+	#goflow-modal .modal-content.login {
+		width: 100vw;
+		height: 60vw;
+		min-height: 18em;
+		padding: 0;
+	}
+
+	#goflow-modal img#go-flow {
+		width: 100vw;
+		height: 60vw;
+		left: 0;
+		right: 0;
+	}
+
+	#goflow-modal .modal-content.login>p:nth-of-type(1) {
+		font-size: 1.2rem;
+		top: 1.2em;
+	}
+
+	#goflow-modal .modal-content.login>p:nth-of-type(2) {
+		top: 8.5em;
+		font-size: 1rem;
+	}
+
+	#goflow-modal #go-arrow {
+		bottom: 2em;
+		right: 2em;
+		width: 2em;
+		height: 2em;
+		font-size: 1.1em;
+	}
 }
 
 /*--- EDIT PROFILE MODAL SPECIFICS ---*/
@@ -284,7 +427,8 @@
 	align-items: center;
 	justify-content: center;
 	margin-top: 10px;
-	margin-bottom: 20px; /* Reduced from 40px to 20px to bring elements closer */
+	margin-bottom: 20px;
+	/* Reduced from 40px to 20px to bring elements closer */
 }
 
 #h2-edit-profile {
@@ -363,7 +507,7 @@
 	z-index: -1;
 }
 
-#edit-profile-modal .form input[type="file"] + label.file-label {
+#edit-profile-modal .form input[type="file"]+label.file-label {
 	padding: 10px 15px;
 	background: var(--orange);
 	color: var(--peach);
@@ -377,16 +521,16 @@
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-#edit-profile-modal .form input[type="file"] + label.file-label:hover {
+#edit-profile-modal .form input[type="file"]+label.file-label:hover {
 	background-color: var(--peach);
 	color: var(--orange);
 	border: 2px solid var(--orange);
 }
 
-
 /* Change Password Styles */
 .important-changes-container {
-	margin-top: 0; /* Reduced from 1rem to eliminate the gap */
+	margin-top: 0;
+	/* Reduced from 1rem to eliminate the gap */
 	width: 100%;
 	display: flex;
 	flex-direction: column;
@@ -419,9 +563,8 @@ h4.important-changes {
 	padding: 0.6rem;
 	font-size: 0.9rem;
 	/* Make the width match the file input container's effective width */
-	min-width: calc(
-		100% - 3.1875em
-	); /* Account for the trash button width (2.1875em) plus margin (1em) */
+	min-width: calc(100% - 3.1875em);
+	/* Account for the trash button width (2.1875em) plus margin (1em) */
 }
 
 #delete-account-btn {
@@ -433,7 +576,6 @@ h4.important-changes {
 	background-color: #e74c3c;
 	color: white;
 }
-
 
 /* Image preview styling specific to edit profile modal */
 #edit-profile-modal #profile-preview-container {
@@ -487,7 +629,8 @@ h4.important-changes {
 	align-items: center;
 	justify-content: center;
 	margin-top: 10px;
-	margin-bottom: 20px; /* Reduced from 40px to 20px to bring elements closer */
+	margin-bottom: 20px;
+	/* Reduced from 40px to 20px to bring elements closer */
 }
 
 #edit-profile-modal-overlay .form input:focus {
@@ -520,9 +663,9 @@ h4.important-changes {
 }
 
 /* Remove the conflicting selector that was added earlier */
-#edit-profile-modal .form > label + input,
-#edit-profile-modal .form > label + textarea,
-#edit-profile-modal .form > label + .password-input-container {
+#edit-profile-modal .form>label+input,
+#edit-profile-modal .form>label+textarea,
+#edit-profile-modal .form>label+.password-input-container {
 	margin-bottom: 0;
 	/* Reset this so it doesn't add extra spacing */
 }
@@ -620,7 +763,8 @@ h4.important-changes {
 
 /* Irreversible Modal Specific */
 .irreversible-modal {
-	display: none; /* Start with display none */
+	display: none;
+	/* Start with display none */
 	position: fixed;
 	z-index: 10000;
 	left: 0;
@@ -636,7 +780,8 @@ h4.important-changes {
 }
 
 .irreversible-modal.show {
-	display: flex; /* Show as flex when .show class is added */
+	display: flex;
+	/* Show as flex when .show class is added */
 	opacity: 1;
 	pointer-events: auto;
 }
@@ -1162,10 +1307,7 @@ h4.important-changes {
 	display: none;
 }
 
-#subcategory-modal
-	.subcategory-checkboxes
-	input[type="checkbox"]:checked
-	+ label,
+#subcategory-modal .subcategory-checkboxes input[type="checkbox"]:checked+label,
 #subcategory-modal .subcategory-checkboxes label.selected {
 	background: var(--orange);
 	color: #fff;
@@ -1176,10 +1318,7 @@ h4.important-changes {
 	display: none;
 }
 
-#subcategory-modal
-	.subcategory-checkboxes
-	input[type="checkbox"]:checked
-	+ label::before {
+#subcategory-modal .subcategory-checkboxes input[type="checkbox"]:checked+label::before {
 	background: var(--orange);
 	border-color: var(--orange);
 	box-shadow: 0 0 0 2px #fff inset;
@@ -1207,28 +1346,354 @@ h4.important-changes {
 	color: #333;
 }
 
+/* Rate-it Modal Styles */
+#rate-it-modal-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 1000;
+}
+
+#rate-it-modal-overlay .modal-content {
+	min-width: 400px;
+	max-width: 550px;
+	text-align: center;
+	padding: 2em;
+	border-radius: 16px;
+	background: #fff;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+	display: flex;
+	flex-direction: column;
+}
+
+#rate-it-modal-overlay h2 {
+	color: var(--yellow);
+	font-family: "Modak", sans-serif;
+	margin-bottom: 0.5em;
+	font-size: 2em;
+	font-weight: normal;
+}
+
+#rate-it-modal-overlay .service-title {
+	margin-bottom: 1em;
+}
+
+#rate-it-modal-overlay .service-title h3 {
+	font-family: "EB Garamond", serif;
+	font-size: 1.4em;
+	color: #333;
+	margin: 0;
+}
+
+#rate-it-modal-overlay textarea {
+	width: 100%;
+	min-height: 120px;
+	padding: 0.8em;
+	border-radius: 8px;
+	border: 1.5px solid #ccc;
+	font-size: 1.1em;
+	font-family: "Cormorant Garamond", serif;
+	resize: vertical;
+	margin-bottom: 1em;
+	box-sizing: border-box;
+}
+
+#rate-it-modal-overlay textarea:focus {
+	outline: none;
+	border: 2px solid var(--yellow);
+}
+
+#rate-it-modal-overlay .rating-section {
+	margin: 1em 0;
+}
+
+#rate-it-modal-overlay .rating-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-bottom: 1em;
+}
+
+#rate-it-modal-overlay .rating-container label {
+	margin-bottom: 0.5em;
+	font-weight: bold;
+	font-family: "Cormorant Garamond", serif;
+	font-size: 1.1em;
+}
+
+#rate-it-modal-overlay .stars-container {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	margin-bottom: 0.5em;
+}
+
+#rate-it-modal-overlay .stars {
+	display: flex;
+	cursor: pointer;
+	font-size: 2.5em;
+	line-height: 1;
+	gap: 0.1em;
+	/* Add spacing between stars */
+}
+
+#rate-it-modal-overlay .star-icon {
+	color: #ddd;
+	position: relative;
+	font-style: normal;
+	transition: color 0.2s ease-in-out;
+	cursor: pointer;
+	user-select: none;
+	width: 1em;
+	/* Make each star a consistent width */
+	text-align: center;
+	/* Center the star character */
+}
+
+#rate-it-modal-overlay .star-icon.active {
+	color: var(--yellow);
+}
+
+#rate-it-modal-overlay .star-icon.active.half-filled {
+	position: relative;
+	color: #e0e0e0;
+}
+
+#rate-it-modal-overlay .star-icon.active.half-filled::before {
+	content: "★";
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 50%;
+	overflow: hidden;
+	color: var(--yellow);
+}
+
+/* Old half star style - keeping for backward compatibility */
+#rate-it-modal-overlay .star-icon.active.half {
+	position: relative;
+	display: inline-block;
+}
+
+/* Make the star larger for better click targets */
 @media (max-width: 600px) {
-	#new-service-modal {
-		max-width: 98vw;
-		padding: 1.2rem 0.5rem 1.5rem 0.5rem;
+	#rate-it-modal-overlay .modal-content {
+		min-width: 300px;
+		max-width: 95%;
+		padding: 1.5em;
 	}
 
-	#new-service-modal h2 {
-		font-size: 1.2rem;
+	#rate-it-modal-overlay h2 {
+		font-size: 1.7em;
 	}
 
-	.row-fields {
-		flex-direction: column;
-		gap: 0.5em;
-	}
-
-	#subcategory-modal {
-		max-width: 98vw;
-		padding: 1.2rem 0.5rem 1.2rem 0.5rem;
-	}
-
-	#subcategory-modal h3 {
-		font-size: 1.05rem;
+	#rate-it-modal-overlay .stars {
+		font-size: 1.6em;
 	}
 }
 
+/* Error message styling for modals */
+.modal-error {
+	color: var(--orange);
+	background: #fffbe6;
+	border: 1px solid var(--orange);
+	border-radius: 8px;
+	padding: 0.7em 1em;
+	margin-bottom: 1em;
+	text-align: center;
+	font-weight: bold;
+	font-size: 1.05em;
+}
+
+/* Floating error message styling */
+#floating-modal-error {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background: #fffbe6;
+	color: var(--orange);
+	border: 2px solid var(--orange);
+	border-radius: 12px;
+	padding: 1.2em 2.2em;
+	font-size: 1.2em;
+	font-weight: bold;
+	z-index: 9999;
+	box-shadow: 0 4px 32px rgba(0, 0, 0, 0.18);
+	text-align: center;
+	opacity: 1;
+	transition: opacity 0.6s;
+}
+
+#floating-modal-error.fade-out {
+	opacity: 0;
+}
+
+/* Modal overlay for proper modal display */
+#editServiceModal.modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background: rgba(0, 0, 0, 0.5);
+	z-index: 10000;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: opacity 0.2s;
+}
+
+#editServiceModal.modal[style*="display:none"] {
+	display: none !important;
+}
+
+#editServiceModal .modal-content {
+	background: #fff;
+	border-radius: 16px;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+	max-width: 640px;
+	max-height: 780px;
+	width: 95vw;
+	padding: 2.5rem 2rem 2rem 2rem;
+	position: relative;
+	animation: modalFadeIn 0.3s;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+}
+
+#editServiceModal h2 {
+	color: var(--purple);
+	margin-bottom: 1.2rem;
+	font-size: 2.4rem;
+	font-weight: normal;
+	text-align: center;
+}
+
+#editServiceForm label {
+	display: block;
+	margin-bottom: 0.3rem;
+	font-weight: 500;
+	color: #333;
+	font-size: 1.24em;
+}
+
+#editServiceForm input[type="text"],
+#editServiceForm input[type="number"],
+#editServiceForm textarea,
+#editServiceForm select {
+	width: 100%;
+	padding: 0.6em 0.8em;
+	margin-bottom: 0.5em;
+	margin-top: 0.3em;
+	border: 1px solid #9f93b5;
+	border-radius: 6px;
+	font-size: 1rem;
+	background: #eee;
+	transition: border 0.2s;
+	box-sizing: border-box;
+}
+
+#editServiceForm input[type="text"]:focus,
+#editServiceForm input[type="number"]:focus,
+#editServiceForm textarea:focus,
+#editServiceForm select:focus {
+	border: 1.5px solid var(--purple, #7c3aed);
+	outline: none;
+}
+
+#editServiceForm textarea {
+	resize: vertical;
+	min-height: 80px;
+	max-height: 220px;
+}
+
+#editServiceForm .btn {
+	display: block;
+	margin: 2em auto 0 auto;
+	padding: 0.8em 2.2em;
+	background: var(--purple, #7c3aed);
+	color: #fff;
+	border: none;
+	border-radius: 6px;
+	font-size: 1.1em;
+	font-weight: 600;
+	cursor: pointer;
+	transition: background 0.2s;
+}
+
+#editServiceForm .btn:hover {
+	background: #5f2ab6;
+}
+
+#editServiceModal .close {
+	position: absolute;
+	top: 1em;
+	right: 1em;
+	font-size: 2em;
+	color: #888;
+	cursor: pointer;
+}
+
+#edit-service-image-preview {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5em;
+	margin-top: 0.5em;
+}
+
+/* Edit Service Modal - price and delivery side by side */
+.edit-service-row {
+	display: flex;
+	gap: 1.5em;
+	margin-bottom: 1.1em;
+}
+
+.edit-service-col {
+	flex: 1 1 0;
+	min-width: 0;
+}
+
+@media (max-width: 600px) {
+	.edit-service-row {
+		flex-direction: column;
+		gap: 0.5em;
+	}
+}
+
+#edit-service-image-preview img {
+	width: 60px;
+	height: 60px;
+	object-fit: cover;
+	border-radius: 6px;
+	border: 1px solid #ccc;
+}
+
+body.modal-open {
+	overflow: hidden;
+}
+
+@media (max-width: 600px) {
+	#editServiceModal .modal-content {
+		max-width: 98vw;
+		padding: 1em 0.5em;
+	}
+}
+
+/* Center the Edit Service Modal overlay and content */
+#editServiceModal.modal {
+	display: flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+}
+
+#editServiceModal .modal-content {
+	margin: 0 auto;
+}

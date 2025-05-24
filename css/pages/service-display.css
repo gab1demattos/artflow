@@ -2,8 +2,10 @@
 
 #service-display {
 	display: flex;
+	flex-direction: row;
 	justify-content: space-around;
-	gap: 0;
+	gap: 2em;
+	width: 100%;
 }
 
 .main-image {
@@ -27,7 +29,7 @@
 	width: 35%;
 }
 
-#service-checkout > h2 {
+#service-checkout>h2 {
 	font-size: 2.5rem;
 	margin-bottom: 0.5rem;
 	font-weight: 700;
@@ -42,7 +44,15 @@
 	margin: 0 auto;
 	font-family: "EB Garamond", serif;
 	gap: 0.5em;
-	transform: translateY(-1em);
+}
+
+#owner-info a {
+	display: flex;
+	align-items: center;
+	gap: 0.5em;
+	text-decoration: none;
+	color: inherit;
+	height: 3em;
 }
 
 #owner-info p {
@@ -51,14 +61,24 @@
 	line-height: 1.5;
 	margin-top: 0;
 	text-align: center;
-	transform: translateY(0.5em);
 }
 
 #owner-info img {
-	width: 3em;
-	height: auto;
+	width: 2em;
+	height: 2em;
+	border-radius: 50%;
+	object-fit: cover;
+	border: 1px solid #ddd;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 	padding: 0;
-	transform: scale(0.6);
+	vertical-align: middle;
+}
+
+#owner-info div {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 0.5em;
 }
 
 #service-name {
@@ -86,13 +106,13 @@
 	font-family: "EB Garamond", serif;
 	padding: 0.2em;
 }
+
 .service-options {
 	padding: 7px 30px;
 	margin-left: 1em;
 	font-size: 16px;
 	width: auto;
 	height: auto;
-	margin-bottom: 1em;
 	background: transparent;
 	cursor: pointer;
 	border-radius: 15px;
@@ -100,12 +120,14 @@
 	font-family: "EB Garamond", serif;
 	margin: 0 auto;
 	margin-bottom: 1em;
+
+	transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
 }
 
 #service-options {
 	display: flex;
 	justify-content: center;
-	gap: 1em;
+	gap: 0;
 	margin-top: 1em;
 }
 
@@ -136,17 +158,18 @@
 }
 
 .service-options:hover {
-	transform: translateY(-2px);
-	transition: all 0.3s ease-in-out;
+	background-color: #a123c7;
+	color: #fff;
+	box-shadow: 0px 6px 12px rgba(173, 31, 235, 0.25);
+	transform: translateY(-2px) scale(1.03);
+	outline: none;
 }
 
 #price {
 	font-size: 3rem;
 	font-weight: 700;
-	margin-top: 0.2em;
 	text-align: end;
-	margin-right: 1em;
-	margin-bottom: 0.2em;
+	margin: 0.2em 1em 0.2em 0;
 }
 
 #service-delivery {
@@ -185,8 +208,8 @@
 	margin: 6em 0 0 2em;
 	scroll-behavior: smooth;
 	width: 9em;
-	height: 27em;
-	overflow-y: scroll;
+	height: auto;
+	overflow-y: visible;
 }
 
 #service-imgs img {
@@ -202,6 +225,8 @@
 	margin-top: 1em;
 	border-radius: 5px;
 	font-family: "EB Garamond", serif;
+	width: auto;
+	max-width: 100%;
 }
 
 #reviews h3 {
@@ -219,6 +244,9 @@
 	border-radius: 10px;
 	background-color: #fff;
 	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+	width: auto;
+	max-width: 100%;
+	box-sizing: border-box;
 }
 
 .review p {
@@ -233,25 +261,148 @@
 	text-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* Review styling enhancements */
+.service-avg-rating {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-bottom: 1.5em;
+	padding: 0.5em;
+	background-color: #f9f9f9;
+	border-radius: 10px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	width: auto;
+	max-width: 100%;
+}
+
+.service-avg-rating p {
+	margin: 0.5em 0;
+	font-size: 1.3rem;
+	color: #333;
+}
+
+.review-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 0.5em;
+}
+
+.review-rating {
+	display: flex;
+	align-items: center;
+	font-size: 1.1rem;
+}
+
+.rating-value {
+	margin-left: 0.5em;
+	font-weight: bold;
+	color: #555;
+}
+
+.review-content {
+	padding: 0.5em 0;
+	border-top: 1px solid #eee;
+	border-bottom: 1px solid #eee;
+}
+
+.review-date {
+	margin-top: 0.5em;
+	text-align: right;
+	font-style: italic;
+	color: #777;
+}
+
+.review-user {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+}
+
+.review-user-img {
+	width: 2.5rem;
+	height: 2.5rem;
+	border-radius: 50%;
+	object-fit: cover;
+	border: 1px solid #ddd;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+	margin-top: 0.5rem;
+	/* Added padding on top of profile pictures */
+}
+
+.review-user p {
+	margin: 0;
+}
+
 #images-service {
 	display: flex;
-	margin-top: 25em;
+	margin-top: 0;
+	position: static;
+	z-index: auto;
 }
 
 #service-main {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: center;
 	width: 60%;
-	overflow-y: auto;
-	height: 100vh;
+	height: auto;
+	padding-bottom: 2em;
+	overflow: visible;
 }
 
-#service-details > p {
+#service-details {
+	margin-top: 2em;
+	width: 100%;
+}
+
+#service-details>p {
 	font-size: 1.2rem;
 	color: #555;
 	line-height: 1.5;
 	margin-top: 2em;
 	text-align: center;
+}
+
+/* Ensure body and html allow for natural scrolling */
+body,
+html {
+	height: auto;
+	overflow-y: auto;
+}
+
+/* Remove any remaining fixed heights that could cause column scroll */
+#service-main,
+#service-details,
+#service-imgs,
+#service-checkout {
+	height: auto !important;
+	max-height: none !important;
+}
+
+/* Delete Service button styling */
+.delete-service-btn {
+	background-color: #e53935;
+	color: #fff;
+	border: none;
+	border-radius: 15px;
+	padding: 7px 30px;
+	font-size: 16px;
+	font-family: "EB Garamond", serif;
+	cursor: pointer;
+	margin: 0 auto;
+	margin-bottom: 1em;
+	transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+	box-shadow: 0px 4px 8px rgba(229, 57, 53, 0.15);
+	display: inline-block;
+	margin-left: 0;
+}
+
+.delete-service-btn:hover,
+.delete-service-btn:focus {
+	background-color: #b71c1c;
+	color: #fff;
+	box-shadow: 0px 6px 12px rgba(229, 57, 53, 0.25);
+	transform: translateY(-2px) scale(1.03);
+	outline: none;
 }
