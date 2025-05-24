@@ -257,9 +257,9 @@ const Categories = {
 						servicePrice <= maxPrice &&
 						serviceDelivery <= maxDelivery
 					) {
-						card.style.display = '';
+						card.style.display = ''; // Show the service if it matches the filters
 					} else {
-						card.style.display = 'none';
+						card.style.display = 'none'; // Hide the service if it doesn't match
 					}
 				});
 			};
@@ -270,7 +270,6 @@ const Categories = {
 
 			// Attach event listener to apply filters button
 			applyFiltersButton.addEventListener('click', (event) => {
-				event.preventDefault(); // Prevent form submission
 				applyFilters();
 			});
 		}
