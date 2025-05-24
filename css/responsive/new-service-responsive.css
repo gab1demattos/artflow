@@ -1,0 +1,197 @@
+@media screen and (max-width: 767px) {
+
+    /* Modal container styles */
+    #new-service-modal-overlay.modal-overlay {
+        align-items: flex-start !important;
+        padding-top: 10px !important;
+        padding-bottom: 10px !important;
+        overflow-y: auto !important;
+    }
+
+    #new-service-modal {
+        max-width: 100% !important;
+        width: 94% !important;
+        padding: 1.5rem 1.2rem 1rem !important;
+        margin: 0 auto !important;
+        max-height: none !important;
+        overflow-y: visible !important;
+        border-radius: 12px !important;
+    }
+
+    /* Form element styles */
+    #new-service-modal h2 {
+        font-size: 1.8rem !important;
+        margin-bottom: 1rem !important;
+    }
+
+    #new-service-form label {
+        font-size: 1rem !important;
+        margin-bottom: 0.8rem !important;
+    }
+
+    #new-service-form input[type="text"],
+    #new-service-form input[type="number"],
+    #new-service-form textarea,
+    #new-service-form select {
+        padding: 0.5em 0.7em !important;
+        font-size: 16px !important;
+        /* Prevents zoom on iOS */
+        margin-top: 0.2em !important;
+    }
+
+    /* iOS-specific input fixes */
+    #new-service-form input[type="text"],
+    #new-service-form input[type="number"],
+    #new-service-form select {
+        font-size: 16px !important;
+        /* Prevents auto-zoom on iOS */
+        height: 42px !important;
+        /* Taller touchpoint for better UX */
+        -webkit-appearance: none !important;
+        /* Remove iOS default styling */
+        appearance: none !important;
+    }
+
+    /* Safari-specific file input styling */
+    #new-service-form input[type="file"]::-webkit-file-upload-button {
+        font-size: 14px !important;
+        padding: 8px !important;
+    }
+
+    #new-service-form textarea {
+        min-height: 70px !important;
+        max-height: 150px !important;
+    }
+
+    /* Make row fields stack on mobile */
+    .row-fields {
+        flex-direction: column !important;
+        gap: 0.8em !important;
+    }
+
+    /* Button and input file styling */
+    #open-subcategory-overlay {
+        padding: 0.3rem 0.6rem !important;
+        font-size: 0.85rem !important;
+        white-space: normal !important;
+    }
+
+    #new-service-form .button-container {
+        margin-top: 1rem !important;
+    }
+
+    #new-service-form .button-container button {
+        width: 100% !important;
+        padding: 0.6rem !important;
+    }
+
+    /* Close button positioning */
+    #new-service-modal .close-modal {
+        top: 0.6em !important;
+        right: 0.6em !important;
+        font-size: 1.8rem !important;
+    }
+
+    /* Fix small text */
+    #new-service-form small {
+        font-size: 0.85em !important;
+    }
+
+    /* Make file input more mobile friendly */
+    #new-service-form input[type="file"] {
+        width: 100% !important;
+        font-size: 0.85rem !important;
+    }
+
+    /* Adjust spacing */
+    #subcategory-section {
+        margin-bottom: 0.8rem !important;
+    }
+
+    #primary-image-section {
+        margin: 0.5em 0 0.8em 0 !important;
+    }
+
+    /* For the smallest screens */
+    @media screen and (max-width: 360px) {
+        #new-service-modal {
+            padding: 1.2rem 1rem 0.8rem !important;
+            width: 96% !important;
+        }
+
+        #new-service-modal h2 {
+            font-size: 1.6rem !important;
+            margin-bottom: 0.8rem !important;
+        }
+
+        #new-service-form label {
+            font-size: 0.95rem !important;
+        }
+
+        #open-subcategory-overlay {
+            font-size: 0.8rem !important;
+            padding: 0.25rem 0.5rem !important;
+        }
+    }
+
+    /* Subcategory overlay responsive styles */
+    #subcategory-overlay {
+        align-items: flex-start !important;
+        padding: 20px 10px !important;
+        overflow-y: auto !important;
+    }
+
+    #subcategory-modal {
+        max-width: 100% !important;
+        width: 94% !important;
+        padding: 1.8rem 1rem 1.2rem !important;
+        margin: 0 auto !important;
+        border-radius: 12px !important;
+    }
+
+    #subcategory-modal h2 {
+        font-size: 1.7rem !important;
+        margin-bottom: 0.8em !important;
+    }
+
+    #subcategory-modal .subcategory-checkboxes {
+        gap: 0.5em !important;
+    }
+
+    #subcategory-modal .subcategory-checkboxes label {
+        font-size: 0.95em !important;
+        padding: 6px 12px !important;
+        min-width: 100px !important;
+    }
+
+    #subcategory-modal .button-container {
+        justify-content: center !important;
+        margin-top: 0.5em !important;
+    }
+
+    #subcategory-modal .button-container button {
+        width: 100% !important;
+        padding: 0.5rem 1rem !important;
+    }
+
+    #subcategory-modal .close-subcategory-modal {
+        top: 0.5em !important;
+        right: 0.8em !important;
+        font-size: 1.5rem !important;
+    }
+
+    /* Fix subcategory summary display */
+    #subcategory-section .subcategory-summary {
+        font-size: 0.9rem !important;
+        padding: 0.5rem !important;
+        background-color: rgba(125, 58, 237, 0.05) !important;
+        border-radius: 6px !important;
+        text-align: center !important;
+    }
+
+    /* Prevent overflow issues */
+    #new-service-modal .form-container,
+    #subcategory-modal {
+        overflow-x: hidden !important;
+    }
+}

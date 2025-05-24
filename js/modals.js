@@ -181,7 +181,7 @@ const Modals = {
 			openNewServiceModalBtn.addEventListener("click", (e) => {
 				e.stopPropagation();
 				this.overlays.newService.classList.remove("hidden");
-				
+
 				// Auto-close the sidebar when the new service modal is opened
 				if (typeof closeSidebar === 'function') {
 					closeSidebar();
