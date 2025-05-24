@@ -23,16 +23,15 @@ foreach ($categories as $cat) {
           <textarea id="edit-service-description" name="description" rows="4" required></textarea>
 
           <label for="edit-service-category">Category</label>
-          <select id="edit-service-category" name="category" required>
-            <?php foreach ($categories as $cat): ?>
-              <option value="<?= $cat['id'] ?>"><?= htmlspecialchars($cat['category_type']) ?></option>
-            <?php endforeach; ?>
-          </select>
-
-          <label for="edit-service-subcategory">Subcategory</label>
-          <select id="edit-service-subcategory" name="subcategory" required>
-            <!-- Subcategories will be populated by JS -->
-          </select>
+          <div style="display: flex; align-items: center; gap: 0.7em; margin-bottom: 1.1em;">
+            <select id="edit-service-category" name="category" required>
+              <?php foreach ($categories as $cat): ?>
+                <option value="<?= $cat['id'] ?>"><?= htmlspecialchars($cat['category_type']) ?></option>
+              <?php endforeach; ?>
+            </select>
+            <button type="button" id="edit-open-subcategory-overlay" class="button outline green hovering" style="display:none;white-space:nowrap;">Choose subcategories</button>
+          </div>
+          <div id="edit-subcategory-section"></div>
 
           <div class="edit-service-row">
             <div class="edit-service-col">
