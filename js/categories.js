@@ -230,8 +230,14 @@ const Categories = {
 
 		if (minPriceInput && maxPriceInput) {
 			const updateDisplayedValues = () => {
-				const minPrice = parseFloat(minPriceInput.value);
-				const maxPrice = parseFloat(maxPriceInput.value);
+				let minPrice = parseFloat(minPriceInput.value);
+				let maxPrice = parseFloat(maxPriceInput.value);
+
+				// Ensure the circles do not cross each other
+				if (minPrice > maxPrice) {
+					minPrice = maxPrice;
+					minPriceInput.value = minPrice;
+				}
 
 				// Update displayed values
 				minValueDisplay.textContent = minPrice;
