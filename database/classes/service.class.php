@@ -704,8 +704,11 @@ class Service
         ?int $deliveryMax
     ): array {
         $db = Database::getInstance();
-
-        $query = 'SELECT Service.*, User.username FROM Service JOIN User ON Service.user_id = User.id WHERE Service.category_id = ?';
+        $query = 'SELECT Service.*, User.username, COALESCE(AVG(Review.rating), 0) as avg_rating 
+                  FROM Service 
+                  JOIN User ON Service.user_id = User.id
+                  LEFT JOIN Review ON Service.id = Review.service_id
+                  WHERE Service.category_id = ?';
         $params = [$categoryId];
 
         // Apply price range filter
@@ -718,16 +721,6 @@ class Service
             $params[] = $priceMax;
         }
 
-        // Apply rating range filter (assuming a rating column exists)
-        if ($ratingMin !== null) {
-            $query .= ' AND Service.rating >= ?';
-            $params[] = $ratingMin;
-        }
-        if ($ratingMax !== null) {
-            $query .= ' AND Service.rating <= ?';
-            $params[] = $ratingMax;
-        }
-
         // Apply delivery time range filter
         if ($deliveryMin !== null) {
             $query .= ' AND Service.delivery_time >= ?';
@@ -736,6 +729,19 @@ class Service
         if ($deliveryMax !== null) {
             $query .= ' AND Service.delivery_time <= ?';
             $params[] = $deliveryMax;
+        }
+
+        // Group by Service ID to calculate average rating
+        $query .= ' GROUP BY Service.id';
+
+        // Apply rating range filter
+        if ($ratingMin !== null) {
+            $query .= ' HAVING avg_rating >= ?';
+            $params[] = $ratingMin;
+        }
+        if ($ratingMax !== null) {
+            $query .= ' AND avg_rating <= ?';
+            $params[] = $ratingMax;
         }
 
         $query .= ' LIMIT ? OFFSET ?';
@@ -758,7 +764,8 @@ class Service
                 (int)$service['delivery_time'],
                 $service['images'],
                 $service['videos'],
-                $service['username']
+                $service['username'],
+                (float)$service['avg_rating']
             );
         }
 
