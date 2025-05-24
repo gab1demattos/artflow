@@ -5,15 +5,19 @@ declare(strict_types=1);
 require_once(__DIR__ . '/../../database/classes/user.class.php');
 require_once(__DIR__ . '/../../database/session.php');
 require_once(__DIR__ . '/../../database/database.php');
+require_once(__DIR__ . '/../../database/csrf.php');
+require_once(__DIR__ . '/../../database/security.php');
 
 // Use absolute path for redirect to homepage
-function redirect_home() {
+function redirect_home()
+{
     header('Location: /pages/index.php');
     exit();
 }
 
 // If AJAX, return JSON error, else show error in alert
-function handle_signup_error($msg) {
+function handle_signup_error($msg)
+{
     echo '<script>
         if (window.parent && window.parent.showModalError) {
             window.parent.showModalError("signup-modal-overlay", "' . addslashes($msg) . '");
@@ -26,12 +30,23 @@ function handle_signup_error($msg) {
     exit();
 }
 
-// Get form data
-$name = $_POST['name'] ?? '';
-$username = $_POST['username'] ?? '';
-$email = $_POST['email'] ?? '';
-$password = $_POST['password'] ?? '';
-$confirm_password = $_POST['confirm_password'] ?? '';
+// Check if this is a POST request
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    redirect_home();
+}
+
+// Validate CSRF token
+$token = $_POST['csrf_token'] ?? '';
+if (!CSRF::validate($token, 'signup_csrf_token')) {
+    handle_signup_error('Invalid security token. Please try again.');
+}
+
+// Get and sanitize form data
+$name = Security::sanitizeInput($_POST['name'] ?? '');
+$username = Security::sanitizeInput($_POST['username'] ?? '');
+$email = Security::sanitizeInput($_POST['email'] ?? '');
+$password = $_POST['password'] ?? ''; // Don't sanitize passwords
+$confirm_password = $_POST['confirm_password'] ?? ''; // Don't sanitize passwords
 
 $session = Session::getInstance();
 

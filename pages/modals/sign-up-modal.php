@@ -4,6 +4,10 @@
             <div class="form-container">
                 <h2 id='h2-signup'>Create Account</h2>
                 <form id="signup-form" class="form" method="POST" action="/actions/login/signup-action.php" target="signup-iframe">
+                    <?php
+                    require_once(__DIR__ . '/../../database/csrf.php');
+                    echo CSRF::getTokenField('signup_csrf_token');
+                    ?>
                     <input type="text" placeholder="Name" name="name" required>
                     <input type="text" placeholder="Username" name="username" required>
                     <input type="email" placeholder="Email" name="email" required>
