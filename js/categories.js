@@ -223,7 +223,25 @@ const Categories = {
 	 * Set up filtering for services by price range and max delivery days
 	 */
 	setupFilters() {
-		// Removed filtering logic from categories.js as it is now handled server-side in category.php
+		const minPriceInput = document.querySelector('.min-price-filter');
+		const maxPriceInput = document.querySelector('.max-price-filter');
+		const minValueDisplay = document.getElementById('min-value-filter');
+		const maxValueDisplay = document.getElementById('max-value-filter');
+
+		if (minPriceInput && maxPriceInput) {
+			const updateDisplayedValues = () => {
+				const minPrice = parseFloat(minPriceInput.value);
+				const maxPrice = parseFloat(maxPriceInput.value);
+
+				// Update displayed values
+				minValueDisplay.textContent = minPrice;
+				maxValueDisplay.textContent = maxPrice;
+			};
+
+			// Attach event listeners to range inputs to update displayed values
+			minPriceInput.addEventListener('input', updateDisplayedValues);
+			maxPriceInput.addEventListener('input', updateDisplayedValues);
+		}
 	},
 };
 
