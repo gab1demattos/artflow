@@ -108,7 +108,7 @@ drawHeader($loggedInUser);
         <?php endif; ?>
     </div>
 
-    <div id="reviews" class="tab-content">
+    <div id="reviews" class="tab-content<?= empty($reviews) ? ' empty-state' : '' ?>">
         <?php if (empty($reviews)): ?>
             <img src="/images/nothing-to-see-here.png" alt="Nothing to see here!" class="nothing-img" />
         <?php else: ?>

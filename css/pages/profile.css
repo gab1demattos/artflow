@@ -6,7 +6,8 @@
 		"image info"
 		"image bio";
 	padding: 20px;
-	margin-bottom: 20px;
+	margin-bottom: 0;
+	/* Remove bottom margin to maintain consistent spacing */
 	gap: 8px;
 	position: relative;
 }
@@ -150,19 +151,26 @@
 /* Tabs Styles */
 .tabs {
 	display: flex;
+	align-items: center;
 	border-bottom: 1px solid #ddd;
-	margin-bottom: 20px;
-	margin-left: 4.5em;
-	margin-right: 4.5em;
+	margin: 1rem 4.5em;
+	/* Consistent margins all around */
+	gap: 0;
+	height: 40px;
 }
 
 .tabs div {
-	padding: 10px 20px;
+	padding: 0 15px;
 	cursor: pointer;
 	font-weight: 500;
 	position: relative;
-	/* For positioning the active indicator */
 	transition: color 0.3s ease;
+	min-width: 80px;
+	text-align: center;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .tabs div:hover {
@@ -182,35 +190,50 @@
 	left: 0;
 	width: 100%;
 	/* Width of the tab */
-	height: 3px;
-	/* Height of the indicator line */
+	height: 4px;
+	/* Make the indicator line more visible */
+	border-radius: 2px;
+	/* Round the corners of the indicator */
 	background-color: var(--green);
 	transition: transform 0.3s ease;
 }
 
 /* Tab content containers */
 .tab-content {
-	display: none;
+	display: none !important;
 	/* Hide all tab content by default */
 	min-height: calc(100vh - 25em);
 	/* Use viewport height minus space for header/tabs/etc */
 	width: 100%;
 	flex-direction: column;
-	padding: 0 4.5em;
-	/* Match tab margins */
+	padding: 2rem 4.5em;
+	/* Standard padding */
+	margin-top: 0;
+	/* Remove negative margin */
 	box-sizing: border-box;
+	transition: opacity 0.2s ease;
+	/* Smooth transition when switching tabs */
 }
 
-/* Only apply flex display to empty state when it's also active */
+/* Display active tab content */
+.tab-content.active {
+	display: flex !important;
+	/* Show only active tab content */
+}
+
+/* Empty state styling for active tabs */
 .tab-content.active.empty-state {
-	display: flex;
-	justify-content: center;
+	justify-content: flex-start;
+	align-items: center;
 	text-align: center;
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	min-height: 50vh;
 }
 
 /* Specific styling for reviews tab - only apply when active */
-#reviews.tab-content.active {
-	display: flex;
+#reviews.tab-content.active:not(.empty-state) {
 	flex-direction: column;
 	justify-content: flex-start;
 	text-align: center;
@@ -218,12 +241,12 @@
 	padding-top: 1.5rem;
 }
 
-/* Ensure the nothing-img is properly positioned in empty states */
-.tab-content.empty-state .nothing-img,
-#reviews.tab-content .nothing-img {
-	margin: 40px auto 0;
-	/* Top margin of 40px, centered horizontally */
+/* Empty state image container positioning */
+.tab-content.empty-state::before {
+	content: "";
 	display: block;
+	height: 220px;
+	/* Fixed height to ensure consistent spacing */
 }
 
 .tab-content.active {
@@ -274,9 +297,13 @@
 }
 
 .nothing-img {
-	max-width: 250px;
-	opacity: 0.7;
-	margin-top: 40px;
+	max-width: 300px;
+	opacity: 0.8;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	/* Center precisely both vertically and horizontally */
 }
 
 /* Add padding between pagination and footer */
@@ -414,13 +441,8 @@ footer,
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	min-height: 20rem;
-}
-
-.nothing-img {
-	max-width: 100%;
-	max-height: 400px;
-	opacity: 0.8;
+	height: 60vh;
+	/* Fixed height to ensure consistent positioning */
 }
 
 /* Average Rating Styles */

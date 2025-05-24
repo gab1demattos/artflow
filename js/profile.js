@@ -217,6 +217,60 @@ document.addEventListener("DOMContentLoaded", function () {
 	const resetProfileImage = document.getElementById("reset_profile_image");
 	const fileLabel = document.querySelector(".file-label");
 	const cancelEditProfile = document.getElementById("cancel-edit-profile");
+	const editProfileBtn = document.getElementById("edit-profile-button");
+	const editProfileModalOverlay = document.getElementById(
+		"edit-profile-modal-overlay"
+	);
+
+	// Initialize profile preview image when edit profile button is clicked
+	if (editProfileBtn && profilePreview) {
+		editProfileBtn.addEventListener("click", function () {
+			// Get the current user profile image from the main profile image on the page
+			// Updated selector to match the actual HTML structure
+			const currentUserImg = document.querySelector(".profile-img img");
+
+			if (
+				currentUserImg &&
+				currentUserImg.src &&
+				!currentUserImg.src.includes("undefined")
+			) {
+				// Use the same image that's displayed on the profile page
+				profilePreview.src = currentUserImg.src;
+				console.log(
+					"Setting preview to current user image:",
+					currentUserImg.src
+				);
+
+				// Show or hide delete button based on whether it's the default image
+				if (deleteImageBtn) {
+					if (currentUserImg.src.includes("/default.png")) {
+						deleteImageBtn.style.display = "none";
+					} else {
+						deleteImageBtn.style.display = "block";
+					}
+				}
+			} else {
+				// Fallback to default image if no profile image is found
+				profilePreview.src = "/images/user_pfp/default.png";
+				console.log("Setting preview to default image (fallback)");
+
+				// Hide delete button since we're showing the default image
+				if (deleteImageBtn) {
+					deleteImageBtn.style.display = "none";
+				}
+			}
+
+			// Add error handler for any image loading issues
+			profilePreview.onerror = function () {
+				console.log("Failed to load profile image, using fallback");
+				this.src = window.location.origin + "/images/user_pfp/default.png";
+
+				if (deleteImageBtn) {
+					deleteImageBtn.style.display = "none";
+				}
+			};
+		});
+	}
 
 	// Handle profile image change
 	if (profileImageInput) {
