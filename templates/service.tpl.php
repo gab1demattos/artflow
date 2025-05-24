@@ -26,7 +26,8 @@
     $stmtImg->execute([$service['id']]);
     $imageRow = $stmtImg->fetch(PDO::FETCH_ASSOC); // Fetch a single row
     $imagePaths = $imageRow['images']; // Extract the 'images' field
-    $images = explode(', ', $imagePaths); // Split the string into an array
+    // Fix: split on comma only, trim whitespace, and filter out empty values
+    $images = array_filter(array_map('trim', explode(',', $imagePaths)));
 
     $stmtOwner = $db->prepare('SELECT u.name, u.username FROM User u JOIN Service s ON u.id = s.user_id WHERE s.id = ?');
     $stmtOwner->execute([$service['id']]);
@@ -36,12 +37,14 @@
     <div id="service-display">
         <div id="service-main">
             <div id="images-service">
+                <div id="main-image">
+                    <img class="main-image" src="<?= htmlspecialchars($images[0]) ?>" alt="Service Image">
+                </div>
                 <div id="service-imgs">
                     <?php foreach ($images as $image) { ?>
-                        <img class="service-imgs" src="<?= htmlspecialchars($image) ?>" alt="Service Image">
+                        <img class="service-imgs" src="<?= htmlspecialchars($image) ?>" alt="Service Image Thumbnail">
                     <?php } ?>
                 </div>
-                <div id="main-image"><img class="main-image" src="<?= htmlspecialchars($images[0]) ?>" alt="Service Image"></div>
             </div>
             <div id="service-details">
                 <div id="reviews">
