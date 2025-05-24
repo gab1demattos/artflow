@@ -9,6 +9,12 @@ document.addEventListener("DOMContentLoaded", () => {
 	const searchBar = document.getElementById("search-bar");
 	const filterSearch = document.getElementById("filter-search");
 	const deliveryTimeInput = document.getElementById("delivery-time");
+	const filterRatingStars = document.querySelectorAll(
+		"#filter-search-rating .star-icon"
+	);
+	const filterRatingValue = document.getElementById("filter-rating-value");
+	const filterRatingText = document.getElementById("filter-rating-text");
+	window.currentFilterRating = 0; // Using window to share state
 
 	// Redirect to search.php when the search bar is clicked
 	searchBar.addEventListener("click", () => {
@@ -553,43 +559,75 @@ document.addEventListener("DOMContentLoaded", () => {
 	});
 
 	// Initialize star rating filter functionality
-	const starIcons = document.querySelectorAll(
-		"#filter-search-rating .star-icon"
-	);
-	const filterRatingValue = document.getElementById("filter-rating-value");
-	const filterRatingText = document.getElementById("filter-rating-text");
-	let currentFilterRating = 0;
-
-	// Function to update star display
+	// Function to update star display for filters
 	function updateFilterStarDisplay(rating) {
-		starIcons.forEach((star) => {
+		filterRatingStars.forEach((star) => {
 			const starValue = parseFloat(star.getAttribute("data-value"));
-			star.style.color = starValue <= rating ? "#f8d64e" : "#ddd";
+			const starIndex = Math.ceil(starValue) - 1;
+
+			// Full star
+			if (rating >= starValue) {
+				star.textContent = "★";
+				star.classList.add("active");
+				star.classList.remove("half");
+			}
+			// Half star
+			else if (rating === starValue - 0.5) {
+				star.textContent = "★";
+				star.classList.add("active", "half");
+			}
+			// Empty star
+			else {
+				star.textContent = "★";
+				star.classList.remove("active", "half");
+			}
 		});
+
 		filterRatingValue.value = rating;
 		filterRatingText.textContent = rating.toFixed(1);
 	}
 
-	// Add event listeners to star icons
-	starIcons.forEach((star) => {
-		star.addEventListener("mouseover", function () {
-			const hoverRating = parseFloat(this.getAttribute("data-value"));
-			updateFilterStarDisplay(hoverRating);
+	// Handle star hover and click events for filters
+	filterRatingStars.forEach((star) => {
+		star.addEventListener("mousemove", function (e) {
+			const rect = this.getBoundingClientRect();
+			const x = e.clientX - rect.left;
+			const starValue = parseFloat(this.getAttribute("data-value"));
+
+			if (x < rect.width / 2) {
+				// Left half of star - show half star rating
+				updateFilterStarDisplay(starValue - 0.5);
+			} else {
+				// Right half of star - show full star rating
+				updateFilterStarDisplay(starValue);
+			}
 		});
 
-		star.addEventListener("click", function () {
-			currentFilterRating = parseFloat(this.getAttribute("data-value"));
-			updateFilterStarDisplay(currentFilterRating);
-			fetchFilteredServices(); // Trigger service update
+		star.addEventListener("click", function (e) {
+			const rect = this.getBoundingClientRect();
+			const x = e.clientX - rect.left;
+			const starValue = parseFloat(this.getAttribute("data-value"));
+
+			if (x < rect.width / 2) {
+				window.currentFilterRating = starValue - 0.5;
+			} else {
+				window.currentFilterRating = starValue;
+			}
+
+			updateFilterStarDisplay(window.currentFilterRating);
+			fetchFilteredServices(); // Trigger search update with new rating filter
 		});
 	});
 
-	// Reset stars when mouse leaves the container
-	document
-		.querySelector("#filter-search-rating")
-		.addEventListener("mouseleave", function () {
-			updateFilterStarDisplay(currentFilterRating);
+	// Reset to current rating when mouse leaves container
+	const filterStarsContainer = document.querySelector(
+		"#filter-search-rating .stars-container"
+	);
+	if (filterStarsContainer) {
+		filterStarsContainer.addEventListener("mouseleave", function () {
+			updateFilterStarDisplay(window.currentFilterRating);
 		});
+	}
 
 	// Modified fetchFilteredServices function to include rating filter
 	async function fetchFilteredServices() {
@@ -691,4 +729,148 @@ document.addEventListener("DOMContentLoaded", () => {
 	});
 
 	deliveryTimeInput.addEventListener("change", fetchFilteredServices);
+
+	// End of the file
+	let currentFilterRating = 0;
+
+	// Function to update filter stars display
+	function updateFilterStarDisplay(rating) {
+		filterRatingStars.forEach((star) => {
+			const starValue = parseFloat(star.getAttribute("data-value"));
+			const starIndex = Math.ceil(starValue) - 1;
+
+			// Full star
+			if (rating >= starValue) {
+				star.textContent = "★";
+				star.classList.add("active");
+				star.classList.remove("half");
+			}
+			// Half star
+			else if (rating === starValue - 0.5) {
+				star.textContent = "★";
+				star.classList.add("active", "half");
+			}
+			// Empty star
+			else {
+				star.textContent = "★";
+				star.classList.remove("active", "half");
+			}
+		});
+
+		// Update the rating text and hidden value
+		filterRatingText.textContent = rating.toFixed(1);
+		filterRatingValue.value = rating;
+	}
+
+	// Handle star hover for preview
+	filterRatingStars.forEach((star) => {
+		star.addEventListener("mousemove", function (e) {
+			const rect = this.getBoundingClientRect();
+			const x = e.clientX - rect.left; // x position within the star
+			const starValue = parseFloat(this.getAttribute("data-value"));
+
+			if (x < rect.width / 2) {
+				// Left half of the star - show half star
+				updateFilterStarDisplay(starValue - 0.5);
+			} else {
+				// Right half of the star - show full star
+				updateFilterStarDisplay(starValue);
+			}
+		});
+
+		// Set rating on click
+		star.addEventListener("click", function (e) {
+			const rect = this.getBoundingClientRect();
+			const x = e.clientX - rect.left;
+			const starValue = parseFloat(this.getAttribute("data-value"));
+
+			if (x < rect.width / 2) {
+				currentFilterRating = starValue - 0.5;
+			} else {
+				currentFilterRating = starValue;
+			}
+
+			updateFilterStarDisplay(currentFilterRating);
+			updateSearchResults(); // Trigger search update with new rating filter
+		});
+	});
+
+	// Reset to current rating when mouse leaves container
+	const starsContainer = document.querySelector(
+		"#filter-search-rating .stars-container"
+	);
+	if (starsContainer) {
+		starsContainer.addEventListener("mouseleave", function () {
+			updateFilterStarDisplay(currentFilterRating);
+		});
+	}
+
+	// Modified updateSearchResults to include rating filter
+	async function updateSearchResults() {
+		const selectedCategories = Array.from(
+			document.querySelectorAll(
+				'.filter-option-category input[type="checkbox"]:checked'
+			)
+		).map((cb) => cb.id.replace("filter-option-", ""));
+
+		const minPrice = parseFloat(document.querySelector(".min-price").value);
+		const maxPrice = parseFloat(document.querySelector(".max-price").value);
+		const maxDeliveryTime = parseFloat(
+			document.getElementById("delivery-time").value
+		);
+		const minRating = currentFilterRating;
+
+		try {
+			const response = await fetch(
+				`/api/api_services.php?categories=${selectedCategories.join(
+					","
+				)}&min_price=${minPrice}&max_price=${maxPrice}&max_delivery_time=${maxDeliveryTime}&min_rating=${minRating}`
+			);
+			const services = await response.json();
+
+			const searchResults = document.getElementById("search-results");
+			searchResults.innerHTML = ""; // Clear previous results
+
+			if (services.length > 0) {
+				services.forEach((service) => {
+					const serviceCard = document.createElement("a");
+					serviceCard.href = `/pages/service.php?id=${encodeURIComponent(
+						service.id
+					)}`;
+					serviceCard.classList.add("service-card-link");
+					serviceCard.innerHTML = `
+                        <div class="service-card">
+                            <div class="pantone-image-wrapper">
+                                ${
+																	service.image
+																		? `<img src="${service.image}" alt="Service image" class="pantone-image" />`
+																		: '<div class="pantone-image pantone-image-placeholder"></div>'
+																}
+                            </div>
+                            <div class="pantone-title">${service.title}</div>
+                            <div class="pantone-info-row">
+                                <span class="pantone-username">${
+																	service.username
+																}</span>
+                                <span class="pantone-rating">★ ${
+																	service.rating || "0.0"
+																}</span>
+                                <span class="pantone-delivery-time">${
+																	service.price
+																}€</span>
+                            </div>
+                        </div>
+                    `;
+					searchResults.appendChild(serviceCard);
+				});
+			} else {
+				searchResults.innerHTML =
+					"<p>No services found for the selected filters.</p>";
+			}
+		} catch (error) {
+			console.error("Error fetching services:", error);
+			searchResults.innerHTML =
+				"<p>Error loading services. Please try again later.</p>";
+		}
+	}
 });
