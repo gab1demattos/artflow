@@ -124,19 +124,16 @@ drawHeader($user);
         <div id="services-list">
             <?php
             // Capture filter inputs
-            $priceMin = $_GET['price_min'] ?? null;
-            $priceMax = $_GET['price_max'] ?? null;
-            $ratingMin = $_GET['rating_min'] ?? null;
-            $ratingMax = $_GET['rating_max'] ?? null;
-            $deliveryMin = $_GET['delivery_min'] ?? null;
-            $deliveryMax = $_GET['delivery_max'] ?? null;
+            $priceMin = isset($_GET['price_min']) ? floatval($_GET['price_min']) : null;
+            $priceMax = isset($_GET['price_max']) ? floatval($_GET['price_max']) : null;
+            $deliveryMax = isset($_GET['delivery_max']) ? intval($_GET['delivery_max']) : null;
 
             // Pagination: fetch only the services for the current page
             $offset = ($page - 1) * $servicesPerPage;
             $totalServices = Service::countServicesByCategory($categoryId);
 
             // Fetch filtered services
-            $services = Service::getFilteredServicesByCategory($categoryId, $servicesPerPage, $offset, $priceMin, $priceMax, $ratingMin, $ratingMax, $deliveryMin, $deliveryMax);
+            $services = Service::getFilteredServicesByCategory($categoryId, $servicesPerPage, $offset, $priceMin, $priceMax, null, null, null, $deliveryMax);
 
             if ($services) {
                 foreach ($services as $serviceObj) {
