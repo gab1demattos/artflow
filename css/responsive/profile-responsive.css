@@ -61,6 +61,23 @@
 		top: 1em;
 		right: 1em;
 	}
+
+	/* Adjust empty state image and container for mobile */
+	.tab-content.empty-state {
+		min-height: 15rem;
+		padding: 1rem;
+	}
+
+	.nothing-img {
+		max-width: 200px;
+		margin: 10px auto;
+	}
+
+	/* Center tab content vertically on mobile */
+	#listings.tab-content.active.empty-state,
+	#reviews.tab-content.active.empty-state {
+		padding-top: 2rem;
+	}
 }
 
 /* =================== */
@@ -72,6 +89,15 @@
       The desktop styles are already defined in profile.css
       This media query ensures we only apply those styles at larger screens
     */
+
+	/* Tablet-specific empty state adjustments */
+	.tab-content.empty-state {
+		min-height: 18rem;
+	}
+
+	.nothing-img {
+		max-width: 250px;
+	}
 }
 
 /* ================================== */

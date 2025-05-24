@@ -150,19 +150,27 @@
 /* Tabs Styles */
 .tabs {
 	display: flex;
+	align-items: center;
 	border-bottom: 1px solid #ddd;
 	margin-bottom: 20px;
 	margin-left: 4.5em;
 	margin-right: 4.5em;
+	gap: 0;
+	height: 40px;
 }
 
 .tabs div {
-	padding: 10px 20px;
+	padding: 0 15px;
 	cursor: pointer;
 	font-weight: 500;
 	position: relative;
-	/* For positioning the active indicator */
 	transition: color 0.3s ease;
+	min-width: 80px;
+	text-align: center;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .tabs div:hover {
@@ -182,35 +190,46 @@
 	left: 0;
 	width: 100%;
 	/* Width of the tab */
-	height: 3px;
-	/* Height of the indicator line */
+	height: 4px;
+	/* Make the indicator line more visible */
+	border-radius: 2px;
+	/* Round the corners of the indicator */
 	background-color: var(--green);
 	transition: transform 0.3s ease;
 }
 
 /* Tab content containers */
 .tab-content {
-	display: none;
+	display: none !important;
 	/* Hide all tab content by default */
 	min-height: calc(100vh - 25em);
 	/* Use viewport height minus space for header/tabs/etc */
 	width: 100%;
 	flex-direction: column;
-	padding: 0 4.5em;
-	/* Match tab margins */
+	padding: 4rem 4.5em;
+	/* Increase top padding to match spacing with content */
+	margin-top: -2rem;Ant9
+	/* Pull up to compensate for the profile section margin */
 	box-sizing: border-box;
+	transition: opacity 0.2s ease;
+	/* Smooth transition when switching tabs */
 }
 
-/* Only apply flex display to empty state when it's also active */
+/* Display active tab content */
+.tab-content.active {
+	display: flex !important;
+	/* Show only active tab content */
+}
+
+/* Empty state styling for active tabs */
 .tab-content.active.empty-state {
-	display: flex;
 	justify-content: center;
+	align-items: center;
 	text-align: center;
 }
 
 /* Specific styling for reviews tab - only apply when active */
-#reviews.tab-content.active {
-	display: flex;
+#reviews.tab-content.active:not(.empty-state) {
 	flex-direction: column;
 	justify-content: flex-start;
 	text-align: center;
@@ -219,11 +238,12 @@
 }
 
 /* Ensure the nothing-img is properly positioned in empty states */
-.tab-content.empty-state .nothing-img,
-#reviews.tab-content .nothing-img {
-	margin: 40px auto 0;
-	/* Top margin of 40px, centered horizontally */
+.tab-content.empty-state .nothing-img {
+	margin: 20px auto;
+	/* Centered horizontally with some margin */
 	display: block;
+	max-width: 300px;
+	/* Control the maximum width */
 }
 
 .tab-content.active {
@@ -274,9 +294,10 @@
 }
 
 .nothing-img {
-	max-width: 250px;
-	opacity: 0.7;
-	margin-top: 40px;
+	max-width: 300px;
+	opacity: 0.8;
+	margin: 0 auto;
+	/* Remove vertical margin to let container padding control spacing */
 }
 
 /* Add padding between pagination and footer */
@@ -412,15 +433,11 @@ footer,
 /* Empty state styling */
 .tab-content.empty-state {
 	display: flex;
-	justify-content: center;
+	justify-content: flex-start;
+	/* Align to top like non-empty states */
 	align-items: center;
-	min-height: 20rem;
-}
-
-.nothing-img {
-	max-width: 100%;
-	max-height: 400px;
-	opacity: 0.8;
+	padding-top: 4rem;
+	/* Match the spacing of non-empty states */
 }
 
 /* Average Rating Styles */
