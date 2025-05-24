@@ -26,25 +26,30 @@
     $stmtImg->execute([$service['id']]);
     $imageRow = $stmtImg->fetch(PDO::FETCH_ASSOC); // Fetch a single row
     $imagePaths = $imageRow['images']; // Extract the 'images' field
-    $images = explode(', ', $imagePaths); // Split the string into an array
+    // Fix: split on comma only, trim whitespace, and filter out empty values
+    $images = array_filter(array_map('trim', explode(',', $imagePaths)));
 
-    $stmtOwner = $db->prepare('SELECT u.name, u.username FROM User u JOIN Service s ON u.id = s.user_id WHERE s.id = ?');
+    $stmtOwner = $db->prepare('SELECT u.name, u.username, u.profile_image FROM User u JOIN Service s ON u.id = s.user_id WHERE s.id = ?');
     $stmtOwner->execute([$service['id']]);
     $owner = $stmtOwner->fetch(PDO::FETCH_ASSOC);
     ?>
     <link rel="stylesheet" href="/css/responsive/service-responsive.css">
+    <link rel="stylesheet" href="/css/modals.css">
     <div id="service-display">
         <div id="service-main">
             <div id="images-service">
+                <?php if (count($images) > 1): ?>
                 <div id="service-imgs">
                     <?php foreach ($images as $image) { ?>
-                        <img class="service-imgs" src="<?= htmlspecialchars($image) ?>" alt="Service Image">
+                        <img class="service-imgs" src="<?= htmlspecialchars($image) ?>" alt="Service Image Thumbnail">
                     <?php } ?>
                 </div>
-                <div id="main-image"><img class="main-image" src="<?= htmlspecialchars($images[0]) ?>" alt="Service Image"></div>
+                <?php endif; ?>
+                <div id="main-image">
+                    <img class="main-image" src="<?= htmlspecialchars($images[0]) ?>" alt="Service Image">
+                </div>
             </div>
             <div id="service-details">
-                <p><?= htmlspecialchars($service['description']) ?></p>
                 <div id="reviews">
                     <h3>Reviews</h3>
                     <?php
@@ -112,9 +117,13 @@
         <div id="service-checkout">
             <h2><?= htmlspecialchars($service['title']) ?></h2>
             <div id="owner-info">
-                <img src="../images/logos/avatar.png" alt="User Icon">
-                <p><?= htmlspecialchars($owner['name']) ?></p>
-                <p>@<?= htmlspecialchars($owner['username']) ?></p>
+                <a href="/pages/profile.php?username=<?= urlencode($owner['username']) ?>" style="display: flex; align-items: center; gap: 0.5em; text-decoration: none; color: inherit;">
+                    <img src="<?= ($owner['profile_image'] !== null && $owner['profile_image'] !== '') ? htmlspecialchars($owner['profile_image']) : '/images/user_pfp/default.png' ?>" alt="User Icon">
+                    <div style="display: flex; flex-direction: row; align-items: center; gap: 0.5em;">
+                        <p style="margin: 0; font-weight: 600;"><?= htmlspecialchars($owner['name']) ?></p>
+                        <p style="margin: 0; opacity: 0.7;">@<?= htmlspecialchars($owner['username']) ?></p>
+                    </div>
+                </a>
             </div>
             <div id="service-info">
                 <p id="price" class="service-info"><?= htmlspecialchars($service['price']) ?>€</p>
@@ -129,16 +138,66 @@
                         <button id="payment" class="service-options">Continue to Payment</button>
                     <?php elseif (!$user): ?>
                         <button class="button filled hovering service-options">Sign Up to Message</button>
+                    <?php elseif ($user && $service['user_id'] == $user['id']): ?>
+    <button id="edit-service-btn"
+        data-service-id="<?= $service['id'] ?>"
+        data-title="<?= htmlspecialchars($service['title'], ENT_QUOTES) ?>"
+        data-description="<?= htmlspecialchars($service['description'], ENT_QUOTES) ?>"
+        data-category="<?= $service['category_id'] ?? '' ?>"
+        data-subcategory="<?= $service['subcategory_id'] ?? '' ?>"
+        data-price="<?= htmlspecialchars($service['price']) ?>"
+        data-delivery="<?= htmlspecialchars($service['delivery_time']) ?>"
+        class="button filled hovering service-options">
+        Edit Service
+    </button>
+    <button id="delete-service-btn" class="delete-service-btn" type="button">Delete Service</button>
                     <?php endif; ?>
                 </div>
             </div>
-
+            <div id="service-description">
+                <!-- <h3>Description</h3> -->
+                 <br>
+                <p><?= htmlspecialchars($service['description']) ?></p>
+            </div>
         </div>
     </div>
     <script src="/js/service-scroll.js"></script>
+    <script src="/js/edit-service-modal.js"></script>
 
     <?php include __DIR__ . '/../pages/modals/requirements-modal.php'; ?>
     <?php include __DIR__ . '/../pages/modals/payment-modal.php'; ?>
     <?php include __DIR__ . '/../pages/modals/thankyou-modal.php'; ?>
-    <script src="/js/checkout.js"></script>
+    <?php include __DIR__ . '/../pages/modals/edit-service-modal.php'; ?>
+    <?php include __DIR__ . '/../templates/irreversible-modal.tpl.php'; ?>
+    <script src="/js/modals.js"></script>
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    const deleteBtn = document.getElementById('delete-service-btn');
+    if (deleteBtn && window.Modals && typeof window.Modals.showIrreversibleModal === 'function') {
+        deleteBtn.addEventListener('click', function() {
+            window.Modals.showIrreversibleModal(
+                function onConfirm() {
+                    fetch('/actions/adminpanel/delete-service.php', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        body: 'service_id=<?= $service['id'] ?>'
+                    })
+                    .then(r => r.json())
+                    .then(result => {
+                        if (result.success) {
+                            window.location.href = '/';
+                        } else {
+                            alert(result.error || 'Failed to delete service.');
+                        }
+                    })
+                    .catch(() => alert('Failed to delete service.'));
+                },
+                function onCancel() {
+                    // Do nothing
+                }
+            );
+        });
+    }
+});
+</script>
 <?php } ?>

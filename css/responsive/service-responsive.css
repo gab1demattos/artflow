@@ -13,7 +13,8 @@
     }
 
     #service-checkout {
-        order: -1; /* Move service-checkout to the top */
+        order: -1;
+        /* Move service-checkout to the top */
         width: 90%;
         margin: 1em 0;
         padding-top: 0;
@@ -62,11 +63,12 @@
     }
 
     #service-main {
-        order: 0; /* Keep service-main below service-checkout */
+        order: 0;
+        /* Keep service-main below service-checkout */
         width: 100%;
-        height: auto;
-        overflow-y:hidden;
-        overflow-x: hidden;
+        height: auto !important;
+        overflow-y: visible !important;
+        overflow-x: visible !important;
     }
 
     #images-service {

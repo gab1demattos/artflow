@@ -25,5 +25,6 @@ if (!$service) {
 
 drawHeader($user);
 drawServiceDisplay($service, $user, $db);
+drawFooter($user); 
 ?>
 <script src="/js/script.js"></script>

@@ -17,8 +17,8 @@
 }
 
 /* Hide header search bar when search modal is active */
-.modal-overlay:not(.hidden) ~ header #search-bar {
-    display: none;
+.modal-overlay:not(.hidden)~header #search-bar {
+	display: none;
 }
 
 /* Base modal container structure */
@@ -1439,7 +1439,8 @@ h4.important-changes {
 	cursor: pointer;
 	font-size: 2.5em;
 	line-height: 1;
-	gap: 0.1em; /* Add spacing between stars */
+	gap: 0.1em;
+	/* Add spacing between stars */
 }
 
 #rate-it-modal-overlay .star-icon {
@@ -1449,8 +1450,10 @@ h4.important-changes {
 	transition: color 0.2s ease-in-out;
 	cursor: pointer;
 	user-select: none;
-	width: 1em; /* Make each star a consistent width */
-	text-align: center; /* Center the star character */
+	width: 1em;
+	/* Make each star a consistent width */
+	text-align: center;
+	/* Center the star character */
 }
 
 #rate-it-modal-overlay .star-icon.active {
@@ -1532,3 +1535,165 @@ h4.important-changes {
 	opacity: 0;
 }
 
+/* Modal overlay for proper modal display */
+#editServiceModal.modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background: rgba(0, 0, 0, 0.5);
+	z-index: 10000;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: opacity 0.2s;
+}
+
+#editServiceModal.modal[style*="display:none"] {
+	display: none !important;
+}
+
+#editServiceModal .modal-content {
+	background: #fff;
+	border-radius: 16px;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+	max-width: 640px;
+	max-height: 780px;
+	width: 95vw;
+	padding: 2.5rem 2rem 2rem 2rem;
+	position: relative;
+	animation: modalFadeIn 0.3s;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+}
+
+#editServiceModal h2 {
+	color: var(--purple);
+	margin-bottom: 1.2rem;
+	font-size: 2.4rem;
+	font-weight: normal;
+	text-align: center;
+}
+
+#editServiceForm label {
+	display: block;
+	margin-bottom: 0.3rem;
+	font-weight: 500;
+	color: #333;
+	font-size: 1.24em;
+}
+
+#editServiceForm input[type="text"],
+#editServiceForm input[type="number"],
+#editServiceForm textarea,
+#editServiceForm select {
+	width: 100%;
+	padding: 0.6em 0.8em;
+	margin-bottom: 0.5em;
+	margin-top: 0.3em;
+	border: 1px solid #9f93b5;
+	border-radius: 6px;
+	font-size: 1rem;
+	background: #eee;
+	transition: border 0.2s;
+	box-sizing: border-box;
+}
+
+#editServiceForm input[type="text"]:focus,
+#editServiceForm input[type="number"]:focus,
+#editServiceForm textarea:focus,
+#editServiceForm select:focus {
+	border: 1.5px solid var(--purple, #7c3aed);
+	outline: none;
+}
+
+#editServiceForm textarea {
+	resize: vertical;
+	min-height: 80px;
+	max-height: 220px;
+}
+
+#editServiceForm .btn {
+	display: block;
+	margin: 2em auto 0 auto;
+	padding: 0.8em 2.2em;
+	background: var(--purple, #7c3aed);
+	color: #fff;
+	border: none;
+	border-radius: 6px;
+	font-size: 1.1em;
+	font-weight: 600;
+	cursor: pointer;
+	transition: background 0.2s;
+}
+
+#editServiceForm .btn:hover {
+	background: #5f2ab6;
+}
+
+#editServiceModal .close {
+	position: absolute;
+	top: 1em;
+	right: 1em;
+	font-size: 2em;
+	color: #888;
+	cursor: pointer;
+}
+
+#edit-service-image-preview {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5em;
+	margin-top: 0.5em;
+}
+
+/* Edit Service Modal - price and delivery side by side */
+.edit-service-row {
+	display: flex;
+	gap: 1.5em;
+	margin-bottom: 1.1em;
+}
+
+.edit-service-col {
+	flex: 1 1 0;
+	min-width: 0;
+}
+
+@media (max-width: 600px) {
+	.edit-service-row {
+		flex-direction: column;
+		gap: 0.5em;
+	}
+}
+
+#edit-service-image-preview img {
+	width: 60px;
+	height: 60px;
+	object-fit: cover;
+	border-radius: 6px;
+	border: 1px solid #ccc;
+}
+
+body.modal-open {
+	overflow: hidden;
+}
+
+@media (max-width: 600px) {
+	#editServiceModal .modal-content {
+		max-width: 98vw;
+		padding: 1em 0.5em;
+	}
+}
+
+/* Center the Edit Service Modal overlay and content */
+#editServiceModal.modal {
+	display: flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+}
+
+#editServiceModal .modal-content {
+	margin: 0 auto;
+}

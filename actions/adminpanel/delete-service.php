@@ -6,7 +6,7 @@ require_once(__DIR__ . '/../../database/classes/service.class.php');
 
 $session = Session::getInstance();
 $user = $session->getUser() ?? null;
-if (!$user || $user['user_type'] !== 'admin') {
+if (!$user) {
     http_response_code(403);
     echo json_encode(['error' => 'Forbidden']);
     exit();
