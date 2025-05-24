@@ -74,11 +74,11 @@ drawHeader($user);
                         <div class="price-filter-content">
                             <div>
                                 <label>Min Price</label>
-                                <p id="min-value-filter"><?= $priceMin ?></p>
+                                <p id="min-value-filter"><?= isset($_GET['price_min']) ? $_GET['price_min'] : $priceMin ?></p>
                             </div>
                             <div>
                                 <label>Max Price</label>
-                                <p id="max-value-filter"><?= $priceMax ?></p>
+                                <p id="max-value-filter"><?= isset($_GET['price_max']) ? $_GET['price_max'] : $priceMax ?></p>
                             </div>
                         </div>
                         <div class="price-filter-slider">
@@ -86,28 +86,42 @@ drawHeader($user);
                             <input 
                                 type="range" 
                                 class="min-price-filter" 
+                                name="price_min"
                                 min="<?= $priceMin ?>" 
                                 max="<?= $priceMax ?>" 
-                                value="<?= $priceMin ?>" 
+                                value="<?= isset($_GET['price_min']) ? $_GET['price_min'] : $priceMin ?>" 
                             >
                             <input 
                                 type="range" 
                                 class="max-price-filter" 
+                                name="price_max"
                                 min="<?= $priceMin ?>" 
                                 max="<?= $priceMax ?>" 
-                                value="<?= $priceMax ?>" 
-                                >
+                                value="<?= isset($_GET['price_max']) ? $_GET['price_max'] : $priceMax ?>" 
+                            >
                         </div>
                     </div>
 
                     <div id="rating-filter">
-                        <label>Rating:</label>
-                        <div class="rating-checkboxes">
-                            <label><input type="checkbox" name="rating[]" value="5" checked> 5 Stars</label>
-                            <label><input type="checkbox" name="rating[]" value="4" checked> 4 Stars</label>
-                            <label><input type="checkbox" name="rating[]" value="3" checked> 3 Stars</label>
-                            <label><input type="checkbox" name="rating[]" value="2" checked> 2 Stars</label>
-                            <label><input type="checkbox" name="rating[]" value="1" checked> 1 Star</label>
+                        <label id="label-rating">Minimum Rating</label>
+                        <div id="filter-search-rating">
+                            <div class="rating-container">
+                                <div class="stars-container">
+                                    <div class="stars">
+                                        <i class="star-icon" data-value="1.0">★</i>
+                                        <i class="star-icon" data-value="2.0">★</i>
+                                        <i class="star-icon" data-value="3.0">★</i>
+                                        <i class="star-icon" data-value="4.0">★</i>
+                                        <i class="star-icon" data-value="5.0">★</i>
+                                    </div>
+                                    <input type="hidden" id="filter-rating-value" name="min_rating" value="0">
+                                    <div class="rating-display">
+                                        <span id="filter-rating-text">0.0</span>/5
+                                        <button id="clear-rating" type="button" title="Clear rating filter">×</button>
+                                    </div>
+                                </div>
+                                
+                            </div>
                         </div>
                     </div>
 
@@ -127,13 +141,14 @@ drawHeader($user);
             $priceMin = isset($_GET['price_min']) ? floatval($_GET['price_min']) : null;
             $priceMax = isset($_GET['price_max']) ? floatval($_GET['price_max']) : null;
             $deliveryMax = isset($_GET['delivery_max']) ? intval($_GET['delivery_max']) : null;
+            $minRating = isset($_GET['min_rating']) ? floatval($_GET['min_rating']) : null;
 
             // Pagination: fetch only the services for the current page
             $offset = ($page - 1) * $servicesPerPage;
             $totalServices = Service::countServicesByCategory($categoryId);
 
             // Fetch filtered services
-            $services = Service::getFilteredServicesByCategory($categoryId, $servicesPerPage, $offset, $priceMin, $priceMax, null, null, null, $deliveryMax);
+            $services = Service::getFilteredServicesByCategory($categoryId, $servicesPerPage, $offset, $priceMin, $priceMax, $minRating, null, null, $deliveryMax);
 
             if ($services) {
                 foreach ($services as $serviceObj) {
@@ -172,3 +187,130 @@ drawHeader($user);
 <script src="/js/app.js"></script>
 <!-- Keep script.js for backward compatibility -->
 <script src="/js/script.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const filterRatingStars = document.querySelectorAll("#filter-search-rating .star-icon");
+        const filterRatingValue = document.getElementById("filter-rating-value");
+        const filterRatingText = document.getElementById("filter-rating-text");
+        const clearRatingBtn = document.getElementById("clear-rating");
+        let currentFilterRating = 0;
+
+        // Price range filter elements
+        const minPriceInput = document.querySelector(".min-price-filter");
+        const maxPriceInput = document.querySelector(".max-price-filter");
+        const minPriceDisplay = document.getElementById("min-value-filter");
+        const maxPriceDisplay = document.getElementById("max-value-filter");
+        const rangeFill = document.querySelector(".range-fill");
+
+        // Function to update the visual range fill
+        function updateRangeFill() {
+            if (minPriceInput && maxPriceInput && rangeFill) {
+                const minVal = parseInt(minPriceInput.value);
+                const maxVal = parseInt(maxPriceInput.value);
+                const minRange = parseInt(minPriceInput.min);
+                const maxRange = parseInt(minPriceInput.max);
+                
+                const leftPercent = ((minVal - minRange) / (maxRange - minRange)) * 100;
+                const rightPercent = ((maxVal - minRange) / (maxRange - minRange)) * 100;
+                
+                rangeFill.style.left = leftPercent + "%";
+                rangeFill.style.width = (rightPercent - leftPercent) + "%";
+            }
+        }
+
+        // Add event listeners for price range inputs
+        if (minPriceInput && maxPriceInput) {
+            minPriceInput.addEventListener("input", () => {
+                if (parseFloat(minPriceInput.value) > parseFloat(maxPriceInput.value)) {
+                    minPriceInput.value = maxPriceInput.value;
+                }
+                minPriceDisplay.textContent = minPriceInput.value;
+                updateRangeFill();
+            });
+
+            maxPriceInput.addEventListener("input", () => {
+                if (parseFloat(maxPriceInput.value) < parseFloat(minPriceInput.value)) {
+                    maxPriceInput.value = minPriceInput.value;
+                }
+                maxPriceDisplay.textContent = maxPriceInput.value;
+                updateRangeFill();
+            });
+
+            // Initialize the range fill on page load
+            updateRangeFill();
+        }
+
+        function updateFilterStarDisplay(rating) {
+            filterRatingStars.forEach((star) => {
+                const starValue = parseFloat(star.getAttribute("data-value"));
+
+                if (rating >= starValue) {
+                    star.textContent = "★";
+                    star.classList.add("active");
+                    star.classList.remove("half");
+                } else if (rating === starValue - 0.5) {
+                    star.textContent = "★";
+                    star.classList.add("active", "half");
+                } else {
+                    star.textContent = "★";
+                    star.classList.remove("active", "half");
+                }
+            });
+
+            filterRatingValue.value = rating;
+            filterRatingText.textContent = rating.toFixed(1);
+        }
+
+        filterRatingStars.forEach((star) => {
+            star.addEventListener("mousemove", function (e) {
+                const rect = this.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const starValue = parseFloat(this.getAttribute("data-value"));
+
+                if (x < rect.width / 2) {
+                    updateFilterStarDisplay(starValue - 0.5);
+                } else {
+                    updateFilterStarDisplay(starValue);
+                }
+            });
+
+            star.addEventListener("click", function (e) {
+                const rect = this.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const starValue = parseFloat(this.getAttribute("data-value"));
+
+                if (x < rect.width / 2) {
+                    currentFilterRating = starValue - 0.5;
+                } else {
+                    currentFilterRating = starValue;
+                }
+
+                updateFilterStarDisplay(currentFilterRating);
+                // Removed applyFilters() call - only save the rating, don't apply immediately
+            });
+        });
+
+        const filterStarsContainer = document.querySelector("#filter-search-rating .stars-container");
+        if (filterStarsContainer) {
+            filterStarsContainer.addEventListener("mouseleave", function () {
+                updateFilterStarDisplay(currentFilterRating);
+            });
+        }
+
+        if (clearRatingBtn) {
+            clearRatingBtn.addEventListener("click", () => {
+                currentFilterRating = 0;
+                updateFilterStarDisplay(0);
+                // Removed applyFilters() call - only clear the rating, don't apply immediately
+            });
+        }
+
+        // Apply filters only when the form is submitted
+        const filterForm = document.querySelector('.filters-container form');
+        if (filterForm) {
+            filterForm.addEventListener('submit', function(e) {
+                // The form will submit normally with all the filter values including min_rating
+            });
+        }
+    });
+</script>
