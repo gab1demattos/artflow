@@ -14,9 +14,14 @@
 @import url("responsive/home-responsive.css");
 @import url("responsive/messages-responsive.css");
 @import url("responsive/modals-responsive.css");
-@import url("responsive/profile-responsive.css");
-@import url("search.css");
+
+@import url('responsive/profile-responsive.css');
+@import url('responsive/activity-responsive.css');
+@import url('responsive/stats-responsive.css');
+@import url('responsive/admin-responsive.css');
+@import url('search.css');
 @import url("responsive/search-responsive.css");
+
 
 :root {
 	/*theme colors*/
@@ -32,17 +37,24 @@
 /* Used in both the side bar and the profile page*/
 
 .profile-img {
-	border-radius: 50%; /* Makes the image circular */
+	border-radius: 50%;
+	/* Makes the image circular */
 	border: 2px solid #ddd;
-	display: inline-block; /* Ensures the container takes the size of the image */
-	overflow: hidden; /* Ensures the image doesn't overflow the circular boundary */
+	display: inline-block;
+	/* Ensures the container takes the size of the image */
+	overflow: hidden;
+	/* Ensures the image doesn't overflow the circular boundary */
 }
 
 .profile-img img {
-	width: 12.5em; /* Default size */
-	height: 12.5em; /* Default size */
-	object-fit: cover; /* Maintains aspect ratio while filling the container */
-	display: block; /* Removes any extra space below the image */
+	width: 12.5em;
+	/* Default size */
+	height: 12.5em;
+	/* Default size */
+	object-fit: cover;
+	/* Maintains aspect ratio while filling the container */
+	display: block;
+	/* Removes any extra space below the image */
 }
 
 /*== Service card ==*/
@@ -63,7 +75,8 @@
 	position: relative;
 	overflow: hidden;
 	transition: box-shadow 0.2s;
-	margin-left: 0; /* Ensure no left margin pushes cards from edge */
+	margin-left: 0;
+	/* Ensure no left margin pushes cards from edge */
 }
 
 .pantone-image-wrapper {
@@ -147,12 +160,12 @@ body {
 	color: inherit;
 }
 
-header > h1 {
+header>h1 {
 	color: var(--green);
 	margin: 0;
 }
 
-ul > li {
+ul>li {
 	list-style-type: none;
 }
 
@@ -228,4 +241,6 @@ header:first-of-type {
 	padding: 0;
 	margin: 0;
 	height: 100%;
+
 }
+

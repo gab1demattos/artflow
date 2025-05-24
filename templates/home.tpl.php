@@ -14,6 +14,7 @@ function drawHeader($user, $currentPage = '')
         <link rel="stylesheet" href="/css/main.css">
         <link rel="stylesheet" href="/css/responsive/global-responsive.css">
         <link rel="stylesheet" href="/css/see-more.css">
+        <link rel="stylesheet" href="/css/responsive/new-service-responsive.css">
     </head>
 
     <body>

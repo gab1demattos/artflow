@@ -64,4 +64,5 @@ drawHeader($user);
 <link rel="stylesheet" href="/css/components.css">
 <script src="/js/modals.js"></script>
 <script src="/js/admin.js"></script>
+<script src="/js/admin-responsive.js"></script>
 <?php drawFooter($user); ?>

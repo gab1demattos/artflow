@@ -48,6 +48,18 @@ async function loadStats() {
     const values = data.earnings_per_day.map(e => e.amount);
     new Chart(ctx, {
         type: 'line',
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            scales: {
+                x: {
+                    ticks: {
+                        maxRotation: 45,
+                        minRotation: 45
+                    }
+                }
+            }
+        },
         data: {
             labels: labels,
             datasets: [{
@@ -74,6 +86,8 @@ async function loadStats() {
         }
     });
 }
-loadStats();
+loadStats(); 
 </script>
-<?php // Optionally, add a footer or close tags if needed ?>
+<?php 
+drawFooter($user);
+ ?>

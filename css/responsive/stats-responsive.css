@@ -1,0 +1,212 @@
+/* ======================================= */
+/* BASE MOBILE STYLES (applied by default) */
+/* ======================================= */
+
+@media screen and (max-width: 767px) {
+
+    /* Make stat row a horizontal container */
+    .stat-row {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        gap: 0.5rem !important;
+        margin-bottom: 1rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        align-items: center !important;
+        justify-content: center !important;
+        text-align: center !important;
+    }
+
+    /* Make stat boxes smaller and fit two in a row */
+    .stat-box {
+        padding: 0.6rem 0.25rem !important;
+        min-width: 0 !important;
+        width: 40% !important;
+        /* Two boxes per row, with some spacing */
+        max-width: 110px !important;
+        min-height: 55px !important;
+        box-sizing: border-box !important;
+        border-radius: 6px !important;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+        margin: 0.25rem !important;
+        text-align: center !important;
+        flex: 0 0 auto !important;
+        /* Don't grow or shrink */
+        display: inline-block !important;
+        /* Force inline block display */
+    }
+
+    /* Make labels smaller */
+    .stat-label {
+        font-size: 0.6rem !important;
+        line-height: 1.2 !important;
+        text-align: center !important;
+        width: 100% !important;
+        display: block !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        white-space: nowrap !important;
+        margin-bottom: 0.3rem !important;
+    }
+
+    /* Make values smaller */
+    .stat-value {
+        font-size: 0.75rem !important;
+        margin-top: 0.3rem !important;
+        line-height: 1.2 !important;
+        text-align: center !important;
+        width: 100% !important;
+        display: block !important;
+    }
+
+    /* Make the container optimized for two boxes per row */
+    .admin-panel-container {
+        padding: 0.5rem !important;
+        margin: 0.25rem auto !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
+        box-sizing: border-box !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+
+    /* Adjust margins for horizontal layout */
+    .stat-box+.stat-box {
+        margin-left: 0 !important;
+    }
+
+    /* Force override any conflicting styles */
+    .stat-row>.stat-box {
+        display: inline-block !important;
+        vertical-align: top !important;
+    }
+
+    /* First two boxes stay in top row, third box centered in bottom row */
+    .stat-box:nth-child(3) {
+        width: 45% !important;
+        margin: 0 auto !important;
+        clear: both !important;
+        min-height: 55px !important;
+    }
+
+    /* Adjust title size */
+    .admin-title {
+        font-size: 1.2rem;
+        margin-bottom: 0.75rem;
+    }
+
+    /* For very small screens (e.g. iPhone SE) */
+    @media screen and (max-width: 375px) {
+        .stat-box {
+            width: 42% !important;
+            padding: 0.5rem 0.2rem !important;
+            max-width: 90px !important;
+            min-height: 50px !important;
+        }
+
+        .stat-label {
+            font-size: 0.55rem !important;
+            margin-bottom: 0.25rem !important;
+        }
+
+        .stat-value {
+            font-size: 0.7rem !important;
+            margin-top: 0.25rem !important;
+        }
+
+        .stat-box:nth-child(3) {
+            width: 42% !important;
+            min-height: 50px !important;
+        }
+    }
+
+    /* Chart container */
+    [style*="max-width:700px"] {
+        max-width: 95% !important;
+        padding: 0;
+        margin-top: 0.75rem;
+        overflow-x: hidden;
+    }
+
+    /* Make chart heading smaller */
+    [style*="max-width:700px"] h3 {
+        font-size: 0.95rem;
+        margin-bottom: 0.5em;
+    }
+
+    canvas {
+        max-width: 100%;
+        height: auto !important;
+    }
+}
+
+/* =================== */
+/*    TABLET STYLES    */
+/* =================== */
+
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+    .admin-panel-container {
+        max-width: 90%;
+        margin: 2rem auto;
+        padding: 1.5rem;
+        border-radius: 12px;
+    }
+
+    .admin-title {
+        font-size: 2rem;
+        margin-bottom: 1.8rem;
+    }
+
+    .stat-row {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .stat-box {
+        width: calc(33% - 1rem);
+        min-width: 120px;
+        max-width: 160px;
+        padding: 1rem;
+    }
+
+    .stat-box+.stat-box {
+        margin-left: 0;
+    }
+
+    .stat-label {
+        font-size: 0.95rem;
+    }
+
+    .stat-value {
+        font-size: 1.5rem;
+        margin-top: 0.3rem;
+    }
+
+    /* Chart container */
+    .chart-container,
+    [style*="max-width:700px"] {
+        max-width: 90% !important;
+    }
+}
+
+/* ================================== */
+/*    DESKTOP STYLES (above 1200px)   */
+/* ================================== */
+
+/*use the main modals.css settings */
+@media screen and (min-width: 1200px) {
+    /* 
+      The desktop styles are already defined 
+      This media query ensures we only apply those styles at larger screens
+    */
+
+    /* For ultra-wide screens, adjust proportions */
+    @media screen and (min-width: 2400px) {}
+}
