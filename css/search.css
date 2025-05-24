@@ -280,7 +280,7 @@ input[type="checkbox"] {
 
 .range-fill {
     height: 6px;
-    background-color: var(--purple);
+    background-color: var(--purple); /* Set the bar to purple */
     position: absolute;
     z-index: 1;
     border-radius: 3px; /* Added for smoother edges */
@@ -300,16 +300,17 @@ input[type="range"]::-webkit-slider-thumb {
     width: 15px;
     height: 15px; /* Fixed typo */
     border-radius: 50%;
-    background-color: var(--purple);
+    background-color: var(--light-gray); /* Set buttons to white */
     cursor: pointer;
     position: relative;
     z-index: 3; /* Ensure thumbs are above everything */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 input[type="range"]::-webkit-slider-runnable-track {
     width: 100%;
     height: 6px; /* Adjusted to match fill height */
-    background-color: var(--light-gray);
+    background-color: var(--purple); /* Set the bar to purple */
     border-radius: 3px;
     border: none;
 }
