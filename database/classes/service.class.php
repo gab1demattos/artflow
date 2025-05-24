@@ -397,21 +397,27 @@ class Service {
      * 
      * @return array Array of Service objects
      */
-    public static function getAllServices(?float $minPrice = null, ?float $maxPrice = null): array {
+    public static function getAllServices(?float $minPrice = null, ?float $maxPrice = null, ?int $maxDeliveryTime = null): array {
         $db = Database::getInstance();
         $query = 'SELECT * FROM Service';
         $params = [];
+        $conditions = [];
 
-        if ($minPrice !== null || $maxPrice !== null) {
-            $query .= ' WHERE';
-            if ($minPrice !== null) {
-                $query .= ' price >= ?';
-                $params[] = $minPrice;
-            }
-            if ($maxPrice !== null) {
-                $query .= ($minPrice !== null ? ' AND' : '') . ' price <= ?';
-                $params[] = $maxPrice;
-            }
+        if ($minPrice !== null) {
+            $conditions[] = 'price >= ?';
+            $params[] = $minPrice;
+        }
+        if ($maxPrice !== null) {
+            $conditions[] = 'price <= ?';
+            $params[] = $maxPrice;
+        }
+        if ($maxDeliveryTime !== null) {
+            $conditions[] = 'delivery_time <= ?';
+            $params[] = $maxDeliveryTime;
+        }
+
+        if (!empty($conditions)) {
+            $query .= ' WHERE ' . implode(' AND ', $conditions);
         }
 
         $stmt = $db->prepare($query);
@@ -432,7 +438,6 @@ class Service {
                 $service['videos']
             );
         }
-
         return $result;
     }
 

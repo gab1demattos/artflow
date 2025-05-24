@@ -368,8 +368,7 @@ document.addEventListener('DOMContentLoaded', () => {
         updatePriceRange();
     });
 
-
-    deliveryTimeInput.addEventListener('chnage', async () => {
+    deliveryTimeInput.addEventListener('change', async () => {
         const maxDeliveryTime = parseFloat(deliveryTimeInput.value);
 
         const selectedCategories = Array.from(categoryCheckboxes)
@@ -388,41 +387,43 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch(`/api/api_services.php?categories=${selectedCategories.join(',')}&min_price=${minPrice}&max_price=${maxPrice}&max_delivery_time=${maxDeliveryTime}`);
             const services = await response.json();
 
+            console.log('Fetched Services:', services); // Debugging log
+
             searchResults.innerHTML = ""; // Clear previous results
 
             if (services.length > 0) {
                 services.forEach(service => {
-                if (service.delivery_time <= maxDeliveryTime) { // Ensure delivery time filter is applied
-                    const serviceCard = document.createElement('a');
-                    serviceCard.href = `/pages/service.php?id=${encodeURIComponent(service.id)}`;
-                    serviceCard.classList.add('service-card-link');
-                    serviceCard.innerHTML = `
-                        <div class="service-card">
-                            <div class="pantone-image-wrapper">
-                                ${service.image ? `<img src="${service.image}" alt="Service image" class="pantone-image" />` : '<div class="pantone-image pantone-image-placeholder"></div>'}
+                    if (service.delivery_time <= maxDeliveryTime) { // Ensure filtering is applied
+                        console.log('Service Passed Filter:', service); // Debugging log
+                        const serviceCard = document.createElement('a');
+                        serviceCard.href = `/pages/service.php?id=${encodeURIComponent(service.id)}`;
+                        serviceCard.classList.add('service-card-link');
+                        serviceCard.innerHTML = `
+                            <div class="service-card">
+                                <div class="pantone-image-wrapper">
+                                    ${service.image ? `<img src="${service.image}" alt="Service image" class="pantone-image" />` : '<div class="pantone-image pantone-image-placeholder"></div>'}
+                                </div>
+                                <div class="pantone-title">${service.title}</div>
+                                <div class="pantone-info-row">
+                                    <span class="pantone-username">${service.username}</span>
+                                    <span class="pantone-rating">★ ${service.rating || '0.0'}</span>
+                                    <span class="pantone-delivery-time">${service.delivery_time} days</span>
+                                </div>
                             </div>
-                            <div class="pantone-title">${service.title}</div>
-                            <div class="pantone-info-row">
-                                <span class="pantone-username">${service.username}</span>
-                                <span class="pantone-rating">★ ${service.rating || '0.0'}</span>
-                            </div>
-                        </div>
-                    `;
-                    searchResults.appendChild(serviceCard);
-}
+                        `;
+                        searchResults.appendChild(serviceCard);
+                    } else {
+                        console.log('Service Failed Filter:', service); // Debugging log
+                    }
                 });
             } else {
-                searchResults.innerHTML = ""; // Clear previous results
                 searchResults.innerHTML = '<p>No services found for the selected filters.</p>';
             }
         } catch (error) {
             console.error('Error fetching services:', error);
-            searchResults.innerHTML = ""; // Clear previous results
             searchResults.innerHTML = '<p>Error loading services. Please try again later.</p>';
         }
     });
-
-   
 });
 
 
