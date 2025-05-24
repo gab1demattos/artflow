@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('search-input');
     const searchButton = document.getElementById('search-button');
+    const searchPageButton = document.getElementById('search-page-button');
     const SearchInputPage = document.getElementById('search-page-input');
     const SearchBarPage = document.getElementById('search-page-bar');
     const searchServicesBtn = document.getElementById("search-services");
@@ -9,6 +10,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchBar = document.getElementById('search-bar');
     const filterSearch = document.getElementById("filter-search");
     const deliveryTimeInput = document.getElementById('delivery-time');
+    const filterButton = document.getElementById('filter-sidebar');
+    const filterApplyButton = document.getElementById('filter-sidebar-end');
+
 
     // Redirect to search.php when the search bar is clicked
     searchBar.addEventListener('click', () => {

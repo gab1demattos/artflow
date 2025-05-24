@@ -1,13 +1,15 @@
 @media (max-width: 470px) {
-	#filter-search {
-        display: none;
+	
+
+    .service-card {
+        width: 200px;
+        min-width: 0;
+        max-width: 250px;
+        padding: 0 0 12px 0;
     }
 
-    #search-results {
-        width: 100%;
-    }
-
-    #search-page-bar {
+    #filter-search {
+        width: 35%;
         margin: 0 auto;
     }
 }
