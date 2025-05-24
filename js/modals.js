@@ -272,15 +272,15 @@ const Modals = {
 // Utility to show error message in a modal (global)
 window.showModalError = function (modalId, message) {
 	// Remove any existing floating error
-	let floating = document.getElementById('floating-modal-error');
+	let floating = document.getElementById("floating-modal-error");
 	if (floating) floating.remove();
 	// Create floating error
-	floating = document.createElement('div');
-	floating.id = 'floating-modal-error';
+	floating = document.createElement("div");
+	floating.id = "floating-modal-error";
 	floating.textContent = message;
 	document.body.appendChild(floating);
 	setTimeout(() => {
-		floating.classList.add('fade-out');
+		floating.classList.add("fade-out");
 		setTimeout(() => floating.remove(), 600);
 	}, 3000);
 };
@@ -288,46 +288,100 @@ window.showModalError = function (modalId, message) {
 // Show Go Flow modal globally
 window.showGoFlowModal = function () {
 	// Hide all modals
-	document.querySelectorAll('.modal-overlay').forEach(m => m.classList.add('hidden'));
+	document
+		.querySelectorAll(".modal-overlay")
+		.forEach((m) => m.classList.add("hidden"));
 	// Show Go Flow modal
-	const goFlow = document.getElementById('goflow-modal-overlay');
-	if (goFlow) goFlow.classList.remove('hidden');
+	const goFlow = document.getElementById("goflow-modal-overlay");
+	if (goFlow) goFlow.classList.remove("hidden");
 };
 
 // Intercept sign up form submit
-const signupForm = document.querySelector('#signup-modal-overlay form');
+const signupForm = document.querySelector("#signup-modal-overlay form");
 if (signupForm) {
-	signupForm.addEventListener('submit', function (e) {
+	signupForm.addEventListener("submit", function (e) {
 		const password = signupForm.querySelector('input[name="password"]').value;
-		const confirm = signupForm.querySelector('input[name="confirm_password"]').value;
+		const confirm = signupForm.querySelector(
+			'input[name="confirm_password"]'
+		).value;
 		if (password.length < 8) {
 			e.preventDefault();
-			showModalError('signup-modal-overlay', 'Password must be at least 8 characters.');
+			showModalError(
+				"signup-modal-overlay",
+				"Password must be at least 8 characters."
+			);
 			return;
 		}
 		if (password !== confirm) {
 			e.preventDefault();
-			showModalError('signup-modal-overlay', 'Password and confirmation do not match.');
+			showModalError(
+				"signup-modal-overlay",
+				"Password and confirmation do not match."
+			);
 			return;
 		}
 	});
 }
 
 // Intercept sign in form submit for AJAX error display
-const signinForm = document.querySelector('#signin-modal-overlay form');
+const signinForm = document.querySelector("#signin-modal-overlay form");
 if (signinForm) {
-	signinForm.addEventListener('submit', async function (e) {
+	signinForm.addEventListener("submit", async function (e) {
 		e.preventDefault();
+
+		// Get a fresh CSRF token before submitting
+		try {
+			const tokenResponse = await fetch("/actions/login/refresh_csrf.php");
+			if (tokenResponse.ok) {
+				const tokenData = await tokenResponse.json();
+				// Update the CSRF token input in the form
+				const tokenInput = signinForm.querySelector('input[name="csrf_token"]');
+				if (tokenInput) {
+					tokenInput.value = tokenData.token;
+				}
+			}
+		} catch (error) {
+			console.error("Failed to refresh CSRF token:", error);
+		}
+
+		// Now submit the form with the fresh token
 		const formData = new FormData(signinForm);
 		const res = await fetch(signinForm.action, {
-			method: 'POST',
+			method: "POST",
 			body: formData,
-			headers: { 'X-Requested-With': 'XMLHttpRequest' }
+			headers: { "X-Requested-With": "XMLHttpRequest" },
 		});
+
 		if (!res.ok) {
-			const data = await res.json();
-			showModalError('signin-modal-overlay', data.error || 'Invalid email or password.');
+			// Only try to parse JSON if we get a JSON response
+			let errorMessage = "Invalid email or password.";
+			try {
+				const data = await res.json();
+				errorMessage = data.error || errorMessage;
+				console.log("Login error:", data); // Debug info
+			} catch (e) {
+				console.error("Failed to parse error response:", e);
+			}
+			showModalError("signin-modal-overlay", errorMessage);
+
+			// Get a fresh token for next attempt
+			try {
+				const newTokenResponse = await fetch("/actions/login/refresh_csrf.php");
+				if (newTokenResponse.ok) {
+					const newTokenData = await newTokenResponse.json();
+					const tokenInput = signinForm.querySelector(
+						'input[name="csrf_token"]'
+					);
+					if (tokenInput) {
+						tokenInput.value = newTokenData.token;
+						console.log("New token set for next attempt"); // Debug info
+					}
+				}
+			} catch (error) {
+				console.error("Failed to refresh token after error:", error);
+			}
 		} else {
+			// Success - reload the page
 			window.location.reload();
 		}
 	});
