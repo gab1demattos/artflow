@@ -70,6 +70,108 @@ document.addEventListener('DOMContentLoaded', function () {
     // Apply immediately when loaded
     makeTablesResponsive();
 
+    // Category modal specific handling for mobile devices
+    function setupMobileCategoryModal() {
+        const categoryModal = document.getElementById('category-modal');
+        const categoryOverlay = document.getElementById('category-modal-overlay');
+        const categoryForm = document.getElementById('category-form');
+
+        if (categoryModal && categoryForm) {
+            // When form is submitted, ensure it doesn't create extra space
+            categoryForm.addEventListener('submit', function () {
+                // Reset any inline height that might be causing issues
+                categoryModal.style.height = '';
+                categoryModal.style.minHeight = '';
+            });
+
+            // When the modal is opened, ensure proper sizing
+            const openModalBtn = document.getElementById('open-category-modal');
+            if (openModalBtn) {
+                openModalBtn.addEventListener('click', function () {
+                    // Allow modal to size naturally based on content
+                    setTimeout(() => {
+                        categoryModal.style.height = 'auto';
+                        // Ensure no extra padding pushing content down
+                        const formContainer = categoryModal.querySelector('.form-container');
+                        if (formContainer) {
+                            formContainer.style.paddingBottom = '0';
+                        }
+                    }, 10);
+                });
+            }
+
+            // Reset modal state when closed
+            const closeModalBtn = document.getElementById('close-category-modal');
+            if (closeModalBtn) {
+                closeModalBtn.addEventListener('click', function () {
+                    resetCategoryModal();
+                });
+            }
+
+            // Also reset when clicking outside the modal
+            if (categoryOverlay) {
+                categoryOverlay.addEventListener('click', function (e) {
+                    if (e.target === categoryOverlay) {
+                        resetCategoryModal();
+                    }
+                });
+            }
+
+            // Function to reset modal state
+            function resetCategoryModal() {
+                // Reset any inline styles we set
+                categoryModal.style.height = '';
+                categoryModal.style.minHeight = '';
+                categoryModal.style.maxHeight = '';
+
+                // Reset form if needed
+                if (categoryForm) {
+                    categoryForm.reset();
+                }
+
+                // Reset any form container styles
+                const formContainer = categoryModal.querySelector('.form-container');
+                if (formContainer) {
+                    formContainer.style.paddingBottom = '';
+                }
+            }
+
+            // Watch for window resize to adjust modal size
+            window.addEventListener('resize', function () {
+                if (categoryOverlay && !categoryOverlay.classList.contains('hidden')) {
+                    categoryModal.style.height = 'auto';
+                }
+            });
+        }
+    }
+
+    // Set up the category modal handling for mobile
+    setupMobileCategoryModal();
+
+    // Fix for mobile viewport height calculation
+    function setMobileViewportHeight() {
+        // First we get the viewport height and multiply it by 1% to get a value for a vh unit
+        let vh = window.innerHeight * 0.01;
+        // Then we set the value in the --vh custom property to the root of the document
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+
+        // Apply this height to the category modal if it's open
+        const categoryModal = document.getElementById('category-modal');
+        const categoryOverlay = document.getElementById('category-modal-overlay');
+
+        if (categoryModal && categoryOverlay && !categoryOverlay.classList.contains('hidden')) {
+            // Use the custom vh value for proper height calculation
+            categoryModal.style.maxHeight = `calc(90 * var(--vh, 1vh))`;
+        }
+    }
+
+    // Set the height initially
+    setMobileViewportHeight();
+
+    // Reset on resize and orientation change
+    window.addEventListener('resize', setMobileViewportHeight);
+    window.addEventListener('orientationchange', setMobileViewportHeight);
+
     // Also apply when tab content changes
     document.querySelectorAll('.admin-tab-btn').forEach(function (button) {
         button.addEventListener('click', function () {

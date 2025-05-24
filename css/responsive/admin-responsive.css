@@ -344,30 +344,132 @@
     #category-modal {
         max-width: 90% !important;
         width: 90% !important;
-        padding: 1.5rem 1rem !important;
+        padding: 1.5rem 1rem 1rem !important;
+        /* Reduced bottom padding */
+        box-sizing: border-box !important;
+        /* Ensure padding is included in the width calculation */
+        display: flex !important;
+        flex-direction: column !important;
+        max-height: calc(90 * var(--vh, 1vh)) !important;
+        /* Use custom viewport height */
+        overflow-y: auto !important;
+        /* Allow scrolling if needed */
+        -webkit-overflow-scrolling: touch !important;
+        /* Smooth scrolling on iOS */
+        animation: modalFadeIn 0.2s ease-out !important;
+        /* Add smooth entry animation */
     }
 
     #category-modal h2 {
         font-size: 1.5rem !important;
         margin-bottom: 1rem !important;
+        padding: 0 !important;
     }
 
     #category-modal .form input,
     #category-modal .form input[type="file"],
     #category-modal .form textarea,
     #category-modal .form select {
-        padding: 0.6rem !important;
-        font-size: 0.9rem !important;
+        padding: 0.7rem 0.6rem !important;
+        font-size: 16px !important;
+        /* Prevent iOS zoom */
+        margin-bottom: 0.75rem !important;
+        height: auto !important;
+        /* Override any fixed heights */
+        line-height: normal !important;
+        /* Fix vertical alignment */
+        display: block !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
     }
 
     #category-modal .button-container {
         flex-direction: column !important;
         gap: 0.5rem !important;
+        margin-top: 0.5rem !important;
+        /* Add some space above the buttons */
+        margin-bottom: 0 !important;
+        /* Remove any bottom margin */
+        width: 100% !important;
     }
 
     #category-modal .button-container button {
         width: 100% !important;
         margin: 0 !important;
+        padding: 0.7rem !important;
+        /* Consistent button padding */
+        height: auto !important;
+        min-height: 42px !important;
+        /* Ensure touch-friendly size */
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    /* Fix bottom spacing */
+    #category-modal .form .button-container:after {
+        content: none !important;
+        /* Remove any generated content that might cause spacing */
+    }
+
+    /* Fix form container spacing */
+    #category-modal .form-container {
+        padding: 0 !important;
+        margin-bottom: 0 !important;
+        /* Remove bottom margin */
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+    }
+
+    #category-modal form.form {
+        margin-bottom: 0 !important;
+        /* Remove form bottom margin */
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+    }
+
+    /* Fix modal overlay in mobile view */
+    #category-modal-overlay.modal-overlay {
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 10px !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+        /* Prevent body scrolling behind modal */
+        z-index: 2100 !important;
+        /* Ensure proper stacking */
+        transition: opacity 0.2s ease-out !important;
+        /* Smooth fade in/out */
+    }
+
+    /* Fix modal content structure */
+    #category-modal .modal-content {
+        width: 100% !important;
+        height: auto !important;
+        display: flex !important;
+        flex-direction: column !important;
+        position: relative !important;
+        overflow: visible !important;
+        padding-bottom: 0 !important;
+        /* Remove bottom padding */
+    }
+
+    /* Make form inputs properly fill container width */
+    #category-modal .form input,
+    #category-modal .form input[type="file"],
+    #category-modal .form textarea {
+        box-sizing: border-box !important;
+        width: 100% !important;
+        margin-bottom: 0.8rem !important;
+        font-size: 16px !important;
+        /* Prevent iOS zoom on input focus */
+    }
+
+    /* Fix iOS form input zoom issue */
+    #category-modal .form input::placeholder {
+        font-size: 16px !important;
     }
 
     /* Make stat boxes responsive */
@@ -428,5 +530,16 @@
         background: linear-gradient(to left, #fff 60%, #ffd700 100%);
     }
 
-   
+    /* Modal animations for smoother experience */
+    @keyframes modalFadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
 }
