@@ -1,0 +1,13 @@
+@media (max-width: 470px) {
+	#filter-search {
+        display: none;
+    }
+
+    #search-results {
+        width: 100%;
+    }
+
+    #search-page-bar {
+        margin: 0 auto;
+    }
+}

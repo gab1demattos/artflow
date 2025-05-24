@@ -17,6 +17,7 @@
 @import url("responsive/modals-responsive.css");
 @import url('responsive/profile-responsive.css');
 @import url('search.css');
+@import url("responsive/search-responsive.css");
 
 :root {
 	/*theme colors*/
