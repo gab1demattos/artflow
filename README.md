@@ -20,19 +20,19 @@
 - [ ] Browse services using filters like category, price, and rating.
 - [x] Engage with freelancers to ask questions or request custom orders.
 - [x] Hire freelancers and proceed to checkout (simulate payment process).
-- [ ] Leave ratings and reviews for completed services.
+- [x] Leave ratings and reviews for completed services.
 
 **Admins:**
 
-- [ ] Elevate a user to admin status.
+- [x] Elevate a user to admin status.
 - [x] Introduce new service categories and other pertinent entities.
-- [ ] Oversee and ensure the smooth operation of the entire system.
+- [x] Oversee and ensure the smooth operation of the entire system.
 
 **Extra:**
 
-- [ ] Analytics Dashboard: A tool for freelancers to track performance metrics and sales data.
+- [x] Analytics Dashboard: A tool for freelancers to track performance metrics and sales data.
 - [x] Custom Order System: Clients can request tailored services based on their needs (submit requirements).
-- [ ] User Preferences: Allow users to set and filter searches based on personal preferences such as budget, delivery time, and service type.
+- [x] User Preferences: Allow users to set and filter searches based on personal preferences
 
 ## Running
 
