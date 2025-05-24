@@ -234,6 +234,7 @@
 	font-size: 0.9rem;
 	color: #666;
 	margin-left: 0.5rem;
+	position: relative;
 }
 
 /* Using the same styles as rate-it modal for consistency */
@@ -254,6 +255,25 @@
 	width: 50%;
 	overflow: hidden;
 	color: var(--yellow);
+}
+
+#filter-search-rating #clear-rating {
+	position: absolute;
+	left: 10em;
+	bottom: 0.1em;
+	background: none;
+	border: none;
+	color: #999;
+	font-size: 1rem;
+	cursor: pointer;
+	padding: 0.2em;
+	line-height: 0.8;
+	opacity: 0.6;
+	transition: opacity 0.2s;
+}
+
+#filter-search-rating #clear-rating:hover {
+	opacity: 1;
 }
 
 #filter-search-price {

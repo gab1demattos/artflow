@@ -39,6 +39,7 @@ function drawSearchPage($db)
                         <input type="hidden" id="filter-rating-value" value="0">
                         <div class="rating-display">
                             <span id="filter-rating-text">0.0</span>/5
+                            <button id="clear-rating" title="Clear rating filter">×</button>
                         </div>
                     </div>
                 </div>

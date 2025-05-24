@@ -730,6 +730,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	deliveryTimeInput.addEventListener("change", fetchFilteredServices);
 
+	// Add clear rating button functionality
+	const clearRatingBtn = document.getElementById("clear-rating");
+	if (clearRatingBtn) {
+		clearRatingBtn.addEventListener("click", () => {
+			window.currentFilterRating = 0;
+			updateFilterStarDisplay(0);
+			fetchFilteredServices(); // Update results
+		});
+	}
+
 	// End of the file
 	let currentFilterRating = 0;
 
