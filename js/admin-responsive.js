@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Function to add data-label attributes to all admin tables
     function makeTablesResponsive() {
         document.querySelectorAll('.admin-table').forEach(function (table) {
-            // Get header texts and skip the last column if it's 'Actions'
+            // Get header texts
             const headerTexts = Array.from(table.querySelectorAll('thead th')).map(th => {
                 const text = th.textContent.trim();
                 return text;
@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // Add responsive class to table
             table.classList.add('responsive-table');
 
+            // Set data labels for each cell
             table.querySelectorAll('tbody tr').forEach(function (row) {
                 Array.from(row.querySelectorAll('td')).forEach(function (cell, i) {
                     if (i < headerTexts.length) {
@@ -19,8 +20,17 @@ document.addEventListener('DOMContentLoaded', function () {
                         cell.setAttribute('data-label', headerTexts[i]);
 
                         // Special handling for action buttons column
-                        if (headerTexts[i] === 'Actions' || i === headerTexts.length - 1) {
+                        if (headerTexts[i] === 'Actions' || headerTexts[i] === 'Action' ||
+                            headerTexts[i].includes('Actions') || i === headerTexts.length - 1) {
                             cell.classList.add('action-cell');
+                        }
+
+                        // Wrap cell content in a span if it doesn't already have a wrapper
+                        // This helps with our flexbox layout in mobile view
+                        if (!cell.querySelector('span, div, a, button') &&
+                            !cell.classList.contains('action-cell')) {
+                            const content = cell.innerHTML;
+                            cell.innerHTML = '<span>' + content + '</span>';
                         }
                     }
                 });
@@ -36,12 +46,12 @@ document.addEventListener('DOMContentLoaded', function () {
         button.addEventListener('click', function () {
             // Add transition class to body for smooth tab switching
             document.body.classList.add('tab-transitioning');
-            
+
             // Remove transitioning class after animation completes
             setTimeout(() => {
                 document.body.classList.remove('tab-transitioning');
             }, 300);
-            
+
             // Give tables time to render
             setTimeout(makeTablesResponsive, 150);
         });
@@ -68,4 +78,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Start observing the document with configured parameters
     observer.observe(document.body, { childList: true, subtree: true });
+
+    // Expose function globally to allow manual refresh of table styles
+    window.refreshAdminTables = makeTablesResponsive;
+
+    // Force initial update for any tables already in the DOM
+    setTimeout(makeTablesResponsive, 300);
 });

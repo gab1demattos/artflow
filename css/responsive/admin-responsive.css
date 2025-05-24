@@ -17,6 +17,8 @@
 
     /* For the smallest screens, make further adjustments */
     @media screen and (max-width: 360px) {
+
+        /* Smaller tabs for very small screens */
         .admin-tab-btn {
             padding: 0.35rem 0.4rem;
             /* Even smaller padding */
@@ -26,6 +28,25 @@
             /* Tighten letter spacing */
             min-width: 60px;
             /* Even smaller minimum width */
+        }
+
+        /* Adjust table cards for very small screens */
+        .admin-table td {
+            padding: 0.5rem;
+        }
+
+        .admin-table td::before {
+            min-width: 70px;
+            max-width: 80px;
+            font-size: 0.8rem;
+            /* Smaller font size */
+            padding-right: 0.5rem;
+        }
+
+        .admin-table td>span,
+        .admin-table td>div,
+        .admin-table td>a {
+            padding-left: 0.25rem;
         }
 
         .admin-tabs-row {
@@ -219,15 +240,23 @@
             border: 1px solid #e0e0e0;
             border-radius: 8px;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            /* Ensure white background */
+            padding: 0.25rem 0;
+            /* Add some vertical padding */
         }
 
         .admin-table td {
-            display: block;
-            text-align: right;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
             border-bottom: 1px solid #f0f0f0;
-            padding-left: 120px;
+            padding: 0.5rem 0.75rem;
+            min-height: 2rem;
             position: relative;
-            min-height: 1.5rem;
+            overflow-wrap: break-word;
+            word-break: break-word;
         }
 
         .admin-table td:last-child {
@@ -236,22 +265,41 @@
 
         .admin-table td::before {
             content: attr(data-label);
-            position: absolute;
-            left: 0.5rem;
-            width: 110px;
             font-weight: bold;
-            text-align: left;
             color: var(--yellow);
+            padding-right: 1rem;
+            min-width: 80px;
+            max-width: 100px;
+            text-align: left;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            flex: 0 0 auto;
+        }
+
+        .admin-table td>span,
+        .admin-table td>div,
+        .admin-table td>a {
+            flex: 1 1 auto;
+            text-align: right;
+            padding-left: 0.5rem;
         }
 
         /* Handle action buttons in mobile view */
         .admin-table td:last-child,
         .admin-table td.action-cell {
             display: flex;
+            flex-direction: row;
             justify-content: flex-end;
             flex-wrap: wrap;
             gap: 0.5rem;
             padding: 0.8rem;
+            align-items: center;
+        }
+
+        .admin-table td.action-cell::before {
+            align-self: flex-start;
+            margin-top: 0.5rem;
         }
 
         .admin-action-btn,
