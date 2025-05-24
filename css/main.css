@@ -1,22 +1,21 @@
 @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Modak&family=Material+Icons&display=swap");
 
-
 @import url("components.css");
 @import url("modals.css");
 
 @import url("pages/home.css");
-@import url('pages/category.css');
+@import url("pages/category.css");
 @import url("pages/activity.css");
-@import url('pages/messages.css');
+@import url("pages/messages.css");
 @import url("pages/profile.css");
-@import url('pages/service-display.css');
-
+@import url("pages/service-display.css");
 
 @import url("responsive/footer-responsive.css");
 @import url("responsive/home-responsive.css");
+@import url("responsive/messages-responsive.css");
 @import url("responsive/modals-responsive.css");
-@import url('responsive/profile-responsive.css');
-@import url('search.css');
+@import url("responsive/profile-responsive.css");
+@import url("search.css");
 @import url("responsive/search-responsive.css");
 
 :root {
@@ -118,7 +117,8 @@
 	background: #fff;
 }
 
-.pantone-username, .pantone-price {
+.pantone-username,
+.pantone-price {
 	font-family: "EB Garamond", serif;
 	font-size: 1rem;
 	color: #666;
@@ -129,8 +129,6 @@
 	color: #c2ab42;
 	font-weight: 600;
 }
-
-
 
 /*=== General Styles ===*/
 body {
@@ -231,4 +229,3 @@ header:first-of-type {
 	margin: 0;
 	height: 100%;
 }
-

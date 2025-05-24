@@ -102,6 +102,9 @@ document.addEventListener("DOMContentLoaded", () => {
 		conversationSearch.addEventListener("input", filterConversations);
 	}
 
+	// Handle responsive design for mobile
+	checkIfMobile();
+
 	// Handle dropdown menu toggle
 	if (menuButton && dropdownMenu) {
 		menuButton.addEventListener("click", toggleDropdownMenu);
@@ -191,11 +194,25 @@ function createOrSelectConversation(userId) {
 					// Add to conversation list
 					conversationList.prepend(newItem);
 
-					// Add click event
-					newItem.addEventListener("click", () => selectConversation(newItem));
+					// Add click event - different for mobile vs desktop
+					if (window.innerWidth < 768) {
+						newItem.addEventListener("click", function () {
+							selectConversation(newItem);
+							showMainChatView();
+						});
+					} else {
+						newItem.addEventListener("click", () =>
+							selectConversation(newItem)
+						);
+					}
 
 					// Select the conversation
 					selectConversation(newItem);
+
+					// On mobile, switch to main chat view
+					if (window.innerWidth < 768) {
+						showMainChatView();
+					}
 
 					// Remove no Converstations message if it exists
 					const noConversationsMsg = document.querySelector(
@@ -233,7 +250,6 @@ function selectConversation(item) {
 	// Enable input and send button
 	messageInput.disabled = false;
 	sendButton.disabled = false;
-	messageInput.focus();
 
 	// Load messages for this conversation
 	loadMessages();
@@ -246,6 +262,15 @@ function selectConversation(item) {
 
 	// Store the selected conversation in session storage
 	sessionStorage.setItem("selectedUserId", selectedUserId);
+
+	// On mobile, focus the input after a slight delay to ensure UI is updated
+	if (window.innerWidth < 768) {
+		setTimeout(() => {
+			messageInput.focus();
+		}, 300);
+	} else {
+		messageInput.focus();
+	}
 }
 
 /**
@@ -591,6 +616,11 @@ function deleteConversation() {
 				// Clear session storage
 				sessionStorage.removeItem("selectedUserId");
 
+				// On mobile, return to conversation list view
+				if (window.innerWidth < 768) {
+					showConversationList();
+				}
+
 				// Check if there are any conversations left
 				const remainingConversations = document.querySelectorAll(
 					".chat-app__chat-item"
@@ -610,4 +640,130 @@ function deleteConversation() {
 			console.error("Error:", error);
 			alert("An error occurred. Please try again.");
 		});
+}
+
+/**
+ * Checks if the device is a mobile device and applies mobile-specific behavior
+ */
+function checkIfMobile() {
+	// Check if screen width is mobile size (under 768px)
+	const isMobile = window.innerWidth < 768;
+
+	// Set up mobile specific UI and interactions
+	setupMobileLayout(isMobile);
+
+	// Add window resize listener to check for orientation changes
+	window.addEventListener("resize", handleResize);
+}
+
+/**
+ * Sets up mobile specific layout and interactions
+ * @param {boolean} isMobile - Whether the device is mobile
+ */
+function setupMobileLayout(isMobile) {
+	const sidebar = document.querySelector(".chat-app__sidebar");
+	const mainChat = document.querySelector(".chat-app__main");
+	const backButton = document.getElementById("back-to-conversations");
+
+	if (!sidebar || !mainChat || !backButton) return;
+
+	if (isMobile) {
+		// Initialize with sidebar visible and main chat hidden
+		if (!selectedUserId) {
+			sidebar.classList.remove("hidden");
+			mainChat.classList.remove("visible");
+		} else {
+			// If a conversation is already selected, show the chat view
+			sidebar.classList.add("hidden");
+			mainChat.classList.add("visible");
+			backButton.classList.add("visible");
+		}
+
+		// Set up back button functionality
+		backButton.addEventListener("click", showConversationList);
+
+		// Override conversation selection behavior for mobile
+		const chatItems = document.querySelectorAll(".chat-app__chat-item");
+		chatItems.forEach((item) => {
+			// Remove any existing event listeners first
+			const newItem = item.cloneNode(true);
+			item.parentNode.replaceChild(newItem, item);
+
+			// Add our mobile-specific click event
+			newItem.addEventListener("click", function () {
+				const userId = this.dataset.userId;
+				const existingItem = document.querySelector(
+					`.chat-app__chat-item[data-user-id="${userId}"]`
+				);
+
+				if (existingItem) {
+					selectConversation(existingItem);
+					showMainChatView();
+				}
+			});
+		});
+	} else {
+		// For desktop/tablet, use normal layout
+		sidebar.classList.remove("hidden");
+		mainChat.classList.remove("visible");
+		backButton.classList.remove("visible");
+
+		// Remove mobile-specific event listeners
+		backButton.removeEventListener("click", showConversationList);
+	}
+}
+
+/**
+ * Shows the conversation list/sidebar view on mobile
+ * Animates the transition back to the conversation list
+ */
+function showConversationList() {
+	const sidebar = document.querySelector(".chat-app__sidebar");
+	const mainChat = document.querySelector(".chat-app__main");
+	const backButton = document.getElementById("back-to-conversations");
+
+	if (!sidebar || !mainChat) return;
+
+	// Simply use the CSS classes for the transition
+	// This prevents the double animation effect
+	sidebar.classList.remove("hidden");
+	mainChat.classList.remove("visible");
+	backButton.classList.remove("visible");
+}
+
+/**
+ * Shows the main chat view on mobile
+ * Animates the transition to show the chat view
+ */
+function showMainChatView() {
+	const sidebar = document.querySelector(".chat-app__sidebar");
+	const mainChat = document.querySelector(".chat-app__main");
+	const backButton = document.getElementById("back-to-conversations");
+
+	if (!sidebar || !mainChat) return;
+
+	// Simply use the CSS classes for the transition
+	// This prevents the double animation effect
+	sidebar.classList.add("hidden");
+	mainChat.classList.add("visible");
+	backButton.classList.add("visible");
+}
+
+/**
+ * Handles window resize events for responsive behavior
+ */
+function handleResize() {
+	// Check if device is mobile
+	const isMobile = window.innerWidth < 768;
+
+	// Set up layout based on screen size
+	setupMobileLayout(isMobile);
+
+	// If user has selected a conversation, make sure it stays visible after resize
+	if (selectedUserId) {
+		// Re-scroll to bottom of messages if needed
+		if (messagesContainer) {
+			messagesContainer.scrollTop = messagesContainer.scrollHeight;
+		}
+	}
 }
