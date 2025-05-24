@@ -37,13 +37,13 @@
     <div id="service-display">
         <div id="service-main">
             <div id="images-service">
-                <div id="main-image">
-                    <img class="main-image" src="<?= htmlspecialchars($images[0]) ?>" alt="Service Image">
-                </div>
                 <div id="service-imgs">
                     <?php foreach ($images as $image) { ?>
                         <img class="service-imgs" src="<?= htmlspecialchars($image) ?>" alt="Service Image Thumbnail">
                     <?php } ?>
+                </div>
+                <div id="main-image">
+                    <img class="main-image" src="<?= htmlspecialchars($images[0]) ?>" alt="Service Image">
                 </div>
             </div>
             <div id="service-details">
