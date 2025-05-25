@@ -54,7 +54,7 @@ if (!empty($_FILES['media']['name'][0])) {
         header('Location: ../../pages/modal/new-service-modal.php');
         exit();
     }
-    $uploadsDir = __DIR__ . '../../images/services/';
+    $uploadsDir = __DIR__ . '/../../images/services/';
     if (!is_dir($uploadsDir)) mkdir($uploadsDir, 0777, true);
 
     for ($i = 0; $i < $totalFiles; $i++) {

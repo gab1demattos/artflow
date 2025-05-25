@@ -1,11 +1,11 @@
 <?php
-require_once(__DIR__ . '../../database/security/security_bootstrap.php');
-require_once(__DIR__ . '../../database/session.php');
-require_once(__DIR__ . '../../templates/home.tpl.php');
-require_once(__DIR__ . '../../database/classes/user.class.php');
-require_once(__DIR__ . '../../database/classes/service.class.php');
-require_once(__DIR__ . '../../database/classes/review.class.php');
-require_once(__DIR__ . '../../templates/service_card.php');
+require_once(__DIR__ . '/../../database/security/security_bootstrap.php');
+require_once(__DIR__ . '/../../database/session.php');
+require_once(__DIR__ . '/../../templates/home.tpl.php');
+require_once(__DIR__ . '/../../database/classes/user.class.php');
+require_once(__DIR__ . '/../../database/classes/service.class.php');
+require_once(__DIR__ . '/../../database/classes/review.class.php');
+require_once(__DIR__ . '/../../templates/service_card.php');
 
 $session = Session::getInstance();
 $loggedInUser = $session->getUser() ?? null;
@@ -171,11 +171,11 @@ drawHeader($loggedInUser);
 
 <?php
 // Include the edit profile modal
-include_once(__DIR__ . '../modals/edit-profile-modal.php');
+include_once(__DIR__ . '/../../pages/modals/edit-profile-modal.php');
 // Include the change password modal
-include_once(__DIR__ . '../modals/change-password.php');
+include_once(__DIR__ . '/../../pages/modals/change-password.php');
 // Include the irreversible action modal
-include_once(__DIR__ . '/../templates/irreversible-modal.tpl.php');
+include_once(__DIR__ . '/../../templates/irreversible-modal.tpl.php');
 
 drawFooter($loggedInUser);
 ?>

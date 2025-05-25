@@ -1,7 +1,7 @@
 <?php
-require_once(__DIR__ . '../../database/security/security_bootstrap.php');
-require_once(__DIR__ . '../../database/session.php');
-require_once(__DIR__ . '../../templates/home.tpl.php');
+require_once(__DIR__ . '/../../database/security/security_bootstrap.php');
+require_once(__DIR__ . '/../../database/session.php');
+require_once(__DIR__ . '/../../templates/home.tpl.php');
 
 $session = Session::getInstance();
 $user = $session->getUser() ?? null;
@@ -58,7 +58,7 @@ drawHeader($user);
         </div>
     </div>
 </main>
-<?php include_once(__DIR__ . '../../templates/irreversible-modal.tpl.php'); ?>
+<?php include_once(__DIR__ . '/../../templates/irreversible-modal.tpl.php'); ?>
 <link rel="stylesheet" href="../../css/main.css">
 <script src="../../js/modal/modals.js"></script>
 <script src="../../js/users/admin.js"></script>
