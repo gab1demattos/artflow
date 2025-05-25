@@ -227,38 +227,12 @@ header:first-of-type {
 	height: 100%;
 }
 
-/* Position the #flow-footer image at the top right corner of the footer */
-#flow-footer {
+#flow-title {
 	position: absolute;
-	top: 0;
-	right: 0;
+	bottom: -1em;
+	left: -1em;
+	width: auto; 
 	height: auto;
-	width: 23em;
-	z-index: 2;
-	pointer-events: none;
-}
-
-#end {
-	position: relative;
-}
-
-#info {
-	position: relative;
-}
-
-#flow-info {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	width: 82em;
-	height: 100%;
 	z-index: 1;
-	object-fit: cover;
 	pointer-events: none;
-}
-
-#info-content {
-	position: relative;
-	z-index: 2;
 }

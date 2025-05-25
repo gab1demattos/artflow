@@ -227,8 +227,11 @@
 	background-color: var(--green);
 	font-family: "EB Garamond", sans-serif;
 	padding-bottom: 10em;
-	justify-content: flex-end;
 	align-content: center;
+    display: flex;
+	flex-direction: column;
+	justify-content: center;
+	box-sizing: border-box
 }
 
 #categories h2 {

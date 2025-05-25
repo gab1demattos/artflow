@@ -88,6 +88,7 @@ function drawHeader($user, $currentPage = '')
     { ?>
         <main class="container">
             <section id="title">
+                <img src="/images/flow_1.svg" alt="flow" id="flow-title">
                 <h2>where creativity<br>
                     <span class='flow-text'>flows</span> seamlessly
                 </h2>
@@ -158,7 +159,6 @@ function drawHeader($user, $currentPage = '')
         <?php function drawInfo()
         { ?>
             <section id="info">
-                <img src="/images/flow_3.svg" alt="flow" id="flow-info">
                 <div id="info-content">
                     <h2>Our motivation</h2>
                     <p>Etiam pellentesque tempus rutrum. Nullam eget nisl nec nulla ultrices commodo eget eget erat. Phasellus non rutrum erat. Duis nec rhoncus enim. Sed condimentum, odio facilisis maximus aliquet, tellus arcu consequat nibh, nec ultrices erat mauris vitae nisi. In maximus posuere egestas. Aenean congue justo non augue eleifend eleifend. Pellentesque dapibus, orci vitae tempus posuere, dolor risus dapibus augue, sed vehicula orci neque ac orci. Phasellus auctor vulputate volutpat.</p>
@@ -172,7 +172,6 @@ function drawHeader($user, $currentPage = '')
         { ?>
             <footer id="end">
                 <h2>artflow</h2>
-                <img src="/images/flow_4.svg" alt="flow" id="flow-footer">
                 <div id="end-content">
                     <div id="authors">
                         <h3>Developed by:</h3>
