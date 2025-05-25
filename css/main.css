@@ -1,7 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Modak&family=Material+Icons&display=swap");
 
 @import url("components.css");
-@import url("modals.css");
+
+@import url("modals/modal-animations.css");
+@import url("modals/modals.css");
 
 @import url("pages/home.css");
 @import url("pages/category.css");
@@ -10,17 +12,26 @@
 @import url("pages/profile.css");
 @import url("pages/service-display.css");
 @import url('pages/search.css');
+@import url('pages/admin.css');
+@import url('pages/home.css');
+@import url('pages/see-more.css');
 
-@import url("responsive/footer-responsive.css");
 @import url("responsive/home-responsive.css");
 @import url("responsive/messages-responsive.css");
 @import url("responsive/modals-responsive.css");
-
-@import url('responsive/profile-responsive.css');
-@import url('responsive/activity-responsive.css');
-@import url('responsive/stats-responsive.css');
-@import url('responsive/admin-responsive.css');
+@import url("responsive/activity-responsive.css");
+@import url("responsive/admin-responsive.css");
+@import url("responsive/category-responsive.css");
+@import url("responsive/checkout-responsive.css");
+@import url("responsive/footer-responsive.css");
+@import url("responsive/global-responsive.css");
+@import url("responsive/new-service-responsive.css");
+@import url("responsive/profile-responsive.css");
 @import url("responsive/search-responsive.css");
+@import url("responsive/see-more-responsive.css");
+@import url("responsive/service-responsive.css");
+@import url("responsive/stats-responsive.css");
+
 
 
 :root {
