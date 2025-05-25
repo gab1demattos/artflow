@@ -1,0 +1,198 @@
+/* Requirements and payment modal specifics */
+#requirements-modal-overlay .modal-content,
+#payment-modal-overlay .modal-content {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	padding: 2em 2em 1em 2em;
+	min-width: 320px;
+	min-height: 200px;
+	max-width: 400px;
+	background: #fff;
+	border-radius: 16px;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+}
+
+#requirements-modal-overlay .modal-content {
+	min-width: 480px;
+	min-height: 320px;
+	max-width: 600px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	/* Push content and buttons apart */
+	box-sizing: border-box;
+	padding-left: 2em;
+	padding-right: 2em;
+}
+
+@media screen and (max-width: 767px) {
+	#requirements-modal-overlay .modal-content {
+		min-width: 0;
+		/* Remove min-width constraint on mobile */
+	}
+}
+
+#payment-modal-overlay .modal-content {
+	min-width: 700px;
+	min-height: 340px;
+	max-width: 900px;
+	display: flex;
+	flex-direction: row-reverse;
+	/* Reverse order for desktop view */
+	justify-content: space-between;
+	box-sizing: border-box;
+	padding-left: 2em;
+	padding-right: 2em;
+	gap: 2em;
+}
+
+@media screen and (max-width: 767px) {
+	#payment-modal-overlay .modal-content {
+		min-width: 0;
+		/* Remove min-width constraint on mobile */
+	}
+}
+
+#payment-modal-overlay .payment-form-section {
+	flex: 2;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+#payment-modal-overlay .order-overview-section {
+	flex: 1;
+	background: #faf8f6;
+	border-radius: 12px;
+	padding: 1.5em 1em;
+	margin-top: 1em;
+	margin-bottom: 1em;
+	box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	min-width: 200px;
+	max-width: 260px;
+	font-size: 1em;
+}
+
+#payment-modal-overlay .order-overview-section h3 {
+	font-size: 1.4em;
+	margin-bottom: 0.7em;
+	/* color: var(--orange, #e67e22); */
+	font-family: "EB Garamond", sans-serif;
+}
+
+#payment-modal-overlay .order-overview-section p {
+	font-size: 1em;
+	font-weight: bold;
+	margin: 0.2em 0;
+	color: #333;
+}
+
+#payment-modal-overlay .order-overview-section p span {
+	font-weight: normal;
+	font-size: 1em;
+}
+
+#payment-modal-overlay .order-overview-section .order-total {
+	font-weight: bold;
+	margin-top: 1em;
+	font-size: 1.4em;
+	color: var(--orange, #e67e22);
+}
+
+#requirements-modal-overlay h2 {
+	color: var(--green);
+	font-family: "Modak", sans-serif;
+	text-align: center;
+	margin-bottom: 1em;
+	font-weight: normal;
+}
+
+#payment-modal-overlay h2 {
+	color: var(--green);
+	font-family: "Modak", sans-serif;
+	text-align: center;
+	margin-bottom: 1em;
+	font-weight: normal;
+}
+
+#requirements-modal-overlay textarea {
+	font-size: 1.1em;
+	border-radius: 8px;
+	border: 1.5px solid #ccc;
+	padding: 1em;
+	resize: vertical;
+	min-height: 160px;
+	box-sizing: border-box;
+	width: 100%;
+	margin-left: 0;
+	margin-right: 0;
+}
+
+#payment-modal-overlay input[type="text"] {
+	width: 100%;
+	max-width: 100%;
+	box-sizing: border-box;
+	margin-bottom: 1em;
+	padding: 0.6em 0.8em;
+	border-radius: 6px;
+	border: 1.5px solid #ccc;
+	font-size: 1em;
+}
+
+#payment-modal-overlay label {
+	font-size: 1em;
+	margin-bottom: 0.5em;
+	display: block;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+#requirements-modal-overlay .button-container {
+	margin-top: auto;
+	margin-bottom: 0;
+	justify-content: flex-end;
+}
+
+#payment-modal-overlay .button-container {
+	margin-top: auto;
+	margin-bottom: 0;
+	justify-content: flex-end;
+}
+
+/* Thank You Modal Styles */
+#thankyou-modal-overlay .modal-content {
+	min-width: 400px;
+	max-width: 500px;
+	text-align: center;
+	padding: 2.5em 2em;
+	border-radius: 16px;
+	background: #fff;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+#thankyou-modal-overlay h2 {
+	color: var(--green);
+	font-family: "Modak", sans-serif;
+	margin-bottom: 1em;
+	font-size: 2em;
+	font-weight: normal;
+}
+
+#thankyou-modal-overlay p {
+	font-size: 1.2em;
+	margin: 0 0 1em 0;
+	color: #333;
+}
+
+#thankyou-close.button {
+	margin-top: 1.5em;
+	width: 100%;
+	max-width: 220px;
+}

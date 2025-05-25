@@ -1,0 +1,151 @@
+/* Rate-it Modal Styles */
+#rate-it-modal-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 1000;
+}
+
+#rate-it-modal-overlay .modal-content {
+	min-width: 400px;
+	max-width: 550px;
+	text-align: center;
+	padding: 2em;
+	border-radius: 16px;
+	background: #fff;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+	display: flex;
+	flex-direction: column;
+}
+
+#rate-it-modal-overlay h2 {
+	color: var(--yellow);
+	font-family: "Modak", sans-serif;
+	margin-bottom: 0.5em;
+	font-size: 2em;
+	font-weight: normal;
+}
+
+#rate-it-modal-overlay .service-title {
+	margin-bottom: 1em;
+}
+
+#rate-it-modal-overlay .service-title h3 {
+	font-family: "EB Garamond", serif;
+	font-size: 1.4em;
+	color: #333;
+	margin: 0;
+}
+
+#rate-it-modal-overlay textarea {
+	width: 100%;
+	min-height: 120px;
+	padding: 0.8em;
+	border-radius: 8px;
+	border: 1.5px solid #ccc;
+	font-size: 1.1em;
+	font-family: "Cormorant Garamond", serif;
+	resize: vertical;
+	margin-bottom: 1em;
+	box-sizing: border-box;
+}
+
+#rate-it-modal-overlay textarea:focus {
+	outline: none;
+	border: 2px solid var(--yellow);
+}
+
+#rate-it-modal-overlay .rating-section {
+	margin: 1em 0;
+}
+
+#rate-it-modal-overlay .rating-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-bottom: 1em;
+}
+
+#rate-it-modal-overlay .rating-container label {
+	margin-bottom: 0.5em;
+	font-weight: bold;
+	font-family: "Cormorant Garamond", serif;
+	font-size: 1.1em;
+}
+
+#rate-it-modal-overlay .stars-container {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	margin-bottom: 0.5em;
+}
+
+#rate-it-modal-overlay .stars {
+	display: flex;
+	cursor: pointer;
+	font-size: 2.5em;
+	line-height: 1;
+	gap: 0.1em;
+	/* Add spacing between stars */
+}
+
+#rate-it-modal-overlay .star-icon {
+	color: #ddd;
+	position: relative;
+	font-style: normal;
+	transition: color 0.2s ease-in-out;
+	cursor: pointer;
+	user-select: none;
+	width: 1em;
+	/* Make each star a consistent width */
+	text-align: center;
+	/* Center the star character */
+}
+
+#rate-it-modal-overlay .star-icon.active {
+	color: var(--yellow);
+}
+
+#rate-it-modal-overlay .star-icon.active.half-filled {
+	position: relative;
+	color: #e0e0e0;
+}
+
+#rate-it-modal-overlay .star-icon.active.half-filled::before {
+	content: "★";
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 50%;
+	overflow: hidden;
+	color: var(--yellow);
+}
+
+/* Old half star style - keeping for backward compatibility */
+#rate-it-modal-overlay .star-icon.active.half {
+	position: relative;
+	display: inline-block;
+}
+
+/* Make the star larger for better click targets */
+@media (max-width: 600px) {
+	#rate-it-modal-overlay .modal-content {
+		min-width: 300px;
+		max-width: 95%;
+		padding: 1.5em;
+	}
+
+	#rate-it-modal-overlay h2 {
+		font-size: 1.7em;
+	}
+
+	#rate-it-modal-overlay .stars {
+		font-size: 1.6em;
+	}
+}

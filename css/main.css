@@ -2,8 +2,18 @@
 
 @import url("components.css");
 
+/* Modal CSS files */
 @import url("modals/modal-animations.css");
-@import url("modals/modals.css");
+@import url("modals/modal-base.css");
+@import url("modals/auth-modals.css");
+@import url("modals/go-flow-modal.css");
+@import url("modals/profile-modal.css");
+@import url("modals/service-modals.css");
+@import url("modals/subcategory-modal.css");
+@import url("modals/irreversible-modal.css");
+@import url("modals/rate-it-modal.css");
+@import url("modals/checkout-modals.css");
+@import url("modals/tiny-modal.css");
 
 @import url("pages/home.css");
 @import url("pages/category.css");
@@ -13,7 +23,6 @@
 @import url("pages/service-display.css");
 @import url('pages/search.css');
 @import url('pages/admin.css');
-@import url('pages/home.css');
 @import url('pages/see-more.css');
 
 @import url("responsive/home-responsive.css");

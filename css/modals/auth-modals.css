@@ -1,0 +1,35 @@
+/* =========================== */
+/* SIGN-UP AND SIGN-IN MODALS */
+/* =========================== */
+
+/* Z-index boost when modal is active */
+#signup-modal,
+#signin-modal {
+	z-index: 1001;
+}
+
+/*--- SIGNUP MODAL SPECIFICS ---*/
+
+/* Purple heading for signup */
+#h2-signup {
+	color: var(--purple);
+}
+
+/* Purple focus border for signup inputs */
+#signup-modal .form input:focus {
+	outline: none;
+	border: 2px solid var(--purple);
+}
+
+/*--- SIGNIN MODAL SPECIFICS ---*/
+
+/* Yellow heading for signin */
+#h2-signin {
+	color: var(--yellow);
+}
+
+/* Yellow focus border for signin inputs */
+#signin-modal .form input:focus {
+	outline: none;
+	border: 2px solid var(--yellow);
+}
