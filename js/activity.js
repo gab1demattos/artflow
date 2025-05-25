@@ -31,38 +31,31 @@ document.addEventListener("DOMContentLoaded", function () {
 				});
 				sortedOrders.forEach((order) => {
 					const isCompleted = order.status === "completed";
+					// Only show Rate it button if order is completed and not rated
 					yourOrders.innerHTML += `
-                    <div class="order-card">
+                    <div class="order-card" data-order-id="${order.id}">
                         <div class="order-header">
-                            <span class="order-title" data-service-id="${
-															order.service_id
-														}" style="cursor: pointer;">${order.title}</span>
-                            <span class="order-status ${
-															isCompleted ? "completed" : "in-progress"
-														}">${
-						isCompleted ? "Completed" : "In Progress"
-					}</span>
+                            <span class="order-title" data-service-id="${order.service_id
+						}" style="cursor: pointer;">${order.title}</span>
+                            <span class="order-status ${isCompleted ? "completed" : "in-progress"
+						}">${isCompleted ? "Completed" : "In Progress"
+						}</span>
                         </div>
                         <div class="order-details">
-                            <div><strong>Seller:</strong> ${
-															order.seller_name
-														} (@${order.seller_username})</div>
-                            <div><strong>Delivery:</strong> ${
-															order.delivery_time
-														} days</div>
-                            <div><strong>Requirements:</strong> ${
-															order.requirements
-														}</div>
+                            <div><strong>Seller:</strong> ${order.seller_name
+						} (@${order.seller_username})</div>
+                            <div><strong>Delivery:</strong> ${order.delivery_time
+						} days</div>
+                            <div><strong>Requirements:</strong> ${order.requirements
+						}</div>
                             <div><strong>Total:</strong> ${order.price}€</div>
-                            <div><strong>Date:</strong> ${
-															order.date ? order.date.split(" ")[0] : ""
-														}</div>
+                            <div><strong>Date:</strong> ${order.date ? order.date.split(" ")[0] : ""
+						}</div>
                         </div>
-                        ${
-													isCompleted
-														? `<button class="rate-it-btn" data-service-id="${order.service_id}" data-service-title="${order.title}">Rate it!</button>`
-														: ""
-												}
+                        ${isCompleted && !order.rated
+							? `<button class="rate-it-btn" data-service-id="${order.service_id}" data-service-title="${order.title}" data-exchange-id="${order.id}">Rate it!</button>`
+							: ""
+						}
                     </div>`;
 				});
 
@@ -91,35 +84,27 @@ document.addEventListener("DOMContentLoaded", function () {
 					ordersFromOthers.innerHTML += `
                     <div class="order-card" data-order-id="${order.id}">
                         <div class="order-header">
-                            <span class="order-title" data-service-id="${
-															order.service_id
-														}" style="cursor: pointer;">${order.title}</span>
-                            <span class="order-status ${
-															delivered ? "delivered" : "not-delivered"
-														}">${
-						delivered ? "Delivered" : "Not Delivered"
-					}</span>
+                            <span class="order-title" data-service-id="${order.service_id
+						}" style="cursor: pointer;">${order.title}</span>
+                            <span class="order-status ${delivered ? "delivered" : "not-delivered"
+						}">${delivered ? "Delivered" : "Not Delivered"
+						}</span>
                         </div>
                         <div class="order-details">
-                            <div><strong>Buyer:</strong> ${
-															order.buyer_name
-														} (@${order.buyer_username})</div>
-                            <div><strong>Delivery:</strong> ${
-															order.delivery_time
-														} days</div>
-                            <div><strong>Requirements:</strong> ${
-															order.requirements
-														}</div>
+                            <div><strong>Buyer:</strong> ${order.buyer_name
+						} (@${order.buyer_username})</div>
+                            <div><strong>Delivery:</strong> ${order.delivery_time
+						} days</div>
+                            <div><strong>Requirements:</strong> ${order.requirements
+						}</div>
                             <div><strong>Total:</strong> ${order.price}€</div>
-                            <div><strong>Date:</strong> ${
-															order.date ? order.date.split(" ")[0] : ""
-														}</div>
+                            <div><strong>Date:</strong> ${order.date ? order.date.split(" ")[0] : ""
+						}</div>
                         </div>
-                        ${
-													!delivered
-														? '<button class="mark-delivered-btn">Mark as Delivered</button>'
-														: ""
-												}
+                        ${!delivered
+							? '<button class="mark-delivered-btn">Mark as Delivered</button>'
+							: ""
+						}
                     </div>`;
 				});
 
@@ -179,6 +164,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			button.addEventListener("click", function () {
 				const serviceId = this.getAttribute("data-service-id");
 				const serviceTitle = this.getAttribute("data-service-title");
+				const exchangeId = this.getAttribute("data-exchange-id");
 
 				console.log("Rate It button clicked:", serviceId, serviceTitle);
 
@@ -200,6 +186,7 @@ document.addEventListener("DOMContentLoaded", function () {
 								</div>
 								<form id="rate-it-form" action="/actions/submit-review.php" method="POST">
 									<input type="hidden" name="service_id" value="${serviceId}">
+									<input type="hidden" name="exchange_id" value="${exchangeId}">
 									<input type="hidden" name="rating" id="rating-value" value="0">
 									
 									<div class="form-group">
@@ -281,10 +268,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
 							const rating = document.getElementById("rating-value").value;
 							const reviewText = document.getElementById("review-text").value;
+							const exchangeId = document.querySelector(
+								"input[name='exchange_id']"
+							).value;
 
 							// Create URL-encoded form data
 							const formData = new URLSearchParams();
 							formData.append("service_id", serviceId);
+							formData.append("exchange_id", exchangeId);
 							formData.append("rating", rating);
 							formData.append("review_text", reviewText);
 							formData.append("make_public", "0");
@@ -314,13 +305,20 @@ document.addEventListener("DOMContentLoaded", function () {
 										// Success with JSON response
 										rateItModal.style.display = "none";
 
+										// Hide the Rate it button for this order
+										const orderCard = document.querySelector(`.order-card[data-order-id='${exchangeId}']`);
+										if (orderCard) {
+											const rateBtn = orderCard.querySelector('.rate-it-btn');
+											if (rateBtn) rateBtn.style.display = 'none';
+										}
+
 										// Redirect to the service page
 										window.location.href = "/pages/service.php?id=" + serviceId;
 									} else {
 										// Error
 										alert(
 											result.error ||
-												"An error occurred while submitting your review."
+											"An error occurred while submitting your review."
 										);
 									}
 								})

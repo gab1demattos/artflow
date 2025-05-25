@@ -52,10 +52,9 @@ if (!$seller) {
 $seller_id = $seller['user_id'];
 
 // Insert into Exchange (date will default to CURRENT_TIMESTAMP)
-$stmt = $db->prepare('INSERT INTO Exchange (client_id, freelancer_id, service_id, requirements, status) VALUES (?, ?, ?, ?, ?)');
+$stmt = $db->prepare('INSERT INTO Exchange (client_id, service_id, requirements, status) VALUES (?, ?, ?, ?)');
 $stmt->execute([
     $user['id'],
-    $seller_id,
     $service_id,
     $requirements,
     'in progress'

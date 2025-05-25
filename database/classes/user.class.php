@@ -247,7 +247,7 @@ class User
             }
 
             // 5. Delete exchanges involving the user
-            $stmt = $db->prepare('DELETE FROM Exchange WHERE freelancer_id = ? OR client_id = ?');
+            $stmt = $db->prepare('DELETE FROM Exchange WHERE client_id = ? OR service_id IN (SELECT id FROM Service WHERE user_id = ?)');
             $stmt->execute([$userId, $userId]);
 
             // 6. Delete the user's services

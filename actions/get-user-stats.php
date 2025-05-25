@@ -15,12 +15,12 @@ $db = Database::getInstance();
 $userId = $user['id'];
 
 // Total earnings (sum of price for completed orders as freelancer)
-$stmt = $db->prepare('SELECT SUM(s.price) as total FROM Exchange e JOIN Service s ON e.service_id = s.id WHERE e.freelancer_id = ? AND e.status = ?');
+$stmt = $db->prepare('SELECT SUM(s.price) as total FROM Exchange e JOIN Service s ON e.service_id = s.id WHERE s.user_id = ? AND e.status = ?');
 $stmt->execute([$userId, 'completed']);
 $totalEarnings = floatval($stmt->fetchColumn() ?: 0);
 
 // Number of completed services (as freelancer)
-$stmt = $db->prepare('SELECT COUNT(*) FROM Exchange WHERE freelancer_id = ? AND status = ?');
+$stmt = $db->prepare('SELECT COUNT(*) FROM Exchange e JOIN Service s ON e.service_id = s.id WHERE s.user_id = ? AND e.status = ?');
 $stmt->execute([$userId, 'completed']);
 $completedServices = intval($stmt->fetchColumn());
 
@@ -30,7 +30,7 @@ $stmt->execute([$userId]);
 $currentListings = intval($stmt->fetchColumn());
 
 // Earnings per day (date, sum of price for completed orders as freelancer)
-$stmt = $db->prepare('SELECT DATE(e.date) as day, SUM(s.price) as amount FROM Exchange e JOIN Service s ON e.service_id = s.id WHERE e.freelancer_id = ? AND e.status = ? GROUP BY day ORDER BY day ASC');
+$stmt = $db->prepare('SELECT DATE(e.date) as day, SUM(s.price) as amount FROM Exchange e JOIN Service s ON e.service_id = s.id WHERE s.user_id = ? AND e.status = ? GROUP BY day ORDER BY day ASC');
 $stmt->execute([$userId, 'completed']);
 $earningsPerDay = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
