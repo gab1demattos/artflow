@@ -271,8 +271,11 @@ document.addEventListener("DOMContentLoaded", () => {
 			if (filterSearch) filterSearch.classList.add("hidden");
 			if (SearchBarPage) SearchBarPage.classList.add("names-active");
 
-			// Load search results for names
+			// Load search results for names - this triggers the initial user display
 			loadSearchResults("names", SearchInputPage);
+			
+			// Also call initial to show all users immediately
+			initial("names");
 		});
 	}
 
@@ -414,7 +417,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             <div class="user-card">
                                 <div class="user-info">
                                     <img src="${user.profilePicture || "/images/user_pfp/default.png"}" alt="User profile picture" class="user-profile-picture" />
-                                    <p class="user-username">${user.name}</p>
+                                    <p class="user-name">${user.name}</p>
                                     <p class="user-username">@${user.username}</p>
                                 </div>
                             </div>
