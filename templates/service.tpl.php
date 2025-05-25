@@ -33,7 +33,7 @@
     $stmtOwner->execute([$service['id']]);
     $owner = $stmtOwner->fetch(PDO::FETCH_ASSOC);
     ?>
-    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="/css/main.css">
     <div id="service-display">
         <div id="service-main">
             <div id="images-service">
@@ -116,7 +116,7 @@
         <div id="service-checkout">
             <h2><?= htmlspecialchars($service['title']) ?></h2>
             <div id="owner-info">
-                <a href="../pages/users/profile.php?username=<?= urlencode($owner['username']) ?>" style="display: flex; align-items: center; gap: 0.5em; text-decoration: none; color: inherit;">
+                <a href="/pages/users/profile.php?username=<?= urlencode($owner['username']) ?>" style="display: flex; align-items: center; gap: 0.5em; text-decoration: none; color: inherit;">
                     <img src="<?= ($owner['profile_image'] !== null && $owner['profile_image'] !== '') ? htmlspecialchars($owner['profile_image']) : '/images/user_pfp/default.png' ?>" alt="User Icon">
                     <div style="display: flex; flex-direction: row; align-items: center; gap: 0.5em;">
                         <p style="margin: 0; font-weight: 600;"><?= htmlspecialchars($owner['name']) ?></p>
@@ -133,7 +133,7 @@
                 </div>
                 <div id="service-options">
                     <?php if ($user && $service['user_id'] != $user['id']): ?>
-                        <a href="../pages/users/messages.php?user_id=<?= $service['user_id'] ?>" class="service-options" id="message">Message <?= htmlspecialchars(explode(' ', $owner['name'])[0]) ?></a>
+                        <a href="/pages/users/messages.php?user_id=<?= $service['user_id'] ?>" class="service-options" id="message">Message <?= htmlspecialchars(explode(' ', $owner['name'])[0]) ?></a>
                         <button id="payment" class="service-options">Continue to Payment</button>
                     <?php elseif (!$user): ?>
     <div class="service-warning">Sign up to message and order</div>
