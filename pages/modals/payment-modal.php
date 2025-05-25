@@ -2,6 +2,14 @@
 <div id="payment-modal-overlay" class="modal-overlay hidden">
     <div class="modal">
         <div class="modal-content">
+            <div class="order-overview-section" id="order-overview-section">
+                <h3>Order Overview</h3>
+                <p id="order-title">Service: <span></span></p>
+                <p id="order-owner">Seller: <span></span></p>
+                <p id="order-delivery">Delivery: <span></span></p>
+                <p id="order-requirements">Requirements: <span></span></p>
+                <div class="order-total">Total: <span id="order-total"></span> €</div>
+            </div>
             <div class="payment-form-section">
                 <h2>Payment Details</h2>
                 <form id="payment-form" autocomplete="off">
@@ -28,14 +36,6 @@
                         <button type="button" id="close-payment-modal" class="button outline">Cancel</button>
                     </div>
                 </form>
-            </div>
-            <div class="order-overview-section" id="order-overview-section">
-                <h3>Order Overview</h3>
-                <p id="order-title">Service: <span></span></p>
-                <p id="order-owner">Seller: <span></span></p>
-                <p id="order-delivery">Delivery: <span></span></p>
-                <p id="order-requirements">Requirements: <span></span></p>
-                <div class="order-total">Total: <span id="order-total"></span> €</div>
             </div>
         </div>
     </div>

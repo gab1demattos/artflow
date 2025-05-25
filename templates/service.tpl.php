@@ -34,6 +34,7 @@
     $owner = $stmtOwner->fetch(PDO::FETCH_ASSOC);
     ?>
     <link rel="stylesheet" href="/css/responsive/service-responsive.css">
+    <link rel="stylesheet" href="/css/responsive/checkout-responsive.css">
     <link rel="stylesheet" href="/css/modals.css">
     <div id="service-display">
         <div id="service-main">

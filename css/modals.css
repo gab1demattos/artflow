@@ -713,17 +713,32 @@ h4.important-changes {
 	padding-right: 2em;
 }
 
+@media screen and (max-width: 767px) {
+	#requirements-modal-overlay .modal-content {
+		min-width: 0;
+		/* Remove min-width constraint on mobile */
+	}
+}
+
 #payment-modal-overlay .modal-content {
 	min-width: 700px;
 	min-height: 340px;
 	max-width: 900px;
 	display: flex;
-	flex-direction: row;
+	flex-direction: row-reverse;
+	/* Reverse order for desktop view */
 	justify-content: space-between;
 	box-sizing: border-box;
 	padding-left: 2em;
 	padding-right: 2em;
 	gap: 2em;
+}
+
+@media screen and (max-width: 767px) {
+	#payment-modal-overlay .modal-content {
+		min-width: 0;
+		/* Remove min-width constraint on mobile */
+	}
 }
 
 #payment-modal-overlay .payment-form-section {
