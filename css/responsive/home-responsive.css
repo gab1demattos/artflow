@@ -296,6 +296,10 @@
 		padding: 0 !important;
 		overflow: visible !important;
 	}
+
+    #flow-title {
+        display: none !important; /* Hide the flow title on mobile */
+    }
 }
 
 /* ================================== */
