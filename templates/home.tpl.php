@@ -11,13 +11,8 @@ function drawHeader($user, $currentPage = '')
         <title>artflow</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" href="/images/a.png" type="image/png">
+        <link rel="icon" href="../images/a.png" type="image/png">
         <link rel="stylesheet" href="/css/main.css">
-        <link rel="stylesheet" href="/css/responsive/global-responsive.css">
-        <link rel="stylesheet" href="/css/see-more.css">
-        <link rel="stylesheet" href="/css/responsive/new-service-responsive.css">
-        <link rel="stylesheet" href="/css/modals/modal-animations.css">
-        <link rel="stylesheet" href="/css/search-icon.css">
     </head>
 
     <body>
@@ -25,7 +20,7 @@ function drawHeader($user, $currentPage = '')
             <h1><a href="/" class='artflow-text'>artflow</a></h1>
             <nav id="menu">
                 <ul id="buttons">
-                    <li><a href="/pages/search.php" id="search-icon-link"><img src="/images/logos/search2.svg" alt="Search" id="search-icon"></a></li>
+                    <li><a href="../pages/services/search.php" id="search-icon-link"><img src="../images/logos/search2.svg" alt="Search" id="search-icon"></a></li>
                     <?php if (!$user): ?>
                         <li><button class="button filled hovering">Sign Up</button></li>
                     <?php else: ?>
@@ -39,9 +34,9 @@ function drawHeader($user, $currentPage = '')
             <div id="sidebar">
                 <div id="profile">
                     <?php
-                    echo '<a href="/pages/profile.php?username=' . htmlspecialchars($user['username']) . '" id="profile-link" aria-label="View Profile">'
+                    echo '<a href="../pages/users/profile.php?username=' . htmlspecialchars($user['username']) . '" id="profile-link" aria-label="View Profile">'
                     ?>
-                    <img src="<?= isset($user['profile_image']) && $user['profile_image'] ? htmlspecialchars($user['profile_image']) : '/images/user_pfp/default.png' ?>" alt="Avatar" id="avatar-sidebar" class="profile-img">
+                    <img src="<?= isset($user['profile_image']) && $user['profile_image'] ? htmlspecialchars($user['profile_image']) : '../images/user_pfp/default.png' ?>" alt="Avatar" id="avatar-sidebar" class="profile-img">
                     <div>
                         <h2 id="profile-name"><?= htmlspecialchars($user['name']) ?></h2>
                         <h3 id="profile-username">@<?= htmlspecialchars($user['username']) ?></h3>
@@ -50,36 +45,36 @@ function drawHeader($user, $currentPage = '')
                 </div>
                 <ul id="sidebar-list">
                     <li class="sidebar-item" id="new-service-button">
-                        <img src="/images/logos/add_circle.png" alt="New Service" class="logo">
+                        <img src="../images/logos/add_circle.png" alt="New Service" class="logo">
                         <button id="open-new-service-modal">New Service</button>
                     </li>
                     <li class="sidebar-item">
-                        <img src="/images/logos/activity.png" alt="Activity" class="logo">
-                        <a href="/pages/activity.php"><button>Activity</button></a>
+                        <img src="../images/logos/activity.png" alt="Activity" class="logo">
+                        <a href="../pages/info/activity.php"><button>Activity</button></a>
                     </li>
                     <li class="sidebar-item">
-                        <img src="/images/logos/messages.png" alt="Messages" class="logo">
-                        <a href="/pages/messages.php"><button>Messages</button></a>
+                        <img src="../images/logos/messages.png" alt="Messages" class="logo">
+                        <a href="../pages/users/messages.php"><button>Messages</button></a>
                     </li>
                     <li class="sidebar-item">
-                        <img src="/images/logos/stats.png" alt="Stats" class="logo">
-                        <a href="/pages/stats.php"><button>Stats</button></a>
+                        <img src="../images/logos/stats.png" alt="Stats" class="logo">
+                        <a href="../pages/info/stats.php"><button>Stats</button></a>
                     </li>
                     <?php if (isset($user['user_type']) && $user['user_type'] === 'admin'): ?>
                         <li class="sidebar-item">
-                            <img src="/images/logos/admin_panel.png" alt="Admin Panel" class="logo">
-                            <a href="/pages/admin.php"><button>Admin Panel</button></a>
+                            <img src="../images/logos/admin_panel.png" alt="Admin Panel" class="logo">
+                            <a href="../pages/users/admin.php"><button>Admin Panel</button></a>
                         </li>
                     <?php endif; ?>
 
                     <li class="sidebar-item" id="logout-button">
-                        <img src="/images/logos/logout.png" alt="Log Out" class="logo">
-                        <form action="/actions/login/logout.php" method="post"><button>Log Out</button></form>
+                        <img src="../images/logos/logout.png" alt="Log Out" class="logo">
+                        <form action="../actions/login/logout.php" method="post"><button>Log Out</button></form>
                     </li>
                 </ul>
             </div>
             <div id="overlay" onclick="closeSidebar()"></div>
-            <script src="/js/sidebar.js"></script>
+            <script src="../js/others/sidebar.js"></script>
         <?php endif; ?>
 
     <?php } ?>
@@ -123,14 +118,14 @@ function drawHeader($user, $currentPage = '')
                             $stmt->execute([$category['id']]);
                             $subcategories = $stmt->fetchAll(PDO::FETCH_COLUMN);
                         ?>
-                            <a href="/pages/category.php?id=<?= $category['id'] ?>" class="category-item" style="text-decoration:none;color:inherit;" aria-label="View category <?= htmlspecialchars($category['category_type']) ?>">
+                            <a href="../pages/services/category.php?id=<?= $category['id'] ?>" class="category-item" style="text-decoration:none;color:inherit;" aria-label="View category <?= htmlspecialchars($category['category_type']) ?>">
 
                                 <span class="category-link" style="pointer-events:none;"><?= htmlspecialchars($category['category_type']) ?></span>
 
                             </a>
                         <?php endforeach; ?>
                     </div>
-                    <a id="link" href="/pages/see-more-categories.php">see more -></a>
+                    <a id="link" href="../pages/services/see-more-categories.php">see more -></a>
                 </div>
                 <?php if ($user && isset($user['user_type']) && $user['user_type'] === 'admin'): ?>
                     <div id="category-modal-overlay" class="modal-overlay hidden">
@@ -138,7 +133,7 @@ function drawHeader($user, $currentPage = '')
                             <div class="modal-content">
                                 <div class="form-container">
                                     <h2>Add Category</h2>
-                                    <form id="category-form" class="form" action="/actions/adminpanel/add-category.php" method="post" enctype="multipart/form-data">
+                                    <form id="category-form" class="form" action="../actions/adminpanel/add-category.php" method="post" enctype="multipart/form-data">
                                         <input type="text" name="category_name" placeholder="Category name" required>
                                         <input type="file" name="category_image" accept="image/*">
                                         <input type="text" name="subcategories" placeholder="Subcategories (comma separated)">
@@ -208,14 +203,14 @@ function drawHeader($user, $currentPage = '')
         <?php include __DIR__ . '/../pages/modals/new-service-modal.php'; ?>
 
         <!-- Load the modular JavaScript files -->
-        <script src="/js/modals.js"></script>
-        <script src="/js/categories.js"></script>
-        <script src="/js/app.js"></script>
+        <script src="../js/modal/modals.js"></script>
+        <script src="../js/services/categories.js"></script>
+        <script src="../js/others/app.js"></script>
         <!-- Keep script.js for backward compatibility -->
-        <script src="/js/script.js"></script>
-        <script src="/js/search.js"></script>
+        <script src="../js/others/script.js"></script>
+        <script src="../js/services/search.js"></script>
         <!-- Go with flow modal helper -->
-        <script src="/js/go-flow-helper.js"></script>
+        <script src="../js/others/go-flow-helper.js"></script>
         
         <!-- Check for and display session errors -->
         <?php if (isset($_SESSION['signup_error'])): ?>
