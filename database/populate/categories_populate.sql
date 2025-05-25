@@ -88,6 +88,6 @@ VALUES (6, 'Tattoo Design'),
     (6, 'Body Painting'),
     (6, 'Temporary Tattoo'),
     (6, 'Flash Art'),
-    (6, 'Custom Tattoo Concepts'),
+    (6, 'Custom Tattoo'),
     (6, 'Cover-up Design'),
     (6, 'Blackwork & Dotwork');
