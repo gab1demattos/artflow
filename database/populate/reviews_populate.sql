@@ -206,4 +206,181 @@ VALUES -- Reviews for Exchange ID 1: Client 5 ordered service 1 from freelancer 
         'The doll arrived with stitching issues and the outfit was nothing like what I requested. Very disappointed with the quality and attention to detail.',
         '2025-05-13 17:33:42',
         20
+    ),
+    -- Reviews for new exchanges
+    (
+        7,
+        21,
+        4.5,
+        'The minimalist digital portraits for our team were fantastic! Each one captured the personality perfectly while maintaining a consistent style. Minor adjustments needed for one portrait.',
+        '2025-05-23 09:45:18',
+        21
+    ),
+    (
+        8,
+        25,
+        5.0,
+        'Absolutely stunning pottery set! The craftsmanship is exceptional, and the custom glazing perfectly matches our wedding theme. Worth every penny!',
+        '2025-05-24 14:20:33',
+        22
+    ),
+    (
+        4,
+        30,
+        4.0,
+        'Beautiful henna design for our wedding. The intricate patterns were gorgeous, though the application took longer than expected. Still very happy with the result!',
+        '2025-05-24 16:55:27',
+        23
+    ),
+    (
+        9,
+        40,
+        4.5,
+        'The watercolor series exceeded expectations! Each painting captures the essence of nature beautifully. The artist really understood the vision.',
+        '2025-05-22 11:30:15',
+        25
+    ),
+    (
+        5,
+        45,
+        5.0,
+        'Incredible 3D visualization of our house design! The attention to detail, lighting, and materials is remarkable. The architect loved it too!',
+        '2025-05-21 13:40:52',
+        26
+    ),
+    (
+        3,
+        55,
+        4.0,
+        'The macramé installation is a beautiful centerpiece in our office. Great craftsmanship, though installation took a bit longer than planned.',
+        '2025-05-20 15:25:09',
+        28
+    ),
+    (
+        4,
+        60,
+        5.0,
+        'Exceptional animation work! Each character action is fluid and perfectly captures the intended mood. The extra expressions added were a wonderful bonus.',
+        '2025-05-17 14:20:33',
+        29
+    ),
+    (
+        5,
+        65,
+        4.5,
+        'The website design is modern and user-friendly. Great attention to responsive design and accessibility. Just needed minor tweaks to the contact form.',
+        '2025-05-18 16:45:27',
+        30
+    ),
+    (
+        7,
+        75,
+        5.0,
+        'The engagement ring is absolutely perfect! The attention to detail in the rose gold work and stone setting is exceptional. My fiancée loves it!',
+        '2025-05-19 10:30:15',
+        32
+    ),
+    (
+        8,
+        80,
+        4.5,
+        'Very professional product launch animation. The timing and transitions are perfect, and it really highlights our product features well.',
+        '2025-05-20 09:15:42',
+        33
+    ),
+    (
+        10,
+        90,
+        5.0,
+        'The silk scarf is a masterpiece! The cherry blossom pattern is delicate and the colors are vibrant. Excellent craftsmanship!',
+        '2025-05-21 11:25:18',
+        35
+    ),
+    (
+        11,
+        95,
+        4.5,
+        'Stunning VR walkthrough! The attention to lighting and materials makes it incredibly realistic. Client was very impressed.',
+        '2025-05-22 13:40:55',
+        36
+    ),
+    (
+        13,
+        105,
+        5.0,
+        'The dining table is absolutely gorgeous! The epoxy river design exceeded our expectations. A true piece of functional art.',
+        '2025-05-20 14:30:22',
+        38
+    ),
+    (
+        14,
+        110,
+        4.0,
+        'Great motion graphics work! The intro really matches our channel´s style. Would have liked slightly faster delivery.',
+        '2025-05-21 17:55:43',
+        39
+    ),
+    (
+        5,
+        120,
+        4.5,
+        'Excellent social media templates! Very versatile and easy to customize. Perfect for our brand´s aesthetic.',
+        '2025-05-22 12:15:31',
+        41
+    ),
+    (
+        6,
+        125,
+        5.0,
+        'The wedding invitation suite is perfect! Every piece is beautifully designed and the paper quality is excellent.',
+        '2025-05-23 14:20:17',
+        42
+    ),
+    (
+        7,
+        130,
+        4.5,
+        'Outstanding photo retouching work! Natural-looking results that enhanced each photo while maintaining authenticity.',
+        '2025-05-24 09:35:48',
+        43
+    ),
+    (
+        9,
+        140,
+        4.0,
+        'Solid storyboard work that really helped visualize our commercial. Communication was great throughout the process.',
+        '2025-05-23 11:45:29',
+        45
+    ),
+    (
+        10,
+        145,
+        5.0,
+        'The meditation app interface is both beautiful and intuitive. User testing showed great results!',
+        '2025-05-22 16:30:12',
+        46
+    ),
+    (
+        12,
+        155,
+        5.0,
+        'Amazing wedding photography! Captured every special moment and delivered a beautiful collection of memories.',
+        '2025-05-21 15:25:38',
+        48
+    ),
+    (
+        13,
+        160,
+        4.5,
+        'The e-commerce site works flawlessly. Great features and smooth payment integration. Minor delay in delivery.',
+        '2025-05-20 17:40:53',
+        49
+    ),
+    (
+        14,
+        165,
+        4.0,
+        'Beautiful throw pillows with excellent print quality. Colors match our interior perfectly.',
+        '2025-05-19 13:15:27',
+        50
     );

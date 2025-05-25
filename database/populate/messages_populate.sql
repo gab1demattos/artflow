@@ -579,4 +579,214 @@ VALUES (
         4,
         2,
         'That sounds perfect. I can prepare a demonstration and then work with each participant. Let me know what date works for your group.'
+    ),
+    -- Marcus and Rachel discussing photography
+    (
+        23,
+        24,
+        'Hi Rachel, I saw you do photography. Could you help me with product shots of my digital art prints?'
+    ),
+    (
+        24,
+        23,
+        'Of course, Marcus! I specialize in art photography. Do you have the prints ready?'
+    ),
+    (
+        23,
+        24,
+        'I''ll have them ready by next week. They''re metallic prints, so we''ll need good lighting to capture the effect.'
+    ),
+    (
+        24,
+        23,
+        'Perfect! Metallic prints are tricky but I have experience with those. My studio has specialized lighting for reflective surfaces.'
+    ),
+    -- Sophia and Adrian discussing VFX collaboration
+    (
+        26,
+        27,
+        'Adrian, I''m working on a project that needs both particle effects and motion graphics. Would you be interested in collaborating?'
+    ),
+    (
+        27,
+        26,
+        'Definitely! That''s right up my alley. What kind of project is it?'
+    ),
+    (
+        26,
+        27,
+        'It''s a title sequence for an indie film. I''m handling the particle systems but could use your expertise on the motion graphics.'
+    ),
+    (
+        27,
+        26,
+        'Sounds exciting! Send me the concept art and we can discuss the visual style you''re going for.'
+    ),
+    -- Luna and Victor discussing art education
+    (
+        31,
+        29,
+        'Victor, I''m putting together an online course on concept art. Would you be interested in doing a guest lecture on street art influences?'
+    ),
+    (
+        29,
+        31,
+        'That would be amazing! I love sharing how street art can inspire digital work.'
+    ),
+    (
+        31,
+        29,
+        'Great! I''m thinking a 45-minute session about your transition from street art to digital and your creative process.'
+    ),
+    (
+        29,
+        31,
+        'Perfect timing. I just finished a piece that combines both styles. I can use it as a case study.'
+    ),
+    -- Elena and Kai discussing game assets
+    (
+        36,
+        37,
+        'Hey Kai, I heard you''re looking for 3D models for your game environment. I''d love to help!'
+    ),
+    (
+        37,
+        36,
+        'Elena! Yes, I need some environmental props and possibly some creature models.'
+    ),
+    (
+        36,
+        37,
+        'I can handle both. My 3D printing background helps me create very printable game assets too, if you ever want to make merchandise.'
+    ),
+    (
+        37,
+        36,
+        'That''s perfect! Let''s start with the environment props. I''ll send you the art direction document.'
+    ),
+    -- Hassan and Beatrice discussing architectural visualization
+    (
+        39,
+        38,
+        'Beatrice, I''m working on an architectural project and could use some help with the interior visualization.'
+    ),
+    (
+        38,
+        39,
+        'I''d be happy to help, Hassan. What kind of space are you working on?'
+    ),
+    (
+        39,
+        38,
+        'It''s a modern art gallery. I need help with the lighting and material design.'
+    ),
+    (
+        38,
+        39,
+        'That''s exactly the kind of project I enjoy. Send me the floor plans and we can discuss the aesthetic direction.'
+    ),
+    -- Nadia and Oscar discussing animation
+    (
+        42,
+        43,
+        'Oscar, I have some character rigs that need storyboarding for an animated short. Would you be interested?'
+    ),
+    (
+        43,
+        42,
+        'I''d love to help, Nadia! Your character rigs are always fun to work with.'
+    ),
+    (
+        42,
+        43,
+        'Great! It''s a 2-minute sequence with lots of action. I''ll send you the character sheets and story outline.'
+    ),
+    (
+        43,
+        42,
+        'Perfect timing! I just finished my current project. When do you need the storyboards?'
+    ),
+    -- Leo and Alice discussing mixed media
+    (
+        45,
+        46,
+        'Alice, I''m transitioning from traditional to digital sculpture and would love your insight on branding this new direction.'
+    ),
+    (
+        46,
+        45,
+        'I''d be happy to help, Leo! It''s all about highlighting how your traditional skills enhance your digital work.'
+    ),
+    (
+        45,
+        46,
+        'That''s exactly what I want to convey. Could we schedule a branding consultation?'
+    ),
+    (
+        46,
+        45,
+        'Of course! I have some ideas already. Let''s meet next week to discuss the direction.'
+    ),
+    -- Marco and Priya discussing product design
+    (
+        47,
+        48,
+        'Priya, your fantasy art style would work beautifully for a product line I''m developing. Would you be interested in licensing some artwork?'
+    ),
+    (
+        48,
+        47,
+        'That sounds intriguing, Marco! What kind of products are you designing?'
+    ),
+    (
+        47,
+        48,
+        'Eco-friendly home decor items - think wall art, throws, and decorative objects with a fantasy twist.'
+    ),
+    (
+        48,
+        47,
+        'I love the combination of sustainability and fantasy! Let''s discuss which pieces would work best for your products.'
+    ),
+    -- Cross-disciplinary collaborations
+    (
+        31,
+        42,
+        'Nadia, would you be interested in creating a workshop on rigging for my digital art students?'
+    ),
+    (
+        42,
+        31,
+        'That would be great, Luna! We could cover both basic and advanced rigging techniques.'
+    ),
+    (
+        36,
+        39,
+        'Hassan, I''d love to learn more about architectural visualization. Could we do a skill exchange?'
+    ),
+    (
+        39,
+        36,
+        'Absolutely! I could definitely use some pointers on digital sculpting in return. When are you free to start?'
+    ),
+    -- Mobile game project discussion
+    (
+        37,
+        23,
+        'Marcus, I need some character concepts for a mobile game. Your style would be perfect!'
+    ),
+    (
+        23,
+        37,
+        'Thanks, Kai! What''s the game about? I''d love to help create the characters.'
+    ),
+    (
+        37,
+        23,
+        'It''s a puzzle adventure game with a sci-fi theme. Need 5 main characters and some NPCs.'
+    ),
+    (
+        23,
+        37,
+        'Sounds fun! I have experience with mobile game art. Let''s make sure they look good even at small sizes.'
     );
