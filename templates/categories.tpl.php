@@ -5,7 +5,7 @@
             <h2>All Categories</h2>
             <div id="see-more-category-list">
                 <?php foreach ($categories as $category): ?>
-                    <a href="../pages/services/category.php?id=<?= $category['id'] ?>" class="see-more-category-card" style="text-decoration:none;color:inherit;" aria-label="View category <?= htmlspecialchars($category['category_type']) ?>">
+                    <a href="/pages/services/category.php?id=<?= $category['id'] ?>" class="see-more-category-card" style="text-decoration:none;color:inherit;" aria-label="View category <?= htmlspecialchars($category['category_type']) ?>">
                         <?php if (!empty($category['image'])): ?>
                             <div class="see-more-category-image-wrapper">
                                 <img src="<?= htmlspecialchars($category['image']) ?>" alt="<?= htmlspecialchars($category['category_type']) ?>" />
@@ -80,7 +80,7 @@
                         $serviceImage = count($serviceImages) > 0 ? $serviceImages[0] : null;
                 ?>
                         <div class="service-card" data-subcategory-ids="<?= htmlspecialchars($subcatIdsStr) ?>">
-                            <a href="../pages/services/service.php?id=<?= $service['id'] ?>" style="text-decoration: none; color: inherit;">
+                            <a href="/pages/services/service.php?id=<?= $service['id'] ?>" style="text-decoration: none; color: inherit;">
                                 <div class="pantone-image-wrapper">
                                     <?php if ($serviceImage): ?>
                                         <img src="<?= htmlspecialchars($serviceImage) ?>" alt="Service image" class="pantone-image" />

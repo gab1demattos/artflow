@@ -19,7 +19,7 @@ function drawServiceCard($service, $serviceImage = null, $subcatIdsStr = '')
     $formattedRating = number_format($avgRating, 1);
 
 ?>
-    <a href="../pages/services/service.php?id=<?= htmlspecialchars($service['id']) ?>" class="service-card-link">
+    <a href="/pages/services/service.php?id=<?= htmlspecialchars($service['id']) ?>" class="service-card-link">
         <div class="service-card" data-subcategory-ids="<?= htmlspecialchars($subcatIdsStr) ?>">
             <div class="pantone-image-wrapper">
                 <?php if ($serviceImage): ?>

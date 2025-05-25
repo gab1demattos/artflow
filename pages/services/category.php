@@ -180,7 +180,7 @@ drawHeader($user);
     </div>
 </main>
 <?php drawFooter($user); ?>
-<link rel="stylesheet" href="../../css/main.css">
+<link rel="stylesheet" href="/css/main.css">
 <!-- Load the modular JavaScript files -->
 <script src="/js/modal/modals.js"></script>
 <script src="/js/services/categories.js"></script>
