@@ -131,7 +131,7 @@ function drawHeader($user, $currentPage = '')
                             </a>
                         <?php endforeach; ?>
                     </div>
-                    <a id="link" href="/pages/see-more-categories.php">see more -></a>
+                    <button id="see-more" class="button filled orange" onclick="window.location.href='/pages/see-more-categories.php'">See More →</button>
                 </div>
                 <?php if ($user && isset($user['user_type']) && $user['user_type'] === 'admin'): ?>
                     <div id="category-modal-overlay" class="modal-overlay hidden">

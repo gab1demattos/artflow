@@ -226,13 +226,3 @@ header:first-of-type {
 	margin: 0;
 	height: 100%;
 }
-
-#flow-title {
-	position: absolute;
-	bottom: -1em;
-	left: -1em;
-	width: auto; 
-	height: auto;
-	z-index: 1;
-	pointer-events: none;
-}
