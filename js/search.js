@@ -188,7 +188,7 @@ document.addEventListener("DOMContentLoaded", () => {
 																					item.rating || "0.0"
 																				}</span>
                                         <span class="pantone-delivery-time">${
-																					service.price
+																					item.price
 																				}€</span>
                                     </div>
                                 </div>

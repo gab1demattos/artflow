@@ -20,7 +20,8 @@ $services = Service::getAllServices();
           'delivery_time' => $service->delivery_time,
           'image' => $service->getFirstImage(),
           'username' => $service->getUsername(),
-          'subcategories' => implode(',', $service->getSubcategoryIds())
+          'subcategories' => implode(',', $service->getSubcategoryIds()),
+          'rating' => $service->avg_rating ?? 0
           
       ];
   }, $services));
