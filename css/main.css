@@ -9,6 +9,7 @@
 @import url("pages/messages.css");
 @import url("pages/profile.css");
 @import url("pages/service-display.css");
+@import url('pages/search.css');
 
 @import url("responsive/footer-responsive.css");
 @import url("responsive/home-responsive.css");
@@ -19,7 +20,6 @@
 @import url('responsive/activity-responsive.css');
 @import url('responsive/stats-responsive.css');
 @import url('responsive/admin-responsive.css');
-@import url('search.css');
 @import url("responsive/search-responsive.css");
 
 

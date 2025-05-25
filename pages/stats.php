@@ -11,7 +11,7 @@ if (!$user) {
 
 drawHeader($user);
 ?>
-<link rel="stylesheet" href="/css/admin.css">
+<link rel="stylesheet" href="/css/pages/admin.css">
 <link rel="stylesheet" href="/css/components.css">
 <main class="admin-panel-container">
     <h2 class="admin-title" style="color:var(--green)">Your Freelancer Stats</h2>

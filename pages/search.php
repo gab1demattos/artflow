@@ -13,7 +13,7 @@ $db = Database::getInstance();
 // Pass the current page name to drawHeader
 drawHeader($user, 'search.php');
 drawSearchPage($db); ?>
-<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/pages/search.css">
 <link rel="stylesheet" href="/css/responsive/search-responsive.css">
 
 <!-- Load the modular JavaScript files -->
