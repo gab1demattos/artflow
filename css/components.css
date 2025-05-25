@@ -320,6 +320,12 @@ a.button {
 	padding: 0.5em;
 }
 
+#logout-button {
+	border-top: #3338 solid 1px;
+	padding-left: 0;
+	padding-top: 1em;
+}
+
 #settings {
 	box-sizing: border-box;
 	border-top: 1px solid #3338;
@@ -381,8 +387,8 @@ a.button {
 }
 
 #avatar-sidebar {
-	width: 5em;
-	height: 5em;
+	width: 7em;
+	height: auto;
 }
 
 #profile {
@@ -398,13 +404,14 @@ a.button {
 #profile-name {
 	margin: 0 auto;
 	font-weight: 100;
+	font-size: 1.4em;
 }
 
 #profile-username {
 	margin: 0 auto;
 	font-weight: 100;
 	font-size: normal;
-	text-align: center;
+	text-align: start;
 }
 
 #profile-link {
