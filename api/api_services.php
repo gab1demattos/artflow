@@ -18,6 +18,9 @@ $maxPrice = isset($_GET['max_price']) ? (float)$_GET['max_price'] : null;
 $maxDeliveryTime = isset($_GET['max_delivery_time']) ? (int)$_GET['max_delivery_time'] : null;
 $minRating = isset($_GET['min_rating']) ? (float)$_GET['min_rating'] : 0;
 
+// Debug logging
+error_log("API called with params: categories=" . implode(',', $categories) . ", minPrice=$minPrice, maxPrice=$maxPrice, maxDeliveryTime=$maxDeliveryTime, minRating=$minRating");
+
 if (!empty($categories)) {
     $services = Service::getServicesByCategories($db, $categories, $minPrice, $maxPrice, $maxDeliveryTime, $minRating);
 } else {
@@ -26,6 +29,8 @@ if (!empty($categories)) {
         ? Service::getAllServices($minPrice, $maxPrice, $maxDeliveryTime, $minRating)
         : Service::searchServices($db, $search, $minPrice, $maxPrice, $maxDeliveryTime, $minRating);
 }
+
+error_log("API returning " . count($services) . " services after filtering");
 
 echo json_encode(array_map(function ($service) {
     return [

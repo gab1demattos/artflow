@@ -409,41 +409,71 @@ document.addEventListener("DOMContentLoaded", () => {
 	const minPriceDisplay = document.getElementById("min-value");
 	const maxPriceDisplay = document.getElementById("max-value");
 
-	const updatePriceRange = async () => {
-		let minPrice = parseFloat(minPriceInput.value);
-		let maxPrice = parseFloat(maxPriceInput.value);
-
-		if (minPrice > maxPrice) {
-			minPrice = maxPrice;
-			minPriceInput.value = minPrice;
-		}
-
-		minPriceDisplay.textContent = minPrice;
-		maxPriceDisplay.textContent = maxPrice;
-
+	// Single consolidated function to fetch filtered services
+	async function fetchFilteredServices() {
 		const selectedCategories = Array.from(
 			document.querySelectorAll(
-				'.filter-option-category input[type="checkbox"]'
+				'.filter-option-category input[type="checkbox"]:checked'
 			)
-		)
-			.filter((cb) => cb.checked)
-			.map((cb) => cb.id.replace("filter-option-", ""));
+		).map((cb) => cb.id.replace("filter-option-", ""));
 
-		console.log("Selected Categories:", selectedCategories);
-		console.log("Price Range:", minPrice, maxPrice);
+		// Use safe defaults and check if elements exist
+		let minPrice = 0;
+		let maxPrice = 1000;
+		let maxDeliveryTime = 30;
+		let minRating = currentFilterRating;
+
+		const minPriceElement = document.querySelector(".min-price");
+		const maxPriceElement = document.querySelector(".max-price");
+		const deliveryTimeElement = document.getElementById("delivery-time");
+
+		if (minPriceElement) {
+			minPrice = parseFloat(minPriceElement.value) || 0;
+		}
+
+		if (maxPriceElement) {
+			maxPrice = parseFloat(maxPriceElement.value) || 1000;
+		}
+
+		if (deliveryTimeElement) {
+			maxDeliveryTime = parseFloat(deliveryTimeElement.value) || 30;
+		}
+
+		console.log("Fetching services with filters:", {
+			categories: selectedCategories,
+			minPrice,
+			maxPrice,
+			maxDeliveryTime,
+			minRating,
+		});
+
+		// Build the API URL - ensure min_rating is always included
+		let apiUrl = `/api/api_services.php?categories=${selectedCategories.join(",")}&min_price=${minPrice}&max_price=${maxPrice}&max_delivery_time=${maxDeliveryTime}`;
+		
+		// Always include min_rating parameter
+		apiUrl += `&min_rating=${minRating}`;
+		
+		console.log("API URL:", apiUrl);
 
 		try {
-			const response = await fetch(
-				`/api/api_services.php?categories=${selectedCategories.join(
-					","
-				)}&min_price=${minPrice}&max_price=${maxPrice}`
-			);
+			const response = await fetch(apiUrl);
+			
+			if (!response.ok) {
+				throw new Error(`HTTP error! status: ${response.status}`);
+			}
+			
 			const services = await response.json();
+			
+			console.log("API Response:", services);
+			console.log("Number of services returned:", services.length);
+			console.log("Applied rating filter:", minRating);
 
+			const searchResults = document.getElementById("search-results");
 			searchResults.innerHTML = ""; // Clear previous results
 
 			if (services.length > 0) {
 				services.forEach((service) => {
+					console.log("Processing service:", service.title, "Rating:", service.rating);
 					const serviceCard = document.createElement("a");
 					serviceCard.href = `/pages/service.php?id=${encodeURIComponent(
 						service.id
@@ -475,6 +505,7 @@ document.addEventListener("DOMContentLoaded", () => {
 					searchResults.appendChild(serviceCard);
 				});
 			} else {
+				console.log("No services found - showing empty message");
 				searchResults.innerHTML =
 					"<p>No services found for the selected filters.</p>";
 			}
@@ -483,23 +514,48 @@ document.addEventListener("DOMContentLoaded", () => {
 			searchResults.innerHTML =
 				"<p>Error loading services. Please try again later.</p>";
 		}
+	}
+
+	// Update the category checkbox event handler to use fetchFilteredServices
+	categoryCheckboxes.forEach((checkbox) => {
+		checkbox.addEventListener("change", fetchFilteredServices);
+	});
+
+	// Update the price range handlers to use fetchFilteredServices
+	const updatePriceRange = async () => {
+		let minPrice = parseFloat(minPriceInput.value);
+		let maxPrice = parseFloat(maxPriceInput.value);
+
+		if (minPrice > maxPrice) {
+			minPrice = maxPrice;
+			minPriceInput.value = minPrice;
+		}
+
+		minPriceDisplay.textContent = minPrice;
+		maxPriceDisplay.textContent = maxPrice;
+
+		// Use the centralized fetchFilteredServices function
+		fetchFilteredServices();
 	};
 
 	minPriceInput.addEventListener("input", () => {
 		if (parseFloat(minPriceInput.value) > parseFloat(maxPriceInput.value)) {
 			minPriceInput.value = maxPriceInput.value;
 		}
-		updatePriceRange();
+		fetchFilteredServices();
 	});
 
 	maxPriceInput.addEventListener("input", () => {
-		console.log("Max Price Input Changed:", maxPriceInput.value); // Debugging log
+		console.log("Max Price Input Changed:", maxPriceInput.value);
 		if (parseFloat(maxPriceInput.value) < parseFloat(minPriceInput.value)) {
 			maxPriceInput.value = minPriceInput.value;
 		}
-		maxPriceDisplay.textContent = maxPriceInput.value; // Ensure maxPriceDisplay is updated
-		updatePriceRange();
+		maxPriceDisplay.textContent = maxPriceInput.value;
+		fetchFilteredServices();
 	});
+
+	// Update delivery time handler to use fetchFilteredServices
+	deliveryTimeInput.addEventListener("change", fetchFilteredServices);
 
 	deliveryTimeInput.addEventListener("change", async () => {
 		const maxDeliveryTime = parseFloat(deliveryTimeInput.value);
@@ -651,111 +707,6 @@ document.addEventListener("DOMContentLoaded", () => {
 		filterStarsContainer.addEventListener("mouseleave", function () {
 			updateFilterStarDisplay(currentFilterRating);
 		});
-	}
-
-	// Single consolidated function to fetch filtered services
-	async function fetchFilteredServices() {
-		const selectedCategories = Array.from(
-			document.querySelectorAll(
-				'.filter-option-category input[type="checkbox"]:checked'
-			)
-		).map((cb) => cb.id.replace("filter-option-", ""));
-
-		// Use safe defaults and check if elements exist
-		let minPrice = 0;
-		let maxPrice = 1000;
-		let maxDeliveryTime = 30;
-		let minRating = currentFilterRating;
-
-		const minPriceElement = document.querySelector(".min-price");
-		const maxPriceElement = document.querySelector(".max-price");
-		const deliveryTimeElement = document.getElementById("delivery-time");
-
-		if (minPriceElement) {
-			minPrice = parseFloat(minPriceElement.value) || 0;
-		}
-
-		if (maxPriceElement) {
-			maxPrice = parseFloat(maxPriceElement.value) || 1000;
-		}
-
-		if (deliveryTimeElement) {
-			maxDeliveryTime = parseFloat(deliveryTimeElement.value) || 30;
-		}
-
-		console.log("Fetching services with filters:", {
-			categories: selectedCategories,
-			minPrice,
-			maxPrice,
-			maxDeliveryTime,
-			minRating,
-		});
-
-		// Build the API URL
-		const apiUrl = `/api/api_services.php?categories=${selectedCategories.join(
-			","
-		)}&min_price=${minPrice}&max_price=${maxPrice}&max_delivery_time=${maxDeliveryTime}&min_rating=${minRating}`;
-		
-		console.log("API URL:", apiUrl);
-
-		try {
-			const response = await fetch(apiUrl);
-			
-			if (!response.ok) {
-				throw new Error(`HTTP error! status: ${response.status}`);
-			}
-			
-			const services = await response.json();
-			
-			console.log("API Response:", services);
-			console.log("Number of services returned:", services.length);
-
-			const searchResults = document.getElementById("search-results");
-			searchResults.innerHTML = ""; // Clear previous results
-
-			if (services.length > 0) {
-				services.forEach((service) => {
-					console.log("Processing service:", service.title, "Rating:", service.rating);
-					const serviceCard = document.createElement("a");
-					serviceCard.href = `/pages/service.php?id=${encodeURIComponent(
-						service.id
-					)}`;
-					serviceCard.classList.add("service-card-link");
-					serviceCard.innerHTML = `
-                        <div class="service-card">
-                            <div class="pantone-image-wrapper">
-                                ${
-																	service.image
-																		? `<img src="${service.image}" alt="Service image" class="pantone-image" />`
-																		: '<div class="pantone-image pantone-image-placeholder"></div>'
-																}
-                            </div>
-                            <div class="pantone-title">${service.title}</div>
-                            <div class="pantone-info-row">
-                                <span class="pantone-username">${
-																	service.username
-																}</span>
-                                <span class="pantone-rating">★ ${
-																	service.rating || "0.0"
-																}</span>
-                                <span class="pantone-delivery-time">${
-																	service.price
-																}€</span>
-                            </div>
-                        </div>
-                    `;
-					searchResults.appendChild(serviceCard);
-				});
-			} else {
-				console.log("No services found - showing empty message");
-				searchResults.innerHTML =
-					"<p>No services found for the selected filters.</p>";
-			}
-		} catch (error) {
-			console.error("Error fetching services:", error);
-			searchResults.innerHTML =
-				"<p>Error loading services. Please try again later.</p>";
-		}
 	}
 
 	// Add event listeners for filter changes

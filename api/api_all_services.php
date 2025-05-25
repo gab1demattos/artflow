@@ -11,19 +11,18 @@ require_once(__DIR__ . '/../templates/service_card.php');
 $db = Database::getInstance();
 $services = Service::getAllServices();
 
-  echo json_encode(array_map(function($service) {
-      return [
-          'id' => $service->id,
-          'title' => $service->title,
-          'description' => $service->description,
-          'price' => $service->price,
-          'delivery_time' => $service->delivery_time,
-          'image' => $service->getFirstImage(),
-          'username' => $service->getUsername(),
-          'subcategories' => implode(',', $service->getSubcategoryIds()),
-          'rating' => $service->avg_rating ?? 0
-          
-      ];
-  }, $services));
+echo json_encode(array_map(function($service) {
+    return [
+        'id' => $service->id,
+        'title' => $service->title,
+        'description' => $service->description,
+        'price' => $service->price,
+        'delivery_time' => $service->delivery_time,
+        'image' => $service->getFirstImage(),
+        'username' => $service->getUsername(),
+        'subcategories' => implode(',', $service->getSubcategoryIds()),
+        'rating' => $service->avg_rating // Use the stored avg_rating instead of defaulting to 0
+    ];
+}, $services));
 ?>
 
