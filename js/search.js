@@ -14,7 +14,9 @@ document.addEventListener("DOMContentLoaded", () => {
 	);
 	const filterRatingValue = document.getElementById("filter-rating-value");
 	const filterRatingText = document.getElementById("filter-rating-text");
-	window.currentFilterRating = 0; // Using window to share state
+
+	// Single rating variable declaration
+	let currentFilterRating = 0;
 
 	// Redirect to search.php when the search bar is clicked
 	searchBar.addEventListener("click", () => {
@@ -52,9 +54,8 @@ document.addEventListener("DOMContentLoaded", () => {
 		});
 
 		// Reset star rating
-		if (window.filterRating) {
-			window.filterRating.setRating(0);
-		}
+		currentFilterRating = 0;
+		updateFilterStarDisplay(0);
 
 		// Reset price range inputs to their initial values - check if they exist first
 		if (typeof minPriceInput !== "undefined" && minPriceInput) {
@@ -578,12 +579,10 @@ document.addEventListener("DOMContentLoaded", () => {
 		}
 	});
 
-	// Initialize star rating filter functionality
-	// Function to update star display for filters
+	// Single consolidated function to update star display for filters
 	function updateFilterStarDisplay(rating) {
 		filterRatingStars.forEach((star) => {
 			const starValue = parseFloat(star.getAttribute("data-value"));
-			const starIndex = Math.ceil(starValue) - 1;
 
 			// Full star
 			if (rating >= starValue) {
@@ -603,11 +602,16 @@ document.addEventListener("DOMContentLoaded", () => {
 			}
 		});
 
-		filterRatingValue.value = rating;
-		filterRatingText.textContent = rating.toFixed(1);
+		// Update the rating text and hidden value
+		if (filterRatingValue) {
+			filterRatingValue.value = rating;
+		}
+		if (filterRatingText) {
+			filterRatingText.textContent = rating.toFixed(1);
+		}
 	}
 
-	// Handle star hover and click events for filters
+	// Single consolidated star rating event handling
 	filterRatingStars.forEach((star) => {
 		star.addEventListener("mousemove", function (e) {
 			const rect = this.getBoundingClientRect();
@@ -629,12 +633,12 @@ document.addEventListener("DOMContentLoaded", () => {
 			const starValue = parseFloat(this.getAttribute("data-value"));
 
 			if (x < rect.width / 2) {
-				window.currentFilterRating = starValue - 0.5;
+				currentFilterRating = starValue - 0.5;
 			} else {
-				window.currentFilterRating = starValue;
+				currentFilterRating = starValue;
 			}
 
-			updateFilterStarDisplay(window.currentFilterRating);
+			updateFilterStarDisplay(currentFilterRating);
 			fetchFilteredServices(); // Trigger search update with new rating filter
 		});
 	});
@@ -645,11 +649,11 @@ document.addEventListener("DOMContentLoaded", () => {
 	);
 	if (filterStarsContainer) {
 		filterStarsContainer.addEventListener("mouseleave", function () {
-			updateFilterStarDisplay(window.currentFilterRating);
+			updateFilterStarDisplay(currentFilterRating);
 		});
 	}
 
-	// Modified fetchFilteredServices function to include rating filter
+	// Single consolidated function to fetch filtered services
 	async function fetchFilteredServices() {
 		const selectedCategories = Array.from(
 			document.querySelectorAll(
@@ -661,7 +665,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		let minPrice = 0;
 		let maxPrice = 1000;
 		let maxDeliveryTime = 30;
-		let minRating = 0;
+		let minRating = currentFilterRating;
 
 		const minPriceElement = document.querySelector(".min-price");
 		const maxPriceElement = document.querySelector(".max-price");
@@ -679,10 +683,6 @@ document.addEventListener("DOMContentLoaded", () => {
 			maxDeliveryTime = parseFloat(deliveryTimeElement.value) || 30;
 		}
 
-		if (filterRatingValue) {
-			minRating = parseFloat(filterRatingValue.value) || 0;
-		}
-
 		console.log("Fetching services with filters:", {
 			categories: selectedCategories,
 			minPrice,
@@ -691,19 +691,31 @@ document.addEventListener("DOMContentLoaded", () => {
 			minRating,
 		});
 
+		// Build the API URL
+		const apiUrl = `/api/api_services.php?categories=${selectedCategories.join(
+			","
+		)}&min_price=${minPrice}&max_price=${maxPrice}&max_delivery_time=${maxDeliveryTime}&min_rating=${minRating}`;
+		
+		console.log("API URL:", apiUrl);
+
 		try {
-			const response = await fetch(
-				`/api/api_services.php?categories=${selectedCategories.join(
-					","
-				)}&min_price=${minPrice}&max_price=${maxPrice}&max_delivery_time=${maxDeliveryTime}&min_rating=${minRating}`
-			);
+			const response = await fetch(apiUrl);
+			
+			if (!response.ok) {
+				throw new Error(`HTTP error! status: ${response.status}`);
+			}
+			
 			const services = await response.json();
+			
+			console.log("API Response:", services);
+			console.log("Number of services returned:", services.length);
 
 			const searchResults = document.getElementById("search-results");
 			searchResults.innerHTML = ""; // Clear previous results
 
 			if (services.length > 0) {
 				services.forEach((service) => {
+					console.log("Processing service:", service.title, "Rating:", service.rating);
 					const serviceCard = document.createElement("a");
 					serviceCard.href = `/pages/service.php?id=${encodeURIComponent(
 						service.id
@@ -735,6 +747,7 @@ document.addEventListener("DOMContentLoaded", () => {
 					searchResults.appendChild(serviceCard);
 				});
 			} else {
+				console.log("No services found - showing empty message");
 				searchResults.innerHTML =
 					"<p>No services found for the selected filters.</p>";
 			}
@@ -773,153 +786,9 @@ document.addEventListener("DOMContentLoaded", () => {
 	const clearRatingBtn = document.getElementById("clear-rating");
 	if (clearRatingBtn) {
 		clearRatingBtn.addEventListener("click", () => {
-			window.currentFilterRating = 0;
+			currentFilterRating = 0;
 			updateFilterStarDisplay(0);
 			fetchFilteredServices(); // Update results
 		});
-	}
-
-	// End of the file
-	let currentFilterRating = 0;
-
-	// Function to update filter stars display
-	function updateFilterStarDisplay(rating) {
-		filterRatingStars.forEach((star) => {
-			const starValue = parseFloat(star.getAttribute("data-value"));
-			const starIndex = Math.ceil(starValue) - 1;
-
-			// Full star
-			if (rating >= starValue) {
-				star.textContent = "★";
-				star.classList.add("active");
-				star.classList.remove("half");
-			}
-			// Half star
-			else if (rating === starValue - 0.5) {
-				star.textContent = "★";
-				star.classList.add("active", "half");
-			}
-			// Empty star
-			else {
-				star.textContent = "★";
-				star.classList.remove("active", "half");
-			}
-		});
-
-		// Update the rating text and hidden value
-		filterRatingText.textContent = rating.toFixed(1);
-		filterRatingValue.value = rating;
-	}
-
-	// Handle star hover for preview
-	filterRatingStars.forEach((star) => {
-		star.addEventListener("mousemove", function (e) {
-			const rect = this.getBoundingClientRect();
-			const x = e.clientX - rect.left; // x position within the star
-			const starValue = parseFloat(this.getAttribute("data-value"));
-
-			if (x < rect.width / 2) {
-				// Left half of the star - show half star
-				updateFilterStarDisplay(starValue - 0.5);
-			} else {
-				// Right half of the star - show full star
-				updateFilterStarDisplay(starValue);
-			}
-		});
-
-		// Set rating on click
-		star.addEventListener("click", function (e) {
-			const rect = this.getBoundingClientRect();
-			const x = e.clientX - rect.left;
-			const starValue = parseFloat(this.getAttribute("data-value"));
-
-			if (x < rect.width / 2) {
-				currentFilterRating = starValue - 0.5;
-			} else {
-				currentFilterRating = starValue;
-			}
-
-			updateFilterStarDisplay(currentFilterRating);
-			updateSearchResults(); // Trigger search update with new rating filter
-		});
-	});
-
-	// Reset to current rating when mouse leaves container
-	const starsContainer = document.querySelector(
-		"#filter-search-rating .stars-container"
-	);
-	if (starsContainer) {
-		starsContainer.addEventListener("mouseleave", function () {
-			updateFilterStarDisplay(currentFilterRating);
-		});
-	}
-
-	// Modified updateSearchResults to include rating filter
-	async function updateSearchResults() {
-		const selectedCategories = Array.from(
-			document.querySelectorAll(
-				'.filter-option-category input[type="checkbox"]:checked'
-			)
-		).map((cb) => cb.id.replace("filter-option-", ""));
-
-		const minPrice = parseFloat(document.querySelector(".min-price").value);
-		const maxPrice = parseFloat(document.querySelector(".max-price").value);
-		const maxDeliveryTime = parseFloat(
-			document.getElementById("delivery-time").value
-		);
-		const minRating = currentFilterRating;
-
-		try {
-			const response = await fetch(
-				`/api/api_services.php?categories=${selectedCategories.join(
-					","
-				)}&min_price=${minPrice}&max_price=${maxPrice}&max_delivery_time=${maxDeliveryTime}&min_rating=${minRating}`
-			);
-			const services = await response.json();
-
-			const searchResults = document.getElementById("search-results");
-			searchResults.innerHTML = ""; // Clear previous results
-
-			if (services.length > 0) {
-				services.forEach((service) => {
-					const serviceCard = document.createElement("a");
-					serviceCard.href = `/pages/service.php?id=${encodeURIComponent(
-						service.id
-					)}`;
-					serviceCard.classList.add("service-card-link");
-					serviceCard.innerHTML = `
-                        <div class="service-card">
-                            <div class="pantone-image-wrapper">
-                                ${
-																	service.image
-																		? `<img src="${service.image}" alt="Service image" class="pantone-image" />`
-																		: '<div class="pantone-image pantone-image-placeholder"></div>'
-																}
-                            </div>
-                            <div class="pantone-title">${service.title}</div>
-                            <div class="pantone-info-row">
-                                <span class="pantone-username">${
-																	service.username
-																}</span>
-                                <span class="pantone-rating">★ ${
-																	service.rating || "0.0"
-																}</span>
-                                <span class="pantone-delivery-time">${
-																	service.price
-																}€</span>
-                            </div>
-                        </div>
-                    `;
-					searchResults.appendChild(serviceCard);
-				});
-			} else {
-				searchResults.innerHTML =
-					"<p>No services found for the selected filters.</p>";
-			}
-		} catch (error) {
-			console.error("Error fetching services:", error);
-			searchResults.innerHTML =
-				"<p>Error loading services. Please try again later.</p>";
-		}
 	}
 });
