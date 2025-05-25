@@ -48,17 +48,43 @@ class Service
         $this->avg_rating = $avg_rating ?? 0; // Initialize avg_rating property
     }
 
-
-
     /**
      * Get all services
      * 
      * @return array Array of Service objects
      */
-    /*public static function getAllServices(): array
+    public static function getAllServices(?float $minPrice = null, ?float $maxPrice = null, ?int $maxDeliveryTime = null, ?float $minRating = 0): array
     {
         $db = Database::getInstance();
-        $stmt = $db->query('SELECT * FROM Service');
+        $query = 'SELECT Service.*, User.username 
+                 FROM Service 
+                 JOIN User ON Service.user_id = User.id';
+        $params = [];
+        $whereConditions = [];
+
+        if ($minPrice !== null) {
+            $whereConditions[] = 'Service.price >= ?';
+            $params[] = $minPrice;
+        }
+        if ($maxPrice !== null) {
+            $whereConditions[] = 'Service.price <= ?';
+            $params[] = $maxPrice;
+        }
+        if ($maxDeliveryTime !== null) {
+            $whereConditions[] = 'Service.delivery_time <= ?';
+            $params[] = $maxDeliveryTime;
+        }
+        if ($minRating > 0) {
+            $whereConditions[] = 'Service.avg_rating >= ?';
+            $params[] = $minRating;
+        }
+
+        if (!empty($whereConditions)) {
+            $query .= ' WHERE ' . implode(' AND ', $whereConditions);
+        }
+
+        $stmt = $db->prepare($query);
+        $stmt->execute($params);
         $services = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         $result = [];
@@ -72,15 +98,125 @@ class Service
                 (float)$service['price'],
                 (int)$service['delivery_time'],
                 $service['images'],
-                $service['videos']
+                $service['videos'],
+                $service['username'],
+                (float)$service['avg_rating']
             );
         }
-
         return $result;
-    }*/
+    }
+
+    public static function searchServices(PDO $db, string $search, ?float $minPrice = null, ?float $maxPrice = null, ?int $maxDeliveryTime = null, ?float $minRating = 0): array
+    {
+        $query = 'SELECT Service.*, User.username
+                 FROM Service 
+                 JOIN User ON Service.user_id = User.id
+                 WHERE Service.title LIKE ?';
+        $params = ['%' . $search . '%'];
+
+        if ($minPrice !== null) {
+            $query .= ' AND Service.price >= ?';
+            $params[] = $minPrice;
+        }
+        if ($maxPrice !== null) {
+            $query .= ' AND Service.price <= ?';
+            $params[] = $maxPrice;
+        }
+        if ($maxDeliveryTime !== null) {
+            $query .= ' AND Service.delivery_time <= ?';
+            $params[] = $maxDeliveryTime;
+        }
+        if ($minRating > 0) {
+            $query .= ' AND Service.avg_rating >= ?';
+            $params[] = $minRating;
+        }
+
+        $stmt = $db->prepare($query);
+        $stmt->execute($params);
+        $services = [];
+        while ($service = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $services[] = new Service(
+                (int)$service['id'],
+                (int)$service['user_id'],
+                $service['title'],
+                $service['description'],
+                (int)$service['category_id'],
+                (float)$service['price'],
+                (int)$service['delivery_time'],
+                $service['images'],
+                $service['videos'],
+                $service['username'],
+                (float)$service['avg_rating']
+            );
+        }
+        return $services;
+    }
 
     /**
+     * Get services by multiple category IDs with proper rating filtering
+     * 
+     * @param PDO $db Database connection
+     * @param array $categoryIds Array of category IDs
+     * @param float|null $minPrice Minimum price filter
+     * @param float|null $maxPrice Maximum price filter
+     * @param int|null $maxDeliveryTime Maximum delivery time filter
+     * @param float $minRating Minimum rating filter
+     * @return array Array of Service objects
+     */
+    public static function getServicesByCategories(PDO $db, array $categoryIds, ?float $minPrice = null, ?float $maxPrice = null, ?int $maxDeliveryTime = null, ?float $minRating = 0): array
+    {
+        if (empty($categoryIds)) {
+            return [];
+        }
 
+        $placeholders = implode(',', array_fill(0, count($categoryIds), '?'));
+        $query = "SELECT Service.*, User.username 
+                FROM Service 
+                JOIN User ON Service.user_id = User.id
+                WHERE Service.category_id IN ($placeholders)";
+        $params = $categoryIds;
+
+        if ($minPrice !== null) {
+            $query .= ' AND Service.price >= ?';
+            $params[] = $minPrice;
+        }
+        if ($maxPrice !== null) {
+            $query .= ' AND Service.price <= ?';
+            $params[] = $maxPrice;
+        }
+        if ($maxDeliveryTime !== null) {
+            $query .= ' AND Service.delivery_time <= ?';
+            $params[] = $maxDeliveryTime;
+        }
+        if ($minRating > 0) {
+            $query .= ' AND Service.avg_rating >= ?';
+            $params[] = $minRating;
+        }
+
+        $stmt = $db->prepare($query);
+        $stmt->execute($params);
+        $services = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $result = [];
+        foreach ($services as $service) {
+            $result[] = new Service(
+                (int)$service['id'],
+                (int)$service['user_id'],
+                $service['title'],
+                $service['description'],
+                (int)$service['category_id'],
+                (float)$service['price'],
+                (int)$service['delivery_time'],
+                $service['images'],
+                $service['videos'],
+                $service['username'],
+                (float)$service['avg_rating']
+            );
+        }
+        return $result;
+    }
+
+    /**
      * Get service by ID
      * 
      * @param int $id Service ID
@@ -490,196 +626,6 @@ class Service
     }
 
     /**
-     * Get all services
-     * 
-     * @return array Array of Service objects
-     */
-    public static function getAllServices(?float $minPrice = null, ?float $maxPrice = null, ?int $maxDeliveryTime = null, ?float $minRating = 0): array
-    {
-        $db = Database::getInstance();
-        $query = 'SELECT Service.*, User.username, COALESCE(AVG(Review.rating), 0) as avg_rating 
-                 FROM Service 
-                 JOIN User ON Service.user_id = User.id
-                 LEFT JOIN Review ON Service.id = Review.service_id';
-        $params = [];
-        $whereConditions = [];
-        $havingConditions = [];
-
-        if ($minPrice !== null) {
-            $whereConditions[] = 'Service.price >= ?';
-            $params[] = $minPrice;
-        }
-        if ($maxPrice !== null) {
-            $whereConditions[] = 'Service.price <= ?';
-            $params[] = $maxPrice;
-        }
-        if ($maxDeliveryTime !== null) {
-            $whereConditions[] = 'Service.delivery_time <= ?';
-            $params[] = $maxDeliveryTime;
-        }
-
-        if (!empty($whereConditions)) {
-            $query .= ' WHERE ' . implode(' AND ', $whereConditions);
-        }
-
-        $query .= ' GROUP BY Service.id';
-
-        if ($minRating > 0) {
-            $havingConditions[] = 'avg_rating >= ?';
-            $params[] = $minRating;
-        }
-
-        if (!empty($havingConditions)) {
-            $query .= ' HAVING ' . implode(' AND ', $havingConditions);
-        }
-
-        $stmt = $db->prepare($query);
-        $stmt->execute($params);
-        $services = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        $result = [];
-        foreach ($services as $service) {
-            $result[] = new Service(
-                (int)$service['id'],
-                (int)$service['user_id'],
-                $service['title'],
-                $service['description'],
-                (int)$service['category_id'],
-                (float)$service['price'],
-                (int)$service['delivery_time'],
-                $service['images'],
-                $service['videos'],
-                $service['username'],
-                isset($service['avg_rating']) ? (float)$service['avg_rating'] : 0
-            );
-        }
-        return $result;
-    }
-
-    public static function searchServices(PDO $db, string $search, ?float $minPrice = null, ?float $maxPrice = null, ?int $maxDeliveryTime = null, ?float $minRating = 0): array
-    {
-        $query = 'SELECT Service.*, User.username, COALESCE(AVG(Review.rating), 0) as avg_rating
-                 FROM Service 
-                 JOIN User ON Service.user_id = User.id
-                 LEFT JOIN Review ON Service.id = Review.service_id
-                 WHERE title LIKE ?';
-        $params = ['%' . $search . '%'];
-
-        if ($minPrice !== null) {
-            $query .= ' AND Service.price >= ?';
-            $params[] = $minPrice;
-        }
-        if ($maxPrice !== null) {
-            $query .= ' AND Service.price <= ?';
-            $params[] = $maxPrice;
-        }
-        if ($maxDeliveryTime !== null) {
-            $query .= ' AND Service.delivery_time <= ?';
-            $params[] = $maxDeliveryTime;
-        }
-
-        $query .= ' GROUP BY Service.id';
-
-        if ($minRating > 0) {
-            $query .= ' HAVING avg_rating >= ?';
-            $params[] = $minRating;
-        }
-
-        $stmt = $db->prepare($query);
-        $stmt->execute($params);
-        $services = [];
-        while ($service = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            $services[] = new Service(
-                (int)$service['id'],
-                (int)$service['user_id'],
-                $service['title'],
-                $service['description'],
-                (int)$service['category_id'],
-                (float)$service['price'],
-                (int)$service['delivery_time'],
-                $service['images'],
-                $service['videos'],
-                $service['username'],
-                isset($service['avg_rating']) ? (float)$service['avg_rating'] : 0
-            );
-        }
-        return $services;
-    }
-
-    /**
-     * Get services by multiple category IDs
-     * 
-     * @param PDO $db Database connection
-     * @param array $categoryIds Array of category IDs
-     * @return array Array of Service objects
-     */
-    public static function getServicesByCategories(PDO $db, array $categoryIds, ?float $minPrice = null, ?float $maxPrice = null, ?int $maxDeliveryTime = null, ?float $minRating = 0): array
-    {
-        $placeholders = implode(',', array_fill(0, count($categoryIds), '?'));
-        $query = "SELECT Service.*, User.username, COALESCE(AVG(Review.rating), 0) as avg_rating 
-                FROM Service 
-                JOIN User ON Service.user_id = User.id
-                LEFT JOIN Review ON Service.id = Review.service_id
-                WHERE Service.category_id IN ($placeholders)";
-        $params = $categoryIds;
-
-        $whereConditions = [];
-        $havingConditions = [];
-
-        if ($minPrice !== null) {
-            $whereConditions[] = 'Service.price >= ?';
-            $params[] = $minPrice;
-        }
-        if ($maxPrice !== null) {
-            $whereConditions[] = 'Service.price <= ?';
-            $params[] = $maxPrice;
-        }
-        if ($maxDeliveryTime !== null) {
-            $whereConditions[] = 'Service.delivery_time <= ?';
-            $params[] = $maxDeliveryTime;
-        }
-
-        // Add WHERE conditions if there are any
-        if (!empty($whereConditions)) {
-            $query .= ' AND ' . implode(' AND ', $whereConditions);
-        }
-
-        // Add GROUP BY clause
-        $query .= ' GROUP BY Service.id';
-
-        // Rating must use HAVING since it's an aggregate function result
-        if ($minRating > 0) {
-            $havingConditions[] = 'avg_rating >= ?';
-            $params[] = $minRating;
-        }
-
-        if (!empty($havingConditions)) {
-            $query .= ' HAVING ' . implode(' AND ', $havingConditions);
-        }
-
-        $stmt = $db->prepare($query);
-        $stmt->execute($params);
-        $services = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        $result = [];
-        foreach ($services as $service) {
-            $result[] = new Service(
-                (int)$service['id'],
-                (int)$service['user_id'],
-                $service['title'],
-                $service['description'],
-                (int)$service['category_id'],
-                (float)$service['price'],
-                (int)$service['delivery_time'],
-                $service['images'],
-                $service['videos'],
-                $service['username'],
-                (float)$service['avg_rating']
-            );
-        }
-        return $result;
-    }
-
-    /**
      * Get filtered services by category with pagination
      * @param int $categoryId
      * @param int $limit
@@ -704,10 +650,9 @@ class Service
         ?int $deliveryMax
     ): array {
         $db = Database::getInstance();
-        $query = 'SELECT Service.*, User.username, COALESCE(AVG(Review.rating), 0) as avg_rating 
+        $query = 'SELECT Service.*, User.username 
                   FROM Service 
                   JOIN User ON Service.user_id = User.id
-                  LEFT JOIN Review ON Service.id = Review.service_id
                   WHERE Service.category_id = ?';
         $params = [$categoryId];
 
@@ -731,16 +676,13 @@ class Service
             $params[] = $deliveryMax;
         }
 
-        // Group by Service ID to calculate average rating
-        $query .= ' GROUP BY Service.id';
-
         // Apply rating range filter
         if ($ratingMin !== null) {
-            $query .= ' HAVING avg_rating >= ?';
+            $query .= ' AND Service.avg_rating >= ?';
             $params[] = $ratingMin;
         }
         if ($ratingMax !== null) {
-            $query .= ' AND avg_rating <= ?';
+            $query .= ' AND Service.avg_rating <= ?';
             $params[] = $ratingMax;
         }
 

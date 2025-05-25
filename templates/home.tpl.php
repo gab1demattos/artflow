@@ -74,7 +74,7 @@ function drawHeader($user, $currentPage = '')
                         </li>
                     <?php endif; ?>
 
-                    <li class="sidebar-item">
+                    <li class="sidebar-item" id="logout-button">
                         <img src="/images/logos/logout.png" alt="Log Out" class="logo">
                         <form action="/actions/login/logout.php" method="post"><button>Log Out</button></form>
                     </li>
