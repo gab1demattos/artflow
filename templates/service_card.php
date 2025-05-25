@@ -2,9 +2,15 @@
 function drawServiceCard($service, $serviceImage = null, $subcatIdsStr = '')
 {
     require_once(__DIR__ . '/../database/classes/service.class.php');
+    
+    // update the rating and get the latest value directly from database
     Service::updateAverageRating($service['id']);
-
-    $avgRating = isset($service['avg_rating']) ? (float)$service['avg_rating'] : 0;
+    $db = Database::getInstance();
+    $stmt = $db->prepare('SELECT avg_rating FROM Service WHERE id = ?');
+    $stmt->execute([$service['id']]);
+    $updatedService = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+    $avgRating = isset($updatedService['avg_rating']) ? (float)$updatedService['avg_rating'] : 0;
     $formattedRating = number_format($avgRating, 1);
 
 ?>

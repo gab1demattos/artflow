@@ -58,8 +58,10 @@
                 $services = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 if ($services) {
                     foreach ($services as $service) {
+                      
                         Service::updateAverageRating($service['id']);
-
+                        
+                        // always get fresh rating data
                         $stmtUpdated = $db->prepare('SELECT avg_rating FROM Service WHERE id = ?');
                         $stmtUpdated->execute([$service['id']]);
                         $updatedService = $stmtUpdated->fetch(PDO::FETCH_ASSOC);
