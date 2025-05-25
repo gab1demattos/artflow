@@ -315,14 +315,16 @@ a.button {
 }
 
 
-#sidebar.active + #overlay {
+#sidebar.active+#overlay {
 	display: block;
 	opacity: 1;
 }
 
 #avatar-sidebar {
-	width: 7em;
-	height: auto;
+	width: 5em;
+	height: 5em;
+	object-fit: cover;
+	border-radius: 50%;
 }
 
 #profile {
@@ -362,7 +364,7 @@ a.button {
 }
 
 .star {
-	color: #d3d3d3; 
+	color: #d3d3d3;
 	font-size: 1.2rem;
 }
 
@@ -443,5 +445,3 @@ a.button {
 	justify-content: center;
 	margin-bottom: 2.5rem;
 }
-
-
