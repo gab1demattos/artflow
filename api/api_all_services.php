@@ -12,6 +12,15 @@ $db = Database::getInstance();
 $services = Service::getAllServices();
 
 echo json_encode(array_map(function($service) {
+    // make sure we're using the latest rating
+    Service::updateAverageRating($service->id);
+    
+    $db = Database::getInstance();
+    $stmt = $db->prepare('SELECT avg_rating FROM Service WHERE id = ?');
+    $stmt->execute([$service->id]);
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    $current_rating = $result ? (float)$result['avg_rating'] : 0;
+    
     return [
         'id' => $service->id,
         'title' => $service->title,
@@ -21,7 +30,7 @@ echo json_encode(array_map(function($service) {
         'image' => $service->getFirstImage(),
         'username' => $service->getUsername(),
         'subcategories' => implode(',', $service->getSubcategoryIds()),
-        'rating' => $service->avg_rating
+        'rating' => $current_rating
     ];
 }, $services));
 ?>

@@ -38,6 +38,15 @@ if (!empty($search)) {
 error_log("API returning " . count($services) . " services after filtering");
 
 echo json_encode(array_map(function ($service) {
+    // make sure we're using the latest rating
+    Service::updateAverageRating($service->id);
+    
+    $db = Database::getInstance();
+    $stmt = $db->prepare('SELECT avg_rating FROM Service WHERE id = ?');
+    $stmt->execute([$service->id]);
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    $current_rating = $result ? (float)$result['avg_rating'] : 0;
+    
     return [
         'id' => $service->id,
         'title' => $service->title,
@@ -47,6 +56,6 @@ echo json_encode(array_map(function ($service) {
         'username' => $service->getUsername(),
         'subcategories' => implode(',', $service->getSubcategoryIds()),
         'delivery_time' => $service->delivery_time,
-        'rating' => $service->avg_rating
+        'rating' => $current_rating
     ];
 }, $services));

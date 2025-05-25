@@ -22,7 +22,7 @@ function drawHeader($user, $currentPage = '')
                 <ul id="buttons">
                     <li><a href="/pages/services/search.php" id="search-icon-link"><img src="/images/logos/search2.svg" alt="Search" id="search-icon"></a></li>
                     <?php if (!$user): ?>
-                        <li><button class="button filled hovering">Sign Up</button></li>
+                        <li><button class="button filled hovering" id="header-sign-up">Sign Up</button></li>
                     <?php else: ?>
                         <li><button id="sidebar-open" onclick="openSidebar()" aria-label="Open Sidebar">☰</button></li>
                     <?php endif; ?>
@@ -124,7 +124,7 @@ function drawHeader($user, $currentPage = '')
                             </a>
                         <?php endforeach; ?>
                     </div>
-                    <button id="see-more" class="button filled orange" onclick="window.location.href='/pages/see-more-categories.php'">See More →</button>
+                    <button id="see-more" class="button filled orange" onclick="window.location.href='/pages/services/see-more-categories.php'">See More →</button>
                 </div>
                 <?php if ($user && isset($user['user_type']) && $user['user_type'] === 'admin'): ?>
                     <div id="category-modal-overlay" class="modal-overlay hidden">
@@ -181,8 +181,8 @@ function drawHeader($user, $currentPage = '')
                         <h3>Quick Links:</h3>
                         <ul>
                             <li class="footer-link"><a href="/">Home</a></li>
-                            <li class="footer-link"><a href="/pages/see-more-categories.php">All Categories</a></li>
-                            <li class="footer-link"><a href="/pages/search.php">All Services</a></li>
+                            <li class="footer-link"><a href="/pages/services/see-more-categories.php">All Categories</a></li>
+                            <li class="footer-link"><a href="/pages/services/search.php">All Services</a></li>
                         </ul>
                     </div>
                 </div>
