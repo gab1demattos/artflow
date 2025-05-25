@@ -158,6 +158,7 @@ function drawHeader($user, $currentPage = '')
         <?php function drawInfo()
         { ?>
             <section id="info">
+                <img src="/images/flow_3.svg" alt="flow" id="flow-info">
                 <div id="info-content">
                     <h2>Our motivation</h2>
                     <p>Etiam pellentesque tempus rutrum. Nullam eget nisl nec nulla ultrices commodo eget eget erat. Phasellus non rutrum erat. Duis nec rhoncus enim. Sed condimentum, odio facilisis maximus aliquet, tellus arcu consequat nibh, nec ultrices erat mauris vitae nisi. In maximus posuere egestas. Aenean congue justo non augue eleifend eleifend. Pellentesque dapibus, orci vitae tempus posuere, dolor risus dapibus augue, sed vehicula orci neque ac orci. Phasellus auctor vulputate volutpat.</p>
@@ -171,6 +172,7 @@ function drawHeader($user, $currentPage = '')
         { ?>
             <footer id="end">
                 <h2>artflow</h2>
+                <img src="/images/flow_4.svg" alt="flow" id="flow-footer">
                 <div id="end-content">
                     <div id="authors">
                         <h3>Developed by:</h3>
@@ -216,26 +218,26 @@ function drawHeader($user, $currentPage = '')
         <script src="/js/search.js"></script>
         <!-- Go with flow modal helper -->
         <script src="/js/go-flow-helper.js"></script>
-        
+
         <!-- Check for and display session errors -->
         <?php if (isset($_SESSION['signup_error'])): ?>
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                // Show modal first
-                const signUpModal = document.getElementById('signup-modal-overlay');
-                if (signUpModal) {
-                    signUpModal.classList.remove('hidden');
-                }
-                
-                // Display the error using the same function as client-side validation
-                if (typeof window.showModalError === 'function') {
-                    window.showModalError('signup-modal-overlay', '<?= addslashes(htmlspecialchars($_SESSION['signup_error'])) ?>');
-                }
-                
-                // Clear the error after displaying it
-                <?php unset($_SESSION['signup_error']); ?>
-            });
-        </script>
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    // Show modal first
+                    const signUpModal = document.getElementById('signup-modal-overlay');
+                    if (signUpModal) {
+                        signUpModal.classList.remove('hidden');
+                    }
+
+                    // Display the error using the same function as client-side validation
+                    if (typeof window.showModalError === 'function') {
+                        window.showModalError('signup-modal-overlay', '<?= addslashes(htmlspecialchars($_SESSION['signup_error'])) ?>');
+                    }
+
+                    // Clear the error after displaying it
+                    <?php unset($_SESSION['signup_error']); ?>
+                });
+            </script>
         <?php endif; ?>
     </body>
 
