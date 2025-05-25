@@ -1,27 +1,45 @@
 @media (max-width: 470px) {
-	
+	.service-card {
+		width: 200px;
+		min-width: 0;
+		max-width: 250px;
+		padding: 0 0 12px 0;
+	}
 
-    .service-card {
-        width: 200px;
-        min-width: 0;
-        max-width: 250px;
-        padding: 0 0 12px 0;
-    }
+	#filter-search {
+		width: 35%;
+		margin: 0 auto;
+	}
 
-    #filter-search {
-        width: 35%;
-        margin: 0 auto;
-    }
+	#filter-search-rating .stars {
+		font-size: 1.3rem !important;
+	}
 
-    #filter-search-rating .stars {
-        font-size: 1.3rem !important;
-    }
+	#filter-search-rating .star-icon {
+		font-size: 1.3rem !important;
+	}
 
-    #filter-search-rating .star-icon {
-        font-size: 1.3rem !important;
-    }
+	#filter-search-rating .rating-display {
+		position: relative;
+		display: flex;
+		align-items: center;
+	}
 
-    .pantone-rating {
-        font-size: 0.85rem !important;
-    }
+	#filter-search-rating #clear-rating {
+		position: absolute;
+		left: 4em;
+		bottom: 0;
+		background: none;
+		border: none;
+		color: #999;
+		font-size: 1.2rem;
+		cursor: pointer;
+		line-height: 1;
+		opacity: 0.8;
+		display: block;
+	}
+
+	.pantone-rating {
+		font-size: 0.85rem !important;
+	}
 }
