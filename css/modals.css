@@ -16,11 +16,6 @@
 	z-index: 1000;
 }
 
-/* Hide header search bar when search modal is active */
-.modal-overlay:not(.hidden)~header #search-bar {
-	display: none;
-}
-
 /* Base modal container structure */
 .modal .login {
 	background-color: white;

@@ -17,17 +17,15 @@ function drawHeader($user, $currentPage = '')
         <link rel="stylesheet" href="/css/see-more.css">
         <link rel="stylesheet" href="/css/responsive/new-service-responsive.css">
         <link rel="stylesheet" href="/css/modals/modal-animations.css">
+        <link rel="stylesheet" href="/css/search-icon.css">
     </head>
 
     <body>
         <header>
             <h1><a href="/" class='artflow-text'>artflow</a></h1>
             <nav id="menu">
-                <div id="search-bar" style="<?php echo $currentPage === 'search.php' ? 'display: none;' : ''; ?>">
-                    <input type="text" id="search-input" placeholder="Search here..." />
-                    <button id="search-button"><img src="/images/logos/search.png" alt="Search" id="search-icon"></button>
-                </div>
                 <ul id="buttons">
+                    <li><a href="/pages/search.php" id="search-icon-link"><img src="/images/logos/search2.svg" alt="Search" id="search-icon"></a></li>
                     <?php if (!$user): ?>
                         <li><button class="button filled hovering">Sign Up</button></li>
                     <?php else: ?>
