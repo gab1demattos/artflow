@@ -59,7 +59,7 @@ drawHeader($user);
     </div>
 </main>
 <?php include_once(__DIR__ . '/../templates/irreversible-modal.tpl.php'); ?>
-<link rel="stylesheet" href="/css/admin.css">
+<link rel="stylesheet" href="/css/pages/admin.css">
 <link rel="stylesheet" href="/css/modals.css">
 <link rel="stylesheet" href="/css/components.css">
 <script src="/js/modals.js"></script>

@@ -25,6 +25,7 @@ const Modals = {
 	 * Initialize modals functionality
 	 */
 	init() {
+		console.log("Initializing Modals");
 		// Get modal overlay references
 		this.overlays.signUp = document.getElementById("signup-modal-overlay");
 		this.overlays.signIn = document.getElementById("signin-modal-overlay");
@@ -35,6 +36,16 @@ const Modals = {
 		);
 		this.overlays.subcategory = document.getElementById("subcategory-overlay");
 		this.overlays.irreversible = document.getElementById("irreversible-modal");
+
+		console.log("Modal overlays found:", {
+			signUp: !!this.overlays.signUp,
+			signIn: !!this.overlays.signIn,
+			goFlow: !!this.overlays.goFlow,
+			category: !!this.overlays.category,
+			newService: !!this.overlays.newService,
+			subcategory: !!this.overlays.subcategory,
+			irreversible: !!this.overlays.irreversible,
+		});
 
 		// Initialize various modal-related events
 		this.setupGenericModalEvents();
@@ -183,7 +194,7 @@ const Modals = {
 				this.overlays.newService.classList.remove("hidden");
 
 				// Auto-close the sidebar when the new service modal is opened
-				if (typeof closeSidebar === 'function') {
+				if (typeof closeSidebar === "function") {
 					closeSidebar();
 				} else {
 					// Fallback if closeSidebar function is not available
@@ -210,20 +221,74 @@ const Modals = {
 	 */
 	setupGoFlowModal() {
 		// Check for signup success in session storage
+		console.log(
+			"Checking signup_success:",
+			sessionStorage.getItem("signup_success")
+		);
 		if (
 			sessionStorage.getItem("signup_success") === "true" &&
 			this.overlays.goFlow
 		) {
+			console.log("Showing go with flow modal");
 			this.show("goFlow");
 			// Clear the flag to prevent showing the modal again on refresh
 			sessionStorage.removeItem("signup_success");
 		}
 
-		// Handle Go Flow modal arrow button click to reload page
+		// Listen for the storage event that might be fired from other tabs/windows
+		window.addEventListener("storage", (event) => {
+			if (
+				event.key === "signup_success" &&
+				event.newValue === "true" &&
+				this.overlays.goFlow
+			) {
+				console.log("Storage event triggered, showing modal");
+				this.show("goFlow");
+				// Clear flag
+				sessionStorage.removeItem("signup_success");
+			}
+		});
+
+		// Check again after a short delay (sometimes the session storage might not be immediately available)
+		setTimeout(() => {
+			if (
+				sessionStorage.getItem("signup_success") === "true" &&
+				this.overlays.goFlow
+			) {
+				console.log("Showing go with flow modal (delayed check)");
+				this.show("goFlow");
+				sessionStorage.removeItem("signup_success");
+			}
+		}, 500);
+
+		// Handle Go Flow modal arrow button click with animation
 		const goFlowArrowButton = document.getElementById("go-arrow");
-		if (goFlowArrowButton && this.overlays.goFlow) {
-			goFlowArrowButton.addEventListener("click", function () {
-				window.location.reload();
+		const goFlowModal = document.getElementById("goflow-modal");
+		if (goFlowArrowButton && this.overlays.goFlow && goFlowModal) {
+			goFlowArrowButton.addEventListener("click", () => {
+				// Animate arrow button
+				goFlowArrowButton.classList.add("arrow-clicked");
+
+				// Animate modal content
+				const modalContent = document.querySelector(
+					"#goflow-modal .modal-content"
+				);
+				if (modalContent) {
+					modalContent.classList.add("content-fading");
+				}
+
+				// Animate entire modal
+				goFlowModal.classList.add("modal-closing");
+
+				// Hide modal after animation completes
+				setTimeout(() => {
+					this.overlays.goFlow.classList.add("hidden");
+					goFlowModal.classList.remove("modal-closing");
+					if (modalContent) {
+						modalContent.classList.remove("content-fading");
+					}
+					goFlowArrowButton.classList.remove("arrow-clicked");
+				}, 500); // Match this timeout to the animation duration in CSS
 			});
 		}
 	},
@@ -300,13 +365,37 @@ window.showModalError = function (modalId, message) {
 
 // Show Go Flow modal globally
 window.showGoFlowModal = function () {
+	console.log("showGoFlowModal called");
+
 	// Hide all modals
 	document
 		.querySelectorAll(".modal-overlay")
 		.forEach((m) => m.classList.add("hidden"));
+
 	// Show Go Flow modal
 	const goFlow = document.getElementById("goflow-modal-overlay");
-	if (goFlow) goFlow.classList.remove("hidden");
+	if (goFlow) {
+		console.log("Found goflow-modal-overlay, removing hidden class");
+		goFlow.classList.remove("hidden");
+
+		// Make sure it's visible
+		goFlow.style.display = "flex";
+
+		// Log the current state
+		console.log("Modal hidden?", goFlow.classList.contains("hidden"));
+		console.log("Modal display:", getComputedStyle(goFlow).display);
+
+		// Add event listener to close button
+		const goArrow = document.getElementById("go-arrow");
+		if (goArrow) {
+			goArrow.addEventListener("click", function () {
+				goFlow.classList.add("hidden");
+				window.location.reload();
+			});
+		}
+	} else {
+		console.error("Could not find goflow-modal-overlay");
+	}
 };
 
 // Intercept sign up form submit
