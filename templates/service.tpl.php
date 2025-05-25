@@ -162,10 +162,10 @@
     </div>
     <script src="/js/services/service-scroll.js"></script>
     <script src="/js/modal/edit-service-modal.js"></script>
-    <?php include __DIR__ . '/../pages/modals/requirements-modal.php'; ?>
-    <?php include __DIR__ . '/../pages/modals/payment-modal.php'; ?>
-    <?php include __DIR__ . '/../pages/modals/thankyou-modal.php'; ?>
-    <?php include __DIR__ . '/../pages/modals/edit-service-modal.php'; ?>
+    <?php include __DIR__ . '/../../pages/modals/requirements-modal.php'; ?>
+    <?php include __DIR__ . '/../../pages/modals/payment-modal.php'; ?>
+    <?php include __DIR__ . '/../../pages/modals/thankyou-modal.php'; ?>
+    <?php include __DIR__ . '/../../pages/modals/edit-service-modal.php'; ?>
     <?php include __DIR__ . '/irreversible-modal.tpl.php'; ?>
     <script src="/js/modal/modals.js"></script>
     <script src="/js/services/checkout.js"></script>
