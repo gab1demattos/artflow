@@ -295,8 +295,8 @@
 	color: white;
 	text-decoration: underline;
 	display: block;
-	text-align: right;
+	text-align: center;
 	width: 50em;
 	margin-top: 1em;
-	padding-right: 8em;
+	font-size: 1.5em;
 }
