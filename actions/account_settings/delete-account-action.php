@@ -23,7 +23,11 @@ if ($success) {
     // Log the user out by destroying the session
     $session->logout();
 
-    header('Location: ../../pages/index.php');
+    // Use a temporary HTML page with JS to set sessionStorage before redirecting
+    // Redirect to homepage with showGoFlow parameter to trigger the modal
+    header('Location: /pages/index.php?showGoFlow=true');
+    exit();
+    exit();
 } else {
     // If deletion failed, redirect back to profile with error
     header('Location: ../../pages/profile.php?username=' . urlencode($user['username']) . '&error=delete_failed');

@@ -100,9 +100,13 @@ if ($user) {
         'profile_image' => $user->profile_image
     ]);
 
-    // Set success message and redirect
+    // Set success message both in session and with JavaScript sessionStorage
     $_SESSION['signup_success'] = true;
-    header('Location: /');
+
+    // Use a temporary HTML page with JS to set sessionStorage before redirecting
+    // Redirect to homepage with showGoFlow parameter to trigger the modal
+    header('Location: /pages/index.php?showGoFlow=true');
+    exit();
     exit();
 } else {
     handle_signup_error('Account creation failed. Please try again.');

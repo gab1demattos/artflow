@@ -168,7 +168,7 @@ function drawHeader($user, $currentPage = '')
         <?php } ?>
 
 
-        <?php function drawFooter($user)
+        <?php function drawFooter($user, $showGoFlow = false)
         { ?>
             <footer id="end">
                 <h2>artflow</h2>
@@ -196,12 +196,18 @@ function drawHeader($user, $currentPage = '')
                 </div>
             </footer>
         </main>
+
         <?php if (!$user): ?>
             <?php include __DIR__ . '/../pages/modals/sign-up-modal.php'; ?>
             <?php include __DIR__ . '/../pages/modals/sign-in-modal.php'; ?>
-            <?php include __DIR__ . '/../pages/modals/go-with-flow-modal.php'; ?>
         <?php endif; ?>
+
+        <?php // Always include the go-with-flow modal regardless of login state 
+        ?>
+        <?php include __DIR__ . '/../pages/modals/go-with-flow-modal.php'; ?>
+
         <?php include __DIR__ . '/../pages/modals/new-service-modal.php'; ?>
+
         <!-- Load the modular JavaScript files -->
         <script src="/js/modals.js"></script>
         <script src="/js/categories.js"></script>
@@ -209,6 +215,8 @@ function drawHeader($user, $currentPage = '')
         <!-- Keep script.js for backward compatibility -->
         <script src="/js/script.js"></script>
         <script src="/js/search.js"></script>
+        <!-- Go with flow modal helper -->
+        <script src="/js/go-flow-helper.js"></script>
     </body>
 
     </html>
