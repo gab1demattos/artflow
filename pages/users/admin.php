@@ -1,7 +1,7 @@
 <?php
-require_once(__DIR__ . '/../database/security/security_bootstrap.php');
-require_once(__DIR__ . '/../database/session.php');
-require_once(__DIR__ . '/../templates/home.tpl.php');
+require_once(__DIR__ . '../../database/security/security_bootstrap.php');
+require_once(__DIR__ . '../../database/session.php');
+require_once(__DIR__ . '../../templates/home.tpl.php');
 
 $session = Session::getInstance();
 $user = $session->getUser() ?? null;
@@ -44,7 +44,7 @@ drawHeader($user);
             <div class="modal-content">
                 <div class="form-container">
                     <h2>Add Category</h2>
-                    <form id="category-form" class="form" action="/actions/adminpanel/add-category.php" method="post" enctype="multipart/form-data">
+                    <form id="category-form" class="form" action="../../actions/adminpanel/add-category.php" method="post" enctype="multipart/form-data">
                         <input type="text" name="category_name" placeholder="Category name" required>
                         <input type="file" name="category_image" accept="image/*">
                         <input type="text" name="subcategories" placeholder="Subcategories (comma separated)">
@@ -58,11 +58,9 @@ drawHeader($user);
         </div>
     </div>
 </main>
-<?php include_once(__DIR__ . '/../templates/irreversible-modal.tpl.php'); ?>
-<link rel="stylesheet" href="/css/pages/admin.css">
-<link rel="stylesheet" href="/css/modals.css">
-<link rel="stylesheet" href="/css/components.css">
-<script src="/js/modals.js"></script>
-<script src="/js/admin.js"></script>
-<script src="/js/admin-responsive.js"></script>
+<?php include_once(__DIR__ . '../../templates/irreversible-modal.tpl.php'); ?>
+<link rel="stylesheet" href="../../css/main.css">
+<script src="../../js/modal/modals.js"></script>
+<script src="../../js/users/admin.js"></script>
+<script src="../../js/users/admin-responsive.js"></script>
 <?php drawFooter($user); ?>

@@ -15,7 +15,7 @@ foreach ($categories as $cat) {
     <div class="modal-content">
       <div class="form-container">
         <h2>Post a New Service</h2>
-        <form id="new-service-form" action="/actions/create-service.php" method="post" enctype="multipart/form-data">
+        <form id="new-service-form" action="../../actions/service,create-service.php" method="post" enctype="multipart/form-data">
           <label>Title:<br>
             <input type="text" name="title" required maxlength="80">
             <br>

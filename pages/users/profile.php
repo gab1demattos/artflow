@@ -1,11 +1,11 @@
 <?php
-require_once(__DIR__ . '/../database/security/security_bootstrap.php');
-require_once(__DIR__ . '/../database/session.php');
-require_once(__DIR__ . '/../templates/home.tpl.php');
-require_once(__DIR__ . '/../database/classes/user.class.php');
-require_once(__DIR__ . '/../database/classes/service.class.php');
-require_once(__DIR__ . '/../database/classes/review.class.php');
-require_once(__DIR__ . '/../templates/service_card.php');
+require_once(__DIR__ . '../../database/security/security_bootstrap.php');
+require_once(__DIR__ . '../../database/session.php');
+require_once(__DIR__ . '../../templates/home.tpl.php');
+require_once(__DIR__ . '../../database/classes/user.class.php');
+require_once(__DIR__ . '../../database/classes/service.class.php');
+require_once(__DIR__ . '../../database/classes/review.class.php');
+require_once(__DIR__ . '../../templates/service_card.php');
 
 $session = Session::getInstance();
 $loggedInUser = $session->getUser() ?? null;
@@ -48,10 +48,10 @@ drawHeader($loggedInUser);
         <?php if ($loggedInUser && $loggedInUser['username'] === $user->getUsername()): ?>
             <button id="edit-profile-button" class="button filled orange hovering edit-profile-btn">Edit Profile</button>
         <?php elseif ($loggedInUser): ?>
-            <a href="/pages/messages.php?user_id=<?= $user->getId() ?>" class="button filled yellow hovering edit-profile-btn">Send Message</a>
+            <a href="../../pages/users/messages.php?user_id=<?= $user->getId() ?>" class="button filled yellow hovering edit-profile-btn">Send Message</a>
         <?php endif; ?>
         <div class="profile-img">
-            <img src="<?= ($user->getProfileImage() !== null && $user->getProfileImage() !== '') ? htmlspecialchars($user->getProfileImage()) : '/images/user_pfp/default.png' ?>" alt="Profile Picture" />
+            <img src="<?= ($user->getProfileImage() !== null && $user->getProfileImage() !== '') ? htmlspecialchars($user->getProfileImage()) : '../../images/user_pfp/default.png' ?>" alt="Profile Picture" />
         </div>
         <div class="info">
             <div class="name"><?= htmlspecialchars($user->getName()) ?></div>
@@ -74,7 +74,7 @@ drawHeader($loggedInUser);
 
     <div id="listings" class="tab-content active<?= empty($services) ? ' empty-state' : '' ?>">
         <?php if (empty($services)): ?>
-            <img src="/images/nothing-to-see-here.png" alt="Nothing to see here!" class="nothing-img" />
+            <img src="../../images/profile/nothing-to-see-here.png" alt="Nothing to see here!" class="nothing-img" />
         <?php else: ?>
             <div id="services-list">
                 <?php foreach ($services as $serviceObj):
@@ -110,7 +110,7 @@ drawHeader($loggedInUser);
 
     <div id="reviews" class="tab-content<?= empty($reviews) ? ' empty-state' : '' ?>">
         <?php if (empty($reviews)): ?>
-            <img src="/images/nothing-to-see-here.png" alt="Nothing to see here!" class="nothing-img" />
+            <img src="../../images/profile/nothing-to-see-here.png" alt="Nothing to see here!" class="nothing-img" />
         <?php else: ?>
             <div class="average-rating">
                 <strong>Average Rating: </strong>
@@ -167,13 +167,13 @@ drawHeader($loggedInUser);
     </div>
 </main>
 
-<script src="/js/profile.js"></script>
+<script src="../../js/users/profile.js"></script>
 
 <?php
 // Include the edit profile modal
-include_once(__DIR__ . '/modals/edit-profile-modal.php');
+include_once(__DIR__ . '../modals/edit-profile-modal.php');
 // Include the change password modal
-include_once(__DIR__ . '/modals/change-password.php');
+include_once(__DIR__ . '../modals/change-password.php');
 // Include the irreversible action modal
 include_once(__DIR__ . '/../templates/irreversible-modal.tpl.php');
 

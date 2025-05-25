@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . '/../templates/home.tpl.php';
-require_once __DIR__ . '/../database/session.php';
+require_once __DIR__ . '../../templates/home.tpl.php';
+require_once __DIR__ . '../../database/session.php';
 
 $session = Session::getInstance();
 $user = $session->getUser();
@@ -11,8 +11,7 @@ if (!$user) {
 
 drawHeader($user);
 ?>
-<link rel="stylesheet" href="/css/pages/admin.css">
-<link rel="stylesheet" href="/css/components.css">
+<link rel="stylesheet" href="../../css/main.css">
 <main class="admin-panel-container">
     <h2 class="admin-title" style="color:var(--green)">Your Freelancer Stats</h2>
     <div class="stat-row">
@@ -37,7 +36,7 @@ drawHeader($user);
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
 async function loadStats() {
-    const res = await fetch('/actions/get-user-stats.php');
+    const res = await fetch('../../actions/activity/get-user-stats.php');
     const data = await res.json();
     document.getElementById('stat-earnings').textContent = data.total_earnings + '€';
     document.getElementById('stat-completed').textContent = data.completed_services;

@@ -3,9 +3,9 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-require_once(__DIR__ . '/../database/session.php');
-require_once(__DIR__ . '/../templates/home.tpl.php');
-require_once(__DIR__ . '/../database/classes/message.class.php');
+require_once(__DIR__ . '../../database/session.php');
+require_once(__DIR__ . '../../templates/home.tpl.php');
+require_once(__DIR__ . '../../database/classes/message.class.php');
 
 $session = Session::getInstance();
 $user = $session->getUser() ?? null;
@@ -25,16 +25,15 @@ try {
     // Get all conversations for the current user
     $conversations = Message::getConversationsForUser($user['id']);
 ?>
-    <link rel="stylesheet" href="/css/messages.css">
-    <link rel="stylesheet" href="/css/irreversible.css">
-    <?php include_once(__DIR__ . '/../templates/irreversible-modal.tpl.php'); ?>
+    <link rel="stylesheet" href="../../css/main.css">
+    <?php include_once(__DIR__ . '../../templates/irreversible-modal.tpl.php'); ?>
     <div id='messages-page'>
         <div class="chat-app__container">
             <aside class="chat-app__sidebar">
                 <h1 class="chat-app__title">chats</h1>
                 <div class="chat-app__search-bar">
                     <input class="chat-app__search-input" type="text" placeholder="Search here..." id="conversation-search" />
-                    <img class="chat-app__search-icon" src="/images/logos/search.png" alt="search icon" />
+                    <img class="chat-app__search-icon" src="../../images/logos/search.png" alt="search icon" />
                 </div>
                 <div class="chat-app__chat-list" id="conversation-list">
                     <?php if (empty($conversations)): ?>
@@ -42,7 +41,7 @@ try {
                     <?php else: ?>
                         <?php foreach ($conversations as $conversation):
                             $otherUserId = ($conversation['sender_id'] == $user['id']) ? $conversation['receiver_id'] : $conversation['sender_id'];
-                            $profileImage = $conversation['other_profile_image'] ? $conversation['other_profile_image'] : '/images/user_pfp/default.png';
+                            $profileImage = $conversation['other_profile_image'] ? $conversation['other_profile_image'] : '../../images/user_pfp/default.png';
                             $previewText = strlen($conversation['message']) > 25 ? substr($conversation['message'], 0, 25) . '...' : $conversation['message'];
                         ?>
                             <div class="chat-app__chat-item" data-user-id="<?= $otherUserId ?>">
@@ -89,7 +88,7 @@ try {
         const currentUser = <?= json_encode([
                                 'id' => $user['id'],
                                 'username' => $user['username'],
-                                'profile_image' => $user['profile_image'] ?? '/images/user_pfp/default.png'
+                                'profile_image' => $user['profile_image'] ?? '../../images/user_pfp/default.png'
                             ]) ?>;
 
         // If a specific conversation was requested via URL
@@ -108,7 +107,7 @@ try {
             });
         <?php endif; ?>
     </script>
-    <script src="/js/messages.js"></script>
+    <script src="../../js/users/messages.js"></script>
 
 <?php
 } catch (Exception $e) {

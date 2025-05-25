@@ -1,10 +1,10 @@
 <?php
-require_once(__DIR__ . '/../database/session.php');
-require_once(__DIR__ . '/../templates/home.tpl.php');
-require_once(__DIR__ . '/../templates/service_card.php');
-require_once(__DIR__ . '/../database/classes/category.class.php');
-require_once(__DIR__ . '/../database/classes/service.class.php');
-require_once(__DIR__ . '/../templates/categories.tpl.php');
+require_once(__DIR__ . '../../database/session.php');
+require_once(__DIR__ . '../../templates/home.tpl.php');
+require_once(__DIR__ . '../../templates/service_card.php');
+require_once(__DIR__ . '../../database/classes/category.class.php');
+require_once(__DIR__ . '../../database/classes/service.class.php');
+require_once(__DIR__ . '../../templates/categories.tpl.php');
 
 $session = Session::getInstance();
 $user = $session->getUser() ?? null;
@@ -180,13 +180,13 @@ drawHeader($user);
     </div>
 </main>
 <?php drawFooter($user); ?>
-<link rel="stylesheet" href="/css/responsive/category-responsive.css">
+<link rel="stylesheet" href="../../css/main.css">
 <!-- Load the modular JavaScript files -->
-<script src="/js/modals.js"></script>
-<script src="/js/categories.js"></script>
-<script src="/js/app.js"></script>
+<script src="../../js/modal/modals.js"></script>
+<script src="../../js/services/categories.js"></script>
+<script src="../../js/others/app.js"></script>
 <!-- Keep script.js for backward compatibility -->
-<script src="/js/script.js"></script>
+<script src="../../js/others/script.js"></script>
 <script>
     document.addEventListener("DOMContentLoaded", () => {
         const filterRatingStars = document.querySelectorAll("#filter-search-rating .star-icon");

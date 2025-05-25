@@ -3,7 +3,7 @@
         <div class="modal-content login">
             <div class="form-container">
                 <h2 id='h2-signup'>Create Account</h2>
-                <form id="signup-form" class="form" method="POST" action="/actions/login/signup-action.php">
+                <form id="signup-form" class="form" method="POST" action="../../actions/login/signup-action.php">
                     <?php
                     require_once(__DIR__ . '/../../database/security/csrf.php');
                     echo CSRF::getTokenField('signup_csrf_token');
@@ -30,7 +30,7 @@
                 </form>
             </div>
             <div class="modal-right">
-                <img src="../images/modals/sign_up/sign-up-image.png" alt="Illustration">
+                <img src="../../images/modals/sign_up/sign-up-image.png" alt="Illustration">
             </div>
         </div>
     </div>

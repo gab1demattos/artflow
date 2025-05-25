@@ -1,7 +1,7 @@
 <div id="goflow-modal-overlay" class="modal-overlay hidden">
     <div class="modal login" id="goflow-modal">
         <div class="modal-content login">
-            <img src='/images/modals/go_with_flow/go_flow.png' id='go-flow' alt='Orange Go Flow'>
+            <img src='../../images/modals/go_with_flow/go_flow.png' id='go-flow' alt='Orange Go Flow'>
             <p>
                 You're all set<br>
                 — now just go with the <span class='flow-text'>flow</span>.
