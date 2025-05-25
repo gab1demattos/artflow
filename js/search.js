@@ -289,67 +289,120 @@ document.addEventListener("DOMContentLoaded", () => {
 		const listener = async function () {
 			if (!searchResults) return;
 
-			searchResults.innerHTML = ""; // Clear previous results
 			const query = inputElement.value.trim();
 
-			const endpoint =
-				type === "services"
-					? query === ""
-						? "/api/api_all_services.php"
-						: `/api/api_services.php?search=${encodeURIComponent(query)}`
-					: query === ""
+			if (type === "services") {
+				// For services, if there's a search query, we need to apply it along with filters
+				if (query === "") {
+					// No search query - use fetchFilteredServices to apply current filters
+					fetchFilteredServices();
+				} else {
+					// There's a search query - build URL with search term AND current filters
+					const selectedCategories = Array.from(
+						document.querySelectorAll(
+							'.filter-option-category input[type="checkbox"]:checked'
+						)
+					).map((cb) => cb.id.replace("filter-option-", ""));
+
+					// Use safe defaults and check if elements exist
+					let minPrice = 0;
+					let maxPrice = 1000;
+					let maxDeliveryTime = 30;
+					let minRating = currentFilterRating;
+
+					if (minPriceInput) {
+						minPrice = parseFloat(minPriceInput.value) || 0;
+					}
+
+					if (maxPriceInput) {
+						maxPrice = parseFloat(maxPriceInput.value) || 1000;
+					}
+
+					if (deliveryTimeInput) {
+						maxDeliveryTime = parseFloat(deliveryTimeInput.value) || 30;
+					}
+
+					// Build URL with search term and all current filters
+					let apiUrl = `/api/api_services.php?search=${encodeURIComponent(query)}&categories=${selectedCategories.join(",")}&min_price=${minPrice}&max_price=${maxPrice}&max_delivery_time=${maxDeliveryTime}&min_rating=${minRating}`;
+
+					try {
+						const response = await fetch(apiUrl);
+						if (!response.ok) {
+							throw new Error(`HTTP error! status: ${response.status}`);
+						}
+						
+						const services = await response.json();
+
+						searchResults.innerHTML = ""; // Clear previous results
+
+						if (services.length > 0) {
+							services.forEach((service) => {
+								const serviceCard = document.createElement("a");
+								serviceCard.href = `/pages/service.php?id=${encodeURIComponent(service.id)}`;
+								serviceCard.classList.add("service-card-link");
+								serviceCard.innerHTML = `
+									<div class="service-card">
+										<div class="pantone-image-wrapper">
+											${
+												service.image
+													? `<img src="${service.image}" alt="Service image" class="pantone-image" />`
+													: '<div class="pantone-image pantone-image-placeholder"></div>'
+											}
+										</div>
+										<div class="pantone-title">${service.title}</div>
+										<div class="pantone-info-row">
+											<span class="pantone-username">${service.username}</span>
+											<span class="pantone-rating">★ ${service.rating || "0.0"}</span>
+											<span class="pantone-delivery-time">${service.price}€</span>
+										</div>
+									</div>
+								`;
+								searchResults.appendChild(serviceCard);
+							});
+						} else {
+							searchResults.innerHTML = "<p>No services found for the search term with current filters.</p>";
+						}
+					} catch (error) {
+						console.error("Error fetching filtered search results:", error);
+						searchResults.innerHTML = "<p>Error loading search results. Please try again later.</p>";
+					}
+				}
+			} else {
+				// For users, keep the existing logic
+				searchResults.innerHTML = ""; // Clear previous results
+
+				const endpoint = query === ""
 					? "/api/api_users.php"
 					: `/api/api_users.php?search=${encodeURIComponent(query)}`;
 
-			try {
-				const response = await fetch(endpoint);
-				const data = await response.json();
+				try {
+					const response = await fetch(endpoint);
+					const data = await response.json();
 
-				searchResults.innerHTML = ""; // Clear previous results
-				if (data.length > 0) {
-					data.forEach((item) => {
-						const card = document.createElement("a");
-						if (type === "services") {
-							card.href = `/pages/service.php?id=${encodeURIComponent(item.id)}`;
-							card.classList.add("service-card-link");
-							card.innerHTML = `
-                                <div class="service-card">
-                                    <div class="pantone-image-wrapper">
-                                        ${
-											item.image
-												? `<img src="${item.image}" alt="Service image" class="pantone-image" />`
-												: '<div class="pantone-image pantone-image-placeholder"></div>'
-										}
-                                    </div>
-                                    <div class="pantone-title">${item.title}</div>
-                                    <div class="pantone-info-row">
-                                        <span class="pantone-username">${item.username}</span>
-                                        <span class="pantone-rating">★ ${item.rating || "0.0"}</span>
-                                        <span class="pantone-delivery-time">${item.price}€</span>
-                                    </div>
-                                </div>
-                            `;
-						} else {
+					searchResults.innerHTML = ""; // Clear previous results
+					if (data.length > 0) {
+						data.forEach((item) => {
+							const card = document.createElement("a");
 							card.href = `/pages/profile.php?username=${encodeURIComponent(item.username)}`;
 							card.classList.add("user-card-link");
 							card.innerHTML = `
-                                <div class="user-card">
-                                    <div class="user-info">
-                                        <img src="${item.profilePicture || "/images/user_pfp/default.png"}" alt="User profile picture" class="user-profile-picture" />
-                                        <p class="user-name">${item.name}</p>
-                                        <p class="user-username">@${item.username}</p>
-                                    </div>
-                                </div>
-                            `;
-						}
-						searchResults.appendChild(card);
-					});
-				} else {
-					searchResults.innerHTML = `<p>No ${type} found.</p>`;
+								<div class="user-card">
+									<div class="user-info">
+										<img src="${item.profilePicture || "/images/user_pfp/default.png"}" alt="User profile picture" class="user-profile-picture" />
+										<p class="user-name">${item.name}</p>
+										<p class="user-username">@${item.username}</p>
+									</div>
+								</div>
+							`;
+							searchResults.appendChild(card);
+						});
+					} else {
+						searchResults.innerHTML = `<p>No users found.</p>`;
+					}
+				} catch (error) {
+					console.error(`Error fetching search results for users:`, error);
+					searchResults.innerHTML = `<p>Error loading search results. Please try again later.</p>`;
 				}
-			} catch (error) {
-				console.error(`Error fetching search results for ${type}:`, error);
-				searchResults.innerHTML = `<p>Error loading search results. Please try again later.</p>`;
 			}
 		};
 
