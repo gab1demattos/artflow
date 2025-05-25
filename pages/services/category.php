@@ -126,7 +126,10 @@ drawHeader($user);
                         <input type="number" name="delivery_max" id="delivery-max" placeholder="Max" min="1" max="<?= $deliveryMax ?>" value="<?= $deliveryMax ?>" step="1">
                     </div>
 
-                    <button type="submit">Apply Filters</button>
+                    <div class="filter-buttons">
+                        <button type="submit">Apply Filters</button>
+                        <button type="button" id="reset-filters">Reset Filters</button>
+                    </div>
                 </div>
             </form>
         </div>
@@ -183,6 +186,7 @@ drawHeader($user);
         const filterRatingValue = document.getElementById("filter-rating-value");
         const filterRatingText = document.getElementById("filter-rating-text");
         const clearRatingBtn = document.getElementById("clear-rating");
+        const resetFiltersBtn = document.getElementById("reset-filters");
         let currentFilterRating = 0;
 
         const minPriceInput = document.querySelector(".min-price-filter");
@@ -286,6 +290,41 @@ drawHeader($user);
             clearRatingBtn.addEventListener("click", () => {
                 currentFilterRating = 0;
                 updateFilterStarDisplay(0);
+            });
+        }
+        
+        // Reset Filters Button Functionality
+        if (resetFiltersBtn) {
+            resetFiltersBtn.addEventListener("click", () => {
+                // Reset price range
+                if (minPriceInput && maxPriceInput) {
+                    minPriceInput.value = minPriceInput.min;
+                    maxPriceInput.value = maxPriceInput.max;
+                    minPriceDisplay.textContent = minPriceInput.min;
+                    maxPriceDisplay.textContent = maxPriceInput.max;
+                    updateRangeFill();
+                }
+                
+                // Reset rating
+                if (filterRatingValue && filterRatingText) {
+                    currentFilterRating = 0;
+                    updateFilterStarDisplay(0);
+                }
+                
+                // Reset delivery time
+                const deliveryMaxInput = document.getElementById("delivery-max");
+                if (deliveryMaxInput) {
+                    deliveryMaxInput.value = deliveryMaxInput.max;
+                }
+                
+                // Reset subcategory filters if any are selected
+                const subcategoryTags = document.querySelectorAll(".subcategory-tag.selected");
+                subcategoryTags.forEach(tag => {
+                    tag.classList.remove("selected");
+                });
+                
+                // Redirect to the page without query parameters
+                window.location.href = `?id=<?= $categoryId ?>`;
             });
         }
 

@@ -178,6 +178,11 @@
 	cursor: pointer;
 }
 
+.filter-buttons {
+	display: flex;
+	gap: 10px;
+}
+
 .filters-container button {
 	padding: 5px 7px;
 	font-size: 0.7em;
@@ -191,6 +196,14 @@
 
 .filters-container button:hover {
 	background-color: #b96a4b;
+}
+
+#reset-filters {
+	background-color: #888;
+}
+
+#reset-filters:hover {
+	background-color: #666;
 }
 
 #price-min,
