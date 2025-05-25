@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	// Redirect to search.php when the search bar is clicked
 	if (searchIcon) {
 		searchIcon.addEventListener("click", () => {
-			window.location.href = "../../pages/services/search.php";
+			window.location.href = "/pages/services/search.php";
 		});
 	}
 
@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		});
 
 		// Build the API URL
-		let apiUrl = `../../api/api_services.php?categories=${selectedCategories.join(",")}&min_price=${minPrice}&max_price=${maxPrice}&max_delivery_time=${maxDeliveryTime}&min_rating=${minRating}`;
+		let apiUrl = `/api/api_services.php?categories=${selectedCategories.join(",")}&min_price=${minPrice}&max_price=${maxPrice}&max_delivery_time=${maxDeliveryTime}&min_rating=${minRating}`;
 
 		console.log("API URL:", apiUrl);
 
@@ -148,7 +148,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			if (services.length > 0) {
 				services.forEach((service) => {
 					const serviceCard = document.createElement("a");
-					serviceCard.href = `../../pages/services/service.php?id=${encodeURIComponent(
+					serviceCard.href = `/pages/services/service.php?id=${encodeURIComponent(
 						service.id
 					)}`;
 					serviceCard.classList.add("service-card-link");
@@ -323,7 +323,7 @@ document.addEventListener("DOMContentLoaded", () => {
 					}
 
 					// Build URL with search term and all current filters
-					let apiUrl = `../../api/api_services.php?search=${encodeURIComponent(query)}&categories=${selectedCategories.join(",")}&min_price=${minPrice}&max_price=${maxPrice}&max_delivery_time=${maxDeliveryTime}&min_rating=${minRating}`;
+					let apiUrl = `/api/api_services.php?search=${encodeURIComponent(query)}&categories=${selectedCategories.join(",")}&min_price=${minPrice}&max_price=${maxPrice}&max_delivery_time=${maxDeliveryTime}&min_rating=${minRating}`;
 
 					try {
 						const response = await fetch(apiUrl);
@@ -338,7 +338,7 @@ document.addEventListener("DOMContentLoaded", () => {
 						if (services.length > 0) {
 							services.forEach((service) => {
 								const serviceCard = document.createElement("a");
-								serviceCard.href = `../../pages/services/service.php?id=${encodeURIComponent(service.id)}`;
+								serviceCard.href = `/pages/services/service.php?id=${encodeURIComponent(service.id)}`;
 								serviceCard.classList.add("service-card-link");
 								serviceCard.innerHTML = `
 									<div class="service-card">
@@ -372,8 +372,8 @@ document.addEventListener("DOMContentLoaded", () => {
 				searchResults.innerHTML = ""; // Clear previous results
 
 				const endpoint = query === ""
-					? "../../api/api_users.php"
-					: `../../api/api_users.php?search=${encodeURIComponent(query)}`;
+					? "/api/api_users.php"
+					: `/api/api_users.php?search=${encodeURIComponent(query)}`;
 
 				try {
 					const response = await fetch(endpoint);
@@ -383,12 +383,12 @@ document.addEventListener("DOMContentLoaded", () => {
 					if (data.length > 0) {
 						data.forEach((item) => {
 							const card = document.createElement("a");
-							card.href = `../../pages/users/profile.php?username=${encodeURIComponent(item.username)}`;
+							card.href = `/pages/users/profile.php?username=${encodeURIComponent(item.username)}`;
 							card.classList.add("user-card-link");
 							card.innerHTML = `
 								<div class="user-card">
 									<div class="user-info">
-										<img src="${item.profilePicture || "../../images/user_pfp/default.png"}" alt="User profile picture" class="user-profile-picture" />
+										<img src="${item.profilePicture || "/images/user_pfp/default.png"}" alt="User profile picture" class="user-profile-picture" />
 										<p class="user-name">${item.name}</p>
 										<p class="user-username">@${item.username}</p>
 									</div>
@@ -422,14 +422,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 		if (type === "services") {
 			// Make an AJAX request to fetch all services
-			fetch("../../api/api_all_services.php")
+			fetch("/api/api_all_services.php")
 				.then((response) => response.json())
 				.then((services) => {
 					searchResults.innerHTML = ""; // Clear previous results
 					if (services.length > 0) {
 						services.forEach((service) => {
 							const serviceCard = document.createElement("a");
-							serviceCard.href = `../../pages/services/service.php?id=${encodeURIComponent(service.id)}`;
+							serviceCard.href = `/pages/services/service.php?id=${encodeURIComponent(service.id)}`;
 							serviceCard.classList.add("service-card-link");
 							serviceCard.innerHTML = `
                             <div class="service-card" data-subcategory-ids="${encodeURIComponent(service.subcategories || "")}">
@@ -460,19 +460,19 @@ document.addEventListener("DOMContentLoaded", () => {
 				});
 		} else if (type === "names") {
 			// Make an AJAX request to fetch all users
-			fetch("../../api/api_users.php")
+			fetch("/api/api_users.php")
 				.then((response) => response.json())
 				.then((users) => {
 					searchResults.innerHTML = ""; // Clear previous results
 					if (users.length > 0) {
 						users.forEach((user) => {
 							const userCard = document.createElement("a");
-							userCard.href = `../../pages/users/profile.php?username=${encodeURIComponent(user.username)}`;
+							userCard.href = `/pages/users/profile.php?username=${encodeURIComponent(user.username)}`;
 							userCard.classList.add("user-card-link");
 							userCard.innerHTML = `
                             <div class="user-card">
                                 <div class="user-info">
-                                    <img src="${user.profilePicture || "../../images/user_pfp/default.png"}" alt="User profile picture" class="user-profile-picture" />
+                                    <img src="${user.profilePicture || "/images/user_pfp/default.png"}" alt="User profile picture" class="user-profile-picture" />
                                     <p class="user-name">${user.name}</p>
                                     <p class="user-username">@${user.username}</p>
                                 </div>
