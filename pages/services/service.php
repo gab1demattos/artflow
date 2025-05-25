@@ -27,4 +27,4 @@ drawHeader($user);
 drawServiceDisplay($service, $user, $db);
 drawFooter($user); 
 ?>
-<script src="../../js/others/script.js"></script>
+<script src="/js/others/script.js"></script>

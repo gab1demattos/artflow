@@ -9,9 +9,9 @@ $user = $session->getUser() ?? null;
 // Use the Category class method instead of the function
 $categories = Category::getCategories();
 
-// Ensure see-more page CSS is loaded
+// Use absolute path for CSS files
 ?>
-<link rel="stylesheet" href="../../css/main.css">
+<link rel="stylesheet" href="/css/main.css">
 <?php
 drawHeader($user);
 drawSeeMoreCategories($categories);

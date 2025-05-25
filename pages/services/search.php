@@ -16,9 +16,9 @@ drawSearchPage($db); ?>
 <link rel="stylesheet" href="../../css/main.css">
 
 <!-- Load the modular JavaScript files -->
-<script src="../../js/services/rate-it.js"></script>
-<script src="../../js/modal/modals.js"></script>
-<script src="../../js/services/categories.js"></script>
-<script src="../../js/services/search.js"></script>
+<script src="/js/services/rate-it.js"></script>
+<script src="/js/modal/modals.js"></script>
+<script src="/js/services/categories.js"></script>
+<script src="/js/services/search.js"></script>
 <!-- Keep script.js for backward compatibility -->
-<script src="../../js/others/script.js"></script>
+<script src="/js/others/script.js"></script>

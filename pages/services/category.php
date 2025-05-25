@@ -182,11 +182,11 @@ drawHeader($user);
 <?php drawFooter($user); ?>
 <link rel="stylesheet" href="../../css/main.css">
 <!-- Load the modular JavaScript files -->
-<script src="../../js/modal/modals.js"></script>
-<script src="../../js/services/categories.js"></script>
-<script src="../../js/others/app.js"></script>
+<script src="/js/modal/modals.js"></script>
+<script src="/js/services/categories.js"></script>
+<script src="/js/others/app.js"></script>
 <!-- Keep script.js for backward compatibility -->
-<script src="../../js/others/script.js"></script>
+<script src="/js/others/script.js"></script>
 <script>
     document.addEventListener("DOMContentLoaded", () => {
         const filterRatingStars = document.querySelectorAll("#filter-search-rating .star-icon");
