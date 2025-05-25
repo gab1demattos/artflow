@@ -51,10 +51,10 @@ if (!empty($_FILES['media']['name'][0])) {
     $totalFiles = count($_FILES['media']['name']);
     if ($totalFiles > 5) {
         $_SESSION['error'] = 'You can upload a maximum of 5 files.';
-        header('Location: /pages/new-service.php');
+        header('Location: ../../pages/modal/new-service-modal.php');
         exit();
     }
-    $uploadsDir = __DIR__ . '/../images/services/';
+    $uploadsDir = __DIR__ . '../../images/services/';
     if (!is_dir($uploadsDir)) mkdir($uploadsDir, 0777, true);
 
     for ($i = 0; $i < $totalFiles; $i++) {
@@ -80,7 +80,7 @@ if (!empty($_FILES['media']['name'][0])) {
 
             if (!$validation['valid']) {
                 $_SESSION['error'] = 'File ' . $file['name'] . ': ' . $validation['error'];
-                header('Location: /pages/new-service.php');
+                header('Location: ../../pages/modal/new-service-modal.php');
                 exit();
             }
 
@@ -93,7 +93,7 @@ if (!empty($_FILES['media']['name'][0])) {
         else if (in_array($file['type'], $allowedVideoTypes)) {
             if ($file['size'] > $maxFileSize) {
                 $_SESSION['error'] = 'Video file too large. Maximum size is 10MB.';
-                header('Location: /pages/new-service.php');
+                header('Location: ../../pages/modal/new-service-modal.php');
                 exit();
             }
             $filename = uniqid('srv_', true) . '_' . basename($file['name']);
@@ -114,7 +114,7 @@ if (!empty($_FILES['media']['name'][0])) {
 }
 if (empty($mediaPaths)) {
     $_SESSION['error'] = 'At least one image or video is required.';
-    header('Location: /pages/new-service.php');
+    header('Location: ../../pages/modal/new-service-modal.php');
     exit();
 }
 // Ensure primary image is first in the list
@@ -138,5 +138,5 @@ if (!empty($subcategories) && is_array($subcategories)) {
     }
 }
 
-header('Location: /pages/category.php?id=' . $category_id);
+header('Location: ../../pages/services/category.php?id=' . $category_id);
 exit();

@@ -9,7 +9,7 @@ require_once(__DIR__ . '/../../database/security/rate_limiter.php');
 
 function redirect_home()
 {
-    header('Location: /pages/index.php');
+    header('Location: ../../pages/index.php');
     exit();
 }
 

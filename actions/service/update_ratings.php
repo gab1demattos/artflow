@@ -1,7 +1,7 @@
 <?php
 // Script to update all service ratings based on existing reviews
-require_once(__DIR__ . '/database/database.php');
-require_once(__DIR__ . '/database/classes/service.class.php');
+require_once(__DIR__ . '/../../database/database.php');
+require_once(__DIR__ . '/../../database/classes/service.class.php');
 
 $db = Database::getInstance();
 

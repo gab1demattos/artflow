@@ -80,5 +80,5 @@ if (isset($_POST['subcategories']) && is_array($_POST['subcategories'])) {
     }
 }
 
-header('Location: /pages/service.php?id=' . $serviceId);
+header('Location: ../../pages/services/service.php?id=' . $serviceId);
 exit;

@@ -18,11 +18,11 @@ $success = User::deleteAccount((int)$userId);
 if ($success) {
     $session->logout();
 
-    header('Location: /pages/index.php?showGoFlow=true');
+    header('Location: ../../pages/index.php?showGoFlow=true');
     exit();
     exit();
 } else {
-    header('Location: ../../pages/profile.php?username=' . urlencode($user['username']) . '&error=delete_failed');
+    header('Location: ../../pages/users/profile.php?username=' . urlencode($user['username']) . '&error=delete_failed');
 }
 
 exit();
