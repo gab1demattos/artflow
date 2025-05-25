@@ -1,5 +1,4 @@
 <?php
-// actions/activity/get-orders.php
 require_once(__DIR__ . '/../../database/database.php');
 require_once(__DIR__ . '/../../database/session.php');
 
@@ -14,12 +13,10 @@ if (!$user) {
 
 $db = Database::getInstance();
 
-// Fetch orders placed by the user (as client)
 $stmt = $db->prepare('SELECT e.id, e.status, e.requirements, e.date, s.id as service_id, s.title, s.price, s.delivery_time, u.name as seller_name, u.username as seller_username FROM Exchange e JOIN Service s ON e.service_id = s.id JOIN User u ON s.user_id = u.id WHERE e.client_id = ? ORDER BY e.id DESC');
 $stmt->execute([$user['id']]);
 $yourOrders = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// Add rated flag for each order
 foreach ($yourOrders as &$order) {
     $stmtR = $db->prepare('SELECT 1 FROM Review WHERE user_id = ? AND exchange_id = ?');
     $stmtR->execute([$user['id'], $order['id']]);
