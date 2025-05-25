@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	});
 
 	// Fetch and render orders dynamically
-	fetch("/actions/activity/get-orders.php")
+	fetch("../../actions/activity/get-orders.php")
 		.then((res) => res.json())
 		.then((data) => {
 			if (!data.success) return;
@@ -118,7 +118,7 @@ document.addEventListener("DOMContentLoaded", function () {
 					if (!card) return;
 					const orderId = card.getAttribute("data-order-id");
 					btn.disabled = true;
-					fetch("/actions/activity/mark-delivered.php", {
+					fetch("../../actions/activity/mark-delivered.php", {
 						method: "POST",
 						headers: { "Content-Type": "application/x-www-form-urlencoded" },
 						body: `order_id=${encodeURIComponent(orderId)}`,
@@ -152,7 +152,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			title.addEventListener("click", function () {
 				const serviceId = this.getAttribute("data-service-id");
 				if (serviceId) {
-					window.location.href = "/pages/service.php?id=" + serviceId;
+					window.location.href = "../../pages/services/service.php?id=" + serviceId;
 				}
 			});
 		});
@@ -184,7 +184,7 @@ document.addEventListener("DOMContentLoaded", function () {
 								<div class="service-title">
 									<h3>${serviceTitle}</h3>
 								</div>
-								<form id="rate-it-form" action="/actions/submit-review.php" method="POST">
+								<form id="rate-it-form" action="../../actions/service/submit-review.php" method="POST">
 									<input type="hidden" name="service_id" value="${serviceId}">
 									<input type="hidden" name="exchange_id" value="${exchangeId}">
 									<input type="hidden" name="rating" id="rating-value" value="0">
@@ -283,7 +283,7 @@ document.addEventListener("DOMContentLoaded", function () {
 							console.log("Submitting form data:", formData.toString()); // Debug log
 
 							// Submit the review via fetch API
-							fetch("/actions/submit-review.php", {
+							fetch("../../actions/service/submit-review.php", {
 								method: "POST",
 								headers: {
 									"Content-Type": "application/x-www-form-urlencoded",
@@ -300,7 +300,7 @@ document.addEventListener("DOMContentLoaded", function () {
 										rateItModal.style.display = "none";
 
 										// Redirect to the service page
-										window.location.href = "/pages/service.php?id=" + serviceId;
+										window.location.href = "../../pages/services/service.php?id=" + serviceId;
 									} else if (result.success) {
 										// Success with JSON response
 										rateItModal.style.display = "none";
@@ -313,7 +313,7 @@ document.addEventListener("DOMContentLoaded", function () {
 										}
 
 										// Redirect to the service page
-										window.location.href = "/pages/service.php?id=" + serviceId;
+										window.location.href = "../../pages/services/service.php?id=" + serviceId;
 									} else {
 										// Error
 										alert(

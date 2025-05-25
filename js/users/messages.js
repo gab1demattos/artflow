@@ -127,7 +127,7 @@ function createOrSelectConversation(userId) {
 	} else {
 		// Conversation doesn't exist yet, need to create it
 		// First, fetch user information
-		fetch(`/actions/messages/get-user-info.php?user_id=${userId}`)
+		fetch(`../../actions/messages/get-user-info.php?user_id=${userId}`)
 			.then((response) => response.json())
 			.then((data) => {
 				if (data.success) {
@@ -139,7 +139,7 @@ function createOrSelectConversation(userId) {
 					newItem.dataset.userId = userId;
 
 					const profileImage =
-						user.profile_image || "/images/user_pfp/default.png";
+						user.profile_image || "../../images/user_pfp/default.png";
 
 					newItem.innerHTML = `
                         <img src="${profileImage}" alt="profile" class="chat-app__avatar" />
@@ -215,7 +215,7 @@ function selectConversation(item) {
 function loadMessages() {
 	if (!selectedUserId) return;
 
-	fetch(`/actions/messages/get-messages.php?user_id=${selectedUserId}`)
+	fetch(`../../actions/messages/get-messages.php?user_id=${selectedUserId}`)
 		.then((response) => {
 			if (!response.ok) {
 				console.error("Network response was not ok: " + response.status);
@@ -308,7 +308,7 @@ function sendMessage() {
 	messageInput.value = "";
 
 	// Send message via API
-	fetch("/actions/messages/send-message.php", {
+	fetch("../../actions/messages/send-message.php", {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
@@ -407,11 +407,11 @@ function visitUserProfile() {
 	if (!selectedUserId) return;
 
 	// Fetch the username first and then redirect to the profile page with username
-	fetch(`/actions/messages/get-user-info.php?user_id=${selectedUserId}`)
+	fetch(`../../actions/messages/get-user-info.php?user_id=${selectedUserId}`)
 		.then((response) => response.json())
 		.then((data) => {
 			if (data.success && data.user && data.user.username) {
-				window.location.href = `/pages/profile.php?username=${encodeURIComponent(
+				window.location.href = `../../pages/users/profile.php?username=${encodeURIComponent(
 					data.user.username
 				)}`;
 			}
@@ -450,7 +450,7 @@ function deleteConversation() {
 	if (!selectedUserId) return;
 
 	// Send delete request to the server
-	fetch("/actions/messages/delete-conversation.php", {
+	fetch("../../actions/messages/delete-conversation.php", {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",

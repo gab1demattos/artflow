@@ -183,7 +183,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 					// Redirect to the delete account action
 					window.location.href =
-						"/actions/account_settings/delete-account-action.php";
+						"../../actions/account_settings/delete-account-action.php";
 				};
 			}
 
@@ -251,7 +251,7 @@ document.addEventListener("DOMContentLoaded", function () {
 				}
 			} else {
 				// Fallback to default image if no profile image is found
-				profilePreview.src = "/images/user_pfp/default.png";
+				profilePreview.src = "../../images/user_pfp/default.png";
 				console.log("Setting preview to default image (fallback)");
 
 				// Hide delete button since we're showing the default image
@@ -263,7 +263,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			// Add error handler for any image loading issues
 			profilePreview.onerror = function () {
 				console.log("Failed to load profile image, using fallback");
-				this.src = window.location.origin + "/images/user_pfp/default.png";
+				this.src = window.location.origin + "../../images/user_pfp/default.png";
 
 				if (deleteImageBtn) {
 					deleteImageBtn.style.display = "none";
@@ -298,7 +298,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	// Handle delete image button click
 	if (deleteImageBtn) {
 		deleteImageBtn.addEventListener("click", function () {
-			profilePreview.src = "/images/user_pfp/default.png";
+			profilePreview.src = "../../images/user_pfp/default.png";
 			if (profileImageInput) {
 				profileImageInput.value = "";
 			}
@@ -315,7 +315,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	// Show/hide delete button based on preview image
 	if (profilePreview) {
 		profilePreview.addEventListener("load", function () {
-			if (this.src !== "/images/user_pfp/default.png") {
+			if (this.src !== "../../images/user_pfp/default.png") {
 				deleteImageBtn.style.display = "block";
 			} else {
 				deleteImageBtn.style.display = "none";

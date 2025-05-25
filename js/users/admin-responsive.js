@@ -250,7 +250,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Check if this is an admin API call
         const url = arguments[0];
         if (typeof url === 'string' &&
-            (url.includes('/actions/adminpanel/') || url.includes('/admin/'))) {
+            (url.includes('../../actions/adminpanel/') || url.includes('/admin/'))) {
 
             console.log('Admin API call detected:', url);
             // Schedule multiple refreshes to catch both immediate and delayed DOM updates

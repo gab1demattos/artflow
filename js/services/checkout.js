@@ -186,7 +186,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Send AJAX to create order
             try {
-                const response = await fetch('/actions/create-order.php', {
+                const response = await fetch('../../actions/service/create-order.php', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
