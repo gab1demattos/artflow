@@ -109,19 +109,29 @@
 	object-fit: cover;
 }
 
-.user-username {
+.user-info {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding: 0;
+	gap: 0.5em;
+}
+
+.user-name {
 	font-size: 18px;
 	color: #333;
 	font-family: "EB Garamond", serif;
-	text-decoration: none;
-	transform: translateY(-0.5em);
+	font-weight: 600;
+	margin: 0;
 }
 
-.user-info {
-	display: flex;
-	justify-content: center;
-	padding: 0;
-	gap: 1em;
+.user-username {
+	font-size: 16px;
+	color: #666;
+	font-family: "EB Garamond", serif;
+	text-decoration: none;
+	margin: 0;
+	font-style: italic;
 }
 
 /* Add a CSS rule to ensure dynamically displayed text is not underlined */
