@@ -33,7 +33,7 @@ VALUES (
         3,
         250.00,
         14,
-        '/images/services/srv_682b442734f443.07923633_monalisa.jpg'
+        '/images/services/populators/painting4.jpg'
     ),
     (
         5,
@@ -42,7 +42,7 @@ VALUES (
         4,
         180.00,
         10,
-        '/images/services/srv_682b4427347d38.81134772_3d.jpg'
+        '/images/services/populators/3d2.jpg'
     ),
     (
         6,
@@ -105,7 +105,7 @@ VALUES (
         3,
         180.00,
         10,
-        '/images/services/srv_682b442734f443.07923633_monalisa.jpg'
+        '/images/services/populators/painting1.jpg'
     ),
     (
         5,
@@ -114,7 +114,7 @@ VALUES (
         4,
         220.00,
         12,
-        '/images/services/srv_682b4427347d38.81134772_3d.jpg'
+        '/images/services/populators/3d2.jpg'
     ),
     (
         6,
@@ -159,7 +159,7 @@ VALUES (
         3,
         130.00,
         9,
-        '/images/services/srv_682b442734f443.07923633_monalisa.jpg'
+        '/images/services/populators/painting1.jpg'
     ),
     (
         4,
@@ -168,7 +168,7 @@ VALUES (
         4,
         200.00,
         11,
-        '/images/services/srv_682b4427347d38.81134772_3d.jpg'
+        '/images/services/populators/3d2.jpg'
     ),
     (
         5,
@@ -213,7 +213,7 @@ VALUES (
         3,
         160.00,
         12,
-        '/images/services/srv_682b442734f443.07923633_monalisa.jpg'
+        '/images/services/populators/painting1.jpg'
     ),
     (
         3,
@@ -222,7 +222,7 @@ VALUES (
         4,
         140.00,
         8,
-        '/images/services/srv_682b4427347d38.81134772_3d.jpg'
+        '/images/services/populators/3d2.jpg'
     ),
     (
         4,
@@ -231,7 +231,7 @@ VALUES (
         5,
         35.00,
         4,
-        '/images/services/srv_682b442734e0e2.96781324_craft.jpg'
+        '/images/services/populators/craft4.jpg'
     ),
     (
         5,
@@ -267,7 +267,7 @@ VALUES (
         3,
         200.00,
         13,
-        '/images/services/srv_682b442734f443.07923633_monalisa.jpg'
+        '/images/services/populators/painting1.jpg'
     ),
     (
         2,
@@ -276,7 +276,7 @@ VALUES (
         4,
         300.00,
         15,
-        '/images/services/srv_682b4427347d38.81134772_3d.jpg'
+        '/images/services/populators/3d2.jpg'
     ),
     (
         3,
@@ -339,7 +339,7 @@ VALUES (
         3,
         140.00,
         8,
-        '/images/services/srv_682b442734f443.07923633_monalisa.jpg'
+        '/images/services/populators/painting1.jpg'
     ),
     (
         4,
@@ -348,7 +348,7 @@ VALUES (
         4,
         110.00,
         7,
-        '/images/services/srv_682b4427347d38.81134772_3d.jpg'
+        '/images/services/populators/3d2.jpg'
     ),
     (
         5,
@@ -393,7 +393,7 @@ VALUES (
         3,
         110.00,
         6,
-        '/images/services/srv_682b442734f443.07923633_monalisa.jpg'
+        '/images/services/populators/painting1.jpg'
     ),
     (
         3,
@@ -402,7 +402,7 @@ VALUES (
         4,
         210.00,
         13,
-        '/images/services/srv_682b4427347d38.81134772_3d.jpg'
+        '/images/services/populators/3d2.jpg'
     ),
     (
         4,
@@ -447,7 +447,7 @@ VALUES (
         3,
         105.00,
         7,
-        '/images/services/srv_682b442734f443.07923633_monalisa.jpg'
+        '/images/services/populators/painting1.jpg'
     ),
     (
         2,
@@ -456,7 +456,7 @@ VALUES (
         4,
         260.00,
         14,
-        '/images/services/srv_682b4427347d38.81134772_3d.jpg'
+        '/images/services/populators/3d2.jpg'
     ),
     (
         3,
