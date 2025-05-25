@@ -45,7 +45,8 @@
 #search-results.names-active {
 	flex-wrap: nowrap;
 	flex-direction: column;
-	justify-content: flex-start; /* Ensure list starts from the top */
+	justify-content: flex-start;
+	align-items: center; /* Center user cards horizontally */
 	padding: 1em;
 	width: 100%;
 }
@@ -95,10 +96,9 @@
 	border-radius: 8px;
 	transition: box-shadow 0.3s ease;
 	cursor: pointer;
-	padding-left: 1em;
-	padding-top: 1em;
+	padding: 1em;
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
+	}
 
 .user-profile-picture {
 	width: 2.5em;
@@ -109,19 +109,30 @@
 	object-fit: cover;
 }
 
-.user-username {
+.user-info {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding: 0;
+	gap: 0.5em;
+	width: 95vw;
+}
+
+.user-name {
 	font-size: 18px;
 	color: #333;
 	font-family: "EB Garamond", serif;
-	text-decoration: none;
-	transform: translateY(-0.5em);
+	font-weight: 600;
+	margin: 0;
 }
 
-.user-info {
-	display: flex;
-	justify-content: center;
-	padding: 0;
-	gap: 1em;
+.user-username {
+	font-size: 16px;
+	color: #666;
+	font-family: "EB Garamond", serif;
+	text-decoration: none;
+	margin: 0;
+	font-style: italic;
 }
 
 /* Add a CSS rule to ensure dynamically displayed text is not underlined */
