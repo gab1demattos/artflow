@@ -203,10 +203,11 @@
     /* Thank You Modal - Mobile Responsive */
     #thankyou-modal-overlay .modal-content {
         min-width: 0 !important;
-        /* Override desktop min-width */
         width: 100%;
-        max-width: 100% !important;
-        padding: 1.5em 1em;
+        max-width: 350px !important;
+        margin: 0 auto;
+        padding: 1.2em 0.8em;
+        box-sizing: border-box;
     }
 
     #thankyou-modal-overlay h2 {
