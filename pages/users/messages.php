@@ -3,9 +3,9 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-require_once(__DIR__ . '../../database/session.php');
-require_once(__DIR__ . '../../templates/home.tpl.php');
-require_once(__DIR__ . '../../database/classes/message.class.php');
+require_once(__DIR__ . '/../../database/session.php');
+require_once(__DIR__ . '/../../templates/home.tpl.php');
+require_once(__DIR__ . '/../../database/classes/message.class.php');
 
 $session = Session::getInstance();
 $user = $session->getUser() ?? null;
@@ -26,7 +26,7 @@ try {
     $conversations = Message::getConversationsForUser($user['id']);
 ?>
     <link rel="stylesheet" href="../../css/main.css">
-    <?php include_once(__DIR__ . '../../templates/irreversible-modal.tpl.php'); ?>
+    <?php include_once(__DIR__ . '/../../templates/irreversible-modal.tpl.php'); ?>
     <div id='messages-page'>
         <div class="chat-app__container">
             <aside class="chat-app__sidebar">

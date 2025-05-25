@@ -37,7 +37,6 @@
             $stmt->execute([$category['id']]);
             $subcategories = $stmt->fetchAll(PDO::FETCH_ASSOC);
             ?>
-
             <?php if ($subcategories): ?>
                 <div class="subcategory-carousel-wrapper">
                     <div class="subcategory-carousel" id="subcategory-carousel">
@@ -53,7 +52,7 @@
         <div class="category-content">
             <div id="services-list">
                 <?php
-                require_once(__DIR__ . '../database/classes/service.class.php');
+                require_once(__DIR__ . '/../database/classes/service.class.php');
 
                 // Fetch all services for this category
                 $stmt = $db->prepare('SELECT Service.*, User.username FROM Service JOIN User ON Service.user_id = User.id WHERE Service.category_id = ?');
