@@ -161,7 +161,10 @@ function drawHeader($user, $currentPage = '')
             <section id="info">
                 <div id="info-content">
                     <h2>Our motivation</h2>
-                    <p>Etiam pellentesque tempus rutrum. Nullam eget nisl nec nulla ultrices commodo eget eget erat. Phasellus non rutrum erat. Duis nec rhoncus enim. Sed condimentum, odio facilisis maximus aliquet, tellus arcu consequat nibh, nec ultrices erat mauris vitae nisi. In maximus posuere egestas. Aenean congue justo non augue eleifend eleifend. Pellentesque dapibus, orci vitae tempus posuere, dolor risus dapibus augue, sed vehicula orci neque ac orci. Phasellus auctor vulputate volutpat.</p>
+                    <p>In an era where artificial intelligence is rapidly transforming creative industries, many fear that AI-generated art will overshadow human creativity.</p>
+                    <p>As developers, we recognize the power of technology—but we refuse to embrace trends that devalue real art and the artists behind it. Instead, we choose to build a space that celebrates and empowers human creativity.</p>
+                    <p>Our mission is to create a freelancing platform exclusively for artists—a place where illustrators, painters, designers, and digital creators can thrive, connect with clients who value authentic work, and earn a fair income from their craft.</p>
+                    <p>Together, we can ensure that artists remain at the heart of creativity. Because the world doesn’t need more machine-made content—it needs <span class='flow-text'>art</span>. And art needs <span class='flow-text'>you</span>.</p>
                 </div>
             </section>
 
@@ -176,17 +179,17 @@ function drawHeader($user, $currentPage = '')
                     <div id="authors">
                         <h3>Developed by:</h3>
                         <ul>
-                            <li class="author">@ Francisca Portugal</li>
-                            <li class="author">@ Gabriela de Mattos</li>
-                            <li class="author">@ Maria Luiza Vieira</li>
+                            <li class="author footer-link">@ <a href='https://github.com/franpts2'>Francisca Portugal</a></li>
+                            <li class="author footer-link">@ <a href='https://github.com/gab1demattos'>Gabriela de Mattos</a></li>
+                            <li class="author footer-link">@ <a href='https://github.com/maluviieira'>Maria Luiza Vieira</a></li>
                         </ul>
                     </div>
                     <div id="footer-links">
                         <h3>Quick Links:</h3>
                         <ul>
-                            <li class="footer-link"><a>Home</a></li>
-                            <li class="footer-link"><a>Page 1</a></li>
-                            <li class="footer-link"><a>Page 2</a></li>
+                            <li class="footer-link"><a href="/">Home</a></li>
+                            <li class="footer-link"><a href="/pages/see-more-categories.php">All Categories</a></li>
+                            <li class="footer-link"><a href="/pages/search.php">All Services</a></li>
                         </ul>
                     </div>
                 </div>

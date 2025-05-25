@@ -150,7 +150,18 @@
 	font-family: "Cormorant Garamond", serif;
 	font-size: 1.1em;
 	line-height: 1.7em;
+    text-decoration: none;
 }
+
+.footer-link a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.footer-link a:hover {
+    color: var(--green);
+}
+
 
 #end h3 {
 	margin-bottom: 0;
@@ -304,4 +315,8 @@
 #see-more {
 	display: block;
 	align-self: flex-end;
+}
+
+#see-more:hover {
+    transform: translateX(0.2em);
 }
