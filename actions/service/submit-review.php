@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-require_once(__DIR__ . '/../database/security/security_bootstrap.php');
-require_once(__DIR__ . '/../database/session.php');
-require_once(__DIR__ . '/../database/database.php');
-require_once(__DIR__ . '/../database/classes/service.class.php');
-require_once(__DIR__ . '/../database/classes/review.class.php');
-require_once(__DIR__ . '/../database/security/security.php');
+require_once(__DIR__ . '/../../database/security/security_bootstrap.php');
+require_once(__DIR__ . '/../../database/session.php');
+require_once(__DIR__ . '/../../database/database.php');
+require_once(__DIR__ . '/../../database/classes/service.class.php');
+require_once(__DIR__ . '/../../database/classes/review.class.php');
+require_once(__DIR__ . '/../../database/security/security.php');
 
 // Set header for JSON response
 header('Content-Type: application/json');

@@ -1,6 +1,6 @@
 <?php
-require_once(__DIR__ . '/../database/session.php');
-require_once(__DIR__ . '/../database/database.php');
+require_once(__DIR__ . '/../../database/session.php');
+require_once(__DIR__ . '/../../database/database.php');
 
 $session = Session::getInstance();
 $user = $session->getUser() ?? null;
@@ -29,7 +29,7 @@ if ($title === '' || $description === '' || !$category_id || !$delivery_time || 
 }
 
 // Include security utilities
-require_once(__DIR__ . '/../database/security/security.php');
+require_once(__DIR__ . '/../../database/security/security.php');
 
 // Sanitize inputs
 $title = Security::sanitizeInput($title);
@@ -80,7 +80,7 @@ if (!empty($_FILES['media']['name'][0])) {
 
             if (!$validation['valid']) {
                 $_SESSION['error'] = 'File ' . $file['name'] . ': ' . $validation['error'];
-                header('Location: ../../pages/modal/new-service-modal.php');
+                header('Location: /../../pages/modal/new-service-modal.php');
                 exit();
             }
 
@@ -93,7 +93,7 @@ if (!empty($_FILES['media']['name'][0])) {
         else if (in_array($file['type'], $allowedVideoTypes)) {
             if ($file['size'] > $maxFileSize) {
                 $_SESSION['error'] = 'Video file too large. Maximum size is 10MB.';
-                header('Location: ../../pages/modal/new-service-modal.php');
+                header('Location: /../../pages/modal/new-service-modal.php');
                 exit();
             }
             $filename = uniqid('srv_', true) . '_' . basename($file['name']);
@@ -114,7 +114,7 @@ if (!empty($_FILES['media']['name'][0])) {
 }
 if (empty($mediaPaths)) {
     $_SESSION['error'] = 'At least one image or video is required.';
-    header('Location: ../../pages/modal/new-service-modal.php');
+    header('Location: /../../pages/modal/new-service-modal.php');
     exit();
 }
 // Ensure primary image is first in the list
@@ -138,5 +138,5 @@ if (!empty($subcategories) && is_array($subcategories)) {
     }
 }
 
-header('Location: ../../pages/services/category.php?id=' . $category_id);
+header('Location: /../../pages/services/category.php?id=' . $category_id);
 exit();

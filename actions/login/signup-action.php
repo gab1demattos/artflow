@@ -105,7 +105,7 @@ if ($user) {
 
     // Use a temporary HTML page with JS to set sessionStorage before redirecting
     // Redirect to homepage with showGoFlow parameter to trigger the modal
-    header('Location: ../../pages/index.php?showGoFlow=true');
+    header('Location: /../../pages/index.php?showGoFlow=true');
     exit();
     exit();
 } else {

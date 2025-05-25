@@ -15,14 +15,14 @@ if (!$user) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: ../../pages/users/profile.php?username=' . $user['username']);
+    header('Location: /../../pages/users/profile.php?username=' . $user['username']);
     exit();
 }
 
 $token = $_POST['csrf_token'] ?? '';
 if (!CSRF::validate($token, 'edit_profile_csrf_token')) {
     $_SESSION['error'] = 'Invalid security token. Please try again.';
-    header('Location: ../../pages/users/profile.php?username=' . $user['username']);
+    header('Location: /../../pages/users/profile.php?username=' . $user['username']);
     exit();
 }
 
@@ -34,7 +34,7 @@ $resetProfileImage = isset($_POST['reset_profile_image']) && $_POST['reset_profi
 
 if (empty($name) || empty($username) || empty($email)) {
     $_SESSION['error'] = 'Name, username, and email are required';
-    header('Location: ../../pages/users/profile.php?username=' . $user['username']);
+    header('Location: /../../pages/users/profile.php?username=' . $user['username']);
     exit();
 }
 
@@ -46,7 +46,7 @@ if ($username !== $user['username']) {
 
     if ($existingUser) {
         $_SESSION['error'] = 'Username is already taken';
-        header('Location: ../../pages/users/profile.php?username=' . $user['username']);
+        header('Location: /../../pages/users/profile.php?username=' . $user['username']);
         exit();
     }
 }
@@ -59,7 +59,7 @@ if ($email !== $user['email']) {
 
     if ($existingUser) {
         $_SESSION['error'] = 'Email is already taken';
-        header('Location: ../../pages/users/profile.php?username=' . $user['username']);
+        header('Location: /../../pages/users/profile.php?username=' . $user['username']);
         exit();
     }
 }
@@ -67,7 +67,7 @@ if ($email !== $user['email']) {
 $profileImage = $user['profile_image'] ?? null; 
 
 if ($resetProfileImage) {
-    $profileImage = '../../images/user_pfp/default.png';
+    $profileImage = '/../../images/user_pfp/default.png';
 }
 else if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] === UPLOAD_ERR_OK) {
     $imageValidation = Security::validateImageUpload(
@@ -78,7 +78,7 @@ else if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] ==
 
     if (!$imageValidation['valid']) {
         $_SESSION['error'] = $imageValidation['error'];
-        header('Location: ../../pages/users/profile.php?username=' . $user['username']);
+        header('Location: /../../pages/users/profile.php?username=' . $user['username']);
         exit();
     }
 
@@ -93,7 +93,7 @@ else if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] ==
     $targetPath = $uploadsDir . $filename;
 
     if (move_uploaded_file($_FILES['profile_image']['tmp_name'], $targetPath)) {
-        $profileImage = '../../images/user_pfp/' . $filename;
+        $profileImage = '/../../images/user_pfp/' . $filename;
     }
 }
 
@@ -111,10 +111,10 @@ if ($success) {
         $_SESSION['success'] = 'Profile updated successfully';
     }
 
-    header('Location: ../../pages/users/profile.php?username=' . $username);
+    header('Location: /../../pages/users/profile.php?username=' . $username);
     exit();
 } else {
     $_SESSION['error'] = 'Failed to update profile';
-    header('Location: ../../pages/users/profile.php?username=' . $user['username']);
+    header('Location: /../../pages/users/profile.php?username=' . $user['username']);
     exit();
 }

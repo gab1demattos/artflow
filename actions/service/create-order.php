@@ -1,8 +1,8 @@
 <?php
-require_once(__DIR__ . '/../database/session.php');
-require_once(__DIR__ . '/../database/database.php');
-require_once(__DIR__ . '/../database/security/csrf.php');
-require_once(__DIR__ . '/../database/security/security.php');
+require_once(__DIR__ . '/../../database/session.php');
+require_once(__DIR__ . '/../../database/database.php');
+require_once(__DIR__ . '/../../database/security/csrf.php');
+require_once(__DIR__ . '/../../database/security/security.php');
 
 header('Content-Type: application/json');
 $session = Session::getInstance();
