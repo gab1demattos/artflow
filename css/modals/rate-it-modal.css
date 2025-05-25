@@ -1,4 +1,3 @@
-/* Rate-it Modal Styles */
 #rate-it-modal-overlay {
 	position: fixed;
 	top: 0;
@@ -92,7 +91,6 @@
 	font-size: 2.5em;
 	line-height: 1;
 	gap: 0.1em;
-	/* Add spacing between stars */
 }
 
 #rate-it-modal-overlay .star-icon {
@@ -103,9 +101,7 @@
 	cursor: pointer;
 	user-select: none;
 	width: 1em;
-	/* Make each star a consistent width */
 	text-align: center;
-	/* Center the star character */
 }
 
 #rate-it-modal-overlay .star-icon.active {
@@ -127,13 +123,11 @@
 	color: var(--yellow);
 }
 
-/* Old half star style - keeping for backward compatibility */
 #rate-it-modal-overlay .star-icon.active.half {
 	position: relative;
 	display: inline-block;
 }
 
-/* Make the star larger for better click targets */
 @media (max-width: 600px) {
 	#rate-it-modal-overlay .modal-content {
 		min-width: 300px;

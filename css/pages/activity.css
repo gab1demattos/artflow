@@ -1,5 +1,3 @@
-/* Activity Page Styles */
-/* --- MOVED FROM PROFILE.CSS --- */
 .activity-container {
 	max-width: 700px;
 	margin: 2rem auto;
@@ -19,22 +17,16 @@
 
 .activity-tabs {
 	display: flex;
-
 	border-bottom: 1px solid #ddd;
-	/* margin-bottom: 20px; */
 	margin-left: 4.5em;
 	margin-right: 4.5em;
-
 	gap: 0.5rem;
-	/* margin-bottom: 1rem;
-    align-items: flex-end; */
 }
 
 .activity-tab {
 	background: #f3f3f3;
 	border: none;
 	border-radius: 6px 6px 0 0;
-	/* padding: 0.7rem 2.2rem; */
 	font-family: "EB Garamond", sans-serif;
 	font-size: 1.1rem;
 	font-weight: 500;
@@ -53,16 +45,11 @@
 
 .activity-tab-content {
 	display: none;
-	/* Hide all tab content by default */
 	min-height: calc(100vh - 25em);
-	/* Use viewport height minus space for header/tabs/etc */
 	width: 100%;
 	flex-direction: column;
 	padding: 0 4.5em;
-	/* Match tab margins */
 	box-sizing: border-box;
-
-	/* Prevent order cards from overflowing the tab content */
 	max-height: 600px;
 	overflow-y: auto;
 	padding-bottom: 1em;
@@ -80,10 +67,8 @@
 	padding: 1.2rem 1.5rem;
 	transition: box-shadow 0.2s;
 	position: relative;
-	/* Needed for absolute button placement */
 	box-sizing: border-box;
 	width: 100%;
-	/* Ensure full width */
 }
 
 .mark-delivered-btn {
@@ -203,4 +188,3 @@
 	}
 }
 
-/* --- END MOVED STYLES --- */

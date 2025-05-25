@@ -1,7 +1,5 @@
-/* Irreversible Modal Specific */
 .irreversible-modal {
 	display: none;
-	/* Start with display none */
 	position: fixed;
 	z-index: 10000;
 	left: 0;
@@ -18,7 +16,6 @@
 
 .irreversible-modal.show {
 	display: flex;
-	/* Show as flex when .show class is added */
 	opacity: 1;
 	pointer-events: auto;
 }

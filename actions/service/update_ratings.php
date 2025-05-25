@@ -1,5 +1,4 @@
 <?php
-// Script to update all service ratings based on existing reviews
 require_once(__DIR__ . '/../../database/database.php');
 require_once(__DIR__ . '/../../database/classes/service.class.php');
 
@@ -8,7 +7,6 @@ $db = Database::getInstance();
 try {
     echo "Updating service ratings...\n";
     
-    // Get all services that have reviews
     $stmt = $db->query("SELECT DISTINCT service_id FROM Review");
     $serviceIds = $stmt->fetchAll(PDO::FETCH_COLUMN);
     
@@ -25,7 +23,6 @@ try {
     
     echo "Successfully updated $updated service ratings.\n";
     
-    // Show the updated ratings
     echo "\nUpdated service ratings:\n";
     $stmt = $db->query("SELECT id, title, avg_rating FROM Service WHERE avg_rating > 0 ORDER BY avg_rating DESC");
     $services = $stmt->fetchAll(PDO::FETCH_ASSOC);

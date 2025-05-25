@@ -19,20 +19,9 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit();
 }
 
-// CSRF token validation - disable for AJAX requests using a dedicated API token approach
-// Uncomment this section if you're implementing AJAX CSRF protection
-/*
-$token = $_POST['csrf_token'] ?? '';
-if (!CSRF::validate($token, 'payment_csrf_token')) {
-    http_response_code(403);
-    echo json_encode(['success' => false, 'error' => 'Invalid security token']);
-    exit();
-}
-*/
 
 $service_id = intval($_POST['service_id'] ?? 0);
 $requirements = Security::sanitizeInput(trim($_POST['requirements'] ?? ''));
-// Remove price and delivery_time from required fields and ignore them
 if (!$service_id || $requirements === '') {
     http_response_code(400);
     echo json_encode(['success' => false, 'error' => 'Missing required fields']);
@@ -40,7 +29,6 @@ if (!$service_id || $requirements === '') {
 }
 
 $db = Database::getInstance();
-// Get seller id from service
 $stmt = $db->prepare('SELECT user_id, price, delivery_time FROM Service WHERE id = ?');
 $stmt->execute([$service_id]);
 $seller = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -51,7 +39,6 @@ if (!$seller) {
 }
 $seller_id = $seller['user_id'];
 
-// Insert into Exchange (date will default to CURRENT_TIMESTAMP)
 $stmt = $db->prepare('INSERT INTO Exchange (client_id, service_id, requirements, status) VALUES (?, ?, ?, ?)');
 $stmt->execute([
     $user['id'],

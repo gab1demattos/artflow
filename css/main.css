@@ -1,8 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Modak&family=Material+Icons&display=swap");
-
 @import url("components.css");
-
-/* Modal CSS files */
 @import url("modals/modal-animations.css");
 @import url("modals/modal-base.css");
 @import url("modals/auth-modals.css");
@@ -14,7 +11,6 @@
 @import url("modals/rate-it-modal.css");
 @import url("modals/checkout-modals.css");
 @import url("modals/tiny-modal.css");
-
 @import url("pages/home.css");
 @import url("pages/category.css");
 @import url("pages/activity.css");
@@ -24,7 +20,6 @@
 @import url('pages/search.css');
 @import url('pages/admin.css');
 @import url('pages/see-more.css');
-
 @import url("responsive/home-responsive.css");
 @import url("responsive/messages-responsive.css");
 @import url("responsive/modals-responsive.css");
@@ -41,10 +36,7 @@
 @import url("responsive/service-responsive.css");
 @import url("responsive/stats-responsive.css");
 
-
-
 :root {
-	/*theme colors*/
 	--purple: #885784;
 	--green: #82a899;
 	--yellow: #c2ab42;
@@ -53,32 +45,20 @@
 	--peach: #f2dac6;
 }
 
-/*== Profile Image ==*/
-/* Used in both the side bar and the profile page*/
-
 .profile-img {
 	border-radius: 50%;
-	/* Makes the image circular */
 	border: 2px solid #ddd;
 	display: inline-block;
-	/* Ensures the container takes the size of the image */
 	overflow: hidden;
-	/* Ensures the image doesn't overflow the circular boundary */
 }
 
 .profile-img img {
 	width: 12.5em;
-	/* Default size */
 	height: 12.5em;
-	/* Default size */
 	object-fit: cover;
-	/* Maintains aspect ratio while filling the container */
 	display: block;
-	/* Removes any extra space below the image */
 }
 
-/*== Service card ==*/
-/* Used in the category and profile pages */
 .service-card {
 	background: #fff;
 	border: 1px solid #eee;
@@ -96,7 +76,6 @@
 	overflow: hidden;
 	transition: box-shadow 0.2s;
 	margin-left: 0;
-	/* Ensure no left margin pushes cards from edge */
 }
 
 .pantone-image-wrapper {
@@ -107,7 +86,6 @@
 	justify-content: center;
 	align-items: center;
 	overflow: hidden;
-
 	border-bottom: 1px solid #eee;
 	margin-top: 6px;
 }
@@ -163,13 +141,11 @@
 	font-weight: 600;
 }
 
-/*=== General Styles ===*/
 body {
 	margin: 0 auto;
 	padding: 0;
 	font-family: "EB Garamond", serif;
 	padding-top: 50px;
-	/* Space for fixed header */
 }
 
 .artflow-text {
@@ -220,7 +196,6 @@ header:first-of-type {
 	display: none !important;
 }
 
-/* Search Bar */
 #search-icon {
 	width: 1em;
 	height: auto;
@@ -246,6 +221,5 @@ header:first-of-type {
 	padding: 0;
 	margin: 0;
 	height: 100%;
-
 }
 

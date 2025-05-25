@@ -1,4 +1,3 @@
-/* Subcategory checkboxes common styles */
 .subcategory-checkboxes {
 	display: flex;
 	flex-wrap: wrap;
@@ -20,7 +19,6 @@
 	accent-color: var(--purple);
 }
 
-/* Overlay for subcategory selection */
 #subcategory-overlay {
 	position: fixed;
 	top: 0;
@@ -54,7 +52,6 @@
 
 #subcategory-modal h2 {
 	color: var(--green);
-	/* font-size: 1.8rem; */
 	font-family: "Modak", sans-serif;
 	font-weight: normal;
 	margin-bottom: 1em;
@@ -79,7 +76,6 @@
 	margin-right: 0;
 	cursor: pointer;
 	background: rgba(221, 141, 110, 0.5);
-	/* orange, semi-transparent */
 	border-radius: 8px;
 	padding: 8px 18px;
 	color: #333;

@@ -1,5 +1,4 @@
 <?php
-// actions/edit-service.php
 require_once(__DIR__ . '/../database/database.php');
 require_once(__DIR__ . '/../database/session.php');
 
@@ -42,7 +41,6 @@ if (!$service || $service['user_id'] != $user['id']) {
     exit;
 }
 
-// Handle image uploads (optional: keep old images if none uploaded)
 $images = $service['images'];
 if (!empty($_FILES['images']['name'][0])) {
     $uploadDir = __DIR__ . '/../images/services/';
@@ -62,16 +60,12 @@ if (!empty($_FILES['images']['name'][0])) {
     }
 }
 
-// Update Service main fields (no subcategory_id column!)
 $update = $db->prepare('UPDATE Service SET title = ?, description = ?, category_id = ?, price = ?, delivery_time = ?, images = ? WHERE id = ?');
 $update->execute([$title, $description, $category, $price, $delivery, $images, $serviceId]);
 
-// Update subcategories (ServiceSubcategory table)
 if (isset($_POST['subcategories']) && is_array($_POST['subcategories'])) {
-    // Remove old subcategories
     $stmt = $db->prepare('DELETE FROM ServiceSubcategory WHERE service_id = ?');
     $stmt->execute([$serviceId]);
-    // Insert new subcategories
     foreach ($_POST['subcategories'] as $subcatId) {
         if (is_numeric($subcatId)) {
             $stmt = $db->prepare('INSERT INTO ServiceSubcategory (service_id, subcategory_id) VALUES (?, ?)');

@@ -21,17 +21,14 @@ $delivery_time = intval($_POST['delivery_time'] ?? 0);
 $price = floatval($_POST['price'] ?? 0);
 $subcategories = $_POST['subcategories'] ?? [];
 
-// Validate required fields
 if ($title === '' || $description === '' || !$category_id || !$delivery_time || !$price) {
     $_SESSION['error'] = 'All fields except subcategories are required.';
     header('Location: /pages/new-service.php');
     exit();
 }
 
-// Include security utilities
 require_once(__DIR__ . '/../../database/security/security.php');
 
-// Sanitize inputs
 $title = Security::sanitizeInput($title);
 $description = Security::sanitizeInput($description);
 $category_id = Security::validateInteger($category_id) ? $category_id : 0;
@@ -39,7 +36,6 @@ $delivery_time = Security::validateInteger($delivery_time) ? $delivery_time : 0;
 $price = Security::validateFloat($price) ? $price : 0;
 $subcategories = is_array($subcategories) ? array_map([Security::class, 'sanitizeInput'], $subcategories) : [];
 
-// Handle media upload (max 5 files)
 $mediaPaths = [];
 $primaryImage = null;
 $allowedImageTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
@@ -58,7 +54,6 @@ if (!empty($_FILES['media']['name'][0])) {
     if (!is_dir($uploadsDir)) mkdir($uploadsDir, 0777, true);
 
     for ($i = 0; $i < $totalFiles; $i++) {
-        // Create a file array structure for a single file
         $file = [
             'name' => $_FILES['media']['name'][$i],
             'type' => $_FILES['media']['type'][$i],
@@ -67,10 +62,8 @@ if (!empty($_FILES['media']['name'][0])) {
             'size' => $_FILES['media']['size'][$i],
         ];
 
-        // Use enhanced security validation for media files
         $isImage = strpos($file['type'], 'image/') === 0;
 
-        // For images, use our enhanced validation
         if ($isImage) {
             $validation = Security::validateImageUpload(
                 $file,
@@ -84,12 +77,10 @@ if (!empty($_FILES['media']['name'][0])) {
                 exit();
             }
 
-            // Create a more secure filename that preserves the extension
             $fileInfo = pathinfo($file['name']);
             $extension = isset($fileInfo['extension']) ? '.' . $fileInfo['extension'] : '';
             $filename = uniqid('srv_', true) . $extension;
         }
-        // For videos, perform basic checks
         else if (in_array($file['type'], $allowedVideoTypes)) {
             if ($file['size'] > $maxFileSize) {
                 $_SESSION['error'] = 'Video file too large. Maximum size is 10MB.';
@@ -98,7 +89,6 @@ if (!empty($_FILES['media']['name'][0])) {
             }
             $filename = uniqid('srv_', true) . '_' . basename($file['name']);
         }
-        // Skip files that aren't allowed
         else {
             continue;
         }
@@ -117,12 +107,10 @@ if (empty($mediaPaths)) {
     header('Location: /../../pages/modal/new-service-modal.php');
     exit();
 }
-// Ensure primary image is first in the list
 if ($primaryImage && ($idx = array_search($primaryImage, $mediaPaths)) !== false) {
     array_unshift($mediaPaths, array_splice($mediaPaths, $idx, 1)[0]);
 }
 
-// Insert service
 $db = Database::getInstance();
 $stmt = $db->prepare('INSERT INTO Service (user_id, title, description, category_id, price, delivery_time, images, videos) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
 $images = implode(',', array_filter($mediaPaths, fn($p) => preg_match('/\.(jpg|jpeg|png|gif|webp)$/i', $p)));
@@ -130,7 +118,6 @@ $videos = implode(',', array_filter($mediaPaths, fn($p) => preg_match('/\.(mp4|m
 $stmt->execute([$user['id'], $title, $description, $category_id, $price, $delivery_time, $images, $videos]);
 $serviceId = $db->lastInsertId();
 
-// Insert subcategories
 if (!empty($subcategories) && is_array($subcategories)) {
     foreach ($subcategories as $subcatId) {
         $stmt = $db->prepare('INSERT INTO ServiceSubcategory (service_id, subcategory_id) VALUES (?, ?)');

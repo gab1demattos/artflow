@@ -1,6 +1,5 @@
 <?php
-// Returns JSON: { users: [...], services: [...], categories: [...] }
-// Only accessible by admin
+
 require_once(__DIR__ . '/../../database/session.php');
 $session = Session::getInstance();
 $user = $session->getUser() ?? null;

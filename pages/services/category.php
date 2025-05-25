@@ -12,21 +12,18 @@ $db = Database::getInstance();
 
 $categoryId = isset($_GET['id']) ? intval($_GET['id']) : 0;
 $page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
-$servicesPerPage = 20; // 4 rows x 5 cards
+$servicesPerPage = 20;
 $category = null;
 
 if ($categoryId > 0) {
-    // Use Category class method instead of direct database query
     $category = Category::getCategoryAsArrayById($categoryId);
 }
 
 if (!$category) {
-    // Not found, redirect to home
     header('Location: /');
     exit();
 }
 
-// Fetch min and max values for price and delivery time
 $priceRange = Service::getPriceRangeByCategory($categoryId);
 $deliveryRange = Service::getDeliveryRangeByCategory($categoryId);
 
@@ -48,7 +45,6 @@ drawHeader($user);
             </h1>
         </div>
         <?php
-        // Fetch subcategories for this category using Category class method
         $subcategories = Category::getSubcategoriesByCategoryId($categoryId);
         ?>
         <?php if ($subcategories): ?>
@@ -137,17 +133,14 @@ drawHeader($user);
 
         <div id="services-list">
             <?php
-            // Capture filter inputs
             $priceMin = isset($_GET['price_min']) ? floatval($_GET['price_min']) : null;
             $priceMax = isset($_GET['price_max']) ? floatval($_GET['price_max']) : null;
             $deliveryMax = isset($_GET['delivery_max']) ? intval($_GET['delivery_max']) : null;
             $minRating = isset($_GET['min_rating']) ? floatval($_GET['min_rating']) : null;
 
-            // Pagination: fetch only the services for the current page
             $offset = ($page - 1) * $servicesPerPage;
             $totalServices = Service::countServicesByCategory($categoryId);
 
-            // Fetch filtered services
             $services = Service::getFilteredServicesByCategory($categoryId, $servicesPerPage, $offset, $priceMin, $priceMax, $minRating, null, null, $deliveryMax);
 
             if ($services) {
@@ -164,7 +157,6 @@ drawHeader($user);
             ?>
         </div>
         <?php
-        // Pagination controls
         $totalPages = ceil($totalServices / $servicesPerPage);
         if ($totalPages > 1): ?>
         <nav class="pagination">
@@ -181,11 +173,9 @@ drawHeader($user);
 </main>
 <?php drawFooter($user); ?>
 <link rel="stylesheet" href="/css/main.css">
-<!-- Load the modular JavaScript files -->
 <script src="/js/modal/modals.js"></script>
 <script src="/js/services/categories.js"></script>
 <script src="/js/others/app.js"></script>
-<!-- Keep script.js for backward compatibility -->
 <script src="/js/others/script.js"></script>
 <script>
     document.addEventListener("DOMContentLoaded", () => {
@@ -195,14 +185,12 @@ drawHeader($user);
         const clearRatingBtn = document.getElementById("clear-rating");
         let currentFilterRating = 0;
 
-        // Price range filter elements
         const minPriceInput = document.querySelector(".min-price-filter");
         const maxPriceInput = document.querySelector(".max-price-filter");
         const minPriceDisplay = document.getElementById("min-value-filter");
         const maxPriceDisplay = document.getElementById("max-value-filter");
         const rangeFill = document.querySelector(".range-fill");
 
-        // Function to update the visual range fill
         function updateRangeFill() {
             if (minPriceInput && maxPriceInput && rangeFill) {
                 const minVal = parseInt(minPriceInput.value);
@@ -218,7 +206,6 @@ drawHeader($user);
             }
         }
 
-        // Add event listeners for price range inputs
         if (minPriceInput && maxPriceInput) {
             minPriceInput.addEventListener("input", () => {
                 if (parseFloat(minPriceInput.value) > parseFloat(maxPriceInput.value)) {
@@ -236,7 +223,6 @@ drawHeader($user);
                 updateRangeFill();
             });
 
-            // Initialize the range fill on page load
             updateRangeFill();
         }
 
@@ -286,7 +272,6 @@ drawHeader($user);
                 }
 
                 updateFilterStarDisplay(currentFilterRating);
-                // Removed applyFilters() call - only save the rating, don't apply immediately
             });
         });
 
@@ -301,15 +286,12 @@ drawHeader($user);
             clearRatingBtn.addEventListener("click", () => {
                 currentFilterRating = 0;
                 updateFilterStarDisplay(0);
-                // Removed applyFilters() call - only clear the rating, don't apply immediately
             });
         }
 
-        // Apply filters only when the form is submitted
         const filterForm = document.querySelector('.filters-container form');
         if (filterForm) {
             filterForm.addEventListener('submit', function(e) {
-                // The form will submit normally with all the filter values including min_rating
             });
         }
     });

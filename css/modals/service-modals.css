@@ -1,4 +1,3 @@
-/* Style for the New Service Modal */
 #new-service-modal-overlay {
 	position: fixed;
 	top: 0;
@@ -143,7 +142,6 @@
 	margin-bottom: 0;
 }
 
-/* Edit Service Modal */
 #editServiceModal.modal {
 	position: fixed;
 	top: 0;
@@ -257,7 +255,6 @@
 	margin-top: 0.5em;
 }
 
-/* Edit Service Modal - price and delivery side by side */
 .edit-service-row {
 	display: flex;
 	gap: 1.5em;
@@ -277,7 +274,6 @@
 	border: 1px solid #ccc;
 }
 
-/* Center the Edit Service Modal overlay and content */
 #editServiceModal.modal {
 	display: flex !important;
 	align-items: center !important;

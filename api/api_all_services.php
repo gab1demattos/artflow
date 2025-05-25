@@ -1,8 +1,8 @@
 <?php
 
 declare(strict_types=1);
-require_once(__DIR__ . '/../api/api_security.php'); // Apply API security headers and CORS
-require_once(__DIR__ . '/../database/security/security.php'); // Load security helpers
+require_once(__DIR__ . '/../api/api_security.php'); 
+require_once(__DIR__ . '/../database/security/security.php');
 require_once(__DIR__ . '/../database/session.php');
 require_once(__DIR__ . '/../database/classes/service.class.php');
 require_once(__DIR__ . '/../database/database.php');
@@ -21,7 +21,7 @@ echo json_encode(array_map(function($service) {
         'image' => $service->getFirstImage(),
         'username' => $service->getUsername(),
         'subcategories' => implode(',', $service->getSubcategoryIds()),
-        'rating' => $service->avg_rating // Use the stored avg_rating instead of defaulting to 0
+        'rating' => $service->avg_rating
     ];
 }, $services));
 ?>

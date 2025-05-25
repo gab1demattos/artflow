@@ -16,9 +16,7 @@ $stmt = $db->prepare('SELECT Service.*, User.username FROM Service JOIN User ON 
 $stmt->execute([$serviceId]);
 $service = $stmt->fetch(PDO::FETCH_ASSOC);
 
-
 if (!$service) {
-    // Not found, redirect to home
     header('Location: /');
     exit();
 }

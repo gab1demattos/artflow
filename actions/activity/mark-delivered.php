@@ -25,7 +25,6 @@ if (!$order_id) {
 }
 
 $db = Database::getInstance();
-// Only allow the freelancer (seller) to mark as delivered
 $stmt = $db->prepare('SELECT s.user_id as freelancer_id FROM Exchange e JOIN Service s ON e.service_id = s.id WHERE e.id = ?');
 $stmt->execute([$order_id]);
 $row = $stmt->fetch(PDO::FETCH_ASSOC);

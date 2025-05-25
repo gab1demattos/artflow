@@ -1,6 +1,3 @@
-/* Modal Animations */
-
-/* Fade out transition for the go with flow modal */
 @keyframes modalFadeOut {
 	0% {
 		opacity: 1;
@@ -12,13 +9,11 @@
 	}
 }
 
-/* Special animation for the Go With Flow modal close */
 .modal-closing {
 	animation: modalFadeOut 0.5s ease-in-out forwards;
 	pointer-events: none;
 }
 
-/* Arrow button animation */
 @keyframes arrowClick {
 	0% {
 		transform: scale(1);
@@ -35,7 +30,6 @@
 	animation: arrowClick 0.5s ease-in-out;
 }
 
-/* Content fade out animation */
 @keyframes contentFadeOut {
 	0% {
 		opacity: 1;
