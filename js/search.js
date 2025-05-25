@@ -239,6 +239,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 			// Load search results for services
 			loadSearchResults("services", SearchInputPage);
+			
+			// Immediately show all services when switching to services tab
+			initial("services");
 		});
 	}
 
