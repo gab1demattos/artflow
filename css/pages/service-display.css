@@ -406,3 +406,17 @@ html {
 	transform: translateY(-2px) scale(1.03);
 	outline: none;
 }
+
+.service-warning {
+	background: #fffbe6;
+	color: #b8860b;
+	border: 1px solid #ffe58f;
+	border-radius: 6px;
+	padding: 0.75em 1em;
+	margin: 1em 0;
+	font-size: 1.05em;
+	font-weight: 600;
+	text-align: center;
+	box-shadow: 0 2px 8px rgba(255, 215, 0, 0.08);
+	display: block;
+}

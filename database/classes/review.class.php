@@ -16,6 +16,7 @@ class Review
     public ?string $username = null;
     public ?string $service_title = null;
     public ?string $profile_image = null;
+    public ?int $exchange_id = null;
 
     /**
      * Constructor for Review
@@ -30,7 +31,8 @@ class Review
         ?string $updated_at = null,
         ?string $username = null,
         ?string $service_title = null,
-        ?string $profile_image = null
+        ?string $profile_image = null,
+        ?int $exchange_id = null
     ) {
         $this->id = $id;
         $this->user_id = $user_id;
@@ -42,6 +44,7 @@ class Review
         $this->username = $username;
         $this->service_title = $service_title;
         $this->profile_image = $profile_image;
+        $this->exchange_id = $exchange_id;
     }
 
     /**
@@ -211,23 +214,25 @@ class Review
      * @param int $serviceId Service ID
      * @param float $rating Rating value (0.5 to 5)
      * @param string $comment Review text content
+     * @param int $exchangeId Exchange (order) ID
      * @return Review|null The created review or null if creation failed
      */
     public static function createReview(
         int $userId,
         int $serviceId,
         float $rating,
-        string $comment
+        string $comment,
+        int $exchangeId
     ): ?Review {
         $db = Database::getInstance();
 
         try {
             $stmt = $db->prepare('
-                INSERT INTO Review (user_id, service_id, rating, comment, created_at)
-                VALUES (?, ?, ?, ?, CURRENT_TIMESTAMP)
+                INSERT INTO Review (user_id, service_id, rating, comment, created_at, exchange_id)
+                VALUES (?, ?, ?, ?, CURRENT_TIMESTAMP, ?)
             ');
 
-            $stmt->execute([$userId, $serviceId, $rating, $comment]);
+            $stmt->execute([$userId, $serviceId, $rating, $comment, $exchangeId]);
             $reviewId = (int)$db->lastInsertId();
 
             return new Review(
@@ -236,7 +241,12 @@ class Review
                 $serviceId,
                 $rating,
                 $comment,
-                date('Y-m-d H:i:s')
+                date('Y-m-d H:i:s'),
+                null,
+                null,
+                null,
+                null,
+                $exchangeId
             );
         } catch (PDOException $e) {
             error_log('Error creating review: ' . $e->getMessage());

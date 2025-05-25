@@ -1,6 +1,5 @@
 -- Exchanges
 INSERT INTO Exchange (
-        freelancer_id,
         client_id,
         service_id,
         status,
@@ -8,7 +7,6 @@ INSERT INTO Exchange (
         date
     )
 VALUES (
-        2,
         5,
         1,
         'completed',
@@ -16,7 +14,6 @@ VALUES (
         '2025-05-10 14:00:00'
     ),
     (
-        3,
         6,
         2,
         'completed',
@@ -24,7 +21,6 @@ VALUES (
         '2025-05-12 09:30:00'
     ),
     (
-        4,
         7,
         3,
         'in progress',
@@ -32,7 +28,6 @@ VALUES (
         '2025-05-15 16:45:00'
     ),
     (
-        5,
         8,
         4,
         'in progress',
@@ -40,7 +35,6 @@ VALUES (
         '2025-05-18 11:20:00'
     ),
     (
-        6,
         2,
         5,
         'completed',
@@ -48,7 +42,6 @@ VALUES (
         '2025-05-20 17:10:00'
     ),
     (
-        7,
         3,
         6,
         'completed',
@@ -56,7 +49,6 @@ VALUES (
         '2025-05-21 10:00:00'
     ),
     (
-        8,
         4,
         7,
         'in progress',
@@ -64,7 +56,6 @@ VALUES (
         '2025-05-22 15:30:00'
     ),
     (
-        2,
         6,
         8,
         'completed',
@@ -72,7 +63,6 @@ VALUES (
         '2025-05-23 12:45:00'
     ),
     (
-        3,
         2,
         9,
         'in progress',
@@ -80,7 +70,6 @@ VALUES (
         '2025-05-23 17:00:00'
     ),
     (
-        4,
         5,
         10,
         'completed',
@@ -88,7 +77,6 @@ VALUES (
         '2025-05-22 09:15:00'
     ),
     (
-        5,
         7,
         11,
         'in progress',
@@ -96,7 +84,6 @@ VALUES (
         '2025-05-23 13:20:00'
     ),
     (
-        6,
         8,
         12,
         'completed',
@@ -105,7 +92,6 @@ VALUES (
     ),
     -- Adding new completed exchanges
     (
-        7,
         4,
         13,
         'completed',
@@ -113,7 +99,6 @@ VALUES (
         '2025-05-18 13:45:00'
     ),
     (
-        8,
         2,
         14,
         'completed',
@@ -121,7 +106,6 @@ VALUES (
         '2025-05-19 09:30:00'
     ),
     (
-        2,
         3,
         15,
         'completed',
@@ -129,7 +113,6 @@ VALUES (
         '2025-05-17 14:20:00'
     ),
     (
-        3,
         5,
         16,
         'completed',
@@ -137,7 +120,6 @@ VALUES (
         '2025-05-16 11:15:00'
     ),
     (
-        4,
         6,
         17,
         'completed',
@@ -145,7 +127,6 @@ VALUES (
         '2025-05-15 16:30:00'
     ),
     (
-        5,
         2,
         18,
         'completed',
@@ -153,7 +134,6 @@ VALUES (
         '2025-05-14 10:45:00'
     ),
     (
-        6,
         3,
         19,
         'completed',
@@ -161,7 +141,6 @@ VALUES (
         '2025-05-13 15:50:00'
     ),
     (
-        7,
         5,
         20,
         'completed',
@@ -169,8 +148,6 @@ VALUES (
         '2025-05-12 09:25:00'
     ),
     (
-        2,
-        -- John Doe as freelancer
         9,
         13,
         'completed',
@@ -178,8 +155,6 @@ VALUES (
         '2025-05-18 10:00:00'
     ),
     (
-        2,
-        -- John Doe as freelancer
         10,
         14,
         'completed',
@@ -187,8 +162,6 @@ VALUES (
         '2025-05-20 15:30:00'
     ),
     (
-        2,
-        -- John Doe as freelancer
         11,
         15,
         'completed',
@@ -196,8 +169,6 @@ VALUES (
         '2025-05-11 11:00:00'
     ),
     (
-        2,
-        -- John Doe as freelancer
         12,
         16,
         'completed',
@@ -205,8 +176,6 @@ VALUES (
         '2025-05-13 16:45:00'
     ),
     (
-        2,
-        -- John Doe as freelancer
         13,
         17,
         'in progress',
@@ -214,12 +183,9 @@ VALUES (
         '2025-05-26 09:00:00'
     ),
     (
-        2,
-        -- John Doe as freelancer
         14,
         18,
         'in progress',
         'Menu design for restaurant, illustrated icons',
         '2025-05-26 14:30:00'
     );
-

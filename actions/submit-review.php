@@ -30,6 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $serviceId = isset($_POST['service_id']) ? intval($_POST['service_id']) : 0;
     $rating = isset($_POST['rating']) ? floatval($_POST['rating']) : 0;
     $comment = isset($_POST['review_text']) ? Security::sanitizeInput($_POST['review_text']) : '';
+    $exchangeId = isset($_POST['exchange_id']) ? intval($_POST['exchange_id']) : 0;
 
     // Enhanced validation
     $errors = [];
@@ -37,13 +38,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($serviceId <= 0) {
         $errors[] = 'Invalid service selected';
     }
-
+    if ($exchangeId <= 0) {
+        $errors[] = 'Invalid order (exchange) selected';
+    }
     if ($rating <= 0 || $rating > 5) {
         $errors[] = 'Please provide a rating between 0.5 and 5';
     }
-
     if (empty($comment)) {
         $errors[] = 'Please provide review text';
+    }
+
+    // Check if the user is the client for this exchange and the exchange is completed
+    if (empty($errors)) {
+        $db = Database::getInstance();
+        $stmt = $db->prepare('SELECT * FROM Exchange WHERE id = ? AND client_id = ? AND service_id = ? AND status = "completed"');
+        $stmt->execute([$exchangeId, $userId, $serviceId]);
+        $exchange = $stmt->fetch(PDO::FETCH_ASSOC);
+        if (!$exchange) {
+            echo json_encode(['success' => false, 'error' => 'You can only review completed orders you purchased.']);
+            exit();
+        }
+        // Check if already reviewed
+        $stmt = $db->prepare('SELECT 1 FROM Review WHERE user_id = ? AND exchange_id = ?');
+        $stmt->execute([$userId, $exchangeId]);
+        if ($stmt->fetch()) {
+            echo json_encode(['success' => false, 'error' => 'You have already reviewed this order.']);
+            exit();
+        }
     }
 
     // If no errors, save the review
@@ -64,7 +85,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $userId,
                 $serviceId,
                 $rating,
-                $comment
+                $comment,
+                $exchangeId
             );
 
             if ($review) {

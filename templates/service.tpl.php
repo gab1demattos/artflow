@@ -34,6 +34,7 @@
     $owner = $stmtOwner->fetch(PDO::FETCH_ASSOC);
     ?>
     <link rel="stylesheet" href="/css/responsive/service-responsive.css">
+    <link rel="stylesheet" href="/css/responsive/checkout-responsive.css">
     <link rel="stylesheet" href="/css/modals.css">
     <div id="service-display">
         <div id="service-main">
@@ -137,7 +138,7 @@
                         <a href="/pages/messages.php?user_id=<?= $service['user_id'] ?>" class="service-options" id="message">Message <?= htmlspecialchars(explode(' ', $owner['name'])[0]) ?></a>
                         <button id="payment" class="service-options">Continue to Payment</button>
                     <?php elseif (!$user): ?>
-                        <button class="button filled hovering service-options">Sign Up to Message</button>
+    <div class="service-warning">Sign up to message and order</div>
                     <?php elseif ($user && $service['user_id'] == $user['id']): ?>
     <button id="edit-service-btn"
         data-service-id="<?= $service['id'] ?>"
@@ -170,6 +171,7 @@
     <?php include __DIR__ . '/../pages/modals/edit-service-modal.php'; ?>
     <?php include __DIR__ . '/../templates/irreversible-modal.tpl.php'; ?>
     <script src="/js/modals.js"></script>
+    <script src="/js/checkout.js"></script>
     <script>
 document.addEventListener('DOMContentLoaded', function() {
     const deleteBtn = document.getElementById('delete-service-btn');

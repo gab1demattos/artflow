@@ -12,10 +12,20 @@ document.addEventListener('DOMContentLoaded', function () {
     const paymentConfirm = document.getElementById('payment-confirm');
     const paymentForm = document.getElementById('payment-form');
 
+    // Function to toggle body scroll
+    function toggleBodyScroll(disable) {
+        if (disable) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+    }
+
     // Open requirements modal
     if (paymentBtn && requirementsModal) {
         paymentBtn.addEventListener('click', function () {
             requirementsModal.classList.remove('hidden');
+            toggleBodyScroll(true);
         });
     }
 
@@ -23,6 +33,17 @@ document.addEventListener('DOMContentLoaded', function () {
     if (requirementsClose && requirementsModal) {
         requirementsClose.addEventListener('click', function () {
             requirementsModal.classList.add('hidden');
+            toggleBodyScroll(false);
+        });
+    }
+
+    // Close modal when clicking overlay (outside modal)
+    if (requirementsModal) {
+        requirementsModal.addEventListener('click', function (e) {
+            if (e.target === requirementsModal) {
+                requirementsModal.classList.add('hidden');
+                toggleBodyScroll(false);
+            }
         });
     }
 
@@ -53,6 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
             requirementsTextarea.classList.remove('input-error');
             requirementsModal.classList.add('hidden');
             paymentModal.classList.remove('hidden');
+            toggleBodyScroll(true); // Keep body scroll disabled for payment modal
             fillOrderOverview();
         });
     }
@@ -61,6 +83,41 @@ document.addEventListener('DOMContentLoaded', function () {
     if (paymentClose && paymentModal) {
         paymentClose.addEventListener('click', function () {
             paymentModal.classList.add('hidden');
+            toggleBodyScroll(false);
+        });
+    }
+
+    // Close payment modal when clicking overlay (outside modal)
+    if (paymentModal) {
+        paymentModal.addEventListener('click', function (e) {
+            if (e.target === paymentModal) {
+                paymentModal.classList.add('hidden');
+                toggleBodyScroll(false);
+            }
+        });
+    }
+
+    // Format credit card number with spaces every 4 digits
+    const cardInput = paymentForm ? paymentForm.elements['card'] : null;
+    if (cardInput) {
+        cardInput.addEventListener('input', function (e) {
+            let value = e.target.value.replace(/\s+/g, '');
+            if (value.length > 0) {
+                value = value.match(new RegExp('.{1,4}', 'g')).join(' ');
+            }
+            e.target.value = value.substring(0, 19); // Limit to 16 digits + 3 spaces
+        });
+    }
+
+    // Format expiry date with slash after 2 digits (MM/YY)
+    const expInput = paymentForm ? paymentForm.elements['exp'] : null;
+    if (expInput) {
+        expInput.addEventListener('input', function (e) {
+            let value = e.target.value.replace(/\//g, '');
+            if (value.length > 2) {
+                value = value.substring(0, 2) + '/' + value.substring(2, 4);
+            }
+            e.target.value = value;
         });
     }
 
@@ -149,9 +206,18 @@ document.addEventListener('DOMContentLoaded', function () {
                         if (thankyouClose) {
                             thankyouClose.onclick = function () {
                                 thankyouModal.classList.add('hidden');
+                                toggleBodyScroll(false); // Re-enable scrolling
                                 window.location.reload(); // Optionally reload to update activity/orders
                             };
                         }
+                        // Close thank you modal when clicking outside
+                        thankyouModal.onclick = function (e) {
+                            if (e.target === thankyouModal) {
+                                thankyouModal.classList.add('hidden');
+                                toggleBodyScroll(false); // Re-enable scrolling
+                                window.location.reload(); // Optionally reload to update activity/orders
+                            }
+                        };
                     }
                 } else {
                     alert(result.error || 'Failed to place order.');

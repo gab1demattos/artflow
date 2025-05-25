@@ -16,11 +16,6 @@
 	z-index: 1000;
 }
 
-/* Hide header search bar when search modal is active */
-.modal-overlay:not(.hidden) ~ header #search-bar {
-	display: none;
-}
-
 /* Base modal container structure */
 .modal .login {
 	background-color: white;
@@ -236,14 +231,14 @@
 	bottom: -0.56em;
 }
 
-#goflow-modal .modal-content > p:nth-of-type(1) {
+#goflow-modal .modal-content>p:nth-of-type(1) {
 	font-size: 2rem;
 	position: absolute;
 	left: 4em;
 	top: 2em;
 }
 
-#goflow-modal .modal-content > p:nth-of-type(2) {
+#goflow-modal .modal-content>p:nth-of-type(2) {
 	position: absolute;
 	left: 2.125em;
 	top: 14.25em;
@@ -299,12 +294,12 @@
 	right: 0;
 }
 
-#goflow-modal .modal-content.login > p:nth-of-type(1) {
+#goflow-modal .modal-content.login>p:nth-of-type(1) {
 	font-size: 2rem;
 	top: 2em;
 }
 
-#goflow-modal .modal-content.login > p:nth-of-type(2) {
+#goflow-modal .modal-content.login>p:nth-of-type(2) {
 	top: 14.25em;
 	font-size: 1.4rem;
 }
@@ -381,12 +376,12 @@
 		right: 0;
 	}
 
-	#goflow-modal .modal-content.login > p:nth-of-type(1) {
+	#goflow-modal .modal-content.login>p:nth-of-type(1) {
 		font-size: 1.2rem;
 		top: 1.2em;
 	}
 
-	#goflow-modal .modal-content.login > p:nth-of-type(2) {
+	#goflow-modal .modal-content.login>p:nth-of-type(2) {
 		top: 8.5em;
 		font-size: 1rem;
 	}
@@ -514,7 +509,7 @@
 	z-index: -1;
 }
 
-#edit-profile-modal .form input[type="file"] + label.file-label {
+#edit-profile-modal .form input[type="file"]+label.file-label {
 	padding: 10px 15px;
 	background: var(--orange);
 	color: var(--peach);
@@ -528,7 +523,7 @@
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-#edit-profile-modal .form input[type="file"] + label.file-label:hover {
+#edit-profile-modal .form input[type="file"]+label.file-label:hover {
 	background-color: var(--peach);
 	color: var(--orange);
 	border: 2px solid var(--orange);
@@ -670,9 +665,9 @@ h4.important-changes {
 }
 
 /* Remove the conflicting selector that was added earlier */
-#edit-profile-modal .form > label + input,
-#edit-profile-modal .form > label + textarea,
-#edit-profile-modal .form > label + .password-input-container {
+#edit-profile-modal .form>label+input,
+#edit-profile-modal .form>label+textarea,
+#edit-profile-modal .form>label+.password-input-container {
 	margin-bottom: 0;
 	/* Reset this so it doesn't add extra spacing */
 }
@@ -713,17 +708,32 @@ h4.important-changes {
 	padding-right: 2em;
 }
 
+@media screen and (max-width: 767px) {
+	#requirements-modal-overlay .modal-content {
+		min-width: 0;
+		/* Remove min-width constraint on mobile */
+	}
+}
+
 #payment-modal-overlay .modal-content {
 	min-width: 700px;
 	min-height: 340px;
 	max-width: 900px;
 	display: flex;
-	flex-direction: row;
+	flex-direction: row-reverse;
+	/* Reverse order for desktop view */
 	justify-content: space-between;
 	box-sizing: border-box;
 	padding-left: 2em;
 	padding-right: 2em;
 	gap: 2em;
+}
+
+@media screen and (max-width: 767px) {
+	#payment-modal-overlay .modal-content {
+		min-width: 0;
+		/* Remove min-width constraint on mobile */
+	}
 }
 
 #payment-modal-overlay .payment-form-section {
@@ -1314,10 +1324,7 @@ h4.important-changes {
 	display: none;
 }
 
-#subcategory-modal
-	.subcategory-checkboxes
-	input[type="checkbox"]:checked
-	+ label,
+#subcategory-modal .subcategory-checkboxes input[type="checkbox"]:checked+label,
 #subcategory-modal .subcategory-checkboxes label.selected {
 	background: var(--orange);
 	color: #fff;
@@ -1328,10 +1335,7 @@ h4.important-changes {
 	display: none;
 }
 
-#subcategory-modal
-	.subcategory-checkboxes
-	input[type="checkbox"]:checked
-	+ label::before {
+#subcategory-modal .subcategory-checkboxes input[type="checkbox"]:checked+label::before {
 	background: var(--orange);
 	border-color: var(--orange);
 	box-shadow: 0 0 0 2px #fff inset;
