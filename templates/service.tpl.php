@@ -138,7 +138,7 @@
                         <a href="/pages/messages.php?user_id=<?= $service['user_id'] ?>" class="service-options" id="message">Message <?= htmlspecialchars(explode(' ', $owner['name'])[0]) ?></a>
                         <button id="payment" class="service-options">Continue to Payment</button>
                     <?php elseif (!$user): ?>
-                        <button class="button filled hovering service-options">Sign Up to Message</button>
+    <div class="service-warning">Sign up to message the seller</div>
                     <?php elseif ($user && $service['user_id'] == $user['id']): ?>
     <button id="edit-service-btn"
         data-service-id="<?= $service['id'] ?>"
