@@ -12,3 +12,4 @@ drawTitle();
 drawCategories();
 drawInfo();
 drawFooter($user);
+?>

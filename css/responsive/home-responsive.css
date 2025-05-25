@@ -1,4 +1,5 @@
 @media screen and (max-width: 767px) {
+
 	.container {
 		grid-template-rows: auto auto auto auto auto;
 		height: auto !important;
@@ -194,13 +195,15 @@
 		margin-top: 2em !important; 
 	}
 
-	#block > a {
-		width: auto !important;
-		padding-right: 0 !important;
-		text-align: center !important;
-		font-size: 15px !important;
-		margin-top: 1em !important;
+	#see-more {
+		align-self: center !important; /* Center the button itself within #block */
+		text-align: center !important; /* Ensure text within the button is centered */
+		margin-top: 2em;
 	}
+
+    #flow-title {
+        display: none !important; /* Hide the flow title on mobile */
+    }
 }
 
 @media screen and (min-width: 768px) and (max-width: 1199px) {
@@ -270,6 +273,10 @@
 		padding: 0 !important;
 		overflow: visible !important;
 	}
+
+    #flow-title {
+        display: none !important; /* Hide the flow title on mobile */
+    }
 }
 
 
