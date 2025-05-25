@@ -51,7 +51,7 @@ VALUES (
         5,
         95.00,
         8,
-        '/images/services/srv_682b442734e0e2.96781324_craft.jpg'
+        '/images/services/populators/craft1.jpg'
     ),
     (
         7,
@@ -60,7 +60,7 @@ VALUES (
         6,
         85.00,
         6,
-        '/images/services/srv_682c36f07ed799.00860090_Capture-2025-02-24-164426.png'
+        '/images/services/populators/tattoo1.png'
     ),
     (
         8,
@@ -123,7 +123,7 @@ VALUES (
         5,
         60.00,
         6,
-        '/images/services/srv_682b442734e0e2.96781324_craft.jpg'
+        '/images/services/populators/craft3.jpg'
     ),
     (
         7,
@@ -132,7 +132,7 @@ VALUES (
         6,
         55.00,
         2,
-        '/images/services/srv_682c36f07ed799.00860090_Capture-2025-02-24-164426.png'
+        '/images/services/populators/tattoo2.png'
     ),
     (
         8,
@@ -177,7 +177,7 @@ VALUES (
         5,
         45.00,
         5,
-        '/images/services/srv_682b442734e0e2.96781324_craft.jpg'
+        '/images/services/populators/craft4.jpg'
     ),
     (
         6,
@@ -186,7 +186,7 @@ VALUES (
         6,
         70.00,
         3,
-        '/images/services/srv_682c36f07ed799.00860090_Capture-2025-02-24-164426.png'
+        '/images/services/populators/tattoo3.png'
     ),
     (
         7,
@@ -240,7 +240,7 @@ VALUES (
         6,
         50.00,
         2,
-        '/images/services/srv_682c36f07ed799.00860090_Capture-2025-02-24-164426.png'
+        '/images/services/populators/tattoo4.png'
     ),
     (
         6,
@@ -285,7 +285,7 @@ VALUES (
         5,
         85.00,
         9,
-        '/images/services/srv_682b442734e0e2.96781324_craft.jpg'
+        '/images/services/populators/craft5.jpg'
     ),
     (
         4,
@@ -294,7 +294,7 @@ VALUES (
         6,
         100.00,
         3,
-        '/images/services/srv_682c36f07ed799.00860090_Capture-2025-02-24-164426.png'
+        '/images/services/populators/tattoo5.png'
     ),
     (
         6,
@@ -303,7 +303,7 @@ VALUES (
         5,
         70.00,
         5,
-        '/images/services/srv_682b442734e0e2.96781324_craft.jpg'
+        '/images/services/populators/craft6.jpg'
     ),
     (
         7,
@@ -312,7 +312,7 @@ VALUES (
         6,
         90.00,
         4,
-        '/images/services/srv_682c36f07ed799.00860090_Capture-2025-02-24-164426.png'
+        '/images/services/populators/tattoo6.png'
     ),
     (
         8,
@@ -357,7 +357,7 @@ VALUES (
         5,
         30.00,
         3,
-        '/images/services/srv_682b442734e0e2.96781324_craft.jpg'
+        '/images/services/populators/craft7.jpg'
     ),
     (
         6,
@@ -366,7 +366,7 @@ VALUES (
         6,
         120.00,
         2,
-        '/images/services/srv_682c36f07ed799.00860090_Capture-2025-02-24-164426.png'
+        '/images/services/populators/tattoo1.png,/images/services/populators/tattoo2.png'
     ),
     (
         7,
@@ -411,7 +411,7 @@ VALUES (
         5,
         50.00,
         2,
-        '/images/services/srv_682b442734e0e2.96781324_craft.jpg'
+        '/images/services/populators/craft8.jpg'
     ),
     (
         5,
@@ -420,7 +420,7 @@ VALUES (
         6,
         130.00,
         5,
-        '/images/services/srv_682c36f07ed799.00860090_Capture-2025-02-24-164426.png'
+        '/images/services/populators/tattoo3.png,/images/services/populators/tattoo4.png'
     ),
     (
         6,
@@ -465,7 +465,7 @@ VALUES (
         5,
         40.00,
         3,
-        '/images/services/srv_682b442734e0e2.96781324_craft.jpg'
+        '/images/services/populators/craft1.jpg'
     ),
     (
         4,
@@ -474,7 +474,7 @@ VALUES (
         6,
         60.00,
         2,
-        '/images/services/srv_682c36f07ed799.00860090_Capture-2025-02-24-164426.png'
+        '/images/services/populators/tattoo5.png,/images/services/populators/tattoo6.png'
     ),
     (
         2,
@@ -493,4 +493,328 @@ VALUES (
         90.00,
         6,
         '/images/services/digital_concept_art.png'
+    ),
+    (
+        4,
+        'Enchanted Illustration Series',
+        'Custom digital illustrations with a magical and whimsical touch. Perfect for childrens books or fantasy projects.',
+        1,
+        150.00,
+        7,
+        '/images/services/populators/illustration1.png,/images/services/populators/illustration2.png,/images/services/populators/illustration3.png'
+    ),
+    (
+        5,
+        'Modern Corporate Branding Package',
+        'Complete branding solutions for modern businesses, including logo, business cards, and brand guidelines.',
+        2,
+        300.00,
+        14,
+        '/images/services/populators/graphic-design1.png,/images/services/populators/graphic-design2.png,/images/services/populators/graphic-design3.png'
+    ),
+    (
+        6,
+        'Artisanal Pottery Collection',
+        'Hand-crafted ceramic pieces with unique glazing techniques and modern designs.',
+        5,
+        180.00,
+        10,
+        '/images/services/populators/craft1.jpg,/images/services/populators/craft2.jpg'
+    ),
+    (
+        7,
+        'Character Design Portfolio',
+        'Custom character designs for your gaming project or animation series.',
+        1,
+        200.00,
+        8,
+        '/images/services/populators/illustration4.png,/images/services/populators/illustration5.png'
+    ),
+    (
+        8,
+        'Digital Marketing Asset Package',
+        'Complete set of digital marketing materials including social media templates and banner ads.',
+        2,
+        250.00,
+        10,
+        '/images/services/populators/graphic-design4.png,/images/services/populators/graphic-design5.jpg'
+    ),
+    (
+        9,
+        'Handwoven Textile Art',
+        'Custom woven wall hangings and textile art pieces using traditional techniques.',
+        5,
+        220.00,
+        15,
+        '/images/services/populators/craft3.jpg,/images/services/populators/craft4.jpg,/images/services/populators/craft5.jpg'
+    ),
+    (
+        10,
+        'Fantasy Environment Design',
+        'Detailed digital paintings of fantasy environments and landscapes.',
+        1,
+        180.00,
+        9,
+        '/images/services/populators/illustration6.png,/images/services/populators/illustration7.png'
+    ),
+    (
+        11,
+        'Brand Identity Evolution Package',
+        'Transform your existing brand with a modern refresh while maintaining brand recognition.',
+        2,
+        400.00,
+        21,
+        '/images/services/populators/graphic-design7.png'
+    ),
+    (
+        12,
+        'Sustainable Craft Workshop',
+        'Learn to create beautiful crafts using eco-friendly and sustainable materials.',
+        5,
+        120.00,
+        5,
+        '/images/services/populators/craft6.jpg,/images/services/populators/craft7.jpg'
+    ),
+    (
+        6,
+        'Tribal Tattoo Designs',
+        'Authentic tribal tattoo designs inspired by various cultural traditions and modern interpretations.',
+        6,
+        120.00,
+        6,
+        '/images/services/populators/tattoo1.png,/images/services/populators/tattoo3.png'
+    ),
+    (
+        7,
+        'Minimalist Tattoo Art',
+        'Clean, simple, and elegant minimalist tattoo designs with powerful visual impact.',
+        6,
+        85.00,
+        4,
+        '/images/services/populators/tattoo2.png'
+    ),
+    (
+        5,
+        'Watercolor Style Tattoos',
+        'Vibrant and artistic watercolor style tattoo designs with fluid color transitions.',
+        6,
+        140.00,
+        7,
+        '/images/services/populators/tattoo4.png,/images/services/populators/tattoo6.png'
+    ),
+    (
+        4,
+        'Portrait Tattoo Design',
+        'Realistic portrait tattoo designs capturing the essence and likeness of your loved ones.',
+        6,
+        200.00,
+        12,
+        '/images/services/populators/tattoo5.png'
+    ),
+    (
+        8,
+        'Festival Body Art Package',
+        'Complete festival body art package including glitter, gems, and temporary tattoos perfect for music festivals.',
+        6,
+        75.00,
+        1,
+        '/images/services/populators/tattoo2.png,/images/services/populators/tattoo4.png'
+    ),
+    (
+        3,
+        'Traditional Japanese Tattoo',
+        'Traditional Irezumi Japanese style tattoo designs with traditional motifs and techniques.',
+        6,
+        190.00,
+        10,
+        '/images/services/populators/tattoo1.png,/images/services/populators/tattoo3.png'
+    ),
+    (
+        4,
+        'Dotwork Mandala Tattoos',
+        'Intricate dotwork mandala tattoo designs combining geometric patterns with spiritual symbolism.',
+        6,
+        160.00,
+        8,
+        '/images/services/populators/tattoo2.png,/images/services/populators/tattoo5.png'
+    ),
+    (
+        5,
+        'Bridal Henna Package',
+        'Complete bridal henna package with traditional and modern designs for the entire bridal party.',
+        6,
+        250.00,
+        3,
+        '/images/services/populators/tattoo1.png,/images/services/populators/tattoo4.png'
+    ),
+    (
+        6,
+        'Geometric Blackwork Design',
+        'Bold geometric blackwork tattoo designs with precise linework and striking patterns.',
+        6,
+        140.00,
+        6,
+        '/images/services/populators/tattoo3.png,/images/services/populators/tattoo6.png'
+    ),
+    (
+        7,
+        'Couple Matching Tattoos',
+        'Custom designed matching or complementary tattoos for couples, featuring unique symbolism and personal meaning.',
+        6,
+        180.00,
+        8,
+        '/images/services/populators/tattoo1.png,/images/services/populators/tattoo2.png,/images/services/populators/tattoo6.png'
+    ),
+    (
+        8,
+        'Festival Face Art',
+        'Stunning face and body art designs perfect for festivals, raves, and special events, including UV reactive options.',
+        6,
+        95.00,
+        1,
+        '/images/services/populators/tattoo3.png,/images/services/populators/tattoo4.png'
+    ),
+    (
+        4,
+        'Sacred Geometry Tattoo',
+        'Precise and intricate sacred geometry tattoo designs incorporating mathematical patterns and spiritual symbols.',
+        6,
+        170.00,
+        9,
+        '/images/services/populators/tattoo2.png,/images/services/populators/tattoo5.png'
+    ),
+    (
+        5,
+        'Professional Henna Training',
+        'Comprehensive henna art training course for aspiring artists, including traditional and modern techniques.',
+        6,
+        300.00,
+        14,
+        '/images/services/populators/tattoo1.png,/images/services/populators/tattoo3.png,/images/services/populators/tattoo4.png'
+    ),
+    (
+        3,
+        'Vector Portrait Collection',
+        'Clean and scalable vector portraits in a modern minimalist style, perfect for personal branding.',
+        1,
+        120.00,
+        5,
+        '/images/services/populators/illustration1.png,/images/services/populators/illustration4.png'
+    ),
+    (
+        4,
+        'Game Character Concept Package',
+        'Full character concept package including turnarounds, expressions, and key poses for game development.',
+        1,
+        280.00,
+        14,
+        '/images/services/populators/illustration2.png,/images/services/populators/illustration5.png'
+    ),
+    (
+        5,
+        'Comic Page Creation',
+        'Professional comic page layouts and illustrations with dynamic storytelling and detailed backgrounds.',
+        1,
+        175.00,
+        8,
+        '/images/services/populators/illustration3.png,/images/services/populators/illustration6.png'
+    ),
+    (
+        6,
+        'Retro Pixel Art Scenes',
+        'Nostalgic pixel art scene creation with attention to detail and authentic retro gaming style.',
+        1,
+        95.00,
+        6,
+        '/images/services/populators/illustration4.png,/images/services/populators/illustration7.png'
+    ),
+    (
+        7,
+        'Film Storyboard Package',
+        'Professional storyboards for film and animation with dynamic camera angles and clear action sequences.',
+        1,
+        220.00,
+        10,
+        '/images/services/populators/illustration1.png,/images/services/populators/illustration5.png'
+    ),
+    (
+        8,
+        'Children´s Book Package',
+        'Complete children´s book illustration package with character designs and full-page illustrations.',
+        1,
+        450.00,
+        21,
+        '/images/services/populators/illustration2.png,/images/services/populators/illustration6.png,/images/services/populators/illustration7.png'
+    ),
+    (
+        3,
+        'Nature Watercolor Series',
+        'Series of delicate watercolor paintings featuring botanical subjects, landscapes, or wildlife of your choice.',
+        3,
+        180.00,
+        12,
+        '/images/services/populators/painting1.jpg,/images/services/populators/painting2.jpg'
+    ),
+    (
+        7,
+        'Detailed Pen and Ink Drawing',
+        'Intricate pen and ink illustrations with fine detail work, perfect for architectural or natural subjects.',
+        3,
+        160.00,
+        9,
+        '/images/services/populators/painting1.jpg,/images/services/populators/painting3.jpg'
+    ),
+    (
+        4,
+        'Architectural Walkthrough',
+        'Photorealistic 3D architectural visualization with cinematic walkthrough animation.',
+        4,
+        450.00,
+        15,
+        '/images/services/populators/3d1.jpg,/images/services/populators/3d2.jpg'
+    ),
+    (
+        5,
+        'Character Animation Pack',
+        'Custom character animation package including walk cycles, actions, and emotional expressions.',
+        4,
+        320.00,
+        12,
+        '/images/services/populators/3d3.jpg,/images/services/populators/3d4.jpg'
+    ),
+    (
+        6,
+        'Product Launch Animation',
+        'Dynamic 3D product animation perfect for marketing campaigns and social media.',
+        4,
+        280.00,
+        10,
+        '/images/services/populators/3d2.jpg,/images/services/populators/3d1.jpg'
+    ),
+    (
+        7,
+        'Game Environment Assets',
+        'Optimized 3D game environment assets with textures and LODs.',
+        4,
+        200.00,
+        8,
+        '/images/services/populators/3d4.jpg,/images/services/populators/3d2.jpg'
+    ),
+    (
+        8,
+        'VR Experience Design',
+        'Custom VR environment and interaction design for immersive experiences.',
+        4,
+        550.00,
+        21,
+        '/images/services/populators/3d1.jpg,/images/services/populators/3d3.jpg,/images/services/populators/3d4.jpg'
+    ),
+    (
+        9,
+        'Product Configurator 3D',
+        'Interactive 3D product configurator for e-commerce with multiple customization options.',
+        4,
+        400.00,
+        14,
+        '/images/services/populators/3d2.jpg,/images/services/populators/3d3.jpg'
     );
