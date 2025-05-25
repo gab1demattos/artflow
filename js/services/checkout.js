@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const paymentClose = document.getElementById('close-payment-modal');
     const paymentConfirm = document.getElementById('payment-confirm');
     const paymentForm = document.getElementById('payment-form');
-
+    
     function toggleBodyScroll(disable) {
         if (disable) {
             document.body.style.overflow = 'hidden';
@@ -16,21 +16,21 @@ document.addEventListener('DOMContentLoaded', function () {
             document.body.style.overflow = '';
         }
     }
-
+    
     if (paymentBtn && requirementsModal) {
         paymentBtn.addEventListener('click', function () {
             requirementsModal.classList.remove('hidden');
             toggleBodyScroll(true);
         });
     }
-
+    
     if (requirementsClose && requirementsModal) {
         requirementsClose.addEventListener('click', function () {
             requirementsModal.classList.add('hidden');
             toggleBodyScroll(false);
         });
     }
-
+    
     if (requirementsModal) {
         requirementsModal.addEventListener('click', function (e) {
             if (e.target === requirementsModal) {
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
-
+    
     function fillOrderOverview() {
         const serviceTitle = document.querySelector('#service-checkout h2')?.textContent || '';
         const ownerName = document.querySelector('#owner-info p')?.textContent || '';
@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelector('#order-total').textContent = price;
         document.querySelector('#order-requirements span').textContent = requirements;
     }
-
+    
     if (requirementsContinue && requirementsModal && paymentModal) {
         requirementsContinue.addEventListener('click', function () {
             if (!requirementsTextarea.value.trim()) {
@@ -69,14 +69,14 @@ document.addEventListener('DOMContentLoaded', function () {
             fillOrderOverview();
         });
     }
-
+    
     if (paymentClose && paymentModal) {
         paymentClose.addEventListener('click', function () {
             paymentModal.classList.add('hidden');
             toggleBodyScroll(false);
         });
     }
-
+    
     if (paymentModal) {
         paymentModal.addEventListener('click', function (e) {
             if (e.target === paymentModal) {
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
-
+    
     const cardInput = paymentForm ? paymentForm.elements['card'] : null;
     if (cardInput) {
         cardInput.addEventListener('input', function (e) {
@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function () {
             e.target.value = value.substring(0, 19);
         });
     }
-
+    
     const expInput = paymentForm ? paymentForm.elements['exp'] : null;
     if (expInput) {
         expInput.addEventListener('input', function (e) {
@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function () {
             e.target.value = value;
         });
     }
-
+    
     if (paymentConfirm && paymentForm) {
         paymentConfirm.addEventListener('click', async function (e) {
             e.preventDefault();
@@ -123,7 +123,6 @@ document.addEventListener('DOMContentLoaded', function () {
             
             let valid = true;
             let firstInvalid = null;
-
             if (!cardPattern.test(card)) {
                 paymentForm.elements['card'].classList.add('input-error');
                 valid = false;
@@ -131,7 +130,6 @@ document.addEventListener('DOMContentLoaded', function () {
             } else {
                 paymentForm.elements['card'].classList.remove('input-error');
             }
-
             if (!expPattern.test(exp)) {
                 paymentForm.elements['exp'].classList.add('input-error');
                 valid = false;
@@ -139,7 +137,6 @@ document.addEventListener('DOMContentLoaded', function () {
             } else {
                 paymentForm.elements['exp'].classList.remove('input-error');
             }
-
             if (!cvvPattern.test(cvv)) {
                 paymentForm.elements['cvv'].classList.add('input-error');
                 valid = false;
@@ -147,7 +144,6 @@ document.addEventListener('DOMContentLoaded', function () {
             } else {
                 paymentForm.elements['cvv'].classList.remove('input-error');
             }
-
             if (!name) {
                 paymentForm.elements['name'].classList.add('input-error');
                 valid = false;
@@ -155,12 +151,10 @@ document.addEventListener('DOMContentLoaded', function () {
             } else {
                 paymentForm.elements['name'].classList.remove('input-error');
             }
-
             if (!valid) {
                 if (firstInvalid) firstInvalid.focus();
                 return;
             }
-
             const serviceId = new URLSearchParams(window.location.search).get('id');
             const requirements = document.getElementById('requirements-textarea')?.value || '';
             const price = document.getElementById('price')?.textContent?.replace('€', '').trim() || '';
@@ -170,7 +164,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 const match = delivery.match(/(\d+)/);
                 if (match) deliveryTime = parseInt(match[1], 10);
             }
-
             try {
                 const response = await fetch('../../actions/service/create-order.php', {
                     method: 'POST',

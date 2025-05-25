@@ -1,20 +1,9 @@
 <?php
-
-/**
- * Renders a service card component
- * 
- * @param array $service Array containing service details (id, title, username, etc.)
- * @param string|null $serviceImage Main image URL for the service
- * @param string $subcatIdsStr Comma-separated string of subcategory IDs
- * @return void
- */
 function drawServiceCard($service, $serviceImage = null, $subcatIdsStr = '')
 {
-    // Update the average rating for this service
     require_once(__DIR__ . '/../database/classes/service.class.php');
     Service::updateAverageRating($service['id']);
 
-    // Get the rating
     $avgRating = isset($service['avg_rating']) ? (float)$service['avg_rating'] : 0;
     $formattedRating = number_format($avgRating, 1);
 

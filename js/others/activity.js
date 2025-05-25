@@ -1,4 +1,3 @@
-// JS for tab switching on the activity page
 document.addEventListener("DOMContentLoaded", function () {
 	const tabs = document.querySelectorAll(".activity-tab");
 	const contents = document.querySelectorAll(".activity-tab-content");
@@ -11,18 +10,15 @@ document.addEventListener("DOMContentLoaded", function () {
 		});
 	});
 
-	// Fetch and render orders dynamically
 	fetch("../../actions/activity/get-orders.php")
 		.then((res) => res.json())
 		.then((data) => {
 			if (!data.success) return;
-			// Render Your Orders
 			const yourOrders = document.getElementById("your-orders");
 			yourOrders.innerHTML = "";
 			if (data.yourOrders.length === 0) {
 				yourOrders.innerHTML = '<div class="no-orders">No orders found.</div>';
 			} else {
-				// Sort: in progress first, then completed
 				const sortedOrders = data.yourOrders.slice().sort((a, b) => {
 					if (a.status === b.status) return 0;
 					if (a.status === "in progress") return -1;
@@ -31,7 +27,6 @@ document.addEventListener("DOMContentLoaded", function () {
 				});
 				sortedOrders.forEach((order) => {
 					const isCompleted = order.status === "completed";
-					// Only show Rate it button if order is completed and not rated
 					yourOrders.innerHTML += `
                     <div class="order-card" data-order-id="${order.id}">
                         <div class="order-header">
@@ -59,20 +54,16 @@ document.addEventListener("DOMContentLoaded", function () {
                     </div>`;
 				});
 
-				// Attach event listeners to the Rate it buttons
 				attachRateItListeners();
 
-				// Attach event listeners to order titles in Your Orders
 				attachOrderTitleListeners();
 			}
-			// Render Orders From Others
 			const ordersFromOthers = document.getElementById("orders-from-others");
 			ordersFromOthers.innerHTML = "";
 			if (data.ordersFromOthers.length === 0) {
 				ordersFromOthers.innerHTML =
 					'<div class="no-orders">No orders found.</div>';
 			} else {
-				// Sort: not delivered (in progress) first, then delivered (completed)
 				const sortedOrders = data.ordersFromOthers.slice().sort((a, b) => {
 					if (a.status === b.status) return 0;
 					if (a.status === "in progress") return -1;
@@ -108,10 +99,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     </div>`;
 				});
 
-				// Attach event listeners to order titles in Orders From Others
 				attachOrderTitleListeners();
 			}
-			// Re-attach mark delivered listeners
 			document.querySelectorAll(".mark-delivered-btn").forEach(function (btn) {
 				btn.addEventListener("click", function () {
 					const card = btn.closest(".order-card");
@@ -146,7 +135,6 @@ document.addEventListener("DOMContentLoaded", function () {
 			});
 		});
 
-	// Function to attach click event listeners to order titles
 	function attachOrderTitleListeners() {
 		document.querySelectorAll(".order-title").forEach((title) => {
 			title.addEventListener("click", function () {
@@ -158,7 +146,6 @@ document.addEventListener("DOMContentLoaded", function () {
 		});
 	}
 
-	// Function to attach event listeners to all Rate it buttons
 	function attachRateItListeners() {
 		document.querySelectorAll(".rate-it-btn").forEach((button) => {
 			button.addEventListener("click", function () {
@@ -168,11 +155,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 				console.log("Rate It button clicked:", serviceId, serviceTitle);
 
-				// Check if modal already exists
 				let rateItModal = document.getElementById("rate-it-modal-overlay");
 
 				if (!rateItModal) {
-					// Create the modal dynamically
 					rateItModal = document.createElement("div");
 					rateItModal.id = "rate-it-modal-overlay";
 					rateItModal.className = "modal-overlay";
@@ -223,10 +208,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 					document.body.appendChild(rateItModal);
 
-					// Setup stars functionality
 					setupRatingStars();
 
-					// Close modal handlers
 					const closeButton = document.getElementById("close-rate-it");
 					if (closeButton) {
 						closeButton.addEventListener("click", function () {
@@ -234,18 +217,16 @@ document.addEventListener("DOMContentLoaded", function () {
 						});
 					}
 
-					// Close when clicking outside content
 					rateItModal.addEventListener("click", function (event) {
 						if (event.target === rateItModal) {
 							rateItModal.style.display = "none";
 						}
 					});
 
-					// Form validation
 					const rateForm = document.getElementById("rate-it-form");
 					if (rateForm) {
 						rateForm.addEventListener("submit", function (event) {
-							event.preventDefault(); // Prevent the default form submission
+							event.preventDefault(); 
 
 							const currentRating = parseFloat(
 								document.getElementById("rating-value").value
@@ -255,11 +236,10 @@ document.addEventListener("DOMContentLoaded", function () {
 								return false;
 							}
 
-							// Get form data
 							const serviceId = document.querySelector(
 								"input[name='service_id']"
 							).value;
-							console.log("Service ID being submitted:", serviceId); // Debug log
+							console.log("Service ID being submitted:", serviceId); 
 
 							if (!serviceId || serviceId === "0" || serviceId === 0) {
 								alert("Error: Invalid service ID. Please try again.");
@@ -272,7 +252,6 @@ document.addEventListener("DOMContentLoaded", function () {
 								"input[name='exchange_id']"
 							).value;
 
-							// Create URL-encoded form data
 							const formData = new URLSearchParams();
 							formData.append("service_id", serviceId);
 							formData.append("exchange_id", exchangeId);
@@ -280,9 +259,8 @@ document.addEventListener("DOMContentLoaded", function () {
 							formData.append("review_text", reviewText);
 							formData.append("make_public", "0");
 
-							console.log("Submitting form data:", formData.toString()); // Debug log
+							console.log("Submitting form data:", formData.toString()); 
 
-							// Submit the review via fetch API
 							fetch("../../actions/service/submit-review.php", {
 								method: "POST",
 								headers: {
@@ -294,28 +272,21 @@ document.addEventListener("DOMContentLoaded", function () {
 									response.json().catch(() => response.text())
 								)
 								.then((result) => {
-									// Check if result is a string (HTML) or an object
 									if (typeof result === "string") {
-										// Success - close the modal and redirect
 										rateItModal.style.display = "none";
 
-										// Redirect to the service page
 										window.location.href = "../../pages/services/service.php?id=" + serviceId;
 									} else if (result.success) {
-										// Success with JSON response
 										rateItModal.style.display = "none";
 
-										// Hide the Rate it button for this order
 										const orderCard = document.querySelector(`.order-card[data-order-id='${exchangeId}']`);
 										if (orderCard) {
 											const rateBtn = orderCard.querySelector('.rate-it-btn');
 											if (rateBtn) rateBtn.style.display = 'none';
 										}
 
-										// Redirect to the service page
 										window.location.href = "../../pages/services/service.php?id=" + serviceId;
 									} else {
-										// Error
 										alert(
 											result.error ||
 											"An error occurred while submitting your review."
@@ -331,7 +302,6 @@ document.addEventListener("DOMContentLoaded", function () {
 						});
 					}
 				} else {
-					// Modal exists, update its content
 					const serviceIdInput = rateItModal.querySelector(
 						"input[name='service_id']"
 					);
@@ -344,7 +314,6 @@ document.addEventListener("DOMContentLoaded", function () {
 						titleElement.textContent = serviceTitle;
 					}
 
-					// Reset the form
 					const rateForm = document.getElementById("rate-it-form");
 					if (rateForm) {
 						rateForm.reset();
@@ -358,79 +327,65 @@ document.addEventListener("DOMContentLoaded", function () {
 					}
 				}
 
-				// Display the modal
 				rateItModal.style.display = "flex";
 			});
 		});
 	}
 
-	// Function to setup rating star functionality
 	function setupRatingStars() {
 		const stars = document.querySelectorAll(".star-icon");
 		const ratingValue = document.getElementById("rating-value");
 		const ratingText = document.getElementById("rating-text");
 		let currentRating = 0;
 
-		// Function to update stars display
 		function updateStarDisplay(rating) {
 			stars.forEach((star) => {
 				const starValue = parseFloat(star.getAttribute("data-value"));
 
-				// Full star
 				if (starValue <= rating) {
 					star.classList.add("active");
 					star.classList.remove("half");
 					star.textContent = "★";
 				}
-				// Half star - if rating is X.5 and this is the next star
 				else if (starValue - 0.5 === rating) {
 					star.classList.add("active", "half");
 					star.textContent = "⯪";
 				}
-				// Empty star
 				else {
 					star.classList.remove("active", "half");
 					star.textContent = "★";
 				}
 			});
 
-			// Update the rating text and hidden value
 			ratingText.textContent = rating.toFixed(1);
 			ratingValue.value = rating;
 		}
 
-		// Handle click events for full and half stars
 		stars.forEach((star, index) => {
 			const starContainer = star.parentElement;
 			const starRect = star.getBoundingClientRect();
 			const starWidth = starRect.width;
 
-			// Show preview on hover
 			star.addEventListener("mousemove", function (e) {
 				const rect = this.getBoundingClientRect();
-				const x = e.clientX - rect.left; // x position within the element
+				const x = e.clientX - rect.left; 
 				const starValue = parseFloat(this.getAttribute("data-value"));
 
 				if (x < rect.width / 2) {
-					// Left half of the star - show half star
 					updateStarDisplay(starValue - 0.5);
 				} else {
-					// Right half of the star - show full star
 					updateStarDisplay(starValue);
 				}
 			});
 
-			// Set rating on click
 			star.addEventListener("click", function (e) {
 				const rect = this.getBoundingClientRect();
 				const x = e.clientX - rect.left;
 				const starValue = parseFloat(this.getAttribute("data-value"));
 
 				if (x < rect.width / 2) {
-					// Left half of the star clicked
 					currentRating = starValue - 0.5;
 				} else {
-					// Right half or whole star clicked
 					currentRating = starValue;
 				}
 
@@ -438,7 +393,6 @@ document.addEventListener("DOMContentLoaded", function () {
 			});
 		});
 
-		// Reset to current rating when mouse leaves the star container
 		const starsContainer = document.querySelector(".stars-container");
 		if (starsContainer) {
 			starsContainer.addEventListener("mouseleave", function () {

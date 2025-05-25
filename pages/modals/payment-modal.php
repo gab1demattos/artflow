@@ -1,4 +1,3 @@
-<!-- Payment Modal -->
 <div id="payment-modal-overlay" class="modal-overlay hidden">
     <div class="modal">
         <div class="modal-content">

@@ -65,7 +65,7 @@ async function loadStats() {
                 label: 'Earnings (€)',
                 data: values,
                 borderColor: getComputedStyle(document.documentElement).getPropertyValue('--green').trim() || '#3bb77e',
-                backgroundColor: 'rgba(61, 217, 188, 0.15)', // light green fill
+                backgroundColor: 'rgba(61, 217, 188, 0.15)', 
                 fill: true,
                 tension: 0.3,
                 pointRadius: 4,

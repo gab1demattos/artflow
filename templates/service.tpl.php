@@ -10,7 +10,6 @@
         return;
     }
 
-    // Automatically update the average rating for this service
     Service::updateAverageRating($serviceId);
 
     $stmtService = $db->prepare('SELECT * FROM Service WHERE id = ?');
@@ -24,9 +23,8 @@
 
     $stmtImg = $db->prepare('SELECT images FROM Service WHERE id = ?');
     $stmtImg->execute([$service['id']]);
-    $imageRow = $stmtImg->fetch(PDO::FETCH_ASSOC); // Fetch a single row
-    $imagePaths = $imageRow['images']; // Extract the 'images' field
-    // Fix: split on comma only, trim whitespace, and filter out empty values
+    $imageRow = $stmtImg->fetch(PDO::FETCH_ASSOC); 
+    $imagePaths = $imageRow['images'];
     $images = array_filter(array_map('trim', explode(',', $imagePaths)));
 
     $stmtOwner = $db->prepare('SELECT u.name, u.username, u.profile_image FROM User u JOIN Service s ON u.id = s.user_id WHERE s.id = ?');
@@ -52,13 +50,11 @@
                 <div id="reviews">
                     <h3>Reviews</h3>
                     <?php
-                    // Display average rating for this service if available
                     $avgRating = isset($service['avg_rating']) ? (float)$service['avg_rating'] : 0;
                     if ($avgRating > 0) {
                         echo '<div class="service-avg-rating">';
                         echo '<p><strong>Average Rating:</strong> ' . number_format($avgRating, 1) . ' / 5.0</p>';
                         echo '<div class="stars-display">';
-                        // Display filled stars based on rating
                         for ($i = 1; $i <= 5; $i++) {
                             if ($i <= floor($avgRating)) {
                                 echo '<span class="star filled">★</span>';
@@ -72,7 +68,6 @@
                         echo '</div>';
                     }
 
-                    // Use Review class to get reviews
                     $reviews = Review::getReviewsByServiceId($service['id']);
 
                     if (count($reviews) > 0) {
@@ -85,7 +80,6 @@
                                     </div>
                                     <div class="review-rating">
                                         <?php
-                                        // Show stars for this review's rating
                                         for ($i = 1; $i <= 5; $i++) {
                                             if ($i <= floor($review->rating)) {
                                                 echo '<span class="star filled">★</span>';
@@ -154,7 +148,6 @@
                 </div>
             </div>
             <div id="service-description">
-                <!-- <h3>Description</h3> -->
                  <br>
                 <p><?= htmlspecialchars($service['description']) ?></p>
             </div>

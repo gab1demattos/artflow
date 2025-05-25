@@ -1,9 +1,6 @@
-/* ======================================= */
-/* BASE MOBILE STYLES (applied by default) */
-/* ======================================= */
+
 
 @media screen and (max-width: 767px) {
-    /* Footer section */
     #end {
         min-height: auto !important;
         padding: 1rem !important;
@@ -15,15 +12,15 @@
     }
 
     #end-content {
-        flex-direction: row !important; /* Changed from column to row for mobile only */
-        justify-content: space-between !important; /* Add space between the two columns */
+        flex-direction: row !important; 
+        justify-content: space-between !important; 
         gap: 1rem !important;
         padding: 0.5rem !important;
     }
 
     #authors,
     #footer-links {
-        width: 45% !important; /* Each column takes up almost half the width */
+        width: 45% !important; 
     }
 
     #end h3 {

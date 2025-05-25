@@ -16,12 +16,10 @@ class Service
     public int $delivery_time;
     public ?string $images;
     public ?string $videos;
-    public ?string $username = null; // Added username property
-    public float $avg_rating = 0; // Added avg_rating property
+    public ?string $username = null; 
+    public float $avg_rating = 0; 
 
-    /**
-     * Constructor for Service
-     */
+
     public function __construct(
         int $id,
         int $user_id,
@@ -32,8 +30,8 @@ class Service
         int $delivery_time,
         ?string $images = null,
         ?string $videos = null,
-        ?string $username = null, // Added username parameter
-        ?float $avg_rating = 0 // Added avg_rating parameter
+        ?string $username = null, 
+        ?float $avg_rating = 0 
     ) {
         $this->id = $id;
         $this->user_id = $user_id;
@@ -44,15 +42,11 @@ class Service
         $this->delivery_time = $delivery_time;
         $this->images = $images;
         $this->videos = $videos;
-        $this->username = $username; // Initialize username property
-        $this->avg_rating = $avg_rating ?? 0; // Initialize avg_rating property
+        $this->username = $username; 
+        $this->avg_rating = $avg_rating ?? 0; 
     }
 
-    /**
-     * Get all services
-     * 
-     * @return array Array of Service objects
-     */
+ 
     public static function getAllServices(?float $minPrice = null, ?float $maxPrice = null, ?int $maxDeliveryTime = null, ?float $minRating = 0): array
     {
         $db = Database::getInstance();
@@ -152,18 +146,6 @@ class Service
         return $services;
     }
 
-    /**
-     * Search services within specific categories with filters
-     * 
-     * @param PDO $db Database connection
-     * @param string $search Search term for service title
-     * @param array $categoryIds Array of category IDs to search within
-     * @param float|null $minPrice Minimum price filter
-     * @param float|null $maxPrice Maximum price filter
-     * @param int|null $maxDeliveryTime Maximum delivery time filter
-     * @param float $minRating Minimum rating filter
-     * @return array Array of Service objects
-     */
     public static function searchServicesInCategories(PDO $db, string $search, array $categoryIds, ?float $minPrice = null, ?float $maxPrice = null, ?int $maxDeliveryTime = null, ?float $minRating = 0): array
     {
         if (empty($categoryIds)) {
@@ -216,17 +198,7 @@ class Service
         return $services;
     }
 
-    /**
-     * Get services by multiple category IDs with proper rating filtering
-     * 
-     * @param PDO $db Database connection
-     * @param array $categoryIds Array of category IDs
-     * @param float|null $minPrice Minimum price filter
-     * @param float|null $maxPrice Maximum price filter
-     * @param int|null $maxDeliveryTime Maximum delivery time filter
-     * @param float $minRating Minimum rating filter
-     * @return array Array of Service objects
-     */
+
     public static function getServicesByCategories(PDO $db, array $categoryIds, ?float $minPrice = null, ?float $maxPrice = null, ?int $maxDeliveryTime = null, ?float $minRating = 0): array
     {
         if (empty($categoryIds)) {
@@ -280,12 +252,7 @@ class Service
         return $result;
     }
 
-    /**
-     * Get service by ID
-     * 
-     * @param int $id Service ID
-     * @return Service|null Service object or null if not found
-     */
+
     public static function getServiceById(int $id): ?Service
     {
         $db = Database::getInstance();
@@ -310,12 +277,7 @@ class Service
         return null;
     }
 
-    /**
-     * Get services by category ID
-     * 
-     * @param int $categoryId Category ID
-     * @return array Array of Service objects
-     */
+
     public static function getServicesByCategory(int $categoryId): array
     {
         $db = Database::getInstance();
@@ -335,7 +297,7 @@ class Service
                 (int)$service['delivery_time'],
                 $service['images'],
                 $service['videos'],
-                $service['username'] // Pass the username
+                $service['username'] 
             );
 
             $result[] = $serviceObj;
@@ -344,11 +306,7 @@ class Service
         return $result;
     }
 
-    /**
-     * Count services by category (for pagination)
-     * @param int $categoryId
-     * @return int
-     */
+
     public static function countServicesByCategory(int $categoryId): int
     {
         $db = Database::getInstance();
@@ -357,13 +315,6 @@ class Service
         return (int)$stmt->fetchColumn();
     }
 
-    /**
-     * Get services by category with pagination
-     * @param int $categoryId
-     * @param int $limit
-     * @param int $offset
-     * @return array
-     */
     public static function getServicesByCategoryPaginated(int $categoryId, int $limit, int $offset): array
     {
         $db = Database::getInstance();
@@ -393,12 +344,7 @@ class Service
         return $result;
     }
 
-    /**
-     * Get services by user ID
-     * 
-     * @param int $userId User ID
-     * @return array Array of Service objects
-     */
+
     public static function getServicesByUserId(int $userId): array
     {
         $db = Database::getInstance();
@@ -418,7 +364,7 @@ class Service
                 (int)$service['delivery_time'],
                 $service['images'],
                 $service['videos'],
-                $service['username'] // Pass the username
+                $service['username'] 
             );
 
             $result[] = $serviceObj;
@@ -427,11 +373,6 @@ class Service
         return $result;
     }
 
-    /**
-     * Count services by user (for pagination)
-     * @param int $userId
-     * @return int
-     */
     public static function countServicesByUserId(int $userId): int
     {
         $db = Database::getInstance();
@@ -440,13 +381,6 @@ class Service
         return (int)$stmt->fetchColumn();
     }
 
-    /**
-     * Get services by user with pagination
-     * @param int $userId
-     * @param int $limit
-     * @param int $offset
-     * @return array
-     */
     public static function getServicesByUserIdPaginated(int $userId, int $limit, int $offset): array
     {
         $db = Database::getInstance();
@@ -476,11 +410,6 @@ class Service
         return $result;
     }
 
-    /**
-     * Create a new service
-     * 
-     * @return Service|null The newly created service or null if failed
-     */
     public static function createService(
         int $user_id,
         string $title,
@@ -546,18 +475,11 @@ class Service
         }
     }
 
-    /**
-     * Update the average rating for a service based on reviews
-     * 
-     * @param int $serviceId Service ID to update rating for
-     * @return bool True if update was successful
-     */
     public static function updateAverageRating(int $serviceId): bool
     {
         $db = Database::getInstance();
 
         try {
-            // Calculate average rating from all reviews
             $stmt = $db->prepare('
                 SELECT AVG(rating) as avg_rating
                 FROM Review
@@ -568,7 +490,6 @@ class Service
 
             $avgRating = $result['avg_rating'] ? (float)$result['avg_rating'] : 0;
 
-            // Update the service with new average rating
             $updateStmt = $db->prepare('
                 UPDATE Service
                 SET avg_rating = ?
@@ -582,11 +503,6 @@ class Service
         }
     }
 
-    /**
-     * Delete a service by ID
-     * @param int $id
-     * @return bool
-     */
     public static function deleteServiceById(int $id): bool
     {
         $db = Database::getInstance();
@@ -594,21 +510,13 @@ class Service
         return $stmt->execute([$id]);
     }
 
-    /**
-     * Get the category for this service
-     * 
-     * @return Category|null The category for this service
-     */
+   
     public function getCategory(): ?Category
     {
         return Category::getCategoryById($this->category_id);
     }
 
-    /**
-     * Get subcategories for this service
-     * 
-     * @return array Array of subcategory IDs
-     */
+    
     public function getSubcategoryIds(): array
     {
         $db = Database::getInstance();
@@ -617,11 +525,7 @@ class Service
         return $stmt->fetchAll(PDO::FETCH_COLUMN);
     }
 
-    /**
-     * Get the first image for this service
-     * 
-     * @return string|null The first image path or null if no images
-     */
+    
     public function getFirstImage(): ?string
     {
         if (empty($this->images)) {
@@ -632,11 +536,7 @@ class Service
         return count($imageArray) > 0 ? $imageArray[0] : null;
     }
 
-    /**
-     * Get all image paths as array
-     * 
-     * @return array Array of image paths
-     */
+   
     public function getImagesArray(): array
     {
         if (empty($this->images)) {
@@ -646,11 +546,7 @@ class Service
         return array_filter(array_map('trim', explode(',', $this->images)));
     }
 
-    /**
-     * Convert to associative array for JSON output or template usage
-     * 
-     * @return array Associative array of service properties
-     */
+    
     public function toArray(): array
     {
         return [
@@ -668,15 +564,10 @@ class Service
         ];
     }
 
-    /**
-     * Get the username of the service provider
-     * 
-     * @return string|null Username or null if not available
-     */
+   
     public function getUsername(): ?string
     {
         if ($this->username === null) {
-            // If username is not set, fetch it from the database
             $db = Database::getInstance();
             $stmt = $db->prepare('SELECT username FROM User WHERE id = ?');
             $stmt->execute([$this->user_id]);
@@ -689,19 +580,7 @@ class Service
         return $this->username;
     }
 
-    /**
-     * Get filtered services by category with pagination
-     * @param int $categoryId
-     * @param int $limit
-     * @param int $offset
-     * @param float|null $priceMin
-     * @param float|null $priceMax
-     * @param float|null $ratingMin
-     * @param float|null $ratingMax
-     * @param int|null $deliveryMin
-     * @param int|null $deliveryMax
-     * @return array
-     */
+    
     public static function getFilteredServicesByCategory(
         int $categoryId,
         int $limit,
@@ -720,7 +599,6 @@ class Service
                   WHERE Service.category_id = ?';
         $params = [$categoryId];
 
-        // Apply price range filter
         if ($priceMin !== null) {
             $query .= ' AND Service.price >= ?';
             $params[] = $priceMin;
@@ -730,7 +608,6 @@ class Service
             $params[] = $priceMax;
         }
 
-        // Apply delivery time range filter
         if ($deliveryMin !== null) {
             $query .= ' AND Service.delivery_time >= ?';
             $params[] = $deliveryMin;
@@ -740,7 +617,6 @@ class Service
             $params[] = $deliveryMax;
         }
 
-        // Apply rating range filter
         if ($ratingMin !== null) {
             $query .= ' AND Service.avg_rating >= ?';
             $params[] = $ratingMin;
@@ -778,11 +654,6 @@ class Service
         return $result;
     }
 
-    /**
-     * Get the price range (min and max) for a specific category
-     * @param int $categoryId
-     * @return array ['min' => float, 'max' => float]
-     */
     public static function getPriceRangeByCategory(int $categoryId): array
     {
         $db = Database::getInstance();
@@ -791,11 +662,6 @@ class Service
         return $stmt->fetch(PDO::FETCH_ASSOC) ?: ['min' => 0, 'max' => 0];
     }
 
-    /**
-     * Get the delivery time range (min and max) for a specific category
-     * @param int $categoryId
-     * @return array ['min' => int, 'max' => int]
-     */
     public static function getDeliveryRangeByCategory(int $categoryId): array
     {
         $db = Database::getInstance();

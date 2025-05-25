@@ -10,32 +10,26 @@ require_once(__DIR__ . '/../../templates/service_card.php');
 $session = Session::getInstance();
 $loggedInUser = $session->getUser() ?? null;
 
-// Get user by username
 $user = User::get_user_by_username((string)$_GET['username'] ?? '') ?? null;
 
-// If user doesn't exist, redirect to homepage
 if (!$user) {
     header('Location: /');
     exit();
 }
 
-// Check if user has a bio
 $hasBio = ($user->getBio() !== NULL && $user->getBio() !== '');
 
-// Pagination for user services
 $page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
-$servicesPerPage = 20; // 4 rows x 5 cards
+$servicesPerPage = 20;
 $totalServices = Service::countServicesByUserId($user->getId());
 $offset = ($page - 1) * $servicesPerPage;
 $services = Service::getServicesByUserIdPaginated($user->getId(), $servicesPerPage, $offset);
 
-// Get all services by the user (for retrieving reviews)
 $allUserServices = Service::getServicesByUserId($user->getId());
 $userServiceIds = array_map(function ($service) {
-    return $service->id; // Access the id property directly, not via getId()
+    return $service->id; 
 }, $allUserServices);
 
-// Get reviews for user's services using the refactored method
 $reviewsData = Review::getReviewsByServiceIds($userServiceIds);
 $reviews = $reviewsData['reviews'];
 $averageRating = $reviewsData['averageRating'];
@@ -78,17 +72,13 @@ drawHeader($loggedInUser);
         <?php else: ?>
             <div id="services-list">
                 <?php foreach ($services as $serviceObj):
-                    // Get subcategory IDs for this service
                     $subcatIds = $serviceObj->getSubcategoryIds();
                     $subcatIdsStr = implode(',', $subcatIds);
 
-                    // Get first image for this service
                     $serviceImage = $serviceObj->getFirstImage();
 
-                    // Convert service object to array for the template
                     $service = $serviceObj->toArray();
 
-                    // Use the service card component
                     drawServiceCard($service, $serviceImage, $subcatIdsStr);
                 endforeach; ?>
             </div>
@@ -118,13 +108,10 @@ drawHeader($loggedInUser);
                 <div class="review-rating-stars">
                     <?php for ($i = 1; $i <= 5; $i++):
                         if ($averageRating >= $i) {
-                            // Full star
                             echo '<span class="star filled">★</span>';
                         } else if ($averageRating >= $i - 0.5) {
-                            // Half star
                             echo '<span class="star half-filled">&#9733;</span>';
                         } else {
-                            // Empty star
                             echo '<span class="star">☆</span>';
                         }
                     endfor; ?>
@@ -144,13 +131,10 @@ drawHeader($loggedInUser);
                             <div class="review-rating">
                                 <?php for ($i = 1; $i <= 5; $i++):
                                     if ($review->rating >= $i) {
-                                        // Full star
                                         echo '<span class="star filled">★</span>';
                                     } else if ($review->rating >= $i - 0.5) {
-                                        // Half star
                                         echo '<span class="star half-filled">&#9733;</span>';
                                     } else {
-                                        // Empty star
                                         echo '<span class="star">☆</span>';
                                     }
                                 endfor; ?>
@@ -170,11 +154,8 @@ drawHeader($loggedInUser);
 <script src="../../js/users/profile.js"></script>
 
 <?php
-// Include the edit profile modal
 include_once(__DIR__ . '/../modals/edit-profile-modal.php');
-// Include the change password modal
 include_once(__DIR__ . '/../modals/change-password.php');
-// Include the irreversible action modal
 include_once(__DIR__ . '/../../templates/irreversible-modal.tpl.php');
 
 drawFooter($loggedInUser);

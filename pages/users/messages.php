@@ -10,7 +10,6 @@ require_once(__DIR__ . '/../../database/classes/message.class.php');
 $session = Session::getInstance();
 $user = $session->getUser() ?? null;
 
-// Redirect to home if not logged in
 if (!$user) {
     header('Location: /');
     exit();
@@ -18,11 +17,9 @@ if (!$user) {
 
 drawHeader($user);
 
-// Check if a specific user conversation was requested via URL
 $directMessageUserId = isset($_GET['user_id']) ? (int)$_GET['user_id'] : null;
 
 try {
-    // Get all conversations for the current user
     $conversations = Message::getConversationsForUser($user['id']);
 ?>
     <link rel="stylesheet" href="/css/main.css">
@@ -84,24 +81,19 @@ try {
     </div>
 
     <script>
-        // Store current user data for use in JavaScript
         const currentUser = <?= json_encode([
                                 'id' => $user['id'],
                                 'username' => $user['username'],
                                 'profile_image' => $user['profile_image'] ?? '/images/user_pfp/default.png'
                             ]) ?>;
 
-        // If a specific conversation was requested via URL
         <?php if ($directMessageUserId): ?>
             document.addEventListener("DOMContentLoaded", function() {
-                // Check if user exists in conversation list
                 const existingItem = document.querySelector(`.chat-app__chat-item[data-user-id="<?= $directMessageUserId ?>"]`);
 
                 if (existingItem) {
-                    // If conversation exists, trigger a click on it
                     existingItem.click();
                 } else {
-                    // If conversation doesn't exist yet, create it
                     createOrSelectConversation(<?= $directMessageUserId ?>);
                 }
             });
@@ -111,9 +103,8 @@ try {
 
 <?php
 } catch (Exception $e) {
-    // Handle any errors that may have occurred during the database operation
     echo '<div class="error" style="color: red; padding: 20px; margin: 20px; background: #ffeeee;">Error: ' . htmlspecialchars($e->getMessage()) . '</div>';
-    error_log('Messages page error: ' . $e->getMessage()); // Log the error message for debugging
+    error_log('Messages page error: ' . $e->getMessage());
 }
 
 drawFooter($user);

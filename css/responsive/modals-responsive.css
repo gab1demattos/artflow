@@ -1,16 +1,11 @@
-/* ======================================= */
-/* BASE MOBILE STYLES (applied by default) */
-/* ======================================= */
-
 @media screen and (max-width: 767px) {
 	.modal-overlay {
-		align-items: flex-start !important; /* Align from top instead of center */
-		padding-top: 20px; /* Add some space from the very top of the screen */
-		padding-bottom: 20px; /* Add padding at bottom for scrolling */
-		overflow-y: auto; /* Make overlay scrollable */
+		align-items: flex-start !important; 
+		padding-top: 20px; 
+		padding-bottom: 20px; 
+		overflow-y: auto; 
 	}
 
-	/* Full page overlay specifically for edit profile modal */
 	#edit-profile-modal-overlay.modal-overlay {
 		padding: 0 !important;
 		background-color: white !important;
@@ -31,7 +26,6 @@
 		padding: 1rem;
 	}
 
-	/* Special styling for sign-in modal to make it smaller */
 	#signin-modal {
 		min-height: 350px !important;
 		height: auto !important;
@@ -74,26 +68,24 @@
 		margin: 0 !important;
 	}
 
-	/* Edit profile modal specific styles for mobile - full page appearance */
 	.modal#edit-profile-modal {
 		width: 100% !important;
 		max-width: 100% !important;
 		height: auto !important;
 		min-height: 100% !important;
 		max-height: none !important;
-		padding: 20px 1rem !important; /* Added top padding */
+		padding: 20px 1rem !important; 
 		overflow-y: visible !important;
 		margin: 0 !important;
 		border-radius: 0 !important;
-		position: relative !important; /* Changed to relative */
+		position: relative !important;
 		box-shadow: none !important;
 	}
 
-	/* Ensure the content stays within viewport */
 	#edit-profile-modal .modal-content {
 		height: auto !important;
 		min-height: 100% !important;
-		padding-bottom: 2rem !important; /* Add padding at bottom for better scrolling */
+		padding-bottom: 2rem !important;
 	}
 
 	#edit-profile-modal .form-container {
@@ -109,7 +101,6 @@
 		text-align: center !important;
 	}
 
-	/* Using the exact selector that works in browser testing */
 	.form-layout#edit-profile-form-layout {
 		display: flex !important;
 		flex-direction: column-reverse !important;
@@ -125,14 +116,12 @@
 		margin-bottom: 1.5rem !important;
 	}
 
-	/* Make profile preview smaller on mobile */
 	#edit-profile-modal #profile-preview-container {
 		width: 7em !important;
 		height: 7em !important;
 		margin-bottom: 10px !important;
 	}
 
-	/* Adjust file input container for mobile */
 	.file-input-container {
 		flex-wrap: wrap !important;
 		gap: 0.5em !important;
@@ -140,7 +129,6 @@
 		margin-bottom: 15px !important;
 	}
 
-	/* Mobile styling for important changes container */
 	.important-changes-container {
 		width: 100% !important;
 		max-width: 280px !important;
@@ -164,13 +152,11 @@
 		align-items: center;
 	}
 
-	/* Make form take full width inside form container */
 	.form {
 		width: 100%;
 		max-width: 280px;
 	}
 
-	/* Make the button container stack buttons on mobile for edit profile modal */
 	#edit-profile-modal .button-container {
 		flex-direction: column !important;
 		width: 100% !important;
@@ -182,10 +168,9 @@
 		margin: 0 !important;
 	}
 
-	/* Adjust form inputs and textarea for mobile */
 	#edit-profile-modal .form input,
 	#edit-profile-modal .form textarea {
-		font-size: 16px !important; /* Better size for mobile inputs */
+		font-size: 16px !important; 
 		padding: 10px 15px !important;
 	}
 
@@ -210,7 +195,6 @@
 		width: 100%;
 	}
 
-	/* Hide images on mobile */
 	.modal-right,
 	.modal-left,
 	#goflow-modal img {
@@ -237,7 +221,6 @@
 		margin: 1em 0;
 	}
 
-	/* Style the artflow text without making it a block */
 	#goflow-modal .artflow-text {
 		display: inline;
 		color: var(--orange);
@@ -249,7 +232,6 @@
 		right: 2.5em;
 	}
 
-	/* Sign up modal specific mobile styles */
 	#signup-modal {
 		min-height: 480px !important;
 		height: auto !important;
@@ -303,15 +285,10 @@
 		margin: 0 !important;
 	}
 
-	/* Hide illustration on mobile */
 	#signup-modal .modal-right {
 		display: none !important;
 	}
 }
-
-/* =================== */
-/*    TABLET STYLES    */
-/* =================== */
 
 @media screen and (min-width: 768px) and (max-width: 1199px) {
 	.modal {
@@ -329,7 +306,6 @@
 		padding: 1.5rem;
 	}
 
-	/* Edit profile modal tablet adjustments */
 	.modal#edit-profile-modal {
 		width: 85%;
 		max-width: 700px;
@@ -351,14 +327,12 @@
 		font-size: 2rem;
 	}
 
-	/* Show images on tablet */
 	.modal-right,
 	.modal-left {
 		display: flex;
 		width: 50%;
 	}
 
-	/* Make images overflow proportionally */
 	.modal-right img,
 	.modal-left img {
 		width: 110%;
@@ -366,7 +340,6 @@
 		object-fit: cover;
 	}
 
-	/* Go with flow modal adjustments for tablet */
 	#goflow-modal img {
 		width: 100%;
 		height: auto;
@@ -399,18 +372,7 @@
 	}
 }
 
-/* ================================== */
-/*    DESKTOP STYLES (above 1200px)   */
-/* ================================== */
-
-/*use the main modals.css settings */
 @media screen and (min-width: 1200px) {
-	/* 
-      The desktop styles are already defined in modals.css
-      This media query ensures we only apply those styles at larger screens
-    */
-
-	/* For ultra-wide screens, adjust proportions */
 	@media screen and (min-width: 2400px) {
 		.modal {
 			max-width: 1000px;

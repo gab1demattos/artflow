@@ -1,14 +1,8 @@
-/**
- * Messages page functionality
- * Handles sending and receiving messages in real-time
- */
 
-// Global variables
 let selectedUserId = null;
 let messagePollingInterval = null;
 const POLLING_INTERVAL = 3000; // 3 seconds
 
-// DOM Elements
 const conversationList = document.getElementById("conversation-list");
 const conversationSearch = document.getElementById("conversation-search");
 const messagesContainer = document.getElementById("messages-container");
@@ -20,16 +14,13 @@ const dropdownMenu = document.querySelector(".chat-app__dropdown-menu");
 const visitProfileButton = document.getElementById("visit-profile");
 const deleteConversationButton = document.getElementById("delete-conversation");
 
-// Event Listeners
 document.addEventListener("DOMContentLoaded", () => {
-	// Handle conversation selection
 	if (conversationList) {
 		const chatItems = conversationList.querySelectorAll(".chat-app__chat-item");
 		chatItems.forEach((item) => {
 			item.addEventListener("click", () => selectConversation(item));
 		});
 
-		// If there's a stored conversation, select it
 		const storedUserId = sessionStorage.getItem("selectedUserId");
 		if (storedUserId) {
 			const conversationItem = document.querySelector(
@@ -41,12 +32,9 @@ document.addEventListener("DOMContentLoaded", () => {
 		}
 	}
 
-	// Handle message sending
 	if (messageInput && sendButton) {
-		// Send on button click
 		sendButton.addEventListener("click", sendMessage);
 
-		// Send on Enter key
 		messageInput.addEventListener("keypress", (event) => {
 			if (event.key === "Enter") {
 				event.preventDefault();
@@ -55,19 +43,15 @@ document.addEventListener("DOMContentLoaded", () => {
 		});
 	}
 
-	// Handle conversation search
 	if (conversationSearch) {
 		conversationSearch.addEventListener("input", filterConversations);
 	}
 
-	// Handle responsive design for mobile
 	checkIfMobile();
 
-	// Handle dropdown menu toggle
 	if (menuButton && dropdownMenu) {
 		menuButton.addEventListener("click", toggleDropdownMenu);
 
-		// Close dropdown when clicking outside
 		document.addEventListener("click", (event) => {
 			if (
 				!menuButton.contains(event.target) &&
@@ -78,12 +62,10 @@ document.addEventListener("DOMContentLoaded", () => {
 		});
 	}
 
-	// Handle visit profile button click
 	if (visitProfileButton) {
 		visitProfileButton.addEventListener("click", visitUserProfile);
 	}
 
-	// Handle delete conversation button click
 	if (deleteConversationButton) {
 		deleteConversationButton.addEventListener(
 			"click",
@@ -91,8 +73,6 @@ document.addEventListener("DOMContentLoaded", () => {
 		);
 	}
 
-	// Check URL parameters for direct messaging
-	// Only check URL parameters if not already initialized from PHP
 	if (!window.conversationInitialized) {
 		const urlParams = new URLSearchParams(window.location.search);
 		const directMessageUserId = urlParams.get("user_id");
@@ -102,38 +82,28 @@ document.addEventListener("DOMContentLoaded", () => {
 	}
 });
 
-// Track if conversation has been initialized
 window.conversationInitialized = false;
 
-/**
- * Create or select a conversation with a specific user
- * @param {number} userId - User ID to chat with
- */
+
 function createOrSelectConversation(userId) {
-	// Prevent duplicate initialization
 	if (window.conversationInitialized) {
 		return;
 	}
 	window.conversationInitialized = true;
 
-	// First check if conversation already exists in the list
 	const existingItem = document.querySelector(
 		`.chat-app__chat-item[data-user-id="${userId}"]`
 	);
 
 	if (existingItem) {
-		// Conversation exists, select it
 		selectConversation(existingItem);
 	} else {
-		// Conversation doesn't exist yet, need to create it
-		// First, fetch user information
 		fetch(`/actions/messages/get-user-info.php?user_id=${userId}`)
 			.then((response) => response.json())
 			.then((data) => {
 				if (data.success) {
 					const user = data.user;
 
-					// Create a new conversation item
 					const newItem = document.createElement("div");
 					newItem.className = "chat-app__chat-item";
 					newItem.dataset.userId = userId;
@@ -149,16 +119,12 @@ function createOrSelectConversation(userId) {
                         </div>
                     `;
 
-					// Add to conversation list
 					conversationList.prepend(newItem);
 
-					// Add click event
 					newItem.addEventListener("click", () => selectConversation(newItem));
 
-					// Select the conversation
 					selectConversation(newItem);
 
-					// Remove no conversations message if it exists
 					const noConversationsMsg = document.querySelector(
 						".chat-app__no-conversations"
 					);
@@ -171,47 +137,32 @@ function createOrSelectConversation(userId) {
 	}
 }
 
-/**
- * Select a conversation and load its messages
- * @param {HTMLElement} item - The selected conversation item
- */
 function selectConversation(item) {
-	// Remove active class from all conversations
 	document
 		.querySelectorAll(".chat-app__chat-item")
 		.forEach((el) => el.classList.remove("active"));
 
-	// Add active class to selected conversation
 	item.classList.add("active");
 
-	// Get user ID and name for this conversation
 	selectedUserId = parseInt(item.dataset.userId);
 	const username = item.querySelector(".chat-app__username").textContent;
 
-	// Update header with current chat user
 	currentChatUser.textContent = username;
 
-	// Enable input and send button
 	messageInput.disabled = false;
 	sendButton.disabled = false;
 	messageInput.focus();
 
-	// Load messages for this conversation
 	loadMessages();
 
-	// Start polling for new messages
 	if (messagePollingInterval) {
 		clearInterval(messagePollingInterval);
 	}
 	messagePollingInterval = setInterval(loadMessages, POLLING_INTERVAL);
 
-	// Store the selected conversation in session storage
 	sessionStorage.setItem("selectedUserId", selectedUserId);
 }
 
-/**
- * Load messages for the selected conversation
- */
 function loadMessages() {
 	if (!selectedUserId) return;
 
@@ -235,17 +186,13 @@ function loadMessages() {
 		});
 }
 
-/**
- * Display messages in the messages container
- * @param {Array} messages - Array of message objects
- */
+
 function displayMessages(messages) {
 	if (!messagesContainer) {
 		console.error("Message container element not found!");
 		return;
 	}
 
-	// Clear any empty state message
 	messagesContainer.innerHTML = "";
 
 	if (!messages || messages.length === 0) {
@@ -257,15 +204,12 @@ function displayMessages(messages) {
 		return;
 	}
 
-	// Group messages by date
 	let currentDate = "";
 
 	messages.forEach((message) => {
-		// Get message date
 		const messageDate = new Date(message.timestamp);
 		const formattedDate = messageDate.toLocaleDateString();
 
-		// Add date separator if this is a new date
 		if (formattedDate !== currentDate) {
 			currentDate = formattedDate;
 
@@ -275,39 +219,29 @@ function displayMessages(messages) {
 			messagesContainer.appendChild(dateSeparator);
 		}
 
-		// Create message element
 		const messageEl = document.createElement("div");
 		const isSentByCurrentUser =
 			parseInt(message.sender_id) === parseInt(currentUser.id);
 
-		// The classes need to be flipped here to match the CSS
-		// Since "sent" messages should appear on the right and "received" on the left
 		messageEl.className = isSentByCurrentUser
-			? "chat-app__message chat-app__message--received" // Your message (should be on right)
-			: "chat-app__message chat-app__message--sent"; // Their message (should be on left)
+			? "chat-app__message chat-app__message--received"
+			: "chat-app__message chat-app__message--sent"; 
 
 		messageEl.textContent = message.message;
 
-		// Add message to container
 		messagesContainer.appendChild(messageEl);
 	});
 
-	// Scroll to bottom
 	messagesContainer.scrollTop = messagesContainer.scrollHeight;
 }
 
-/**
- * Send a message to the selected user
- */
 function sendMessage() {
 	if (!selectedUserId || !messageInput.value.trim()) return;
 
 	const messageText = messageInput.value.trim();
 
-	// Clear input field
 	messageInput.value = "";
 
-	// Send message via API
 	fetch("/actions/messages/send-message.php", {
 		method: "POST",
 		headers: {
@@ -321,10 +255,8 @@ function sendMessage() {
 		.then((response) => response.json())
 		.then((data) => {
 			if (data.success) {
-				// Load messages to show the new message
 				loadMessages();
 
-				// Update the preview text in the conversation list
 				const conversationItem = document.querySelector(
 					`.chat-app__chat-item[data-user-id="${selectedUserId}"]`
 				);
@@ -345,10 +277,7 @@ function sendMessage() {
 		.catch((error) => console.error("Error sending message:", error));
 }
 
-/**
- * Filter conversations based on search input
- * Searches for matching usernames in the conversation list
- */
+
 function filterConversations() {
 	const searchTerm = conversationSearch.value.toLowerCase().trim();
 	const conversationItems = document.querySelectorAll(".chat-app__chat-item");
@@ -356,7 +285,6 @@ function filterConversations() {
 		".chat-app__no-conversations"
 	);
 
-	// If there are no conversations, don't try to filter
 	if (conversationItems.length === 0 && noConversationsMsg) {
 		return;
 	}
@@ -376,7 +304,6 @@ function filterConversations() {
 		}
 	});
 
-	// Show a message if no results match the search
 	const noResultsMsg = document.getElementById("no-search-results");
 
 	if (!anyVisible && searchTerm !== "") {
@@ -392,21 +319,14 @@ function filterConversations() {
 	}
 }
 
-/**
- * Toggle dropdown menu visibility
- */
 function toggleDropdownMenu(event) {
 	event.stopPropagation();
 	dropdownMenu.classList.toggle("active");
 }
 
-/**
- * Visit the profile of the selected user
- */
 function visitUserProfile() {
 	if (!selectedUserId) return;
 
-	// Fetch the username first and then redirect to the profile page with username
 	fetch(`/actions/messages/get-user-info.php?user_id=${selectedUserId}`)
 		.then((response) => response.json())
 		.then((data) => {
@@ -419,24 +339,18 @@ function visitUserProfile() {
 		.catch((error) => console.error("Error fetching user info:", error));
 }
 
-/**
- * Confirm conversation deletion with the irreversible modal
- */
+
 function confirmDeleteConversation() {
 	if (!selectedUserId) return;
 
 	const username = currentChatUser.textContent;
 
-	// Close the dropdown menu
 	dropdownMenu.classList.remove("active");
 
-	// Show the irreversible confirmation modal
 	Modals.showIrreversibleModal(
-		// Confirm callback - runs when user clicks "Yes"
 		function () {
 			deleteConversation();
 		},
-		// Cancel callback - runs when user clicks "Nevermind"
 		function () {
 			// Do nothing, just close the modal
 		}

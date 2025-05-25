@@ -1,11 +1,4 @@
-// admin.js - Handles fetching and admin actions for the admin panel
 
-// Security utility functions
-/**
- * Escapes HTML to prevent XSS attacks
- * @param {string} unsafe - The unsafe string to be escaped
- * @return {string} The escaped string
- */
 function escapeHtml(unsafe) {
 	if (typeof unsafe !== "string") {
 		return "";
@@ -18,23 +11,14 @@ function escapeHtml(unsafe) {
 		.replace(/'/g, "&#039;");
 }
 
-/**
- * Creates a safe DOM element with escaped content
- * @param {string} tag - HTML tag name
- * @param {Object} attributes - Element attributes
- * @param {string} textContent - Element text content
- * @return {HTMLElement} The created element
- */
 function createSafeElement(tag, attributes = {}, textContent = "") {
 	const element = document.createElement(tag);
 
-	// Set attributes safely
 	for (const [key, value] of Object.entries(attributes)) {
-		if (key.startsWith("on")) continue; // Skip event handlers
+		if (key.startsWith("on")) continue; 
 		element.setAttribute(key, value);
 	}
 
-	// Set text content safely
 	if (textContent) {
 		element.textContent = textContent;
 	}
@@ -47,7 +31,6 @@ document.addEventListener("DOMContentLoaded", () => {
 		window.Modals.init();
 	}
 
-	// Tab switching logic
 	const tabButtons = document.querySelectorAll(".admin-tab-btn");
 	const tabContents = document.querySelectorAll(".admin-tab-content");
 	const tabMap = {
@@ -80,13 +63,11 @@ document.addEventListener("DOMContentLoaded", () => {
 				'<button id="open-category-modal" class="button filled hovering" type="button" style="margin-bottom:2em;">Add Category</button><div id="admin-categories-table"></div>';
 			renderCategoriesTab();
 		}
-		// Re-initialize modals after dynamic content
 		if (window.Modals && typeof window.Modals.init === "function") {
 			window.Modals.init();
 		}
 	}
 
-	// Initial load: show users tab
 	showTab("users");
 	fetchStats();
 
@@ -97,7 +78,6 @@ document.addEventListener("DOMContentLoaded", () => {
 		});
 	});
 
-	// Event delegation for all admin tables
 	document
 		.getElementById("admin-users")
 		.addEventListener("click", function (e) {
@@ -114,7 +94,6 @@ document.addEventListener("DOMContentLoaded", () => {
 			if (e.target.classList.contains("delete-service-admin-btn")) deleteService(e);
 		});
 
-	// Intercept category form submit for AJAX
 	document.body.addEventListener("submit", function (e) {
 		const form = e.target;
 		if (form && form.id === "category-form") {
@@ -127,7 +106,6 @@ document.addEventListener("DOMContentLoaded", () => {
 				.then((r) => r.json())
 				.then((result) => {
 					if (result.success) {
-						// Hide modal, refresh categories and stats
 						document
 							.getElementById("category-modal-overlay")
 							.classList.add("hidden");
@@ -211,10 +189,8 @@ function renderCategoriesTab() {
         </table>
     `;
 	fetchCategories();
-	// Re-attach event delegation for delete-category-btn after rendering
 	container.removeEventListener("click", handleCategoryTableClick, false);
 	container.addEventListener("click", handleCategoryTableClick, false);
-	// Re-initialize modals to ensure irreversible modal is ready
 	if (window.Modals && typeof window.Modals.init === "function") {
 		window.Modals.init();
 	}
@@ -231,20 +207,16 @@ function fetchUsers() {
 			const tbody = document.querySelector("#users-table tbody");
 			tbody.innerHTML = "";
 			users.forEach((user) => {
-				// Create row element
 				const tr = document.createElement("tr");
 
-				// Create and append cells with escaped content
 				const idCell = createSafeElement("td", {}, user.id);
 				const nameCell = createSafeElement("td", {}, user.name);
 				const usernameCell = createSafeElement("td", {}, user.username);
 				const emailCell = createSafeElement("td", {}, user.email);
 				const typeCell = createSafeElement("td", {}, user.user_type);
 
-				// Create actions cell
 				const actionsCell = document.createElement("td");
 
-				// Create promote button
 				const promoteBtn = createSafeElement(
 					"button",
 					{
@@ -255,7 +227,6 @@ function fetchUsers() {
 					"Promote"
 				);
 
-				// Create ban button
 				const banBtn = createSafeElement(
 					"button",
 					{
@@ -266,11 +237,9 @@ function fetchUsers() {
 					"Ban"
 				);
 
-				// Append buttons to actions cell
 				actionsCell.appendChild(promoteBtn);
 				actionsCell.appendChild(banBtn);
 
-				// Append all cells to row
 				tr.appendChild(idCell);
 				tr.appendChild(nameCell);
 				tr.appendChild(usernameCell);
@@ -278,7 +247,6 @@ function fetchUsers() {
 				tr.appendChild(typeCell);
 				tr.appendChild(actionsCell);
 
-				// Append row to table body
 				tbody.appendChild(tr);
 			});
 		});
@@ -291,16 +259,13 @@ function fetchServices() {
 			const tbody = document.querySelector("#services-table tbody");
 			tbody.innerHTML = "";
 			services.forEach((service) => {
-				// Create row element
 				const tr = document.createElement("tr");
 
-				// Create cells with escaped content
 				const idCell = createSafeElement("td", {}, service.id);
 				const titleCell = createSafeElement("td", {}, service.title);
 				const ownerCell = createSafeElement("td", {}, service.owner);
 				const categoryCell = createSafeElement("td", {}, service.category);
 
-				// Create actions cell with delete button
 				const actionsCell = document.createElement("td");
 				const deleteBtn = createSafeElement(
 					"button",
@@ -312,14 +277,12 @@ function fetchServices() {
 				);
 				actionsCell.appendChild(deleteBtn);
 
-				// Append all cells to row
 				tr.appendChild(idCell);
 				tr.appendChild(titleCell);
 				tr.appendChild(ownerCell);
 				tr.appendChild(categoryCell);
 				tr.appendChild(actionsCell);
 
-				// Append row to table body
 				tbody.appendChild(tr);
 			});
 		});
@@ -332,16 +295,12 @@ function fetchCategories() {
 			const tbody = document.querySelector("#categories-table tbody");
 			tbody.innerHTML = "";
 			categories.forEach((cat) => {
-				// Create row element
 				const tr = document.createElement("tr");
 
-				// Create cells with escaped content
 				const idCell = createSafeElement("td", {}, cat.id);
 				const typeCell = createSafeElement("td", {}, cat.type);
 
-				// Create image cell
 				const imageCell = document.createElement("td");
-				// Validate image URL before creating the element
 				const imageSrc =
 					cat.image && cat.image.startsWith("/")
 						? cat.image
@@ -353,7 +312,6 @@ function fetchCategories() {
 				});
 				imageCell.appendChild(img);
 
-				// Create actions cell with delete button
 				const actionsCell = document.createElement("td");
 				const deleteBtn = createSafeElement(
 					"button",
@@ -365,13 +323,11 @@ function fetchCategories() {
 				);
 				actionsCell.appendChild(deleteBtn);
 
-				// Append all cells to row
 				tr.appendChild(idCell);
 				tr.appendChild(typeCell);
 				tr.appendChild(imageCell);
 				tr.appendChild(actionsCell);
 
-				// Append row to table body
 				tbody.appendChild(tr);
 			});
 		});

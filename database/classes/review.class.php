@@ -18,9 +18,6 @@ class Review
     public ?string $profile_image = null;
     public ?int $exchange_id = null;
 
-    /**
-     * Constructor for Review
-     */
     public function __construct(
         int $id,
         int $user_id,
@@ -47,12 +44,6 @@ class Review
         $this->exchange_id = $exchange_id;
     }
 
-    /**
-     * Get a review by its ID
-     * 
-     * @param int $id Review ID
-     * @return Review|null Review object or null if not found
-     */
     public static function getById(int $id): ?Review
     {
         $db = Database::getInstance();
@@ -81,12 +72,7 @@ class Review
         return null;
     }
 
-    /**
-     * Get reviews for a service
-     * 
-     * @param int $serviceId Service ID
-     * @return array Array of Review objects
-     */
+
     public static function getReviewsByServiceId(int $serviceId): array
     {
         $db = Database::getInstance();
@@ -122,12 +108,6 @@ class Review
         return $result;
     }
 
-    /**
-     * Get reviews by a specific user
-     * 
-     * @param int $userId User ID
-     * @return array Array of Review objects
-     */
     public static function getReviewsByUserId(int $userId): array
     {
         $db = Database::getInstance();
@@ -160,13 +140,7 @@ class Review
         return $result;
     }
 
-    /**
-     * Check if a user has already reviewed a service
-     * 
-     * @param int $userId User ID
-     * @param int $serviceId Service ID
-     * @return bool True if user has reviewed the service
-     */
+
     public static function hasUserReviewedService(int $userId, int $serviceId): bool
     {
         $db = Database::getInstance();
@@ -175,13 +149,7 @@ class Review
         return (int)$stmt->fetchColumn() > 0;
     }
 
-    /**
-     * Get existing review by user and service
-     * 
-     * @param int $userId User ID
-     * @param int $serviceId Service ID
-     * @return Review|null Review object or null if not found
-     */
+
     public static function getUserReviewForService(int $userId, int $serviceId): ?Review
     {
         $db = Database::getInstance();
@@ -207,16 +175,6 @@ class Review
         return null;
     }
 
-    /**
-     * Create a new review
-     * 
-     * @param int $userId User ID
-     * @param int $serviceId Service ID
-     * @param float $rating Rating value (0.5 to 5)
-     * @param string $comment Review text content
-     * @param int $exchangeId Exchange (order) ID
-     * @return Review|null The created review or null if creation failed
-     */
     public static function createReview(
         int $userId,
         int $serviceId,
@@ -254,14 +212,7 @@ class Review
         }
     }
 
-    /**
-     * Update an existing review
-     * 
-     * @param int $reviewId Review ID
-     * @param float $rating New rating value
-     * @param string $comment New review text content
-     * @return bool True if update was successful
-     */
+
     public static function updateReview(
         int $reviewId,
         float $rating,
@@ -283,12 +234,6 @@ class Review
         }
     }
 
-    /**
-     * Delete a review by its ID
-     * 
-     * @param int $reviewId Review ID
-     * @return bool True if deletion was successful
-     */
     public static function deleteReview(int $reviewId): bool
     {
         $db = Database::getInstance();
@@ -302,12 +247,7 @@ class Review
         }
     }
 
-    /**
-     * Get reviews for multiple services
-     * 
-     * @param array $serviceIds Array of service IDs
-     * @return array Array containing reviews and rating information
-     */
+
     public static function getReviewsByServiceIds(array $serviceIds): array
     {
         if (empty($serviceIds)) {
@@ -353,7 +293,6 @@ class Review
             );
         }
 
-        // Calculate average rating
         $averageRating = $reviewCount > 0 ? round($totalRating / $reviewCount, 1) : 0;
 
         return [
@@ -363,12 +302,7 @@ class Review
         ];
     }
 
-    /**
-     * Calculate average rating from an array of reviews
-     * 
-     * @param array $reviews Array of Review objects
-     * @return float Average rating rounded to 1 decimal place
-     */
+
     public static function calculateAverageRating(array $reviews): float
     {
         if (empty($reviews)) {
@@ -385,11 +319,7 @@ class Review
         return round($totalRating / $reviewCount, 1);
     }
 
-    /**
-     * Convert to associative array for JSON output or template usage
-     * 
-     * @return array Associative array of review properties
-     */
+
     public function toArray(): array
     {
         return [

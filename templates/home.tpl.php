@@ -110,10 +110,8 @@ function drawHeader($user, $currentPage = '')
                         <?php
                         $categories = Category::getCategories();
                         $db = Database::getInstance();
-                        // Only show the first 6 categories on the main page
                         $displayedCategories = array_slice($categories, 0, 6);
                         foreach ($displayedCategories as $index => $category):
-                            // Fetch subcategories
                             $stmt = $db->prepare('SELECT name FROM Subcategory WHERE category_id = ?');
                             $stmt->execute([$category['id']]);
                             $subcategories = $stmt->fetchAll(PDO::FETCH_COLUMN);
@@ -196,38 +194,31 @@ function drawHeader($user, $currentPage = '')
             <?php include __DIR__ . '/../pages/modals/sign-in-modal.php'; ?>
         <?php endif; ?>
 
-        <?php // Always include the go-with-flow modal regardless of login state 
+        <?php 
         ?>
         <?php include __DIR__ . '/../pages/modals/go-with-flow-modal.php'; ?>
 
         <?php include __DIR__ . '/../pages/modals/new-service-modal.php'; ?>
 
-        <!-- Load the modular JavaScript files -->
         <script src="/js/modal/modals.js"></script>
         <script src="/js/services/categories.js"></script>
         <script src="/js/others/app.js"></script>
-        <!-- Keep script.js for backward compatibility -->
         <script src="/js/others/script.js"></script>
         <script src="/js/services/search.js"></script>
-        <!-- Go with flow modal helper -->
         <script src="/js/others/go-flow-helper.js"></script>
         
-        <!-- Check for and display session errors -->
         <?php if (isset($_SESSION['signup_error'])): ?>
         <script>
             document.addEventListener('DOMContentLoaded', function() {
-                // Show modal first
                 const signUpModal = document.getElementById('signup-modal-overlay');
                 if (signUpModal) {
                     signUpModal.classList.remove('hidden');
                 }
                 
-                // Display the error using the same function as client-side validation
                 if (typeof window.showModalError === 'function') {
                     window.showModalError('signup-modal-overlay', '<?= addslashes(htmlspecialchars($_SESSION['signup_error'])) ?>');
                 }
                 
-                // Clear the error after displaying it
                 <?php unset($_SESSION['signup_error']); ?>
             });
         </script>

@@ -2,17 +2,8 @@
 
 declare(strict_types=1);
 
-/**
- * Security Helper Class
- * Contains methods for sanitizing input/output and other security-related functions
- */
 class Security
 {
-    /**
-     * Sanitize output to prevent XSS
-     * @param mixed $data Data to be sanitized
-     * @return mixed Sanitized data
-     */
     public static function sanitizeOutput($data)
     {
         if (is_array($data)) {
@@ -24,17 +15,12 @@ class Security
         return htmlspecialchars((string)$data, ENT_QUOTES, 'UTF-8');
     }
 
-    /**
-     * Sanitize input data
-     * @param mixed $data Data to be sanitized
-     * @return mixed Sanitized data
-     */
+    
     public static function sanitizeInput($data)
     {
         if (is_array($data)) {
             $sanitized = [];
             foreach ($data as $key => $value) {
-                // Sanitize the key as well
                 $cleanKey = self::sanitizeInput($key);
                 $sanitized[$cleanKey] = self::sanitizeInput($value);
             }
@@ -42,9 +28,7 @@ class Security
         }
 
         if (is_string($data)) {
-            // Remove potentially dangerous characters
             $data = trim($data);
-            // Filter out any script tags and dangerous attributes
             $data = filter_var($data, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             return $data;
         }
@@ -52,13 +36,6 @@ class Security
         return $data;
     }
 
-    /**
-     * Escape data for safe use in JavaScript
-     * Use this when outputting data directly into JavaScript code
-     * 
-     * @param mixed $data Data to be escaped for JavaScript
-     * @return string JavaScript-safe string
-     */
     public static function escapeForJS($data): string
     {
         if (is_array($data)) {
@@ -77,7 +54,6 @@ class Security
             return (string)$data;
         }
 
-        // For strings, escape all potentially dangerous characters
         $output = (string)$data;
         $output = str_replace('\\', '\\\\', $output); // Escape backslashes
         $output = str_replace('"', '\\"', $output);  // Escape double quotes
@@ -92,69 +68,34 @@ class Security
         return $output;
     }
 
-    /**
-     * Safely prepare an array for JavaScript use
-     * Useful for passing PHP arrays to JavaScript
-     * 
-     * @param array $data Array to be prepared for JavaScript
-     * @return string JavaScript-safe JSON string
-     */
     public static function jsonEncodeForHTML(array $data): string
     {
         return htmlspecialchars(json_encode($data) ?: '{}', ENT_QUOTES, 'UTF-8');
     }
 
-    /**
-     * Validate if input is a valid email
-     * @param string $email Email to validate
-     * @return bool True if valid, false otherwise
-     */
+   
     public static function validateEmail(string $email): bool
     {
         return filter_var($email, FILTER_VALIDATE_EMAIL) !== false;
     }
 
-    /**
-     * Validate if input is a valid integer
-     * @param mixed $input Input to validate
-     * @return bool True if valid integer, false otherwise
-     */
     public static function validateInteger($input): bool
     {
         return filter_var($input, FILTER_VALIDATE_INT) !== false;
     }
 
-    /**
-     * Validate if input is a valid float
-     * @param mixed $input Input to validate  
-     * @return bool True if valid float, false otherwise
-     */
     public static function validateFloat($input): bool
     {
         return filter_var($input, FILTER_VALIDATE_FLOAT) !== false;
     }
 
-    /**
-     * Validate if input is a valid URL
-     * @param string $url URL to validate
-     * @return bool True if valid, false otherwise
-     */
     public static function validateUrl(string $url): bool
     {
         return filter_var($url, FILTER_VALIDATE_URL) !== false;
     }
 
-    /**
-     * Validate uploaded file is an image with allowed extensions
-     * 
-     * @param array $file The $_FILES array element for the uploaded file
-     * @param array $allowedTypes Array of allowed mime types
-     * @param int $maxSize Maximum file size in bytes (default 2MB)
-     * @return array Array with 'valid' boolean and 'error' message if invalid
-     */
     public static function validateImageUpload(array $file, array $allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'], int $maxSize = 2097152): array
     {
-        // Check if file exists and has no errors
         if (!isset($file) || $file['error'] !== UPLOAD_ERR_OK) {
             return [
                 'valid' => false,
@@ -162,7 +103,6 @@ class Security
             ];
         }
 
-        // Check file size
         if ($file['size'] > $maxSize) {
             return [
                 'valid' => false,
@@ -170,7 +110,6 @@ class Security
             ];
         }
 
-        // Check file type by MIME
         $finfo = new finfo(FILEINFO_MIME_TYPE);
         $mimeType = $finfo->file($file['tmp_name']);
 
@@ -183,7 +122,6 @@ class Security
             ];
         }
 
-        // Validate image dimensions and integrity
         $imageInfo = getimagesize($file['tmp_name']);
         if ($imageInfo === false) {
             return [
@@ -192,7 +130,6 @@ class Security
             ];
         }
 
-        // If we've made it this far, validation is successful
         return [
             'valid' => true,
             'error' => null,
@@ -204,12 +141,6 @@ class Security
         ];
     }
 
-    /**
-     * Get user-friendly upload error message
-     * 
-     * @param int $errorCode PHP upload error code
-     * @return string Human-readable error message
-     */
     private static function getUploadErrorMessage(int $errorCode): string
     {
         switch ($errorCode) {
@@ -232,13 +163,7 @@ class Security
         }
     }
 
-    /**
-     * Format bytes to human-readable string
-     * 
-     * @param int $bytes Number of bytes
-     * @param int $precision Precision of decimal places
-     * @return string Formatted size string
-     */
+    
     private static function formatBytes(int $bytes, int $precision = 2): string
     {
         $units = ['B', 'KB', 'MB', 'GB', 'TB'];

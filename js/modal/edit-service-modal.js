@@ -1,5 +1,3 @@
-// Handles the Edit Service modal logic: open, pre-fill, and submit
-
 document.addEventListener('DOMContentLoaded', function () {
     const editBtn = document.getElementById('edit-service-btn');
     const modalOverlay = document.getElementById('edit-service-modal-overlay');
@@ -8,10 +6,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const cancelBtn = document.getElementById('cancel-edit-service');
     const form = document.getElementById('editServiceForm');
 
-    // Open modal
     if (editBtn && modalOverlay) {
         editBtn.addEventListener('click', function () {
-            // Get current service data from data attributes or DOM
             const serviceId = editBtn.getAttribute('data-service-id');
             const title = editBtn.getAttribute('data-title');
             const description = editBtn.getAttribute('data-description');
@@ -27,9 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('edit-service-price').value = price;
             document.getElementById('edit-service-delivery').value = delivery;
 
-            // Set up subcategory state for overlay logic
             currentCategoryId = category;
-            // Parse subcategories as array of strings
             let subcatArr = [];
             if (subcategories) {
                 if (Array.isArray(subcategories)) {
@@ -42,7 +36,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
             selectedSubcatValues = subcatArr;
 
-            // Show summary
             if (subcategorySection) {
                 if (selectedSubcatValues.length > 0 && currentCategoryId && editSubcategoriesByCategory[currentCategoryId]) {
                     const summary = document.createElement('div');
@@ -54,9 +47,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     subcategorySection.innerHTML = '';
                 }
             }
-            // Remove old hidden inputs
             Array.from(form.querySelectorAll('input[type="hidden"][name="subcategories[]"]')).forEach(el => el.remove());
-            // Add new hidden inputs
             selectedSubcatValues.forEach(val => {
                 const hidden = document.createElement('input');
                 hidden.type = 'hidden';
@@ -66,13 +57,11 @@ document.addEventListener('DOMContentLoaded', function () {
             });
             updateSubcatBtnVisibility();
 
-            // Show modal (fix: always remove 'hidden' from overlay, not modal)
             modalOverlay.classList.remove('hidden');
             document.body.classList.add('modal-open');
         });
     }
 
-    // Cancel button closes modal
     if (cancelBtn && modalOverlay) {
         cancelBtn.addEventListener('click', function () {
             modalOverlay.classList.add('hidden');
@@ -80,7 +69,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Close (X) button closes modal
     if (closeBtn && modalOverlay) {
         closeBtn.addEventListener('click', function () {
             modalOverlay.classList.add('hidden');
@@ -88,7 +76,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Clicking outside modal closes it
     if (modalOverlay && modal) {
         modalOverlay.addEventListener('click', function (e) {
             if (e.target === modalOverlay) {
@@ -96,13 +83,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.body.classList.remove('modal-open');
             }
         });
-        // Prevent closing when clicking inside modal
         modal.addEventListener('click', function (e) {
             e.stopPropagation();
         });
     }
 
-    // (Optional) Reset form on close
     function resetForm() {
         if (form) form.reset();
         const preview = document.getElementById('edit-service-image-preview');
@@ -117,13 +102,9 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Submit form
     form.addEventListener('submit', function (e) {
-        // Allow default form submission (POST to PHP)
-        // Optionally, you can show a loading spinner or disable the button here
     });
 
-    // --- Subcategory selection logic (like new service modal) ---
     const openSubcatBtn = document.getElementById('edit-open-subcategory-overlay');
     const categorySelect = document.getElementById('edit-service-category');
     const subcategorySection = document.getElementById('edit-subcategory-section');
@@ -135,7 +116,6 @@ document.addEventListener('DOMContentLoaded', function () {
     let selectedSubcatValues = [];
     let currentCategoryId = null;
 
-    // Show/hide subcategory button based on category
     function updateSubcatBtnVisibility() {
         const catId = categorySelect.value;
         currentCategoryId = catId;
@@ -145,7 +125,6 @@ document.addEventListener('DOMContentLoaded', function () {
             openSubcatBtn.style.display = 'none';
             subcategorySection.innerHTML = '';
             selectedSubcatValues = [];
-            // Remove hidden inputs
             Array.from(form.querySelectorAll('input[type="hidden"][name="subcategories[]"]')).forEach(el => el.remove());
         }
     }
@@ -155,7 +134,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Open subcategory overlay
     if (openSubcatBtn && subcategoryOverlay && subcategoryCheckboxesDiv) {
         openSubcatBtn.addEventListener('click', function () {
             if (!currentCategoryId || !editSubcategoriesByCategory[currentCategoryId]) return;
@@ -185,13 +163,11 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Handle subcategory form submit (confirm selection)
     if (subcategoryForm) {
         subcategoryForm.addEventListener('submit', function (e) {
             e.preventDefault();
             const checked = Array.from(subcategoryCheckboxesDiv.querySelectorAll('input[type="checkbox"]:checked'));
             selectedSubcatValues = checked.map(cb => cb.value);
-            // Show summary
             if (subcategorySection) {
                 if (selectedSubcatValues.length > 0) {
                     const summary = document.createElement('div');
@@ -206,9 +182,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     subcategorySection.innerHTML = '';
                 }
             }
-            // Remove old hidden inputs
             Array.from(form.querySelectorAll('input[type="hidden"][name="subcategories[]"]')).forEach(el => el.remove());
-            // Add new hidden inputs
             selectedSubcatValues.forEach(val => {
                 const hidden = document.createElement('input');
                 hidden.type = 'hidden';
@@ -219,7 +193,6 @@ document.addEventListener('DOMContentLoaded', function () {
             if (subcategoryOverlay) subcategoryOverlay.classList.add('hidden');
         });
     }
-    // Close/cancel subcategory overlay
     closeSubcategoryBtns.forEach(btn => {
         btn.addEventListener('click', function (e) {
             e.preventDefault();
@@ -227,10 +200,8 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // When opening the edit modal, prefill subcategories
     if (editBtn && modalOverlay) {
         editBtn.addEventListener('click', function () {
-            // Get subcategories (single or multiple, as array of strings)
             let subcategories = editBtn.getAttribute('data-subcategories');
             if (!subcategories) subcategories = editBtn.getAttribute('data-subcategory');
             if (subcategories) {
@@ -244,7 +215,6 @@ document.addEventListener('DOMContentLoaded', function () {
             } else {
                 selectedSubcatValues = [];
             }
-            // Show summary
             if (subcategorySection) {
                 if (selectedSubcatValues.length > 0 && currentCategoryId && editSubcategoriesByCategory[currentCategoryId]) {
                     const summary = document.createElement('div');
@@ -256,9 +226,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     subcategorySection.innerHTML = '';
                 }
             }
-            // Remove old hidden inputs
             Array.from(form.querySelectorAll('input[type="hidden"][name="subcategories[]"]')).forEach(el => el.remove());
-            // Add new hidden inputs
             selectedSubcatValues.forEach(val => {
                 const hidden = document.createElement('input');
                 hidden.type = 'hidden';
