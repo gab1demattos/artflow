@@ -64,8 +64,8 @@ INSERT INTO Subcategory (category_id, name)
 VALUES (4, '3D Modeling'),
     (4, 'Character Animation'),
     (4, 'Motion Graphics'),
-    (4, '3D Product Rendering'),
-    (4, 'Architectural Visualization'),
+    (4, '3D Product Render'),
+    (4, 'Architecture'),
     (4, 'Game Asset Creation'),
     (4, 'VFX & Simulation'),
     (4, 'AR/VR Content');
@@ -78,8 +78,8 @@ VALUES (5, 'Pottery & Ceramics'),
     (5, 'Paper Crafts'),
     (5, 'Wood Carving'),
     (5, 'Sculpture'),
-    (5, 'Macramé & Fiber Arts'),
-    (5, 'Candle & Soap Making');
+    (5, 'Macramé'),
+    (5, 'Candle Making');
 
 -- Body Art Design & Tattoo subcategories
 INSERT INTO Subcategory (category_id, name)

@@ -22,7 +22,7 @@ function drawHeader($user, $currentPage = '')
                 <ul id="buttons">
                     <li><a href="/pages/services/search.php" id="search-icon-link"><img src="/images/logos/search2.svg" alt="Search" id="search-icon"></a></li>
                     <?php if (!$user): ?>
-                        <li><button class="button filled hovering">Sign Up</button></li>
+                        <li><button class="button filled hovering" id="header-sign-up">Sign Up</button></li>
                     <?php else: ?>
                         <li><button id="sidebar-open" onclick="openSidebar()" aria-label="Open Sidebar">☰</button></li>
                     <?php endif; ?>

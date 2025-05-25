@@ -11,7 +11,8 @@ $user = $session->getUser() ?? null;
 $db = Database::getInstance();
 
 drawHeader($user, 'search.php');
-drawSearchPage($db); ?>
+drawSearchPage($db);
+drawFooter($user); ?>
 <link rel="stylesheet" href="../../css/main.css">
 <script src="/js/services/rate-it.js"></script>
 <script src="/js/modal/modals.js"></script>

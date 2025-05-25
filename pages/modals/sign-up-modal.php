@@ -30,7 +30,7 @@
                 </form>
             </div>
             <div class="modal-right">
-                <img src="../../images/modals/sign_up/sign-up-image.png" alt="Illustration">
+                <img src="/images/modals/sign_up/sign-up-image.png" alt="Illustration">
             </div>
         </div>
     </div>

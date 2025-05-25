@@ -64,13 +64,14 @@ const Modals = {
 		});
 	},
 	setupSignInSignUpToggling() {
-		const signupBtn = document.querySelector("#buttons li button");
-		if (signupBtn && this.overlays.signUp) {
-			signupBtn.addEventListener("click", (e) => {
+		const headerSignUpBtn = document.querySelector("#header-sign-up");
+		if (headerSignUpBtn && this.overlays.signUp) {
+			headerSignUpBtn.addEventListener("click", (e) => {
 				e.stopPropagation();
 				this.show("signUp");
 			});
 		}
+
 		const signInButtons = document.querySelectorAll("#sign-in");
 		if (this.overlays.signIn) {
 			signInButtons.forEach((button) => {
@@ -80,6 +81,7 @@ const Modals = {
 				});
 			});
 		}
+
 		const signUpButtons = document.querySelectorAll("#sign-up");
 		if (this.overlays.signUp) {
 			signUpButtons.forEach((button) => {
