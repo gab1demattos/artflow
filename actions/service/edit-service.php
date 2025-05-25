@@ -1,6 +1,6 @@
 <?php
-require_once(__DIR__ . '/../database/database.php');
-require_once(__DIR__ . '/../database/session.php');
+require_once(__DIR__ . '/../../database/database.php');
+require_once(__DIR__ . '/../../database/session.php');
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
@@ -43,7 +43,7 @@ if (!$service || $service['user_id'] != $user['id']) {
 
 $images = $service['images'];
 if (!empty($_FILES['images']['name'][0])) {
-    $uploadDir = __DIR__ . '/../images/services/';
+    $uploadDir = __DIR__ . '/../../images/services/';
     $uploaded = [];
     foreach ($_FILES['images']['tmp_name'] as $idx => $tmpName) {
         if ($_FILES['images']['error'][$idx] === UPLOAD_ERR_OK) {
