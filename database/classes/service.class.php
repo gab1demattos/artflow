@@ -153,6 +153,70 @@ class Service
     }
 
     /**
+     * Search services within specific categories with filters
+     * 
+     * @param PDO $db Database connection
+     * @param string $search Search term for service title
+     * @param array $categoryIds Array of category IDs to search within
+     * @param float|null $minPrice Minimum price filter
+     * @param float|null $maxPrice Maximum price filter
+     * @param int|null $maxDeliveryTime Maximum delivery time filter
+     * @param float $minRating Minimum rating filter
+     * @return array Array of Service objects
+     */
+    public static function searchServicesInCategories(PDO $db, string $search, array $categoryIds, ?float $minPrice = null, ?float $maxPrice = null, ?int $maxDeliveryTime = null, ?float $minRating = 0): array
+    {
+        if (empty($categoryIds)) {
+            return self::searchServices($db, $search, $minPrice, $maxPrice, $maxDeliveryTime, $minRating);
+        }
+
+        $placeholders = implode(',', array_fill(0, count($categoryIds), '?'));
+        $query = "SELECT Service.*, User.username 
+                FROM Service 
+                JOIN User ON Service.user_id = User.id
+                WHERE Service.title LIKE ? AND Service.category_id IN ($placeholders)";
+        $params = ['%' . $search . '%'];
+        $params = array_merge($params, $categoryIds);
+
+        if ($minPrice !== null) {
+            $query .= ' AND Service.price >= ?';
+            $params[] = $minPrice;
+        }
+        if ($maxPrice !== null) {
+            $query .= ' AND Service.price <= ?';
+            $params[] = $maxPrice;
+        }
+        if ($maxDeliveryTime !== null) {
+            $query .= ' AND Service.delivery_time <= ?';
+            $params[] = $maxDeliveryTime;
+        }
+        if ($minRating > 0) {
+            $query .= ' AND Service.avg_rating >= ?';
+            $params[] = $minRating;
+        }
+
+        $stmt = $db->prepare($query);
+        $stmt->execute($params);
+        $services = [];
+        while ($service = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $services[] = new Service(
+                (int)$service['id'],
+                (int)$service['user_id'],
+                $service['title'],
+                $service['description'],
+                (int)$service['category_id'],
+                (float)$service['price'],
+                (int)$service['delivery_time'],
+                $service['images'],
+                $service['videos'],
+                $service['username'],
+                (float)$service['avg_rating']
+            );
+        }
+        return $services;
+    }
+
+    /**
      * Get services by multiple category IDs with proper rating filtering
      * 
      * @param PDO $db Database connection

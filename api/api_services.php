@@ -17,17 +17,28 @@ $minPrice = isset($_GET['min_price']) ? (float)$_GET['min_price'] : null;
 $maxPrice = isset($_GET['max_price']) ? (float)$_GET['max_price'] : null;
 $maxDeliveryTime = isset($_GET['max_delivery_time']) ? (int)$_GET['max_delivery_time'] : null;
 $minRating = isset($_GET['min_rating']) ? (float)$_GET['min_rating'] : 0;
+$search = $_GET['search'] ?? '';
 
 // Debug logging
-error_log("API called with params: categories=" . implode(',', $categories) . ", minPrice=$minPrice, maxPrice=$maxPrice, maxDeliveryTime=$maxDeliveryTime, minRating=$minRating");
+error_log("API called with params: search='$search', categories=" . implode(',', $categories) . ", minPrice=$minPrice, maxPrice=$maxPrice, maxDeliveryTime=$maxDeliveryTime, minRating=$minRating");
 
-if (!empty($categories)) {
-    $services = Service::getServicesByCategories($db, $categories, $minPrice, $maxPrice, $maxDeliveryTime, $minRating);
+// Handle different combinations of search and category filtering
+if (!empty($search)) {
+    // If there's a search term, we need to handle it differently based on categories
+    if (!empty($categories)) {
+        // Search within specific categories with filters
+        $services = Service::searchServicesInCategories($db, $search, $categories, $minPrice, $maxPrice, $maxDeliveryTime, $minRating);
+    } else {
+        // Search across all services with filters
+        $services = Service::searchServices($db, $search, $minPrice, $maxPrice, $maxDeliveryTime, $minRating);
+    }
 } else {
-    $search = $_GET['search'] ?? '';
-    $services = empty($search)
-        ? Service::getAllServices($minPrice, $maxPrice, $maxDeliveryTime, $minRating)
-        : Service::searchServices($db, $search, $minPrice, $maxPrice, $maxDeliveryTime, $minRating);
+    // No search term - just apply category and other filters
+    if (!empty($categories)) {
+        $services = Service::getServicesByCategories($db, $categories, $minPrice, $maxPrice, $maxDeliveryTime, $minRating);
+    } else {
+        $services = Service::getAllServices($minPrice, $maxPrice, $maxDeliveryTime, $minRating);
+    }
 }
 
 error_log("API returning " . count($services) . " services after filtering");
