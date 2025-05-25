@@ -261,11 +261,34 @@ const Modals = {
 			}
 		}, 500);
 
-		// Handle Go Flow modal arrow button click to reload page
+		// Handle Go Flow modal arrow button click with animation
 		const goFlowArrowButton = document.getElementById("go-arrow");
-		if (goFlowArrowButton && this.overlays.goFlow) {
-			goFlowArrowButton.addEventListener("click", function () {
-				window.location.reload();
+		const goFlowModal = document.getElementById("goflow-modal");
+		if (goFlowArrowButton && this.overlays.goFlow && goFlowModal) {
+			goFlowArrowButton.addEventListener("click", () => {
+				// Animate arrow button
+				goFlowArrowButton.classList.add("arrow-clicked");
+
+				// Animate modal content
+				const modalContent = document.querySelector(
+					"#goflow-modal .modal-content"
+				);
+				if (modalContent) {
+					modalContent.classList.add("content-fading");
+				}
+
+				// Animate entire modal
+				goFlowModal.classList.add("modal-closing");
+
+				// Hide modal after animation completes
+				setTimeout(() => {
+					this.overlays.goFlow.classList.add("hidden");
+					goFlowModal.classList.remove("modal-closing");
+					if (modalContent) {
+						modalContent.classList.remove("content-fading");
+					}
+					goFlowArrowButton.classList.remove("arrow-clicked");
+				}, 500); // Match this timeout to the animation duration in CSS
 			});
 		}
 	},

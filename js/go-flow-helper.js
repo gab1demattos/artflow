@@ -39,13 +39,8 @@ document.addEventListener("DOMContentLoaded", function () {
 				history.replaceState({}, document.title, url);
 			}, 300);
 
-			// Handle the arrow button click
-			const goArrow = document.getElementById("go-arrow");
-			if (goArrow) {
-				goArrow.addEventListener("click", function () {
-					goFlowModal.classList.add("hidden");
-				});
-			}
+			// Note: Arrow button click handling is now managed in modals.js
+			// This prevents duplicate event listeners and ensures consistent behavior
 		} else {
 			console.error("Go with flow modal element not found");
 		}

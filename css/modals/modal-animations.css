@@ -1,0 +1,52 @@
+/* Modal Animations */
+
+/* Fade out transition for the go with flow modal */
+@keyframes modalFadeOut {
+	0% {
+		opacity: 1;
+		transform: scale(1);
+	}
+	100% {
+		opacity: 0;
+		transform: scale(0.8);
+	}
+}
+
+/* Special animation for the Go With Flow modal close */
+.modal-closing {
+	animation: modalFadeOut 0.5s ease-in-out forwards;
+	pointer-events: none;
+}
+
+/* Arrow button animation */
+@keyframes arrowClick {
+	0% {
+		transform: scale(1);
+	}
+	50% {
+		transform: scale(1.2) rotate(90deg);
+	}
+	100% {
+		transform: scale(1) rotate(180deg);
+	}
+}
+
+.arrow-clicked {
+	animation: arrowClick 0.5s ease-in-out;
+}
+
+/* Content fade out animation */
+@keyframes contentFadeOut {
+	0% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+	100% {
+		opacity: 0;
+		transform: translateY(-20px);
+	}
+}
+
+.content-fading {
+	animation: contentFadeOut 0.4s ease-in-out forwards;
+}
