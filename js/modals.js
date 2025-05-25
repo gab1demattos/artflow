@@ -402,10 +402,43 @@ window.showGoFlowModal = function () {
 const signupForm = document.querySelector("#signup-modal-overlay form");
 if (signupForm) {
 	signupForm.addEventListener("submit", function (e) {
+		const username = signupForm.querySelector('input[name="username"]').value;
+		const email = signupForm.querySelector('input[name="email"]').value;
 		const password = signupForm.querySelector('input[name="password"]').value;
 		const confirm = signupForm.querySelector(
 			'input[name="confirm_password"]'
 		).value;
+
+		// Username validation
+		if (username.length < 3) {
+			e.preventDefault();
+			showModalError(
+				"signup-modal-overlay",
+				"Username must be at least 3 characters."
+			);
+			return;
+		}
+
+		if (!/^[A-Za-z0-9_]+$/.test(username)) {
+			e.preventDefault();
+			showModalError(
+				"signup-modal-overlay",
+				"Username can only contain letters, numbers, or underscores (_)."
+			);
+			return;
+		}
+
+		// Email validation
+		if (!/^\S+@\S+\.\S+$/.test(email)) {
+			e.preventDefault();
+			showModalError(
+				"signup-modal-overlay",
+				"Please enter a valid email address."
+			);
+			return;
+		}
+
+		// Password validation
 		if (password.length < 8) {
 			e.preventDefault();
 			showModalError(
@@ -414,6 +447,43 @@ if (signupForm) {
 			);
 			return;
 		}
+
+		if (!/[0-9]/.test(password)) {
+			e.preventDefault();
+			showModalError(
+				"signup-modal-overlay",
+				"Password must contain at least one number."
+			);
+			return;
+		}
+
+		if (!/[A-Z]/.test(password)) {
+			e.preventDefault();
+			showModalError(
+				"signup-modal-overlay",
+				"Password must contain at least one uppercase letter."
+			);
+			return;
+		}
+
+		if (!/[a-z]/.test(password)) {
+			e.preventDefault();
+			showModalError(
+				"signup-modal-overlay",
+				"Password must contain at least one lowercase letter."
+			);
+			return;
+		}
+
+		if (!/[.\?\$#@!&%]/.test(password)) {
+			e.preventDefault();
+			showModalError(
+				"signup-modal-overlay",
+				"Password must contain at least one special character (.?$#@!&%)."
+			);
+			return;
+		}
+
 		if (password !== confirm) {
 			e.preventDefault();
 			showModalError(

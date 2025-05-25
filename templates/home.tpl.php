@@ -218,6 +218,27 @@ function drawHeader($user, $currentPage = '')
         <script src="/js/search.js"></script>
         <!-- Go with flow modal helper -->
         <script src="/js/go-flow-helper.js"></script>
+        
+        <!-- Check for and display session errors -->
+        <?php if (isset($_SESSION['signup_error'])): ?>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Show modal first
+                const signUpModal = document.getElementById('signup-modal-overlay');
+                if (signUpModal) {
+                    signUpModal.classList.remove('hidden');
+                }
+                
+                // Display the error using the same function as client-side validation
+                if (typeof window.showModalError === 'function') {
+                    window.showModalError('signup-modal-overlay', '<?= addslashes(htmlspecialchars($_SESSION['signup_error'])) ?>');
+                }
+                
+                // Clear the error after displaying it
+                <?php unset($_SESSION['signup_error']); ?>
+            });
+        </script>
+        <?php endif; ?>
     </body>
 
     </html>
