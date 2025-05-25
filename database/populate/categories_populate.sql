@@ -90,4 +90,4 @@ VALUES (6, 'Tattoo Design'),
     (6, 'Flash Art'),
     (6, 'Custom Tattoo'),
     (6, 'Cover-up Design'),
-    (6, 'Blackwork & Dotwork');
+    (6, 'Dotwork');
