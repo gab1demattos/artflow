@@ -1,4 +1,3 @@
-<!-- Requirements Modal -->
 <div id="requirements-modal-overlay" class="modal-overlay hidden">
         <div class="modal">
             <div class="modal-content">

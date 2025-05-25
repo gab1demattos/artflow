@@ -1,10 +1,3 @@
-/* ======================================= */
-/* BASE MOBILE STYLES (applied by default) */
-/* ======================================= */
-
-/* Mobile-first approach: These are the base styles */
-
-/* Mobile-specific adjustments */
 @media screen and (max-width: 767px) {
 
     html,
@@ -33,7 +26,6 @@
         width: 100vw;
         max-width: 100vw;
         margin: 2.5em 0 0.5em 0;
-        /* Increased top margin to avoid overlap with top bar */
         padding: 0 0.5em;
         text-shadow: none;
         background: none;
@@ -110,28 +102,13 @@
   
     
 
-    /* Fix service card size on mobile
-    .service-card {
-        width: 270px !important;
-        min-width: 0 !important;
-        max-width: 270px !important;
-        margin-left: auto;
-        margin-right: auto;
-        box-sizing: border-box;
-    } */
 
     @media screen and (max-width: 320px) {}
 }
 
-/* =================== */
-/*    TABLET STYLES    */
-/* =================== */
-
 @media screen and (min-width: 768px) and (max-width: 1199px) {}
 
-/* ================================== */
-/*    DESKTOP STYLES (above 1200px)   */
-/* ================================== */
+
 
 @media screen and (max-width: 1350px) {
 
@@ -163,6 +140,5 @@
         white-space: nowrap;
     }
 
-    /* For ultra-wide screens, adjust proportions */
     @media screen and (min-width: 2400px) {}
 }

@@ -16,9 +16,7 @@ class Message
     public ?string $receiver_username = null;
     public ?string $sender_profile_image = null;
 
-    /**
-     * Constructor for Message
-     */
+  
     public function __construct(
         int $id,
         int $sender_id,
@@ -39,20 +37,11 @@ class Message
         $this->sender_profile_image = $sender_profile_image;
     }
 
-    /**
-     * Send a new message
-     * 
-     * @param int $sender_id Sender user ID
-     * @param int $receiver_id Receiver user ID
-     * @param string $message Message text
-     * @return Message|null The sent message or null if failed
-     */
     public static function sendMessage(int $sender_id, int $receiver_id, string $message): ?Message
     {
         $db = Database::getInstance();
 
         try {
-            // First check if the users exist
             $stmt = $db->prepare('SELECT COUNT(*) FROM User WHERE id IN (?, ?)');
             $stmt->execute([$sender_id, $receiver_id]);
             $count = (int)$stmt->fetchColumn();
@@ -62,14 +51,12 @@ class Message
                 return null;
             }
 
-            // Insert the message
             $stmt = $db->prepare('INSERT INTO Message (sender_id, receiver_id, message, timestamp) VALUES (?, ?, ?, datetime("now", "localtime"))');
             $success = $stmt->execute([$sender_id, $receiver_id, $message]);
 
             if ($success) {
                 $id = (int)$db->lastInsertId();
 
-                // Get timestamp of the inserted message
                 $stmt = $db->prepare('SELECT timestamp FROM Message WHERE id = ?');
                 $stmt->execute([$id]);
                 $result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -86,30 +73,16 @@ class Message
         }
     }
 
-    /**
-     * Get messages between two users
-     * 
-     * @param int $user1_id First user ID
-     * @param int $user2_id Second user ID
-     * @return array Array of Message objects
-     */
+
     public static function getMessagesBetweenUsers(int $user1_id, int $user2_id): array
     {
         $db = Database::getInstance();
 
-        // Direct SQL debug query to verify data exists
         try {
-            // First log the parameters
-            // file_put_contents(__DIR__ . '/../../debug-message-query.log', "Fetching messages between users $user1_id and $user2_id\n", FILE_APPEND);
-
-            // First check if messages exist with direct SQL query
             $testQuery = "SELECT COUNT(*) FROM Message WHERE (sender_id = $user1_id AND receiver_id = $user2_id) OR (sender_id = $user2_id AND receiver_id = $user1_id)";
             $result = $db->query($testQuery);
             $count = $result->fetchColumn();
 
-            // file_put_contents(__DIR__ . '/../../debug-message-query.log', "Found $count messages in database\n", FILE_APPEND);
-
-            // Continue with regular query
             $stmt = $db->prepare('
                 SELECT m.*, 
                     sender.username as sender_username, 
@@ -124,12 +97,8 @@ class Message
             $stmt->execute([$user1_id, $user2_id, $user2_id, $user1_id]);
             $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            // file_put_contents(__DIR__ . '/../../debug-message-query.log', "Fetched " . count($messages) . " messages with JOIN query\n", FILE_APPEND);
 
             if (empty($messages)) {
-                // file_put_contents(__DIR__ . '/../../debug-message-query.log', "No messages found in JOIN query, trying basic query\n", FILE_APPEND);
-
-                // If no results, try a simpler query without JOINs to see if it's a JOIN issue
                 $stmt = $db->prepare('
                     SELECT * FROM Message 
                     WHERE (sender_id = ? AND receiver_id = ?) OR (sender_id = ? AND receiver_id = ?)
@@ -138,13 +107,8 @@ class Message
                 $stmt->execute([$user1_id, $user2_id, $user2_id, $user1_id]);
                 $basicMessages = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-                // file_put_contents(__DIR__ . '/../../debug-message-query.log', "Basic query found " . count($basicMessages) . " messages\n", FILE_APPEND);
 
                 if (!empty($basicMessages)) {
-                    // We found messages with basic query but not with JOIN
-                    // file_put_contents(__DIR__ . '/../../debug-message-query.log', "Issue with JOIN query detected\n", FILE_APPEND);
-
-                    // Get user data separately
                     $userStmt = $db->prepare('SELECT id, username, profile_image FROM User WHERE id IN (?, ?)');
                     $userStmt->execute([$user1_id, $user2_id]);
                     $users = $userStmt->fetchAll(PDO::FETCH_ASSOC);
@@ -154,7 +118,6 @@ class Message
                         $userMap[$user['id']] = $user;
                     }
 
-                    // Manually build message objects
                     $result = [];
                     foreach ($basicMessages as $message) {
                         $sender = isset($userMap[$message['sender_id']]) ? $userMap[$message['sender_id']] : ['username' => 'Unknown', 'profile_image' => null];
@@ -173,7 +136,6 @@ class Message
                         $result[] = $messageObj;
                     }
 
-                    // file_put_contents(__DIR__ . '/../../debug-message-query.log', "Returning " . count($result) . " messages from basic query\n", FILE_APPEND);
                     return $result;
                 }
             }
@@ -193,27 +155,18 @@ class Message
                 $result[] = $messageObj;
             }
 
-            // file_put_contents(__DIR__ . '/../../debug-message-query.log', "Returning " . count($result) . " message objects\n", FILE_APPEND);
             return $result;
         } catch (PDOException $e) {
-            // Log error
-            // file_put_contents(__DIR__ . '/../../debug-message-query.log', "Database error: " . $e->getMessage() . "\n", FILE_APPEND);
             return [];
         }
     }
 
-    /**
-     * Get conversations for a user
-     * 
-     * @param int $user_id User ID
-     * @return array Array of conversation summaries
-     */
+
     public static function getConversationsForUser(int $user_id): array
     {
         $db = Database::getInstance();
 
         try {
-            // First get distinct users this user has conversed with
             $stmt = $db->prepare('
                 SELECT DISTINCT
                     CASE 
@@ -228,18 +181,15 @@ class Message
 
             $conversations = [];
 
-            // For each user, get the latest message
             foreach ($otherUsers as $otherUserId) {
-                // Get user information first
                 $userStmt = $db->prepare('SELECT username, profile_image FROM User WHERE id = ?');
                 $userStmt->execute([$otherUserId]);
                 $otherUser = $userStmt->fetch(PDO::FETCH_ASSOC);
 
                 if (!$otherUser) {
-                    continue; // Skip if user doesn't exist
+                    continue; 
                 }
 
-                // Now get the latest message
                 $msgStmt = $db->prepare('
                     SELECT 
                         m.id, m.sender_id, m.receiver_id, m.message, m.timestamp
@@ -252,7 +202,6 @@ class Message
                 $lastMessage = $msgStmt->fetch(PDO::FETCH_ASSOC);
 
                 if ($lastMessage) {
-                    // Add user information to the message
                     $lastMessage['other_username'] = $otherUser['username'];
                     $lastMessage['other_profile_image'] = $otherUser['profile_image'];
 
@@ -260,7 +209,6 @@ class Message
                 }
             }
 
-            // Sort conversations by timestamp (newest first)
             usort($conversations, function ($a, $b) {
                 return strtotime($b['timestamp']) - strtotime($a['timestamp']);
             });
@@ -272,11 +220,6 @@ class Message
         }
     }
 
-    /**
-     * Convert to array for JSON output
-     * 
-     * @return array Message data as array
-     */
     public function toArray(): array
     {
         return [
@@ -291,13 +234,7 @@ class Message
         ];
     }
 
-    /**
-     * Delete all messages between two users (a conversation)
-     * 
-     * @param int $user1_id First user ID
-     * @param int $user2_id Second user ID
-     * @return bool True if successful, false otherwise
-     */
+
     public static function deleteConversation(int $user1_id, int $user2_id): bool
     {
         $db = Database::getInstance();

@@ -1,0 +1,133 @@
+.subcategory-checkboxes {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.7em 1.5em;
+	margin-bottom: 1.1rem;
+}
+
+.subcategory-checkboxes label {
+	display: flex;
+	align-items: center;
+	font-size: 1em;
+	font-weight: 400;
+	margin-bottom: 0.2em;
+	cursor: pointer;
+}
+
+.subcategory-checkboxes input[type="checkbox"] {
+	margin-right: 0.4em;
+	accent-color: var(--purple);
+}
+
+#subcategory-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background: rgba(0, 0, 0, 0.45);
+	z-index: 2000;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: opacity 0.2s;
+}
+
+#subcategory-overlay.hidden {
+	display: none;
+}
+
+#subcategory-modal {
+	background: #fff;
+	border-radius: 14px;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+	max-width: 400px;
+	width: 92vw;
+	padding: 2rem 1.5rem 1.5rem 1.5rem;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+}
+
+#subcategory-modal h2 {
+	color: var(--green);
+	font-family: "Modak", sans-serif;
+	font-weight: normal;
+	margin-bottom: 1em;
+	text-align: center;
+}
+
+#subcategory-modal .subcategory-checkboxes {
+	margin-bottom: 1.2em;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.7em 1.5em;
+	justify-content: center;
+	align-items: center;
+}
+
+#subcategory-modal .subcategory-checkboxes label {
+	display: flex;
+	align-items: center;
+	font-size: 1.1em;
+	font-weight: 500;
+	margin-bottom: 0.2em;
+	margin-right: 0;
+	cursor: pointer;
+	background: rgba(221, 141, 110, 0.5);
+	border-radius: 8px;
+	padding: 8px 18px;
+	color: #333;
+	border: 0px solid;
+	transition: background 0.2s, color 0.2s, border 0.2s;
+	white-space: nowrap;
+	margin: 0 0.3em 0.5em 0.3em;
+	position: relative;
+	min-width: 120px;
+	justify-content: center;
+	text-align: center;
+}
+
+#subcategory-modal .subcategory-checkboxes input[type="checkbox"] {
+	display: none;
+}
+
+#subcategory-modal .subcategory-checkboxes input[type="checkbox"]:checked+label,
+#subcategory-modal .subcategory-checkboxes label.selected {
+	background: var(--orange);
+	color: #fff;
+	border: 0px solid;
+}
+
+#subcategory-modal .subcategory-checkboxes label::before {
+	display: none;
+}
+
+#subcategory-modal .subcategory-checkboxes input[type="checkbox"]:checked+label::before {
+	background: var(--orange);
+	border-color: var(--orange);
+	box-shadow: 0 0 0 2px #fff inset;
+}
+
+#subcategory-modal .button-container {
+	display: flex;
+	justify-content: flex-end;
+	gap: 1em;
+}
+
+#subcategory-modal .close-subcategory-modal {
+	position: absolute;
+	top: 0.7em;
+	right: 1em;
+	font-size: 1.7rem;
+	background: none;
+	border: none;
+	color: #888;
+	cursor: pointer;
+	transition: color 0.2s;
+}
+
+#subcategory-modal .close-subcategory-modal:hover {
+	color: #333;
+}

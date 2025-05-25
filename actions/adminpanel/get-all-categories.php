@@ -1,5 +1,4 @@
 <?php
-// Returns JSON: [ {id, type, image} ... ]
 require_once(__DIR__ . '/../../database/session.php');
 $session = Session::getInstance();
 $user = $session->getUser() ?? null;

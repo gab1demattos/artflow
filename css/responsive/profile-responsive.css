@@ -1,15 +1,10 @@
-/* ======================================= */
-/* BASE MOBILE STYLES (applied by default) */
-/* ======================================= */
-
 @media screen and (max-width: 767px) {
-	/* Make the profile picture smaller for mobile */
 	.profile .profile-img {
 		margin-left: 1.5em;
 		margin-right: 1.5em;
 		margin-top: 2em;
-		flex-basis: 8em; /* Smaller width for mobile */
-		height: 8em; /* Smaller height for mobile */
+		flex-basis: 8em; 
+		height: 8em; 
 	}
 
 	.profile .profile-img img {
@@ -17,7 +12,6 @@
 		height: 8em;
 	}
 
-	/* Adjust grid layout for better mobile experience */
 	.profile {
 		grid-template-columns: 1fr;
 		grid-template-areas:
@@ -28,13 +22,11 @@
 		gap: 5px;
 	}
 
-	/* Center the profile image in mobile view */
 	.profile .profile-img {
 		justify-self: center;
 		align-self: center;
 	}
 
-	/* Adjust info section for full width */
 	.profile .info {
 		margin-top: 1.5em;
 		margin-right: 10px;
@@ -42,19 +34,16 @@
 		text-align: center;
 	}
 
-	/* Center the username display */
 	.profile .info .username {
 		justify-content: center;
 	}
 
-	/* Center bio text on mobile */
 	.profile .bio-text {
 		text-align: center;
 		padding: 0 1em;
 		margin-bottom: 1em;
 	}
 
-	/* Adjust tabs for mobile */
 	.tabs {
 		margin-left: 1em;
 		margin-right: 1em;
@@ -64,7 +53,6 @@
 		padding: 0 1em;
 	}
 
-	/* Adjust buttons position for mobile */
 	.edit-profile-btn,
 	.button.filled.yellow.hovering.edit-profile-btn,
 	#edit-profile-button.button.filled.orange.hovering.edit-profile-btn {
@@ -75,7 +63,6 @@
 		padding: 0.5em 1em;
 	}
 
-	/* Adjust empty state image and container for mobile */
 	.tab-content.empty-state {
 		min-height: 15rem;
 		padding: 1rem;
@@ -86,20 +73,17 @@
 		margin: 10px auto;
 	}
 
-	/* Center tab content vertically on mobile */
 	#listings.tab-content.active.empty-state,
 	#reviews.tab-content.active.empty-state {
 		padding-top: 2rem;
 	}
 
-	/* Adjust service card grid for mobile */
 	#services-list {
 		grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
 		gap: 10px;
 		padding: 10px 5px;
 	}
 
-	/* Adjust review cards on mobile */
 	.reviews-list .review-card {
 		padding: 12px;
 		margin-bottom: 10px;
@@ -110,7 +94,6 @@
 		margin: 1em 0;
 	}
 
-	/* For profile with no bio on mobile */
 	.profile.no-bio {
 		grid-template-areas:
 			"image"
@@ -127,17 +110,7 @@
 	}
 }
 
-/* =================== */
-/*    TABLET STYLES    */
-/* =================== */
-
 @media screen and (min-width: 768px) and (max-width: 1199px) {
-	/* 
-      The desktop styles are already defined in profile.css
-      This media query ensures we only apply those styles at larger screens
-    */
-
-	/* Tablet-specific empty state adjustments */
 	.tab-content.empty-state {
 		min-height: 18rem;
 	}
@@ -146,13 +119,11 @@
 		max-width: 250px;
 	}
 
-	/* Smaller buttons for tablet */
 	.edit-profile-btn {
 		top: 2em;
 		right: 2em;
 	}
 
-	/* Adjust profile image size for tablet */
 	.profile .profile-img {
 		margin-left: 3em;
 		margin-right: 2.5em;
@@ -167,18 +138,7 @@
 	}
 }
 
-/* ================================== */
-/*    DESKTOP STYLES (above 1200px)   */
-/* ================================== */
-
-/*use the main profile.css settings */
 @media screen and (min-width: 1200px) {
-	/* 
-      The desktop styles are already defined in profile.css
-      This media query ensures we only apply those styles at larger screens
-    */
-
-	/* For ultra-wide screens, adjust proportions */
 	@media screen and (min-width: 2400px) {
 	}
 }

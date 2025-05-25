@@ -1,6 +1,5 @@
 <?php
-// POST: user_id
-// Deletes user and all their services (irreversible)
+
 require_once(__DIR__ . '/../../database/session.php');
 $session = Session::getInstance();
 $user = $session->getUser() ?? null;
@@ -18,10 +17,8 @@ $userId = (int)$_POST['user_id'];
 require_once(__DIR__ . '/../../database/database.php');
 $db = Database::getInstance();
 try {
-    // Delete all services by this user (cascades to ServiceSubcategory, etc.)
     $stmt = $db->prepare('DELETE FROM Service WHERE user_id = ?');
     $stmt->execute([$userId]);
-    // Delete the user
     $stmt = $db->prepare('DELETE FROM User WHERE id = ?');
     $stmt->execute([$userId]);
     echo json_encode(['success' => true]);

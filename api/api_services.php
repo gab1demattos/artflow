@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-require_once(__DIR__ . '/../api/api_security.php'); // Apply API security headers and CORS
-require_once(__DIR__ . '/../database/security/security.php'); // Load security helpers
+require_once(__DIR__ . '/api_security.php'); 
+require_once(__DIR__ . '/../database/security/security.php');
 require_once(__DIR__ . '/../database/session.php');
 $session = new Session();
 
@@ -19,21 +19,15 @@ $maxDeliveryTime = isset($_GET['max_delivery_time']) ? (int)$_GET['max_delivery_
 $minRating = isset($_GET['min_rating']) ? (float)$_GET['min_rating'] : 0;
 $search = $_GET['search'] ?? '';
 
-// Debug logging
 error_log("API called with params: search='$search', categories=" . implode(',', $categories) . ", minPrice=$minPrice, maxPrice=$maxPrice, maxDeliveryTime=$maxDeliveryTime, minRating=$minRating");
 
-// Handle different combinations of search and category filtering
 if (!empty($search)) {
-    // If there's a search term, we need to handle it differently based on categories
     if (!empty($categories)) {
-        // Search within specific categories with filters
         $services = Service::searchServicesInCategories($db, $search, $categories, $minPrice, $maxPrice, $maxDeliveryTime, $minRating);
     } else {
-        // Search across all services with filters
         $services = Service::searchServices($db, $search, $minPrice, $maxPrice, $maxDeliveryTime, $minRating);
     }
 } else {
-    // No search term - just apply category and other filters
     if (!empty($categories)) {
         $services = Service::getServicesByCategories($db, $categories, $minPrice, $maxPrice, $maxDeliveryTime, $minRating);
     } else {

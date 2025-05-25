@@ -14,7 +14,7 @@ foreach ($categories as $cat) {
     <div class="modal-content">
       <div class="form-container">
         <h2>Edit Service</h2>
-        <form id="editServiceForm" action="/actions/edit-service.php" method="POST" enctype="multipart/form-data">
+        <form id="editServiceForm" action="../../actions/service/edit-service.php" method="POST" enctype="multipart/form-data">
           <input type="hidden" name="service_id" id="edit-service-id" value="">
           <label for="edit-service-title">Title</label>
           <input type="text" id="edit-service-title" name="title" required>

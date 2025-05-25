@@ -1,6 +1,5 @@
 <?php
-// POST: category_type, image
-// Adds new category
+
 require_once(__DIR__ . '/../../database/session.php');
 $session = Session::getInstance();
 $user = $session->getUser() ?? null;
@@ -10,13 +9,11 @@ if (!$user || $user['user_type'] !== 'admin') {
     exit();
 }
 
-// Handle AJAX POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = trim($_POST['category_name'] ?? '');
-    $subcategories = trim($_POST['subcategories'] ?? ''); // comma-separated
+    $subcategories = trim($_POST['subcategories'] ?? ''); 
     $imagePath = null;
 
-    // Handle image upload
     if (isset($_FILES['category_image']) && $_FILES['category_image']['error'] === UPLOAD_ERR_OK) {
         $uploadsDir = __DIR__ . '/../../images/categories/';
         if (!is_dir($uploadsDir)) mkdir($uploadsDir, 0777, true);
@@ -34,7 +31,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute([$name, $imagePath]);
         $categoryId = $db->lastInsertId();
 
-        // Insert subcategories
         if ($subcategories !== '') {
             $subs = array_map('trim', explode(',', $subcategories));
             foreach ($subs as $sub) {

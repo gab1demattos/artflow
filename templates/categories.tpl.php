@@ -5,7 +5,7 @@
             <h2>All Categories</h2>
             <div id="see-more-category-list">
                 <?php foreach ($categories as $category): ?>
-                    <a href="/pages/category.php?id=<?= $category['id'] ?>" class="see-more-category-card" style="text-decoration:none;color:inherit;" aria-label="View category <?= htmlspecialchars($category['category_type']) ?>">
+                    <a href="/pages/services/category.php?id=<?= $category['id'] ?>" class="see-more-category-card" style="text-decoration:none;color:inherit;" aria-label="View category <?= htmlspecialchars($category['category_type']) ?>">
                         <?php if (!empty($category['image'])): ?>
                             <div class="see-more-category-image-wrapper">
                                 <img src="<?= htmlspecialchars($category['image']) ?>" alt="<?= htmlspecialchars($category['category_type']) ?>" />
@@ -32,12 +32,10 @@
                 </h1>
             </div>
             <?php
-            // Fetch subcategories for this category
             $stmt = $db->prepare('SELECT id, name FROM Subcategory WHERE category_id = ?');
             $stmt->execute([$category['id']]);
             $subcategories = $stmt->fetchAll(PDO::FETCH_ASSOC);
             ?>
-
             <?php if ($subcategories): ?>
                 <div class="subcategory-carousel-wrapper">
                     <div class="subcategory-carousel" id="subcategory-carousel">
@@ -55,33 +53,28 @@
                 <?php
                 require_once(__DIR__ . '/../database/classes/service.class.php');
 
-                // Fetch all services for this category
                 $stmt = $db->prepare('SELECT Service.*, User.username FROM Service JOIN User ON Service.user_id = User.id WHERE Service.category_id = ?');
                 $stmt->execute([$category['id']]);
                 $services = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 if ($services) {
                     foreach ($services as $service) {
-                        // Update the average rating for this service
                         Service::updateAverageRating($service['id']);
 
-                        // Fetch the updated service to get the current avg_rating
                         $stmtUpdated = $db->prepare('SELECT avg_rating FROM Service WHERE id = ?');
                         $stmtUpdated->execute([$service['id']]);
                         $updatedService = $stmtUpdated->fetch(PDO::FETCH_ASSOC);
                         $avgRating = isset($updatedService['avg_rating']) ? (float)$updatedService['avg_rating'] : 0;
                         $formattedRating = number_format($avgRating, 1);
 
-                        // Fetch subcategories for this service
                         $stmtSub = $db->prepare('SELECT subcategory_id FROM ServiceSubcategory WHERE service_id = ?');
                         $stmtSub->execute([$service['id']]);
                         $subcatIds = $stmtSub->fetchAll(PDO::FETCH_COLUMN);
                         $subcatIdsStr = implode(',', $subcatIds);
-                        // Get first image (if any)
                         $serviceImages = array_filter(array_map('trim', explode(',', $service['images'] ?? '')));
                         $serviceImage = count($serviceImages) > 0 ? $serviceImages[0] : null;
                 ?>
                         <div class="service-card" data-subcategory-ids="<?= htmlspecialchars($subcatIdsStr) ?>">
-                            <a href="/pages/service.php?id=<?= $service['id'] ?>" style="text-decoration: none; color: inherit;">
+                            <a href="/pages/services/service.php?id=<?= $service['id'] ?>" style="text-decoration: none; color: inherit;">
                                 <div class="pantone-image-wrapper">
                                     <?php if ($serviceImage): ?>
                                         <img src="<?= htmlspecialchars($serviceImage) ?>" alt="Service image" class="pantone-image" />

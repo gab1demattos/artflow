@@ -1,6 +1,5 @@
 <?php
 require_once __DIR__ . '/../../database/classes/category.class.php';
-// Draw the New Service modal (to be included in the main layout, not as a standalone page)
 $categories = Category::getCategories();
 $db = Database::getInstance();
 $subcategoriesByCategory = [];
@@ -15,7 +14,7 @@ foreach ($categories as $cat) {
     <div class="modal-content">
       <div class="form-container">
         <h2>Post a New Service</h2>
-        <form id="new-service-form" action="/actions/create-service.php" method="post" enctype="multipart/form-data">
+        <form id="new-service-form" action="../../actions/service,create-service.php" method="post" enctype="multipart/form-data">
           <label>Title:<br>
             <input type="text" name="title" required maxlength="80">
             <br>
@@ -59,11 +58,9 @@ foreach ($categories as $cat) {
       </div>
     </div>
     <script>
-    // Subcategories data from PHP
     const subcategoriesByCategory = <?php echo json_encode($subcategoriesByCategory); ?>;
     </script>
     <button class="close-modal" aria-label="Close">&times;</button>
   </div>
 </div>
 <?php include __DIR__ . '/subcategory-overlay-modal.php'; ?>
-<!-- No inline script here: modal logic is handled in js/script.js -->

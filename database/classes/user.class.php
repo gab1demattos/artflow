@@ -34,7 +34,6 @@ class User
         $db = Database::getInstance();
 
         try {
-            // Use password_hash with bcrypt (default algorithm)
             $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
             $stmt = $db->prepare('INSERT INTO User (user_type, name, username, email, password, bio, profile_image) VALUES (?, ?, ?, ?, ?, NULL, NULL)');
@@ -54,24 +53,19 @@ class User
     public static function get_user_by_username_password($username, $password)
     {
         $db = Database::getInstance();
-        // First get the user by username only
         $stmt = $db->prepare('SELECT * FROM User WHERE username = ?');
         $stmt->execute([$username]);
         $user = $stmt->fetch();
 
-        // Verify the password hash
         if ($user && password_verify($password, $user['password'])) {
             return $user;
         }
 
-        // For backward compatibility with sha1 hashes
-        // This should be removed after all passwords have been migrated
         $stmt = $db->prepare('SELECT * FROM User WHERE username = ? AND password = ?');
         $stmt->execute([$username, sha1($password)]);
         $user = $stmt->fetch();
 
         if ($user) {
-            // Upgrade old password hash to new format
             self::updatePassword($user['id'], $password);
         }
 
@@ -81,24 +75,19 @@ class User
     public static function get_user_by_email_password($email, $password)
     {
         $db = Database::getInstance();
-        // First get the user by email only
         $stmt = $db->prepare('SELECT * FROM User WHERE email = ?');
         $stmt->execute([$email]);
         $user = $stmt->fetch();
 
-        // Verify the password hash
         if ($user && password_verify($password, $user['password'])) {
             return $user;
         }
 
-        // For backward compatibility with sha1 hashes
-        // This should be removed after all passwords have been migrated
         $stmt = $db->prepare('SELECT * FROM User WHERE email = ? AND password = ?');
         $stmt->execute([$email, sha1($password)]);
         $user = $stmt->fetch();
 
         if ($user) {
-            // Upgrade old password hash to new format
             self::updatePassword($user['id'], $password);
         }
 
@@ -179,26 +168,11 @@ class User
         return $this->profile_image;
     }
 
-    /**
-     * Update user password
-     *
-     * @param int $userId The user ID
-     * @param string $hashedPassword The hashed password
-     * @return bool True if successful, false otherwise
-     */
-    /**
-     * Update user password with secure hashing
-     *
-     * @param int $userId The user ID
-     * @param string $password The plain text password
-     * @return bool True if successful, false otherwise
-     */
     public static function updatePassword(int $userId, string $password): bool
     {
         $db = Database::getInstance();
 
         try {
-            // Hash the password using secure algorithm
             $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
             $stmt = $db->prepare('UPDATE User SET password = ? WHERE id = ?');
@@ -208,61 +182,43 @@ class User
         }
     }
 
-    /**
-     * Delete a user account and all associated data
-     *
-     * @param int $userId The user ID to delete
-     * @return bool True if successful, false otherwise
-     */
     public static function deleteAccount(int $userId): bool
     {
         $db = Database::getInstance();
 
         try {
-            // Start a transaction to ensure data integrity
             $db->beginTransaction();
 
-            // 1. Delete user's reviews
             $stmt = $db->prepare('DELETE FROM Review WHERE user_id = ?');
             $stmt->execute([$userId]);
 
-            // 2. Delete messages sent or received by the user
             $stmt = $db->prepare('DELETE FROM Message WHERE sender_id = ? OR receiver_id = ?');
             $stmt->execute([$userId, $userId]);
 
-            // 3. Get services by this user
             $stmt = $db->prepare('SELECT id FROM Service WHERE user_id = ?');
             $stmt->execute([$userId]);
             $services = $stmt->fetchAll(PDO::FETCH_COLUMN);
 
-            // 4. For each service, delete related records
             foreach ($services as $serviceId) {
-                // Delete service subcategories
                 $stmt = $db->prepare('DELETE FROM ServiceSubcategory WHERE service_id = ?');
                 $stmt->execute([$serviceId]);
 
-                // Delete reviews for the service
                 $stmt = $db->prepare('DELETE FROM Review WHERE service_id = ?');
                 $stmt->execute([$serviceId]);
             }
 
-            // 5. Delete exchanges involving the user
             $stmt = $db->prepare('DELETE FROM Exchange WHERE client_id = ? OR service_id IN (SELECT id FROM Service WHERE user_id = ?)');
             $stmt->execute([$userId, $userId]);
 
-            // 6. Delete the user's services
             $stmt = $db->prepare('DELETE FROM Service WHERE user_id = ?');
             $stmt->execute([$userId]);
 
-            // 7. Finally, delete the user
             $stmt = $db->prepare('DELETE FROM User WHERE id = ?');
             $stmt->execute([$userId]);
 
-            // Commit the transaction
             $db->commit();
             return true;
         } catch (PDOException $e) {
-            // Rollback the transaction if something failed
             $db->rollBack();
             error_log("Error deleting account: " . $e->getMessage());
             return false;
@@ -277,7 +233,7 @@ class User
         while ($user = $stmt->fetch()) {
             $users[] = new User(
                 (int)$user['id'],
-                'regular', // Default user type
+                'regular', 
                 $user['name'],
                 $user['username'],
                 $user['email'],
@@ -298,7 +254,7 @@ class User
         while ($user = $stmt->fetch()) {
             $users[] = new User(
                 (int)$user['id'],
-                'regular', // Default user type
+                'regular', 
                 $user['name'],
                 $user['username'],
                 $user['email'],

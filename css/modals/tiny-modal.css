@@ -1,0 +1,89 @@
+.tiny-modal {
+	width: 320px !important;
+	max-width: 90%;
+	background-color: white;
+	border-radius: 12px;
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+	padding: 20px;
+}
+
+.tiny-modal .modal-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 20px;
+}
+
+.tiny-modal .modal-header h3 {
+	margin: 0;
+	color: var(--green);
+	font-family: "Modak", sans-serif;
+	font-weight: normal;
+	font-size: 1.5rem;
+}
+
+.tiny-modal .modal-header .close {
+	cursor: pointer;
+	font-size: 1.5rem;
+}
+
+.tiny-modal .form-group {
+	margin-bottom: 15px;
+}
+
+.tiny-modal .form-group label {
+	display: block;
+	margin-bottom: 5px;
+	font-family: "Cormorant Garamond", serif;
+	font-size: 1rem;
+	font-weight: bold;
+}
+
+.tiny-modal .form-group input {
+	width: 100%;
+	padding: 8px 12px;
+	border: 1px solid #ccc;
+	border-radius: 8px;
+	font-size: 1rem;
+	box-sizing: border-box;
+}
+
+.tiny-modal .form-group input:focus {
+	outline: none;
+	border: 2px solid var(--green);
+}
+
+.tiny-modal .modal-buttons {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 20px;
+}
+
+.tiny-modal .modal-buttons button {
+	padding: 8px 16px;
+	border-radius: 8px;
+	cursor: pointer;
+	font-family: "EB Garamond", serif;
+	font-size: 1rem;
+	transition: all 0.3s ease;
+}
+
+.tiny-modal .btn-primary {
+	background-color: var(--green);
+	color: white;
+	border: none;
+}
+
+.tiny-modal .btn-primary:hover {
+	background-color: #2e8b57;
+}
+
+.tiny-modal .btn-secondary {
+	background-color: #e0e0e0;
+	color: #333;
+	border: none;
+}
+
+.tiny-modal .btn-secondary:hover {
+	background-color: #d5d5d5;
+}

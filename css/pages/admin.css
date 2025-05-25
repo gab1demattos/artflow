@@ -1,4 +1,3 @@
-/* admin.css - Styles for the admin panel */
 .admin-panel-container {
     max-width: 1000px;
     margin: 2.5rem auto;
@@ -20,7 +19,6 @@
     display: flex;
     justify-content: center;
     gap: 1.5rem;
-    /* margin-bottom: 2.5rem; */
 }
 
 .admin-tab-btn {
@@ -78,21 +76,6 @@
 .admin-table td {
     color: #333;
 }
-
-/* .admin-action-btn {
-    background: linear-gradient(90deg, #7ecb8f 0%, #4cae6a 100%);
-    color: #fff;
-    border: none;
-    border-radius: 20px;
-    padding: 6px 18px;
-    font-size: 1em;
-    font-family: 'EB Garamond', serif;
-    font-weight: 600;
-    margin-right: 0.5em;
-    cursor: pointer;
-    transition: background 0.2s, box-shadow 0.2s;
-
-} */
 
 .red-btn {
     background: linear-gradient(90deg, #c62828 0%, #a31515 100%) !important;
@@ -168,7 +151,6 @@
     width: 100vw;
     height: 100vh;
     background: rgba(0, 0, 0, 0.45);
-    /* standard dark overlay */
     z-index: 2000;
     display: flex;
     align-items: center;

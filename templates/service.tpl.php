@@ -10,7 +10,6 @@
         return;
     }
 
-    // Automatically update the average rating for this service
     Service::updateAverageRating($serviceId);
 
     $stmtService = $db->prepare('SELECT * FROM Service WHERE id = ?');
@@ -24,18 +23,15 @@
 
     $stmtImg = $db->prepare('SELECT images FROM Service WHERE id = ?');
     $stmtImg->execute([$service['id']]);
-    $imageRow = $stmtImg->fetch(PDO::FETCH_ASSOC); // Fetch a single row
-    $imagePaths = $imageRow['images']; // Extract the 'images' field
-    // Fix: split on comma only, trim whitespace, and filter out empty values
+    $imageRow = $stmtImg->fetch(PDO::FETCH_ASSOC); 
+    $imagePaths = $imageRow['images'];
     $images = array_filter(array_map('trim', explode(',', $imagePaths)));
 
     $stmtOwner = $db->prepare('SELECT u.name, u.username, u.profile_image FROM User u JOIN Service s ON u.id = s.user_id WHERE s.id = ?');
     $stmtOwner->execute([$service['id']]);
     $owner = $stmtOwner->fetch(PDO::FETCH_ASSOC);
     ?>
-    <link rel="stylesheet" href="/css/responsive/service-responsive.css">
-    <link rel="stylesheet" href="/css/responsive/checkout-responsive.css">
-    <link rel="stylesheet" href="/css/modals.css">
+    <link rel="stylesheet" href="/css/main.css">
     <div id="service-display">
         <div id="service-main">
             <div id="images-service">
@@ -54,13 +50,11 @@
                 <div id="reviews">
                     <h3>Reviews</h3>
                     <?php
-                    // Display average rating for this service if available
                     $avgRating = isset($service['avg_rating']) ? (float)$service['avg_rating'] : 0;
                     if ($avgRating > 0) {
                         echo '<div class="service-avg-rating">';
                         echo '<p><strong>Average Rating:</strong> ' . number_format($avgRating, 1) . ' / 5.0</p>';
                         echo '<div class="stars-display">';
-                        // Display filled stars based on rating
                         for ($i = 1; $i <= 5; $i++) {
                             if ($i <= floor($avgRating)) {
                                 echo '<span class="star filled">★</span>';
@@ -74,7 +68,6 @@
                         echo '</div>';
                     }
 
-                    // Use Review class to get reviews
                     $reviews = Review::getReviewsByServiceId($service['id']);
 
                     if (count($reviews) > 0) {
@@ -87,7 +80,6 @@
                                     </div>
                                     <div class="review-rating">
                                         <?php
-                                        // Show stars for this review's rating
                                         for ($i = 1; $i <= 5; $i++) {
                                             if ($i <= floor($review->rating)) {
                                                 echo '<span class="star filled">★</span>';
@@ -118,7 +110,7 @@
         <div id="service-checkout">
             <h2><?= htmlspecialchars($service['title']) ?></h2>
             <div id="owner-info">
-                <a href="/pages/profile.php?username=<?= urlencode($owner['username']) ?>" style="display: flex; align-items: center; gap: 0.5em; text-decoration: none; color: inherit;">
+                <a href="/pages/users/profile.php?username=<?= urlencode($owner['username']) ?>" style="display: flex; align-items: center; gap: 0.5em; text-decoration: none; color: inherit;">
                     <img src="<?= ($owner['profile_image'] !== null && $owner['profile_image'] !== '') ? htmlspecialchars($owner['profile_image']) : '/images/user_pfp/default.png' ?>" alt="User Icon">
                     <div style="display: flex; flex-direction: row; align-items: center; gap: 0.5em;">
                         <p style="margin: 0; font-weight: 600;"><?= htmlspecialchars($owner['name']) ?></p>
@@ -135,7 +127,7 @@
                 </div>
                 <div id="service-options">
                     <?php if ($user && $service['user_id'] != $user['id']): ?>
-                        <a href="/pages/messages.php?user_id=<?= $service['user_id'] ?>" class="service-options" id="message">Message <?= htmlspecialchars(explode(' ', $owner['name'])[0]) ?></a>
+                        <a href="/pages/users/messages.php?user_id=<?= $service['user_id'] ?>" class="service-options" id="message">Message <?= htmlspecialchars(explode(' ', $owner['name'])[0]) ?></a>
                         <button id="payment" class="service-options">Continue to Payment</button>
                     <?php elseif (!$user): ?>
     <div class="service-warning">Sign up to message and order</div>
@@ -156,22 +148,20 @@
                 </div>
             </div>
             <div id="service-description">
-                <!-- <h3>Description</h3> -->
                  <br>
                 <p><?= htmlspecialchars($service['description']) ?></p>
             </div>
         </div>
     </div>
-    <script src="/js/service-scroll.js"></script>
-    <script src="/js/edit-service-modal.js"></script>
-
+    <script src="/js/services/service-scroll.js"></script>
+    <script src="/js/modal/edit-service-modal.js"></script>
     <?php include __DIR__ . '/../pages/modals/requirements-modal.php'; ?>
     <?php include __DIR__ . '/../pages/modals/payment-modal.php'; ?>
     <?php include __DIR__ . '/../pages/modals/thankyou-modal.php'; ?>
     <?php include __DIR__ . '/../pages/modals/edit-service-modal.php'; ?>
-    <?php include __DIR__ . '/../templates/irreversible-modal.tpl.php'; ?>
-    <script src="/js/modals.js"></script>
-    <script src="/js/checkout.js"></script>
+    <?php include __DIR__ . '/irreversible-modal.tpl.php'; ?>
+    <script src="/js/modal/modals.js"></script>
+    <script src="/js/services/checkout.js"></script>
     <script>
 document.addEventListener('DOMContentLoaded', function() {
     const deleteBtn = document.getElementById('delete-service-btn');
@@ -187,7 +177,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     .then(r => r.json())
                     .then(result => {
                         if (result.success) {
-                            window.location.href = '/pages/profile.php?username=<?= urlencode($owner['username']) ?>';
+                            window.location.href = '/pages/users/profile.php?username=<?= urlencode($owner['username']) ?>';
                         } else {
                             alert(result.error || 'Failed to delete service.');
                         }

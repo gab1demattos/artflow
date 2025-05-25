@@ -13,11 +13,6 @@ function drawHeader($user, $currentPage = '')
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" href="/images/a.png" type="image/png">
         <link rel="stylesheet" href="/css/main.css">
-        <link rel="stylesheet" href="/css/responsive/global-responsive.css">
-        <link rel="stylesheet" href="/css/see-more.css">
-        <link rel="stylesheet" href="/css/responsive/new-service-responsive.css">
-        <link rel="stylesheet" href="/css/modals/modal-animations.css">
-        <link rel="stylesheet" href="/css/search-icon.css">
     </head>
 
     <body>
@@ -25,7 +20,7 @@ function drawHeader($user, $currentPage = '')
             <h1><a href="/" class='artflow-text'>artflow</a></h1>
             <nav id="menu">
                 <ul id="buttons">
-                    <li><a href="/pages/search.php" id="search-icon-link"><img src="/images/logos/search2.svg" alt="Search" id="search-icon"></a></li>
+                    <li><a href="/pages/services/search.php" id="search-icon-link"><img src="/images/logos/search2.svg" alt="Search" id="search-icon"></a></li>
                     <?php if (!$user): ?>
                         <li><button class="button filled hovering">Sign Up</button></li>
                     <?php else: ?>
@@ -39,7 +34,7 @@ function drawHeader($user, $currentPage = '')
             <div id="sidebar">
                 <div id="profile">
                     <?php
-                    echo '<a href="/pages/profile.php?username=' . htmlspecialchars($user['username']) . '" id="profile-link" aria-label="View Profile">'
+                    echo '<a href="/pages/users/profile.php?username=' . htmlspecialchars($user['username']) . '" id="profile-link" aria-label="View Profile">'
                     ?>
                     <img src="<?= isset($user['profile_image']) && $user['profile_image'] ? htmlspecialchars($user['profile_image']) : '/images/user_pfp/default.png' ?>" alt="Avatar" id="avatar-sidebar" class="profile-img">
                     <div>
@@ -55,20 +50,20 @@ function drawHeader($user, $currentPage = '')
                     </li>
                     <li class="sidebar-item">
                         <img src="/images/logos/activity.png" alt="Activity" class="logo">
-                        <a href="/pages/activity.php"><button>Activity</button></a>
+                        <a href="/pages/info/activity.php"><button>Activity</button></a>
                     </li>
                     <li class="sidebar-item">
                         <img src="/images/logos/messages.png" alt="Messages" class="logo">
-                        <a href="/pages/messages.php"><button>Messages</button></a>
+                        <a href="/pages/users/messages.php"><button>Messages</button></a>
                     </li>
                     <li class="sidebar-item">
                         <img src="/images/logos/stats.png" alt="Stats" class="logo">
-                        <a href="/pages/stats.php"><button>Stats</button></a>
+                        <a href="/pages/info/stats.php"><button>Stats</button></a>
                     </li>
                     <?php if (isset($user['user_type']) && $user['user_type'] === 'admin'): ?>
                         <li class="sidebar-item">
                             <img src="/images/logos/admin_panel.png" alt="Admin Panel" class="logo">
-                            <a href="/pages/admin.php"><button>Admin Panel</button></a>
+                            <a href="/pages/users/admin.php"><button>Admin Panel</button></a>
                         </li>
                     <?php endif; ?>
 
@@ -79,7 +74,7 @@ function drawHeader($user, $currentPage = '')
                 </ul>
             </div>
             <div id="overlay" onclick="closeSidebar()"></div>
-            <script src="/js/sidebar.js"></script>
+            <script src="/js/others/sidebar.js"></script>
         <?php endif; ?>
 
     <?php } ?>
@@ -116,15 +111,13 @@ function drawHeader($user, $currentPage = '')
                         <?php
                         $categories = Category::getCategories();
                         $db = Database::getInstance();
-                        // Only show the first 6 categories on the main page
                         $displayedCategories = array_slice($categories, 0, 6);
                         foreach ($displayedCategories as $index => $category):
-                            // Fetch subcategories
                             $stmt = $db->prepare('SELECT name FROM Subcategory WHERE category_id = ?');
                             $stmt->execute([$category['id']]);
                             $subcategories = $stmt->fetchAll(PDO::FETCH_COLUMN);
                         ?>
-                            <a href="/pages/category.php?id=<?= $category['id'] ?>" class="category-item" style="text-decoration:none;color:inherit;" aria-label="View category <?= htmlspecialchars($category['category_type']) ?>">
+                            <a href="/pages/services/category.php?id=<?= $category['id'] ?>" class="category-item" style="text-decoration:none;color:inherit;" aria-label="View category <?= htmlspecialchars($category['category_type']) ?>">
 
                                 <span class="category-link" style="pointer-events:none;"><?= htmlspecialchars($category['category_type']) ?></span>
 
@@ -205,41 +198,35 @@ function drawHeader($user, $currentPage = '')
             <?php include __DIR__ . '/../pages/modals/sign-in-modal.php'; ?>
         <?php endif; ?>
 
-        <?php // Always include the go-with-flow modal regardless of login state 
+        <?php 
         ?>
         <?php include __DIR__ . '/../pages/modals/go-with-flow-modal.php'; ?>
 
         <?php include __DIR__ . '/../pages/modals/new-service-modal.php'; ?>
 
-        <!-- Load the modular JavaScript files -->
-        <script src="/js/modals.js"></script>
-        <script src="/js/categories.js"></script>
-        <script src="/js/app.js"></script>
-        <!-- Keep script.js for backward compatibility -->
-        <script src="/js/script.js"></script>
-        <script src="/js/search.js"></script>
-        <!-- Go with flow modal helper -->
-        <script src="/js/go-flow-helper.js"></script>
-
-        <!-- Check for and display session errors -->
+        <script src="/js/modal/modals.js"></script>
+        <script src="/js/services/categories.js"></script>
+        <script src="/js/others/app.js"></script>
+        <script src="/js/others/script.js"></script>
+        <script src="/js/services/search.js"></script>
+        <script src="/js/others/go-flow-helper.js"></script>
+        
         <?php if (isset($_SESSION['signup_error'])): ?>
-            <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    // Show modal first
-                    const signUpModal = document.getElementById('signup-modal-overlay');
-                    if (signUpModal) {
-                        signUpModal.classList.remove('hidden');
-                    }
-
-                    // Display the error using the same function as client-side validation
-                    if (typeof window.showModalError === 'function') {
-                        window.showModalError('signup-modal-overlay', '<?= addslashes(htmlspecialchars($_SESSION['signup_error'])) ?>');
-                    }
-
-                    // Clear the error after displaying it
-                    <?php unset($_SESSION['signup_error']); ?>
-                });
-            </script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const signUpModal = document.getElementById('signup-modal-overlay');
+                if (signUpModal) {
+                    signUpModal.classList.remove('hidden');
+                }
+                
+                if (typeof window.showModalError === 'function') {
+                    window.showModalError('signup-modal-overlay', '<?= addslashes(htmlspecialchars($_SESSION['signup_error'])) ?>');
+                }
+                
+                <?php unset($_SESSION['signup_error']); ?>
+            });
+        </script>
+]
         <?php endif; ?>
     </body>
 

@@ -20,15 +20,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $db = Database::getInstance();
     try {
-        // Delete all subcategories for this category
         $stmt = $db->prepare('DELETE FROM Subcategory WHERE category_id = ?');
         $stmt->execute([$categoryId]);
 
-        // Delete all services in this category
         $stmt = $db->prepare('DELETE FROM Service WHERE category_id = ?');
         $stmt->execute([$categoryId]);
 
-        // Delete the category itself
         $stmt = $db->prepare('DELETE FROM Category WHERE id = ?');
         $stmt->execute([$categoryId]);
 

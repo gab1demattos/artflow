@@ -1,6 +1,5 @@
 <?php
-// POST: user_id
-// Promotes user to admin
+
 require_once(__DIR__ . '/../../database/session.php');
 $session = Session::getInstance();
 $user = $session->getUser() ?? null;

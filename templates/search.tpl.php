@@ -89,7 +89,7 @@ function drawSearchPage($db)
                     <input type="number" id="delivery-time" min="1" step="1" max="<?php echo htmlspecialchars($deliveryRange['max_delivery']); ?>" value="<?php echo htmlspecialchars($deliveryRange['max_delivery']); ?>">
                 </div>
 
-                <script src="js/search.js"></script>
+                <script src="/js/services/search.js"></script>
 
             </div>
             <div id="search-results" class="scrollable services-active"></div>

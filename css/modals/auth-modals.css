@@ -1,0 +1,22 @@
+#signup-modal,
+#signin-modal {
+	z-index: 1001;
+}
+
+#h2-signup {
+	color: var(--purple);
+}
+
+#signup-modal .form input:focus {
+	outline: none;
+	border: 2px solid var(--purple);
+}
+
+#h2-signin {
+	color: var(--yellow);
+}
+
+#signin-modal .form input:focus {
+	outline: none;
+	border: 2px solid var(--yellow);
+}

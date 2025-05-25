@@ -1,6 +1,5 @@
 @media screen and (max-width: 767px) {
 
-    /* Admin panel container - improved layout */
     .admin-panel-container {
         padding: 1rem 0.75rem;
         margin: 0.5rem auto;
@@ -12,25 +11,17 @@
         padding-right: 0.75rem !important;
         padding-left: 0.75rem !important;
         background-color: #fff;
-        /* Ensure clean white background */
     }
 
-    /* For the smallest screens, make further adjustments */
     @media screen and (max-width: 360px) {
 
-        /* Smaller tabs for very small screens */
         .admin-tab-btn {
             padding: 0.35rem 0.4rem;
-            /* Even smaller padding */
             font-size: 0.7rem;
-            /* Smaller font size */
             letter-spacing: -0.01em;
-            /* Tighten letter spacing */
             min-width: 60px;
-            /* Even smaller minimum width */
         }
 
-        /* Adjust table cards for very small screens */
         .admin-table td {
             padding: 0.5rem;
         }
@@ -39,7 +30,6 @@
             min-width: 70px;
             max-width: 80px;
             font-size: 0.8rem;
-            /* Smaller font size */
             padding-right: 0.5rem;
         }
 
@@ -51,17 +41,13 @@
 
         .admin-tabs-row {
             gap: 0.25rem;
-            /* Smaller gap */
             justify-content: space-between;
-            /* Distribute space better */
         }
 
         .admin-tab-content {
             padding: 0.75rem 0.5rem;
-            /* Less padding for content */
         }
 
-        /* Make active tab indicator smaller for tiny screens */
         .admin-tab-btn.active::after {
             width: 40%;
             left: 30%;
@@ -69,7 +55,6 @@
         }
     }
 
-    /* Improve button visibility */
     #open-category-modal,
     .button.filled.hovering {
         display: block;
@@ -80,91 +65,66 @@
         padding: 0.75rem 1rem;
     }
 
-    /* Adjust admin title size */
     .admin-title {
         font-size: 1.75rem;
         margin-bottom: 1.25rem;
     }
 
-    /* Make tabs fit on screen without scrolling */
     .admin-tabs-row {
         display: flex;
         margin: 0;
         padding: 0.2rem 0.4rem 0.6rem;
         gap: 0.2rem;
-        /* Minimal gap between tabs */
         justify-content: space-between;
-        /* Distribute space evenly */
         width: 100%;
         box-sizing: border-box;
         position: relative;
         border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         margin-bottom: 0.75rem;
         overflow-x: visible;
-        /* Ensure no scrolling */
     }
 
-    /* Adjust tab buttons - equal width to fit screen */
     .admin-tab-btn {
         padding: 0.4rem 0.2rem !important;
-        /* Minimal horizontal padding */
         font-size: 0.7rem !important;
-        /* Smaller font size */
         font-weight: 500;
         flex: 1;
-        /* Equal width distribution */
         min-width: 0;
-        /* Allow shrinking */
         max-width: none;
-        /* Allow growing */
         border-radius: 6px 6px 0 0;
-        /* Smaller border radius */
         text-align: center;
         overflow: hidden;
         text-overflow: ellipsis;
         position: relative;
-        /* For active indicator */
         transition: all 0.2s ease;
         white-space: nowrap;
-        /* Prevent text wrapping */
     }
 
-    /* Make active tab more visible with bottom indicator */
     .admin-tab-btn.active {
         font-weight: 600;
         color: #fff;
-        /* Ensure text is white */
         position: relative;
-        /* Same size as other tabs */
     }
 
-    /* Add active tab indicator - smaller size */
     .admin-tab-btn.active::after {
         content: '';
         position: absolute;
         bottom: -1px;
         left: 30%;
         width: 40%;
-        /* Smaller width */
         height: 2px;
-        /* Thinner height */
         background-color: #fff;
         border-radius: 1px;
     }
 
-    /* Remove scroll indicators since we don't need them anymore */
-
-    /* Adjust content padding and styling */
     .admin-tab-content {
         padding: 1.25rem 0.75rem;
         box-shadow: 0 1px 6px rgba(0, 0, 0, 0.25);
         border-radius: 0 0 10px 10px;
         margin-top: -1px;
-        /* Connects tab with content */
 
     }
 
-    /* Add tab transition styles */
     .tab-transitioning .admin-tab-content {
         transition: opacity 0.2s ease;
     }
@@ -182,7 +142,6 @@
         margin: 0;
     }
 
-    /* Make tables responsive */
     .admin-table {
         display: block;
         width: 100%;
@@ -190,7 +149,6 @@
         -webkit-overflow-scrolling: touch;
     }
 
-    /* Style table headers and cells for mobile */
     .admin-table th,
     .admin-table td {
         padding: 0.6rem 0.5rem;
@@ -198,7 +156,6 @@
         white-space: nowrap;
     }
 
-    /* Mobile table styles for medium-small screens (scroll horizontally) */
     @media screen and (min-width: 481px) and (max-width: 767px) {
         .admin-table {
             display: block;
@@ -211,11 +168,9 @@
         .admin-table th,
         .admin-table td {
             min-width: 100px;
-            /* Ensure columns have a minimum width */
         }
     }
 
-    /* Mobile card-based layout for very small screens */
     @media screen and (max-width: 480px) {
         .admin-table {
             display: block;
@@ -241,9 +196,7 @@
             border-radius: 8px;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
             background-color: #fff;
-            /* Ensure white background */
             padding: 0.25rem 0;
-            /* Add some vertical padding */
         }
 
         .admin-table td {
@@ -285,7 +238,6 @@
             padding-left: 0.5rem;
         }
 
-        /* Handle action buttons in mobile view */
         .admin-table td:last-child,
         .admin-table td.action-cell {
             display: flex;
@@ -319,7 +271,6 @@
             justify-content: center;
         }
 
-        /* Improve button visibility on mobile */
         .admin-action-btn+.admin-action-btn,
         .promote-btn+.red-btn,
         .promote-btn+.ban-btn {
@@ -333,31 +284,23 @@
             visibility: visible !important;
         }
 
-        /* Prevent any script or style from hiding our data labels */
         .admin-table td::before {
             display: block !important;
             visibility: visible !important;
         }
     }
 
-    /* Improve modal display for small screens */
     #category-modal {
         max-width: 90% !important;
         width: 90% !important;
         padding: 1.5rem 1rem 1rem !important;
-        /* Reduced bottom padding */
         box-sizing: border-box !important;
-        /* Ensure padding is included in the width calculation */
         display: flex !important;
         flex-direction: column !important;
         max-height: calc(90 * var(--vh, 1vh)) !important;
-        /* Use custom viewport height */
         overflow-y: auto !important;
-        /* Allow scrolling if needed */
         -webkit-overflow-scrolling: touch !important;
-        /* Smooth scrolling on iOS */
         animation: modalFadeIn 0.2s ease-out !important;
-        /* Add smooth entry animation */
     }
 
     #category-modal h2 {
@@ -372,12 +315,9 @@
     #category-modal .form select {
         padding: 0.7rem 0.6rem !important;
         font-size: 16px !important;
-        /* Prevent iOS zoom */
         margin-bottom: 0.75rem !important;
         height: auto !important;
-        /* Override any fixed heights */
         line-height: normal !important;
-        /* Fix vertical alignment */
         display: block !important;
         width: 100% !important;
         box-sizing: border-box !important;
@@ -387,9 +327,7 @@
         flex-direction: column !important;
         gap: 0.5rem !important;
         margin-top: 0.5rem !important;
-        /* Add some space above the buttons */
         margin-bottom: 0 !important;
-        /* Remove any bottom margin */
         width: 100% !important;
     }
 
@@ -397,26 +335,20 @@
         width: 100% !important;
         margin: 0 !important;
         padding: 0.7rem !important;
-        /* Consistent button padding */
         height: auto !important;
         min-height: 42px !important;
-        /* Ensure touch-friendly size */
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
     }
 
-    /* Fix bottom spacing */
     #category-modal .form .button-container:after {
         content: none !important;
-        /* Remove any generated content that might cause spacing */
     }
 
-    /* Fix form container spacing */
     #category-modal .form-container {
         padding: 0 !important;
         margin-bottom: 0 !important;
-        /* Remove bottom margin */
         display: flex !important;
         flex-direction: column !important;
         width: 100% !important;
@@ -424,27 +356,21 @@
 
     #category-modal form.form {
         margin-bottom: 0 !important;
-        /* Remove form bottom margin */
         display: flex !important;
         flex-direction: column !important;
         width: 100% !important;
     }
 
-    /* Fix modal overlay in mobile view */
     #category-modal-overlay.modal-overlay {
         align-items: center !important;
         justify-content: center !important;
         padding: 10px !important;
         box-sizing: border-box !important;
         overflow: hidden !important;
-        /* Prevent body scrolling behind modal */
         z-index: 2100 !important;
-        /* Ensure proper stacking */
         transition: opacity 0.2s ease-out !important;
-        /* Smooth fade in/out */
     }
 
-    /* Fix modal content structure */
     #category-modal .modal-content {
         width: 100% !important;
         height: auto !important;
@@ -453,10 +379,8 @@
         position: relative !important;
         overflow: visible !important;
         padding-bottom: 0 !important;
-        /* Remove bottom padding */
     }
 
-    /* Make form inputs properly fill container width */
     #category-modal .form input,
     #category-modal .form input[type="file"],
     #category-modal .form textarea {
@@ -464,15 +388,12 @@
         width: 100% !important;
         margin-bottom: 0.8rem !important;
         font-size: 16px !important;
-        /* Prevent iOS zoom on input focus */
     }
 
-    /* Fix iOS form input zoom issue */
     #category-modal .form input::placeholder {
         font-size: 16px !important;
     }
 
-    /* Make stat boxes responsive */
     .stat-row {
         flex-wrap: wrap !important;
         justify-content: center !important;
@@ -486,7 +407,6 @@
         padding: 0.5rem !important;
     }
 
-    /* Irreversible modal styling for mobile */
     .irreversible-modal {
         width: 90% !important;
         max-width: 350px !important;
@@ -514,7 +434,6 @@
         padding: 0.6rem !important;
     }
 
-    /* Add styling for dragging tabs */
     .admin-tabs-row.dragging {
         cursor: grabbing;
         -webkit-user-select: none;
@@ -525,12 +444,10 @@
         pointer-events: none;
     }
 
-    /* Add indicator dots for tabs with overflow */
     .admin-tabs-row.has-overflow::after {
         background: linear-gradient(to left, #fff 60%, #ffd700 100%);
     }
 
-    /* Modal animations for smoother experience */
     @keyframes modalFadeIn {
         from {
             opacity: 0;

@@ -13,7 +13,6 @@
         margin: 0 auto;
     }
 
-    /* Make filter rating stars smaller on mobile */
     #filter-search-rating .stars {
         font-size: 1.3rem !important;
     }
@@ -22,7 +21,6 @@
         font-size: 1.3rem !important;
     }
 
-    /* Make service card rating stars smaller on mobile */
     .pantone-rating {
         font-size: 0.85rem !important;
     }

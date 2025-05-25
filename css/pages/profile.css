@@ -1,4 +1,3 @@
-/* Profile Container Styles */
 .profile {
 	display: grid;
 	grid-template-columns: auto 1fr;
@@ -7,18 +6,15 @@
 		"image bio";
 	padding: 20px;
 	margin-bottom: 0;
-	/* Remove bottom margin to maintain consistent spacing */
 	gap: 8px;
 	position: relative;
 }
 
-/* Modification for when there's no bio */
 .profile.no-bio {
 	grid-template-areas: "image info";
 	align-items: center;
 }
 
-/* Edit profile button */
 .edit-profile-btn {
 	position: absolute;
 	top: 4.5em;
@@ -26,7 +22,6 @@
 	z-index: 5;
 }
 
-/* Profile Image Styles */
 .profile .profile-img {
 	grid-area: image;
 	position: relative;
@@ -35,44 +30,35 @@
 	margin-top: 3em;
 	align-self: start;
 	flex-basis: 12.5em;
-	/* Width of the image */
 	display: flex;
 	flex-direction: column;
 	height: 12.5em;
-	/* Same as image height */
 }
 
-/* Adjust image alignment when no bio */
 .profile.no-bio .profile-img {
 	align-self: center;
 	margin-top: 0;
 }
 
-/* Profile Image Styles */
 .profile .profile-img img {
 	width: 12.5em;
 	height: 12.5em;
 	border-radius: 50%;
-	/* Makes the image circular */
 	object-fit: cover;
 	border: 2px solid #ddd;
 }
 
-/* Profile Info Styles */
 .profile .info {
 	grid-area: info;
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
 	margin-top: calc(3em + 1.5em);
-	/* Added 0.5em to create slight offset from image top */
 	align-self: flex-start;
 	flex-basis: calc(100% - 20em);
-	/* Take remaining width minus image and margins */
 	margin-right: 20px;
 }
 
-/* Center the info vertically when no bio */
 .profile.no-bio .info {
 	margin-top: 3em;
 	align-self: center;
@@ -100,10 +86,8 @@
 	display: flex;
 	align-items: center;
 	gap: 10px;
-	/* Add space between username and tag */
 }
 
-/* Tag Styles */
 .profile .info .tag {
 	padding: 5px 12px;
 	border-radius: 20px;
@@ -117,7 +101,6 @@
 	color: var(--beige);
 }
 
-/* Bio Styles */
 .profile #bio {
 	grid-area: bio;
 	margin-left: 0;
@@ -148,13 +131,11 @@
 	margin-bottom: 0;
 }
 
-/* Tabs Styles */
 .tabs {
 	display: flex;
 	align-items: center;
 	border-bottom: 1px solid #ddd;
 	margin: 1rem 4.5em;
-	/* Consistent margins all around */
 	gap: 0;
 	height: 40px;
 }
@@ -177,7 +158,6 @@
 	color: var(--green);
 }
 
-/* Active tab indicator */
 .tabs div.active {
 	color: var(--green);
 }
@@ -186,42 +166,29 @@
 	content: "";
 	position: absolute;
 	bottom: -1px;
-	/* Position at the bottom of the tab */
 	left: 0;
 	width: 100%;
-	/* Width of the tab */
 	height: 4px;
-	/* Make the indicator line more visible */
 	border-radius: 2px;
-	/* Round the corners of the indicator */
 	background-color: var(--green);
 	transition: transform 0.3s ease;
 }
 
-/* Tab content containers */
 .tab-content {
 	display: none !important;
-	/* Hide all tab content by default */
 	min-height: calc(100vh - 25em);
-	/* Use viewport height minus space for header/tabs/etc */
 	width: 100%;
 	flex-direction: column;
 	padding: 2rem 4.5em;
-	/* Standard padding */
 	margin-top: 0;
-	/* Remove negative margin */
 	box-sizing: border-box;
 	transition: opacity 0.2s ease;
-	/* Smooth transition when switching tabs */
 }
 
-/* Display active tab content */
 .tab-content.active {
 	display: flex !important;
-	/* Show only active tab content */
 }
 
-/* Empty state styling for active tabs */
 .tab-content.active.empty-state {
 	justify-content: flex-start;
 	align-items: center;
@@ -232,7 +199,6 @@
 	min-height: 50vh;
 }
 
-/* Specific styling for reviews tab - only apply when active */
 #reviews.tab-content.active:not(.empty-state) {
 	flex-direction: column;
 	justify-content: flex-start;
@@ -241,53 +207,40 @@
 	padding-top: 1.5rem;
 }
 
-/* Empty state image container positioning */
 .tab-content.empty-state::before {
 	content: "";
 	display: block;
 	height: 220px;
-	/* Fixed height to ensure consistent spacing */
 }
 
 .tab-content.active {
 	display: flex;
-	/* Show only active tab content */
 }
 
-/* Empty state styling - centered vertically and horizontally */
 .tab-content:empty,
 .tab-content.empty {
 	justify-content: center;
-	/* Center vertically when empty */
 	align-items: center;
 }
 
-/* Service list styling in profile */
 #listings #services-list {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 24px 18px;
 	justify-content: flex-start !important;
-	/* Force left alignment */
 	align-items: flex-start !important;
-	/* Force top alignment */
 	width: 100%;
 	padding: 20px 0;
-	/* Remove horizontal padding since it's on the parent */
 	margin: 0;
-	/* Remove margin */
 }
 
-/* Force left-alignment for listings tab */
 #listings.tab-content.active {
 	align-items: flex-start !important;
 	justify-content: flex-start !important;
 }
 
-/* Center the "no services" message and image */
 #listings:not(:has(#services-list)) {
 	justify-content: center;
-	/* Center vertically when no services */
 }
 
 #listings p {
@@ -303,16 +256,13 @@
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%);
-	/* Center precisely both vertically and horizontally */
 }
 
-/* Add padding between pagination and footer */
 .pagination {
 	margin-bottom: 3em;
 	padding-bottom: 2em;
 }
 
-/* If your pagination is inside a container, you may also want to add margin-bottom to that container. */
 
 footer,
 #end,
@@ -321,27 +271,22 @@ footer,
 	margin-top: 0 !important;
 }
 
-/* Activity Page Styles - MOVED TO activity.css */
-
-/* Reviews tab styling */
 .reviews-list {
 	display: flex;
 	flex-direction: column;
 	gap: 1.5rem;
 	padding: 1rem 0;
 	max-width: 800px;
-	margin: 1.5rem auto 0; /* Added top margin to increase spacing from average rating */
+	margin: 1.5rem auto 0;
 	width: 100%;
-	/* Set height to show one full review plus part of the next one */
-	min-height: 300px; /* Ensure minimum height for smaller reviews */
-	max-height: 500px; /* Increased height to see at least one full review */
+	min-height: 300px;
+	max-height: 500px; 
 	overflow-y: auto;
 	padding-right: 10px;
 	scrollbar-width: thin;
 	scrollbar-color: var(--yellow) transparent;
 }
 
-/* Custom scrollbar for Webkit browsers */
 .reviews-list::-webkit-scrollbar {
 	width: 6px;
 }
@@ -355,7 +300,6 @@ footer,
 	border-radius: 3px;
 }
 
-/* Draggable reviews list styling */
 .reviews-list.draggable {
 	cursor: grab;
 }
@@ -369,7 +313,7 @@ footer,
 	border-radius: 8px;
 	padding: 1.2rem;
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-	border: 2px solid var(--yellow); /* Adding yellow border to review cards */
+	border: 2px solid var(--yellow); 
 }
 
 .review-header {
@@ -436,16 +380,13 @@ footer,
 	margin-top: 0.5rem;
 }
 
-/* Empty state styling */
 .tab-content.empty-state {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	height: 60vh;
-	/* Fixed height to ensure consistent positioning */
 }
 
-/* Average Rating Styles */
 .average-rating {
 	margin: 0;
 	padding: 1rem;
@@ -457,7 +398,6 @@ footer,
 	gap: 0.75rem;
 	width: 100%;
 	max-width: 800px;
-	/* Bottom border removed */
 }
 
 .average-rating .rating-value {
@@ -472,7 +412,7 @@ footer,
 }
 
 .average-rating .star {
-	color: #d3d3d3; /* Light grey color for unfilled stars */
+	color: #d3d3d3; 
 	font-size: 1.4rem;
 }
 

@@ -3,7 +3,7 @@
         <div class="modal-content" id='edit-profile-modal-content'>
             <div class="form-container">
                 <h2 id='h2-edit-profile'>Edit Profile</h2>
-                <form id="edit-profile-form" class="form" method='POST' action='/actions/account_settings/edit-profile-action.php' enctype="multipart/form-data">
+                <form id="edit-profile-form" class="form" method='POST' action='../../actions/account_settings/edit-profile-action.php' enctype="multipart/form-data">
                     <?php
                     require_once(__DIR__ . '/../../database/security/csrf.php');
                     echo CSRF::getTokenField('edit_profile_csrf_token');
@@ -24,7 +24,7 @@
                         </div>
                         <div class="form-right-column">
                             <div id="profile-preview-container">
-                                <img id="profile-preview" src="<?= $user->getProfileImage() ?? '/images/user_pfp/default.png' ?>" alt="Profile preview">
+                                <img id="profile-preview" src="<?= $user->getProfileImage() ?? '../../images/user_pfp/default.png' ?>" alt="Profile preview">
                             </div>
                             <div class="file-input-container">
                                 <input type="file" name="profile_image" id="profile_image" accept="image/*">
@@ -50,4 +50,4 @@
     </div>
 </div>
 
-<script src="/js/profile.js"></script>
+<script src="../../js/users.profile.js"></script>

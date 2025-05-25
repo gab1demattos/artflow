@@ -261,7 +261,6 @@
 	text-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Review styling enhancements */
 .service-avg-rating {
 	display: flex;
 	flex-direction: column;
@@ -327,7 +326,6 @@
 	border: 1px solid #ddd;
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 	margin-top: 0.5rem;
-	/* Added padding on top of profile pictures */
 }
 
 .review-user p {
@@ -364,14 +362,12 @@
 	text-align: center;
 }
 
-/* Ensure body and html allow for natural scrolling */
 body,
 html {
 	height: auto;
 	overflow-y: auto;
 }
 
-/* Remove any remaining fixed heights that could cause column scroll */
 #service-main,
 #service-details,
 #service-imgs,
@@ -380,7 +376,6 @@ html {
 	max-height: none !important;
 }
 
-/* Delete Service button styling */
 .delete-service-btn {
 	background-color: #e53935;
 	color: #fff;

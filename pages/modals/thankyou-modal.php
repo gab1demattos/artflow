@@ -1,4 +1,3 @@
-<!-- Thank You Modal -->
 <div id="thankyou-modal-overlay" class="modal-overlay hidden">
     <div class="modal">
         <div class="modal-content">

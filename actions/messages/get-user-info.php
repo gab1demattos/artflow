@@ -6,7 +6,6 @@ require_once(__DIR__ . '/../../database/classes/user.class.php');
 
 header('Content-Type: application/json');
 
-// Check if user is logged in
 $session = Session::getInstance();
 $currentUser = $session->getUser();
 
@@ -16,14 +15,12 @@ if (!$currentUser) {
     exit();
 }
 
-// Check if this is a GET request
 if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     http_response_code(405);
     echo json_encode(['error' => 'Method not allowed']);
     exit();
 }
 
-// Get user ID from query parameter
 $user_id = isset($_GET['user_id']) ? (int)$_GET['user_id'] : 0;
 
 if ($user_id <= 0) {
@@ -32,7 +29,6 @@ if ($user_id <= 0) {
     exit();
 }
 
-// Get user information
 $db = Database::getInstance();
 $stmt = $db->prepare('SELECT id, username, profile_image FROM User WHERE id = ?');
 $stmt->execute([$user_id]);

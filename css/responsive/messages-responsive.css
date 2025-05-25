@@ -1,7 +1,3 @@
-/* ======================================= */
-/* BASE MOBILE STYLES (applied by default) */
-/* ======================================= */
-
 @media screen and (max-width: 767px) {
 	#messages-page .chat-app__container {
 		width: 100%;
@@ -11,7 +7,6 @@
 		position: relative;
 	}
 
-	/* Hide the back button by default */
 	#messages-page .chat-app__back-button {
 		display: none;
 		align-items: center;
@@ -30,7 +25,6 @@
 		width: 40px;
 	}
 
-	/* Only show the back button on mobile when visible class is added */
 	#messages-page .chat-app__back-button.visible {
 		display: flex;
 	}
@@ -39,7 +33,6 @@
 		font-size: 26px;
 	}
 
-	/* Sidebar styles - full-width by default on mobile */
 	#messages-page .chat-app__sidebar {
 		width: 100%;
 		height: 100%;
@@ -54,7 +47,6 @@
 		transform: translateX(0);
 	}
 
-	/* When conversation is selected, hide sidebar */
 	#messages-page .chat-app__sidebar.hidden {
 		transform: translateX(-100%);
 	}
@@ -105,7 +97,6 @@
 		font-size: 12px;
 	}
 
-	/* Main chat area - also full-width but initially positioned off-screen */
 	#messages-page .chat-app__main {
 		flex: 1;
 		width: 100%;
@@ -118,7 +109,6 @@
 		background-color: white;
 	}
 
-	/* When conversation is selected, show main chat area */
 	#messages-page .chat-app__main.visible {
 		transform: translateX(0);
 	}
@@ -167,21 +157,16 @@
 		font-weight: bold;
 		font-size: 17px;
 		color: var(--orange);
-		/* Ensure text doesn't overlap when back button is visible */
 		max-width: 58%;
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
 	}
 
-	/* Remove the fake input area in sidebar as layout is now different */
 	#messages-page .chat-app__sidebar::after {
 		display: none;
 	}
 
-	/* No transitions */
-
-	/* Improve mobile header alignment for longer usernames */
 	#messages-page .chat-app__menu-container {
 		z-index: 15;
 		position: absolute;
@@ -196,9 +181,6 @@
 	}
 }
 
-/* =================== */
-/*    TABLET STYLES    */
-/* =================== */
 
 @media screen and (min-width: 768px) and (max-width: 1199px) {
 	#messages-page .chat-app__container {
@@ -222,31 +204,18 @@
 		padding: 8px;
 	}
 
-	/* Force hide the back button on tablets regardless of visible class */
 	#messages-page .chat-app__back-button,
 	#messages-page .chat-app__back-button.visible {
 		display: none !important;
 	}
 }
 
-/* ================================== */
-/*    DESKTOP STYLES (above 1200px)   */
-/* ================================== */
-
-/* Use the main messages.css settings */
 @media screen and (min-width: 1200px) {
-	/* 
-      The desktop styles are already defined in messages.css
-      This media query ensures we only apply those styles at larger screens
-    */
-
-	/* Force hide the back button on desktop regardless of visible class */
 	#messages-page .chat-app__back-button,
 	#messages-page .chat-app__back-button.visible {
 		display: none !important;
 	}
 
-	/* For ultra-wide screens, adjust proportions */
 	@media screen and (min-width: 2400px) {
 		#messages-page .chat-app__container {
 			width: 70%;
