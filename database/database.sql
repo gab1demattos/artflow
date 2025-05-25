@@ -36,13 +36,11 @@ CREATE TABLE Service (
 
 CREATE TABLE Exchange (
     id INTEGER PRIMARY KEY,
-    freelancer_id INTEGER NOT NULL,
     client_id INTEGER NOT NULL,
     service_id INTEGER NOT NULL,
     status TEXT NOT NULL CHECK (status IN ('in progress', 'completed')),
     requirements TEXT NOT NULL,
     date TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (freelancer_id) REFERENCES User(id),
     FOREIGN KEY (client_id) REFERENCES User(id),
     FOREIGN KEY (service_id) REFERENCES Service(id)
 );
@@ -65,8 +63,10 @@ CREATE TABLE Review (
     comment TEXT,
     created_at TEXT DEFAULT CURRENT_TIMESTAMP,
     updated_at TEXT,
+    exchange_id INTEGER NOT NULL,
     FOREIGN KEY (user_id) REFERENCES User(id),
-    FOREIGN KEY (service_id) REFERENCES Service(id)
+    FOREIGN KEY (service_id) REFERENCES Service(id),
+    FOREIGN KEY (exchange_id) REFERENCES Exchange(id)
 );
 
 CREATE TABLE Category (
