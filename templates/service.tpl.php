@@ -170,6 +170,7 @@
     <?php include __DIR__ . '/../pages/modals/edit-service-modal.php'; ?>
     <?php include __DIR__ . '/../templates/irreversible-modal.tpl.php'; ?>
     <script src="/js/modals.js"></script>
+    <script src="/js/checkout.js"></script>
     <script>
 document.addEventListener('DOMContentLoaded', function() {
     const deleteBtn = document.getElementById('delete-service-btn');
