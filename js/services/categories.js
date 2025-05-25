@@ -1,13 +1,13 @@
 const Categories = {
 	currentCategoryId: null,
 	selectedSubcatValues: [],
-	
+
 	init() {
 		this.setupSubcategoryOverlay();
 		this.setupSubcategoryTagFiltering();
 		this.setupFilters();
 	},
-	
+
 	setupSubcategoryOverlay() {
 		const openSubcatBtn = document.getElementById("open-subcategory-overlay");
 		const categorySelect = document.getElementById("category-select");
@@ -21,7 +21,7 @@ const Categories = {
 		const closeSubcategoryBtns = document.querySelectorAll(
 			".close-subcategory-modal"
 		);
-		
+
 		if (
 			categorySelect &&
 			openSubcatBtn &&
@@ -30,7 +30,7 @@ const Categories = {
 			categorySelect.addEventListener("change", function () {
 				const catId = this.value;
 				Categories.currentCategoryId = catId;
-				
+
 				if (
 					catId &&
 					subcategoriesByCategory[catId] &&
@@ -42,14 +42,14 @@ const Categories = {
 					if (subcategorySection) subcategorySection.innerHTML = "";
 				}
 			});
-			
+
 			openSubcatBtn.addEventListener("click", function () {
 				if (
 					!Categories.currentCategoryId ||
 					!subcategoriesByCategory[Categories.currentCategoryId]
 				)
 					return;
-					
+
 				if (subcategoryOverlay && subcategoryCheckboxesDiv) {
 					subcategoryCheckboxesDiv.innerHTML = "";
 					subcategoriesByCategory[Categories.currentCategoryId].forEach(
@@ -64,10 +64,10 @@ const Categories = {
 							const cbLabel = document.createElement("label");
 							cbLabel.htmlFor = checkbox.id;
 							cbLabel.textContent = subcat.name;
-							
+
 							subcategoryCheckboxesDiv.appendChild(checkbox);
 							subcategoryCheckboxesDiv.appendChild(cbLabel);
-							
+
 							if (checkbox.checked) cbLabel.classList.add("selected");
 							checkbox.addEventListener("change", function () {
 								if (checkbox.checked) {
@@ -82,23 +82,23 @@ const Categories = {
 				}
 			});
 		}
-		
+
 		if (subcategoryForm) {
 			subcategoryForm.addEventListener("submit", function (e) {
 				e.preventDefault();
-				
+
 				const checked = Array.from(
 					subcategoryCheckboxesDiv.querySelectorAll(
 						'input[type="checkbox"]:checked'
 					)
 				);
 				Categories.selectedSubcatValues = checked.map((cb) => cb.value);
-				
+
 				if (subcategorySection) {
 					if (Categories.selectedSubcatValues.length > 0) {
 						const summary = document.createElement("div");
 						summary.className = "subcategory-summary";
-						
+
 						summary.textContent =
 							"Selected: " +
 							checked
@@ -116,7 +116,7 @@ const Categories = {
 						subcategorySection.innerHTML = "";
 					}
 				}
-				
+
 				const form = document.getElementById("new-service-form");
 				if (form) {
 					Array.from(
@@ -124,7 +124,7 @@ const Categories = {
 							'input[type="hidden"][name="subcategories[]"]'
 						)
 					).forEach((el) => el.remove());
-					
+
 					Categories.selectedSubcatValues.forEach((val) => {
 						const hidden = document.createElement("input");
 						hidden.type = "hidden";
@@ -136,7 +136,7 @@ const Categories = {
 				if (subcategoryOverlay) subcategoryOverlay.classList.add("hidden");
 			});
 		}
-		
+
 		closeSubcategoryBtns.forEach((btn) => {
 			btn.addEventListener("click", function (e) {
 				e.preventDefault();
@@ -144,7 +144,7 @@ const Categories = {
 			});
 		});
 	},
-	
+
 	setupSubcategoryTagFiltering() {
 		const tagContainer = document.getElementById("subcategory-carousel");
 		if (tagContainer) {
@@ -166,25 +166,49 @@ const Categories = {
 			});
 			function filterServices() {
 				if (!servicesList) return;
-				const cards = servicesList.querySelectorAll(".service-card");
+
+				const cardLinks = servicesList.querySelectorAll(".service-card-link");
+
 				if (selectedSubcats.size === 0) {
-					cards.forEach((card) => (card.style.display = ""));
+					cardLinks.forEach(link => {
+						link.style.display = "";
+					});
 					return;
 				}
-				cards.forEach((card) => {
-					const subcatIds = card
-						.getAttribute("data-subcategory-ids")
-						.split(",");
-					
-					const show = Array.from(selectedSubcats).some((id) =>
-						subcatIds.includes(id)
-					);
-					card.style.display = show ? "" : "none";
+
+				const matchingLinks = [];
+				const nonMatchingLinks = [];
+
+				cardLinks.forEach(link => {
+					const card = link.querySelector(".service-card");
+					const subcatIds = card.getAttribute("data-subcategory-ids").split(",");
+
+					const show = Array.from(selectedSubcats).some(id => subcatIds.includes(id));
+
+					if (show) {
+						matchingLinks.push(link);
+						link.style.display = ""; 
+					} else {
+						nonMatchingLinks.push(link);
+						link.style.display = "none";
+					}
+				});
+
+				cardLinks.forEach(link => {
+					link.remove();
+				});
+
+				matchingLinks.forEach(link => {
+					servicesList.appendChild(link);
+				});
+
+				nonMatchingLinks.forEach(link => {
+					servicesList.appendChild(link);
 				});
 			}
 		}
 	},
-	
+
 	setupFilters() {
 		const minPriceInput = document.querySelector('.min-price-filter');
 		const maxPriceInput = document.querySelector('.max-price-filter');
@@ -194,16 +218,16 @@ const Categories = {
 			const updateDisplayedValues = () => {
 				let minPrice = parseFloat(minPriceInput.value);
 				let maxPrice = parseFloat(maxPriceInput.value);
-				
+
 				if (minPrice > maxPrice) {
 					minPrice = maxPrice;
 					minPriceInput.value = minPrice;
 				}
-				
+
 				minValueDisplay.textContent = minPrice;
 				maxValueDisplay.textContent = maxPrice;
 			};
-			
+
 			minPriceInput.addEventListener('input', updateDisplayedValues);
 			maxPriceInput.addEventListener('input', updateDisplayedValues);
 		}
