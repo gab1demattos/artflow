@@ -120,14 +120,14 @@ Here is the illustrative class diagram of this site:
 <img src='docs/uml.png'>
 
 
-## 🛠️ Technology Stack
+## Technology Stack
 
 - **Backend:** PHP
 - **Database:** SQLite
 - **Frontend:** HTML5, CSS3, JavaScript
 - **Security:** CSRF protection, password hashing, input validation
 
-## 🚀 Installation & Setup
+## Installation & Setup
 
 1. Clone the repository
 
@@ -151,7 +151,7 @@ Here is the illustrative class diagram of this site:
 
 4. Access the application at `http://localhost:9000`
 
-## 👥 Demo Accounts
+## Demo Accounts
 
 For testing purposes, use any of the following accounts:
 
@@ -162,7 +162,7 @@ For testing purposes, use any of the following accounts:
 
 _Additional test accounts available in the credentials section below_
 
-## 👩‍💻 Development Team
+## Development Team
 
 - <a href='https://github.com/franpts2'>Francisca Portugal</a>
 - <a href='https://github.com/gab1demattos'>Gabriela de Mattos</a>
