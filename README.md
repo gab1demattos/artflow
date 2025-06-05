@@ -1,4 +1,5 @@
-# <img src='images/logos/a.png' alt='artflow logo'> artflow 
+# <img src='images/logos/a.png' alt='artflow logo'> artflow
+
 ## Where Creativity Flows Seamlessly
 
 <p><strong>artflow</strong> is a freelancing platform exclusively for artists—a place where illustrators, painters, designers, and digital creators can thrive, connect with clients who value authentic work, and earn a fair income from their craft.</p>
@@ -14,7 +15,7 @@
 - [Demo Accounts](#demo-accounts)
 - [Development Team](#development-team)
 
-##  Project Overview
+## Project Overview
 
 In an era where artificial intelligence is rapidly transforming creative industries, many fear that AI-generated art will overshadow human creativity. 'artflow' was created as a response to these concerns—a platform that celebrates and empowers human creativity rather than replacing it.
 
@@ -81,8 +82,10 @@ Our mission is to create a marketplace where artists can:
 - **Responsive Design:** Full functionality across desktop and mobile devices
 - **Real-time Messaging:** Instant communication between users
 
-## Mockups
+## Screenshots
+
 <!--Make it screenshots in the future-->
+
 The application includes several key interfaces:
 
 - **Home Page:** Introduction to the platform
@@ -92,6 +95,25 @@ The application includes several key interfaces:
 - **Messaging System:** Direct communication between users
 - **Admin Dashboard:** Platform management tools
 
+**Screenshots:**
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="docs/screenshots/profile.png" alt="Profile Page" width="32%" />
+  <img src="docs/screenshots/service-detail.png" alt="Service Detail" width="32%" />
+  <img src="docs/screenshots/messages.png" alt="Messages Page" width='32%'/>
+</div>
+<br>
+<div style="display: flex; justify-content: space-between;">
+  <img src="docs/screenshots/search.png" alt="Search" width="24%" />
+  <img src="docs/screenshots/activity-orders_from_others.png" alt="Activity: orders from others" width="24%" />
+  <img src="docs/screenshots/stats.png" alt="Stats" width="24%" />
+  <img src="docs/screenshots/admin-panel.png" alt="Admin Panel" width="24%" />
+</div>
+<br>
+<br>
+
+**Mockups:**
+
 <div style="display: flex; justify-content: space-between;">
   <img src="docs/mockups/home.png" alt="Home Page" width="49%" />
   <img src="docs/mockups/category-page.png" alt="Category Page" width="49%" />
@@ -99,14 +121,6 @@ The application includes several key interfaces:
 <br>
 <img src="docs/mockups/login-system-modals.png" alt="Login System">
 <br><br>
-
-<div style="display: flex; justify-content: space-between;">
-  <img src="docs/mockups/messages-page.png" alt="Messages Page" width='32%'/>
-  <img src="docs/mockups/profile-page.png" alt="Profile Page" width="32%" />
-  <img src="docs/mockups/service-detail.png" alt="Service Detail" width="32%" />
-</div>
-
-
 
 ## System Architecture
 
@@ -118,7 +132,6 @@ ArtFlow follows a structured MVC-inspired architecture with clear separation of 
 
 Here is the illustrative class diagram of this site:
 <img src='docs/uml.png'>
-
 
 ## Technology Stack
 
@@ -155,10 +168,10 @@ Here is the illustrative class diagram of this site:
 
 For testing purposes, use any of the following accounts:
 
-| Role       | Email              | Password     |
-| ---------- | ------------------ | ------------ |
-| Admin      | admin@artflow.com  | Teresa.mag17 |
-| Freelancer | john@example.com   | Teresa.mag17 |
+| Role       | Email             | Password     |
+| ---------- | ----------------- | ------------ |
+| Admin      | admin@artflow.com | Teresa.mag17 |
+| Freelancer | john@example.com  | Teresa.mag17 |
 
 _Additional test accounts available in the credentials section below_
 
